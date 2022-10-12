@@ -1,5 +1,5 @@
 bookdown::gitbook:
-  css: style.css
+  css: islrv2.css
   config:
     toc:
       before: |
@@ -7,3 +7,8 @@ bookdown::gitbook:
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     edit: https://github.com/danhalligan/ISLRv2-solutions/edit/master/%s
+    sharing:
+      facebook: no
+      twitter: no
+      github: yes
+      all: []

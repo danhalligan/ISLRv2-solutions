@@ -1,0 +1,11 @@
+#header .title {
+  color: #2E71B6;
+}
+
+h1, h2, h3 {
+  color: #2E71B6;
+}
+
+h3 > .header-section-number {
+  display: none;
+}

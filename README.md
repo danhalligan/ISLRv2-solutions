@@ -3,7 +3,7 @@
 Solutions for exercises in the book ["An Introduction to Statistical Learning"](https://www.statlearning.com/)
 by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani.
 
-<img src="isl_small.jpg"  width="200">
+![ISLR cover](images/isl_small.jpg)
 
 ## Usage
 

@@ -1,13 +1,15 @@
 ---
-title: "ISLRv2 Solutions"
+title: "An Introduction to Statistical Learning second edition solutions"
 author: "Dan Halligan"
 site: bookdown::bookdown_site
-documentclass: book
-output:
-  bookdown::gitbook: default
 ---
 
-# An Introduction to Statistical Learning second edition solutions
+# Introduction
+
+This bookdown document provides solutions for exercises in the book ["An Introduction to Statistical Learning"](https://www.statlearning.com/)
+by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani.
+
+![ISLR cover](images/isl_small.jpg)
 
 > As the scale and scope of data collection continue to increase across
 > virtually all fields, statistical learning has become a critical toolkit for
