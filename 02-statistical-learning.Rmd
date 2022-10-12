@@ -17,6 +17,11 @@
 > d. The variance of the error terms, i.e. $\sigma^2 = Var(\epsilon)$, is
 >    extremely high.
 
+a. Flexible best - opposite of b
+b. Inflexible best - high chance of some predictors being randomly associated
+c. Flexible best - inflexible leads to high bias
+d. Inflexible best - opposite of c
+
 ### Question 2
 
 > Explain whether each scenario is a classification or regression problem, and
@@ -39,6 +44,10 @@
 >    in the USD/Euro, the % change in the US market, the % change in the British
 >    market, and the % change in the German market.
 
+a. n=500, p=3, regression, inference
+b. n=20, p=13, classification, prediction
+c. n=52, p=3, regression, prediction
+
 ### Question 3
 
 > We now revisit the bias-variance decomposition.
@@ -53,6 +62,16 @@
 > b. Explain why each of the five curves has the shape displayed in
 >    part (a).
 
+* (squared) bias: Decreases with increasing flexiblity (Generally, more
+  flexible methods result in less bias).
+* variance: Increases with increasing flexibility (In general, more flexible
+  statistical methods have higher variance).
+* training error: Decreases with model flexibility (More complex models will
+  better fit the training data).
+* test error: Decreases initially, then increases due to overfitting (less
+  bias but more training error).
+* Bayes (irreducible) error: fixed (does not change with model).
+
 ### Question 4
 
 > You will now think of some real-life applications for statistical learning.
@@ -60,13 +79,25 @@
 > a. Describe three real-life applications in which classification might
 >    be useful. Describe the response, as well as the predictors. Is the goal of
 >    each application inference or prediction? Explain your answer.
->
+
+* Coffee machine cleaned? (day of week, person assigned), inference.
+* Is a flight delayed? (airline, airport etc). inference.
+* Beer type (IPA, pilsner etc.), prediction.
+
 > b. Describe three real-life applications in which regression might be
 >    useful. Describe the response, as well as the predictors. Is the goal of
 >    each application inference or prediction? Explain your answer.
->
+
+* Amount of bonus paid (profitability, client feedback), prediction.
+* Person's height, prediction.
+* House price, inference.
+
 > c. Describe three real-life applications in which cluster analysis might be
 >    useful.
+
+* RNAseq tumour gene expression.
+* SNPs in human populations.
+* Types of client.
 
 ### Question 5
 
@@ -75,12 +106,24 @@
 > might a more flexible approach be preferred to a less flexible approach? When
 > might a less flexible approach be preferred?
 
+Inflexible is more interpretable, fewer observations required, can be biased.
+Flexible can overfit (high error variance). In cases where we have high n or
+non-linear patterns flexible will be preferred.
+
 ### Question 6
 
 > Describe the differences between a parametric and a non-parametric statistical
 > learning approach. What are the advantages of a para- metric approach to
 > regression or classification (as opposed to a non- parametric approach)? What
 > are its disadvantages?
+
+Parametric uses (model) parameters. Parametric models can be more interpretable
+as there is a model behind how data is generated. However, the disadvantage is
+that the model might not reflect reality. If the model is too far from the
+truth, estimates will be poor and more flexible models can fit many different
+forms and require more parameters (leading to overfitting). Non-parametric
+approaches do not estimate a small number of parameters, so a large number
+of observations may be needed to obtain accurate estimates.
 
 ### Question 7
 
@@ -116,7 +159,26 @@ dat <- data.frame(
   "x3" = c(0, 0, 3, 2, 1, 1),
   "y" = c("Red", "Red", "Red", "Green", "Green", "Red")
 )
+
+# Euclidean distance between points and c(0, 0, 0)
+dist <- sqrt(dat[["x1"]]^2 + dat[["x2"]]^2 + dat[["x3"]]^2)
+signif(dist, 3)
+
+knn <- function(k) {
+  names(which.max(table(dat[["y"]][order(dist)[1:k]])))
+}
+
+# What is our prediction with K = 1?
+knn(1)
+
+# What is our prediction with K = 3? Why?
+knn(3)
 ```
+
+a. 3, 2, 3.16, 2.24, 1.41, 1.73
+b. Green (based on 5 only)
+c. Red (based on 2, 5, 6)
+d. Small (high k leads to linear boundaries due to averaging)
 
 ## Applied
 
@@ -151,7 +213,11 @@ dat <- data.frame(
 > a. Use the `read.csv()` function to read the data into `R`. Call the loaded
 >    data `college`. Make sure that you have the directory set to the correct
 >    location for the data.
->
+
+```{r}
+college <- read.csv("data/College.csv")
+```
+
 > b. Look at the data using the `View()` function. You should notice that the
 >    first column is just the name of each university. We don't really want `R`
 >    to treat this as data. However, it may be handy to have these names for 
@@ -177,7 +243,12 @@ dat <- data.frame(
 >    another column labeled `row.names` now appears before the `Private` column.
 >    However, this is not a data column but rather the name that R is giving to
 >    each row.
->
+
+```{r}
+rownames(college) <- college[, 1]
+college <- college[, -1]
+```
+
 > c.
 >     i.   Use the `summary()` function to produce a numerical summary of the
 >          variables in the data set.
@@ -210,29 +281,86 @@ dat <- data.frame(
 >     vi.  Continue exploring the data, and provide a brief summary of what you
 >          discover.
 
+```{r}
+summary(college)
+
+pairs(college[, 1:10], cex = 0.2)
+plot(college$Outstate ~ college$Private)
+
+college$Elite <- factor(ifelse(college$Top10perc > 50, "Yes", "No"))
+summary(college$Elite)
+plot(college$Outstate ~ college$Elite)
+
+par(mfrow = c(2,2))
+hist(college$Enroll, breaks = 5)
+hist(college$Enroll, breaks = 10)
+hist(college$Enroll, breaks = 20)
+hist(college$Enroll, breaks = 50)
+
+chisq.test(college$Private, college$Elite)
+```
+
+Whether a college is Private and Elite is not random!
+
 ### Question 9
 
 > This exercise involves the Auto data set studied in the lab. Make sure
 > that the missing values have been removed from the data.
->
+
+```{r}
+x <- read.table("data/Auto.data", header = TRUE, na.strings = "?")
+x <- na.omit(x)
+```
+
 > a. Which of the predictors are quantitative, and which are qualitative?
->
+
+```{r}
+sapply(x, class)
+numeric <- which(sapply(x, class) == "numeric")
+```
+
 > b. What is the range of each quantitative predictor? You can answer this using
 >    the `range()` function.
->
+
+```{r}
+sapply(x[, numeric], function(x) diff(range(x)))
+```
+
 > c. What is the mean and standard deviation of each quantitative predictor?
->
+
+```{r}
+sapply(x[, numeric], mean)
+sapply(x[, numeric], sd)
+```
+
 > d. Now remove the 10th through 85th observations. What is the range, mean, and
 >    standard deviation of each predictor in the subset of the data that 
 >    remains?
->
+
+```{r}
+sapply(x[-(10:85), numeric], function(x) diff(range(x)))
+sapply(x[-(10:85), numeric], mean)
+sapply(x[-(10:85), numeric], sd)
+```
+
 > e. Using the full data set, investigate the predictors graphically, using
 >    scatterplots or other tools of your choice. Create some plots highlighting
 >    the relationships among the predictors. Comment on your findings.
->
+
+```{r}
+pairs(x[, numeric], cex = 0.2) 
+cor(x[, numeric])
+```
+
+Many of the variables appear to be highly (positively or negatively) correlated
+with some relationships being non-linear.
+
 > f. Suppose that we wish to predict gas mileage (`mpg`) on the basis of the
 >    other variables. Do your plots suggest that any of the other variables
 >    might be useful in predicting `mpg`? Justify your answer.
+
+Yes, since other variables are correlated. However, horsepower, weight and 
+displacement are highly related.
 
 ### Question 10
 
@@ -259,26 +387,66 @@ dat <- data.frame(
 >    
 >    How many rows are in this data set? How many columns? What do the rows and
 >    columns represent?
->
+
+```{r}
+library(MASS)
+dim(Boston)
+head(Boston)
+```
+
 > b. Make some pairwise scatterplots of the predictors (columns) in this data
 >    set. Describe your findings.
->
+
+```{r}
+plot(Boston$nox, Boston$rm)
+plot(Boston$ptratio, Boston$rm)
+heatmap(cor(Boston, method = "spearman"))
+```
+
 > c. Are any of the predictors associated with per capita crime rate? If so,
 >    explain the relationship.
->
+
+Yes
+
 > d. Do any of the census tracts of Boston appear to have particularly high 
 >    crime rates? Tax rates? Pupil-teacher ratios? Comment on the range of each
 >    predictor.
->
+
+```{r}
+par(mfrow=c(2,2))
+hist(Boston$crim, breaks = 20)
+hist(Boston$tax, breaks = 20)
+hist(Boston$ptratio, breaks = 20)
+```
+
 > e. How many of the census tracts in this data set bound the Charles river?
->
+
+```{r}
+sum(Boston$chas)
+```
+
 > f. What is the median pupil-teacher ratio among the towns in this data set?
->
+
+```{r}
+median(Boston$ptratio)
+```
+
 > g. Which census tract of Boston has lowest median value of owner-occupied
 >    homes? What are the values of the other predictors for that census tract,
 >    and how do those values compare to the overall ranges for those predictors?
 >    Comment on your findings.
->
+
+```{r}
+Boston[Boston$medv == min(Boston$medv), ]
+sapply(Boston, quantile)
+```
+
 > h. In this data set, how many of the census tract average more than seven
 >    rooms per dwelling? More than eight rooms per dwelling? Comment on the
 >    census tracts that average more than eight rooms per dwelling.
+
+```{r}
+sum(Boston$rm > 7)
+sum(Boston$rm > 8)
+sapply(Boston[Boston$rm > 8, ], median)
+```
