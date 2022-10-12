@@ -5,14 +5,20 @@ permissions:
 jobs:
   build-and-deploy:
     concurrency: ci-${{ github.ref }} 
-    runs-on: ubuntu-latest
+    runs-on: 
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
-      - name: Install and Build 🔧 
-        run: |
-          bash _build.sh
+      - uses: r-lib/actions/setup-pandoc@v1
+
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v1
+
+      - name: Build 🔧 
+        run: Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.0
