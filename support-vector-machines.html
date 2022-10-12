@@ -509,9 +509,9 @@ regression using non-linear transformations of the features.</p>
 <li><p>Generate a data set with <span class="math inline">\(n = 500\)</span> and <span class="math inline">\(p = 2\)</span>, such that the observations
 belong to two classes with a quadratic decision boundary between them. For
 instance, you can do this as follows:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="support-vector-machines.html#cb19-1"></a><span class="op">&gt;</span><span class="st"> </span>x1 &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">500</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb19-2"><a href="support-vector-machines.html#cb19-2"></a><span class="op">&gt;</span><span class="st"> </span>x2 &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">500</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb19-3"><a href="support-vector-machines.html#cb19-3"></a><span class="op">&gt;</span><span class="st"> </span>y &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>(x1<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span>x2<span class="op">^</span><span class="dv">2</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div></li>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="support-vector-machines.html#cb77-1"></a><span class="op">&gt;</span><span class="st"> </span>x1 &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">500</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb77-2"><a href="support-vector-machines.html#cb77-2"></a><span class="op">&gt;</span><span class="st"> </span>x2 &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">500</span>) <span class="op">-</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb77-3"><a href="support-vector-machines.html#cb77-3"></a><span class="op">&gt;</span><span class="st"> </span>y &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>(x1<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span>x2<span class="op">^</span><span class="dv">2</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div></li>
 <li><p>Plot the observations, colored according to their class labels. Your plot
 should display <span class="math inline">\(X_1\)</span> on the <span class="math inline">\(x\)</span>-axis, and <span class="math inline">\(X_2\)</span> on the <span class="math inline">\(y\)</span>-axis.</p></li>
 <li><p>Fit a logistic regression model to the data, using <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> as
@@ -583,10 +583,10 @@ on your results.</p></li>
 cases with <span class="math inline">\(p = 2\)</span>. When <span class="math inline">\(p &gt; 2\)</span>, you can use the <code>plot()</code> function to
 create plots displaying pairs of variables at a time. Essentially, instead
 of typing</em></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="support-vector-machines.html#cb20-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(svmfit, dat)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="support-vector-machines.html#cb78-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(svmfit, dat)</span></code></pre></div>
 <p><em>where <code>svmfit</code> contains your fitted model and dat is a data frame
 containing your data, you can type</em></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="support-vector-machines.html#cb21-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(svmfit, dat, x1 ∼ x4)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="support-vector-machines.html#cb79-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(svmfit, dat, x1 ∼ x4)</span></code></pre></div>
 <p><em>in order to plot just the first and fourth variables. However, you must
 replace <code>x1</code> and <code>x4</code> with the correct variable names. To find out more,
 type <code>?plot.svm</code>.</em></p></li>
