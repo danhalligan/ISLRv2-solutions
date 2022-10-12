@@ -83,7 +83,7 @@ Option iii is the correct answer.
 > b. Predict the salary of a college graduate with IQ of 110 and a GPA of 4.0.
 
 ```{r}
-model(gpa = 4, iq = 110, college = 1)
+model(gpa = 4, iq = 110, level = 1)
 ```
 
 > c. True or false: Since the coefficient for the GPA/IQ interaction term is
