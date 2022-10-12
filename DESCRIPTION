@@ -2,5 +2,10 @@ Package: placeholder
 Type: Book
 Title: Does not matter.
 Version: 0.0.1
-Imports: bookdown
+Imports: 
+    bookdown,
+    ISLR2,
+    tidyverse,
+    ggplot2,
+    plotly
 Remotes: rstudio/bookdown

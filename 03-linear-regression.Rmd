@@ -9,10 +9,23 @@
 > Your explanation should be phrased in terms of `sales`, `TV`, `radio`, and
 > `newspaper`, rather than in terms of the coefficients of the linear model.
 
+For intercept, that $\beta_0 = 0$
+For the others, that $\beta_n = 0$ (for $n = 1, 2, 3$)
+
+We can conclude that that without any spending, there are still some sales (the
+intercept is not 0). Furthermore, we can conclude that money spent on TV and
+radio are significantly associated with increased sales, but the same cannot be
+said of newspaper spending.
+
 ### Question 2
 
 > Carefully explain the differences between the KNN classifier and KNN
 > regression methods.
+
+The KNN classifier is categorical and assigns a value based on the most
+frequent observed category among $K$ nearest neighbors, whereas KNN regression
+assigns a continuous variable, the average of the response variables for
+the $K$ nearest neighbors.
 
 ### Question 3
 
@@ -34,12 +47,53 @@
 >     iv. For a fixed value of IQ and GPA, college graduates earn more on 
 >         average than high school graduates provided that the GPA is high 
 >         enough.
->
+
+```{r}
+model <- function(gpa, iq, college) {
+  50 +
+  gpa * 20 +
+  iq * 0.07 +
+  college * 35 +
+  gpa * iq * 0.01 +
+  gpa * gender * -10
+}
+x <- seq(1, 5, length = 10)
+y <- seq(1, 200, length = 20)
+college <- t(outer(x, y, f, college = 0))
+high_school <- t(outer(x, y, f, college = 1))
+
+library(plotly)
+plot_ly(x = x, y = y) |>
+  add_surface(
+    z = ~college,
+    colorscale = list(c(0, 1), c("rgb(107,184,214)", "rgb(0,90,124)")),
+    colorbar = list(title = "College")) |>
+  add_surface(
+    z = ~high_school,
+    colorscale = list(c(0, 1), c("rgb(255,112,184)", "rgb(128,0,64)")),
+    colorbar = list(title = "High school")) |>
+  layout(scene = list(
+    xaxis = list(title = "GPA"),
+    yaxis = list(title = "IQ"),
+    zaxis = list(title = "Salary")))
+```
+
+Option iii is the correct answer.
+
 > b. Predict the salary of a college graduate with IQ of 110 and a GPA of 4.0.
->
+
+```{r}
+model(gpa = 4, iq = 110, college = 1)
+```
+
 > c. True or false: Since the coefficient for the GPA/IQ interaction term is
 >    very small, there is very little evidence of an interaction effect. Justify
 >    your answer.
+
+This is false. It is important to remember that GPA and IQ vary over different
+scales. It is better to explicitly test the significance of the interaction 
+effect, and/or visualize or quantify the effect on sales under realistic ranges
+of GPA/IQ values.
 
 ### Question 4
 
@@ -54,16 +108,28 @@
 >    for the cubic regression. Would we expect one to be lower than the other,
 >    would we expect them to be the same, or is there not enough information to
 >    tell? Justify your answer.
->
+
+You would expect the cubic regression to have lower RSS since it is at least
+as flexible as the linear regression.
+
 > b. Answer (a) using test rather than training RSS.
->
+
+Though we could not be certain, the test RSS would likely be higher due to
+overfitting.
+
 > c. Suppose that the true relationship between $X$ and $Y$ is not linear, but
 >    we don't know how far it is from linear. Consider the training RSS for the
 >    linear regression, and also the training RSS for the cubic regression.
 >    Would we expect one to be lower than the other, would we expect them to be
 >    the same, or is there not enough information to tell? Justify your answer.
->
+
+You would expect the cubic regression to have lower RSS since it is at least
+as flexible as the linear regression.
+
 > d. Answer (c) using test rather than training RSS.
+
+There is not enough information to tell, it depends on how non-linear the 
+true relationship is.
 
 ### Question 5
 
@@ -79,10 +145,35 @@
 > _Note: We interpret this result by saying that the fitted
 > values from linear regression are linear combinations of the response values._
 
+$$
+\begin{align}
+\hat{y}_i &= x_i \frac{\sum_{i=1}^nx_iy_i}{\sum_{i' = 1}^n x^2_{i'}} \\
+          & = x_i \frac{\sum_{i'=1}^nx_{i'}y_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} \\
+          & = \frac{\sum_{i'=1}^n x_i x_{i'}y_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} \\
+          & = \sum_{i'=1}^n  \frac{ x_i x_{i'}y_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} \\
+          & = \sum_{i'=1}^n  \frac{ x_i x_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} y_{i'}
+\end{align}
+$$
+therefore,
+
+$$
+a_{i'} = \frac{ x_i x_{i'}}{\sum x^2}
+$$
+
 ### Question 6
 
 > Using (3.4), argue that in the case of simple linear regression, the
 > least squares line always passes through the point $(\bar{x}, \bar{y})$.
+
+when $x = \bar{x}$ what is $y$?
+
+$$
+\begin{align}
+y &= \hat\beta_0 + \hat\beta_1\bar{x} \\
+  &= \bar{y} - \hat\beta_1\bar{x} + \hat\beta_1\bar{x} \\
+  &= \bar{y}
+\end{align}
+$$
 
 ### Question 7
 
@@ -90,6 +181,53 @@
 > of $Y$ onto $X$, the $R^2$ statistic (3.17) is equal to the square of the
 > correlation between $X$ and $Y$ (3.18). Prove that this is the case. For
 > simplicity, you may assume that $\bar{x} = \bar{y} = 0$.
+
+We have the following equations:
+
+$$ R^2 = \frac{\textit{TSS} - \textit{RSS}}{\textit{TSS}} $$
+$$ Cor(x,y) = \frac{\sum_i (x_i-\bar{x})(y_i - \bar{y})}{\sqrt{\sum_i(x_i - \bar{x})^2}\sqrt{\sum_i(y_i - \bar{y})^2}} $$
+
+As above, its important to remember $\sum_i x_i = \sum_j x_j$
+
+when $\bar{x} = \bar{y} = 0$
+$$ Cor(x,y)^2 = \frac{(\sum_ix_iy_i)^2}{\sum_ix_i^2 \sum_iy_i^2} $$
+
+Also note that:
+
+$$\hat{y}_i = \hat\beta_o + \hat\beta_1x_i = x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2}$$
+
+Therefore, given that $RSS = \sum_i(y_i - \hat{y}_i)^2$ and
+$\textit{TSS} = \sum_i(y_i - \bar{y})^2 = \sum_iy_i^2$
+
+$$
+\begin{align}
+R^2 &= \frac{\sum_iy_i^2 - \sum_i(y_i - x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2})^2}
+            {\sum_iy_i^2} \\
+
+    &= \frac{\sum_iy_i^2 - \sum_i(
+          y_i^2 -
+          2y_ix_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2} +
+          x_i^2 (\frac{\sum_j{x_jy_j}}{\sum_jx_j^2})^2
+        )}{\sum_iy_i^2} \\
+
+    &= \frac{
+          2\sum_i(y_ix_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2}) -
+          \sum_i(x_i^2 (\frac{\sum_j{x_jy_j}}{\sum_jx_j^2})^2)
+        }{\sum_iy_i^2} \\
+
+    &= \frac{
+          2\sum_i(y_ix_i) \frac{\sum_j{x_jy_j}}{\sum_jx_j^2} -
+          \sum_i(x_i^2) \frac{(\sum_j{x_jy_j})^2}{(\sum_jx_j^2)^2}
+        }{\sum_iy_i^2} \\
+
+    &= \frac{
+          2\frac{(\sum_i{x_iy_i})^2}{\sum_jx_j^2} -
+          \frac{(\sum_i{x_iy_i})^2}{\sum_jx_j^2}
+        }{\sum_iy_i^2} \\
+
+    &= \frac{(\sum_i{x_iy_i})^2}{\sum_ix_i^2 \sum_iy_i^2}
+\end{align}
+$$
 
 ## Applied
 
@@ -107,12 +245,40 @@
 >        negative?
 >   iv. What is the predicted mpg associated with a horsepower of 98?
 >   v. What are the associated 95% confidence and prediction intervals?
->
+
+```{r}
+library(ISLR2)
+fit <- lm(mpg ~ horsepower, data = Auto)
+summary(fit)
+```
+
+Yes, there is a significant relationship between predictor and response. For
+every unit increase in horsepower, mpg reduces by 0.16 (a negative
+relationship).
+
+```{r}
+predict(fit, data.frame(horsepower = 98), interval = "confidence")
+predict(fit, data.frame(horsepower = 98), interval = "prediction")
+```
+
 > b. Plot the response and the predictor. Use the `abline()` function to display
 >   the least squares regression line.
->
+
+```{r}
+plot(Auto$horsepower, Auto$mpg)
+abline(fit)
+```
+
 > c. Use the `plot()` function to produce diagnostic plots of the least squares
 >   regression fit. Comment on any problems you see with the fit.
+
+```{r}
+par(mfrow = c(2, 2))
+plot(fit, cex = 0.2)
+```
+
+The residuals show a trend with respect to the fitted values suggesting a
+non-linear relationship.
 
 ### Question 9
 
@@ -121,11 +287,20 @@
 >
 > a. Produce a scatterplot matrix which includes all of the variables in the
 >    data set.
->
+
+```{r}
+pairs(Auto, cex = 0.2)
+```
+
 > b. Compute the matrix of correlations between the variables using the function
 >    `cor()`. You will need to exclude the name variable, `name` which is
 >    qualitative.
->
+
+```{r}
+x <- subset(Auto, select = -name)
+cor(x)
+```
+
 > c. Use the `lm()` function to perform a multiple linear regression with `mpg`
 >    as the response and all other variables except name as the predictors. Use 
 >    the `summary()` function to print the results. Comment on the output. For
@@ -134,18 +309,65 @@
 >    ii. Which predictors appear to have a statistically significant relationship
 >       to the response?
 >    iii. What does the coefficient for the `year` variable suggest?
->
+
+```{r}
+fit <- lm(mpg ~ ., data = x)
+summary(fit)
+```
+
+Yes, there is a relationship between some predictors and response, notably
+"displacement" (positive), "weight" (negative), "year" (positive) and
+"origin" (positive).
+
+The coefficient for year (which is positive $~0.75$) suggests that mpg
+increases by about this amount every year on average.
+
 > d. Use the `plot()` function to produce diagnostic plots of the linear
 >    regression fit. Comment on any problems you see with the fit. Do the
 >    residual plots suggest any unusually large outliers? Does the leverage plot
 >    identify any observations with unusually high leverage?
->
+
+```{r}
+par(mfrow = c(2, 2))
+plot(fit, cex = 0.2)
+```
+
+One point has high leverage, the residuals also show a trend with fitted values.
+
 > e. Use the `*` and `:` symbols to fit linear regression models with
 >    interaction effects. Do any interactions appear to be statistically
 >    significant?
->
+
+```{r}
+summary(lm(mpg ~ . + weight:horsepower, data = x))
+summary(lm(mpg ~ . + acceleration:horsepower, data = x))
+summary(lm(mpg ~ . + cylinders:weight, data = x))
+```
+
+There are at least three cases where the interactions appear to be highly
+significant.
+
 > f. Try a few different transformations of the variables, such as $log(X)$,
 >    $\sqrt{X}$, $X^2$. Comment on your findings.
+
+```{r}
+# considering just horsepower.
+par(mfrow = c(2, 2))
+plot(Auto$horsepower, Auto$mpg, cex = 0.2)
+plot(log(Auto$horsepower), Auto$mpg, cex = 0.2)
+plot(sqrt(Auto$horsepower), Auto$mpg, cex = 0.2)
+plot(Auto$horsepower ^ 2, Auto$mpg, cex = 0.2)
+
+x <- subset(Auto, select = -name)
+x$horsepower <- log(x$horsepower)
+fit <- lm(mpg ~ ., data = x)
+summary(fit)
+par(mfrow = c(2, 2))
+plot(fit, cex = 0.2)
+```
+
+A log transformation of horsepower appears to give a more linear relationship
+with mpg.
 
 ### Question 10
 
@@ -153,52 +375,121 @@
 >
 > a. Fit a multiple regression model to predict `Sales` using `Price`, `Urban`,
 >    and `US`.
->
+
+```{r}
+fit <- lm(Sales ~ Price + Urban + US, data = Carseats)
+```
+
 > b. Provide an interpretation of each coefficient in the model. Be
 >    careful---some of the variables in the model are qualitative!
->
+
+```{r}
+summary(fit)
+```
+
 > c. Write out the model in equation form, being careful to handle the
 >    qualitative variables properly.
->
+
+$$
+\textit{Sales} = 13 + -0.054 \times \textit{Price} + \begin{cases}
+   -0.022,   & \text{if $\textit{Urban}$ is Yes, $\textit{US}$ is No} \\
+    1.20,    & \text{if $\textit{Urban}$ is No, $\textit{US}$ is Yes} \\
+    1.18,    & \text{if $\textit{Urban}$ and $\textit{US}$ is Yes} \\
+    0,       & \text{Otherwise}
+\end{cases}
+$$
+
 > d. For which of the predictors can you reject the null hypothesis
 >    $H_0 : \beta_j = 0$?
->
+
+Price and US (Urban shows no significant difference between "No" and "Yes")
+
 > e. On the basis of your response to the previous question, fit a smaller model
 >    that only uses the predictors for which there is evidence of association
 >    with the outcome.
->
+
+```{r}
+fit2 <- lm(Sales ~ Price + US, data = Carseats)
+```
+
 > f. How well do the models in (a) and (e) fit the data?
->
+
+```{r}
+summary(fit)
+summary(fit2)
+anova(fit, fit2)
+```
+
+They have similar $R^2$ and the model containing the extra variable "Urban" is
+non-significantly better.
+
 > g. Using the model from (e), obtain 95% confidence intervals for the
 >    coefficient(s).
->
+
+```{r}
+confint(fit2)
+```
+
 > h. Is there evidence of outliers or high leverage observations in the model
 >    from (e)?
+
+```{r}
+par(mfrow = c(2, 2))
+plot(fit2, cex = 0.2)
+```
+
+Yes, somewhat.
 
 ### Question 11
 
 > In this problem we will investigate the t-statistic for the null hypothesis
 > $H_0 : \beta = 0$ in simple linear regression without an intercept. To
 > begin, we generate a predictor `x` and a response `y` as follows.
+>
 > ```r
 > set.seed(1)
 > x <- rnorm(100)
 > y <- 2 * x + rnorm(100)
 > ```
->
+
+```{r}
+set.seed(1)
+x <- rnorm(100)
+y <- 2 * x + rnorm(100)
+```
+
 > a. Perform a simple linear regression of `y` onto `x`, without an intercept.
 >    Report the coefficient estimate $\hat{\beta}$, the standard error of this
 >    coefficient estimate, and the t-statistic and p-value associated with the
 >    null hypothesis $H_0 : \beta = 0$. Comment on these results. (You can
 >    perform regression without an intercept using the command `lm(y~x+0)`.)
->
+
+```{r}
+fit <- lm(y ~ x + 0)
+coef(summary(fit))
+```
+
+There's a significant positive relationship between $y$ and $x$. $y$ values are
+predicted to be (a little below) twice the $x$ values.
+
 > b. Now perform a simple linear regression of `x` onto `y` without an intercept,
 >    and report the coefficient estimate, its standard error, and the
 >    corresponding t-statistic and p-values associated with the null hypothesis
 >    $H_0 : \beta = 0$. Comment on these results.
->
+
+```{r}
+fit <- lm(x ~ y + 0)
+coef(summary(fit))
+```
+
+There's a significant positive relationship between $x$ and $y$. $x$ values are
+predicted to be (a little below) half the $y$ values.
+
 > c. What is the relationship between the results obtained in (a) and (b)?
->
+
+Without error, the coefficients would be the inverse of each other (2 and 1/2).
+The t-statistic and p-values are the same.
+
 > d. For the regression of $Y$ onto $X$ without an intercept, the
 >    t-statistic for $H_0 : \beta = 0$ takes the form 
 >    $\hat{\beta}/SE(\hat{\beta})$, where $\hat{\beta}$ is given by (3.38), and
@@ -214,14 +505,67 @@
 >    \frac{(\sqrt{n-1}) \sum_{i-1}^nx_iy_i)}
 >         {\sqrt{(\sum_{i=1}^nx_i^2)(\sum_{i'=1}^ny_{i'}^2)-(\sum_{i'=1}^nx_{i'}y_{i'})^2}}
 >    $$
->
+
+$$ \beta = \sum_i x_i y_i / \sum_{i'} x_{i'}^2 ,$$
+
+therefore
+
+$$
+\begin{align}
+t &= \frac{\sum_i x_i y_i \sqrt{n-1} \sqrt{\sum_ix_i^2}}
+          {\sum_i x_i^2 \sqrt{\sum_i(y_i - x_i \beta)^2}} \\
+
+  &= \frac{\sum_i x_i y_i \sqrt{n-1}}
+          {\sqrt{\sum_ix_i^2 \sum_i(y_i - x_i \beta)^2}} \\
+
+
+  &= \frac{\sum_i x_i y_i \sqrt{n-1}}
+          {\sqrt{
+            \sum_ix_i^2
+            \sum_i(y_i^2 - 2 y_i x_i \beta + x_i^2 \beta^2)
+           }} \\
+
+  &= \frac{\sum_i x_i y_i \sqrt{n-1}}
+          {\sqrt{
+            \sum_ix_i^2 \sum_iy_i^2 -
+            \beta \sum_ix_i^2 (2 \sum_i y_i x_i -\beta \sum_i x_i^2)
+           }} \\
+
+  &= \frac{\sum_i x_i y_i \sqrt{n-1}}
+          {\sqrt{
+            \sum_ix_i^2 \sum_iy_i^2 -
+            \sum_i x_i y_i (2 \sum_i y_i x_i - \sum_i x_i y_i)
+           }} \\
+
+  &= \frac{\sum_i x_i y_i \sqrt{n-1}}
+          {\sqrt{
+            \sum_ix_i^2 \sum_iy_i^2 -
+            (\sum_i x_i y_i)^2
+           }} \\
+\end{align}
+$$
+
+We can show this numerically in R by computing $t$ using the above equation.
+
+```{r}
+n <- length(x)
+sqrt(n - 1) * sum(x * y) / sqrt(sum(x ^ 2) * sum(y ^ 2) - sum(x * y) ^ 2)
+```
+
 > e. Using the results from (d), argue that the *t*-statistic for the
 >    regression of y onto x is the same as the *t*-statistic for the regression
 >    of `x` onto `y`.
->
+
+Swapping $x_i$ for $y_i$ in the formula for $t$ will give the same result.
+
 > f. In `R`, show that when regression is performed *with* an intercept, the
 >    $t$-statistic for $H_0 : \beta_1 = 0$ is the same for the regression of `y`
 >    onto `x` as it is for the regression of `x` onto `y`.
+
+```{r}
+coef(summary(lm(y ~ x)))
+coef(summary(lm(x ~ y)))
+```
 
 ### Question 12
 
