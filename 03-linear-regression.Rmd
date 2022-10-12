@@ -49,18 +49,18 @@ the $K$ nearest neighbors.
 >         enough.
 
 ```{r}
-model <- function(gpa, iq, college) {
+model <- function(gpa, iq, level) {
   50 +
   gpa * 20 +
   iq * 0.07 +
-  college * 35 +
+  level * 35 +
   gpa * iq * 0.01 +
-  gpa * gender * -10
+  gpa * level * -10
 }
 x <- seq(1, 5, length = 10)
 y <- seq(1, 200, length = 20)
-college <- t(outer(x, y, model, college = 0))
-high_school <- t(outer(x, y, model, college = 1))
+college <- t(outer(x, y, model, level = 1))
+high_school <- t(outer(x, y, model, level = 0))
 
 library(plotly)
 plot_ly(x = x, y = y) |>
