@@ -1,0 +1,17 @@
+---
+title: "ISLRv2 Solutions"
+author: "Dan Halligan"
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook: default
+---
+
+# An Introduction to Statistical Learning second edition solutions
+
+> As the scale and scope of data collection continue to increase across
+> virtually all fields, statistical learning has become a critical toolkit for
+> anyone who wishes to understand data. An Introduction to Statistical Learning
+> provides a broad and less technical treatment of key topics in statistical
+> learning. Each chapter includes an R lab. This book is appropriate for anyone
+> who wishes to use contemporary tools for data analysis.
