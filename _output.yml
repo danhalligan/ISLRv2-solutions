@@ -2,6 +2,7 @@ bookdown::gitbook:
   css: [islrv2.css, https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css]
   config:
     toc:
+      collapse: section
       before: |
         <li><a href="./">ISLRv2 Solutions</a></li>
       after: |

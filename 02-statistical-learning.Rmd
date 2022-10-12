@@ -286,17 +286,17 @@ summary(college)
 
 college$Private <- college$Private == "Yes"
 pairs(college[, 1:10], cex = 0.2)
-plot(college$Outstate ~ college$Private)
+plot(college$Outstate ~ factor(college$Private))
 
 college$Elite <- factor(ifelse(college$Top10perc > 50, "Yes", "No"))
 summary(college$Elite)
 plot(college$Outstate ~ college$Elite)
 
 par(mfrow = c(2,2))
-hist(college$Enroll, breaks = 5)
-hist(college$Enroll, breaks = 10)
-hist(college$Enroll, breaks = 20)
-hist(college$Enroll, breaks = 50)
+hist(college$Enroll, breaks = 5, main = "n = 5")
+hist(college$Enroll, breaks = 10, main = "n = 10")
+hist(college$Enroll, breaks = 20, main = "n = 20")
+hist(college$Enroll, breaks = 50, main = "n = 50")
 
 chisq.test(college$Private, college$Elite)
 ```
@@ -351,6 +351,7 @@ sapply(x[-(10:85), numeric], sd)
 ```{r}
 pairs(x[, numeric], cex = 0.2) 
 cor(x[, numeric])
+heatmap(cor(x[, numeric]))
 ```
 
 Many of the variables appear to be highly (positively or negatively) correlated
@@ -371,7 +372,7 @@ displacement are highly related.
 >    the `ISLR2` library in R.
 >    
 >     ```r
->     > library(MASS)
+>     > library(ISLR2)
 >     ```
 >    
 >    Now the data set is contained in the object `Boston`.
@@ -390,17 +391,18 @@ displacement are highly related.
 >    columns represent?
 
 ```{r}
-library(MASS)
+library(ISLR2)
 dim(Boston)
-head(Boston)
 ```
 
 > b. Make some pairwise scatterplots of the predictors (columns) in this data
 >    set. Describe your findings.
 
 ```{r}
-plot(Boston$nox, Boston$rm)
-plot(Boston$ptratio, Boston$rm)
+library(ggplot2)
+library(tidyverse)
+ggplot(Boston, aes(nox, rm)) + geom_point()
+ggplot(Boston, aes(ptratio, rm)) + geom_point()
 heatmap(cor(Boston, method = "spearman"))
 ```
 
@@ -414,10 +416,12 @@ Yes
 >    predictor.
 
 ```{r}
-par(mfrow=c(2,2))
-hist(Boston$crim, breaks = 20)
-hist(Boston$tax, breaks = 20)
-hist(Boston$ptratio, breaks = 20)
+Boston |> 
+  pivot_longer(cols = 1:13) |> 
+  filter(name %in% c("crim", "tax", "ptratio")) |> 
+  ggplot(aes(value)) + 
+    geom_histogram(bins = 20) + 
+    facet_wrap(~name, scales="free", ncol= 1)
 ```
 
 > e. How many of the census tracts in this data set bound the Charles river?

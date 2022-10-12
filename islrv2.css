@@ -6,7 +6,9 @@
   letter-spacing: -0.8px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: #2E71B6;
   font-family: "Computer Modern Serif", serif;
   font-weight: normal;
@@ -21,10 +23,10 @@ h1, h2, h3 {
   font-style: italic;
 }
 
-h3 > .header-section-number {
+h3>.header-section-number {
   display: none;
 }
 
-.book .book-body .page-wrapper .page-inner section.normal pre {
+.book .book-body .page-wrapper .page-inner section.normal pre.sourceCode {
   background: #FDF5E7;
 }
