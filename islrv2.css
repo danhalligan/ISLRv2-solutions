@@ -1,11 +1,30 @@
 #header .title {
   color: #2E71B6;
+  font-family: "Computer Modern Serif", serif;
+  font-weight: normal;
+  font-size: 3em;
+  letter-spacing: -0.8px;
 }
 
 h1, h2, h3 {
   color: #2E71B6;
+  font-family: "Computer Modern Serif", serif;
+  font-weight: normal;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal h1 {
+  font-size: 2.5em;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal h2 {
+  font-size: 2em;
+  font-style: italic;
 }
 
 h3 > .header-section-number {
   display: none;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal pre {
+  background: #FDF5E7;
 }

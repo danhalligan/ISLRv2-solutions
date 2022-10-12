@@ -1,6 +1,6 @@
 ---
-title: "An Introduction to Statistical Learning second edition solutions"
-author: "Dan Halligan"
+title: An Introduction to Statistical Learning
+subtitle: Exercise solutions in R
 site: bookdown::bookdown_site
 ---
 
@@ -9,11 +9,4 @@ site: bookdown::bookdown_site
 This bookdown document provides solutions for exercises in the book ["An Introduction to Statistical Learning"](https://www.statlearning.com/)
 by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani.
 
-![ISLR cover](images/isl_small.jpg)
-
-> As the scale and scope of data collection continue to increase across
-> virtually all fields, statistical learning has become a critical toolkit for
-> anyone who wishes to understand data. An Introduction to Statistical Learning
-> provides a broad and less technical treatment of key topics in statistical
-> learning. Each chapter includes an R lab. This book is appropriate for anyone
-> who wishes to use contemporary tools for data analysis.
+![](images/isl_small.jpg)

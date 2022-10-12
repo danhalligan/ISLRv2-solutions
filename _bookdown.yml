@@ -1,6 +1,6 @@
 book_filename: "islrv2-solutions"
 language:
   ui:
-    chapter_name: "Chapter "
+    chapter_name: ""
 delete_merged_file: true
 new_session: yes

@@ -1,5 +1,5 @@
 bookdown::gitbook:
-  css: islrv2.css
+  css: [islrv2.css, https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css]
   config:
     toc:
       before: |
