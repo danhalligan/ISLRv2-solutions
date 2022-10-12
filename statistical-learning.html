@@ -51,6 +51,13 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -748,7 +755,7 @@ discover.</p></li>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="statistical-learning.html#cb14-1"></a>college<span class="op">$</span>Private &lt;-<span class="st"> </span>college<span class="op">$</span>Private <span class="op">==</span><span class="st"> &quot;Yes&quot;</span></span>
 <span id="cb14-2"><a href="statistical-learning.html#cb14-2"></a><span class="kw">pairs</span>(college[, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="statistical-learning.html#cb15-1"></a><span class="kw">plot</span>(college<span class="op">$</span>Outstate <span class="op">~</span><span class="st"> </span>college<span class="op">$</span>Private)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="statistical-learning.html#cb15-1"></a><span class="kw">plot</span>(college<span class="op">$</span>Outstate <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(college<span class="op">$</span>Private))</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="statistical-learning.html#cb16-1"></a>college<span class="op">$</span>Elite &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(college<span class="op">$</span>Top10perc <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
 <span id="cb16-2"><a href="statistical-learning.html#cb16-2"></a><span class="kw">summary</span>(college<span class="op">$</span>Elite)</span></code></pre></div>
@@ -757,10 +764,10 @@ discover.</p></li>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="statistical-learning.html#cb18-1"></a><span class="kw">plot</span>(college<span class="op">$</span>Outstate <span class="op">~</span><span class="st"> </span>college<span class="op">$</span>Elite)</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="statistical-learning.html#cb19-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb19-2"><a href="statistical-learning.html#cb19-2"></a><span class="kw">hist</span>(college<span class="op">$</span>Enroll, <span class="dt">breaks =</span> <span class="dv">5</span>)</span>
-<span id="cb19-3"><a href="statistical-learning.html#cb19-3"></a><span class="kw">hist</span>(college<span class="op">$</span>Enroll, <span class="dt">breaks =</span> <span class="dv">10</span>)</span>
-<span id="cb19-4"><a href="statistical-learning.html#cb19-4"></a><span class="kw">hist</span>(college<span class="op">$</span>Enroll, <span class="dt">breaks =</span> <span class="dv">20</span>)</span>
-<span id="cb19-5"><a href="statistical-learning.html#cb19-5"></a><span class="kw">hist</span>(college<span class="op">$</span>Enroll, <span class="dt">breaks =</span> <span class="dv">50</span>)</span></code></pre></div>
+<span id="cb19-2"><a href="statistical-learning.html#cb19-2"></a><span class="kw">hist</span>(college<span class="op">$</span>Enroll, <span class="dt">breaks =</span> <span class="dv">5</span>, <span class="dt">main =</span> <span class="st">&quot;n = 5&quot;</span>)</span>
+<span id="cb19-3"><a href="statistical-learning.html#cb19-3"></a><span class="kw">hist</span>(college<span class="op">$</span>Enroll, <span class="dt">breaks =</span> <span class="dv">10</span>, <span class="dt">main =</span> <span class="st">&quot;n = 10&quot;</span>)</span>
+<span id="cb19-4"><a href="statistical-learning.html#cb19-4"></a><span class="kw">hist</span>(college<span class="op">$</span>Enroll, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">main =</span> <span class="st">&quot;n = 20&quot;</span>)</span>
+<span id="cb19-5"><a href="statistical-learning.html#cb19-5"></a><span class="kw">hist</span>(college<span class="op">$</span>Enroll, <span class="dt">breaks =</span> <span class="dv">50</span>, <span class="dt">main =</span> <span class="st">&quot;n = 50&quot;</span>)</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-4-4.png" width="672" /></p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="statistical-learning.html#cb20-1"></a><span class="kw">chisq.test</span>(college<span class="op">$</span>Private, college<span class="op">$</span>Elite)</span></code></pre></div>
 <pre><code>## 
@@ -841,6 +848,8 @@ the relationships among the predictors. Comment on your findings.</li>
 ## horsepower   -0.7784268    0.8972570  1.0000000  0.8645377   -0.6891955
 ## weight       -0.8322442    0.9329944  0.8645377  1.0000000   -0.4168392
 ## acceleration  0.4233285   -0.5438005 -0.6891955 -0.4168392    1.0000000</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="statistical-learning.html#cb41-1"></a><span class="kw">heatmap</span>(<span class="kw">cor</span>(x[, numeric]))</span></code></pre></div>
+<p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
 <p>Many of the variables appear to be highly (positively or negatively) correlated
 with some relationships being non-linear.</p>
 <blockquote>
@@ -860,44 +869,39 @@ displacement are highly related.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>To begin, load in the <code>Boston</code> data set. The <code>Boston</code> data set is part of
 the <code>ISLR2</code> library in R.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="statistical-learning.html#cb41-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(MASS)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="statistical-learning.html#cb42-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(ISLR2)</span></code></pre></div>
 <p>Now the data set is contained in the object <code>Boston</code>.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="statistical-learning.html#cb42-1"></a><span class="op">&gt;</span><span class="st"> </span>Boston</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="statistical-learning.html#cb43-1"></a><span class="op">&gt;</span><span class="st"> </span>Boston</span></code></pre></div>
 <p>Read about the data set:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="statistical-learning.html#cb43-1"></a><span class="op">&gt;</span><span class="st"> </span>?Boston</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="statistical-learning.html#cb44-1"></a><span class="op">&gt;</span><span class="st"> </span>?Boston</span></code></pre></div>
 <p>How many rows are in this data set? How many columns? What do the rows and
 columns represent?</p></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="statistical-learning.html#cb44-1"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb44-2"><a href="statistical-learning.html#cb44-2"></a><span class="kw">dim</span>(Boston)</span></code></pre></div>
-<pre><code>## [1] 506  14</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="statistical-learning.html#cb46-1"></a><span class="kw">head</span>(Boston)</span></code></pre></div>
-<pre><code>##      crim zn indus chas   nox    rm  age    dis rad tax ptratio  black lstat
-## 1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90  4.98
-## 2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90  9.14
-## 3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83  4.03
-## 4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63  2.94
-## 5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90  5.33
-## 6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12  5.21
-##   medv
-## 1 24.0
-## 2 21.6
-## 3 34.7
-## 4 33.4
-## 5 36.2
-## 6 28.7</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="statistical-learning.html#cb45-1"></a><span class="kw">library</span>(ISLR2)</span>
+<span id="cb45-2"><a href="statistical-learning.html#cb45-2"></a><span class="kw">dim</span>(Boston)</span></code></pre></div>
+<pre><code>## [1] 506  13</code></pre>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Make some pairwise scatterplots of the predictors (columns) in this data
 set. Describe your findings.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="statistical-learning.html#cb48-1"></a><span class="kw">plot</span>(Boston<span class="op">$</span>nox, Boston<span class="op">$</span>rm)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="statistical-learning.html#cb47-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb47-2"><a href="statistical-learning.html#cb47-2"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+## ✔ readr   2.1.3      ✔ forcats 0.5.2 
+## ✔ purrr   0.3.5      
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="statistical-learning.html#cb49-1"></a><span class="kw">ggplot</span>(Boston, <span class="kw">aes</span>(nox, rm)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="statistical-learning.html#cb49-1"></a><span class="kw">plot</span>(Boston<span class="op">$</span>ptratio, Boston<span class="op">$</span>rm)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="statistical-learning.html#cb50-1"></a><span class="kw">ggplot</span>(Boston, <span class="kw">aes</span>(ptratio, rm)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="statistical-learning.html#cb50-1"></a><span class="kw">heatmap</span>(<span class="kw">cor</span>(Boston, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="statistical-learning.html#cb51-1"></a><span class="kw">heatmap</span>(<span class="kw">cor</span>(Boston, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>))</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-3.png" width="672" /></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -913,24 +917,26 @@ crime rates? Tax rates? Pupil-teacher ratios? Comment on the range of each
 predictor.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="statistical-learning.html#cb51-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb51-2"><a href="statistical-learning.html#cb51-2"></a><span class="kw">hist</span>(Boston<span class="op">$</span>crim, <span class="dt">breaks =</span> <span class="dv">20</span>)</span>
-<span id="cb51-3"><a href="statistical-learning.html#cb51-3"></a><span class="kw">hist</span>(Boston<span class="op">$</span>tax, <span class="dt">breaks =</span> <span class="dv">20</span>)</span>
-<span id="cb51-4"><a href="statistical-learning.html#cb51-4"></a><span class="kw">hist</span>(Boston<span class="op">$</span>ptratio, <span class="dt">breaks =</span> <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="statistical-learning.html#cb52-1"></a>Boston <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span></span>
+<span id="cb52-2"><a href="statistical-learning.html#cb52-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">13</span>) <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span></span>
+<span id="cb52-3"><a href="statistical-learning.html#cb52-3"></a><span class="st">  </span><span class="kw">filter</span>(name <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;crim&quot;</span>, <span class="st">&quot;tax&quot;</span>, <span class="st">&quot;ptratio&quot;</span>)) <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span></span>
+<span id="cb52-4"><a href="statistical-learning.html#cb52-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb52-5"><a href="statistical-learning.html#cb52-5"></a><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">20</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb52-6"><a href="statistical-learning.html#cb52-6"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>name, <span class="dt">scales=</span><span class="st">&quot;free&quot;</span>, <span class="dt">ncol=</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>How many of the census tracts in this data set bound the Charles river?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="statistical-learning.html#cb52-1"></a><span class="kw">sum</span>(Boston<span class="op">$</span>chas)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="statistical-learning.html#cb53-1"></a><span class="kw">sum</span>(Boston<span class="op">$</span>chas)</span></code></pre></div>
 <pre><code>## [1] 35</code></pre>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">
 <li>What is the median pupil-teacher ratio among the towns in this data set?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="statistical-learning.html#cb54-1"></a><span class="kw">median</span>(Boston<span class="op">$</span>ptratio)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="statistical-learning.html#cb55-1"></a><span class="kw">median</span>(Boston<span class="op">$</span>ptratio)</span></code></pre></div>
 <pre><code>## [1] 19.05</code></pre>
 <blockquote>
 <ol start="7" style="list-style-type: lower-alpha">
@@ -940,26 +946,23 @@ and how do those values compare to the overall ranges for those predictors?
 Comment on your findings.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="statistical-learning.html#cb56-1"></a>Boston[Boston<span class="op">$</span>medv <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(Boston<span class="op">$</span>medv), ]</span></code></pre></div>
-<pre><code>##        crim zn indus chas   nox    rm age    dis rad tax ptratio  black lstat
-## 399 38.3518  0  18.1    0 0.693 5.453 100 1.4896  24 666    20.2 396.90 30.59
-## 406 67.9208  0  18.1    0 0.693 5.683 100 1.4254  24 666    20.2 384.97 22.98
-##     medv
-## 399    5
-## 406    5</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="statistical-learning.html#cb58-1"></a><span class="kw">sapply</span>(Boston, quantile)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="statistical-learning.html#cb57-1"></a>Boston[Boston<span class="op">$</span>medv <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(Boston<span class="op">$</span>medv), ]</span></code></pre></div>
+<pre><code>##        crim zn indus chas   nox    rm age    dis rad tax ptratio lstat medv
+## 399 38.3518  0  18.1    0 0.693 5.453 100 1.4896  24 666    20.2 30.59    5
+## 406 67.9208  0  18.1    0 0.693 5.683 100 1.4254  24 666    20.2 22.98    5</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="statistical-learning.html#cb59-1"></a><span class="kw">sapply</span>(Boston, quantile)</span></code></pre></div>
 <pre><code>##           crim    zn indus chas   nox     rm     age       dis rad tax ptratio
 ## 0%    0.006320   0.0  0.46    0 0.385 3.5610   2.900  1.129600   1 187   12.60
 ## 25%   0.082045   0.0  5.19    0 0.449 5.8855  45.025  2.100175   4 279   17.40
 ## 50%   0.256510   0.0  9.69    0 0.538 6.2085  77.500  3.207450   5 330   19.05
 ## 75%   3.677083  12.5 18.10    0 0.624 6.6235  94.075  5.188425  24 666   20.20
 ## 100% 88.976200 100.0 27.74    1 0.871 8.7800 100.000 12.126500  24 711   22.00
-##         black  lstat   medv
-## 0%     0.3200  1.730  5.000
-## 25%  375.3775  6.950 17.025
-## 50%  391.4400 11.360 21.200
-## 75%  396.2250 16.955 25.000
-## 100% 396.9000 37.970 50.000</code></pre>
+##       lstat   medv
+## 0%    1.730  5.000
+## 25%   6.950 17.025
+## 50%  11.360 21.200
+## 75%  16.955 25.000
+## 100% 37.970 50.000</code></pre>
 <blockquote>
 <ol start="8" style="list-style-type: lower-alpha">
 <li>In this data set, how many of the census tract average more than seven
@@ -967,15 +970,15 @@ rooms per dwelling? More than eight rooms per dwelling? Comment on the
 census tracts that average more than eight rooms per dwelling.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="statistical-learning.html#cb60-1"></a><span class="kw">sum</span>(Boston<span class="op">$</span>rm <span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="statistical-learning.html#cb61-1"></a><span class="kw">sum</span>(Boston<span class="op">$</span>rm <span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>)</span></code></pre></div>
 <pre><code>## [1] 64</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="statistical-learning.html#cb62-1"></a><span class="kw">sum</span>(Boston<span class="op">$</span>rm <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="statistical-learning.html#cb63-1"></a><span class="kw">sum</span>(Boston<span class="op">$</span>rm <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>)</span></code></pre></div>
 <pre><code>## [1] 13</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="statistical-learning.html#cb64-1"></a><span class="kw">sapply</span>(Boston[Boston<span class="op">$</span>rm <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>, ], median)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="statistical-learning.html#cb65-1"></a><span class="kw">sapply</span>(Boston[Boston<span class="op">$</span>rm <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>, ], median)</span></code></pre></div>
 <pre><code>##      crim        zn     indus      chas       nox        rm       age       dis 
 ##   0.52014   0.00000   6.20000   0.00000   0.50700   8.29700  78.30000   2.89440 
-##       rad       tax   ptratio     black     lstat      medv 
-##   7.00000 307.00000  17.40000 386.86000   4.14000  48.30000</code></pre>
+##       rad       tax   ptratio     lstat      medv 
+##   7.00000 307.00000  17.40000   4.14000  48.30000</code></pre>
 
 </div>
 </div>
@@ -1034,7 +1037,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "subsection"
+"collapse": "section"
 }
 });
 });

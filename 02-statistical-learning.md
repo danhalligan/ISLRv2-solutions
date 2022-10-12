@@ -241,10 +241,10 @@ college <- read.csv("data/College.csv")
 >    to treat this as data. However, it may be handy to have these names for 
 >    later. Try the following commands:
 >    
->     ```r
->     rownames(college) <- college[, 1]
->     View(college)
->     ```
+>    ```r
+>    rownames(college) <- college[, 1]
+>    View(college)
+>    ```
 >    
 >    You should see that there is now a `row.names` column with the name of 
 >    each university recorded. This means that R has given each row a name 
@@ -252,10 +252,10 @@ college <- read.csv("data/College.csv")
 >    calculations on the row names. However, we still need to eliminate the 
 >    first column in the data where the names are stored. Try
 >    
->     ```r
->     college <- college [, -1]
->     View(college)
->     ```
+>    ```r
+>    college <- college [, -1]
+>    View(college)
+>    ```
 >    
 >    Now you should see that the first data column is `Private`. Note that 
 >    another column labeled `row.names` now appears before the `Private` column.
@@ -351,7 +351,7 @@ pairs(college[, 1:10], cex = 0.2)
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 ```r
-plot(college$Outstate ~ college$Private)
+plot(college$Outstate ~ factor(college$Private))
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-4-2.png" width="672" />
@@ -374,10 +374,10 @@ plot(college$Outstate ~ college$Elite)
 
 ```r
 par(mfrow = c(2,2))
-hist(college$Enroll, breaks = 5)
-hist(college$Enroll, breaks = 10)
-hist(college$Enroll, breaks = 20)
-hist(college$Enroll, breaks = 50)
+hist(college$Enroll, breaks = 5, main = "n = 5")
+hist(college$Enroll, breaks = 10, main = "n = 10")
+hist(college$Enroll, breaks = 20, main = "n = 20")
+hist(college$Enroll, breaks = 50, main = "n = 50")
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-4-4.png" width="672" />
@@ -515,6 +515,12 @@ cor(x[, numeric])
 ## acceleration  0.4233285   -0.5438005 -0.6891955 -0.4168392    1.0000000
 ```
 
+```r
+heatmap(cor(x[, numeric]))
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-10-2.png" width="672" />
+
 Many of the variables appear to be highly (positively or negatively) correlated
 with some relationships being non-linear.
 
@@ -532,54 +538,33 @@ displacement are highly related.
 > a. To begin, load in the `Boston` data set. The `Boston` data set is part of 
 >    the `ISLR2` library in R.
 >    
->     ```r
->     > library(MASS)
->     ```
+>    ```r
+>    > library(ISLR2)
+>    ```
 >    
 >    Now the data set is contained in the object `Boston`.
 >    
->     ```r
->     > Boston
->     ```
+>    ```r
+>    > Boston
+>    ```
 >    
 >    Read about the data set:
 >    
->     ```r
->     > ?Boston
->     ```
+>    ```r
+>    > ?Boston
+>    ```
 >    
 >    How many rows are in this data set? How many columns? What do the rows and
 >    columns represent?
 
 
 ```r
-library(MASS)
+library(ISLR2)
 dim(Boston)
 ```
 
 ```
-## [1] 506  14
-```
-
-```r
-head(Boston)
-```
-
-```
-##      crim zn indus chas   nox    rm  age    dis rad tax ptratio  black lstat
-## 1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90  4.98
-## 2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90  9.14
-## 3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83  4.03
-## 4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63  2.94
-## 5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90  5.33
-## 6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12  5.21
-##   medv
-## 1 24.0
-## 2 21.6
-## 3 34.7
-## 4 33.4
-## 5 36.2
-## 6 28.7
+## [1] 506  13
 ```
 
 > b. Make some pairwise scatterplots of the predictors (columns) in this data
@@ -587,13 +572,29 @@ head(Boston)
 
 
 ```r
-plot(Boston$nox, Boston$rm)
+library(ggplot2)
+library(tidyverse)
+```
+
+```
+## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+## ✔ readr   2.1.3      ✔ forcats 0.5.2 
+## ✔ purrr   0.3.5      
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+```
+
+```r
+ggplot(Boston, aes(nox, rm)) + geom_point()
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 ```r
-plot(Boston$ptratio, Boston$rm)
+ggplot(Boston, aes(ptratio, rm)) + geom_point()
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-2.png" width="672" />
@@ -615,10 +616,12 @@ Yes
 
 
 ```r
-par(mfrow=c(2,2))
-hist(Boston$crim, breaks = 20)
-hist(Boston$tax, breaks = 20)
-hist(Boston$ptratio, breaks = 20)
+Boston |> 
+  pivot_longer(cols = 1:13) |> 
+  filter(name %in% c("crim", "tax", "ptratio")) |> 
+  ggplot(aes(value)) + 
+    geom_histogram(bins = 20) + 
+    facet_wrap(~name, scales="free", ncol= 1)
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-13-1.png" width="672" />
@@ -656,12 +659,9 @@ Boston[Boston$medv == min(Boston$medv), ]
 ```
 
 ```
-##        crim zn indus chas   nox    rm age    dis rad tax ptratio  black lstat
-## 399 38.3518  0  18.1    0 0.693 5.453 100 1.4896  24 666    20.2 396.90 30.59
-## 406 67.9208  0  18.1    0 0.693 5.683 100 1.4254  24 666    20.2 384.97 22.98
-##     medv
-## 399    5
-## 406    5
+##        crim zn indus chas   nox    rm age    dis rad tax ptratio lstat medv
+## 399 38.3518  0  18.1    0 0.693 5.453 100 1.4896  24 666    20.2 30.59    5
+## 406 67.9208  0  18.1    0 0.693 5.683 100 1.4254  24 666    20.2 22.98    5
 ```
 
 ```r
@@ -675,12 +675,12 @@ sapply(Boston, quantile)
 ## 50%   0.256510   0.0  9.69    0 0.538 6.2085  77.500  3.207450   5 330   19.05
 ## 75%   3.677083  12.5 18.10    0 0.624 6.6235  94.075  5.188425  24 666   20.20
 ## 100% 88.976200 100.0 27.74    1 0.871 8.7800 100.000 12.126500  24 711   22.00
-##         black  lstat   medv
-## 0%     0.3200  1.730  5.000
-## 25%  375.3775  6.950 17.025
-## 50%  391.4400 11.360 21.200
-## 75%  396.2250 16.955 25.000
-## 100% 396.9000 37.970 50.000
+##       lstat   medv
+## 0%    1.730  5.000
+## 25%   6.950 17.025
+## 50%  11.360 21.200
+## 75%  16.955 25.000
+## 100% 37.970 50.000
 ```
 
 > h. In this data set, how many of the census tract average more than seven
@@ -711,6 +711,6 @@ sapply(Boston[Boston$rm > 8, ], median)
 ```
 ##      crim        zn     indus      chas       nox        rm       age       dis 
 ##   0.52014   0.00000   6.20000   0.00000   0.50700   8.29700  78.30000   2.89440 
-##       rad       tax   ptratio     black     lstat      medv 
-##   7.00000 307.00000  17.40000 386.86000   4.14000  48.30000
+##       rad       tax   ptratio     lstat      medv 
+##   7.00000 307.00000  17.40000   4.14000  48.30000
 ```
