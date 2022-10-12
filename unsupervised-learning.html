@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>12 Unsupervised Learning | An Introduction to Statistical Learning</title>
+  <meta name="description" content="12 Unsupervised Learning | An Introduction to Statistical Learning" />
+  <meta name="generator" content="bookdown 0.29.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="12 Unsupervised Learning | An Introduction to Statistical Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="12 Unsupervised Learning | An Introduction to Statistical Learning" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="survival-analysis-and-censored-data.html"/>
+<link rel="next" href="multiple-testing.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="islrv2.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">ISLRv2 Solutions</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="statistical-learning.html"><a href="statistical-learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a><ul>
+<li class="chapter" data-level="2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#conceptual"><i class="fa fa-check"></i><b>2.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-1"><i class="fa fa-check"></i><b>2.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="2.1.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-2"><i class="fa fa-check"></i><b>2.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="2.1.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-3"><i class="fa fa-check"></i><b>2.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="2.1.4" data-path="statistical-learning.html"><a href="statistical-learning.html#question-4"><i class="fa fa-check"></i><b>2.1.4</b> Question 4</a></li>
+<li class="chapter" data-level="2.1.5" data-path="statistical-learning.html"><a href="statistical-learning.html#question-5"><i class="fa fa-check"></i><b>2.1.5</b> Question 5</a></li>
+<li class="chapter" data-level="2.1.6" data-path="statistical-learning.html"><a href="statistical-learning.html#question-6"><i class="fa fa-check"></i><b>2.1.6</b> Question 6</a></li>
+<li class="chapter" data-level="2.1.7" data-path="statistical-learning.html"><a href="statistical-learning.html#question-7"><i class="fa fa-check"></i><b>2.1.7</b> Question 7</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#applied"><i class="fa fa-check"></i><b>2.2</b> Applied</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-8"><i class="fa fa-check"></i><b>2.2.1</b> Question 8</a></li>
+<li class="chapter" data-level="2.2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-9"><i class="fa fa-check"></i><b>2.2.2</b> Question 9</a></li>
+<li class="chapter" data-level="2.2.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-10"><i class="fa fa-check"></i><b>2.2.3</b> Question 10</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#conceptual-1"><i class="fa fa-check"></i><b>3.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="linear-regression.html"><a href="linear-regression.html#question-1-1"><i class="fa fa-check"></i><b>3.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="3.1.2" data-path="linear-regression.html"><a href="linear-regression.html#question-2-1"><i class="fa fa-check"></i><b>3.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="3.1.3" data-path="linear-regression.html"><a href="linear-regression.html#question-3-1"><i class="fa fa-check"></i><b>3.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="3.1.4" data-path="linear-regression.html"><a href="linear-regression.html#question-4-1"><i class="fa fa-check"></i><b>3.1.4</b> Question 4</a></li>
+<li class="chapter" data-level="3.1.5" data-path="linear-regression.html"><a href="linear-regression.html#question-5-1"><i class="fa fa-check"></i><b>3.1.5</b> Question 5</a></li>
+<li class="chapter" data-level="3.1.6" data-path="linear-regression.html"><a href="linear-regression.html#question-6-1"><i class="fa fa-check"></i><b>3.1.6</b> Question 6</a></li>
+<li class="chapter" data-level="3.1.7" data-path="linear-regression.html"><a href="linear-regression.html#question-7-1"><i class="fa fa-check"></i><b>3.1.7</b> Question 7</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#applied-1"><i class="fa fa-check"></i><b>3.2</b> Applied</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="linear-regression.html"><a href="linear-regression.html#question-8-1"><i class="fa fa-check"></i><b>3.2.1</b> Question 8</a></li>
+<li class="chapter" data-level="3.2.2" data-path="linear-regression.html"><a href="linear-regression.html#question-9-1"><i class="fa fa-check"></i><b>3.2.2</b> Question 9</a></li>
+<li class="chapter" data-level="3.2.3" data-path="linear-regression.html"><a href="linear-regression.html#question-10-1"><i class="fa fa-check"></i><b>3.2.3</b> Question 10</a></li>
+<li class="chapter" data-level="3.2.4" data-path="linear-regression.html"><a href="linear-regression.html#question-11"><i class="fa fa-check"></i><b>3.2.4</b> Question 11</a></li>
+<li class="chapter" data-level="3.2.5" data-path="linear-regression.html"><a href="linear-regression.html#question-12"><i class="fa fa-check"></i><b>3.2.5</b> Question 12</a></li>
+<li class="chapter" data-level="3.2.6" data-path="linear-regression.html"><a href="linear-regression.html#question-13"><i class="fa fa-check"></i><b>3.2.6</b> Question 13</a></li>
+<li class="chapter" data-level="3.2.7" data-path="linear-regression.html"><a href="linear-regression.html#question-14"><i class="fa fa-check"></i><b>3.2.7</b> Question 14</a></li>
+<li class="chapter" data-level="3.2.8" data-path="linear-regression.html"><a href="linear-regression.html#question-15"><i class="fa fa-check"></i><b>3.2.8</b> Question 15</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a><ul>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#conceptual-2"><i class="fa fa-check"></i><b>4.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="classification.html"><a href="classification.html#question-1-2"><i class="fa fa-check"></i><b>4.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="4.1.2" data-path="classification.html"><a href="classification.html#question-2-2"><i class="fa fa-check"></i><b>4.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="4.1.3" data-path="classification.html"><a href="classification.html#question-3-2"><i class="fa fa-check"></i><b>4.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="4.1.4" data-path="classification.html"><a href="classification.html#question-4-2"><i class="fa fa-check"></i><b>4.1.4</b> Question 4</a></li>
+<li class="chapter" data-level="4.1.5" data-path="classification.html"><a href="classification.html#question-5-2"><i class="fa fa-check"></i><b>4.1.5</b> Question 5</a></li>
+<li class="chapter" data-level="4.1.6" data-path="classification.html"><a href="classification.html#question-6-2"><i class="fa fa-check"></i><b>4.1.6</b> Question 6</a></li>
+<li class="chapter" data-level="4.1.7" data-path="classification.html"><a href="classification.html#question-7-2"><i class="fa fa-check"></i><b>4.1.7</b> Question 7</a></li>
+<li class="chapter" data-level="4.1.8" data-path="classification.html"><a href="classification.html#question-8-2"><i class="fa fa-check"></i><b>4.1.8</b> Question 8</a></li>
+<li class="chapter" data-level="4.1.9" data-path="classification.html"><a href="classification.html#question-9-2"><i class="fa fa-check"></i><b>4.1.9</b> Question 9</a></li>
+<li class="chapter" data-level="4.1.10" data-path="classification.html"><a href="classification.html#question-10-2"><i class="fa fa-check"></i><b>4.1.10</b> Question 10</a></li>
+<li class="chapter" data-level="4.1.11" data-path="classification.html"><a href="classification.html#question-11-1"><i class="fa fa-check"></i><b>4.1.11</b> Question 11</a></li>
+<li class="chapter" data-level="4.1.12" data-path="classification.html"><a href="classification.html#question-12-1"><i class="fa fa-check"></i><b>4.1.12</b> Question 12</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#applied-2"><i class="fa fa-check"></i><b>4.2</b> Applied</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="classification.html"><a href="classification.html#question-13-1"><i class="fa fa-check"></i><b>4.2.1</b> Question 13</a></li>
+<li class="chapter" data-level="4.2.2" data-path="classification.html"><a href="classification.html#question-14-1"><i class="fa fa-check"></i><b>4.2.2</b> Question 14</a></li>
+<li class="chapter" data-level="4.2.3" data-path="classification.html"><a href="classification.html#question-15-1"><i class="fa fa-check"></i><b>4.2.3</b> Question 15</a></li>
+<li class="chapter" data-level="4.2.4" data-path="classification.html"><a href="classification.html#question-13-2"><i class="fa fa-check"></i><b>4.2.4</b> Question 13</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a><ul>
+<li class="chapter" data-level="5.1" data-path="resampling-methods.html"><a href="resampling-methods.html#conceptual-3"><i class="fa fa-check"></i><b>5.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-1-3"><i class="fa fa-check"></i><b>5.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="5.1.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-2-3"><i class="fa fa-check"></i><b>5.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="5.1.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-3-3"><i class="fa fa-check"></i><b>5.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="5.1.4" data-path="resampling-methods.html"><a href="resampling-methods.html#question-4-3"><i class="fa fa-check"></i><b>5.1.4</b> Question 4</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="resampling-methods.html"><a href="resampling-methods.html#applied-3"><i class="fa fa-check"></i><b>5.2</b> Applied</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-5-3"><i class="fa fa-check"></i><b>5.2.1</b> Question 5</a></li>
+<li class="chapter" data-level="5.2.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-6-3"><i class="fa fa-check"></i><b>5.2.2</b> Question 6</a></li>
+<li class="chapter" data-level="5.2.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-7-3"><i class="fa fa-check"></i><b>5.2.3</b> Question 7</a></li>
+<li class="chapter" data-level="5.2.4" data-path="resampling-methods.html"><a href="resampling-methods.html#question-8-3"><i class="fa fa-check"></i><b>5.2.4</b> Question 8</a></li>
+<li class="chapter" data-level="5.2.5" data-path="resampling-methods.html"><a href="resampling-methods.html#question-9-3"><i class="fa fa-check"></i><b>5.2.5</b> Question 9</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a><ul>
+<li class="chapter" data-level="6.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#conceptual-4"><i class="fa fa-check"></i><b>6.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-1-4"><i class="fa fa-check"></i><b>6.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="6.1.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-2-4"><i class="fa fa-check"></i><b>6.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="6.1.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-3-4"><i class="fa fa-check"></i><b>6.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="6.1.4" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-4-4"><i class="fa fa-check"></i><b>6.1.4</b> Question 4</a></li>
+<li class="chapter" data-level="6.1.5" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-5-4"><i class="fa fa-check"></i><b>6.1.5</b> Question 5</a></li>
+<li class="chapter" data-level="6.1.6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-6-4"><i class="fa fa-check"></i><b>6.1.6</b> Question 6</a></li>
+<li class="chapter" data-level="6.1.7" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-7-4"><i class="fa fa-check"></i><b>6.1.7</b> Question 7</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#applied-4"><i class="fa fa-check"></i><b>6.2</b> Applied</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-8-4"><i class="fa fa-check"></i><b>6.2.1</b> Question 8</a></li>
+<li class="chapter" data-level="6.2.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-9-4"><i class="fa fa-check"></i><b>6.2.2</b> Question 9</a></li>
+<li class="chapter" data-level="6.2.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-10-3"><i class="fa fa-check"></i><b>6.2.3</b> Question 10</a></li>
+<li class="chapter" data-level="6.2.4" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-11-2"><i class="fa fa-check"></i><b>6.2.4</b> Question 11</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a><ul>
+<li class="chapter" data-level="7.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#conceptual-5"><i class="fa fa-check"></i><b>7.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-1-5"><i class="fa fa-check"></i><b>7.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="7.1.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-2-5"><i class="fa fa-check"></i><b>7.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="7.1.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-3-5"><i class="fa fa-check"></i><b>7.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="7.1.4" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-4-5"><i class="fa fa-check"></i><b>7.1.4</b> Question 4</a></li>
+<li class="chapter" data-level="7.1.5" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-5-5"><i class="fa fa-check"></i><b>7.1.5</b> Question 5</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#applied-5"><i class="fa fa-check"></i><b>7.2</b> Applied</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-6-5"><i class="fa fa-check"></i><b>7.2.1</b> Question 6</a></li>
+<li class="chapter" data-level="7.2.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-7-5"><i class="fa fa-check"></i><b>7.2.2</b> Question 7</a></li>
+<li class="chapter" data-level="7.2.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-8-5"><i class="fa fa-check"></i><b>7.2.3</b> Question 8</a></li>
+<li class="chapter" data-level="7.2.4" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-9-5"><i class="fa fa-check"></i><b>7.2.4</b> Question 9</a></li>
+<li class="chapter" data-level="7.2.5" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-10-4"><i class="fa fa-check"></i><b>7.2.5</b> Question 10</a></li>
+<li class="chapter" data-level="7.2.6" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-11-3"><i class="fa fa-check"></i><b>7.2.6</b> Question 11</a></li>
+<li class="chapter" data-level="7.2.7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-12-2"><i class="fa fa-check"></i><b>7.2.7</b> Question 12</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a><ul>
+<li class="chapter" data-level="8.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#conceptual-6"><i class="fa fa-check"></i><b>8.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-1-6"><i class="fa fa-check"></i><b>8.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="8.1.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-2-6"><i class="fa fa-check"></i><b>8.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="8.1.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-3-6"><i class="fa fa-check"></i><b>8.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="8.1.4" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-4-6"><i class="fa fa-check"></i><b>8.1.4</b> Question 4</a></li>
+<li class="chapter" data-level="8.1.5" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-5-6"><i class="fa fa-check"></i><b>8.1.5</b> Question 5</a></li>
+<li class="chapter" data-level="8.1.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-6-6"><i class="fa fa-check"></i><b>8.1.6</b> Question 6</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#applied-6"><i class="fa fa-check"></i><b>8.2</b> Applied</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-7-6"><i class="fa fa-check"></i><b>8.2.1</b> Question 7</a></li>
+<li class="chapter" data-level="8.2.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-8-6"><i class="fa fa-check"></i><b>8.2.2</b> Question 8</a></li>
+<li class="chapter" data-level="8.2.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-9-6"><i class="fa fa-check"></i><b>8.2.3</b> Question 9</a></li>
+<li class="chapter" data-level="8.2.4" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-10-5"><i class="fa fa-check"></i><b>8.2.4</b> Question 10</a></li>
+<li class="chapter" data-level="8.2.5" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-11-4"><i class="fa fa-check"></i><b>8.2.5</b> Question 11</a></li>
+<li class="chapter" data-level="8.2.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-12-3"><i class="fa fa-check"></i><b>8.2.6</b> Question 12</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a><ul>
+<li class="chapter" data-level="9.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#conceptual-7"><i class="fa fa-check"></i><b>9.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-1-7"><i class="fa fa-check"></i><b>9.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="9.1.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-2-7"><i class="fa fa-check"></i><b>9.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="9.1.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-3-7"><i class="fa fa-check"></i><b>9.1.3</b> Question 3</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#applied-7"><i class="fa fa-check"></i><b>9.2</b> Applied</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-4-7"><i class="fa fa-check"></i><b>9.2.1</b> Question 4</a></li>
+<li class="chapter" data-level="9.2.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-5-7"><i class="fa fa-check"></i><b>9.2.2</b> Question 5</a></li>
+<li class="chapter" data-level="9.2.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-6-7"><i class="fa fa-check"></i><b>9.2.3</b> Question 6</a></li>
+<li class="chapter" data-level="9.2.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-7-7"><i class="fa fa-check"></i><b>9.2.4</b> Question 7</a></li>
+<li class="chapter" data-level="9.2.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-8-7"><i class="fa fa-check"></i><b>9.2.5</b> Question 8</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a><ul>
+<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#conceptual-8"><i class="fa fa-check"></i><b>10.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="deep-learning.html"><a href="deep-learning.html#question-1-8"><i class="fa fa-check"></i><b>10.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="10.1.2" data-path="deep-learning.html"><a href="deep-learning.html#question-2-8"><i class="fa fa-check"></i><b>10.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="10.1.3" data-path="deep-learning.html"><a href="deep-learning.html#question-3-8"><i class="fa fa-check"></i><b>10.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="10.1.4" data-path="deep-learning.html"><a href="deep-learning.html#question-4-8"><i class="fa fa-check"></i><b>10.1.4</b> Question 4</a></li>
+<li class="chapter" data-level="10.1.5" data-path="deep-learning.html"><a href="deep-learning.html#question-5-8"><i class="fa fa-check"></i><b>10.1.5</b> Question 5</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#applied-8"><i class="fa fa-check"></i><b>10.2</b> Applied</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="deep-learning.html"><a href="deep-learning.html#question-6-8"><i class="fa fa-check"></i><b>10.2.1</b> Question 6</a></li>
+<li class="chapter" data-level="10.2.2" data-path="deep-learning.html"><a href="deep-learning.html#question-7-8"><i class="fa fa-check"></i><b>10.2.2</b> Question 7</a></li>
+<li class="chapter" data-level="10.2.3" data-path="deep-learning.html"><a href="deep-learning.html#question-8-8"><i class="fa fa-check"></i><b>10.2.3</b> Question 8</a></li>
+<li class="chapter" data-level="10.2.4" data-path="deep-learning.html"><a href="deep-learning.html#question-9-7"><i class="fa fa-check"></i><b>10.2.4</b> Question 9</a></li>
+<li class="chapter" data-level="10.2.5" data-path="deep-learning.html"><a href="deep-learning.html#question-10-6"><i class="fa fa-check"></i><b>10.2.5</b> Question 10</a></li>
+<li class="chapter" data-level="10.2.6" data-path="deep-learning.html"><a href="deep-learning.html#question-11-5"><i class="fa fa-check"></i><b>10.2.6</b> Question 11</a></li>
+<li class="chapter" data-level="10.2.7" data-path="deep-learning.html"><a href="deep-learning.html#question-12-4"><i class="fa fa-check"></i><b>10.2.7</b> Question 12</a></li>
+<li class="chapter" data-level="10.2.8" data-path="deep-learning.html"><a href="deep-learning.html#question-13-3"><i class="fa fa-check"></i><b>10.2.8</b> Question 13</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a><ul>
+<li class="chapter" data-level="11.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#conceptual-9"><i class="fa fa-check"></i><b>11.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-1-9"><i class="fa fa-check"></i><b>11.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="11.1.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-2-9"><i class="fa fa-check"></i><b>11.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="11.1.3" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-3-9"><i class="fa fa-check"></i><b>11.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="11.1.4" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-4-9"><i class="fa fa-check"></i><b>11.1.4</b> Question 4</a></li>
+<li class="chapter" data-level="11.1.5" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-5-9"><i class="fa fa-check"></i><b>11.1.5</b> Question 5</a></li>
+<li class="chapter" data-level="11.1.6" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-6-9"><i class="fa fa-check"></i><b>11.1.6</b> Question 6</a></li>
+<li class="chapter" data-level="11.1.7" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-7-9"><i class="fa fa-check"></i><b>11.1.7</b> Question 7</a></li>
+<li class="chapter" data-level="11.1.8" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-8-9"><i class="fa fa-check"></i><b>11.1.8</b> Question 8</a></li>
+<li class="chapter" data-level="11.1.9" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-9-8"><i class="fa fa-check"></i><b>11.1.9</b> Question 9</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#applied-9"><i class="fa fa-check"></i><b>11.2</b> Applied</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-10-7"><i class="fa fa-check"></i><b>11.2.1</b> Question 10</a></li>
+<li class="chapter" data-level="11.2.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-11-6"><i class="fa fa-check"></i><b>11.2.2</b> Question 11</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a><ul>
+<li class="chapter" data-level="12.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#conceptual-10"><i class="fa fa-check"></i><b>12.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-1-10"><i class="fa fa-check"></i><b>12.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="12.1.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-2-10"><i class="fa fa-check"></i><b>12.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="12.1.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-3-10"><i class="fa fa-check"></i><b>12.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="12.1.4" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-4-10"><i class="fa fa-check"></i><b>12.1.4</b> Question 4</a></li>
+<li class="chapter" data-level="12.1.5" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-5-10"><i class="fa fa-check"></i><b>12.1.5</b> Question 5</a></li>
+<li class="chapter" data-level="12.1.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-6-10"><i class="fa fa-check"></i><b>12.1.6</b> Question 6</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#applied-10"><i class="fa fa-check"></i><b>12.2</b> Applied</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-7-10"><i class="fa fa-check"></i><b>12.2.1</b> Question 7</a></li>
+<li class="chapter" data-level="12.2.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-8-10"><i class="fa fa-check"></i><b>12.2.2</b> Question 8</a></li>
+<li class="chapter" data-level="12.2.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-9-9"><i class="fa fa-check"></i><b>12.2.3</b> Question 9</a></li>
+<li class="chapter" data-level="12.2.4" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-10-8"><i class="fa fa-check"></i><b>12.2.4</b> Question 10</a></li>
+<li class="chapter" data-level="12.2.5" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-11-7"><i class="fa fa-check"></i><b>12.2.5</b> Question 11</a></li>
+<li class="chapter" data-level="12.2.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-12-5"><i class="fa fa-check"></i><b>12.2.6</b> Question 12</a></li>
+<li class="chapter" data-level="12.2.7" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-13-4"><i class="fa fa-check"></i><b>12.2.7</b> Question 13</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a><ul>
+<li class="chapter" data-level="13.1" data-path="multiple-testing.html"><a href="multiple-testing.html#conceptual-11"><i class="fa fa-check"></i><b>13.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-1-11"><i class="fa fa-check"></i><b>13.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="13.1.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-2-11"><i class="fa fa-check"></i><b>13.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="13.1.3" data-path="multiple-testing.html"><a href="multiple-testing.html#question-3-11"><i class="fa fa-check"></i><b>13.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="13.1.4" data-path="multiple-testing.html"><a href="multiple-testing.html#question-4-11"><i class="fa fa-check"></i><b>13.1.4</b> Question 4</a></li>
+<li class="chapter" data-level="13.1.5" data-path="multiple-testing.html"><a href="multiple-testing.html#question-5-11"><i class="fa fa-check"></i><b>13.1.5</b> Question 5</a></li>
+<li class="chapter" data-level="13.1.6" data-path="multiple-testing.html"><a href="multiple-testing.html#question-6-11"><i class="fa fa-check"></i><b>13.1.6</b> Question 6</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="multiple-testing.html"><a href="multiple-testing.html#applied-11"><i class="fa fa-check"></i><b>13.2</b> Applied</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-7-11"><i class="fa fa-check"></i><b>13.2.1</b> Question 7</a></li>
+<li class="chapter" data-level="13.2.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-8-11"><i class="fa fa-check"></i><b>13.2.2</b> Question 8</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Introduction to Statistical Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="unsupervised-learning" class="section level1 hasAnchor">
+<h1><span class="header-section-number">12</span> Unsupervised Learning<a href="unsupervised-learning.html#unsupervised-learning" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="conceptual-10" class="section level2 hasAnchor">
+<h2><span class="header-section-number">12.1</span> Conceptual<a href="unsupervised-learning.html#conceptual-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="question-1-10" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.1.1</span> Question 1<a href="unsupervised-learning.html#question-1-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>This problem involves the <span class="math inline">\(K\)</span>-means clustering algorithm.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Prove (12.18).</p></li>
+<li><p>On the basis of this identity, argue that the <span class="math inline">\(K\)</span>-means clustering
+algorithm (Algorithm 12.2) decreases the objective (12.17) at each
+iteration.</p></li>
+</ol>
+</blockquote>
+</div>
+<div id="question-2-10" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.1.2</span> Question 2<a href="unsupervised-learning.html#question-2-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>Suppose that we have four observations, for which we compute a dissimilarity
+matrix, given by</p>
+<span class="math display">\[\begin{bmatrix}
+     &amp; 0.3  &amp; 0.4  &amp; 0.7  \\
+0.3  &amp;      &amp; 0.5  &amp; 0.8  \\
+0.4  &amp; 0.5  &amp;      &amp; 0.45 \\
+0.7  &amp; 0.8  &amp; 0.45 &amp;      \\
+\end{bmatrix}\]</span>
+<p>For instance, the dissimilarity between the first and second observations is
+0.3, and the dissimilarity between the second and fourth observations is 0.8.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>On the basis of this dissimilarity matrix, sketch the dendrogram that
+results from hierarchically clustering these four observations using
+complete linkage. Be sure to indicate on the plot the height at which each
+fusion occurs, as well as the observations corresponding to each leaf in
+the dendrogram.</p></li>
+<li><p>Repeat (a), this time using single linkage clustering.</p></li>
+<li><p>Suppose that we cut the dendrogram obtained in (a) such that two clusters
+result. Which observations are in each cluster?</p></li>
+<li><p>Suppose that we cut the dendrogram obtained in (b) such that two clusters
+result. Which observations are in each cluster?</p></li>
+<li><p>It is mentioned in the chapter that at each fusion in the dendrogram, the
+position of the two clusters being fused can be swapped without changing
+the meaning of the dendrogram. Draw a dendrogram that is equivalent to the
+dendrogram in (a), for which two or more of the leaves are repositioned,
+but for which the meaning of the dendrogram is the same.</p></li>
+</ol>
+</blockquote>
+</div>
+<div id="question-3-10" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.1.3</span> Question 3<a href="unsupervised-learning.html#question-3-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>In this problem, you will perform <span class="math inline">\(K\)</span>-means clustering manually, with <span class="math inline">\(K = 2\)</span>,
+on a small example with <span class="math inline">\(n = 6\)</span> observations and <span class="math inline">\(p = 2\)</span> features. The
+observations are as follows.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Obs.</th>
+<th><span class="math inline">\(X_1\)</span></th>
+<th><span class="math inline">\(X_2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>6</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>4</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: lower-alpha">
+<li><p>Plot the observations.</p></li>
+<li><p>Randomly assign a cluster label to each observation. You can use the
+<code>sample()</code> command in <code>R</code> to do this. Report the cluster labels for each
+observation.</p></li>
+<li><p>Compute the centroid for each cluster.</p></li>
+<li><p>Assign each observation to the centroid to which it is closest, in terms of
+Euclidean distance. Report the cluster labels for each observation.</p></li>
+<li><p>Repeat (c) and (d) until the answers obtained stop changing.</p></li>
+<li><p>In your plot from (a), color the observations according to the cluster
+labels obtained.</p></li>
+</ol>
+</blockquote>
+</div>
+<div id="question-4-10" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.1.4</span> Question 4<a href="unsupervised-learning.html#question-4-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>Suppose that for a particular data set, we perform hierarchical clustering
+using single linkage and using complete linkage. We obtain two dendrograms.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>At a certain point on the single linkage dendrogram, the clusters {1, 2, 3}
+and {4, 5} fuse. On the complete linkage dendrogram, the clusters {1, 2, 3}
+and {4, 5} also fuse at a certain point. Which fusion will occur higher on
+the tree, or will they fuse at the same height, or is there not enough
+information to tell?</p></li>
+<li><p>At a certain point on the single linkage dendrogram, the clusters {5} and
+{6} fuse. On the complete linkage dendrogram, the clusters {5} and {6} also
+fuse at a certain point. Which fusion will occur higher on the tree, or
+will they fuse at the same height, or is there not enough information to
+tell?</p></li>
+</ol>
+</blockquote>
+</div>
+<div id="question-5-10" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.1.5</span> Question 5<a href="unsupervised-learning.html#question-5-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>In words, describe the results that you would expect if you performed
+<span class="math inline">\(K\)</span>-means clustering of the eight shoppers in Figure 12.16, on the basis of
+their sock and computer purchases, with <span class="math inline">\(K = 2\)</span>. Give three answers, one for
+each of the variable scalings displayed. Explain.</p>
+</blockquote>
+</div>
+<div id="question-6-10" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.1.6</span> Question 6<a href="unsupervised-learning.html#question-6-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>We saw in Section 12.2.2 that the principal component loading and score
+vectors provide an approximation to a matrix, in the sense of (12.5).
+Specifically, the principal component score and loading vectors solve the
+optimization problem given in (12.6).</p>
+<p>Now, suppose that the M principal component score vectors zim, <span class="math inline">\(m = 1,...,M\)</span>,
+are known. Using (12.6), explain that the first <span class="math inline">\(M\)</span> principal component
+loading vectors <span class="math inline">\(\phi_{jm}\)</span>, <span class="math inline">\(m = 1,...,M\)</span>, can be obtaining by performing <span class="math inline">\(M\)</span>
+separate least squares linear regressions. In each regression, the principal
+component score vectors are the predictors, and one of the features of the
+data matrix is the response.</p>
+</blockquote>
+</div>
+</div>
+<div id="applied-10" class="section level2 hasAnchor">
+<h2><span class="header-section-number">12.2</span> Applied<a href="unsupervised-learning.html#applied-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="question-7-10" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.2.1</span> Question 7<a href="unsupervised-learning.html#question-7-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>In the chapter, we mentioned the use of correlation-based distance and
+Euclidean distance as dissimilarity measures for hierarchical clustering.
+It turns out that these two measures are almost equivalent: if each
+observation has been centered to have mean zero and standard deviation one,
+and if we let <span class="math inline">\(r_{ij}\)</span> denote the correlation between the <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th
+observations, then the quantity <span class="math inline">\(1 − r_{ij}\)</span> is proportional to the squared
+Euclidean distance between the ith and jth observations.</p>
+<p>On the <code>USArrests</code> data, show that this proportionality holds.</p>
+<p><em>Hint: The Euclidean distance can be calculated using the <code>dist()</code> function,</em>
+<em>and correlations can be calculated using the <code>cor()</code> function.</em></p>
+</blockquote>
+</div>
+<div id="question-8-10" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.2.2</span> Question 8<a href="unsupervised-learning.html#question-8-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>In Section 12.2.3, a formula for calculating PVE was given in Equation
+12.10. We also saw that the PVE can be obtained using the <code>sdev</code> output of the
+<code>prcomp()</code> function.</p>
+<p>On the <code>USArrests</code> data, calculate PVE in two ways:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Using the <code>sdev</code> output of the <code>prcomp()</code> function, as was done in Section
+12.2.3.</p></li>
+<li><p>By applying Equation 12.10 directly. That is, use the <code>prcomp()</code> function to
+compute the principal component loadings. Then, use those loadings in
+Equation 12.10 to obtain the PVE.</p></li>
+</ol>
+<p>These two approaches should give the same results.</p>
+<p><em>Hint: You will only obtain the same results in (a) and (b) if the same</em>
+<em>data is used in both cases. For instance, if in (a) you performed</em>
+<em><code>prcomp()</code> using centered and scaled variables, then you must center and</em>
+<em>scale the variables before applying Equation 12.10 in (b).</em></p>
+</blockquote>
+</div>
+<div id="question-9-9" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.2.3</span> Question 9<a href="unsupervised-learning.html#question-9-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>Consider the <code>USArrests</code> data. We will now perform hierarchical clustering on
+the states.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Using hierarchical clustering with complete linkage and Euclidean distance,
+cluster the states.</p></li>
+<li><p>Cut the dendrogram at a height that results in three distinct clusters.
+Which states belong to which clusters?</p></li>
+<li><p>Hierarchically cluster the states using complete linkage and Euclidean
+distance, <em>after scaling the variables to have standard deviation one</em>.</p></li>
+<li><p>What effect does scaling the variables have on the hierarchical clustering
+obtained? In your opinion, should the variables be scaled before the
+inter-observation dissimilarities are computed? Provide a justification for
+your answer.</p></li>
+</ol>
+</blockquote>
+</div>
+<div id="question-10-8" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.2.4</span> Question 10<a href="unsupervised-learning.html#question-10-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>In this problem, you will generate simulated data, and then perform PCA and
+<span class="math inline">\(K\)</span>-means clustering on the data.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Generate a simulated data set with 20 observations in each of three classes
+(i.e. 60 observations total), and 50 variables.</p>
+<p><em>Hint: There are a number of functions in <code>R</code> that you can use to generate</em>
+<em>data. One example is the <code>rnorm()</code> function; <code>runif()</code> is another option.</em>
+<em>Be sure to add a mean shift to the observations in each class so that</em>
+<em>there are three distinct classes.</em></p></li>
+<li><p>Perform PCA on the 60 observations and plot the first two principal
+component score vectors. Use a different color to indicate the
+observations in each of the three classes. If the three classes appear
+separated in this plot, then continue on to part (c). If not, then return
+to part (a) and modify the simulation so that there is greater separation
+between the three classes. Do not continue to part (c) until the three
+classes show at least some separation in the first two principal component
+score vectors.</p></li>
+<li><p>Perform <span class="math inline">\(K\)</span>-means clustering of the observations with <span class="math inline">\(K = 3\)</span>. How well do
+the clusters that you obtained in <span class="math inline">\(K\)</span>-means clustering compare to the true
+class labels?</p>
+<p><em>Hint: You can use the <code>table()</code> function in <code>R</code> to compare the true class</em>
+<em>labels to the class labels obtained by clustering. Be careful how you</em>
+<em>interpret the results: <span class="math inline">\(K\)</span>-means clustering will arbitrarily number the</em>
+<em>clusters, so you cannot simply check whether the true class labels and</em>
+<em>clustering labels are the same.</em></p></li>
+<li><p>Perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 2\)</span>. Describe your results.</p></li>
+<li><p>Now perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 4\)</span>, and describe your results.</p></li>
+<li><p>Now perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 3\)</span> on the first two principal
+component score vectors, rather than on the raw data. That is, perform
+<span class="math inline">\(K\)</span>-means clustering on the <span class="math inline">\(60 \times 2\)</span> matrix of which the first column
+is the first principal component score vector, and the second column is
+the second principal component score vector. Comment on the results.</p></li>
+<li><p>Using the <code>scale()</code> function, perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 3\)</span> on
+the data <em>after scaling each variable to have standard deviation one</em>. How
+do these results compare to those obtained in (b)? Explain.</p></li>
+</ol>
+</blockquote>
+</div>
+<div id="question-11-7" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.2.5</span> Question 11<a href="unsupervised-learning.html#question-11-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>Write an <code>R</code> function to perform matrix completion as in Algorithm 12.1, and
+as outlined in Section 12.5.2. In each iteration, the function should keep
+track of the relative error, as well as the iteration count. Iterations should
+continue until the relative error is small enough or until some maximum number
+of iterations is reached (set a default value for this maximum number).
+Furthermore, there should be an option to print out the progress in each
+iteration.</p>
+<p>Test your function on the <code>Boston</code> data. First, standardize the features to
+have mean zero and standard deviation one using the <code>scale()</code> function. Run an
+experiment where you randomly leave out an increasing (and nested) number of
+observations from 5% to 30%, in steps of 5%. Apply Algorithm 12.1 with <span class="math inline">\(M = 1,2,...,8\)</span>. Display the approximation error as a function of the fraction of
+observations that are missing, and the value of <span class="math inline">\(M\)</span>, averaged over 10
+repetitions of the experiment.</p>
+</blockquote>
+</div>
+<div id="question-12-5" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.2.6</span> Question 12<a href="unsupervised-learning.html#question-12-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>In Section 12.5.2, Algorithm 12.1 was implemented using the <code>svd()</code> function.
+However, given the connection between the <code>svd()</code> function and the <code>prcomp()</code>
+function highlighted in the lab, we could have instead implemented the
+algorithm using <code>prcomp()</code>.</p>
+<p>Write a function to implement Algorithm 12.1 that makes use of <code>prcomp()</code>
+rather than <code>svd()</code>.</p>
+</blockquote>
+</div>
+<div id="question-13-4" class="section level3 hasAnchor">
+<h3><span class="header-section-number">12.2.7</span> Question 13<a href="unsupervised-learning.html#question-13-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p>On the book website, <code>www.StatLearning.com</code>, there is a gene expression data
+set (<code>Ch10Ex11.csv</code>) that consists of 40 tissue samples with measurements on
+1,000 genes. The first 20 samples are from healthy patients, while the
+second 20 are from a diseased group.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Load in the data using <code>read.csv()</code>. You will need to select <code>header = F</code>.</p></li>
+<li><p>Apply hierarchical clustering to the samples using correlation-based
+distance, and plot the dendrogram. Do the genes separate the samples into
+the two groups? Do your results depend on the type of linkage used?</p></li>
+<li><p>Your collaborator wants to know which genes differ the most across the two
+groups. Suggest a way to answer this question, and apply it here.</p></li>
+</ol>
+</blockquote>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="survival-analysis-and-censored-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multiple-testing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": {}
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/danhalligan/ISLRv2-solutions/edit/master/12-unsupervised-learning.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
