@@ -223,10 +223,10 @@ college <- read.csv("data/College.csv")
 >    to treat this as data. However, it may be handy to have these names for 
 >    later. Try the following commands:
 >    
->     ```r
->     rownames(college) <- college[, 1]
->     View(college)
->     ```
+>    ```r
+>    rownames(college) <- college[, 1]
+>    View(college)
+>    ```
 >    
 >    You should see that there is now a `row.names` column with the name of 
 >    each university recorded. This means that R has given each row a name 
@@ -234,10 +234,10 @@ college <- read.csv("data/College.csv")
 >    calculations on the row names. However, we still need to eliminate the 
 >    first column in the data where the names are stored. Try
 >    
->     ```r
->     college <- college [, -1]
->     View(college)
->     ```
+>    ```r
+>    college <- college [, -1]
+>    View(college)
+>    ```
 >    
 >    Now you should see that the first data column is `Private`. Note that 
 >    another column labeled `row.names` now appears before the `Private` column.
@@ -371,21 +371,21 @@ displacement are highly related.
 > a. To begin, load in the `Boston` data set. The `Boston` data set is part of 
 >    the `ISLR2` library in R.
 >    
->     ```r
->     > library(ISLR2)
->     ```
+>    ```r
+>    > library(ISLR2)
+>    ```
 >    
 >    Now the data set is contained in the object `Boston`.
 >    
->     ```r
->     > Boston
->     ```
+>    ```r
+>    > Boston
+>    ```
 >    
 >    Read about the data set:
 >    
->     ```r
->     > ?Boston
->     ```
+>    ```r
+>    > ?Boston
+>    ```
 >    
 >    How many rows are in this data set? How many columns? What do the rows and
 >    columns represent?
