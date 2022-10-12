@@ -284,6 +284,7 @@ college <- college[, -1]
 ```{r}
 summary(college)
 
+college$Private <- college$Private == "Yes"
 pairs(college[, 1:10], cex = 0.2)
 plot(college$Outstate ~ college$Private)
 
