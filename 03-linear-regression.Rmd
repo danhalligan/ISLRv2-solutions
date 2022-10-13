@@ -48,6 +48,10 @@ the $K$ nearest neighbors.
 >         average than high school graduates provided that the GPA is high 
 >         enough.
 
+```{r, message = FALSE, warning = FALSE}
+library(plotly)
+```
+
 ```{r}
 model <- function(gpa, iq, level) {
   50 +
@@ -62,7 +66,6 @@ y <- seq(1, 200, length = 20)
 college <- t(outer(x, y, model, level = 1))
 high_school <- t(outer(x, y, model, level = 0))
 
-library(plotly)
 plot_ly(x = x, y = y) |>
   add_surface(
     z = ~college,
@@ -78,7 +81,7 @@ plot_ly(x = x, y = y) |>
     zaxis = list(title = "Salary")))
 ```
 
-Option iii is the correct answer.
+Option iii correct.
 
 > b. Predict the salary of a college graduate with IQ of 110 and a GPA of 4.0.
 
@@ -145,20 +148,17 @@ true relationship is.
 > _Note: We interpret this result by saying that the fitted
 > values from linear regression are linear combinations of the response values._
 
-$$
 \begin{align}
-\hat{y}_i &= x_i \frac{\sum_{i=1}^nx_iy_i}{\sum_{i' = 1}^n x^2_{i'}} \\
+\hat{y}_i & = x_i \frac{\sum_{i=1}^nx_iy_i}{\sum_{i' = 1}^n x^2_{i'}} \\
           & = x_i \frac{\sum_{i'=1}^nx_{i'}y_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} \\
           & = \frac{\sum_{i'=1}^n x_i x_{i'}y_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} \\
           & = \sum_{i'=1}^n  \frac{ x_i x_{i'}y_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} \\
           & = \sum_{i'=1}^n  \frac{ x_i x_{i'}}{\sum_{i'' = 1}^n x^2_{i''}} y_{i'}
 \end{align}
-$$
+
 therefore,
 
-$$
-a_{i'} = \frac{ x_i x_{i'}}{\sum x^2}
-$$
+$$a_{i'} = \frac{ x_i x_{i'}}{\sum x^2}$$
 
 ### Question 6
 
@@ -167,13 +167,11 @@ $$
 
 when $x = \bar{x}$ what is $y$?
 
-$$
 \begin{align}
 y &= \hat\beta_0 + \hat\beta_1\bar{x} \\
   &= \bar{y} - \hat\beta_1\bar{x} + \hat\beta_1\bar{x} \\
   &= \bar{y}
 \end{align}
-$$
 
 ### Question 7
 
@@ -199,7 +197,6 @@ $$\hat{y}_i = \hat\beta_o + \hat\beta_1x_i = x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^
 Therefore, given that $RSS = \sum_i(y_i - \hat{y}_i)^2$ and
 $\textit{TSS} = \sum_i(y_i - \bar{y})^2 = \sum_iy_i^2$
 
-$$
 \begin{align}
 R^2 &= \frac{\sum_iy_i^2 - \sum_i(y_i - x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2})^2}
             {\sum_iy_i^2} \\
@@ -227,7 +224,6 @@ R^2 &= \frac{\sum_iy_i^2 - \sum_i(y_i - x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2})^2
 
     &= \frac{(\sum_i{x_iy_i})^2}{\sum_ix_i^2 \sum_iy_i^2}
 \end{align}
-$$
 
 ## Applied
 
@@ -350,8 +346,9 @@ significant.
 > f. Try a few different transformations of the variables, such as $log(X)$,
 >    $\sqrt{X}$, $X^2$. Comment on your findings.
 
+Here I'll just consider transformations for `horesepower`.
+
 ```{r}
-# considering just horsepower.
 par(mfrow = c(2, 2))
 plot(Auto$horsepower, Auto$mpg, cex = 0.2)
 plot(log(Auto$horsepower), Auto$mpg, cex = 0.2)
@@ -366,7 +363,7 @@ par(mfrow = c(2, 2))
 plot(fit, cex = 0.2)
 ```
 
-A log transformation of horsepower appears to give a more linear relationship
+A log transformation of `horsepower` appears to give a more linear relationship
 with mpg.
 
 ### Question 10
@@ -442,7 +439,7 @@ Yes, somewhat.
 
 ### Question 11
 
-> In this problem we will investigate the t-statistic for the null hypothesis
+> In this problem we will investigate the _t_-statistic for the null hypothesis
 > $H_0 : \beta = 0$ in simple linear regression without an intercept. To
 > begin, we generate a predictor `x` and a response `y` as follows.
 >
@@ -458,9 +455,9 @@ x <- rnorm(100)
 y <- 2 * x + rnorm(100)
 ```
 
-> a. Perform a simple linear regression of `y` onto `x`, without an intercept.
+> a. Perform a simple linear regression of `y` onto `x`, _without_ an intercept.
 >    Report the coefficient estimate $\hat{\beta}$, the standard error of this
->    coefficient estimate, and the t-statistic and p-value associated with the
+>    coefficient estimate, and the _t_-statistic and _p_-value associated with the
 >    null hypothesis $H_0 : \beta = 0$. Comment on these results. (You can
 >    perform regression without an intercept using the command `lm(y~x+0)`.)
 
@@ -474,7 +471,7 @@ predicted to be (a little below) twice the $x$ values.
 
 > b. Now perform a simple linear regression of `x` onto `y` without an intercept,
 >    and report the coefficient estimate, its standard error, and the
->    corresponding t-statistic and p-values associated with the null hypothesis
+>    corresponding _t_-statistic and _p_-values associated with the null hypothesis
 >    $H_0 : \beta = 0$. Comment on these results.
 
 ```{r}
@@ -491,7 +488,7 @@ Without error, the coefficients would be the inverse of each other (2 and 1/2).
 The t-statistic and p-values are the same.
 
 > d. For the regression of $Y$ onto $X$ without an intercept, the
->    t-statistic for $H_0 : \beta = 0$ takes the form 
+>    _t_-statistic for $H_0 : \beta = 0$ takes the form 
 >    $\hat{\beta}/SE(\hat{\beta})$, where $\hat{\beta}$ is given by (3.38), and
 >    where
 >    $$
@@ -510,14 +507,12 @@ $$ \beta = \sum_i x_i y_i / \sum_{i'} x_{i'}^2 ,$$
 
 therefore
 
-$$
 \begin{align}
 t &= \frac{\sum_i x_i y_i \sqrt{n-1} \sqrt{\sum_ix_i^2}}
           {\sum_i x_i^2 \sqrt{\sum_i(y_i - x_i \beta)^2}} \\
 
   &= \frac{\sum_i x_i y_i \sqrt{n-1}}
           {\sqrt{\sum_ix_i^2 \sum_i(y_i - x_i \beta)^2}} \\
-
 
   &= \frac{\sum_i x_i y_i \sqrt{n-1}}
           {\sqrt{
@@ -538,12 +533,8 @@ t &= \frac{\sum_i x_i y_i \sqrt{n-1} \sqrt{\sum_ix_i^2}}
            }} \\
 
   &= \frac{\sum_i x_i y_i \sqrt{n-1}}
-          {\sqrt{
-            \sum_ix_i^2 \sum_iy_i^2 -
-            (\sum_i x_i y_i)^2
-           }} \\
+          {\sqrt{\sum_ix_i^2 \sum_iy_i^2 - (\sum_i x_i y_i)^2}} \\
 \end{align}
-$$
 
 We can show this numerically in R by computing $t$ using the above equation.
 
@@ -552,14 +543,14 @@ n <- length(x)
 sqrt(n - 1) * sum(x * y) / sqrt(sum(x ^ 2) * sum(y ^ 2) - sum(x * y) ^ 2)
 ```
 
-> e. Using the results from (d), argue that the *t*-statistic for the
->    regression of y onto x is the same as the *t*-statistic for the regression
+> e. Using the results from (d), argue that the _t_-statistic for the
+>    regression of y onto x is the same as the _t_-statistic for the regression
 >    of `x` onto `y`.
 
 Swapping $x_i$ for $y_i$ in the formula for $t$ will give the same result.
 
-> f. In `R`, show that when regression is performed *with* an intercept, the
->    $t$-statistic for $H_0 : \beta_1 = 0$ is the same for the regression of `y`
+> f. In `R`, show that when regression is performed _with_ an intercept, the
+>    _t_-statistic for $H_0 : \beta_1 = 0$ is the same for the regression of `y`
 >    onto `x` as it is for the regression of `x` onto `y`.
 
 ```{r}
@@ -576,62 +567,177 @@ coef(summary(lm(x ~ y)))
 >    what circumstance is the coefficient estimate for the regression of $X$
 >    onto $Y$ the same as the coefficient estimate for the regression of $Y$
 >    onto $X$?
->
+
+$$ \hat\beta = \sum_i x_iy_i / \sum_{i'} x_{i'}^2 $$
+
+The coefficient for the regression of X onto Y swaps the $x$ and $y$ variables:
+
+$$ \hat\beta = \sum_i x_iy_i / \sum_{i'} y_{i'}^2 $$
+
+So they are the same when $\sum_{i} x_{i}^2 = \sum_{i} y_{i}^2$
+
 > b. Generate an example in `R` with $n = 100$ observations in which the
 >    coefficient estimate for the regression of $X$ onto $Y$ is different from
 >    the coefficient estimate for the regression of $Y$ onto $X$.
->
+
+```{r}
+x <- rnorm(100)
+y <- 2 * x + rnorm(100, 0, 0.1)
+c(sum(x^2), sum(y^2))
+c(coef(lm(y ~ x))[2], coef(lm(x ~ y))[2])
+```
+
 > c. Generate an example in `R` with $n = 100$ observations in which the
 >    coefficient estimate for the regression of $X$ onto $Y$ is the same as the
 >    coefficient estimate for the regression of $Y$ onto $X$.
+
+```{r}
+x <- rnorm(100)
+y <- x + rnorm(100, 0, 0.1)
+c(sum(x^2), sum(y^2))
+c(coef(lm(y ~ x))[2], coef(lm(x ~ y))[2])
+```
 
 ### Question 13
 
 > In this exercise you will create some simulated data and will fit simple
 > linear regression models to it. Make sure to use `set.seed(1)` prior to
 > starting part (a) to ensure consistent results.
->
+
+```{r}
+set.seed(1)
+```
+
 > a. Using the `rnorm()` function, create a vector, `x`, containing 100
 >    observations drawn from a $N(0, 1)$ distribution. This represents a
 >    feature, $X$.
->
+
+```{r}
+x <- rnorm(100, 0, 1)
+```
+
 > b. Using the `rnorm()` function, create a vector, `eps`, containing 100
 >    observations drawn from a $N(0, 0.25)$ distribution---a normal
 >    distribution with mean zero and variance 0.25.
->
+
+```{r}
+eps <- rnorm(100, 0, sqrt(0.25))
+```
+
 > c. Using x and `eps`, generate a vector y according to the model
 >    $$Y = -1 + 0.5X + \epsilon$$
 >    What is the length of the vector `y`? What are the values of
 >    $\beta_0$ and $\beta_1$ in this linear model?
->
+
+```{r}
+y <- -1 + 0.5 * x + eps
+length(y)
+```
+
+$\beta_0 = -1$ and $\beta_1 = 0.5$
+
 > d. Create a scatterplot displaying the relationship between `x` and `y`.
 >    Comment on what you observe.
->
+
+```{r}
+plot(x, y)
+```
+
+There is a linear relationship between $x$ and $y$ (with some error).
+
 > e. Fit a least squares linear model to predict `y` using `x`. Comment on the
 >    model obtained. How do $\hat\beta_0$ and $\hat\beta_1$ compare to $\beta_0$
 >    and $\beta_1$?
->
+
+```{r}
+fit <- lm(y ~ x)
+summary(fit)
+```
+
+$\beta_0$ and $\beta_1$ are close to their population values.
+
 > f. Display the least squares line on the scatterplot obtained in (d). Draw the
 >    population regression line on the plot, in a different color. Use the
 >    `legend()` command to create an appropriate legend.
->
+
+```{r}
+plot(x, y)
+abline(fit)
+abline(-1, 0.5, col = "red", lty = 2)
+legend("topleft",
+  c("model fit", "population regression"),
+  col = c("black", "red"),
+  lty = c(1, 2)
+)
+```
+
 > g. Now fit a polynomial regression model that predicts `y` using `x` and `x^2`.
 >    Is there evidence that the quadratic term improves the model fit? Explain
 >    your answer.
->
+
+```{r}
+fit2 <- lm(y ~ poly(x, 2))
+anova(fit2, fit)
+```
+
+There is no evidence for an improved fit, since the F-test is non-significant.
+
 > h. Repeat (a)--(f) after modifying the data generation process in such a way
 >    that there is *less* noise in the data. The model (3.39) should remain the
 >    same. You can do this by decreasing the variance of the normal distribution
 >    used to generate the error term $\epsilon$ in (b). Describe your results.
->
+
+```{r}
+x <- rnorm(100, 0, 1)
+y <- -1 + 0.5 * x + rnorm(100, 0, sqrt(0.05))
+fit2 <- lm(y ~ x)
+summary(fit2)
+plot(x, y)
+abline(fit2)
+abline(-1, 0.5, col = "red", lty = 2)
+legend("topleft",
+  c("model fit", "population regression"),
+  col = c("black", "red"),
+  lty = c(1, 2)
+)
+```
+
+The data shows less variability and the $R^2$ is higher.
+
 > i. Repeat (a)--(f) after modifying the data generation process in such a way
 >    that there is *more* noise in the data. The model (3.39) should remain the
 >    same. You can do this by increasing the variance of the normal distribution
 >    used to generate the error term $\epsilon$ in (b). Describe your results.
->
+
+```{r}
+x <- rnorm(100, 0, 1)
+y <- -1 + 0.5 * x + rnorm(100, 0, 1)
+fit3 <- lm(y ~ x)
+summary(fit3)
+plot(x, y)
+abline(fit3)
+abline(-1, 0.5, col = "red", lty = 2)
+legend("topleft",
+  c("model fit", "population regression"),
+  col = c("black", "red"),
+  lty = c(1, 2)
+)
+```
+
+The data shows more variability. The $R^2$ is lower.
+
 > j. What are the confidence intervals for $\beta_0$ and $\beta_1$ based on the
 >    original data set, the noisier data set, and the less noisy data set?
 >    Comment on your results.
+
+```{r}
+confint(fit)
+confint(fit2)
+confint(fit3)
+```
+
+The confidence intervals for the coefficients are smaller when there is less
+error.
 
 ### Question 14
 
@@ -649,25 +755,71 @@ coef(summary(lm(x ~ y)))
 >    The last line corresponds to creating a linear model in which `y` is a
 >    function of `x1` and `x2`. Write out the form of the linear model. What are
 >    the regression coefficients?
->
+
+```{r}
+set.seed(1)
+x1 <- runif(100)
+x2 <- 0.5 * x1 + rnorm(100) / 10
+y <- 2 + 2 * x1 + 0.3 * x2 + rnorm(100)
+```
+
+The model is of the form:
+
+$$Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \epsilon$$
+
+The coefficients are $\beta_0 = 2$, $\beta_1 = 2$, $\beta_3 = 0.3$.
+
 > b. What is the correlation between `x1` and `x2`? Create a scatterplot
 >    displaying the relationship between the variables.
->
+
+```{r}
+cor(x1, x2)
+plot(x1, x2)
+```
+
 > c. Using this data, fit a least squares regression to predict `y` using `x1`
 >    and `x2`. Describe the results obtained. What are $\hat\beta_0$,
 >    $\hat\beta_1$, and $\hat\beta_2$? How do these relate to the true $\beta_0$,
 >    $\beta_1$, and \beta_2$? Can you reject the null hypothesis $H_0 : \beta_1$
 >    = 0$? How about the null hypothesis $H_0 : \beta_2 = 0$?
->
+
+```{r}
+summary(lm(y ~ x1 + x2))
+```
+
+$\hat\beta_0 = 2.13$, $\hat\beta_1 = 1.43$, and $\hat\beta_2 = 1.01$. These are
+relatively poor estimates of the true values. We can reject the hypothesis that
+$H_0 : \beta_1$ at a p-value of 0.05 (just about). We cannot reject the 
+hypothesis that $H_0 : \beta_2 = 0$.
+
 > d. Now fit a least squares regression to predict `y` using only `x1`. Comment
 >    on your results. Can you reject the null hypothesis $H 0 : \beta_1 = 0$?
->
+
+```{r}
+summary(lm(y ~ x1))
+```
+
+We can reject $H_0 : \beta_1 = 0$. The p-value is much more significant for 
+$\beta_1$ compared to when `x2` is included in the model.
+
 > e. Now fit a least squares regression to predict `y` using only `x2`. Comment
 >    on your results. Can you reject the null hypothesis $H_0 : \beta_1 = 0$?
->
+
+```{r}
+summary(lm(y ~ x2))
+```
+
+Similarly, we can reject $H_0 : \beta_2 = 0$. The p-value is much more
+significant for $\beta_2$ compared to when `x1` is included in the model.
+
 > f. Do the results obtained in (c)--(e) contradict each other? Explain your
 >    answer.
->
+
+No they do not contradict each other. Both `x1` and `x2` individually are 
+capable of explaining much of the variation observed in `y`, however since they
+are correlated, it is very difficult to tease apart their separate 
+contributions.
+
 > g. Now suppose we obtain one additional observation, which was unfortunately
 >    mismeasured.
 >    ```r
@@ -680,22 +832,78 @@ coef(summary(lm(x ~ y)))
 >    this observation an outlier? A high-leverage point? Both? Explain your
 >    answers.
 
+```{r}
+x1 <- c(x1 , 0.1)
+x2 <- c(x2 , 0.8)
+y <- c(y ,6)
+summary(lm(y ~ x1 + x2))
+summary(lm(y ~ x1))
+summary(lm(y ~ x2))
+
+par(mfrow = c(2, 2))
+plot(lm(y ~ x1 + x2), cex = 0.2)
+par(mfrow = c(2, 2))
+plot(lm(y ~ x1), cex = 0.2)
+par(mfrow = c(2, 2))
+plot(lm(y ~ x2), cex = 0.2)
+```
+
+In the first model (with both predictors), the new point has very high leverage
+(since it is an outlier in terms of the joint `x1` and `x2` distribution), 
+however it is not an outlier. In the model that includes `x1`, it is an outlier
+but does not have high leverage. In the model that includes `x2`, it has high
+leverage but is not an outlier. It is useful to consider the scatterplot of 
+`x1` and `x2`.
+
+```{r}
+plot(x1, x2)
+points(0.1, 0.8, col = "red", pch = 19)
+```
+
 ### Question 15
 
 > This problem involves the `Boston` data set, which we saw in the lab for this
 > chapter. We will now try to predict per capita crime rate using the other
 > variables in this data set. In other words, per capita crime rate is the
 > response, and the other variables are the predictors.
->
+
+We are trying to predict `crim`.
+
+```{r}
+pred <- subset(Boston, select = -crim)
+```
+
 > a. For each predictor, fit a simple linear regression model to predict the
 >    response. Describe your results. In which of the models is there a
 >    statistically significant association between the predictor and the
 >    response? Create some plots to back up your assertions.
->
+
+```{r}
+fits <- lapply(pred, function(x) lm(Boston$crim ~ x))
+printCoefmat(do.call(rbind, lapply(fits, function(x) coef(summary(x))[2, ])))
+```
+
+There are significant associations for all predictors with the exception of
+`chas` when fitting separate linear models. For example, consider the following
+plot representing the third model
+
+```
+plot(Boston$rm, Boston$crim)
+abline(fits[[5]])
+```
+
 > b. Fit a multiple regression model to predict the response using all of the
 >    predictors. Describe your results. For which predictors can we reject the
 >    null hypothesis $H_0 : \beta_j = 0$?
->
+
+```{r}
+mfit <- lm(crim ~ ., data = Boston)
+summary(mfit)
+```
+
+There are now only significant associations for `zn`, `dis`, `rad`, `black` and
+`medv`.
+
 > c. How do your results from (a) compare to your results from (b)? Create a
 >    plot displaying the univariate regression coefficients from (a) on the
 >    $x$-axis, and the multiple regression coefficients from (b) on the
@@ -703,10 +911,37 @@ coef(summary(lm(x ~ y)))
 >    plot. Its coefficient in a simple linear regression model is shown on the
 >    x-axis, and its coefficient estimate in the multiple linear regression
 >    model is shown on the y-axis.
->
+
+The results from (b) show reduced significance compared to the models fit in 
+(a). 
+
+```{r}
+plot(sapply(fits, function(x) coef(x)[2]), coef(mfit)[-1], 
+  xlab = "Univariate regression", 
+  ylab = "multiple regression")
+```
+
+The estimated coefficients differ (in particular the estimated coefficient for
+`nox` is dramatically different) between the two modelling strategies.
+
 > d. Is there evidence of non-linear association between any of the predictors
 >    and the response? To answer this question, for each predictor X, fit a
 >    model of the form 
 >    $$
 >    Y = \beta_0 + \beta_1X + \beta_2X^2 + \beta_3X^3 + \epsilon
 >    $$
+
+```{r}
+pred <- subset(pred, select = -chas)
+fits <- lapply(names(pred), function(p) {
+  f <- paste0("crim ~ poly(", p, ", 3)")
+  lm(as.formula(f), data = Boston)
+})
+for (fit in fits) printCoefmat(coef(summary(fit)))
+```
+
+Yes there is strong evidence for many variables having non-linear associations.
+In many cases, the addition of a cubic term is significant (`indus`, `nox`, 
+`age`, `dis`, `ptratio` and `medv`). In other cases although the cubic terms
+is not significant, the squared term is (`zn`, `rm`, `rad`, `tax`, `lstat`). 
+In only one case, `black` is there no evidence for a non-linear relationship.
