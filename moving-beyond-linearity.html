@@ -593,13 +593,13 @@ matter 1 what value you choose.</p></li>
 <li><p>Keeping <span class="math inline">\(\hat{\beta}_1\)</span> fixed, fit the model
 <span class="math display">\[Y - \hat{\beta}_1X_1 = \beta_0 + \beta_2X_2 + \epsilon.\]</span>
 You can do this as follows:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="moving-beyond-linearity.html#cb187-1"></a><span class="op">&gt;</span><span class="st"> </span>a &lt;-<span class="st"> </span>y <span class="op">-</span><span class="st"> </span>beta1 <span class="op">*</span><span class="st"> </span>x1</span>
-<span id="cb187-2"><a href="moving-beyond-linearity.html#cb187-2"></a><span class="op">&gt;</span><span class="st"> </span>beta2 &lt;-<span class="st"> </span><span class="kw">lm</span>(a <span class="op">~</span><span class="st"> </span>x2)<span class="op">$</span>coef[<span class="dv">2</span>]</span></code></pre></div></li>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="moving-beyond-linearity.html#cb284-1"></a><span class="op">&gt;</span><span class="st"> </span>a &lt;-<span class="st"> </span>y <span class="op">-</span><span class="st"> </span>beta1 <span class="op">*</span><span class="st"> </span>x1</span>
+<span id="cb284-2"><a href="moving-beyond-linearity.html#cb284-2"></a><span class="op">&gt;</span><span class="st"> </span>beta2 &lt;-<span class="st"> </span><span class="kw">lm</span>(a <span class="op">~</span><span class="st"> </span>x2)<span class="op">$</span>coef[<span class="dv">2</span>]</span></code></pre></div></li>
 <li><p>Keeping <span class="math inline">\(\hat{\beta}_2\)</span> fixed, fit the model
 <span class="math display">\[Y - \hat{\beta}_2X_2 = \beta_0 + \beta_1 X_1 + \epsilon.\]</span>
 You can do this as follows:</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="moving-beyond-linearity.html#cb188-1"></a><span class="op">&gt;</span><span class="st"> </span>a &lt;-<span class="st"> </span>y <span class="op">-</span><span class="st"> </span>beta2 <span class="op">*</span><span class="st"> </span>x2</span>
-<span id="cb188-2"><a href="moving-beyond-linearity.html#cb188-2"></a><span class="op">&gt;</span><span class="st"> </span>beta1 &lt;-<span class="st"> </span><span class="kw">lm</span>(a <span class="op">~</span><span class="st"> </span>x1)<span class="op">$</span>coef[<span class="dv">2</span>]</span></code></pre></div></li>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="moving-beyond-linearity.html#cb285-1"></a><span class="op">&gt;</span><span class="st"> </span>a &lt;-<span class="st"> </span>y <span class="op">-</span><span class="st"> </span>beta2 <span class="op">*</span><span class="st"> </span>x2</span>
+<span id="cb285-2"><a href="moving-beyond-linearity.html#cb285-2"></a><span class="op">&gt;</span><span class="st"> </span>beta1 &lt;-<span class="st"> </span><span class="kw">lm</span>(a <span class="op">~</span><span class="st"> </span>x1)<span class="op">$</span>coef[<span class="dv">2</span>]</span></code></pre></div></li>
 <li><p>Write a for loop to repeat (c) and (d) 1,000 times. Report the estimates of
 <span class="math inline">\(\hat{\beta}_0, \hat{\beta}_1,\)</span> and <span class="math inline">\(\hat{\beta}_2\)</span> at each iteration of the
 for loop. Create a plot in which each of these values is displayed, with

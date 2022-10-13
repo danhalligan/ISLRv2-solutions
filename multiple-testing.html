@@ -509,10 +509,10 @@ null hypotheses do we reject?</p></li>
 <h3><span class="header-section-number">13.2.2</span> Question 8<a href="multiple-testing.html#question-8-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In this problem, we will simulate data from <span class="math inline">\(m = 100\)</span> fund managers.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="multiple-testing.html#cb192-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb192-2"><a href="multiple-testing.html#cb192-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb192-3"><a href="multiple-testing.html#cb192-3"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb192-4"><a href="multiple-testing.html#cb192-4"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="multiple-testing.html#cb289-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb289-2"><a href="multiple-testing.html#cb289-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb289-3"><a href="multiple-testing.html#cb289-3"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb289-4"><a href="multiple-testing.html#cb289-4"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
 <p>These data represent each fund manager’s percentage returns for each of <span class="math inline">\(n = 20\)</span> months. We wish to test the null hypothesis that each fund manager’s
 percentage returns have population mean equal to zero. Notice that we
 simulated the data in such a way that each fund manager’s percentage returns

@@ -385,6 +385,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 other words, the logistic function representation and logit representation
 for the logistic regression model are equivalent.</p>
 </blockquote>
+<p>We need to show that</p>
+<p><span class="math display">\[
+p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}
+\]</span></p>
+<p>is equivalent to</p>
+<p><span class="math display">\[
+\frac{p(X)}{1-p(X)} = e^{\beta_0 + \beta_1X}
+\]</span></p>
+<p>Letting <span class="math inline">\(x = e^{\beta_0 + \beta_1X}\)</span></p>
+<p><span class="math display">\[\begin{align}
+\frac{P(X)}{1-p(X)} &amp;= \frac{\frac{x}{1 + x}}
+                            {1 - \frac{x}{1 + x}} \\
+              &amp;= \frac{\frac{x}{1 + x}}
+                      {\frac{1}{1 + x}} \\
+              &amp;= x
+\end{align}\]</span></p>
 </div>
 <div id="question-2-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.2</span> Question 2<a href="classification.html#question-2-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -396,6 +412,37 @@ words, under the assumption that the observations in the <span class="math inlin
 drawn from a <span class="math inline">\(N(\mu_k,\sigma^2)\)</span> distribution, the Bayes’ classifier assigns
 an observation to the class for which the discriminant function is maximized.</p>
 </blockquote>
+<p>4.12 is</p>
+<p><span class="math display">\[
+p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi\sigma}} \exp(-\frac{1}{2\sigma^2}(x - \mu_k)^2)}
+              {\sum_{l=1}^k \pi_l\frac{1}{\sqrt{2\pi\sigma}} \exp(-\frac{1}{2\sigma^2}(x - \mu_l)^2)}
+\]</span></p>
+<p>and the discriminant function is</p>
+<p><span class="math display">\[
+\delta_k(x) = x.\frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma_2} + \log(\pi_k)
+\]</span></p>
+<p>Since <span class="math inline">\(\sigma^2\)</span> is constant</p>
+<p><span class="math display">\[
+p_k(x) = \frac{\pi_k \exp\left(-\frac{1}{2\sigma^2}(x - \mu_k)^2\right)}
+              {\sum_{l=1}^k \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)}
+\]</span></p>
+<p>Maximizing <span class="math inline">\(p_k(x)\)</span> also maximizes any monotonic function of <span class="math inline">\(p_k(X)\)</span>, and
+therefore, we can consider maximizing <span class="math inline">\(\log(p_K(X))\)</span></p>
+<p><span class="math display">\[
+\log(p_k(x)) = \log(\pi_k) - \frac{1}{2\sigma^2}(x - \mu_k)^2 -
+              \log\left(\sum_{l=1}^k \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)\right)
+\]</span></p>
+<p>Remember that we are maximizing over <span class="math inline">\(k\)</span>, and since the last term does not
+vary with <span class="math inline">\(k\)</span> it can be ignored. So we just need to maximize</p>
+<p><span class="math display">\[\begin{align}
+f &amp;= \log(\pi_k) - \frac{1}{2\sigma^2} (x^2 - 2x\mu_k + \mu_k^2) \\
+  &amp;= \log(\pi_k) - \frac{x^2}{2\sigma^2} + \frac{x\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} \\
+\end{align}\]</span></p>
+<p>Since <span class="math inline">\(\frac{x^2}{2\sigma^2}\)</span> is also independent of <span class="math inline">\(k\)</span>, we just need to
+maximize</p>
+<p><span class="math display">\[
+\log(\pi_k) + \frac{x\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2}
+\]</span></p>
 </div>
 <div id="question-3-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.3</span> Question 3<a href="classification.html#question-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -413,6 +460,28 @@ quadratic.</p>
 <em>Section 4.4.1, but without making the assumption that</em>
 <em><span class="math inline">\(\sigma_1^2 = ... = \sigma_K^2\)</span>.</em></p>
 </blockquote>
+<p>As above,</p>
+<p><span class="math display">\[
+p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi\sigma_k}} \exp(-\frac{1}{2\sigma_k^2}(x - \mu_k)^2)}
+              {\sum_{l=1}^k \pi_l\frac{1}{\sqrt{2\pi\sigma_l}} \exp(-\frac{1}{2\sigma_l^2}(x - \mu_l)^2)}
+\]</span></p>
+<p>Now lets derive the Bayes classifier, without assuming
+<span class="math inline">\(\sigma_1^2 = ... = \sigma_K^2\)</span></p>
+<p>Maximizing <span class="math inline">\(p_k(x)\)</span> also maximizes any monotonic function of <span class="math inline">\(p_k(X)\)</span>, and
+therefore, we can consider maximizing <span class="math inline">\(\log(p_K(X))\)</span></p>
+<p><span class="math display">\[
+\log(p_k(x)) = \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi\sigma_k}}\right) - \frac{1}{2\sigma_k^2}(x - \mu_k)^2 -
+              \log\left(\sum_{l=1}^k \frac{1}{\sqrt{2\pi\sigma_l}} \pi_l \exp\left(-\frac{1}{2\sigma_l^2}(x - \mu_l)^2\right)\right)
+\]</span></p>
+<p>Remember that we are maximizing over <span class="math inline">\(k\)</span>, and since the last term does not
+vary with <span class="math inline">\(k\)</span> it can be ignored. So we just need to maximize</p>
+<p><span class="math display">\[\begin{align}
+f &amp;= \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi\sigma_k}}\right) - \frac{1}{2\sigma_k^2}(x - \mu_k)^2 \\
+  &amp;= \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi\sigma_k}}\right) - \frac{x^2}{2\sigma_k^2} + \frac{x\mu_k}{\sigma_k^2} - \frac{\mu_k^2}{2\sigma_k^2}  \\
+\end{align}\]</span></p>
+<p>However, unlike in Q2, <span class="math inline">\(\frac{x^2}{2\sigma_k^2}\)</span> is not independent of <span class="math inline">\(k\)</span>, so
+we retain the term with <span class="math inline">\(x^2\)</span>, hence <span class="math inline">\(f\)</span>, the Bayes’ classifier, is a
+quadratic function of <span class="math inline">\(x\)</span>.</p>
 </div>
 <div id="question-4-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.4</span> Question 4<a href="classification.html#question-4-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -425,7 +494,7 @@ which a prediction must be made. This phenomenon is known as the
 approaches often perform poorly when <span class="math inline">\(p\)</span> is large. We will now investigate
 this curse.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Suppose that we have a set of observations, each with measurements on
+<li>Suppose that we have a set of observations, each with measurements on
 <span class="math inline">\(p = 1\)</span> feature, <span class="math inline">\(X\)</span>. We assume that <span class="math inline">\(X\)</span> is uniformly (evenly) distributed
 on <span class="math inline">\([0, 1]\)</span>. Associated with each observation is a response value. Suppose
 that we wish to predict a test observation’s response using only
@@ -433,8 +502,16 @@ observations that are within 10% of the range of <span class="math inline">\(X\)
 observation. For instance, in order to predict the response for a test
 observation with <span class="math inline">\(X = 0.6\)</span>, we will use observations in the range
 <span class="math inline">\([0.55, 0.65]\)</span>. On average, what fraction of the available observations
-will we use to make the prediction?</p></li>
-<li><p>Now suppose that we have a set of observations, each with measurements on
+will we use to make the prediction?</li>
+</ol>
+</blockquote>
+<p>For values in <span class="math inline">\(0...0.05\)</span>, we use less than 10% of observations (between 5% and
+10%, 7.5% on average), similarly with values in <span class="math inline">\(0.95...1\)</span>. For values in
+<span class="math inline">\(0.05...0.95\)</span> we use 10% of available observations. The (weighted) average is
+then <span class="math inline">\(7.5 \times 0.1 + 10 \times 0.9 = 9.75\%\)</span>.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Now suppose that we have a set of observations, each with measurements on
 <span class="math inline">\(p = 2\)</span> features, <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>. We assume that <span class="math inline">\((X_1, X_2)\)</span> are
 uniformly distributed on <span class="math inline">\([0, 1] \times [0, 1]\)</span>. We wish to predict a test
 observation’s response using only observations that are within 10% of the
@@ -443,45 +520,91 @@ observation. For instance, in order to predict the response for a test
 observation with <span class="math inline">\(X_1 = 0.6\)</span> and <span class="math inline">\(X_2 = 0.35\)</span>, we will use observations in
 the range <span class="math inline">\([0.55, 0.65]\)</span> for <span class="math inline">\(X_1\)</span> and in the range <span class="math inline">\([0.3, 0.4]\)</span> for <span class="math inline">\(X_2\)</span>.
 On average, what fraction of the available observations will we use to
-make the prediction?</p></li>
-<li><p>Now suppose that we have a set of observations on <span class="math inline">\(p = 100\)</span> features. Again
+make the prediction?</li>
+</ol>
+</blockquote>
+<p>Since we need the observation to be within range for <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> we square
+9.75% = <span class="math inline">\(0.0975^2 \times 100 = 0.95\%\)</span></p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Now suppose that we have a set of observations on <span class="math inline">\(p = 100\)</span> features. Again
 the observations are uniformly distributed on each feature, and again each
 feature ranges in value from 0 to 1. We wish to predict a test
 observation’s response using observations within the 10% of each feature’s
 range that is closest to that test observation. What fraction of the
-available observations will we use to make the prediction?</p></li>
-<li><p>Using your answers to parts (a)–(c), argue that a drawback of KNN when
+available observations will we use to make the prediction?</li>
+</ol>
+</blockquote>
+<p>Similar to above, we use: <span class="math inline">\(0.0975^{100} \times 100 = 8 \times 10^{-100}\%\)</span>,
+essentially zero.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Using your answers to parts (a)–(c), argue that a drawback of KNN when
 <span class="math inline">\(p\)</span> is large is that there are very few training observations “near” any
-given test observation.</p></li>
-<li><p>Now suppose that we wish to make a prediction for a test observation by
+given test observation.</li>
+</ol>
+</blockquote>
+<p>As <span class="math inline">\(p\)</span> increases, the fraction of observations near any given point rapidly
+approaches zero. For instance, even if you use 50% of the nearest observations
+for each <span class="math inline">\(p\)</span>, with <span class="math inline">\(p = 10\)</span>, only <span class="math inline">\(0.5^{10} \times 100 \approx 0.1\%\)</span> points are
+“near”.</p>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Now suppose that we wish to make a prediction for a test observation by
 creating a <span class="math inline">\(p\)</span>-dimensional hypercube centered around the test observation
 that contains, on average, 10% of the training observations. For
 <span class="math inline">\(p = 1,2,\)</span> and <span class="math inline">\(100\)</span>, what is the length of each side of the hypercube?
-Comment on your answer.</p></li>
+Comment on your answer.</li>
 </ol>
 <p><em>Note: A hypercube is a generalization of a cube to an arbitrary number of</em>
 <em>dimensions. When <span class="math inline">\(p = 1\)</span>, a hypercube is simply a line segment, when <span class="math inline">\(p = 2\)</span></em>
 <em>it is a square, and when <span class="math inline">\(p = 100\)</span> it is a 100-dimensional cube.</em></p>
 </blockquote>
+<p>When <span class="math inline">\(p = 1\)</span>, clearly the length is 0.1.
+When <span class="math inline">\(p = 2\)</span>, we need the value <span class="math inline">\(l\)</span> such that <span class="math inline">\(l^2 = 0.1\)</span>, so
+<span class="math inline">\(l = \sqrt{0.1} = 0.32\)</span>.
+When <span class="math inline">\(p = n\)</span>, <span class="math inline">\(l = 0.1^{1/n}\)</span>, so in the case of <span class="math inline">\(n = 100\)</span>, <span class="math inline">\(l = 0.98\)</span>.
+Therefore, the length of each side of the hypercube rapidly approaches 1
+(or 100%) of the range of each <span class="math inline">\(p\)</span>.</p>
 </div>
 <div id="question-5-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.5</span> Question 5<a href="classification.html#question-5-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>We now examine the differences between LDA and QDA.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>If the Bayes decision boundary is linear, do we expect LDA or QDA to
-perform better on the training set? On the test set?</p></li>
-<li><p>If the Bayes decision boundary is non-linear, do we expect LDA or QDA to
-perform better on the training set? On the test set?</p></li>
-<li><p>In general, as the sample size <span class="math inline">\(n\)</span> increases, do we expect the test
-prediction accuracy of QDA relative to LDA to improve, decline, or be
-unchanged? Why?</p></li>
-<li><p>True or False: Even if the Bayes decision boundary for a given problem is
-linear, we will probably achieve a superior test error rate using QDA
-rather than LDA because QDA is flexible enough to model a linear decision
-boundary. Justify your answer.</p></li>
+<li>If the Bayes decision boundary is linear, do we expect LDA or QDA to
+perform better on the training set? On the test set?</li>
 </ol>
 </blockquote>
+<p>QDA, being a more flexible model, will always perform better on the training
+set, but LDA would be expected to perform better on the test set.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>If the Bayes decision boundary is non-linear, do we expect LDA or QDA to
+perform better on the training set? On the test set?</li>
+</ol>
+</blockquote>
+<p>QDA, being a more flexible model, will perform better on the training
+set, and we would hope that extra flexibility translates to a better fit on
+the test set.</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>In general, as the sample size <span class="math inline">\(n\)</span> increases, do we expect the test
+prediction accuracy of QDA relative to LDA to improve, decline, or be
+unchanged? Why?</li>
+</ol>
+</blockquote>
+<p>As <span class="math inline">\(n\)</span> increases, we would expect the prediction accuracy of QDA relative to
+LDA to improve as there is more data to fit to subtle effects in the data.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>True or False: Even if the Bayes decision boundary for a given problem is
+linear, we will probably achieve a superior test error rate using QDA
+rather than LDA because QDA is flexible enough to model a linear decision
+boundary. Justify your answer.</li>
+</ol>
+</blockquote>
+<p>False. QDA can overfit leading to poorer test performance.</p>
 </div>
 <div id="question-6-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.6</span> Question 6<a href="classification.html#question-6-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -491,12 +614,27 @@ variables <span class="math inline">\(X_1 =\)</span> hours studied, <span class=
 We fit a logistic regression and produce estimated coefficient,
 <span class="math inline">\(\hat\beta_0 = -6\)</span>, <span class="math inline">\(\hat\beta_1 = 0.05\)</span>, <span class="math inline">\(\hat\beta_2 = 1\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Estimate the probability that a student who studies for 40h and has an
-undergrad GPA of 3.5 gets an A in the class.</p></li>
-<li><p>How many hours would the student in part (a) need to study to have a 50%
-chance of getting an A in the class?</p></li>
+<li>Estimate the probability that a student who studies for 40h and has an
+undergrad GPA of 3.5 gets an A in the class.</li>
 </ol>
 </blockquote>
+<p>The logistic model is:</p>
+<p><span class="math display">\[
+\log\left(\frac{p(X)}{1-p(x)}\right) = -6 + 0.05X_1 + X_2
+\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+p(X) = \frac{e^{-6 + 0.05X_1 + X_2}}{1 + e^{-6 + 0.05X_1 + X_2}}
+\]</span></p>
+<p>when <span class="math inline">\(X_1 = 40\)</span> and <span class="math inline">\(X_2 = 3.5\)</span>, <span class="math inline">\(p(X) = 0.38\)</span></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>How many hours would the student in part (a) need to study to have a 50%
+chance of getting an A in the class?</li>
+</ol>
+</blockquote>
+<p>We would like to solve for <span class="math inline">\(X_1\)</span> where <span class="math inline">\(p(X) = 0.5\)</span>. Taking the first equation
+above, we need to solve <span class="math inline">\(0 = −6 + 0.05X_1 + 3.5\)</span>, so <span class="math inline">\(X_1 = 50\)</span> hours.</p>
 </div>
 <div id="question-7-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.7</span> Question 7<a href="classification.html#question-7-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -514,6 +652,24 @@ that its percentage profit was <span class="math inline">\(X = 4\)</span> last y
 <em><span class="math inline">\(f(x) =\frac{1}{\sqrt{2\pi\sigma^2}}e^{-(x-\mu)^2/2\sigma^2}\)</span>.</em>
 <em>You will need to use Bayes’ theorem.</em></p>
 </blockquote>
+<p>Value <span class="math inline">\(v\)</span> for companies (D) issuing a dividend = <span class="math inline">\(v_D \sim \mathcal{N}(10, 36)\)</span>.
+Value <span class="math inline">\(v\)</span> for companies (N) not issuing a dividend = <span class="math inline">\(v_N \sim \mathcal{N}(0, 36)\)</span>
+and <span class="math inline">\(p(D) = 0.8\)</span>.</p>
+<p>We want to find <span class="math inline">\(p(D|v)\)</span> and we can calculate <span class="math inline">\(p(v|D)\)</span> from the Gaussian
+density function. Note that since <span class="math inline">\(e^2\)</span> is equal between both classes, the
+term <span class="math inline">\(\frac{1}{\sqrt{2\pi\sigma^2}}\)</span> cancels.</p>
+<p><span class="math display">\[\begin{align}
+p(D|v) &amp;= \frac{p(v|D) p(D)}{p(v|D)p(D) + p(v|N)p(N)} \\
+       &amp;= \frac{\pi_D \frac{1}{\sqrt{2\pi\sigma^2}} e^{-(x-\mu_D)^2/2\sigma^2}}
+               {\pi_D \frac{1}{\sqrt{2\pi\sigma^2}} e^{-(x-\mu_D)^2/2\sigma^2} +
+                \pi_N \frac{1}{\sqrt{2\pi\sigma^2}} e^{-(x-\mu_N)^2/2\sigma^2}} \\
+       &amp;= \frac{\pi_D e^{-(x-\mu_D)^2/2\sigma^2}}
+               {\pi_D e^{-(x-\mu_D)^2/2\sigma^2} +
+                \pi_N e^{-(x-\mu_N)^2/2\sigma^2}} \\
+       &amp;= \frac{0.8 \times e^{-(4-10)^2/(2 \times 36)}}{0.8 \times e^{-(4-10)^2/(2 \times 36)} + 0.2 \times e^{-(4-0)^2/(2 \times 36)}}
+\end{align}\]</span></p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="classification.html#cb181-1"></a><span class="kw">exp</span>(<span class="op">-</span>(<span class="dv">4-10</span>)<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span><span class="op">*</span><span class="dv">36</span>)) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span> <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="op">-</span>(<span class="dv">4-10</span>)<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span><span class="op">*</span><span class="dv">36</span>))<span class="op">*</span><span class="fl">0.8</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(<span class="dv">4-0</span>)<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span><span class="op">*</span><span class="dv">36</span>))<span class="op">*</span><span class="fl">0.2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.7518525</code></pre>
 </div>
 <div id="question-8-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.8</span> Question 8<a href="classification.html#question-8-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -526,21 +682,34 @@ an average error rate (averaged over both test and training data sets) of
 18%. Based on these results, which method should we prefer to use for
 classification of new observations? Why?</p>
 </blockquote>
+<p>For <span class="math inline">\(K = 1\)</span>, performance on the training set is perfect and the error rate
+is zero, implying a test error rate of 36%. Logistic regression outperforms
+1-nearest neighbor on the test set and therefore should be preferred.</p>
 </div>
 <div id="question-9-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.9</span> Question 9<a href="classification.html#question-9-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This problem has to do with <em>odds</em>.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>On average, what fraction of people with an odds of 0.37 of defaulting on
-their credit card payment will in fact default?</p></li>
-<li><p>Suppose that an individual has a 16% chance of defaulting on her credit
-card payment. What are the odds that she will default?</p></li>
+<li>On average, what fraction of people with an odds of 0.37 of defaulting on
+their credit card payment will in fact default?</li>
 </ol>
 </blockquote>
+<p>Odds is defined as <span class="math inline">\(p/(1-p)\)</span>.</p>
+<p><span class="math display">\[0.37 = \frac{p(x)}{1 - p(x)}\]</span></p>
+<p>therefore,</p>
+<p><span class="math display">\[p(x) = \frac{0.37}{1 + 0.37} = 0.27\]</span></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Suppose that an individual has a 16% chance of defaulting on her credit
+card payment. What are the odds that she will default?</li>
+</ol>
+</blockquote>
+<p><span class="math display">\[0.16 / (1 - 0.16)  = 0.19\]</span></p>
 </div>
 <div id="question-10-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.10</span> Question 10<a href="classification.html#question-10-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>ToDo</p>
 <blockquote>
 <p>Equation 4.32 derived an expression for <span class="math inline">\(\log(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)})\)</span>
 in the setting where <span class="math inline">\(p &gt; 1\)</span>, so that the mean for the <span class="math inline">\(k\)</span>th class, <span class="math inline">\(\mu_k\)</span>,
@@ -554,6 +723,7 @@ provide expressions for <span class="math inline">\(a_k\)</span> and <span class
 </div>
 <div id="question-11-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.11</span> Question 11<a href="classification.html#question-11-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>ToDo</p>
 <blockquote>
 <p>Work out the detailed forms of <span class="math inline">\(a_k\)</span>, <span class="math inline">\(b_{kj}\)</span>, and <span class="math inline">\(b_{kjl}\)</span> in (4.33).
 Your answer should involve <span class="math inline">\(\pi_k\)</span>, <span class="math inline">\(\pi_K\)</span>, <span class="math inline">\(\mu_k\)</span>, <span class="math inline">\(\mu_K\)</span>, <span class="math inline">\(\Sigma_k\)</span>,
@@ -562,6 +732,7 @@ and <span class="math inline">\(\Sigma_K\)</span>.</p>
 </div>
 <div id="question-12-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.12</span> Question 12<a href="classification.html#question-12-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>ToDo</p>
 <blockquote>
 <p>Suppose that you wish to classify an observation <span class="math inline">\(X \in \mathbb{R}\)</span> into
 <code>apples</code> and <code>oranges</code>. You fit a logistic regression model and find that</p>
@@ -605,31 +776,251 @@ of the <code>ISLR2</code> package. This data is similar in nature to the <code>S
 from this chapter’s lab, except that it contains 1,089 weekly returns for 21
 years, from the beginning of 1990 to the end of 2010.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Produce some numerical and graphical summaries of the <code>Weekly</code> data. Do
-there appear to be any patterns?</p></li>
-<li><p>Use the full data set to perform a logistic regression with <code>Direction</code> as
+<li>Produce some numerical and graphical summaries of the <code>Weekly</code> data. Do
+there appear to be any patterns?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="classification.html#cb183-1"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb183-2"><a href="classification.html#cb183-2"></a><span class="kw">library</span>(class)</span>
+<span id="cb183-3"><a href="classification.html#cb183-3"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb183-4"><a href="classification.html#cb183-4"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb183-5"><a href="classification.html#cb183-5"></a><span class="kw">library</span>(ISLR2)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="classification.html#cb184-1"></a><span class="kw">summary</span>(Weekly)</span></code></pre></div>
+<pre><code>##       Year           Lag1               Lag2               Lag3         
+##  Min.   :1990   Min.   :-18.1950   Min.   :-18.1950   Min.   :-18.1950  
+##  1st Qu.:1995   1st Qu.: -1.1540   1st Qu.: -1.1540   1st Qu.: -1.1580  
+##  Median :2000   Median :  0.2410   Median :  0.2410   Median :  0.2410  
+##  Mean   :2000   Mean   :  0.1506   Mean   :  0.1511   Mean   :  0.1472  
+##  3rd Qu.:2005   3rd Qu.:  1.4050   3rd Qu.:  1.4090   3rd Qu.:  1.4090  
+##  Max.   :2010   Max.   : 12.0260   Max.   : 12.0260   Max.   : 12.0260  
+##       Lag4               Lag5              Volume            Today         
+##  Min.   :-18.1950   Min.   :-18.1950   Min.   :0.08747   Min.   :-18.1950  
+##  1st Qu.: -1.1580   1st Qu.: -1.1660   1st Qu.:0.33202   1st Qu.: -1.1540  
+##  Median :  0.2380   Median :  0.2340   Median :1.00268   Median :  0.2410  
+##  Mean   :  0.1458   Mean   :  0.1399   Mean   :1.57462   Mean   :  0.1499  
+##  3rd Qu.:  1.4090   3rd Qu.:  1.4050   3rd Qu.:2.05373   3rd Qu.:  1.4050  
+##  Max.   : 12.0260   Max.   : 12.0260   Max.   :9.32821   Max.   : 12.0260  
+##  Direction 
+##  Down:484  
+##  Up  :605  
+##            
+##            
+##            
+## </code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="classification.html#cb186-1"></a><span class="kw">corrplot</span>(<span class="kw">cor</span>(Weekly[, <span class="dv">-9</span>]), <span class="dt">type =</span> <span class="st">&quot;lower&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">method =</span> <span class="st">&quot;ellipse&quot;</span>)</span></code></pre></div>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Volume is strongly positively correlated with Year. Other correlations are
+week, but Lag1 is negatively correlated with Lag2 but positively correlated
+with Lag3.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Use the full data set to perform a logistic regression with <code>Direction</code> as
 the response and the five lag variables plus <code>Volume</code> as predictors. Use
 the summary function to print the results. Do any of the predictors appear
-to be statistically significant? If so, which ones?</p></li>
-<li><p>Compute the confusion matrix and overall fraction of correct predictions.
+to be statistically significant? If so, which ones?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="classification.html#cb187-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(</span>
+<span id="cb187-2"><a href="classification.html#cb187-2"></a>  Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4 <span class="op">+</span><span class="st"> </span>Lag5 <span class="op">+</span><span class="st"> </span>Volume,</span>
+<span id="cb187-3"><a href="classification.html#cb187-3"></a>  <span class="dt">data =</span> Weekly,</span>
+<span id="cb187-4"><a href="classification.html#cb187-4"></a>  <span class="dt">family =</span> binomial</span>
+<span id="cb187-5"><a href="classification.html#cb187-5"></a>)</span>
+<span id="cb187-6"><a href="classification.html#cb187-6"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + 
+##     Volume, family = binomial, data = Weekly)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.6949  -1.2565   0.9913   1.0849   1.4579  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)   
+## (Intercept)  0.26686    0.08593   3.106   0.0019 **
+## Lag1        -0.04127    0.02641  -1.563   0.1181   
+## Lag2         0.05844    0.02686   2.175   0.0296 * 
+## Lag3        -0.01606    0.02666  -0.602   0.5469   
+## Lag4        -0.02779    0.02646  -1.050   0.2937   
+## Lag5        -0.01447    0.02638  -0.549   0.5833   
+## Volume      -0.02274    0.03690  -0.616   0.5377   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1496.2  on 1088  degrees of freedom
+## Residual deviance: 1486.4  on 1082  degrees of freedom
+## AIC: 1500.4
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>Lag2 is significant.</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Compute the confusion matrix and overall fraction of correct predictions.
 Explain what the confusion matrix is telling you about the types of
-mistakes made by logistic regression.</p></li>
-<li><p>Now fit the logistic regression model using a training data period from
+mistakes made by logistic regression.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="classification.html#cb189-1"></a><span class="kw">contrasts</span>(Weekly<span class="op">$</span>Direction)</span></code></pre></div>
+<pre><code>##      Up
+## Down  0
+## Up    1</code></pre>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="classification.html#cb191-1"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb191-2"><a href="classification.html#cb191-2"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up (pred)&quot;</span>, <span class="st">&quot;Down (pred)&quot;</span>), Weekly<span class="op">$</span>Direction))</span></code></pre></div>
+<pre><code>##              
+##               Down  Up
+##   Down (pred)   54  48
+##   Up (pred)    430 557</code></pre>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="classification.html#cb193-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
+<pre><code>## [1] 0.5610652</code></pre>
+<p>The overall fraction of correct predictions is 0.56. Although logistic
+regression correctly predicts upwards movements well, it incorrectly predicts
+most downwards movements as up.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Now fit the logistic regression model using a training data period from
 1990 to 2008, with <code>Lag2</code> as the only predictor. Compute the confusion
 matrix and the overall fraction of correct predictions for the held out
-data (that is, the data from 2009 and 2010).</p></li>
-<li><p>Repeat (d) using LDA.</p></li>
-<li><p>Repeat (d) using QDA.</p></li>
-<li><p>Repeat (d) using KNN with <span class="math inline">\(K = 1\)</span>.</p></li>
-<li><p>Repeat (d) using naive Bayes.</p></li>
-<li><p>Which of these methods appears to provide the best results on this data?</p></li>
-<li><p>Experiment with different combinations of predictors, including possible
+data (that is, the data from 2009 and 2010).</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="classification.html#cb195-1"></a>train &lt;-<span class="st"> </span>Weekly<span class="op">$</span>Year <span class="op">&lt;</span><span class="st"> </span><span class="dv">2009</span></span>
+<span id="cb195-2"><a href="classification.html#cb195-2"></a></span>
+<span id="cb195-3"><a href="classification.html#cb195-3"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb195-4"><a href="classification.html#cb195-4"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb195-5"><a href="classification.html#cb195-5"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up (pred)&quot;</span>, <span class="st">&quot;Down (pred)&quot;</span>), Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
+<pre><code>##              
+##               Down Up
+##   Down (pred)    9  5
+##   Up (pred)     34 56</code></pre>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="classification.html#cb197-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
+<pre><code>## [1] 0.625</code></pre>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Repeat (d) using LDA.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="classification.html#cb199-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly[train, ])</span>
+<span id="cb199-2"><a href="classification.html#cb199-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb199-3"><a href="classification.html#cb199-3"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(pred, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
+<pre><code>##       
+## pred   Down Up
+##   Down    9  5
+##   Up     34 56</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="classification.html#cb201-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
+<pre><code>## [1] 0.625</code></pre>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Repeat (d) using QDA.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="classification.html#cb203-1"></a>fit &lt;-<span class="st"> </span><span class="kw">qda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly[train, ])</span>
+<span id="cb203-2"><a href="classification.html#cb203-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb203-3"><a href="classification.html#cb203-3"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(pred, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
+<pre><code>##       
+## pred   Down Up
+##   Down    0  0
+##   Up     43 61</code></pre>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="classification.html#cb205-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
+<pre><code>## [1] 0.5865385</code></pre>
+<blockquote>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Repeat (d) using KNN with <span class="math inline">\(K = 1\)</span>.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="classification.html#cb207-1"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
+<span id="cb207-2"><a href="classification.html#cb207-2"></a>  Weekly[train, <span class="st">&quot;Lag2&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb207-3"><a href="classification.html#cb207-3"></a>  Weekly[<span class="op">!</span>train, <span class="st">&quot;Lag2&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb207-4"><a href="classification.html#cb207-4"></a>  Weekly<span class="op">$</span>Direction[train]</span>
+<span id="cb207-5"><a href="classification.html#cb207-5"></a>)</span>
+<span id="cb207-6"><a href="classification.html#cb207-6"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(fit, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
+<pre><code>##       
+## fit    Down Up
+##   Down   21 30
+##   Up     22 31</code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="classification.html#cb209-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
+<pre><code>## [1] 0.5</code></pre>
+<blockquote>
+<ol start="8" style="list-style-type: lower-alpha">
+<li>Repeat (d) using naive Bayes.</li>
+</ol>
+</blockquote>
+<p>ToDo</p>
+<blockquote>
+<ol style="list-style-type: lower-roman">
+<li>Which of these methods appears to provide the best results on this data?</li>
+</ol>
+</blockquote>
+<p>ToDo
+Logistic regression and LDA are the best performing.</p>
+<blockquote>
+<ol start="10" style="list-style-type: lower-alpha">
+<li>Experiment with different combinations of predictors, including possible
 transformations and interactions, for each of the methods. Report the
 variables, method, and associated confusion matrix that appears to provide
 the best results on the held out data. Note that you should also
-experiment with values for <span class="math inline">\(K\)</span> in the KNN classifier.</p></li>
+experiment with values for <span class="math inline">\(K\)</span> in the KNN classifier.</li>
 </ol>
 </blockquote>
+<p>ToDo</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="classification.html#cb211-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb211-2"><a href="classification.html#cb211-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb211-3"><a href="classification.html#cb211-3"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<pre><code>## [1] 0.5673077</code></pre>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="classification.html#cb213-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag3, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb213-2"><a href="classification.html#cb213-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb213-3"><a href="classification.html#cb213-3"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<pre><code>## [1] 0.5865385</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="classification.html#cb215-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span>Lag4, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb215-2"><a href="classification.html#cb215-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb215-3"><a href="classification.html#cb215-3"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<pre><code>## [1] 0.5865385</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="classification.html#cb217-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb217-2"><a href="classification.html#cb217-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb217-3"><a href="classification.html#cb217-3"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<pre><code>## [1] 0.5865385</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="classification.html#cb219-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">*</span><span class="st"> </span>Lag2 <span class="op">*</span><span class="st"> </span>Lag3 <span class="op">*</span><span class="st"> </span>Lag4, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb219-2"><a href="classification.html#cb219-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb219-3"><a href="classification.html#cb219-3"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<pre><code>## [1] 0.5961538</code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="classification.html#cb221-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4,<span class="dt">data =</span> Weekly[train, ])</span>
+<span id="cb221-2"><a href="classification.html#cb221-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb221-3"><a href="classification.html#cb221-3"></a><span class="kw">mean</span>(pred <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<pre><code>## [1] 0.5769231</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="classification.html#cb223-1"></a>fit &lt;-<span class="st"> </span><span class="kw">qda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4, <span class="dt">data =</span> Weekly[train, ])</span>
+<span id="cb223-2"><a href="classification.html#cb223-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb223-3"><a href="classification.html#cb223-3"></a><span class="kw">mean</span>(pred <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<pre><code>## [1] 0.5192308</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="classification.html#cb225-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb225-2"><a href="classification.html#cb225-2"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>, <span class="cf">function</span>(k) {</span>
+<span id="cb225-3"><a href="classification.html#cb225-3"></a>  fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
+<span id="cb225-4"><a href="classification.html#cb225-4"></a>    Weekly[train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb225-5"><a href="classification.html#cb225-5"></a>    Weekly[<span class="op">!</span>train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb225-6"><a href="classification.html#cb225-6"></a>    Weekly<span class="op">$</span>Direction[train],</span>
+<span id="cb225-7"><a href="classification.html#cb225-7"></a>    <span class="dt">k =</span> k</span>
+<span id="cb225-8"><a href="classification.html#cb225-8"></a>  )</span>
+<span id="cb225-9"><a href="classification.html#cb225-9"></a>  <span class="kw">mean</span>(fit <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span>
+<span id="cb225-10"><a href="classification.html#cb225-10"></a>})</span>
+<span id="cb225-11"><a href="classification.html#cb225-11"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>, res, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;k&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Fraction correct&quot;</span>)</span></code></pre></div>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="classification.html#cb226-1"></a>(k &lt;-<span class="st"> </span><span class="kw">which.max</span>(res))</span></code></pre></div>
+<pre><code>## [1] 26</code></pre>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="classification.html#cb228-1"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
+<span id="cb228-2"><a href="classification.html#cb228-2"></a>  Weekly[train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb228-3"><a href="classification.html#cb228-3"></a>  Weekly[<span class="op">!</span>train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb228-4"><a href="classification.html#cb228-4"></a>  Weekly<span class="op">$</span>Direction[train],</span>
+<span id="cb228-5"><a href="classification.html#cb228-5"></a>  <span class="dt">k =</span> k</span>
+<span id="cb228-6"><a href="classification.html#cb228-6"></a>)</span>
+<span id="cb228-7"><a href="classification.html#cb228-7"></a><span class="kw">table</span>(fit, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<pre><code>##       
+## fit    Down Up
+##   Down   23 18
+##   Up     20 43</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="classification.html#cb230-1"></a><span class="kw">mean</span>(fit <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<pre><code>## [1] 0.6346154</code></pre>
+<p>KNN using the first 3 Lag variables performs marginally better than logistic
+regression with <code>Lag2</code> if we tune <span class="math inline">\(k\)</span>.</p>
 </div>
 <div id="question-14-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.2.2</span> Question 14<a href="classification.html#question-14-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -637,34 +1028,108 @@ experiment with values for <span class="math inline">\(K\)</span> in the KNN cla
 <p>In this problem, you will develop a model to predict whether a given car gets
 high or low gas mileage based on the <code>Auto</code> data set.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Create a binary variable, <code>mpg01</code>, that contains a 1 if <code>mpg</code> contains a
+<li>Create a binary variable, <code>mpg01</code>, that contains a 1 if <code>mpg</code> contains a
 value above its median, and a 0 if <code>mpg</code> contains a value below its
 median. You can compute the median using the <code>median()</code> function. Note you
 may find it helpful to use the <code>data.frame()</code> function to create a single
-data set containing both <code>mpg01</code> and the other <code>Auto</code> variables.</p></li>
-<li><p>Explore the data graphically in order to investigate the association
-between <code>mpg01</code> and the other features. Which of the other features seem
-most likely to be useful in predicting <code>mpg01</code>? Scatterplots and boxplots
-may be useful tools to answer this question. Describe your findings.</p></li>
-<li><p>Split the data into a training set and a test set.</p></li>
-<li><p>Perform LDA on the training data in order to predict <code>mpg01</code> using the
-variables that seemed most associated with <code>mpg01</code> in (b). What is the
-test error of the model obtained?</p></li>
-<li><p>Perform QDA on the training data in order to predict <code>mpg01</code> using the
-variables that seemed most associated with <code>mpg01</code> in (b). What is the
-test error of the model obtained?</p></li>
-<li><p>Perform logistic regression on the training data in order to predict
-<code>mpg01</code> using the variables that seemed most associated with <code>mpg01</code> in
-(b). What is the test error of the model obtained?</p></li>
-<li><p>Perform naive Bayes on the training data in order to predict <code>mpg01</code> using
-the variables that seemed most associated with <code>mpg01</code> in (b). What is the
-test error of the model obtained?</p></li>
-<li><p>Perform KNN on the training data, with several values of <span class="math inline">\(K\)</span>, in order to
-predict <code>mpg01</code>. Use only the variables that seemed most associated with
-<code>mpg01</code> in (b). What test errors do you obtain? Which value of <span class="math inline">\(K\)</span> seems
-to perform the best on this data set?</p></li>
+data set containing both <code>mpg01</code> and the other <code>Auto</code> variables.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="classification.html#cb232-1"></a>x &lt;-<span class="st"> </span><span class="kw">cbind</span>(Auto[, <span class="dv">-1</span>], <span class="kw">data.frame</span>(<span class="st">&quot;mpg01&quot;</span> =<span class="st"> </span>Auto<span class="op">$</span>mpg <span class="op">&gt;</span><span class="st"> </span><span class="kw">median</span>(Auto<span class="op">$</span>mpg)))</span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Explore the data graphically in order to investigate the association
+between <code>mpg01</code> and the other features. Which of the other features seem
+most likely to be useful in predicting <code>mpg01</code>? Scatterplots and boxplots
+may be useful tools to answer this question. Describe your findings.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="classification.html#cb233-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>))</span>
+<span id="cb233-2"><a href="classification.html#cb233-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>) <span class="kw">hist</span>(x[, i], <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">main =</span> <span class="kw">colnames</span>(x)[i])</span>
+<span id="cb233-3"><a href="classification.html#cb233-3"></a></span>
+<span id="cb233-4"><a href="classification.html#cb233-4"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>))</span></code></pre></div>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="classification.html#cb234-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>) <span class="kw">boxplot</span>(x[, i] <span class="op">~</span><span class="st"> </span>x<span class="op">$</span>mpg01, <span class="dt">main =</span> <span class="kw">colnames</span>(x)[i])</span>
+<span id="cb234-2"><a href="classification.html#cb234-2"></a></span>
+<span id="cb234-3"><a href="classification.html#cb234-3"></a><span class="kw">pairs</span>(x[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>])</span></code></pre></div>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-12-2.png" width="672" /><img src="04-classification_files/figure-html/unnamed-chunk-12-3.png" width="672" /></p>
+<p>Most variables show an association with <code>mpg01</code> category, and several
+variables are colinear.</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Split the data into a training set and a test set.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="classification.html#cb235-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb235-2"><a href="classification.html#cb235-2"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(x)), <span class="kw">nrow</span>(x) <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span></code></pre></div>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Perform LDA on the training data in order to predict <code>mpg01</code> using the
+variables that seemed most associated with <code>mpg01</code> in (b). What is the
+test error of the model obtained?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="classification.html#cb236-1"></a><span class="kw">sort</span>(<span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb236-2"><a href="classification.html#cb236-2"></a>  <span class="kw">setNames</span>(<span class="kw">abs</span>(<span class="kw">t.test</span>(x[, i] <span class="op">~</span><span class="st"> </span>x<span class="op">$</span>mpg01)<span class="op">$</span>statistic), <span class="kw">colnames</span>(x)[i])</span>
+<span id="cb236-3"><a href="classification.html#cb236-3"></a>}))</span></code></pre></div>
+<pre><code>## acceleration         year       origin   horsepower displacement       weight 
+##     7.302430     9.403221    11.824099    17.681939    22.632004    22.932777 
+##    cylinders 
+##    23.035328</code></pre>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="classification.html#cb238-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lda</span>(mpg01 <span class="op">~</span><span class="st"> </span>cylinders <span class="op">+</span><span class="st"> </span>weight <span class="op">+</span><span class="st"> </span>displacement, <span class="dt">data =</span> x[train, ])</span>
+<span id="cb238-2"><a href="classification.html#cb238-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, x[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb238-3"><a href="classification.html#cb238-3"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span></code></pre></div>
+<pre><code>## [1] 0.1068702</code></pre>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Perform QDA on the training data in order to predict <code>mpg01</code> using the
+variables that seemed most associated with <code>mpg01</code> in (b). What is the
+test error of the model obtained?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="classification.html#cb240-1"></a>fit &lt;-<span class="st"> </span><span class="kw">qda</span>(mpg01 <span class="op">~</span><span class="st"> </span>cylinders <span class="op">+</span><span class="st"> </span>weight <span class="op">+</span><span class="st"> </span>displacement, <span class="dt">data =</span> x[train, ])</span>
+<span id="cb240-2"><a href="classification.html#cb240-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, x[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb240-3"><a href="classification.html#cb240-3"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span></code></pre></div>
+<pre><code>## [1] 0.09923664</code></pre>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Perform logistic regression on the training data in order to predict
+<code>mpg01</code> using the variables that seemed most associated with <code>mpg01</code> in
+(b). What is the test error of the model obtained?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="classification.html#cb242-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(mpg01 <span class="op">~</span><span class="st"> </span>cylinders <span class="op">+</span><span class="st"> </span>weight <span class="op">+</span><span class="st"> </span>displacement, <span class="dt">data =</span> x[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb242-2"><a href="classification.html#cb242-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, x[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb242-3"><a href="classification.html#cb242-3"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span></code></pre></div>
+<pre><code>## [1] 0.1145038</code></pre>
+<blockquote>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Perform naive Bayes on the training data in order to predict <code>mpg01</code> using
+the variables that seemed most associated with <code>mpg01</code> in (b). What is the
+test error of the model obtained?</li>
+</ol>
+</blockquote>
+<p>ToDo</p>
+<blockquote>
+<ol start="8" style="list-style-type: lower-alpha">
+<li>Perform KNN on the training data, with several values of <span class="math inline">\(K\)</span>, in order to
+predict <code>mpg01</code>. Use only the variables that seemed most associated with
+<code>mpg01</code> in (b). What test errors do you obtain? Which value of <span class="math inline">\(K\)</span> seems
+to perform the best on this data set?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="classification.html#cb244-1"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, <span class="cf">function</span>(k) {</span>
+<span id="cb244-2"><a href="classification.html#cb244-2"></a>  fit &lt;-<span class="st"> </span><span class="kw">knn</span>(x[train, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>)], x[<span class="op">-</span>train, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>)], x<span class="op">$</span>mpg01[train], <span class="dt">k =</span> k)</span>
+<span id="cb244-3"><a href="classification.html#cb244-3"></a>  <span class="kw">mean</span>(fit <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span>
+<span id="cb244-4"><a href="classification.html#cb244-4"></a>})</span>
+<span id="cb244-5"><a href="classification.html#cb244-5"></a><span class="kw">names</span>(res) &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">50</span></span>
+<span id="cb244-6"><a href="classification.html#cb244-6"></a><span class="kw">plot</span>(res, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</span></code></pre></div>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="classification.html#cb245-1"></a>res[<span class="kw">which.min</span>(res)]</span></code></pre></div>
+<pre><code>##         3 
+## 0.1068702</code></pre>
+<p>For the models tested here, <span class="math inline">\(k = 32\)</span> appears to perform best. QDA has a lower
+error rate overall, performing slightly better than LDA.</p>
 </div>
 <div id="question-15-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.2.3</span> Question 15<a href="classification.html#question-15-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -676,37 +1141,84 @@ the 3rd power. In other words, your function should compute <span class="math in
 print out the results.</p>
 <p><em>Hint: Recall that <code>x^a</code> raises <code>x</code> to the power <code>a</code>. Use the <code>print()</code></em>
 <em>function to output the result.</em></p></li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="classification.html#cb247-1"></a>Power &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">print</span>(<span class="dv">2</span><span class="op">^</span><span class="dv">3</span>)</span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
 <li><p>Create a new function, <code>Power2()</code>, that allows you to pass any two
 numbers, <code>x</code> and <code>a</code>, and prints out the value of <code>x^a</code>. You can do this
 by beginning your function with the line</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="classification.html#cb181-1"></a><span class="op">&gt;</span><span class="st"> </span>Power2=<span class="cf">function</span>(x,a) {</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="classification.html#cb248-1"></a><span class="op">&gt;</span><span class="st"> </span>Power2=<span class="cf">function</span>(x,a) {</span></code></pre></div>
 <p>You should be able to call your function by entering, for instance,</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="classification.html#cb182-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">Power2</span>(<span class="dv">3</span>, <span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="classification.html#cb249-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">Power2</span>(<span class="dv">3</span>, <span class="dv">8</span>)</span></code></pre></div>
 <p>on the command line. This should output the value of <span class="math inline">\(3^8\)</span>, namely, 6,561.</p></li>
-<li><p>Using the <code>Power2()</code> function that you just wrote, compute <span class="math inline">\(10^3\)</span>,
-<span class="math inline">\(8^{17}\)</span>, and <span class="math inline">\(131^3\)</span>.</p></li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="classification.html#cb250-1"></a>Power2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, a) <span class="kw">print</span>(x<span class="op">^</span>a)</span></code></pre></div>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Using the <code>Power2()</code> function that you just wrote, compute <span class="math inline">\(10^3\)</span>,
+<span class="math inline">\(8^{17}\)</span>, and <span class="math inline">\(131^3\)</span>.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="classification.html#cb251-1"></a><span class="kw">c</span>(<span class="kw">Power2</span>(<span class="dv">10</span>, <span class="dv">3</span>), <span class="kw">Power2</span>(<span class="dv">8</span>, <span class="dv">17</span>), <span class="kw">Power2</span>(<span class="dv">131</span>, <span class="dv">3</span>))</span></code></pre></div>
+<pre><code>## [1] 1000
+## [1] 2.2518e+15
+## [1] 2248091</code></pre>
+<pre><code>## [1] 1.000000e+03 2.251800e+15 2.248091e+06</code></pre>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
 <li><p>Now create a new function, <code>Power3()</code>, that actually returns the result
 <code>x^a</code> as an <code>R</code> object, rather than simply printing it to the screen. That
 is, if you store the value <code>x^a</code> in an object called result within your
 function, then you can simply <code>return()</code> this result, using the following
 line:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="classification.html#cb183-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">return</span>(result)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="classification.html#cb254-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">return</span>(result)</span></code></pre></div>
 <p>The line above should be the last line in your function, before the <code>}</code>
 symbol.</p></li>
-<li><p>Now using the <code>Power3()</code> function, create a plot of <span class="math inline">\(f(x) = x^2\)</span>. The
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="classification.html#cb255-1"></a>Power3 &lt;-<span class="st"> </span><span class="cf">function</span>(x, a) {</span>
+<span id="cb255-2"><a href="classification.html#cb255-2"></a>  result &lt;-<span class="st"> </span>x<span class="op">^</span>a</span>
+<span id="cb255-3"><a href="classification.html#cb255-3"></a>  <span class="kw">return</span>(result)</span>
+<span id="cb255-4"><a href="classification.html#cb255-4"></a>}</span></code></pre></div>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Now using the <code>Power3()</code> function, create a plot of <span class="math inline">\(f(x) = x^2\)</span>. The
 <span class="math inline">\(x\)</span>-axis should display a range of integers from 1 to 10, and the <span class="math inline">\(y\)</span>-axis
 should display <span class="math inline">\(x^2\)</span>. Label the axes appropriately, and use an appropriate
 title for the figure. Consider displaying either the <span class="math inline">\(x\)</span>-axis, the
 <span class="math inline">\(y\)</span>-axis, or both on the log-scale. You can do this by using <code>log = "x"</code>,
-<code>log = "y"</code>, or <code>log = "xy"</code> as arguments to the <code>plot()</code> function.</p></li>
+<code>log = "y"</code>, or <code>log = "xy"</code> as arguments to the <code>plot()</code> function.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="classification.html#cb256-1"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="kw">Power3</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">2</span>), </span>
+<span id="cb256-2"><a href="classification.html#cb256-2"></a>  <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, </span>
+<span id="cb256-3"><a href="classification.html#cb256-3"></a>  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;x&quot;</span><span class="op">^</span><span class="st">&quot;2&quot;</span>)),</span>
+<span id="cb256-4"><a href="classification.html#cb256-4"></a>  <span class="dt">log =</span> <span class="st">&quot;y&quot;</span></span>
+<span id="cb256-5"><a href="classification.html#cb256-5"></a>)</span></code></pre></div>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
 <li><p>Create a function, <code>PlotPower()</code>, that allows you to create a plot of <code>x</code>
 against <code>x^a</code> for a fixed <code>a</code> and for a range of values of <code>x</code>. For
 instance, if you call</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="classification.html#cb184-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">PlotPower</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="classification.html#cb257-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">PlotPower</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">3</span>)</span></code></pre></div>
 <p>then a plot should be created with an <span class="math inline">\(x\)</span>-axis taking on values
 <span class="math inline">\(1,2,...,10\)</span>, and a <span class="math inline">\(y\)</span>-axis taking on values <span class="math inline">\(1^3,2^3,...,10^3\)</span>.</p></li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="classification.html#cb258-1"></a>PlotPower &lt;-<span class="st"> </span><span class="cf">function</span>(x, a, <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>) {</span>
+<span id="cb258-2"><a href="classification.html#cb258-2"></a>  <span class="kw">plot</span>(x, <span class="kw">Power3</span>(x, a),</span>
+<span id="cb258-3"><a href="classification.html#cb258-3"></a>    <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, </span>
+<span id="cb258-4"><a href="classification.html#cb258-4"></a>    <span class="dt">ylab =</span> <span class="kw">substitute</span>(<span class="st">&quot;x&quot;</span><span class="op">^</span>a, <span class="kw">list</span>(<span class="dt">a =</span> a)),</span>
+<span id="cb258-5"><a href="classification.html#cb258-5"></a>    <span class="dt">log =</span> log</span>
+<span id="cb258-6"><a href="classification.html#cb258-6"></a>  )</span>
+<span id="cb258-7"><a href="classification.html#cb258-7"></a>}</span>
+<span id="cb258-8"><a href="classification.html#cb258-8"></a></span>
+<span id="cb258-9"><a href="classification.html#cb258-9"></a><span class="kw">PlotPower</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 </div>
 <div id="question-13-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.2.4</span> Question 13<a href="classification.html#question-13-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -718,6 +1230,167 @@ sub-sets of the predictors. Describe your findings.</p>
 <p><em>Hint: You will have to create the response variable yourself, using the</em>
 <em>variables that are contained in the <code>Boston</code> data set.</em></p>
 </blockquote>
+<p>ToDo</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="classification.html#cb259-1"></a>x &lt;-<span class="st"> </span><span class="kw">cbind</span>(</span>
+<span id="cb259-2"><a href="classification.html#cb259-2"></a>  Boston[, <span class="dv">-1</span>], </span>
+<span id="cb259-3"><a href="classification.html#cb259-3"></a>  <span class="kw">data.frame</span>(<span class="st">&quot;highcrim&quot;</span> =<span class="st"> </span>Boston<span class="op">$</span>crim <span class="op">&gt;</span><span class="st"> </span><span class="kw">median</span>(Boston<span class="op">$</span>crim))</span>
+<span id="cb259-4"><a href="classification.html#cb259-4"></a>)</span>
+<span id="cb259-5"><a href="classification.html#cb259-5"></a></span>
+<span id="cb259-6"><a href="classification.html#cb259-6"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb259-7"><a href="classification.html#cb259-7"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(x)), <span class="kw">nrow</span>(x) <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span></code></pre></div>
+<p>Fit lda, logistic regression and KNN models (with k = 1..50) for a set of
+specific predictors and return the error rate.</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="classification.html#cb260-1"></a>f &lt;-<span class="st"> </span><span class="cf">function</span>(cols, <span class="dt">k_vals =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>) {</span>
+<span id="cb260-2"><a href="classification.html#cb260-2"></a>  dat_train &lt;-<span class="st"> </span>x[train, cols, drop =<span class="st"> </span><span class="ot">FALSE</span>]</span>
+<span id="cb260-3"><a href="classification.html#cb260-3"></a>  dat_test &lt;-<span class="st"> </span>x[<span class="op">-</span>train, cols, drop =<span class="st"> </span><span class="ot">FALSE</span>]</span>
+<span id="cb260-4"><a href="classification.html#cb260-4"></a></span>
+<span id="cb260-5"><a href="classification.html#cb260-5"></a>  fit &lt;-<span class="st"> </span><span class="kw">lda</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train)</span>
+<span id="cb260-6"><a href="classification.html#cb260-6"></a>  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb260-7"><a href="classification.html#cb260-7"></a>  lda_err &lt;-<span class="st"> </span><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train])</span>
+<span id="cb260-8"><a href="classification.html#cb260-8"></a></span>
+<span id="cb260-9"><a href="classification.html#cb260-9"></a>  fit &lt;-<span class="st"> </span><span class="kw">glm</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train, <span class="dt">family =</span> binomial)</span>
+<span id="cb260-10"><a href="classification.html#cb260-10"></a>  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb260-11"><a href="classification.html#cb260-11"></a>  logreg_err &lt;-<span class="st"> </span><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train])</span>
+<span id="cb260-12"><a href="classification.html#cb260-12"></a></span>
+<span id="cb260-13"><a href="classification.html#cb260-13"></a>  res &lt;-<span class="st"> </span><span class="kw">sapply</span>(k_vals, <span class="cf">function</span>(k) {</span>
+<span id="cb260-14"><a href="classification.html#cb260-14"></a>    fit &lt;-<span class="st"> </span><span class="kw">knn</span>(dat_train, dat_test, x<span class="op">$</span>highcrim[train], <span class="dt">k =</span> k)</span>
+<span id="cb260-15"><a href="classification.html#cb260-15"></a>    <span class="kw">mean</span>(fit <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train])</span>
+<span id="cb260-16"><a href="classification.html#cb260-16"></a>  })</span>
+<span id="cb260-17"><a href="classification.html#cb260-17"></a>  knn_err &lt;-<span class="st"> </span><span class="kw">min</span>(res)</span>
+<span id="cb260-18"><a href="classification.html#cb260-18"></a></span>
+<span id="cb260-19"><a href="classification.html#cb260-19"></a>  <span class="kw">c</span>(<span class="st">&quot;LDA&quot;</span> =<span class="st"> </span>lda_err, <span class="st">&quot;LR&quot;</span> =<span class="st"> </span>logreg_err, <span class="st">&quot;KNN&quot;</span> =<span class="st"> </span>knn_err)</span>
+<span id="cb260-20"><a href="classification.html#cb260-20"></a>}</span>
+<span id="cb260-21"><a href="classification.html#cb260-21"></a></span>
+<span id="cb260-22"><a href="classification.html#cb260-22"></a>n &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">13</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb260-23"><a href="classification.html#cb260-23"></a>  <span class="kw">setNames</span>(<span class="kw">abs</span>(<span class="kw">wilcox.test</span>(<span class="kw">as.numeric</span>(x[, i]) <span class="op">~</span><span class="st"> </span>x<span class="op">$</span>highcrim)<span class="op">$</span>p.value), <span class="kw">colnames</span>(x)[i])</span>
+<span id="cb260-24"><a href="classification.html#cb260-24"></a>}))</span>
+<span id="cb260-25"><a href="classification.html#cb260-25"></a>n</span></code></pre></div>
+<pre><code>##      highcrim           nox           dis           age         indus 
+## 7.825553e-112  2.412920e-64  1.056245e-48  2.938048e-45  3.100164e-44 
+##           tax           rad            zn         lstat          medv 
+##  1.902875e-41  5.061325e-38  3.505222e-27  4.460639e-25  4.896101e-19 
+##       ptratio            rm          chas 
+##  2.666494e-16  5.164707e-05  1.153633e-01</code></pre>
+<p>Variables <code>nox</code> (nitrogen oxides concentration) followed by <code>dis</code> (distance to
+employment center) appear to be most associated with high crime.</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="classification.html#cb262-1"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">13</span>, <span class="cf">function</span>(max) <span class="kw">f</span>(<span class="dv">1</span><span class="op">:</span>max))</span>
+<span id="cb262-2"><a href="classification.html#cb262-2"></a>(res &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">t</span>(res)))</span></code></pre></div>
+<pre><code>## # A tibble: 13 × 3
+##      LDA    LR    KNN
+##    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 0.296 0.296 0.296 
+##  2 0.249 0.225 0.0296
+##  3 0.243 0.225 0.0296
+##  4 0.178 0.118 0.0296
+##  5 0.172 0.130 0.0533
+##  6 0.166 0.142 0.154 
+##  7 0.160 0.142 0.130 
+##  8 0.148 0.130 0.107 
+##  9 0.154 0.130 0.0769
+## 10 0.154 0.101 0.0710
+## 11 0.154 0.130 0.0769
+## 12 0.166 0.118 0.0769
+## 13 0.166 0.118 0.0769</code></pre>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="classification.html#cb264-1"></a>res<span class="op">$</span>n_var &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">13</span></span>
+<span id="cb264-2"><a href="classification.html#cb264-2"></a><span class="kw">pivot_longer</span>(res, <span class="dt">cols =</span> <span class="op">!</span>n_var) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb264-3"><a href="classification.html#cb264-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb264-4"><a href="classification.html#cb264-4"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb264-5"><a href="classification.html#cb264-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb264-6"><a href="classification.html#cb264-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>KNN appears to perform better (if we tune <span class="math inline">\(k\)</span>) for all numbers of predictors.</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="classification.html#cb265-1"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
+<span id="cb265-2"><a href="classification.html#cb265-2"></a>  x[train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], </span>
+<span id="cb265-3"><a href="classification.html#cb265-3"></a>  x[<span class="op">-</span>train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], </span>
+<span id="cb265-4"><a href="classification.html#cb265-4"></a>  x<span class="op">$</span>highcrim[train], </span>
+<span id="cb265-5"><a href="classification.html#cb265-5"></a>  <span class="dt">k =</span> <span class="dv">1</span></span>
+<span id="cb265-6"><a href="classification.html#cb265-6"></a>)</span>
+<span id="cb265-7"><a href="classification.html#cb265-7"></a><span class="kw">table</span>(fit, x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim)</span></code></pre></div>
+<pre><code>##        
+## fit     FALSE TRUE
+##   FALSE    78    2
+##   TRUE      3   86</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="classification.html#cb267-1"></a><span class="kw">mean</span>(fit <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
+<pre><code>## [1] 2.95858</code></pre>
+<p>Surprisingly, the best model (with an error rate of ~5%) uses <span class="math inline">\(k = 1\)</span> and
+assigns crime rate categories based on the town with the single most similar
+nitrogen oxide concentration. This might be, for example, because nearby towns
+have similar crime rates, and we can obtain good predictions by predicting
+crime rate based on a nearby town.</p>
+<p>But what if we only consider <span class="math inline">\(k = 20\)</span> and up to 8 predictors.</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="classification.html#cb269-1"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="cf">function</span>(max) <span class="kw">f</span>(<span class="dv">1</span><span class="op">:</span>max, <span class="dt">k_vals =</span> <span class="dv">20</span>))</span>
+<span id="cb269-2"><a href="classification.html#cb269-2"></a>(res &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">t</span>(res)))</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 3
+##     LDA    LR   KNN
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0.296 0.296 0.296
+## 2 0.249 0.225 0.172
+## 3 0.243 0.225 0.166
+## 4 0.178 0.118 0.172
+## 5 0.172 0.130 0.154
+## 6 0.166 0.142 0.213
+## 7 0.160 0.142 0.201
+## 8 0.148 0.130 0.195</code></pre>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="classification.html#cb271-1"></a>res<span class="op">$</span>n_var &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">8</span></span>
+<span id="cb271-2"><a href="classification.html#cb271-2"></a><span class="kw">pivot_longer</span>(res, <span class="dt">cols =</span> <span class="op">!</span>n_var) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb271-3"><a href="classification.html#cb271-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb271-4"><a href="classification.html#cb271-4"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb271-5"><a href="classification.html#cb271-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb271-6"><a href="classification.html#cb271-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>We can see that there best model now is logistic regression with 6 predictors
+which has ~10% error rate.</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="classification.html#cb272-1"></a>(vars &lt;-<span class="st"> </span><span class="kw">names</span>(n)[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>])</span></code></pre></div>
+<pre><code>## [1] &quot;highcrim&quot; &quot;nox&quot;      &quot;dis&quot;      &quot;age&quot;      &quot;indus&quot;    &quot;tax&quot;</code></pre>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="classification.html#cb274-1"></a>dat_train &lt;-<span class="st"> </span>x[train, vars]</span>
+<span id="cb274-2"><a href="classification.html#cb274-2"></a>dat_test &lt;-<span class="st"> </span>x[<span class="op">-</span>train, vars]</span>
+<span id="cb274-3"><a href="classification.html#cb274-3"></a></span>
+<span id="cb274-4"><a href="classification.html#cb274-4"></a>(fit &lt;-<span class="st"> </span><span class="kw">glm</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train, <span class="dt">family =</span> binomial))</span></code></pre></div>
+<pre><code>## 
+## Call:  glm(formula = x$highcrim[train] ~ ., family = binomial, data = dat_train)
+## 
+## Coefficients:
+## (Intercept)          nox          dis          age        indus          tax  
+##  -21.205733    36.357909     0.270415     0.006280    -0.102454     0.003696  
+## 
+## Degrees of Freedom: 336 Total (i.e. Null);  331 Residual
+## Null Deviance:       467 
+## Residual Deviance: 206.5     AIC: 218.5</code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="classification.html#cb276-1"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb276-2"><a href="classification.html#cb276-2"></a><span class="kw">table</span>(pred, x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim)</span></code></pre></div>
+<pre><code>##        
+## pred    FALSE TRUE
+##   FALSE    65   10
+##   TRUE     16   78</code></pre>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="classification.html#cb278-1"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train]) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
+<pre><code>## [1] 15.38462</code></pre>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="classification.html#cb280-1"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = x$highcrim[train] ~ ., family = binomial, data = dat_train)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.0291  -0.4497  -0.1615   0.2717   2.3764  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -21.205733   3.575588  -5.931 3.02e-09 ***
+## nox          36.357909   6.546083   5.554 2.79e-08 ***
+## dis           0.270415   0.170125   1.590   0.1119    
+## age           0.006280   0.009748   0.644   0.5194    
+## indus        -0.102454   0.044403  -2.307   0.0210 *  
+## tax           0.003696   0.001594   2.319   0.0204 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 467.04  on 336  degrees of freedom
+## Residual deviance: 206.47  on 331  degrees of freedom
+## AIC: 218.47
+## 
+## Number of Fisher Scoring iterations: 7</code></pre>
 
 </div>
 </div>
