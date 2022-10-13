@@ -385,6 +385,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 variable calculus, derive (5.6). In other words, prove that <span class="math inline">\(\alpha\)</span> given by
 (5.6) does indeed minimize <span class="math inline">\(Var(\alpha X + (1 − \alpha)Y)\)</span>.</p>
 </blockquote>
+<p>Equation 5.6 is:</p>
+<p><span class="math display">\[
+\alpha = \frac{\sigma^2_Y - \sigma_{XY}}{\sigma^2_X + \sigma^2_Y - 2\sigma_{XY}}
+\]</span></p>
+<p>Remember that:</p>
+<p><span class="math display">\[
+Var(aX) = a^2Var(X), \\ 
+\mathrm{Var}(X + Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) + \mathrm{Cov}(X,Y), \\
+\mathrm{Cov}(aX, bY) = ab\mathrm{Cov}(X, Y)
+\]</span></p>
+<p>If we define <span class="math inline">\(\sigma^2_X = \mathrm{Var}(X)\)</span>, <span class="math inline">\(\sigma^2_Y = \mathrm{Var}(Y)\)</span> and
+<span class="math inline">\(\sigma_{XY} = \mathrm{Cov}(X, Y)\)</span></p>
+<p><span class="math display">\[\begin{align}
+Var(\alpha X + (1 - \alpha)Y) 
+  &amp;= \alpha^2\sigma^2_X + (1-\alpha)^2\sigma^2_Y + 2\alpha(1 - \alpha)\sigma_{XY} \\
+  &amp;= \alpha^2\sigma^2_X + \sigma^2_Y - 2\alpha\sigma^2_Y + \alpha^2\sigma^2_Y + 
+     2\alpha\sigma_{XY} - 2\alpha^2\sigma_{XY} 
+\end{align}\]</span></p>
+<p>Now we want to find when the rate of change of this function is 0 with respect
+to <span class="math inline">\(\alpha\)</span>, so we compute the partial derivative, set to 0 and solve.</p>
+<p><span class="math display">\[
+\frac{\partial}{\partial{\alpha}} = 
+  2\alpha\sigma^2_X - 2\sigma^2_Y + 2\alpha\sigma^2_Y + 2\sigma_{XY} - 4\alpha\sigma_{XY} = 0
+\]</span></p>
+<p>Moving <span class="math inline">\(\alpha\)</span> terms to the same side:</p>
+<p><span class="math display">\[
+\alpha\sigma^2_X + \alpha\sigma^2_Y - 2\alpha\sigma_{XY} = \sigma^2_Y - \sigma_{XY}
+\]</span></p>
+<p><span class="math display">\[
+\alpha = \frac{\sigma^2_Y - \sigma_{XY}}{\sigma^2_X + \sigma^2_Y - 2\sigma_{XY}}
+\]</span></p>
+<p>We should also show that this is a minimum, so that the second partial
+derivative wrt <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(&gt;= 0\)</span>.</p>
+<p><span class="math display">\[\begin{align}
+\frac{\partial^2}{\partial{\alpha^2}} 
+  &amp;=  2\sigma^2_X + 2\sigma^2_Y - 4\sigma_{XY} \\
+  &amp;=  2(\sigma^2_X + \sigma^2_Y - 2\sigma_{XY}) \\
+  &amp;= 2\mathrm{Var}(X - Y)
+\end{align}\]</span></p>
+<p>Since variance is positive, then this must be positive.</p>
 </div>
 <div id="question-2-3" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.2</span> Question 2<a href="resampling-methods.html#question-2-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -393,33 +433,90 @@ variable calculus, derive (5.6). In other words, prove that <span class="math in
 bootstrap sample. Suppose that we obtain a bootstrap sample from a set of n
 observations.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>What is the probability that the first bootstrap observation is <em>not</em> the
-<span class="math inline">\(j\)</span>th observation from the original sample? Justify your answer.</p></li>
-<li><p>What is the probability that the second bootstrap observation is <em>not</em> the
-<span class="math inline">\(j\)</span>th observation from the original sample?</p></li>
-<li><p>Argue that the probability that the <span class="math inline">\(j\)</span>th observation is <em>not</em> in the
-bootstrap sample is <span class="math inline">\((1 − 1/n)^n\)</span>.</p></li>
-<li><p>When <span class="math inline">\(n = 5\)</span>, what is the probability that the <span class="math inline">\(j\)</span>th observation is in the
-bootstrap sample?</p></li>
-<li><p>When <span class="math inline">\(n = 100\)</span>, what is the probability that the <span class="math inline">\(j\)</span>th observation is in
-the bootstrap sample?</p></li>
-<li><p>When <span class="math inline">\(n = 10,000\)</span>, what is the probability that the <span class="math inline">\(j\)</span>th observation is
-in the bootstrap sample?</p></li>
-<li><p>Create a plot that displays, for each integer value of <span class="math inline">\(n\)</span> from 1 to
+<li>What is the probability that the first bootstrap observation is <em>not</em> the
+<span class="math inline">\(j\)</span>th observation from the original sample? Justify your answer.</li>
+</ol>
+</blockquote>
+<p>This is 1 - probability that it is the <span class="math inline">\(j\)</span>th = <span class="math inline">\(1 - 1/n\)</span>.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What is the probability that the second bootstrap observation is <em>not</em> the
+<span class="math inline">\(j\)</span>th observation from the original sample?</li>
+</ol>
+</blockquote>
+<p>Since each bootstrap observation is a random sample, this probability is the
+same (<span class="math inline">\(1 - 1/n\)</span>).</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Argue that the probability that the <span class="math inline">\(j\)</span>th observation is <em>not</em> in the
+bootstrap sample is <span class="math inline">\((1 − 1/n)^n\)</span>.</li>
+</ol>
+</blockquote>
+<p>For the <span class="math inline">\(j\)</span>th observation to not be in the sample, it would have to <em>not</em> be
+picked for each of <span class="math inline">\(n\)</span> positions, so not picked for <span class="math inline">\(1, 2, ..., n\)</span>, thus
+the probability is <span class="math inline">\((1 - 1/n)^n\)</span></p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>When <span class="math inline">\(n = 5\)</span>, what is the probability that the <span class="math inline">\(j\)</span>th observation is in the
+bootstrap sample?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="resampling-methods.html#cb282-1"></a>n &lt;-<span class="st"> </span><span class="dv">5</span></span>
+<span id="cb282-2"><a href="resampling-methods.html#cb282-2"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>n)<span class="op">^</span>n</span></code></pre></div>
+<pre><code>## [1] 0.67232</code></pre>
+<p><span class="math inline">\(p = 0.67\)</span></p>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>When <span class="math inline">\(n = 100\)</span>, what is the probability that the <span class="math inline">\(j\)</span>th observation is in
+the bootstrap sample?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="resampling-methods.html#cb284-1"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb284-2"><a href="resampling-methods.html#cb284-2"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>n)<span class="op">^</span>n</span></code></pre></div>
+<pre><code>## [1] 0.6339677</code></pre>
+<p><span class="math inline">\(p = 0.64\)</span></p>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>When <span class="math inline">\(n = 10,000\)</span>, what is the probability that the <span class="math inline">\(j\)</span>th observation is
+in the bootstrap sample?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="resampling-methods.html#cb286-1"></a>n &lt;-<span class="st"> </span><span class="dv">100000</span></span>
+<span id="cb286-2"><a href="resampling-methods.html#cb286-2"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>n)<span class="op">^</span>n</span></code></pre></div>
+<pre><code>## [1] 0.6321224</code></pre>
+<p><span class="math inline">\(p = 0.63\)</span></p>
+<blockquote>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Create a plot that displays, for each integer value of <span class="math inline">\(n\)</span> from 1 to
 100,000, the probability that the <span class="math inline">\(j\)</span>th observation is in the bootstrap
-sample. Comment on what you observe.</p></li>
+sample. Comment on what you observe.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="resampling-methods.html#cb288-1"></a>x &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100000</span>, <span class="cf">function</span>(n) <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>n)<span class="op">^</span>n)</span>
+<span id="cb288-2"><a href="resampling-methods.html#cb288-2"></a><span class="kw">plot</span>(x, <span class="dt">log =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</span></code></pre></div>
+<p><img src="05-resampling-methods_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>The probability rapidly approaches 0.63 with increasing <span class="math inline">\(n\)</span>.</p>
+<p>Note that <span class="math display">\[e^x = \lim_{x \to \inf} \left(1 + \frac{x}{n}\right)^n,\]</span> so with <span class="math inline">\(x = -1\)</span>, we
+can see that our limit is <span class="math inline">\(1 - e^{-1} = 1 - 1/e\)</span>.</p>
+<blockquote>
+<ol start="8" style="list-style-type: lower-alpha">
 <li><p>We will now investigate numerically the probability that a bootstrap
 sample of size <span class="math inline">\(n = 100\)</span> contains the <span class="math inline">\(j\)</span>th observation. Here <span class="math inline">\(j = 4\)</span>. We
 repeatedly create bootstrap samples, and each time we record whether or not
 the fourth observation is contained in the bootstrap sample.</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="resampling-methods.html#cb282-1"></a><span class="op">&gt;</span><span class="st"> </span>store &lt;-<span class="st"> </span><span class="kw">rep</span> (<span class="ot">NA</span>, <span class="dv">10000</span>)</span>
-<span id="cb282-2"><a href="resampling-methods.html#cb282-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span>) {</span>
-<span id="cb282-3"><a href="resampling-methods.html#cb282-3"></a>    store[i] <span class="op">&lt;=</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rep =</span> <span class="ot">TRUE</span>) <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span></span>
-<span id="cb282-4"><a href="resampling-methods.html#cb282-4"></a>}</span>
-<span id="cb282-5"><a href="resampling-methods.html#cb282-5"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(store)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="resampling-methods.html#cb289-1"></a><span class="op">&gt;</span><span class="st"> </span>store &lt;-<span class="st"> </span><span class="kw">rep</span> (<span class="ot">NA</span>, <span class="dv">10000</span>)</span>
+<span id="cb289-2"><a href="resampling-methods.html#cb289-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span>) {</span>
+<span id="cb289-3"><a href="resampling-methods.html#cb289-3"></a>    store[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rep =</span> <span class="ot">TRUE</span>) <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span></span>
+<span id="cb289-4"><a href="resampling-methods.html#cb289-4"></a>}</span>
+<span id="cb289-5"><a href="resampling-methods.html#cb289-5"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(store)</span></code></pre></div>
 <p>Comment on the results obtained.</p></li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="resampling-methods.html#cb290-1"></a>store &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10000</span>, <span class="kw">sum</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb290-2"><a href="resampling-methods.html#cb290-2"></a><span class="kw">mean</span>(store)</span></code></pre></div>
+<pre><code>## [1] 0.6291</code></pre>
+<p>The probability of including <span class="math inline">\(4\)</span> when resampling numbers <span class="math inline">\(1...100\)</span> is close to
+<span class="math inline">\(1 - (1 - 1/100)^{100}\)</span>.</p>
 </div>
 <div id="question-3-3" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.3</span> Question 3<a href="resampling-methods.html#question-3-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -428,15 +525,32 @@ the fourth observation is contained in the bootstrap sample.</p>
 <li>We now review <span class="math inline">\(k\)</span>-fold cross-validation.</li>
 </ol>
 <ol style="list-style-type: lower-alpha">
-<li><p>Explain how <span class="math inline">\(k\)</span>-fold cross-validation is implemented.</p></li>
-<li><p>What are the advantages and disadvantages of <span class="math inline">\(k\)</span>-fold cross-validation
-relative to:</p>
+<li>Explain how <span class="math inline">\(k\)</span>-fold cross-validation is implemented.</li>
+</ol>
+</blockquote>
+<p>We divided our data into (approximately equal) <span class="math inline">\(k\)</span> subsets, and then generate
+predictions for each <span class="math inline">\(k\)</span>th set, training on the exclusive <span class="math inline">\(k\)</span> sets combined.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What are the advantages and disadvantages of <span class="math inline">\(k\)</span>-fold cross-validation
+relative to:
 <ol style="list-style-type: lower-roman">
 <li>The validation set approach?</li>
 <li>LOOCV?</li>
 </ol></li>
 </ol>
 </blockquote>
+<p>When using a validation set, we can only train on a small portion of the data
+as we must reserve the rest for validation. As a result it can overestimate the
+test error rate (assuming we then train using the complete data for future
+prediction). It is also sensitive to which observations are including in train
+vs. test. It is, however, low cost in terms of processing time (as we only
+have to fit one model).</p>
+<p>When using LOOCV, we can train on <span class="math inline">\(n-1\)</span> observations, however, the trained
+models we generate each differ only by the inclusion (and exclusion) of a
+single observation. As a result, LOOCV can have high variance (the models fit
+will be similar, and might be quite different to what we would obtain with a
+different data set). LOOCV is also costly in terms of processing time.</p>
 </div>
 <div id="question-4-3" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.4</span> Question 4<a href="resampling-methods.html#question-4-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -445,6 +559,10 @@ relative to:</p>
 the response <span class="math inline">\(Y\)</span> for a particular value of the predictor <span class="math inline">\(X\)</span>. Carefully
 describe how we might estimate the standard deviation of our prediction.</p>
 </blockquote>
+<p>We could address this with bootstrapping. Our procedure would be to (jointly)
+resample <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> variables and fit our model many times. For each model we
+could obtain a summary of our prediction and calculate the standard deviation
+over bootstrapped samples.</p>
 </div>
 </div>
 <div id="applied-3" class="section level2 hasAnchor">
@@ -458,10 +576,17 @@ estimate the test error of this logistic regression model using the
 validation set approach. Do not forget to set a random seed before beginning
 your analysis.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Fit a logistic regression model that uses <code>income</code> and <code>balance</code> to predict
-<code>default</code>.</p></li>
-<li><p>Using the validation set approach, estimate the test error of this model.
-In order to do this, you must perform the following steps:</p>
+<li>Fit a logistic regression model that uses <code>income</code> and <code>balance</code> to predict
+<code>default</code>.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="resampling-methods.html#cb292-1"></a><span class="kw">library</span>(ISLR2)</span>
+<span id="cb292-2"><a href="resampling-methods.html#cb292-2"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb292-3"><a href="resampling-methods.html#cb292-3"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>balance, <span class="dt">data =</span> Default, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Using the validation set approach, estimate the test error of this model.
+In order to do this, you must perform the following steps:
 <ol style="list-style-type: lower-roman">
 <li>Split the sample set into a training set and a validation set.</li>
 <li>Fit a multiple logistic regression model using only the training
@@ -474,16 +599,52 @@ than 0.5.</li>
 <li>Compute the validation set error, which is the fraction of
 the observations in the validation set that are misclassified.</li>
 </ol></li>
-<li><p>Repeat the process in (b) three times, using three different splits of the
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="resampling-methods.html#cb293-1"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="kw">nrow</span>(Default) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb293-2"><a href="resampling-methods.html#cb293-2"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>balance, <span class="dt">data =</span> Default, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">subset =</span> train)</span>
+<span id="cb293-3"><a href="resampling-methods.html#cb293-3"></a>pred &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(fit, <span class="dt">newdata =</span> Default[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>)</span>
+<span id="cb293-4"><a href="resampling-methods.html#cb293-4"></a><span class="kw">table</span>(pred, Default<span class="op">$</span>default[<span class="op">-</span>train]) </span></code></pre></div>
+<pre><code>##      
+## pred    No  Yes
+##   No  4817  110
+##   Yes   20   53</code></pre>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="resampling-methods.html#cb295-1"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>Default<span class="op">$</span>default[<span class="op">-</span>train])</span></code></pre></div>
+<pre><code>## [1] 0.026</code></pre>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Repeat the process in (b) three times, using three different splits of the
 observations into a training set and a validation set. Comment on the
-results obtained.</p></li>
-<li><p>Now consider a logistic regression model that predicts the probability of
+results obtained.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="resampling-methods.html#cb297-1"></a><span class="kw">replicate</span>(<span class="dv">3</span>, {</span>
+<span id="cb297-2"><a href="resampling-methods.html#cb297-2"></a>  train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="kw">nrow</span>(Default) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb297-3"><a href="resampling-methods.html#cb297-3"></a>  fit &lt;-<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>balance, <span class="dt">data =</span> Default, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">subset =</span> train)</span>
+<span id="cb297-4"><a href="resampling-methods.html#cb297-4"></a>  pred &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(fit, <span class="dt">newdata =</span> Default[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>)</span>
+<span id="cb297-5"><a href="resampling-methods.html#cb297-5"></a>  <span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>Default<span class="op">$</span>default[<span class="op">-</span>train])</span>
+<span id="cb297-6"><a href="resampling-methods.html#cb297-6"></a>})</span></code></pre></div>
+<pre><code>## [1] 0.0260 0.0294 0.0258</code></pre>
+<p>The results obtained are variable and depend on the samples allocated to
+training vs. test.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Now consider a logistic regression model that predicts the probability of
 <code>default</code> using <code>income</code>, <code>balance</code>, and a dummy variable for <code>student</code>.
 Estimate the test error for this model using the validation set approach.
 Comment on whether or not including a dummy variable for <code>student</code> leads to
-a reduction in the test error rate.</p></li>
+a reduction in the test error rate.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="resampling-methods.html#cb299-1"></a><span class="kw">replicate</span>(<span class="dv">3</span>, {</span>
+<span id="cb299-2"><a href="resampling-methods.html#cb299-2"></a>  train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="kw">nrow</span>(Default) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb299-3"><a href="resampling-methods.html#cb299-3"></a>  fit &lt;-<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>balance <span class="op">+</span><span class="st"> </span>student, <span class="dt">data =</span> Default, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">subset =</span> train)</span>
+<span id="cb299-4"><a href="resampling-methods.html#cb299-4"></a>  pred &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(fit, <span class="dt">newdata =</span> Default[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>)</span>
+<span id="cb299-5"><a href="resampling-methods.html#cb299-5"></a>  <span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>Default<span class="op">$</span>default[<span class="op">-</span>train])</span>
+<span id="cb299-6"><a href="resampling-methods.html#cb299-6"></a>})</span></code></pre></div>
+<pre><code>## [1] 0.0278 0.0256 0.0250</code></pre>
+<p>Including <code>student</code> does not seem to make a substantial improvement to the
+test error.</p>
 </div>
 <div id="question-6-3" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.2</span> Question 6<a href="resampling-methods.html#question-6-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -496,21 +657,82 @@ ways: (1) using the bootstrap, and (2) using the standard formula for
 computing the standard errors in the <code>glm()</code> function. Do not forget to set a
 random seed before beginning your analysis.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Using the <code>summary()</code> and <code>glm()</code> functions, determine the estimated
+<li>Using the <code>summary()</code> and <code>glm()</code> functions, determine the estimated
 standard errors for the coefficients associated with <code>income</code> and
 <code>balance</code> in a multiple logistic regression model that uses both
-predictors.</p></li>
-<li><p>Write a function, <code>boot.fn()</code>, that takes as input the <code>Default</code> data set
-as well as an index of the observations, and that outputs the coefficient
-estimates for <code>income</code> and <code>balance</code> in the multiple logistic regression
-model.</p></li>
-<li><p>Use the <code>boot()</code> function together with your <code>boot.fn()</code> function to
-estimate the standard errors of the logistic regression coefficients for
-income and balance.</p></li>
-<li><p>Comment on the estimated standard errors obtained using the <code>glm()</code>
-function and using your bootstrap function.</p></li>
+predictors.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="resampling-methods.html#cb301-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>balance, <span class="dt">data =</span> Default, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb301-2"><a href="resampling-methods.html#cb301-2"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = default ~ income + balance, family = &quot;binomial&quot;, 
+##     data = Default)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.4725  -0.1444  -0.0574  -0.0211   3.7245  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -1.154e+01  4.348e-01 -26.545  &lt; 2e-16 ***
+## income       2.081e-05  4.985e-06   4.174 2.99e-05 ***
+## balance      5.647e-03  2.274e-04  24.836  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 2920.6  on 9999  degrees of freedom
+## Residual deviance: 1579.0  on 9997  degrees of freedom
+## AIC: 1585
+## 
+## Number of Fisher Scoring iterations: 8</code></pre>
+<p>The standard errors obtained by bootstrapping are <span class="math inline">\(\beta_1\)</span> = 5.0e-6 and
+<span class="math inline">\(\beta_2\)</span> = 2.3e-4.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Write a function, <code>boot.fn()</code>, that takes as input the <code>Default</code> data set
+as well as an index of the observations, and that outputs the coefficient
+estimates for <code>income</code> and <code>balance</code> in the multiple logistic regression
+model.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="resampling-methods.html#cb303-1"></a>boot.fn &lt;-<span class="st"> </span><span class="cf">function</span>(x, i) {</span>
+<span id="cb303-2"><a href="resampling-methods.html#cb303-2"></a>  fit &lt;-<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>balance, <span class="dt">data =</span> Default[i, ], <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb303-3"><a href="resampling-methods.html#cb303-3"></a>  <span class="kw">coef</span>(fit)[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb303-4"><a href="resampling-methods.html#cb303-4"></a>}</span></code></pre></div>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Use the <code>boot()</code> function together with your <code>boot.fn()</code> function to
+estimate the standard errors of the logistic regression coefficients for
+income and balance.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="resampling-methods.html#cb304-1"></a><span class="kw">library</span>(boot)</span>
+<span id="cb304-2"><a href="resampling-methods.html#cb304-2"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb304-3"><a href="resampling-methods.html#cb304-3"></a><span class="kw">boot</span>(Default, boot.fn, <span class="dt">R =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Default, statistic = boot.fn, R = 1000)
+## 
+## 
+## Bootstrap Statistics :
+##         original       bias     std. error
+## t1* 2.080898e-05 2.737444e-08 5.073444e-06
+## t2* 5.647103e-03 1.176249e-05 2.299133e-04</code></pre>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Comment on the estimated standard errors obtained using the <code>glm()</code>
+function and using your bootstrap function.</li>
+</ol>
+</blockquote>
+<p>The standard errors obtained by bootstrapping are similar to those estimated
+by <code>glm</code>.</p>
 </div>
 <div id="question-7-3" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.3</span> Question 7<a href="resampling-methods.html#question-7-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -523,16 +745,34 @@ compute the LOOCV error for a simple logistic regression model on the <code>Week
 data set. Recall that in the context of classification problems, the LOOCV
 error is given in (5.4).</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Fit a logistic regression model that predicts <code>Direction</code> using <code>Lag1</code> and
-<code>Lag2</code>.</p></li>
-<li><p>Fit a logistic regression model that predicts <code>Direction</code> using <code>Lag1</code> and
-<code>Lag2</code> <em>using all but the first observation</em>.</p></li>
-<li><p>Use the model from (b) to predict the direction of the first
+<li>Fit a logistic regression model that predicts <code>Direction</code> using <code>Lag1</code> and
+<code>Lag2</code>.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="resampling-methods.html#cb306-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Fit a logistic regression model that predicts <code>Direction</code> using <code>Lag1</code> and
+<code>Lag2</code> <em>using all but the first observation</em>.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="resampling-methods.html#cb307-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly[<span class="op">-</span><span class="dv">1</span>, ], <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Use the model from (b) to predict the direction of the first
 observation. You can do this by predicting that the first observation will
 go up if <span class="math inline">\(P(\)</span><code>Direction="Up" | Lag1 , Lag2</code><span class="math inline">\() &gt; 0.5\)</span>. Was this observation
-correctly classified?</p></li>
-<li><p>Write a for loop from <span class="math inline">\(i = 1\)</span> to <span class="math inline">\(i = n\)</span>, where <span class="math inline">\(n\)</span> is the number of
-observations in the data set, that performs each of the following steps:</p>
+correctly classified?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="resampling-methods.html#cb308-1"></a><span class="kw">predict</span>(fit, <span class="dt">newdata =</span> Weekly[<span class="dv">1</span>, , <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span></code></pre></div>
+<pre><code>##    1 
+## TRUE</code></pre>
+<p>Yes the observation was correctly classified.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Write a for loop from <span class="math inline">\(i = 1\)</span> to <span class="math inline">\(i = n\)</span>, where <span class="math inline">\(n\)</span> is the number of
+observations in the data set, that performs each of the following steps:
 <ol style="list-style-type: lower-roman">
 <li>Fit a logistic regression model using all but the <span class="math inline">\(i\)</span>th observation
 to predict <code>Direction</code> using <code>Lag1</code> and <code>Lag2</code> .</li>
@@ -544,10 +784,24 @@ to predict whether or not the market moves up.</li>
 direction for the <span class="math inline">\(i\)</span>th observation. If an error was made, then
 indicate this as a 1, and otherwise indicate it as a 0.</li>
 </ol></li>
-<li><p>Take the average of the <span class="math inline">\(n\)</span> numbers obtained in (d) in order to obtain the
-LOOCV estimate for the test error. Comment on the results.</p></li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="resampling-methods.html#cb310-1"></a>error &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="kw">nrow</span>(Weekly))</span>
+<span id="cb310-2"><a href="resampling-methods.html#cb310-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Weekly)) {</span>
+<span id="cb310-3"><a href="resampling-methods.html#cb310-3"></a>  fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly[<span class="op">-</span>i, ], <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb310-4"><a href="resampling-methods.html#cb310-4"></a>  p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="dt">newdata =</span> Weekly[i, , <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb310-5"><a href="resampling-methods.html#cb310-5"></a>  error[i] &lt;-<span class="st"> </span><span class="kw">ifelse</span>(p, <span class="st">&quot;Down&quot;</span>, <span class="st">&quot;Up&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly<span class="op">$</span>Direction[i]</span>
+<span id="cb310-6"><a href="resampling-methods.html#cb310-6"></a>}</span></code></pre></div>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Take the average of the <span class="math inline">\(n\)</span> numbers obtained in (d) in order to obtain the
+LOOCV estimate for the test error. Comment on the results.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="resampling-methods.html#cb311-1"></a><span class="kw">mean</span>(error)</span></code></pre></div>
+<pre><code>## [1] 0.4499541</code></pre>
+<p>The LOOCV test error rate is 45% which implies that our predictions are
+marginally more often correct than not.</p>
 </div>
 <div id="question-8-3" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.4</span> Question 8<a href="resampling-methods.html#question-8-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -555,32 +809,105 @@ LOOCV estimate for the test error. Comment on the results.</p></li>
 <p>We will now perform cross-validation on a simulated data set.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Generate a simulated data set as follows:</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="resampling-methods.html#cb283-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb283-2"><a href="resampling-methods.html#cb283-2"></a><span class="op">&gt;</span><span class="st"> </span>x=<span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb283-3"><a href="resampling-methods.html#cb283-3"></a><span class="op">&gt;</span><span class="st"> </span>y=x<span class="dv">-2</span><span class="op">*</span>x<span class="op">^</span><span class="dv">2</span><span class="op">+</span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="resampling-methods.html#cb313-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb313-2"><a href="resampling-methods.html#cb313-2"></a><span class="op">&gt;</span><span class="st"> </span>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb313-3"><a href="resampling-methods.html#cb313-3"></a><span class="op">&gt;</span><span class="st"> </span>y &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span>x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
 <p>In this data set, what is <span class="math inline">\(n\)</span> and what is <span class="math inline">\(p\)</span>? Write out the model
 used to generate the data in equation form.</p></li>
-<li><p>Create a scatterplot of <span class="math inline">\(X\)</span> against <span class="math inline">\(Y\)</span>. Comment on what you find.</p></li>
-<li><p>Set a random seed, and then compute the LOOCV errors that result from
-fitting the following four models using least squares:</p>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="resampling-methods.html#cb314-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb314-2"><a href="resampling-methods.html#cb314-2"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb314-3"><a href="resampling-methods.html#cb314-3"></a>y &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
+<p><span class="math inline">\(n\)</span> is 100 and <span class="math inline">\(p\)</span> is 1 (there are 100 observations and <span class="math inline">\(y\)</span> is predicted with
+a single variable <span class="math inline">\(x\)</span>). The model equation is: <span class="math display">\[y = -2x^2 + x + \epsilon\]</span>.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Create a scatterplot of <span class="math inline">\(X\)</span> against <span class="math inline">\(Y\)</span>. Comment on what you find.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="resampling-methods.html#cb315-1"></a><span class="kw">plot</span>(x, y)</span></code></pre></div>
+<p><img src="05-resampling-methods_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><span class="math inline">\(y\)</span> has a (negative) quadratic relationship with <span class="math inline">\(x\)</span>.</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Set a random seed, and then compute the LOOCV errors that result from
+fitting the following four models using least squares:
 <ol style="list-style-type: lower-roman">
 <li><span class="math inline">\(Y = \beta_0 + \beta_1 X + \epsilon\)</span></li>
 <li><span class="math inline">\(Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \epsilon\)</span></li>
 <li><span class="math inline">\(Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \beta_3 X^3 + \epsilon\)</span></li>
 <li><span class="math inline">\(Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \beta_3 X^3 + \beta_4 X^4 + \epsilon\)</span>.</li>
 </ol>
-<p>Note you may find it helpful to use the <code>data.frame()</code> function
-to create a single data set containing both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p></li>
-<li><p>Repeat (c) using another random seed, and report your results.
-Are your results the same as what you got in (c)? Why?</p></li>
-<li><p>Which of the models in (c) had the smallest LOOCV error? Is this what you
-expected? Explain your answer.</p></li>
-<li><p>Comment on the statistical significance of the coefficient estimates
-that results from fitting each of the models in (c) using least squares.
-Do these results agree with the conclusions drawn based on the
-cross-validation results?</p></li>
+Note you may find it helpful to use the <code>data.frame()</code> function
+to create a single data set containing both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="resampling-methods.html#cb316-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb316-2"><a href="resampling-methods.html#cb316-2"></a>dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x, y)</span>
+<span id="cb316-3"><a href="resampling-methods.html#cb316-3"></a><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) <span class="kw">cv.glm</span>(dat, <span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, i)))<span class="op">$</span>delta[<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] 7.2881616 0.9374236 0.9566218 0.9539049</code></pre>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Repeat (c) using another random seed, and report your results.
+Are your results the same as what you got in (c)? Why?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="resampling-methods.html#cb318-1"></a><span class="kw">set.seed</span>(<span class="dv">43</span>)</span>
+<span id="cb318-2"><a href="resampling-methods.html#cb318-2"></a>dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x, y)</span>
+<span id="cb318-3"><a href="resampling-methods.html#cb318-3"></a><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="cf">function</span>(i) <span class="kw">cv.glm</span>(dat, <span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, i)))<span class="op">$</span>delta[<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] 7.2881616 0.9374236 0.9566218 0.9539049</code></pre>
+<p>The results are the same because we are using LOOCV. When doing this, the model
+is fit leaving each one of the observations out in turn, and thus there is no
+stochasticity involved.</p>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Which of the models in (c) had the smallest LOOCV error? Is this what you
+expected? Explain your answer.</li>
+</ol>
+</blockquote>
+<p>The second model had the smallest LOOCV. This what would be expected since the
+model to generate the data was quadratic and we are measuring the test (rather
+than training) error rate to evaluate performance.</p>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Comment on the statistical significance of the coefficient estimates
+that results from fitting each of the models in (c) using least squares.
+Do these results agree with the conclusions drawn based on the
+cross-validation results?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="resampling-methods.html#cb320-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>) <span class="kw">printCoefmat</span>(<span class="kw">coef</span>(<span class="kw">summary</span>(<span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, i), <span class="dt">data =</span> dat))))</span></code></pre></div>
+<pre><code>##             Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept) -1.55002    0.26001 -5.9613 3.954e-08 ***
+## poly(x, i)   6.18883    2.60014  2.3802   0.01924 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##               Estimate Std. Error  t value  Pr(&gt;|t|)    
+## (Intercept)  -1.550023   0.095803 -16.1792 &lt; 2.2e-16 ***
+## poly(x, i)1   6.188826   0.958032   6.4599 4.185e-09 ***
+## poly(x, i)2 -23.948305   0.958032 -24.9974 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##               Estimate Std. Error  t value  Pr(&gt;|t|)    
+## (Intercept)  -1.550023   0.096263 -16.1019 &lt; 2.2e-16 ***
+## poly(x, i)1   6.188826   0.962632   6.4291 4.972e-09 ***
+## poly(x, i)2 -23.948305   0.962632 -24.8779 &lt; 2.2e-16 ***
+## poly(x, i)3   0.264106   0.962632   0.2744    0.7844    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##               Estimate Std. Error  t value  Pr(&gt;|t|)    
+## (Intercept)  -1.550023   0.095905 -16.1620 &lt; 2.2e-16 ***
+## poly(x, i)1   6.188826   0.959051   6.4531 4.591e-09 ***
+## poly(x, i)2 -23.948305   0.959051 -24.9708 &lt; 2.2e-16 ***
+## poly(x, i)3   0.264106   0.959051   0.2754    0.7836    
+## poly(x, i)4   1.257095   0.959051   1.3108    0.1931    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>We can see that the coefficients in the first model are not highly significant,
+but all terms (<span class="math inline">\(\beta_0, \beta_1\)</span> and <span class="math inline">\(\beta_2\)</span>) are in the quadratic model.
+After this, subsequent <span class="math inline">\(\beta_n\)</span> terms are not significant. Therefore, these
+results agree with those from cross-validation.</p>
 </div>
 <div id="question-9-3" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.5</span> Question 9<a href="resampling-methods.html#question-9-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -588,33 +915,122 @@ cross-validation results?</p></li>
 <p>We will now consider the <code>Boston</code> housing data set, from the <code>ISLR2</code>
 library.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Based on this data set, provide an estimate for the population mean of
-<code>medv</code>. Call this estimate <span class="math inline">\(\hat\mu\)</span>.</p></li>
-<li><p>Provide an estimate of the standard error of <span class="math inline">\(\hat\mu\)</span>. Interpret this
-result.</p>
-<p><em>Hint: We can compute the standard error of the sample mean by
-dividing the sample standard deviation by the square root of the number of
-observations.</em></p></li>
-<li><p>Now estimate the standard error of <span class="math inline">\(\hat\mu\)</span> using the bootstrap. How does
-this compare to your answer from (b)?</p></li>
-<li><p>Based on your bootstrap estimate from (c), provide a 95% confidence
-interval for the mean of <code>medv</code>. Compare it to the results obtained using
-<code>t.test(Boston$medv)</code>.</p>
-<p><em>Hint: You can approximate a 95% confidence interval using the
-formula <span class="math inline">\([\hat\mu − 2SE(\hat\mu), \hat\mu + 2SE(\hat\mu)].\)</span></em></p></li>
-<li><p>Based on this data set, provide an estimate, <span class="math inline">\(\hat\mu_{med}\)</span>, for the
-median value of <code>medv</code> in the population.</p></li>
-<li><p>We now would like to estimate the standard error of <span class="math inline">\(\hat\mu_{med}\)</span>.
-Unfortunately, there is no simple formula for computing the standard error
-of the median. Instead, estimate the standard error of the median using
-the bootstrap. Comment on your findings.</p></li>
-<li><p>Based on this data set, provide an estimate for the tenth percentile of
-<code>medv</code> in Boston census tracts. Call this quantity <span class="math inline">\(\hat\mu_{0.1}\)</span>. (You
-can use the <code>quantile()</code> function.)</p></li>
-<li><p>Use the bootstrap to estimate the standard error of <span class="math inline">\(\hat\mu_{0.1}\)</span>.
-Comment on your findings.</p></li>
+<li>Based on this data set, provide an estimate for the population mean of
+<code>medv</code>. Call this estimate <span class="math inline">\(\hat\mu\)</span>.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="resampling-methods.html#cb322-1"></a>(mu &lt;-<span class="st"> </span><span class="kw">mean</span>(Boston<span class="op">$</span>medv))</span></code></pre></div>
+<pre><code>## [1] 22.53281</code></pre>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Provide an estimate of the standard error of <span class="math inline">\(\hat\mu\)</span>. Interpret this
+result.</li>
+</ol>
+<p><em>Hint: We can compute the standard error of the sample mean by
+dividing the sample standard deviation by the square root of the number of
+observations.</em></p>
+</blockquote>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="resampling-methods.html#cb324-1"></a><span class="kw">sd</span>(Boston<span class="op">$</span>medv) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">length</span>(Boston<span class="op">$</span>medv))</span></code></pre></div>
+<pre><code>## [1] 0.4088611</code></pre>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Now estimate the standard error of <span class="math inline">\(\hat\mu\)</span> using the bootstrap. How does
+this compare to your answer from (b)?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="resampling-methods.html#cb326-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb326-2"><a href="resampling-methods.html#cb326-2"></a>(bs &lt;-<span class="st"> </span><span class="kw">boot</span>(Boston<span class="op">$</span>medv, <span class="cf">function</span>(v, i) <span class="kw">mean</span>(v[i]), <span class="dv">10000</span>))</span></code></pre></div>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Boston$medv, statistic = function(v, i) mean(v[i]), 
+##     R = 10000)
+## 
+## 
+## Bootstrap Statistics :
+##     original      bias    std. error
+## t1* 22.53281 0.002175751   0.4029139</code></pre>
+<p>The standard error using the bootstrap (0.403) is very close to that
+obtained from the formula above (0.409).</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Based on your bootstrap estimate from (c), provide a 95% confidence
+interval for the mean of <code>medv</code>. Compare it to the results obtained using
+<code>t.test(Boston$medv)</code>.</li>
+</ol>
+<p><em>Hint: You can approximate a 95% confidence interval using the
+formula <span class="math inline">\([\hat\mu − 2SE(\hat\mu), \hat\mu + 2SE(\hat\mu)].\)</span></em></p>
+</blockquote>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="resampling-methods.html#cb328-1"></a>se &lt;-<span class="st"> </span><span class="kw">sd</span>(bs<span class="op">$</span>t)</span>
+<span id="cb328-2"><a href="resampling-methods.html#cb328-2"></a><span class="kw">c</span>(mu <span class="op">-</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>se, mu <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>se)</span></code></pre></div>
+<pre><code>## [1] 21.72698 23.33863</code></pre>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Based on this data set, provide an estimate, <span class="math inline">\(\hat\mu_{med}\)</span>, for the
+median value of <code>medv</code> in the population.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="resampling-methods.html#cb330-1"></a><span class="kw">median</span>(Boston<span class="op">$</span>medv)</span></code></pre></div>
+<pre><code>## [1] 21.2</code></pre>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>We now would like to estimate the standard error of <span class="math inline">\(\hat\mu_{med}\)</span>.
+Unfortunately, there is no simple formula for computing the standard error
+of the median. Instead, estimate the standard error of the median using
+the bootstrap. Comment on your findings.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="resampling-methods.html#cb332-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb332-2"><a href="resampling-methods.html#cb332-2"></a><span class="kw">boot</span>(Boston<span class="op">$</span>medv, <span class="cf">function</span>(v, i) <span class="kw">median</span>(v[i]), <span class="dv">10000</span>)</span></code></pre></div>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Boston$medv, statistic = function(v, i) median(v[i]), 
+##     R = 10000)
+## 
+## 
+## Bootstrap Statistics :
+##     original   bias    std. error
+## t1*     21.2 -0.01331   0.3744634</code></pre>
+<p>The estimated standard error of the median is 0.374. This is lower than the
+standard error of the mean.</p>
+<blockquote>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Based on this data set, provide an estimate for the tenth percentile of
+<code>medv</code> in Boston census tracts. Call this quantity <span class="math inline">\(\hat\mu_{0.1}\)</span>. (You
+can use the <code>quantile()</code> function.)</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="resampling-methods.html#cb334-1"></a><span class="kw">quantile</span>(Boston<span class="op">$</span>medv, <span class="fl">0.1</span>)</span></code></pre></div>
+<pre><code>##   10% 
+## 12.75</code></pre>
+<blockquote>
+<ol start="8" style="list-style-type: lower-alpha">
+<li>Use the bootstrap to estimate the standard error of <span class="math inline">\(\hat\mu_{0.1}\)</span>.
+Comment on your findings.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="resampling-methods.html#cb336-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb336-2"><a href="resampling-methods.html#cb336-2"></a><span class="kw">boot</span>(Boston<span class="op">$</span>medv, <span class="cf">function</span>(v, i) <span class="kw">quantile</span>(v[i], <span class="fl">0.1</span>), <span class="dv">10000</span>)</span></code></pre></div>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = Boston$medv, statistic = function(v, i) quantile(v[i], 
+##     0.1), R = 10000)
+## 
+## 
+## Bootstrap Statistics :
+##     original   bias    std. error
+## t1*    12.75 0.013405    0.497298</code></pre>
+<p>We get a standard error of ~0.5. This is higher than the standard error of the
+median. Nevertheless the standard error is quite small, thus we can be fairly
+confidence about the value of the 10th percentile.</p>
 
 </div>
 </div>

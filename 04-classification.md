@@ -299,12 +299,14 @@ p(D|v) &= \frac{p(v|D) p(D)}{p(v|D)p(D) + p(v|N)p(N)} \\
        &= \frac{\pi_D e^{-(x-\mu_D)^2/2\sigma^2}}
                {\pi_D e^{-(x-\mu_D)^2/2\sigma^2} +
                 \pi_N e^{-(x-\mu_N)^2/2\sigma^2}} \\
-       &= \frac{0.8 \times e^{-(4-10)^2/(2 \times 36)}}{0.8 \times e^{-(4-10)^2/(2 \times 36)} + 0.2 \times e^{-(4-0)^2/(2 \times 36)}}
+       &= \frac{0.8 \times e^{-(4-10)^2/(2 \times 36)}}
+               {0.8 \times e^{-(4-10)^2/(2 \times 36)} + 0.2 \times e^{-(4-0)^2/(2 \times 36)}} \\
+       &= \frac{0.8 \times e^{-1/2}}{0.8 \times e^{-1/2} + 0.2 \times e^{-2/9}}
 \end{align}
 
 
 ```r
-exp(-(4-10)^2 / (2*36)) * 0.8 / (exp(-(4-10)^2 / (2*36))*0.8 + exp(-(4-0)^2 / (2*36))*0.2)
+exp(-0.5) * 0.8 / (exp(-0.5) * 0.8 + exp(-2/9) * 0.2)
 ```
 
 ```
@@ -1156,9 +1158,9 @@ KNN appears to perform better (if we tune $k$) for all numbers of predictors.
 
 ```r
 fit <- knn(
-  x[train, "nox", drop = FALSE], 
-  x[-train, "nox", drop = FALSE], 
-  x$highcrim[train], 
+  x[train, "nox", drop = FALSE],
+  x[-train, "nox", drop = FALSE],
+  x$highcrim[train],
   k = 1
 )
 table(fit, x[-train, ]$highcrim)
@@ -1210,9 +1212,9 @@ res <- sapply(1:8, function(max) f(1:max, k_vals = 20))
 ```r
 res$n_var <- 1:8
 pivot_longer(res, cols = !n_var) |>
-  ggplot(aes(n_var, value, col = name)) + 
-  geom_line() + 
-  xlab("Number of predictors") + 
+  ggplot(aes(n_var, value, col = name)) +
+  geom_line() +
+  xlab("Number of predictors") +
   ylab("Error rate")
 ```
 

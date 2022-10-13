@@ -666,9 +666,11 @@ p(D|v) &amp;= \frac{p(v|D) p(D)}{p(v|D)p(D) + p(v|N)p(N)} \\
        &amp;= \frac{\pi_D e^{-(x-\mu_D)^2/2\sigma^2}}
                {\pi_D e^{-(x-\mu_D)^2/2\sigma^2} +
                 \pi_N e^{-(x-\mu_N)^2/2\sigma^2}} \\
-       &amp;= \frac{0.8 \times e^{-(4-10)^2/(2 \times 36)}}{0.8 \times e^{-(4-10)^2/(2 \times 36)} + 0.2 \times e^{-(4-0)^2/(2 \times 36)}}
+       &amp;= \frac{0.8 \times e^{-(4-10)^2/(2 \times 36)}}
+               {0.8 \times e^{-(4-10)^2/(2 \times 36)} + 0.2 \times e^{-(4-0)^2/(2 \times 36)}} \\
+       &amp;= \frac{0.8 \times e^{-1/2}}{0.8 \times e^{-1/2} + 0.2 \times e^{-2/9}}
 \end{align}\]</span></p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="classification.html#cb181-1"></a><span class="kw">exp</span>(<span class="op">-</span>(<span class="dv">4-10</span>)<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span><span class="op">*</span><span class="dv">36</span>)) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span> <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="op">-</span>(<span class="dv">4-10</span>)<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span><span class="op">*</span><span class="dv">36</span>))<span class="op">*</span><span class="fl">0.8</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(<span class="dv">4-0</span>)<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span><span class="op">*</span><span class="dv">36</span>))<span class="op">*</span><span class="fl">0.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="classification.html#cb181-1"></a><span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span> <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span><span class="dv">2</span><span class="op">/</span><span class="dv">9</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.7518525</code></pre>
 </div>
 <div id="question-8-2" class="section level3 hasAnchor">
@@ -1300,9 +1302,9 @@ employment center) appear to be most associated with high crime.</p>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>KNN appears to perform better (if we tune <span class="math inline">\(k\)</span>) for all numbers of predictors.</p>
 <div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="classification.html#cb265-1"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
-<span id="cb265-2"><a href="classification.html#cb265-2"></a>  x[train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], </span>
-<span id="cb265-3"><a href="classification.html#cb265-3"></a>  x[<span class="op">-</span>train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>], </span>
-<span id="cb265-4"><a href="classification.html#cb265-4"></a>  x<span class="op">$</span>highcrim[train], </span>
+<span id="cb265-2"><a href="classification.html#cb265-2"></a>  x[train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb265-3"><a href="classification.html#cb265-3"></a>  x[<span class="op">-</span>train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb265-4"><a href="classification.html#cb265-4"></a>  x<span class="op">$</span>highcrim[train],</span>
 <span id="cb265-5"><a href="classification.html#cb265-5"></a>  <span class="dt">k =</span> <span class="dv">1</span></span>
 <span id="cb265-6"><a href="classification.html#cb265-6"></a>)</span>
 <span id="cb265-7"><a href="classification.html#cb265-7"></a><span class="kw">table</span>(fit, x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim)</span></code></pre></div>
@@ -1333,9 +1335,9 @@ crime rate based on a nearby town.</p>
 ## 8 0.148 0.130 0.195</code></pre>
 <div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="classification.html#cb271-1"></a>res<span class="op">$</span>n_var &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">8</span></span>
 <span id="cb271-2"><a href="classification.html#cb271-2"></a><span class="kw">pivot_longer</span>(res, <span class="dt">cols =</span> <span class="op">!</span>n_var) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb271-3"><a href="classification.html#cb271-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb271-4"><a href="classification.html#cb271-4"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb271-5"><a href="classification.html#cb271-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb271-3"><a href="classification.html#cb271-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span></span>
+<span id="cb271-4"><a href="classification.html#cb271-4"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb271-5"><a href="classification.html#cb271-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span></span>
 <span id="cb271-6"><a href="classification.html#cb271-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>We can see that there best model now is logistic regression with 6 predictors

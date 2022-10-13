@@ -624,6 +624,8 @@ Boston |>
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
+Yes, particularly crime and tax rates.
+
 > e. How many of the census tracts in this data set bound the Charles river?
 
 
