@@ -346,7 +346,7 @@ significant.
 > f. Try a few different transformations of the variables, such as $log(X)$,
 >    $\sqrt{X}$, $X^2$. Comment on your findings.
 
-Here I'll just consider transformations for `horesepower`.
+Here I'll just consider transformations for `horsepower`.
 
 ```{r}
 par(mfrow = c(2, 2))
