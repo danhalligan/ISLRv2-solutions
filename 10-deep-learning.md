@@ -36,7 +36,7 @@
 
 ### Question 3
 
-> Show that the negative multinomial log-likelihood (10.14) is equiva- lent to
+> Show that the negative multinomial log-likelihood (10.14) is equivalent to
 > the negative log of the likelihood expression (4.5) when there are $M = 2$
 > classes.
 

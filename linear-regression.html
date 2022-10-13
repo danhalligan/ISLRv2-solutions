@@ -428,6 +428,7 @@ enough.</li>
 </ol></li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="linear-regression.html#cb66-1"></a><span class="kw">library</span>(plotly)</span></code></pre></div>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="linear-regression.html#cb67-1"></a>model &lt;-<span class="st"> </span><span class="cf">function</span>(gpa, iq, level) {</span>
 <span id="cb67-2"><a href="linear-regression.html#cb67-2"></a>  <span class="dv">50</span> <span class="op">+</span></span>
 <span id="cb67-3"><a href="linear-regression.html#cb67-3"></a><span class="st">  </span>gpa <span class="op">*</span><span class="st"> </span><span class="dv">20</span> <span class="op">+</span></span>
@@ -441,41 +442,28 @@ enough.</li>
 <span id="cb67-11"><a href="linear-regression.html#cb67-11"></a>college &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">outer</span>(x, y, model, <span class="dt">level =</span> <span class="dv">1</span>))</span>
 <span id="cb67-12"><a href="linear-regression.html#cb67-12"></a>high_school &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">outer</span>(x, y, model, <span class="dt">level =</span> <span class="dv">0</span>))</span>
 <span id="cb67-13"><a href="linear-regression.html#cb67-13"></a></span>
-<span id="cb67-14"><a href="linear-regression.html#cb67-14"></a><span class="kw">library</span>(plotly)</span></code></pre></div>
-<pre><code>## Loading required package: ggplot2</code></pre>
-<pre><code>## 
-## Attaching package: &#39;plotly&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
-## 
-##     last_plot</code></pre>
-<pre><code>## The following object is masked from &#39;package:stats&#39;:
-## 
-##     filter</code></pre>
-<pre><code>## The following object is masked from &#39;package:graphics&#39;:
-## 
-##     layout</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="linear-regression.html#cb73-1"></a><span class="kw">plot_ly</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb73-2"><a href="linear-regression.html#cb73-2"></a><span class="st">  </span><span class="kw">add_surface</span>(</span>
-<span id="cb73-3"><a href="linear-regression.html#cb73-3"></a>    <span class="dt">z =</span> <span class="op">~</span>college,</span>
-<span id="cb73-4"><a href="linear-regression.html#cb73-4"></a>    <span class="dt">colorscale =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;rgb(107,184,214)&quot;</span>, <span class="st">&quot;rgb(0,90,124)&quot;</span>)),</span>
-<span id="cb73-5"><a href="linear-regression.html#cb73-5"></a>    <span class="dt">colorbar =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;College&quot;</span>)) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb73-6"><a href="linear-regression.html#cb73-6"></a><span class="st">  </span><span class="kw">add_surface</span>(</span>
-<span id="cb73-7"><a href="linear-regression.html#cb73-7"></a>    <span class="dt">z =</span> <span class="op">~</span>high_school,</span>
-<span id="cb73-8"><a href="linear-regression.html#cb73-8"></a>    <span class="dt">colorscale =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;rgb(255,112,184)&quot;</span>, <span class="st">&quot;rgb(128,0,64)&quot;</span>)),</span>
-<span id="cb73-9"><a href="linear-regression.html#cb73-9"></a>    <span class="dt">colorbar =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;High school&quot;</span>)) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb73-10"><a href="linear-regression.html#cb73-10"></a><span class="st">  </span><span class="kw">layout</span>(<span class="dt">scene =</span> <span class="kw">list</span>(</span>
-<span id="cb73-11"><a href="linear-regression.html#cb73-11"></a>    <span class="dt">xaxis =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;GPA&quot;</span>),</span>
-<span id="cb73-12"><a href="linear-regression.html#cb73-12"></a>    <span class="dt">yaxis =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;IQ&quot;</span>),</span>
-<span id="cb73-13"><a href="linear-regression.html#cb73-13"></a>    <span class="dt">zaxis =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;Salary&quot;</span>)))</span></code></pre></div>
-<div id="htmlwidget-c753bc4456b3aaa93e05" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c753bc4456b3aaa93e05">{"x":{"visdat":{"34c9463b7a16":["function () ","plotlyVisDat"]},"cur_data":"34c9463b7a16","attrs":{"34c9463b7a16":{"x":[1,1.44444444444444,1.88888888888889,2.33333333333333,2.77777777777778,3.22222222222222,3.66666666666667,4.11111111111111,4.55555555555556,5],"y":[1,11.4736842105263,21.9473684210526,32.4210526315789,42.8947368421053,53.3684210526316,63.8421052631579,74.3157894736842,84.7894736842105,95.2631578947368,105.736842105263,116.210526315789,126.684210526316,137.157894736842,147.631578947368,158.105263157895,168.578947368421,179.052631578947,189.526315789474,200],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":{},"type":"surface","colorscale":[[0,1],["rgb(107,184,214)","rgb(0,90,124)"]],"colorbar":{"title":"College"},"inherit":true},"34c9463b7a16.1":{"x":[1,1.44444444444444,1.88888888888889,2.33333333333333,2.77777777777778,3.22222222222222,3.66666666666667,4.11111111111111,4.55555555555556,5],"y":[1,11.4736842105263,21.9473684210526,32.4210526315789,42.8947368421053,53.3684210526316,63.8421052631579,74.3157894736842,84.7894736842105,95.2631578947368,105.736842105263,116.210526315789,126.684210526316,137.157894736842,147.631578947368,158.105263157895,168.578947368421,179.052631578947,189.526315789474,200],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":{},"type":"surface","colorscale":[[0,1],["rgb(255,112,184)","rgb(128,0,64)"]],"colorbar":{"title":"High school"},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"GPA"},"yaxis":{"title":"IQ"},"zaxis":{"title":"Salary"}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.333333333333333}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"College","ticklen":2,"len":0.333333333333333,"lenmode":"fraction","y":1,"yanchor":"top"},"colorscale":[[0,"rgb(107,184,214)"],[1,"rgb(0,90,124)"]],"showscale":true,"x":[1,1.44444444444444,1.88888888888889,2.33333333333333,2.77777777777778,3.22222222222222,3.66666666666667,4.11111111111111,4.55555555555556,5],"y":[1,11.4736842105263,21.9473684210526,32.4210526315789,42.8947368421053,53.3684210526316,63.8421052631579,74.3157894736842,84.7894736842105,95.2631578947368,105.736842105263,116.210526315789,126.684210526316,137.157894736842,147.631578947368,158.105263157895,168.578947368421,179.052631578947,189.526315789474,200],"z":[[95.08,99.5288888888889,103.977777777778,108.426666666667,112.875555555556,117.324444444444,121.773333333333,126.222222222222,130.671111111111,135.12],[95.9178947368421,100.413333333333,104.908771929825,109.404210526316,113.899649122807,118.395087719298,122.890526315789,127.385964912281,131.881403508772,136.376842105263],[96.7557894736842,101.297777777778,105.839766081871,110.381754385965,114.923742690058,119.465730994152,124.007719298246,128.549707602339,133.091695906433,137.633684210526],[97.5936842105263,102.182222222222,106.770760233918,111.359298245614,115.94783625731,120.536374269006,125.124912280702,129.713450292398,134.301988304094,138.890526315789],[98.4315789473684,103.066666666667,107.701754385965,112.336842105263,116.971929824561,121.60701754386,126.242105263158,130.877192982456,135.512280701754,140.147368421053],[99.2694736842105,103.951111111111,108.632748538012,113.314385964912,117.996023391813,122.677660818713,127.359298245614,132.040935672515,136.722573099415,141.404210526316],[100.107368421053,104.835555555556,109.563742690058,114.291929824561,119.020116959064,123.748304093567,128.47649122807,133.204678362573,137.932865497076,142.661052631579],[100.945263157895,105.72,110.494736842105,115.269473684211,120.044210526316,124.818947368421,129.593684210526,134.368421052632,139.143157894737,143.917894736842],[101.783157894737,106.604444444444,111.425730994152,116.24701754386,121.068304093567,125.889590643275,130.710877192982,135.53216374269,140.353450292398,145.174736842105],[102.621052631579,107.488888888889,112.356725146199,117.224561403509,122.092397660819,126.960233918129,131.828070175439,136.695906432749,141.563742690058,146.431578947368],[103.458947368421,108.373333333333,113.287719298246,118.202105263158,123.11649122807,128.030877192982,132.945263157895,137.859649122807,142.774035087719,147.688421052632],[104.296842105263,109.257777777778,114.218713450292,119.179649122807,124.140584795322,129.101520467836,134.062456140351,139.023391812865,143.98432748538,148.945263157895],[105.134736842105,110.142222222222,115.149707602339,120.157192982456,125.164678362573,130.17216374269,135.179649122807,140.187134502924,145.194619883041,150.202105263158],[105.972631578947,111.026666666667,116.080701754386,121.134736842105,126.188771929825,131.242807017544,136.296842105263,141.350877192982,146.404912280702,151.458947368421],[106.810526315789,111.911111111111,117.011695906433,122.112280701754,127.212865497076,132.313450292398,137.414035087719,142.514619883041,147.615204678363,152.715789473684],[107.648421052632,112.795555555556,117.94269005848,123.089824561404,128.236959064328,133.384093567251,138.531228070175,143.678362573099,148.825497076023,153.972631578947],[108.486315789474,113.68,118.873684210526,124.067368421053,129.261052631579,134.454736842105,139.648421052632,144.842105263158,150.035789473684,155.229473684211],[109.324210526316,114.564444444444,119.804678362573,125.044912280702,130.28514619883,135.525380116959,140.765614035088,146.005847953216,151.246081871345,156.486315789474],[110.162105263158,115.448888888889,120.73567251462,126.022456140351,131.309239766082,136.596023391813,141.882807017544,147.169590643275,152.456374269006,157.743157894737],[111,116.333333333333,121.666666666667,127,132.333333333333,137.666666666667,143,148.333333333333,153.666666666667,159]],"type":"surface","frame":null},{"colorbar":{"title":"High school","ticklen":2,"len":0.333333333333333,"lenmode":"fraction","y":0.666666666666667,"yanchor":"top"},"colorscale":[[0,"rgb(255,112,184)"],[1,"rgb(128,0,64)"]],"showscale":true,"x":[1,1.44444444444444,1.88888888888889,2.33333333333333,2.77777777777778,3.22222222222222,3.66666666666667,4.11111111111111,4.55555555555556,5],"y":[1,11.4736842105263,21.9473684210526,32.4210526315789,42.8947368421053,53.3684210526316,63.8421052631579,74.3157894736842,84.7894736842105,95.2631578947368,105.736842105263,116.210526315789,126.684210526316,137.157894736842,147.631578947368,158.105263157895,168.578947368421,179.052631578947,189.526315789474,200],"z":[[70.08,78.9733333333333,87.8666666666667,96.76,105.653333333333,114.546666666667,123.44,132.333333333333,141.226666666667,150.12],[70.9178947368421,79.8577777777778,88.7976608187134,97.7375438596491,106.677426900585,115.61730994152,124.557192982456,133.497076023392,142.436959064327,151.376842105263],[71.7557894736842,80.7422222222222,89.7286549707602,98.7150877192982,107.701520467836,116.687953216374,125.674385964912,134.66081871345,143.647251461988,152.633684210526],[72.5936842105263,81.6266666666667,90.659649122807,99.6926315789474,108.725614035088,117.758596491228,126.791578947368,135.824561403509,144.857543859649,153.890526315789],[73.4315789473684,82.5111111111111,91.5906432748538,100.670175438596,109.749707602339,118.829239766082,127.908771929825,136.988304093567,146.06783625731,155.147368421053],[74.2694736842105,83.3955555555555,92.5216374269006,101.647719298246,110.773801169591,119.899883040936,129.025964912281,138.152046783626,147.278128654971,156.404210526316],[75.1073684210526,84.28,93.4526315789474,102.625263157895,111.797894736842,120.970526315789,130.143157894737,139.315789473684,148.488421052632,157.661052631579],[75.9452631578947,85.1644444444444,94.3836257309941,103.602807017544,112.821988304094,122.041169590643,131.260350877193,140.479532163743,149.698713450292,158.917894736842],[76.7831578947368,86.0488888888889,95.3146198830409,104.580350877193,113.846081871345,123.111812865497,132.377543859649,141.643274853801,150.909005847953,160.174736842105],[77.6210526315789,86.9333333333333,96.2456140350877,105.557894736842,114.870175438597,124.182456140351,133.494736842105,142.80701754386,152.119298245614,161.431578947368],[78.4589473684211,87.8177777777778,97.1766081871345,106.535438596491,115.894269005848,125.253099415205,134.611929824561,143.970760233918,153.329590643275,162.688421052632],[79.2968421052632,88.7022222222222,98.1076023391813,107.51298245614,116.918362573099,126.323742690058,135.729122807018,145.134502923977,154.539883040936,163.945263157895],[80.1347368421053,89.5866666666667,99.0385964912281,108.490526315789,117.942456140351,127.394385964912,136.846315789474,146.298245614035,155.750175438597,165.202105263158],[80.9726315789474,90.4711111111111,99.9695906432749,109.468070175439,118.966549707602,128.465029239766,137.96350877193,147.461988304094,156.960467836257,166.458947368421],[81.8105263157895,91.3555555555556,100.900584795322,110.445614035088,119.990643274854,129.53567251462,139.080701754386,148.625730994152,158.170760233918,167.715789473684],[82.6484210526316,92.24,101.831578947368,111.423157894737,121.014736842105,130.606315789474,140.197894736842,149.789473684211,159.381052631579,168.972631578947],[83.4863157894737,93.1244444444444,102.762573099415,112.400701754386,122.038830409357,131.676959064327,141.315087719298,150.953216374269,160.59134502924,170.229473684211],[84.3242105263158,94.0088888888889,103.693567251462,113.378245614035,123.062923976608,132.747602339181,142.432280701754,152.116959064327,161.801637426901,171.486315789474],[85.1621052631579,94.8933333333333,104.624561403509,114.355789473684,124.08701754386,133.818245614035,143.549473684211,153.280701754386,163.011929824561,172.743157894737],[86,95.7777777777778,105.555555555556,115.333333333333,125.111111111111,134.888888888889,144.666666666667,154.444444444444,164.222222222222,174]],"type":"surface","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-<p>Option iii is the correct answer.</p>
+<span id="cb67-14"><a href="linear-regression.html#cb67-14"></a><span class="kw">plot_ly</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb67-15"><a href="linear-regression.html#cb67-15"></a><span class="st">  </span><span class="kw">add_surface</span>(</span>
+<span id="cb67-16"><a href="linear-regression.html#cb67-16"></a>    <span class="dt">z =</span> <span class="op">~</span>college,</span>
+<span id="cb67-17"><a href="linear-regression.html#cb67-17"></a>    <span class="dt">colorscale =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;rgb(107,184,214)&quot;</span>, <span class="st">&quot;rgb(0,90,124)&quot;</span>)),</span>
+<span id="cb67-18"><a href="linear-regression.html#cb67-18"></a>    <span class="dt">colorbar =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;College&quot;</span>)) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb67-19"><a href="linear-regression.html#cb67-19"></a><span class="st">  </span><span class="kw">add_surface</span>(</span>
+<span id="cb67-20"><a href="linear-regression.html#cb67-20"></a>    <span class="dt">z =</span> <span class="op">~</span>high_school,</span>
+<span id="cb67-21"><a href="linear-regression.html#cb67-21"></a>    <span class="dt">colorscale =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="st">&quot;rgb(255,112,184)&quot;</span>, <span class="st">&quot;rgb(128,0,64)&quot;</span>)),</span>
+<span id="cb67-22"><a href="linear-regression.html#cb67-22"></a>    <span class="dt">colorbar =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;High school&quot;</span>)) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb67-23"><a href="linear-regression.html#cb67-23"></a><span class="st">  </span><span class="kw">layout</span>(<span class="dt">scene =</span> <span class="kw">list</span>(</span>
+<span id="cb67-24"><a href="linear-regression.html#cb67-24"></a>    <span class="dt">xaxis =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;GPA&quot;</span>),</span>
+<span id="cb67-25"><a href="linear-regression.html#cb67-25"></a>    <span class="dt">yaxis =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;IQ&quot;</span>),</span>
+<span id="cb67-26"><a href="linear-regression.html#cb67-26"></a>    <span class="dt">zaxis =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;Salary&quot;</span>)))</span></code></pre></div>
+<div id="htmlwidget-05edf4ed1334f2272e26" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-05edf4ed1334f2272e26">{"x":{"visdat":{"2fb47d43eaf1":["function () ","plotlyVisDat"]},"cur_data":"2fb47d43eaf1","attrs":{"2fb47d43eaf1":{"x":[1,1.44444444444444,1.88888888888889,2.33333333333333,2.77777777777778,3.22222222222222,3.66666666666667,4.11111111111111,4.55555555555556,5],"y":[1,11.4736842105263,21.9473684210526,32.4210526315789,42.8947368421053,53.3684210526316,63.8421052631579,74.3157894736842,84.7894736842105,95.2631578947368,105.736842105263,116.210526315789,126.684210526316,137.157894736842,147.631578947368,158.105263157895,168.578947368421,179.052631578947,189.526315789474,200],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":{},"type":"surface","colorscale":[[0,1],["rgb(107,184,214)","rgb(0,90,124)"]],"colorbar":{"title":"College"},"inherit":true},"2fb47d43eaf1.1":{"x":[1,1.44444444444444,1.88888888888889,2.33333333333333,2.77777777777778,3.22222222222222,3.66666666666667,4.11111111111111,4.55555555555556,5],"y":[1,11.4736842105263,21.9473684210526,32.4210526315789,42.8947368421053,53.3684210526316,63.8421052631579,74.3157894736842,84.7894736842105,95.2631578947368,105.736842105263,116.210526315789,126.684210526316,137.157894736842,147.631578947368,158.105263157895,168.578947368421,179.052631578947,189.526315789474,200],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":{},"type":"surface","colorscale":[[0,1],["rgb(255,112,184)","rgb(128,0,64)"]],"colorbar":{"title":"High school"},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"GPA"},"yaxis":{"title":"IQ"},"zaxis":{"title":"Salary"}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.333333333333333}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"College","ticklen":2,"len":0.333333333333333,"lenmode":"fraction","y":1,"yanchor":"top"},"colorscale":[[0,"rgb(107,184,214)"],[1,"rgb(0,90,124)"]],"showscale":true,"x":[1,1.44444444444444,1.88888888888889,2.33333333333333,2.77777777777778,3.22222222222222,3.66666666666667,4.11111111111111,4.55555555555556,5],"y":[1,11.4736842105263,21.9473684210526,32.4210526315789,42.8947368421053,53.3684210526316,63.8421052631579,74.3157894736842,84.7894736842105,95.2631578947368,105.736842105263,116.210526315789,126.684210526316,137.157894736842,147.631578947368,158.105263157895,168.578947368421,179.052631578947,189.526315789474,200],"z":[[95.08,99.5288888888889,103.977777777778,108.426666666667,112.875555555556,117.324444444444,121.773333333333,126.222222222222,130.671111111111,135.12],[95.9178947368421,100.413333333333,104.908771929825,109.404210526316,113.899649122807,118.395087719298,122.890526315789,127.385964912281,131.881403508772,136.376842105263],[96.7557894736842,101.297777777778,105.839766081871,110.381754385965,114.923742690058,119.465730994152,124.007719298246,128.549707602339,133.091695906433,137.633684210526],[97.5936842105263,102.182222222222,106.770760233918,111.359298245614,115.94783625731,120.536374269006,125.124912280702,129.713450292398,134.301988304094,138.890526315789],[98.4315789473684,103.066666666667,107.701754385965,112.336842105263,116.971929824561,121.60701754386,126.242105263158,130.877192982456,135.512280701754,140.147368421053],[99.2694736842105,103.951111111111,108.632748538012,113.314385964912,117.996023391813,122.677660818713,127.359298245614,132.040935672515,136.722573099415,141.404210526316],[100.107368421053,104.835555555556,109.563742690058,114.291929824561,119.020116959064,123.748304093567,128.47649122807,133.204678362573,137.932865497076,142.661052631579],[100.945263157895,105.72,110.494736842105,115.269473684211,120.044210526316,124.818947368421,129.593684210526,134.368421052632,139.143157894737,143.917894736842],[101.783157894737,106.604444444444,111.425730994152,116.24701754386,121.068304093567,125.889590643275,130.710877192982,135.53216374269,140.353450292398,145.174736842105],[102.621052631579,107.488888888889,112.356725146199,117.224561403509,122.092397660819,126.960233918129,131.828070175439,136.695906432749,141.563742690058,146.431578947368],[103.458947368421,108.373333333333,113.287719298246,118.202105263158,123.11649122807,128.030877192982,132.945263157895,137.859649122807,142.774035087719,147.688421052632],[104.296842105263,109.257777777778,114.218713450292,119.179649122807,124.140584795322,129.101520467836,134.062456140351,139.023391812865,143.98432748538,148.945263157895],[105.134736842105,110.142222222222,115.149707602339,120.157192982456,125.164678362573,130.17216374269,135.179649122807,140.187134502924,145.194619883041,150.202105263158],[105.972631578947,111.026666666667,116.080701754386,121.134736842105,126.188771929825,131.242807017544,136.296842105263,141.350877192982,146.404912280702,151.458947368421],[106.810526315789,111.911111111111,117.011695906433,122.112280701754,127.212865497076,132.313450292398,137.414035087719,142.514619883041,147.615204678363,152.715789473684],[107.648421052632,112.795555555556,117.94269005848,123.089824561404,128.236959064328,133.384093567251,138.531228070175,143.678362573099,148.825497076023,153.972631578947],[108.486315789474,113.68,118.873684210526,124.067368421053,129.261052631579,134.454736842105,139.648421052632,144.842105263158,150.035789473684,155.229473684211],[109.324210526316,114.564444444444,119.804678362573,125.044912280702,130.28514619883,135.525380116959,140.765614035088,146.005847953216,151.246081871345,156.486315789474],[110.162105263158,115.448888888889,120.73567251462,126.022456140351,131.309239766082,136.596023391813,141.882807017544,147.169590643275,152.456374269006,157.743157894737],[111,116.333333333333,121.666666666667,127,132.333333333333,137.666666666667,143,148.333333333333,153.666666666667,159]],"type":"surface","frame":null},{"colorbar":{"title":"High school","ticklen":2,"len":0.333333333333333,"lenmode":"fraction","y":0.666666666666667,"yanchor":"top"},"colorscale":[[0,"rgb(255,112,184)"],[1,"rgb(128,0,64)"]],"showscale":true,"x":[1,1.44444444444444,1.88888888888889,2.33333333333333,2.77777777777778,3.22222222222222,3.66666666666667,4.11111111111111,4.55555555555556,5],"y":[1,11.4736842105263,21.9473684210526,32.4210526315789,42.8947368421053,53.3684210526316,63.8421052631579,74.3157894736842,84.7894736842105,95.2631578947368,105.736842105263,116.210526315789,126.684210526316,137.157894736842,147.631578947368,158.105263157895,168.578947368421,179.052631578947,189.526315789474,200],"z":[[70.08,78.9733333333333,87.8666666666667,96.76,105.653333333333,114.546666666667,123.44,132.333333333333,141.226666666667,150.12],[70.9178947368421,79.8577777777778,88.7976608187134,97.7375438596491,106.677426900585,115.61730994152,124.557192982456,133.497076023392,142.436959064327,151.376842105263],[71.7557894736842,80.7422222222222,89.7286549707602,98.7150877192982,107.701520467836,116.687953216374,125.674385964912,134.66081871345,143.647251461988,152.633684210526],[72.5936842105263,81.6266666666667,90.659649122807,99.6926315789474,108.725614035088,117.758596491228,126.791578947368,135.824561403509,144.857543859649,153.890526315789],[73.4315789473684,82.5111111111111,91.5906432748538,100.670175438596,109.749707602339,118.829239766082,127.908771929825,136.988304093567,146.06783625731,155.147368421053],[74.2694736842105,83.3955555555555,92.5216374269006,101.647719298246,110.773801169591,119.899883040936,129.025964912281,138.152046783626,147.278128654971,156.404210526316],[75.1073684210526,84.28,93.4526315789474,102.625263157895,111.797894736842,120.970526315789,130.143157894737,139.315789473684,148.488421052632,157.661052631579],[75.9452631578947,85.1644444444444,94.3836257309941,103.602807017544,112.821988304094,122.041169590643,131.260350877193,140.479532163743,149.698713450292,158.917894736842],[76.7831578947368,86.0488888888889,95.3146198830409,104.580350877193,113.846081871345,123.111812865497,132.377543859649,141.643274853801,150.909005847953,160.174736842105],[77.6210526315789,86.9333333333333,96.2456140350877,105.557894736842,114.870175438597,124.182456140351,133.494736842105,142.80701754386,152.119298245614,161.431578947368],[78.4589473684211,87.8177777777778,97.1766081871345,106.535438596491,115.894269005848,125.253099415205,134.611929824561,143.970760233918,153.329590643275,162.688421052632],[79.2968421052632,88.7022222222222,98.1076023391813,107.51298245614,116.918362573099,126.323742690058,135.729122807018,145.134502923977,154.539883040936,163.945263157895],[80.1347368421053,89.5866666666667,99.0385964912281,108.490526315789,117.942456140351,127.394385964912,136.846315789474,146.298245614035,155.750175438597,165.202105263158],[80.9726315789474,90.4711111111111,99.9695906432749,109.468070175439,118.966549707602,128.465029239766,137.96350877193,147.461988304094,156.960467836257,166.458947368421],[81.8105263157895,91.3555555555556,100.900584795322,110.445614035088,119.990643274854,129.53567251462,139.080701754386,148.625730994152,158.170760233918,167.715789473684],[82.6484210526316,92.24,101.831578947368,111.423157894737,121.014736842105,130.606315789474,140.197894736842,149.789473684211,159.381052631579,168.972631578947],[83.4863157894737,93.1244444444444,102.762573099415,112.400701754386,122.038830409357,131.676959064327,141.315087719298,150.953216374269,160.59134502924,170.229473684211],[84.3242105263158,94.0088888888889,103.693567251462,113.378245614035,123.062923976608,132.747602339181,142.432280701754,152.116959064327,161.801637426901,171.486315789474],[85.1621052631579,94.8933333333333,104.624561403509,114.355789473684,124.08701754386,133.818245614035,143.549473684211,153.280701754386,163.011929824561,172.743157894737],[86,95.7777777777778,105.555555555556,115.333333333333,125.111111111111,134.888888888889,144.666666666667,154.444444444444,164.222222222222,174]],"type":"surface","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Option iii correct.</p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Predict the salary of a college graduate with IQ of 110 and a GPA of 4.0.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="linear-regression.html#cb74-1"></a><span class="kw">model</span>(<span class="dt">gpa =</span> <span class="dv">4</span>, <span class="dt">iq =</span> <span class="dv">110</span>, <span class="dt">level =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="linear-regression.html#cb68-1"></a><span class="kw">model</span>(<span class="dt">gpa =</span> <span class="dv">4</span>, <span class="dt">iq =</span> <span class="dv">110</span>, <span class="dt">level =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 137.1</code></pre>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -546,19 +534,15 @@ What is <span class="math inline">\(a_{i&#39;}\)</span>?</p>
 <p><em>Note: We interpret this result by saying that the fitted
 values from linear regression are linear combinations of the response values.</em></p>
 </blockquote>
-<p><span class="math display">\[
-\begin{align}
-\hat{y}_i &amp;= x_i \frac{\sum_{i=1}^nx_iy_i}{\sum_{i&#39; = 1}^n x^2_{i&#39;}} \\
+<p><span class="math display">\[\begin{align}
+\hat{y}_i &amp; = x_i \frac{\sum_{i=1}^nx_iy_i}{\sum_{i&#39; = 1}^n x^2_{i&#39;}} \\
           &amp; = x_i \frac{\sum_{i&#39;=1}^nx_{i&#39;}y_{i&#39;}}{\sum_{i&#39;&#39; = 1}^n x^2_{i&#39;&#39;}} \\
           &amp; = \frac{\sum_{i&#39;=1}^n x_i x_{i&#39;}y_{i&#39;}}{\sum_{i&#39;&#39; = 1}^n x^2_{i&#39;&#39;}} \\
           &amp; = \sum_{i&#39;=1}^n  \frac{ x_i x_{i&#39;}y_{i&#39;}}{\sum_{i&#39;&#39; = 1}^n x^2_{i&#39;&#39;}} \\
           &amp; = \sum_{i&#39;=1}^n  \frac{ x_i x_{i&#39;}}{\sum_{i&#39;&#39; = 1}^n x^2_{i&#39;&#39;}} y_{i&#39;}
-\end{align}
-\]</span>
-therefore,</p>
-<p><span class="math display">\[
-a_{i&#39;} = \frac{ x_i x_{i&#39;}}{\sum x^2}
-\]</span></p>
+\end{align}\]</span></p>
+<p>therefore,</p>
+<p><span class="math display">\[a_{i&#39;} = \frac{ x_i x_{i&#39;}}{\sum x^2}\]</span></p>
 </div>
 <div id="question-6-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">3.1.6</span> Question 6<a href="linear-regression.html#question-6-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -567,13 +551,11 @@ a_{i&#39;} = \frac{ x_i x_{i&#39;}}{\sum x^2}
 least squares line always passes through the point <span class="math inline">\((\bar{x}, \bar{y})\)</span>.</p>
 </blockquote>
 <p>when <span class="math inline">\(x = \bar{x}\)</span> what is <span class="math inline">\(y\)</span>?</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 y &amp;= \hat\beta_0 + \hat\beta_1\bar{x} \\
   &amp;= \bar{y} - \hat\beta_1\bar{x} + \hat\beta_1\bar{x} \\
   &amp;= \bar{y}
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 </div>
 <div id="question-7-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">3.1.7</span> Question 7<a href="linear-regression.html#question-7-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -593,8 +575,7 @@ simplicity, you may assume that <span class="math inline">\(\bar{x} = \bar{y} = 
 <p><span class="math display">\[\hat{y}_i = \hat\beta_o + \hat\beta_1x_i = x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2}\]</span></p>
 <p>Therefore, given that <span class="math inline">\(RSS = \sum_i(y_i - \hat{y}_i)^2\)</span> and
 <span class="math inline">\(\textit{TSS} = \sum_i(y_i - \bar{y})^2 = \sum_iy_i^2\)</span></p>
-<p>$$
-<span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align}
 R^2 &amp;= \frac{\sum_iy_i^2 - \sum_i(y_i - x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2})^2}
             {\sum_iy_i^2} \\
 
@@ -620,8 +601,7 @@ R^2 &amp;= \frac{\sum_iy_i^2 - \sum_i(y_i - x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2
         }{\sum_iy_i^2} \\
 
     &amp;= \frac{(\sum_i{x_iy_i})^2}{\sum_ix_i^2 \sum_iy_i^2}
-\end{align}\]</span>
-$$</p>
+\end{align}\]</span></p>
 </div>
 </div>
 <div id="applied-1" class="section level2 hasAnchor">
@@ -645,9 +625,9 @@ negative?</li>
 <li>What are the associated 95% confidence and prediction intervals?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="linear-regression.html#cb76-1"></a><span class="kw">library</span>(ISLR2)</span>
-<span id="cb76-2"><a href="linear-regression.html#cb76-2"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>horsepower, <span class="dt">data =</span> Auto)</span>
-<span id="cb76-3"><a href="linear-regression.html#cb76-3"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="linear-regression.html#cb70-1"></a><span class="kw">library</span>(ISLR2)</span>
+<span id="cb70-2"><a href="linear-regression.html#cb70-2"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>horsepower, <span class="dt">data =</span> Auto)</span>
+<span id="cb70-3"><a href="linear-regression.html#cb70-3"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ horsepower, data = Auto)
@@ -669,10 +649,10 @@ negative?</li>
 <p>Yes, there is a significant relationship between predictor and response. For
 every unit increase in horsepower, mpg reduces by 0.16 (a negative
 relationship).</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="linear-regression.html#cb78-1"></a><span class="kw">predict</span>(fit, <span class="kw">data.frame</span>(<span class="dt">horsepower =</span> <span class="dv">98</span>), <span class="dt">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="linear-regression.html#cb72-1"></a><span class="kw">predict</span>(fit, <span class="kw">data.frame</span>(<span class="dt">horsepower =</span> <span class="dv">98</span>), <span class="dt">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 24.46708 23.97308 24.96108</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="linear-regression.html#cb80-1"></a><span class="kw">predict</span>(fit, <span class="kw">data.frame</span>(<span class="dt">horsepower =</span> <span class="dv">98</span>), <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="linear-regression.html#cb74-1"></a><span class="kw">predict</span>(fit, <span class="kw">data.frame</span>(<span class="dt">horsepower =</span> <span class="dv">98</span>), <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre><code>##        fit     lwr      upr
 ## 1 24.46708 14.8094 34.12476</code></pre>
 <blockquote>
@@ -681,18 +661,18 @@ relationship).</p>
 the least squares regression line.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="linear-regression.html#cb82-1"></a><span class="kw">plot</span>(Auto<span class="op">$</span>horsepower, Auto<span class="op">$</span>mpg)</span>
-<span id="cb82-2"><a href="linear-regression.html#cb82-2"></a><span class="kw">abline</span>(fit)</span></code></pre></div>
-<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="linear-regression.html#cb76-1"></a><span class="kw">plot</span>(Auto<span class="op">$</span>horsepower, Auto<span class="op">$</span>mpg)</span>
+<span id="cb76-2"><a href="linear-regression.html#cb76-2"></a><span class="kw">abline</span>(fit)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Use the <code>plot()</code> function to produce diagnostic plots of the least squares
 regression fit. Comment on any problems you see with the fit.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="linear-regression.html#cb83-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb83-2"><a href="linear-regression.html#cb83-2"></a><span class="kw">plot</span>(fit, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
-<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="linear-regression.html#cb77-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb77-2"><a href="linear-regression.html#cb77-2"></a><span class="kw">plot</span>(fit, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>The residuals show a trend with respect to the fitted values suggesting a
 non-linear relationship.</p>
 </div>
@@ -706,8 +686,8 @@ data set.</p>
 data set.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="linear-regression.html#cb84-1"></a><span class="kw">pairs</span>(Auto, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
-<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="linear-regression.html#cb78-1"></a><span class="kw">pairs</span>(Auto, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Compute the matrix of correlations between the variables using the function
@@ -715,8 +695,8 @@ data set.</li>
 qualitative.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="linear-regression.html#cb85-1"></a>x &lt;-<span class="st"> </span><span class="kw">subset</span>(Auto, <span class="dt">select =</span> <span class="op">-</span>name)</span>
-<span id="cb85-2"><a href="linear-regression.html#cb85-2"></a><span class="kw">cor</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="linear-regression.html#cb79-1"></a>x &lt;-<span class="st"> </span><span class="kw">subset</span>(Auto, <span class="dt">select =</span> <span class="op">-</span>name)</span>
+<span id="cb79-2"><a href="linear-regression.html#cb79-2"></a><span class="kw">cor</span>(x)</span></code></pre></div>
 <pre><code>##                     mpg  cylinders displacement horsepower     weight
 ## mpg           1.0000000 -0.7776175   -0.8051269 -0.7784268 -0.8322442
 ## cylinders    -0.7776175  1.0000000    0.9508233  0.8429834  0.8975273
@@ -749,8 +729,8 @@ to the response?</li>
 </ol></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="linear-regression.html#cb87-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> x)</span>
-<span id="cb87-2"><a href="linear-regression.html#cb87-2"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="linear-regression.html#cb81-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> x)</span>
+<span id="cb81-2"><a href="linear-regression.html#cb81-2"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ ., data = x)
@@ -788,9 +768,9 @@ residual plots suggest any unusually large outliers? Does the leverage plot
 identify any observations with unusually high leverage?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="linear-regression.html#cb89-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb89-2"><a href="linear-regression.html#cb89-2"></a><span class="kw">plot</span>(fit, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
-<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="linear-regression.html#cb83-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb83-2"><a href="linear-regression.html#cb83-2"></a><span class="kw">plot</span>(fit, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>One point has high leverage, the residuals also show a trend with fitted values.</p>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
@@ -799,7 +779,7 @@ interaction effects. Do any interactions appear to be statistically
 significant?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="linear-regression.html#cb90-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>weight<span class="op">:</span>horsepower, <span class="dt">data =</span> x))</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="linear-regression.html#cb84-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>weight<span class="op">:</span>horsepower, <span class="dt">data =</span> x))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ . + weight:horsepower, data = x)
@@ -825,7 +805,7 @@ significant?</li>
 ## Residual standard error: 2.931 on 383 degrees of freedom
 ## Multiple R-squared:  0.8618, Adjusted R-squared:  0.859 
 ## F-statistic: 298.6 on 8 and 383 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="linear-regression.html#cb92-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>acceleration<span class="op">:</span>horsepower, <span class="dt">data =</span> x))</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="linear-regression.html#cb86-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>acceleration<span class="op">:</span>horsepower, <span class="dt">data =</span> x))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ . + acceleration:horsepower, data = x)
@@ -851,7 +831,7 @@ significant?</li>
 ## Residual standard error: 3.145 on 383 degrees of freedom
 ## Multiple R-squared:  0.841,  Adjusted R-squared:  0.8376 
 ## F-statistic: 253.2 on 8 and 383 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="linear-regression.html#cb94-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>cylinders<span class="op">:</span>weight, <span class="dt">data =</span> x))</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="linear-regression.html#cb88-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>cylinders<span class="op">:</span>weight, <span class="dt">data =</span> x))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ . + cylinders:weight, data = x)
@@ -885,17 +865,17 @@ significant.</p>
 <span class="math inline">\(\sqrt{X}\)</span>, <span class="math inline">\(X^2\)</span>. Comment on your findings.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="linear-regression.html#cb96-1"></a><span class="co"># considering just horsepower.</span></span>
-<span id="cb96-2"><a href="linear-regression.html#cb96-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb96-3"><a href="linear-regression.html#cb96-3"></a><span class="kw">plot</span>(Auto<span class="op">$</span>horsepower, Auto<span class="op">$</span>mpg, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span>
-<span id="cb96-4"><a href="linear-regression.html#cb96-4"></a><span class="kw">plot</span>(<span class="kw">log</span>(Auto<span class="op">$</span>horsepower), Auto<span class="op">$</span>mpg, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span>
-<span id="cb96-5"><a href="linear-regression.html#cb96-5"></a><span class="kw">plot</span>(<span class="kw">sqrt</span>(Auto<span class="op">$</span>horsepower), Auto<span class="op">$</span>mpg, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span>
-<span id="cb96-6"><a href="linear-regression.html#cb96-6"></a><span class="kw">plot</span>(Auto<span class="op">$</span>horsepower <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, Auto<span class="op">$</span>mpg, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
-<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="linear-regression.html#cb97-1"></a>x &lt;-<span class="st"> </span><span class="kw">subset</span>(Auto, <span class="dt">select =</span> <span class="op">-</span>name)</span>
-<span id="cb97-2"><a href="linear-regression.html#cb97-2"></a>x<span class="op">$</span>horsepower &lt;-<span class="st"> </span><span class="kw">log</span>(x<span class="op">$</span>horsepower)</span>
-<span id="cb97-3"><a href="linear-regression.html#cb97-3"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> x)</span>
-<span id="cb97-4"><a href="linear-regression.html#cb97-4"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<p>Here I’ll just consider transformations for <code>horesepower</code>.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="linear-regression.html#cb90-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb90-2"><a href="linear-regression.html#cb90-2"></a><span class="kw">plot</span>(Auto<span class="op">$</span>horsepower, Auto<span class="op">$</span>mpg, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span>
+<span id="cb90-3"><a href="linear-regression.html#cb90-3"></a><span class="kw">plot</span>(<span class="kw">log</span>(Auto<span class="op">$</span>horsepower), Auto<span class="op">$</span>mpg, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span>
+<span id="cb90-4"><a href="linear-regression.html#cb90-4"></a><span class="kw">plot</span>(<span class="kw">sqrt</span>(Auto<span class="op">$</span>horsepower), Auto<span class="op">$</span>mpg, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span>
+<span id="cb90-5"><a href="linear-regression.html#cb90-5"></a><span class="kw">plot</span>(Auto<span class="op">$</span>horsepower <span class="op">^</span><span class="st"> </span><span class="dv">2</span>, Auto<span class="op">$</span>mpg, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="linear-regression.html#cb91-1"></a>x &lt;-<span class="st"> </span><span class="kw">subset</span>(Auto, <span class="dt">select =</span> <span class="op">-</span>name)</span>
+<span id="cb91-2"><a href="linear-regression.html#cb91-2"></a>x<span class="op">$</span>horsepower &lt;-<span class="st"> </span><span class="kw">log</span>(x<span class="op">$</span>horsepower)</span>
+<span id="cb91-3"><a href="linear-regression.html#cb91-3"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> x)</span>
+<span id="cb91-4"><a href="linear-regression.html#cb91-4"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mpg ~ ., data = x)
@@ -920,10 +900,10 @@ significant.</p>
 ## Residual standard error: 3.18 on 384 degrees of freedom
 ## Multiple R-squared:  0.837,  Adjusted R-squared:  0.834 
 ## F-statistic: 281.6 on 7 and 384 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="linear-regression.html#cb99-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb99-2"><a href="linear-regression.html#cb99-2"></a><span class="kw">plot</span>(fit, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
-<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
-<p>A log transformation of horsepower appears to give a more linear relationship
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="linear-regression.html#cb93-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb93-2"><a href="linear-regression.html#cb93-2"></a><span class="kw">plot</span>(fit, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p>A log transformation of <code>horsepower</code> appears to give a more linear relationship
 with mpg.</p>
 </div>
 <div id="question-10-1" class="section level3 hasAnchor">
@@ -935,14 +915,14 @@ with mpg.</p>
 and <code>US</code>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="linear-regression.html#cb100-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Price <span class="op">+</span><span class="st"> </span>Urban <span class="op">+</span><span class="st"> </span>US, <span class="dt">data =</span> Carseats)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="linear-regression.html#cb94-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Price <span class="op">+</span><span class="st"> </span>Urban <span class="op">+</span><span class="st"> </span>US, <span class="dt">data =</span> Carseats)</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Provide an interpretation of each coefficient in the model. Be
 careful—some of the variables in the model are qualitative!</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="linear-regression.html#cb101-1"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="linear-regression.html#cb95-1"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Sales ~ Price + Urban + US, data = Carseats)
@@ -991,13 +971,13 @@ that only uses the predictors for which there is evidence of association
 with the outcome.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="linear-regression.html#cb103-1"></a>fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Price <span class="op">+</span><span class="st"> </span>US, <span class="dt">data =</span> Carseats)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="linear-regression.html#cb97-1"></a>fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Sales <span class="op">~</span><span class="st"> </span>Price <span class="op">+</span><span class="st"> </span>US, <span class="dt">data =</span> Carseats)</span></code></pre></div>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">
 <li>How well do the models in (a) and (e) fit the data?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="linear-regression.html#cb104-1"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="linear-regression.html#cb98-1"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Sales ~ Price + Urban + US, data = Carseats)
@@ -1018,7 +998,7 @@ with the outcome.</li>
 ## Residual standard error: 2.472 on 396 degrees of freedom
 ## Multiple R-squared:  0.2393, Adjusted R-squared:  0.2335 
 ## F-statistic: 41.52 on 3 and 396 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="linear-regression.html#cb106-1"></a><span class="kw">summary</span>(fit2)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="linear-regression.html#cb100-1"></a><span class="kw">summary</span>(fit2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Sales ~ Price + US, data = Carseats)
@@ -1038,7 +1018,7 @@ with the outcome.</li>
 ## Residual standard error: 2.469 on 397 degrees of freedom
 ## Multiple R-squared:  0.2393, Adjusted R-squared:  0.2354 
 ## F-statistic: 62.43 on 2 and 397 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="linear-regression.html#cb108-1"></a><span class="kw">anova</span>(fit, fit2)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="linear-regression.html#cb102-1"></a><span class="kw">anova</span>(fit, fit2)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: Sales ~ Price + Urban + US
@@ -1054,7 +1034,7 @@ non-significantly better.</p>
 coefficient(s).</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="linear-regression.html#cb110-1"></a><span class="kw">confint</span>(fit2)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="linear-regression.html#cb104-1"></a><span class="kw">confint</span>(fit2)</span></code></pre></div>
 <pre><code>##                   2.5 %      97.5 %
 ## (Intercept) 11.79032020 14.27126531
 ## Price       -0.06475984 -0.04419543
@@ -1065,35 +1045,35 @@ coefficient(s).</li>
 from (e)?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="linear-regression.html#cb112-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb112-2"><a href="linear-regression.html#cb112-2"></a><span class="kw">plot</span>(fit2, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
-<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="linear-regression.html#cb106-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb106-2"><a href="linear-regression.html#cb106-2"></a><span class="kw">plot</span>(fit2, <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Yes, somewhat.</p>
 </div>
 <div id="question-11" class="section level3 hasAnchor">
 <h3><span class="header-section-number">3.2.4</span> Question 11<a href="linear-regression.html#question-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
-<p>In this problem we will investigate the t-statistic for the null hypothesis
+<p>In this problem we will investigate the <em>t</em>-statistic for the null hypothesis
 <span class="math inline">\(H_0 : \beta = 0\)</span> in simple linear regression without an intercept. To
 begin, we generate a predictor <code>x</code> and a response <code>y</code> as follows.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="linear-regression.html#cb113-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb113-2"><a href="linear-regression.html#cb113-2"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb113-3"><a href="linear-regression.html#cb113-3"></a>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="linear-regression.html#cb107-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb107-2"><a href="linear-regression.html#cb107-2"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb107-3"><a href="linear-regression.html#cb107-3"></a>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
 </blockquote>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="linear-regression.html#cb114-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb114-2"><a href="linear-regression.html#cb114-2"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb114-3"><a href="linear-regression.html#cb114-3"></a>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="linear-regression.html#cb108-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb108-2"><a href="linear-regression.html#cb108-2"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb108-3"><a href="linear-regression.html#cb108-3"></a>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
 <blockquote>
 <ol style="list-style-type: lower-alpha">
-<li>Perform a simple linear regression of <code>y</code> onto <code>x</code>, without an intercept.
+<li>Perform a simple linear regression of <code>y</code> onto <code>x</code>, <em>without</em> an intercept.
 Report the coefficient estimate <span class="math inline">\(\hat{\beta}\)</span>, the standard error of this
-coefficient estimate, and the t-statistic and p-value associated with the
+coefficient estimate, and the <em>t</em>-statistic and <em>p</em>-value associated with the
 null hypothesis <span class="math inline">\(H_0 : \beta = 0\)</span>. Comment on these results. (You can
 perform regression without an intercept using the command <code>lm(y~x+0)</code>.)</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="linear-regression.html#cb115-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb115-2"><a href="linear-regression.html#cb115-2"></a><span class="kw">coef</span>(<span class="kw">summary</span>(fit))</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="linear-regression.html#cb109-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb109-2"><a href="linear-regression.html#cb109-2"></a><span class="kw">coef</span>(<span class="kw">summary</span>(fit))</span></code></pre></div>
 <pre><code>##   Estimate Std. Error  t value     Pr(&gt;|t|)
 ## x 1.993876  0.1064767 18.72593 2.642197e-34</code></pre>
 <p>There’s a significant positive relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>. <span class="math inline">\(y\)</span> values are
@@ -1102,12 +1082,12 @@ predicted to be (a little below) twice the <span class="math inline">\(x\)</span
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Now perform a simple linear regression of <code>x</code> onto <code>y</code> without an intercept,
 and report the coefficient estimate, its standard error, and the
-corresponding t-statistic and p-values associated with the null hypothesis
+corresponding <em>t</em>-statistic and <em>p</em>-values associated with the null hypothesis
 <span class="math inline">\(H_0 : \beta = 0\)</span>. Comment on these results.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="linear-regression.html#cb117-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(x <span class="op">~</span><span class="st"> </span>y <span class="op">+</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb117-2"><a href="linear-regression.html#cb117-2"></a><span class="kw">coef</span>(<span class="kw">summary</span>(fit))</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="linear-regression.html#cb111-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(x <span class="op">~</span><span class="st"> </span>y <span class="op">+</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb111-2"><a href="linear-regression.html#cb111-2"></a><span class="kw">coef</span>(<span class="kw">summary</span>(fit))</span></code></pre></div>
 <pre><code>##    Estimate Std. Error  t value     Pr(&gt;|t|)
 ## y 0.3911145 0.02088625 18.72593 2.642197e-34</code></pre>
 <p>There’s a significant positive relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. <span class="math inline">\(x\)</span> values are
@@ -1122,7 +1102,7 @@ The t-statistic and p-values are the same.</p>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>For the regression of <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span> without an intercept, the
-t-statistic for <span class="math inline">\(H_0 : \beta = 0\)</span> takes the form
+<em>t</em>-statistic for <span class="math inline">\(H_0 : \beta = 0\)</span> takes the form
 <span class="math inline">\(\hat{\beta}/SE(\hat{\beta})\)</span>, where <span class="math inline">\(\hat{\beta}\)</span> is given by (3.38), and
 where
 <span class="math display">\[
@@ -1140,14 +1120,12 @@ written as
 </blockquote>
 <p><span class="math display">\[ \beta = \sum_i x_i y_i / \sum_{i&#39;} x_{i&#39;}^2 ,\]</span></p>
 <p>therefore</p>
-<p>$$
-<span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align}
 t &amp;= \frac{\sum_i x_i y_i \sqrt{n-1} \sqrt{\sum_ix_i^2}}
           {\sum_i x_i^2 \sqrt{\sum_i(y_i - x_i \beta)^2}} \\
 
   &amp;= \frac{\sum_i x_i y_i \sqrt{n-1}}
           {\sqrt{\sum_ix_i^2 \sum_i(y_i - x_i \beta)^2}} \\
-
 
   &amp;= \frac{\sum_i x_i y_i \sqrt{n-1}}
           {\sqrt{
@@ -1168,15 +1146,11 @@ t &amp;= \frac{\sum_i x_i y_i \sqrt{n-1} \sqrt{\sum_ix_i^2}}
            }} \\
 
   &amp;= \frac{\sum_i x_i y_i \sqrt{n-1}}
-          {\sqrt{
-            \sum_ix_i^2 \sum_iy_i^2 -
-            (\sum_i x_i y_i)^2
-           }} \\
-\end{align}\]</span>
-$$</p>
+          {\sqrt{\sum_ix_i^2 \sum_iy_i^2 - (\sum_i x_i y_i)^2}} \\
+\end{align}\]</span></p>
 <p>We can show this numerically in R by computing <span class="math inline">\(t\)</span> using the above equation.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="linear-regression.html#cb119-1"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
-<span id="cb119-2"><a href="linear-regression.html#cb119-2"></a><span class="kw">sqrt</span>(n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(x <span class="op">*</span><span class="st"> </span>y) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>(x <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(y <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(x <span class="op">*</span><span class="st"> </span>y) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="linear-regression.html#cb113-1"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
+<span id="cb113-2"><a href="linear-regression.html#cb113-2"></a><span class="kw">sqrt</span>(n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(x <span class="op">*</span><span class="st"> </span>y) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>(x <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(y <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(x <span class="op">*</span><span class="st"> </span>y) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 18.72593</code></pre>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
@@ -1189,15 +1163,15 @@ of <code>x</code> onto <code>y</code>.</li>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">
 <li>In <code>R</code>, show that when regression is performed <em>with</em> an intercept, the
-<span class="math inline">\(t\)</span>-statistic for <span class="math inline">\(H_0 : \beta_1 = 0\)</span> is the same for the regression of <code>y</code>
+<em>t</em>-statistic for <span class="math inline">\(H_0 : \beta_1 = 0\)</span> is the same for the regression of <code>y</code>
 onto <code>x</code> as it is for the regression of <code>x</code> onto <code>y</code>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="linear-regression.html#cb121-1"></a><span class="kw">coef</span>(<span class="kw">summary</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)))</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="linear-regression.html#cb115-1"></a><span class="kw">coef</span>(<span class="kw">summary</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)))</span></code></pre></div>
 <pre><code>##                Estimate Std. Error    t value     Pr(&gt;|t|)
 ## (Intercept) -0.03769261 0.09698729 -0.3886346 6.983896e-01
 ## x            1.99893961 0.10772703 18.5555993 7.723851e-34</code></pre>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="linear-regression.html#cb123-1"></a><span class="kw">coef</span>(<span class="kw">summary</span>(<span class="kw">lm</span>(x <span class="op">~</span><span class="st"> </span>y)))</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="linear-regression.html#cb117-1"></a><span class="kw">coef</span>(<span class="kw">summary</span>(<span class="kw">lm</span>(x <span class="op">~</span><span class="st"> </span>y)))</span></code></pre></div>
 <pre><code>##               Estimate Std. Error    t value     Pr(&gt;|t|)
 ## (Intercept) 0.03880394 0.04266144  0.9095787 3.652764e-01
 ## y           0.38942451 0.02098690 18.5555993 7.723851e-34</code></pre>
@@ -1207,19 +1181,45 @@ onto <code>x</code> as it is for the regression of <code>x</code> onto <code>y</
 <blockquote>
 <p>This problem involves simple linear regression without an intercept.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Recall that the coefficient estimate <span class="math inline">\(\hat{\beta}\)</span> for the linear
+<li>Recall that the coefficient estimate <span class="math inline">\(\hat{\beta}\)</span> for the linear
 regression of <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span> without an intercept is given by (3.38). Under
 what circumstance is the coefficient estimate for the regression of <span class="math inline">\(X\)</span>
 onto <span class="math inline">\(Y\)</span> the same as the coefficient estimate for the regression of <span class="math inline">\(Y\)</span>
-onto <span class="math inline">\(X\)</span>?</p></li>
-<li><p>Generate an example in <code>R</code> with <span class="math inline">\(n = 100\)</span> observations in which the
-coefficient estimate for the regression of <span class="math inline">\(X\)</span> onto <span class="math inline">\(Y\)</span> is different from
-the coefficient estimate for the regression of <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span>.</p></li>
-<li><p>Generate an example in <code>R</code> with <span class="math inline">\(n = 100\)</span> observations in which the
-coefficient estimate for the regression of <span class="math inline">\(X\)</span> onto <span class="math inline">\(Y\)</span> is the same as the
-coefficient estimate for the regression of <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span>.</p></li>
+onto <span class="math inline">\(X\)</span>?</li>
 </ol>
 </blockquote>
+<p><span class="math display">\[ \hat\beta = \sum_i x_iy_i / \sum_{i&#39;} x_{i&#39;}^2 \]</span></p>
+<p>The coefficient for the regression of X onto Y swaps the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables:</p>
+<p><span class="math display">\[ \hat\beta = \sum_i x_iy_i / \sum_{i&#39;} y_{i&#39;}^2 \]</span></p>
+<p>So they are the same when <span class="math inline">\(\sum_{i} x_{i}^2 = \sum_{i} y_{i}^2\)</span></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Generate an example in <code>R</code> with <span class="math inline">\(n = 100\)</span> observations in which the
+coefficient estimate for the regression of <span class="math inline">\(X\)</span> onto <span class="math inline">\(Y\)</span> is different from
+the coefficient estimate for the regression of <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span>.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="linear-regression.html#cb119-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb119-2"><a href="linear-regression.html#cb119-2"></a>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.1</span>)</span>
+<span id="cb119-3"><a href="linear-regression.html#cb119-3"></a><span class="kw">c</span>(<span class="kw">sum</span>(x<span class="op">^</span><span class="dv">2</span>), <span class="kw">sum</span>(y<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 105.9889 429.4924</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="linear-regression.html#cb121-1"></a><span class="kw">c</span>(<span class="kw">coef</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x))[<span class="dv">2</span>], <span class="kw">coef</span>(<span class="kw">lm</span>(x <span class="op">~</span><span class="st"> </span>y))[<span class="dv">2</span>])</span></code></pre></div>
+<pre><code>##         x         y 
+## 2.0106218 0.4962439</code></pre>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Generate an example in <code>R</code> with <span class="math inline">\(n = 100\)</span> observations in which the
+coefficient estimate for the regression of <span class="math inline">\(X\)</span> onto <span class="math inline">\(Y\)</span> is the same as the
+coefficient estimate for the regression of <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span>.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="linear-regression.html#cb123-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb123-2"><a href="linear-regression.html#cb123-2"></a>y &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="fl">0.1</span>)</span>
+<span id="cb123-3"><a href="linear-regression.html#cb123-3"></a><span class="kw">c</span>(<span class="kw">sum</span>(x<span class="op">^</span><span class="dv">2</span>), <span class="kw">sum</span>(y<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 135.5844 134.5153</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="linear-regression.html#cb125-1"></a><span class="kw">c</span>(<span class="kw">coef</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x))[<span class="dv">2</span>], <span class="kw">coef</span>(<span class="kw">lm</span>(x <span class="op">~</span><span class="st"> </span>y))[<span class="dv">2</span>])</span></code></pre></div>
+<pre><code>##         x         y 
+## 0.9925051 1.0006765</code></pre>
 </div>
 <div id="question-13" class="section level3 hasAnchor">
 <h3><span class="header-section-number">3.2.6</span> Question 13<a href="linear-regression.html#question-13" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1227,41 +1227,207 @@ coefficient estimate for the regression of <span class="math inline">\(Y\)</span
 <p>In this exercise you will create some simulated data and will fit simple
 linear regression models to it. Make sure to use <code>set.seed(1)</code> prior to
 starting part (a) to ensure consistent results.</p>
+</blockquote>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="linear-regression.html#cb127-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span></code></pre></div>
+<blockquote>
 <ol style="list-style-type: lower-alpha">
-<li><p>Using the <code>rnorm()</code> function, create a vector, <code>x</code>, containing 100
+<li>Using the <code>rnorm()</code> function, create a vector, <code>x</code>, containing 100
 observations drawn from a <span class="math inline">\(N(0, 1)\)</span> distribution. This represents a
-feature, <span class="math inline">\(X\)</span>.</p></li>
-<li><p>Using the <code>rnorm()</code> function, create a vector, <code>eps</code>, containing 100
-observations drawn from a <span class="math inline">\(N(0, 0.25)\)</span> distribution—a normal
-distribution with mean zero and variance 0.25.</p></li>
-<li><p>Using x and <code>eps</code>, generate a vector y according to the model
-<span class="math display">\[Y = -1 + 0.5X + \epsilon\]</span>
-What is the length of the vector <code>y</code>? What are the values of
-<span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> in this linear model?</p></li>
-<li><p>Create a scatterplot displaying the relationship between <code>x</code> and <code>y</code>.
-Comment on what you observe.</p></li>
-<li><p>Fit a least squares linear model to predict <code>y</code> using <code>x</code>. Comment on the
-model obtained. How do <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span> compare to <span class="math inline">\(\beta_0\)</span>
-and <span class="math inline">\(\beta_1\)</span>?</p></li>
-<li><p>Display the least squares line on the scatterplot obtained in (d). Draw the
-population regression line on the plot, in a different color. Use the
-<code>legend()</code> command to create an appropriate legend.</p></li>
-<li><p>Now fit a polynomial regression model that predicts <code>y</code> using <code>x</code> and <code>x^2</code>.
-Is there evidence that the quadratic term improves the model fit? Explain
-your answer.</p></li>
-<li><p>Repeat (a)–(f) after modifying the data generation process in such a way
-that there is <em>less</em> noise in the data. The model (3.39) should remain the
-same. You can do this by decreasing the variance of the normal distribution
-used to generate the error term <span class="math inline">\(\epsilon\)</span> in (b). Describe your results.</p></li>
-<li><p>Repeat (a)–(f) after modifying the data generation process in such a way
-that there is <em>more</em> noise in the data. The model (3.39) should remain the
-same. You can do this by increasing the variance of the normal distribution
-used to generate the error term <span class="math inline">\(\epsilon\)</span> in (b). Describe your results.</p></li>
-<li><p>What are the confidence intervals for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> based on the
-original data set, the noisier data set, and the less noisy data set?
-Comment on your results.</p></li>
+feature, <span class="math inline">\(X\)</span>.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="linear-regression.html#cb128-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Using the <code>rnorm()</code> function, create a vector, <code>eps</code>, containing 100
+observations drawn from a <span class="math inline">\(N(0, 0.25)\)</span> distribution—a normal
+distribution with mean zero and variance 0.25.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="linear-regression.html#cb129-1"></a>eps &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="kw">sqrt</span>(<span class="fl">0.25</span>))</span></code></pre></div>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Using x and <code>eps</code>, generate a vector y according to the model
+<span class="math display">\[Y = -1 + 0.5X + \epsilon\]</span>
+What is the length of the vector <code>y</code>? What are the values of
+<span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> in this linear model?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="linear-regression.html#cb130-1"></a>y &lt;-<span class="st"> </span><span class="dv">-1</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>eps</span>
+<span id="cb130-2"><a href="linear-regression.html#cb130-2"></a><span class="kw">length</span>(y)</span></code></pre></div>
+<pre><code>## [1] 100</code></pre>
+<p><span class="math inline">\(\beta_0 = -1\)</span> and <span class="math inline">\(\beta_1 = 0.5\)</span></p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Create a scatterplot displaying the relationship between <code>x</code> and <code>y</code>.
+Comment on what you observe.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="linear-regression.html#cb132-1"></a><span class="kw">plot</span>(x, y)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>There is a linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> (with some error).</p>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Fit a least squares linear model to predict <code>y</code> using <code>x</code>. Comment on the
+model obtained. How do <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span> compare to <span class="math inline">\(\beta_0\)</span>
+and <span class="math inline">\(\beta_1\)</span>?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="linear-regression.html#cb133-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
+<span id="cb133-2"><a href="linear-regression.html#cb133-2"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.93842 -0.30688 -0.06975  0.26970  1.17309 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -1.01885    0.04849 -21.010  &lt; 2e-16 ***
+## x            0.49947    0.05386   9.273 4.58e-15 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4814 on 98 degrees of freedom
+## Multiple R-squared:  0.4674, Adjusted R-squared:  0.4619 
+## F-statistic: 85.99 on 1 and 98 DF,  p-value: 4.583e-15</code></pre>
+<p><span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are close to their population values.</p>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Display the least squares line on the scatterplot obtained in (d). Draw the
+population regression line on the plot, in a different color. Use the
+<code>legend()</code> command to create an appropriate legend.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="linear-regression.html#cb135-1"></a><span class="kw">plot</span>(x, y)</span>
+<span id="cb135-2"><a href="linear-regression.html#cb135-2"></a><span class="kw">abline</span>(fit)</span>
+<span id="cb135-3"><a href="linear-regression.html#cb135-3"></a><span class="kw">abline</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb135-4"><a href="linear-regression.html#cb135-4"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,</span>
+<span id="cb135-5"><a href="linear-regression.html#cb135-5"></a>  <span class="kw">c</span>(<span class="st">&quot;model fit&quot;</span>, <span class="st">&quot;population regression&quot;</span>),</span>
+<span id="cb135-6"><a href="linear-regression.html#cb135-6"></a>  <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>),</span>
+<span id="cb135-7"><a href="linear-regression.html#cb135-7"></a>  <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb135-8"><a href="linear-regression.html#cb135-8"></a>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<blockquote>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Now fit a polynomial regression model that predicts <code>y</code> using <code>x</code> and <code>x^2</code>.
+Is there evidence that the quadratic term improves the model fit? Explain
+your answer.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="linear-regression.html#cb136-1"></a>fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">2</span>))</span>
+<span id="cb136-2"><a href="linear-regression.html#cb136-2"></a><span class="kw">anova</span>(fit2, fit)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: y ~ poly(x, 2)
+## Model 2: y ~ x
+##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+## 1     97 22.257                           
+## 2     98 22.709 -1  -0.45163 1.9682 0.1638</code></pre>
+<p>There is no evidence for an improved fit, since the F-test is non-significant.</p>
+<blockquote>
+<ol start="8" style="list-style-type: lower-alpha">
+<li>Repeat (a)–(f) after modifying the data generation process in such a way
+that there is <em>less</em> noise in the data. The model (3.39) should remain the
+same. You can do this by decreasing the variance of the normal distribution
+used to generate the error term <span class="math inline">\(\epsilon\)</span> in (b). Describe your results.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="linear-regression.html#cb138-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb138-2"><a href="linear-regression.html#cb138-2"></a>y &lt;-<span class="st"> </span><span class="dv">-1</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="kw">sqrt</span>(<span class="fl">0.05</span>))</span>
+<span id="cb138-3"><a href="linear-regression.html#cb138-3"></a>fit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
+<span id="cb138-4"><a href="linear-regression.html#cb138-4"></a><span class="kw">summary</span>(fit2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.61308 -0.12553 -0.00391  0.15199  0.41332 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -0.98917    0.02216  -44.64   &lt;2e-16 ***
+## x            0.52375    0.02152   24.33   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.2215 on 98 degrees of freedom
+## Multiple R-squared:  0.858,  Adjusted R-squared:  0.8565 
+## F-statistic: 592.1 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="linear-regression.html#cb140-1"></a><span class="kw">plot</span>(x, y)</span>
+<span id="cb140-2"><a href="linear-regression.html#cb140-2"></a><span class="kw">abline</span>(fit2)</span>
+<span id="cb140-3"><a href="linear-regression.html#cb140-3"></a><span class="kw">abline</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb140-4"><a href="linear-regression.html#cb140-4"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,</span>
+<span id="cb140-5"><a href="linear-regression.html#cb140-5"></a>  <span class="kw">c</span>(<span class="st">&quot;model fit&quot;</span>, <span class="st">&quot;population regression&quot;</span>),</span>
+<span id="cb140-6"><a href="linear-regression.html#cb140-6"></a>  <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>),</span>
+<span id="cb140-7"><a href="linear-regression.html#cb140-7"></a>  <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb140-8"><a href="linear-regression.html#cb140-8"></a>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>The data shows less variability and the <span class="math inline">\(R^2\)</span> is higher.</p>
+<blockquote>
+<ol style="list-style-type: lower-roman">
+<li>Repeat (a)–(f) after modifying the data generation process in such a way
+that there is <em>more</em> noise in the data. The model (3.39) should remain the
+same. You can do this by increasing the variance of the normal distribution
+used to generate the error term <span class="math inline">\(\epsilon\)</span> in (b). Describe your results.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="linear-regression.html#cb141-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb141-2"><a href="linear-regression.html#cb141-2"></a>y &lt;-<span class="st"> </span><span class="dv">-1</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb141-3"><a href="linear-regression.html#cb141-3"></a>fit3 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)</span>
+<span id="cb141-4"><a href="linear-regression.html#cb141-4"></a><span class="kw">summary</span>(fit3)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.51014 -0.60549  0.02065  0.70483  2.08980 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -1.04745    0.09676 -10.825  &lt; 2e-16 ***
+## x            0.42505    0.08310   5.115 1.56e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9671 on 98 degrees of freedom
+## Multiple R-squared:  0.2107, Adjusted R-squared:  0.2027 
+## F-statistic: 26.16 on 1 and 98 DF,  p-value: 1.56e-06</code></pre>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="linear-regression.html#cb143-1"></a><span class="kw">plot</span>(x, y)</span>
+<span id="cb143-2"><a href="linear-regression.html#cb143-2"></a><span class="kw">abline</span>(fit3)</span>
+<span id="cb143-3"><a href="linear-regression.html#cb143-3"></a><span class="kw">abline</span>(<span class="op">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb143-4"><a href="linear-regression.html#cb143-4"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,</span>
+<span id="cb143-5"><a href="linear-regression.html#cb143-5"></a>  <span class="kw">c</span>(<span class="st">&quot;model fit&quot;</span>, <span class="st">&quot;population regression&quot;</span>),</span>
+<span id="cb143-6"><a href="linear-regression.html#cb143-6"></a>  <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>),</span>
+<span id="cb143-7"><a href="linear-regression.html#cb143-7"></a>  <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb143-8"><a href="linear-regression.html#cb143-8"></a>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>The data shows more variability. The <span class="math inline">\(R^2\)</span> is lower.</p>
+<blockquote>
+<ol start="10" style="list-style-type: lower-alpha">
+<li>What are the confidence intervals for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> based on the
+original data set, the noisier data set, and the less noisy data set?
+Comment on your results.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="linear-regression.html#cb144-1"></a><span class="kw">confint</span>(fit)</span></code></pre></div>
+<pre><code>##                  2.5 %     97.5 %
+## (Intercept) -1.1150804 -0.9226122
+## x            0.3925794  0.6063602</code></pre>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="linear-regression.html#cb146-1"></a><span class="kw">confint</span>(fit2)</span></code></pre></div>
+<pre><code>##                 2.5 %     97.5 %
+## (Intercept) -1.033141 -0.9451916
+## x            0.481037  0.5664653</code></pre>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="linear-regression.html#cb148-1"></a><span class="kw">confint</span>(fit3)</span></code></pre></div>
+<pre><code>##                  2.5 %     97.5 %
+## (Intercept) -1.2394772 -0.8554276
+## x            0.2601391  0.5899632</code></pre>
+<p>The confidence intervals for the coefficients are smaller when there is less
+error.</p>
 </div>
 <div id="question-14" class="section level3 hasAnchor">
 <h3><span class="header-section-number">3.2.7</span> Question 14<a href="linear-regression.html#question-14" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1269,37 +1435,221 @@ Comment on your results.</p></li>
 <p>This problem focuses on the collinearity problem.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Perform the following commands in R :</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="linear-regression.html#cb125-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb125-2"><a href="linear-regression.html#cb125-2"></a><span class="op">&gt;</span><span class="st"> </span>x1 &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>)</span>
-<span id="cb125-3"><a href="linear-regression.html#cb125-3"></a><span class="op">&gt;</span><span class="st"> </span>x2 &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="op">/</span><span class="st"> </span><span class="dv">10</span></span>
-<span id="cb125-4"><a href="linear-regression.html#cb125-4"></a><span class="op">&gt;</span><span class="st"> </span>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="fl">0.3</span> <span class="op">*</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="linear-regression.html#cb150-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb150-2"><a href="linear-regression.html#cb150-2"></a><span class="op">&gt;</span><span class="st"> </span>x1 &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>)</span>
+<span id="cb150-3"><a href="linear-regression.html#cb150-3"></a><span class="op">&gt;</span><span class="st"> </span>x2 &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="op">/</span><span class="st"> </span><span class="dv">10</span></span>
+<span id="cb150-4"><a href="linear-regression.html#cb150-4"></a><span class="op">&gt;</span><span class="st"> </span>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="fl">0.3</span> <span class="op">*</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
 <p>The last line corresponds to creating a linear model in which <code>y</code> is a
 function of <code>x1</code> and <code>x2</code>. Write out the form of the linear model. What are
 the regression coefficients?</p></li>
-<li><p>What is the correlation between <code>x1</code> and <code>x2</code>? Create a scatterplot
-displaying the relationship between the variables.</p></li>
-<li><p>Using this data, fit a least squares regression to predict <code>y</code> using <code>x1</code>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="linear-regression.html#cb151-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb151-2"><a href="linear-regression.html#cb151-2"></a>x1 &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>)</span>
+<span id="cb151-3"><a href="linear-regression.html#cb151-3"></a>x2 &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="op">/</span><span class="st"> </span><span class="dv">10</span></span>
+<span id="cb151-4"><a href="linear-regression.html#cb151-4"></a>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span><span class="fl">0.3</span> <span class="op">*</span><span class="st"> </span>x2 <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
+<p>The model is of the form:</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \epsilon\]</span></p>
+<p>The coefficients are <span class="math inline">\(\beta_0 = 2\)</span>, <span class="math inline">\(\beta_1 = 2\)</span>, <span class="math inline">\(\beta_3 = 0.3\)</span>.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What is the correlation between <code>x1</code> and <code>x2</code>? Create a scatterplot
+displaying the relationship between the variables.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="linear-regression.html#cb152-1"></a><span class="kw">cor</span>(x1, x2)</span></code></pre></div>
+<pre><code>## [1] 0.8351212</code></pre>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="linear-regression.html#cb154-1"></a><span class="kw">plot</span>(x1, x2)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Using this data, fit a least squares regression to predict <code>y</code> using <code>x1</code>
 and <code>x2</code>. Describe the results obtained. What are <span class="math inline">\(\hat\beta_0\)</span>,
 <span class="math inline">\(\hat\beta_1\)</span>, and <span class="math inline">\(\hat\beta_2\)</span>? How do these relate to the true <span class="math inline">\(\beta_0\)</span>,
 <span class="math inline">\(\beta_1\)</span>, and _2$? Can you reject the null hypothesis <span class="math inline">\(H_0 : \beta_1\)</span>
-= 0$? How about the null hypothesis <span class="math inline">\(H_0 : \beta_2 = 0\)</span>?</p></li>
-<li><p>Now fit a least squares regression to predict <code>y</code> using only <code>x1</code>. Comment
-on your results. Can you reject the null hypothesis <span class="math inline">\(H 0 : \beta_1 = 0\)</span>?</p></li>
-<li><p>Now fit a least squares regression to predict <code>y</code> using only <code>x2</code>. Comment
-on your results. Can you reject the null hypothesis <span class="math inline">\(H_0 : \beta_1 = 0\)</span>?</p></li>
-<li><p>Do the results obtained in (c)–(e) contradict each other? Explain your
-answer.</p></li>
+= 0$? How about the null hypothesis <span class="math inline">\(H_0 : \beta_2 = 0\)</span>?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="linear-regression.html#cb155-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x1 + x2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.8311 -0.7273 -0.0537  0.6338  2.3359 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   2.1305     0.2319   9.188 7.61e-15 ***
+## x1            1.4396     0.7212   1.996   0.0487 *  
+## x2            1.0097     1.1337   0.891   0.3754    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.056 on 97 degrees of freedom
+## Multiple R-squared:  0.2088, Adjusted R-squared:  0.1925 
+## F-statistic:  12.8 on 2 and 97 DF,  p-value: 1.164e-05</code></pre>
+<p><span class="math inline">\(\hat\beta_0 = 2.13\)</span>, <span class="math inline">\(\hat\beta_1 = 1.43\)</span>, and <span class="math inline">\(\hat\beta_2 = 1.01\)</span>. These are
+relatively poor estimates of the true values. We can reject the hypothesis that
+<span class="math inline">\(H_0 : \beta_1\)</span> at a p-value of 0.05 (just about). We cannot reject the
+hypothesis that <span class="math inline">\(H_0 : \beta_2 = 0\)</span>.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Now fit a least squares regression to predict <code>y</code> using only <code>x1</code>. Comment
+on your results. Can you reject the null hypothesis <span class="math inline">\(H 0 : \beta_1 = 0\)</span>?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="linear-regression.html#cb157-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x1)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.89495 -0.66874 -0.07785  0.59221  2.45560 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   2.1124     0.2307   9.155 8.27e-15 ***
+## x1            1.9759     0.3963   4.986 2.66e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.055 on 98 degrees of freedom
+## Multiple R-squared:  0.2024, Adjusted R-squared:  0.1942 
+## F-statistic: 24.86 on 1 and 98 DF,  p-value: 2.661e-06</code></pre>
+<p>We can reject <span class="math inline">\(H_0 : \beta_1 = 0\)</span>. The p-value is much more significant for
+<span class="math inline">\(\beta_1\)</span> compared to when <code>x2</code> is included in the model.</p>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Now fit a least squares regression to predict <code>y</code> using only <code>x2</code>. Comment
+on your results. Can you reject the null hypothesis <span class="math inline">\(H_0 : \beta_1 = 0\)</span>?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="linear-regression.html#cb159-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x2))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.62687 -0.75156 -0.03598  0.72383  2.44890 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   2.3899     0.1949   12.26  &lt; 2e-16 ***
+## x2            2.8996     0.6330    4.58 1.37e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.072 on 98 degrees of freedom
+## Multiple R-squared:  0.1763, Adjusted R-squared:  0.1679 
+## F-statistic: 20.98 on 1 and 98 DF,  p-value: 1.366e-05</code></pre>
+<p>Similarly, we can reject <span class="math inline">\(H_0 : \beta_2 = 0\)</span>. The p-value is much more
+significant for <span class="math inline">\(\beta_2\)</span> compared to when <code>x1</code> is included in the model.</p>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Do the results obtained in (c)–(e) contradict each other? Explain your
+answer.</li>
+</ol>
+</blockquote>
+<p>No they do not contradict each other. Both <code>x1</code> and <code>x2</code> individually are
+capable of explaining much of the variation observed in <code>y</code>, however since they
+are correlated, it is very difficult to tease apart their separate
+contributions.</p>
+<blockquote>
+<ol start="7" style="list-style-type: lower-alpha">
 <li><p>Now suppose we obtain one additional observation, which was unfortunately
 mismeasured.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="linear-regression.html#cb126-1"></a><span class="op">&gt;</span><span class="st"> </span>x1 &lt;-<span class="st"> </span><span class="kw">c</span>(x1, <span class="fl">0.1</span>)</span>
-<span id="cb126-2"><a href="linear-regression.html#cb126-2"></a><span class="op">&gt;</span><span class="st"> </span>x2 &lt;-<span class="st"> </span><span class="kw">c</span>(x2, <span class="fl">0.8</span>)</span>
-<span id="cb126-3"><a href="linear-regression.html#cb126-3"></a><span class="op">&gt;</span><span class="st"> </span>y &lt;-<span class="st"> </span><span class="kw">c</span>(y, <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="linear-regression.html#cb161-1"></a><span class="op">&gt;</span><span class="st"> </span>x1 &lt;-<span class="st"> </span><span class="kw">c</span>(x1, <span class="fl">0.1</span>)</span>
+<span id="cb161-2"><a href="linear-regression.html#cb161-2"></a><span class="op">&gt;</span><span class="st"> </span>x2 &lt;-<span class="st"> </span><span class="kw">c</span>(x2, <span class="fl">0.8</span>)</span>
+<span id="cb161-3"><a href="linear-regression.html#cb161-3"></a><span class="op">&gt;</span><span class="st"> </span>y &lt;-<span class="st"> </span><span class="kw">c</span>(y, <span class="dv">6</span>)</span></code></pre></div>
 <p>Re-fit the linear models from (c) to (e) using this new data. What effect
 does this new observation have on the each of the models? In each model, is
 this observation an outlier? A high-leverage point? Both? Explain your
 answers.</p></li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="linear-regression.html#cb162-1"></a>x1 &lt;-<span class="st"> </span><span class="kw">c</span>(x1 , <span class="fl">0.1</span>)</span>
+<span id="cb162-2"><a href="linear-regression.html#cb162-2"></a>x2 &lt;-<span class="st"> </span><span class="kw">c</span>(x2 , <span class="fl">0.8</span>)</span>
+<span id="cb162-3"><a href="linear-regression.html#cb162-3"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(y ,<span class="dv">6</span>)</span>
+<span id="cb162-4"><a href="linear-regression.html#cb162-4"></a><span class="kw">summary</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x1 + x2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.73348 -0.69318 -0.05263  0.66385  2.30619 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   2.2267     0.2314   9.624 7.91e-16 ***
+## x1            0.5394     0.5922   0.911  0.36458    
+## x2            2.5146     0.8977   2.801  0.00614 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.075 on 98 degrees of freedom
+## Multiple R-squared:  0.2188, Adjusted R-squared:  0.2029 
+## F-statistic: 13.72 on 2 and 98 DF,  p-value: 5.564e-06</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="linear-regression.html#cb164-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x1)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.8897 -0.6556 -0.0909  0.5682  3.5665 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   2.2569     0.2390   9.445 1.78e-15 ***
+## x1            1.7657     0.4124   4.282 4.29e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.111 on 99 degrees of freedom
+## Multiple R-squared:  0.1562, Adjusted R-squared:  0.1477 
+## F-statistic: 18.33 on 1 and 99 DF,  p-value: 4.295e-05</code></pre>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="linear-regression.html#cb166-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x2))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.64729 -0.71021 -0.06899  0.72699  2.38074 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   2.3451     0.1912  12.264  &lt; 2e-16 ***
+## x2            3.1190     0.6040   5.164 1.25e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.074 on 99 degrees of freedom
+## Multiple R-squared:  0.2122, Adjusted R-squared:  0.2042 
+## F-statistic: 26.66 on 1 and 99 DF,  p-value: 1.253e-06</code></pre>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="linear-regression.html#cb168-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb168-2"><a href="linear-regression.html#cb168-2"></a><span class="kw">plot</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2), <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="linear-regression.html#cb169-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb169-2"><a href="linear-regression.html#cb169-2"></a><span class="kw">plot</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1), <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-43-2.png" width="672" /></p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="linear-regression.html#cb170-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb170-2"><a href="linear-regression.html#cb170-2"></a><span class="kw">plot</span>(<span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x2), <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-43-3.png" width="672" /></p>
+<p>In the first model (with both predictors), the new point has very high leverage
+(since it is an outlier in terms of the joint <code>x1</code> and <code>x2</code> distribution),
+however it is not an outlier. In the model that includes <code>x1</code>, it is an outlier
+but does not have high leverage. In the model that includes <code>x2</code>, it has high
+leverage but is not an outlier. It is useful to consider the scatterplot of
+<code>x1</code> and <code>x2</code>.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="linear-regression.html#cb171-1"></a><span class="kw">plot</span>(x1, x2)</span>
+<span id="cb171-2"><a href="linear-regression.html#cb171-2"></a><span class="kw">points</span>(<span class="fl">0.1</span>, <span class="fl">0.8</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 </div>
 <div id="question-15" class="section level3 hasAnchor">
 <h3><span class="header-section-number">3.2.8</span> Question 15<a href="linear-regression.html#question-15" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1308,29 +1658,196 @@ answers.</p></li>
 chapter. We will now try to predict per capita crime rate using the other
 variables in this data set. In other words, per capita crime rate is the
 response, and the other variables are the predictors.</p>
+</blockquote>
+<p>We are trying to predict <code>crim</code>.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="linear-regression.html#cb172-1"></a>pred &lt;-<span class="st"> </span><span class="kw">subset</span>(Boston, <span class="dt">select =</span> <span class="op">-</span>crim)</span></code></pre></div>
+<blockquote>
 <ol style="list-style-type: lower-alpha">
-<li><p>For each predictor, fit a simple linear regression model to predict the
+<li>For each predictor, fit a simple linear regression model to predict the
 response. Describe your results. In which of the models is there a
 statistically significant association between the predictor and the
-response? Create some plots to back up your assertions.</p></li>
-<li><p>Fit a multiple regression model to predict the response using all of the
+response? Create some plots to back up your assertions.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="linear-regression.html#cb173-1"></a>fits &lt;-<span class="st"> </span><span class="kw">lapply</span>(pred, <span class="cf">function</span>(x) <span class="kw">lm</span>(Boston<span class="op">$</span>crim <span class="op">~</span><span class="st"> </span>x))</span>
+<span id="cb173-2"><a href="linear-regression.html#cb173-2"></a><span class="kw">printCoefmat</span>(<span class="kw">do.call</span>(rbind, <span class="kw">lapply</span>(fits, <span class="cf">function</span>(x) <span class="kw">coef</span>(<span class="kw">summary</span>(x))[<span class="dv">2</span>, ])))</span></code></pre></div>
+<pre><code>##           Estimate Std. Error t value  Pr(&gt;|t|)    
+## zn      -0.0739350  0.0160946 -4.5938 5.506e-06 ***
+## indus    0.5097763  0.0510243  9.9908 &lt; 2.2e-16 ***
+## chas    -1.8927766  1.5061155 -1.2567    0.2094    
+## nox     31.2485312  2.9991904 10.4190 &lt; 2.2e-16 ***
+## rm      -2.6840512  0.5320411 -5.0448 6.347e-07 ***
+## age      0.1077862  0.0127364  8.4628 2.855e-16 ***
+## dis     -1.5509017  0.1683300 -9.2135 &lt; 2.2e-16 ***
+## rad      0.6179109  0.0343318 17.9982 &lt; 2.2e-16 ***
+## tax      0.0297423  0.0018474 16.0994 &lt; 2.2e-16 ***
+## ptratio  1.1519828  0.1693736  6.8014 2.943e-11 ***
+## lstat    0.5488048  0.0477610 11.4907 &lt; 2.2e-16 ***
+## medv    -0.3631599  0.0383902 -9.4597 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>There are significant associations for all predictors with the exception of
+<code>chas</code> when fitting separate linear models. For example, consider the following
+plot representing the third model</p>
+<pre><code>plot(Boston$rm, Boston$crim)
+abline(fits[[5]])</code></pre>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Fit a multiple regression model to predict the response using all of the
 predictors. Describe your results. For which predictors can we reject the
-null hypothesis <span class="math inline">\(H_0 : \beta_j = 0\)</span>?</p></li>
-<li><p>How do your results from (a) compare to your results from (b)? Create a
+null hypothesis <span class="math inline">\(H_0 : \beta_j = 0\)</span>?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="linear-regression.html#cb176-1"></a>mfit &lt;-<span class="st"> </span><span class="kw">lm</span>(crim <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston)</span>
+<span id="cb176-2"><a href="linear-regression.html#cb176-2"></a><span class="kw">summary</span>(mfit)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = crim ~ ., data = Boston)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -8.534 -2.248 -0.348  1.087 73.923 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 13.7783938  7.0818258   1.946 0.052271 .  
+## zn           0.0457100  0.0187903   2.433 0.015344 *  
+## indus       -0.0583501  0.0836351  -0.698 0.485709    
+## chas        -0.8253776  1.1833963  -0.697 0.485841    
+## nox         -9.9575865  5.2898242  -1.882 0.060370 .  
+## rm           0.6289107  0.6070924   1.036 0.300738    
+## age         -0.0008483  0.0179482  -0.047 0.962323    
+## dis         -1.0122467  0.2824676  -3.584 0.000373 ***
+## rad          0.6124653  0.0875358   6.997 8.59e-12 ***
+## tax         -0.0037756  0.0051723  -0.730 0.465757    
+## ptratio     -0.3040728  0.1863598  -1.632 0.103393    
+## lstat        0.1388006  0.0757213   1.833 0.067398 .  
+## medv        -0.2200564  0.0598240  -3.678 0.000261 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.46 on 493 degrees of freedom
+## Multiple R-squared:  0.4493, Adjusted R-squared:  0.4359 
+## F-statistic: 33.52 on 12 and 493 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>There are now only significant associations for <code>zn</code>, <code>dis</code>, <code>rad</code>, <code>black</code> and
+<code>medv</code>.</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>How do your results from (a) compare to your results from (b)? Create a
 plot displaying the univariate regression coefficients from (a) on the
 <span class="math inline">\(x\)</span>-axis, and the multiple regression coefficients from (b) on the
 <span class="math inline">\(y\)</span>-axis. That is, each predictor is displayed as a single point in the
 plot. Its coefficient in a simple linear regression model is shown on the
 x-axis, and its coefficient estimate in the multiple linear regression
-model is shown on the y-axis.</p></li>
-<li><p>Is there evidence of non-linear association between any of the predictors
+model is shown on the y-axis.</li>
+</ol>
+</blockquote>
+<p>The results from (b) show reduced significance compared to the models fit in
+(a).</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="linear-regression.html#cb178-1"></a><span class="kw">plot</span>(<span class="kw">sapply</span>(fits, <span class="cf">function</span>(x) <span class="kw">coef</span>(x)[<span class="dv">2</span>]), <span class="kw">coef</span>(mfit)[<span class="op">-</span><span class="dv">1</span>], </span>
+<span id="cb178-2"><a href="linear-regression.html#cb178-2"></a>  <span class="dt">xlab =</span> <span class="st">&quot;Univariate regression&quot;</span>, </span>
+<span id="cb178-3"><a href="linear-regression.html#cb178-3"></a>  <span class="dt">ylab =</span> <span class="st">&quot;multiple regression&quot;</span>)</span></code></pre></div>
+<p><img src="03-linear-regression_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p>The estimated coefficients differ (in particular the estimated coefficient for
+<code>nox</code> is dramatically different) between the two modelling strategies.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Is there evidence of non-linear association between any of the predictors
 and the response? To answer this question, for each predictor X, fit a
 model of the form
 <span class="math display">\[
 Y = \beta_0 + \beta_1X + \beta_2X^2 + \beta_3X^3 + \epsilon
-\]</span></p></li>
+\]</span></li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="linear-regression.html#cb179-1"></a>pred &lt;-<span class="st"> </span><span class="kw">subset</span>(pred, <span class="dt">select =</span> <span class="op">-</span>chas)</span>
+<span id="cb179-2"><a href="linear-regression.html#cb179-2"></a>fits &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">names</span>(pred), <span class="cf">function</span>(p) {</span>
+<span id="cb179-3"><a href="linear-regression.html#cb179-3"></a>  f &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;crim ~ poly(&quot;</span>, p, <span class="st">&quot;, 3)&quot;</span>)</span>
+<span id="cb179-4"><a href="linear-regression.html#cb179-4"></a>  <span class="kw">lm</span>(<span class="kw">as.formula</span>(f), <span class="dt">data =</span> Boston)</span>
+<span id="cb179-5"><a href="linear-regression.html#cb179-5"></a>})</span>
+<span id="cb179-6"><a href="linear-regression.html#cb179-6"></a><span class="cf">for</span> (fit <span class="cf">in</span> fits) <span class="kw">printCoefmat</span>(<span class="kw">coef</span>(<span class="kw">summary</span>(fit)))</span></code></pre></div>
+<pre><code>##               Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)    3.61352    0.37219  9.7088 &lt; 2.2e-16 ***
+## poly(zn, 3)1 -38.74984    8.37221 -4.6284 4.698e-06 ***
+## poly(zn, 3)2  23.93983    8.37221  2.8594  0.004421 ** 
+## poly(zn, 3)3 -10.07187    8.37221 -1.2030  0.229539    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##                 Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)       3.6135     0.3300 10.9501 &lt; 2.2e-16 ***
+## poly(indus, 3)1  78.5908     7.4231 10.5873 &lt; 2.2e-16 ***
+## poly(indus, 3)2 -24.3948     7.4231 -3.2863  0.001086 ** 
+## poly(indus, 3)3 -54.1298     7.4231 -7.2920 1.196e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##                Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)     3.61352    0.32157 11.2370 &lt; 2.2e-16 ***
+## poly(nox, 3)1  81.37202    7.23361 11.2492 &lt; 2.2e-16 ***
+## poly(nox, 3)2 -28.82859    7.23361 -3.9854 7.737e-05 ***
+## poly(nox, 3)3 -60.36189    7.23361 -8.3446 6.961e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##              Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)    3.6135     0.3703  9.7584 &lt; 2.2e-16 ***
+## poly(rm, 3)1 -42.3794     8.3297 -5.0878 5.128e-07 ***
+## poly(rm, 3)2  26.5768     8.3297  3.1906  0.001509 ** 
+## poly(rm, 3)3  -5.5103     8.3297 -0.6615  0.508575    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##               Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)    3.61352    0.34852 10.3683 &lt; 2.2e-16 ***
+## poly(age, 3)1 68.18201    7.83970  8.6970 &lt; 2.2e-16 ***
+## poly(age, 3)2 37.48447    7.83970  4.7814 2.291e-06 ***
+## poly(age, 3)3 21.35321    7.83970  2.7237   0.00668 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##                Estimate Std. Error  t value  Pr(&gt;|t|)    
+## (Intercept)     3.61352    0.32592  11.0870 &lt; 2.2e-16 ***
+## poly(dis, 3)1 -73.38859    7.33148 -10.0101 &lt; 2.2e-16 ***
+## poly(dis, 3)2  56.37304    7.33148   7.6892 7.870e-14 ***
+## poly(dis, 3)3 -42.62188    7.33148  -5.8135 1.089e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##                Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)     3.61352    0.29707 12.1639 &lt; 2.2e-16 ***
+## poly(rad, 3)1 120.90745    6.68240 18.0934 &lt; 2.2e-16 ***
+## poly(rad, 3)2  17.49230    6.68240  2.6177  0.009121 ** 
+## poly(rad, 3)3   4.69846    6.68240  0.7031  0.482314    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##                Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)     3.61352    0.30468 11.8599 &lt; 2.2e-16 ***
+## poly(tax, 3)1 112.64583    6.85371 16.4358 &lt; 2.2e-16 ***
+## poly(tax, 3)2  32.08725    6.85371  4.6817 3.665e-06 ***
+## poly(tax, 3)3  -7.99681    6.85371 -1.1668    0.2439    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##                    Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)         3.61352    0.36105 10.0084 &lt; 2.2e-16 ***
+## poly(ptratio, 3)1  56.04523    8.12158  6.9008 1.565e-11 ***
+## poly(ptratio, 3)2  24.77482    8.12158  3.0505  0.002405 ** 
+## poly(ptratio, 3)3 -22.27974    8.12158 -2.7433  0.006301 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       3.61352    0.33917 10.6540   &lt;2e-16 ***
+## poly(lstat, 3)1  88.06967    7.62944 11.5434   &lt;2e-16 ***
+## poly(lstat, 3)2  15.88816    7.62944  2.0825   0.0378 *  
+## poly(lstat, 3)3 -11.57402    7.62944 -1.5170   0.1299    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##                 Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)      3.61352    0.29203  12.374 &lt; 2.2e-16 ***
+## poly(medv, 3)1 -75.05761    6.56915 -11.426 &lt; 2.2e-16 ***
+## poly(medv, 3)2  88.08621    6.56915  13.409 &lt; 2.2e-16 ***
+## poly(medv, 3)3 -48.03343    6.56915  -7.312 1.047e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Yes there is strong evidence for many variables having non-linear associations.
+In many cases, the addition of a cubic term is significant (<code>indus</code>, <code>nox</code>,
+<code>age</code>, <code>dis</code>, <code>ptratio</code> and <code>medv</code>). In other cases although the cubic terms
+is not significant, the squared term is (<code>zn</code>, <code>rm</code>, <code>rad</code>, <code>tax</code>, <code>lstat</code>).
+In only one case, <code>black</code> is there no evidence for a non-linear relationship.</p>
 
 </div>
 </div>

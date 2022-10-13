@@ -679,9 +679,9 @@ print out the results.</p>
 <li><p>Create a new function, <code>Power2()</code>, that allows you to pass any two
 numbers, <code>x</code> and <code>a</code>, and prints out the value of <code>x^a</code>. You can do this
 by beginning your function with the line</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="classification.html#cb127-1"></a><span class="op">&gt;</span><span class="st"> </span>Power2=<span class="cf">function</span>(x,a) {</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="classification.html#cb181-1"></a><span class="op">&gt;</span><span class="st"> </span>Power2=<span class="cf">function</span>(x,a) {</span></code></pre></div>
 <p>You should be able to call your function by entering, for instance,</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="classification.html#cb128-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">Power2</span>(<span class="dv">3</span>, <span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="classification.html#cb182-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">Power2</span>(<span class="dv">3</span>, <span class="dv">8</span>)</span></code></pre></div>
 <p>on the command line. This should output the value of <span class="math inline">\(3^8\)</span>, namely, 6,561.</p></li>
 <li><p>Using the <code>Power2()</code> function that you just wrote, compute <span class="math inline">\(10^3\)</span>,
 <span class="math inline">\(8^{17}\)</span>, and <span class="math inline">\(131^3\)</span>.</p></li>
@@ -690,7 +690,7 @@ by beginning your function with the line</p>
 is, if you store the value <code>x^a</code> in an object called result within your
 function, then you can simply <code>return()</code> this result, using the following
 line:</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="classification.html#cb129-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">return</span>(result)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="classification.html#cb183-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">return</span>(result)</span></code></pre></div>
 <p>The line above should be the last line in your function, before the <code>}</code>
 symbol.</p></li>
 <li><p>Now using the <code>Power3()</code> function, create a plot of <span class="math inline">\(f(x) = x^2\)</span>. The
@@ -702,7 +702,7 @@ title for the figure. Consider displaying either the <span class="math inline">\
 <li><p>Create a function, <code>PlotPower()</code>, that allows you to create a plot of <code>x</code>
 against <code>x^a</code> for a fixed <code>a</code> and for a range of values of <code>x</code>. For
 instance, if you call</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="classification.html#cb130-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">PlotPower</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="classification.html#cb184-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">PlotPower</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">3</span>)</span></code></pre></div>
 <p>then a plot should be created with an <span class="math inline">\(x\)</span>-axis taking on values
 <span class="math inline">\(1,2,...,10\)</span>, and a <span class="math inline">\(y\)</span>-axis taking on values <span class="math inline">\(1^3,2^3,...,10^3\)</span>.</p></li>
 </ol>

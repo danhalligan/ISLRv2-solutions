@@ -412,11 +412,11 @@ sample. Comment on what you observe.</p></li>
 sample of size <span class="math inline">\(n = 100\)</span> contains the <span class="math inline">\(j\)</span>th observation. Here <span class="math inline">\(j = 4\)</span>. We
 repeatedly create bootstrap samples, and each time we record whether or not
 the fourth observation is contained in the bootstrap sample.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="resampling-methods.html#cb131-1"></a><span class="op">&gt;</span><span class="st"> </span>store &lt;-<span class="st"> </span><span class="kw">rep</span> (<span class="ot">NA</span>, <span class="dv">10000</span>)</span>
-<span id="cb131-2"><a href="resampling-methods.html#cb131-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span>) {</span>
-<span id="cb131-3"><a href="resampling-methods.html#cb131-3"></a>    store[i] <span class="op">&lt;=</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rep =</span> <span class="ot">TRUE</span>) <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span></span>
-<span id="cb131-4"><a href="resampling-methods.html#cb131-4"></a>}</span>
-<span id="cb131-5"><a href="resampling-methods.html#cb131-5"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(store)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="resampling-methods.html#cb185-1"></a><span class="op">&gt;</span><span class="st"> </span>store &lt;-<span class="st"> </span><span class="kw">rep</span> (<span class="ot">NA</span>, <span class="dv">10000</span>)</span>
+<span id="cb185-2"><a href="resampling-methods.html#cb185-2"></a><span class="op">&gt;</span><span class="st"> </span><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span>) {</span>
+<span id="cb185-3"><a href="resampling-methods.html#cb185-3"></a>    store[i] <span class="op">&lt;=</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rep =</span> <span class="ot">TRUE</span>) <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span></span>
+<span id="cb185-4"><a href="resampling-methods.html#cb185-4"></a>}</span>
+<span id="cb185-5"><a href="resampling-methods.html#cb185-5"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(store)</span></code></pre></div>
 <p>Comment on the results obtained.</p></li>
 </ol>
 </blockquote>
@@ -555,9 +555,9 @@ LOOCV estimate for the test error. Comment on the results.</p></li>
 <p>We will now perform cross-validation on a simulated data set.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Generate a simulated data set as follows:</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="resampling-methods.html#cb132-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb132-2"><a href="resampling-methods.html#cb132-2"></a><span class="op">&gt;</span><span class="st"> </span>x=<span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb132-3"><a href="resampling-methods.html#cb132-3"></a><span class="op">&gt;</span><span class="st"> </span>y=x<span class="dv">-2</span><span class="op">*</span>x<span class="op">^</span><span class="dv">2</span><span class="op">+</span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="resampling-methods.html#cb186-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb186-2"><a href="resampling-methods.html#cb186-2"></a><span class="op">&gt;</span><span class="st"> </span>x=<span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb186-3"><a href="resampling-methods.html#cb186-3"></a><span class="op">&gt;</span><span class="st"> </span>y=x<span class="dv">-2</span><span class="op">*</span>x<span class="op">^</span><span class="dv">2</span><span class="op">+</span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
 <p>In this data set, what is <span class="math inline">\(n\)</span> and what is <span class="math inline">\(p\)</span>? Write out the model
 used to generate the data in equation form.</p></li>
 <li><p>Create a scatterplot of <span class="math inline">\(X\)</span> against <span class="math inline">\(Y\)</span>. Comment on what you find.</p></li>
