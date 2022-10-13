@@ -409,6 +409,14 @@ ToDo
 > a. Produce some numerical and graphical summaries of the `Weekly` data. Do
 >    there appear to be any patterns?
 
+```{r, message = FALSE, warning = FALSE}
+library(MASS)
+library(class)
+library(tidyverse)
+library(corrplot)
+library(ISLR2)
+```
+
 ```{r}
 summary(Weekly)
 corrplot(cor(Weekly[, -9]), type = "lower", diag = FALSE, method = "ellipse")
@@ -803,7 +811,7 @@ f <- function(cols, k_vals = 1:50) {
 }
 
 n <- sort(sapply(1:13, function(i) {
-  setNames(abs(wilcox.test(x[, i] ~ x$highcrim)$p.value), colnames(x)[i])
+  setNames(abs(wilcox.test(as.numeric(x[, i]) ~ x$highcrim)$p.value), colnames(x)[i])
 }))
 n
 ```
@@ -812,17 +820,18 @@ Variables `nox` (nitrogen oxides concentration) followed by `dis` (distance to
 employment center) appear to be most associated with high crime. 
 
 ```{r}
-res <- sapply(1:13, function(max) f(names(n)[1:max]))
-(res <- t(res))
-
-ggplot(reshape2::melt(res), aes(Var1, value, col = Var2)) + 
+res <- sapply(1:13, function(max) f(1:max))
+(res <- as_tibble(t(res)))
+res$n_var <- 1:13
+pivot_longer(res, cols = !n_var) |>
+  ggplot(aes(n_var, value, col = name)) + 
   geom_line() + 
-  xlab("Number of variables") + 
+  xlab("Number of predictors") + 
   ylab("Error rate")
 
 ```
 
-KNN appears to perform better (if we tune k) for all numbers of predictors.
+KNN appears to perform better (if we tune $k$) for all numbers of predictors.
 
 ```{r}
 fit <- knn(
@@ -844,11 +853,13 @@ crime rate based on a nearby town.
 But what if we only consider $k = 20$ and up to 8 predictors.
 
 ```{r}
-res <- sapply(1:8, function(max) f(names(n)[1:max], k_vals = 20))
-(res <- t(res))
-ggplot(reshape2::melt(res), aes(Var1, value, col = Var2)) + 
+res <- sapply(1:8, function(max) f(1:max, k_vals = 20))
+(res <- as_tibble(t(res)))
+res$n_var <- 1:8
+pivot_longer(res, cols = !n_var) |>
+  ggplot(aes(n_var, value, col = name)) + 
   geom_line() + 
-  xlab("Number of variables") + 
+  xlab("Number of predictors") + 
   ylab("Error rate")
 
 ```
