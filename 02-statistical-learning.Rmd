@@ -437,6 +437,8 @@ Boston |>
     facet_wrap(~name, scales="free", ncol= 1)
 ```
 
+Yes, particularly crime and tax rates.
+
 > e. How many of the census tracts in this data set bound the Charles river?
 
 ```{r}

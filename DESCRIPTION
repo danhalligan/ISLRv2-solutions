@@ -10,5 +10,6 @@ Imports:
     plotly,
     MASS,
     class,
-    corrplot
+    corrplot,
+    boot
 Remotes: rstudio/bookdown

@@ -1,10 +1,12 @@
 {
     "cSpell.words": [
         "boxplots",
+        "LOOCV",
         "overfit",
         "overfitting",
         "scatterplot",
-        "scatterplots"
+        "scatterplots",
+        "stochasticity"
     ],
     "cSpell.enabled": true,
     "cSpell.language": "en-US"
