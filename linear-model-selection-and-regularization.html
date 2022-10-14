@@ -385,29 +385,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 a single data set. For each approach, we obtain <span class="math inline">\(p + 1\)</span> models, containing
 <span class="math inline">\(0, 1, 2, ..., p\)</span> predictors. Explain your answers:</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Which of the three models with <span class="math inline">\(k\)</span> predictors has the smallest <em>training</em>
-RSS?</p></li>
-<li><p>Which of the three models with <span class="math inline">\(k\)</span> predictors has the smallest <em>test</em> RSS?</p></li>
-<li><p>True or False:</p>
+<li>Which of the three models with <span class="math inline">\(k\)</span> predictors has the smallest <em>training</em>
+RSS?</li>
+</ol>
+</blockquote>
+<p>Best subset considers the most models (all possible combinations of <span class="math inline">\(p\)</span>
+predictors are considered), therefore this will give the smallest training RSS
+(it will at least consider all possibilities covered by forward and backward
+stepwise selection). However, all three approaches are expected to give similar
+if not identical results in practice.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Which of the three models with <span class="math inline">\(k\)</span> predictors has the smallest <em>test</em> RSS?</li>
+</ol>
+</blockquote>
+<p>We cannot tell which model will perform best on the test RSS. The answer will
+depend on the tradeoff between fitting to the data and overfitting.</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>True or False:
 <ol style="list-style-type: lower-roman">
 <li>The predictors in the <span class="math inline">\(k\)</span>-variable model identified by forward stepwise
 are a subset of the predictors in the (<span class="math inline">\(k+1\)</span>)-variable model identified
 by forward stepwise selection.</li>
-<li>The predictors in the <span class="math inline">\(k\)</span>-variable model identified by backward stepwise
-are a subset of the predictors in the <span class="math inline">\((k+1)\)</span>-variable model identified
-by backward stepwise selection.</li>
-<li>The predictors in the <span class="math inline">\(k\)</span>-variable model identified by backward
-stepwise are a subset of the predictors in the <span class="math inline">\((k+1)\)</span>-variable model
-identified by forward stepwise selection.</li>
-<li>The predictors in the <span class="math inline">\(k\)</span>-variable model identified by forward stepwise
-are a subset of the predictors in the <span class="math inline">\((k+1)\)</span>-variable model identified
-by backward stepwise selection.</li>
-<li>The predictors in the <span class="math inline">\(k\)</span>-variable model identified by best subset are a
-subset of the predictors in the <span class="math inline">\((k+1)\)</span>-variable model identified by best
-subset selection.</li>
 </ol></li>
 </ol>
 </blockquote>
+<p>True. Forward stepwise selection retains all features identified in previous
+models as <span class="math inline">\(k\)</span> is increased.</p>
+<blockquote>
+<pre><code>ii. The predictors in the $k$-variable model identified by backward stepwise
+   are a subset of the predictors in the $(k+1)$-variable model identified
+   by backward stepwise selection.</code></pre>
+</blockquote>
+<p>True. Backward stepwise selection removes features one by one as <span class="math inline">\(k\)</span> is
+decreased.</p>
+<blockquote>
+<pre><code>iii. The predictors in the $k$-variable model identified by backward
+   stepwise are a subset of the predictors in the $(k+1)$-variable model
+   identified by forward stepwise selection.</code></pre>
+</blockquote>
+<p>False. Forward and backward stepwise selection can identify different
+combinations of variables due to differing algorithms.</p>
+<blockquote>
+<pre><code>iv. The predictors in the $k$-variable model identified by forward stepwise
+   are a subset of the predictors in the $(k+1)$-variable model identified
+   by backward stepwise selection.</code></pre>
+</blockquote>
+<p>False. Forward and backward stepwise selection can identify different
+combinations of variables due to differing algorithms.</p>
+<blockquote>
+<pre><code>v. The predictors in the $k$-variable model identified by best subset are a
+   subset of the predictors in the $(k+1)$-variable model identified by best
+   subset selection.</code></pre>
+</blockquote>
+<p>False. Best subset selection can identify different combinations of variables
+for each <span class="math inline">\(k\)</span> by considering all possible models.</p>
 </div>
 <div id="question-2-4" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.2</span> Question 2<a href="linear-model-selection-and-regularization.html#question-2-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -415,7 +448,7 @@ subset selection.</li>
 <p>For parts (a) through (c), indicate which of i. through iv. is correct.
 Justify your answer.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>The lasso, relative to least squares, is:</p>
+<li>The lasso, relative to least squares, is:
 <ol style="list-style-type: lower-roman">
 <li>More flexible and hence will give improved prediction accuracy when its
 increase in bias is less than its decrease in variance.</li>
@@ -426,10 +459,33 @@ increase in bias is less than its decrease in variance.</li>
 <li>Less flexible and hence will give improved prediction accuracy when
 its increase in variance is less than its decrease in bias.</li>
 </ol></li>
-<li><p>Repeat (a) for ridge regression relative to least squares.</p></li>
-<li><p>Repeat (a) for non-linear methods relative to least squares.</p></li>
 </ol>
 </blockquote>
+<ol start="3" style="list-style-type: lower-roman">
+<li>By using shrinkage, lasso can reduce the number of predictors so is less
+flexible. As a result, it will lead to an increase in bias by approximating the
+true relationship. We hope that this increase is small but that we dramatically
+reduce variance (i.e. the difference we would see in the model fit between
+different sets of training data).</li>
+</ol>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Repeat (a) for ridge regression relative to least squares.</li>
+</ol>
+</blockquote>
+<ol start="3" style="list-style-type: lower-roman">
+<li>The same is true of ridge regression—shrinkage results in a less
+flexible model and can reduce variance.</li>
+</ol>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Repeat (a) for non-linear methods relative to least squares.</li>
+</ol>
+</blockquote>
+<ol start="2" style="list-style-type: lower-roman">
+<li>Non-linear methods can be more flexible. They can perform better as long as
+they don’t substantially increase variance.</li>
+</ol>
 </div>
 <div id="question-3-4" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.3</span> Question 3<a href="linear-model-selection-and-regularization.html#question-3-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -443,7 +499,7 @@ by minimizing:</p>
 <p>for a particular value of <span class="math inline">\(s\)</span>. For parts (a) through (e), indicate
 which of i. through v. is correct. Justify your answer.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>As we increase <span class="math inline">\(s\)</span> from 0, the training RSS will:</p>
+<li>As we increase <span class="math inline">\(s\)</span> from 0, the training RSS will:
 <ol style="list-style-type: lower-roman">
 <li>Increase initially, and then eventually start decreasing in an
 inverted U shape.</li>
@@ -452,12 +508,47 @@ inverted U shape.</li>
 <li>Steadily decrease.</li>
 <li>Remain constant.</li>
 </ol></li>
-<li><p>Repeat (a) for test RSS.</p></li>
-<li><p>Repeat (a) for variance.</p></li>
-<li><p>Repeat (a) for (squared) bias.</p></li>
-<li><p>Repeat (a) for the irreducible error.</p></li>
 </ol>
 </blockquote>
+<ol start="4" style="list-style-type: lower-roman">
+<li>As <span class="math inline">\(s\)</span> increases, the model becomes more flexible (the sum of absolute
+coefficients can be higher). With more flexible models, training RSS will
+always decrease.</li>
+</ol>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Repeat (a) for test RSS.</li>
+</ol>
+</blockquote>
+<ol start="2" style="list-style-type: lower-roman">
+<li>With more flexible models, test RSS will decrease (as the fit improves) and
+will then increase due to overfitting (high variance).</li>
+</ol>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Repeat (a) for variance.</li>
+</ol>
+</blockquote>
+<ol start="3" style="list-style-type: lower-roman">
+<li>As <span class="math inline">\(s\)</span> increases, the model becomes more flexible so variance will
+increase.</li>
+</ol>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Repeat (a) for (squared) bias.</li>
+</ol>
+</blockquote>
+<ol start="4" style="list-style-type: lower-roman">
+<li>As <span class="math inline">\(s\)</span> increases, the model becomes more flexible so bias will decrease.</li>
+</ol>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Repeat (a) for the irreducible error.</li>
+</ol>
+</blockquote>
+<ol start="22" style="list-style-type: lower-alpha">
+<li>The irreducible error is unchanged.</li>
+</ol>
 </div>
 <div id="question-4-4" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.4</span> Question 4<a href="linear-model-selection-and-regularization.html#question-4-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -471,7 +562,7 @@ by minimizing</p>
 <p>for a particular value of <span class="math inline">\(\lambda\)</span>. For parts (a) through (e), indicate which
 of i. through v. is correct. Justify your answer.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>As we increase <span class="math inline">\(\lambda\)</span> from 0, the training RSS will:</p>
+<li>As we increase <span class="math inline">\(\lambda\)</span> from 0, the training RSS will:
 <ol style="list-style-type: lower-roman">
 <li>Increase initially, and then eventually start decreasing in an
 inverted U shape.</li>
@@ -480,12 +571,46 @@ inverted U shape.</li>
 <li>Steadily decrease.</li>
 <li>Remain constant.</li>
 </ol></li>
-<li><p>Repeat (a) for test RSS.</p></li>
-<li><p>Repeat (a) for variance.</p></li>
-<li><p>Repeat (a) for (squared) bias.</p></li>
-<li><p>Repeat (a) for the irreducible error.</p></li>
 </ol>
 </blockquote>
+<ol start="3" style="list-style-type: lower-roman">
+<li>As <span class="math inline">\(\lambda\)</span> is increased, more weight is placed on the sum of squared
+coefficients and so the model becomes less flexible. As a result, training RSS
+must increase.</li>
+</ol>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Repeat (a) for test RSS.</li>
+</ol>
+</blockquote>
+<ol start="2" style="list-style-type: lower-roman">
+<li>As <span class="math inline">\(\lambda\)</span> increases, flexibility decreases so test RSS will decrease
+(variance decreases) but will then increase (as bias increases).</li>
+</ol>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Repeat (a) for variance.</li>
+</ol>
+</blockquote>
+<ol start="4" style="list-style-type: lower-roman">
+<li>Steadily decrease.</li>
+</ol>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Repeat (a) for (squared) bias.</li>
+</ol>
+</blockquote>
+<ol start="3" style="list-style-type: lower-roman">
+<li>Steadily increase.</li>
+</ol>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Repeat (a) for the irreducible error.</li>
+</ol>
+</blockquote>
+<ol start="22" style="list-style-type: lower-alpha">
+<li>The irreducible error is unchanged.</li>
+</ol>
 </div>
 <div id="question-5-4" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.5</span> Question 5<a href="linear-model-selection-and-regularization.html#question-5-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -499,29 +624,146 @@ suppose that <span class="math inline">\(y_1 + y_2 =0\)</span> and <span class="
 <span class="math inline">\(x_{12} + x_{22} = 0\)</span>, so that the estimate for the intercept in a least
 squares, ridge regression, or lasso model is zero: <span class="math inline">\(\hat{\beta}_0 = 0\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Write out the ridge regression optimization problem in this setting.</p></li>
-<li><p>Argue that in this setting, the ridge coefficient estimates satisfy
-<span class="math inline">\(\hat{\beta}_1 = \hat{\beta}_2\)</span></p></li>
-<li><p>Write out the lasso optimization problem in this setting.</p></li>
-<li><p>Argue that in this setting, the lasso coefficients <span class="math inline">\(\hat{\beta}_1\)</span> and
-<span class="math inline">\(\hat{\beta}_2\)</span> are not unique—in other words, there are many possible
-solutions to the optimization problem in (c). Describe these solutions.</p></li>
+<li>Write out the ridge regression optimization problem in this setting.</li>
 </ol>
 </blockquote>
+<p>We are trying to minimize:</p>
+<p><span class="math display">\[
+\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p\beta_jx_{ij}\right)^2 +
+  \lambda\sum_{j=1}^p\beta_j^2
+\]</span></p>
+<p>We can ignore <span class="math inline">\(\beta_0\)</span> and can expand the sums since there’s only two terms.
+Additionally, we can define <span class="math inline">\(x_1 = x_{11} = x_{12}\)</span> and
+<span class="math inline">\(x_2 = x_{21} = x_{22}\)</span>. We then need to minimize</p>
+<p><span class="math display">\[\begin{align}
+f = &amp; (y_1 - \beta_1x_1 - \beta_2x_1)^2 + 
+     (y_2 - \beta_1x_2 - \beta_2x_2)^2 + 
+     \lambda\beta_1^2 + \lambda\beta_2^2 \\
+
+f = &amp; y_1^2 - 2y_1\beta_1x_1 - 2y_1\beta_2x_1 + \beta_1^2x_1^2 + 2\beta_1\beta_2x_1^2 + \beta_2^2x_1^2 + \\
+    &amp; y_2^2 - 2y_2\beta_1x_2 - 2y_2\beta_2x_2 + \beta_1^2x_2^2 + 2\beta_1\beta_2x_2^2 + \beta_2^2x_2^2 + \\
+    &amp; \lambda\beta_1^2 + \lambda\beta_2^2 \\
+\end{align}\]</span></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Argue that in this setting, the ridge coefficient estimates satisfy
+<span class="math inline">\(\hat{\beta}_1 = \hat{\beta}_2\)</span></li>
+</ol>
+</blockquote>
+<p>We can find when the above is minimized with respect to each of <span class="math inline">\(\beta_1\)</span> and
+<span class="math inline">\(\beta_2\)</span> by partial differentiation.</p>
+<p><span class="math display">\[
+\frac{\partial}{\partial{\beta_1}} = 
+  - 2y_1x_1 + 2\beta_1x_1^2 + 2\beta_2x_1^2
+  - 2y_2x_2 + 2\beta_1x_2^2 + 2\beta_2x_2^2
+  + 2\lambda\beta_1
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial}{\partial{\beta_2}} = 
+  - 2y_1x_1 + 2\beta_1x_1^2 + 2\beta_2x_1^2
+  - 2y_2x_2 + 2\beta_1x_2^2 + 2\beta_2x_2^2
+  + 2\lambda\beta_2
+\]</span></p>
+<p>A minimum can be found when these are set to 0.</p>
+<p><span class="math display">\[
+\lambda\beta_1 = y_1x_1 + y_2x_2 - \beta_1x_1^2 - \beta_2x_1^2 - \beta_1x_2^2 - \beta_2x_2^2 \\
+\lambda\beta_2 = y_1x_1 + y_2x_2 - \beta_1x_1^2 - \beta_2x_1^2 - \beta_1x_2^2 - \beta_2x_2^2 
+\]</span></p>
+<p>Therefore <span class="math inline">\(\lambda\beta_1 = \lambda\beta_2\)</span></p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Write out the lasso optimization problem in this setting.</li>
+</ol>
+</blockquote>
+<p>We are trying to minimize:</p>
+<p><span class="math display">\[
+\sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p\beta_jx_{ij}\right)^2 +
+  \lambda\sum_{j=1}^p |\beta_j|
+\]</span></p>
+<p>As above, we simplify to</p>
+<p><span class="math display">\[
+(y_1 - \beta_1x_1 - \beta_2x_1)^2 + 
+  (y_2 - \beta_1x_2 - \beta_2x_2)^2 + 
+  \lambda|\beta_1| + \lambda|\beta_2|
+\]</span></p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Argue that in this setting, the lasso coefficients <span class="math inline">\(\hat{\beta}_1\)</span> and
+<span class="math inline">\(\hat{\beta}_2\)</span> are not unique—in other words, there are many possible
+solutions to the optimization problem in (c). Describe these solutions.</li>
+</ol>
+</blockquote>
+<p><span class="math display">\[
+\frac{\partial}{\partial{\beta_1}} = 
+  - 2y_1x_1 + 2\beta_1x_1^2 + 2\beta_2x_1^2
+  - 2y_2x_2 + 2\beta_1x_2^2 + 2\beta_2x_2^2
+  + \lambda\frac{\beta_1}{|\beta_1|}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial}{\partial{\beta_2}} = 
+  - 2y_1x_1 + 2\beta_1x_1^2 + 2\beta_2x_1^2
+  - 2y_2x_2 + 2\beta_1x_2^2 + 2\beta_2x_2^2
+  + \lambda\frac{\beta_2}{|\beta_2|}
+\]</span></p>
+<p>By the above logic <span class="math inline">\(\frac{|\beta_1|}{\beta_1} = \frac{|\beta_2|}{\beta_2}\)</span></p>
+<p>What does this imply though???</p>
+<p>ToDo</p>
 </div>
 <div id="question-6-4" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.6</span> Question 6<a href="linear-model-selection-and-regularization.html#question-6-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>We will now explore (6.12) and (6.13) further.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Consider (6.12) with <span class="math inline">\(p = 1\)</span>. For some choice of <span class="math inline">\(y_1\)</span> and <span class="math inline">\(\lambda &gt; 0\)</span>,
+<li>Consider (6.12) with <span class="math inline">\(p = 1\)</span>. For some choice of <span class="math inline">\(y_1\)</span> and <span class="math inline">\(\lambda &gt; 0\)</span>,
 plot (6.12) as a function of <span class="math inline">\(\beta_1\)</span>. Your plot should confirm that
-(6.12) is solved by (6.14).</p></li>
-<li><p>Consider (6.13) with <span class="math inline">\(p = 1\)</span>. For some choice of <span class="math inline">\(y_1\)</span> and <span class="math inline">\(\lambda &gt; 0\)</span>,
-plot (6.13) as a function of <span class="math inline">\(\beta_1\)</span>. Your plot should confirm that
-(6.13) is solved by (6.15).</p></li>
+(6.12) is solved by (6.14).</li>
 </ol>
 </blockquote>
+<p>Equation 6.12 is:</p>
+<p><span class="math display">\[
+\sum_{j=1}^p(y_j - \beta_j)^2 + \lambda\sum_{j=1}^p\beta_j^2
+\]</span></p>
+<p>Equation 6.14 is:</p>
+<p><span class="math display">\[
+\hat{\beta}_j^R = y_j/(1 + \lambda)
+\]</span></p>
+<p>where <span class="math inline">\(\hat{\beta}_j^R\)</span> is the ridge regression estimate.</p>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="linear-model-selection-and-regularization.html#cb342-1"></a>lambda &lt;-<span class="st"> </span><span class="fl">0.7</span></span>
+<span id="cb342-2"><a href="linear-model-selection-and-regularization.html#cb342-2"></a>y &lt;-<span class="st"> </span><span class="fl">1.4</span></span>
+<span id="cb342-3"><a href="linear-model-selection-and-regularization.html#cb342-3"></a>fn &lt;-<span class="st"> </span><span class="cf">function</span>(beta) {</span>
+<span id="cb342-4"><a href="linear-model-selection-and-regularization.html#cb342-4"></a>  (y <span class="op">-</span><span class="st"> </span>beta)<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>lambda<span class="op">*</span>beta<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb342-5"><a href="linear-model-selection-and-regularization.html#cb342-5"></a>}</span>
+<span id="cb342-6"><a href="linear-model-selection-and-regularization.html#cb342-6"></a><span class="kw">plot</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>), <span class="kw">fn</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;beta&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;6.12&quot;</span>)</span>
+<span id="cb342-7"><a href="linear-model-selection-and-regularization.html#cb342-7"></a><span class="kw">abline</span>(<span class="dt">v =</span> y<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>lambda), <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Consider (6.13) with <span class="math inline">\(p = 1\)</span>. For some choice of <span class="math inline">\(y_1\)</span> and <span class="math inline">\(\lambda &gt; 0\)</span>,
+plot (6.13) as a function of <span class="math inline">\(\beta_1\)</span>. Your plot should confirm that
+(6.13) is solved by (6.15).</li>
+</ol>
+</blockquote>
+<p>Equation 6.13 is:</p>
+<p><span class="math display">\[
+\sum_{j=1}^p(y_j - \beta_j)^2 + \lambda\sum_{j=1}^p|\beta_j|
+\]</span></p>
+<p>Equation 6.15 is:</p>
+<p><span class="math display">\[
+\hat{\beta}_j^L = \begin{cases}
+  y_j - \lambda/2 &amp;\mbox{if } y_j &gt; \lambda/2; \\
+  y_j + \lambda/2 &amp;\mbox{if } y_j &lt; -\lambda/2; \\
+  0               &amp;\mbox{if } |y_j| \le \lambda/2;
+\end{cases}
+\]</span></p>
+<p>For <span class="math inline">\(\lambda = 0.7\)</span> and <span class="math inline">\(y = 1.4\)</span>, the top case applies.</p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="linear-model-selection-and-regularization.html#cb343-1"></a>lambda &lt;-<span class="st"> </span><span class="fl">0.7</span></span>
+<span id="cb343-2"><a href="linear-model-selection-and-regularization.html#cb343-2"></a>y &lt;-<span class="st"> </span><span class="fl">1.4</span></span>
+<span id="cb343-3"><a href="linear-model-selection-and-regularization.html#cb343-3"></a>fn &lt;-<span class="st"> </span><span class="cf">function</span>(beta) {</span>
+<span id="cb343-4"><a href="linear-model-selection-and-regularization.html#cb343-4"></a>  (y <span class="op">-</span><span class="st"> </span>beta)<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>lambda<span class="op">*</span><span class="kw">abs</span>(beta)</span>
+<span id="cb343-5"><a href="linear-model-selection-and-regularization.html#cb343-5"></a>}</span>
+<span id="cb343-6"><a href="linear-model-selection-and-regularization.html#cb343-6"></a><span class="kw">plot</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>), <span class="kw">fn</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;beta&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;6.12&quot;</span>)</span>
+<span id="cb343-7"><a href="linear-model-selection-and-regularization.html#cb343-7"></a><span class="kw">abline</span>(<span class="dt">v =</span> y <span class="op">-</span><span class="st">  </span>lambda<span class="op">/</span><span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="question-7-4" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.7</span> Question 7<a href="linear-model-selection-and-regularization.html#question-7-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -529,15 +771,29 @@ plot (6.13) as a function of <span class="math inline">\(\beta_1\)</span>. Your 
 <p>We will now derive the Bayesian connection to the lasso and ridge regression
 discussed in Section 6.2.2.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Suppose that <span class="math inline">\(y_i = \beta_0 + \sum_{j=1}^p x_{ij}\beta_j + \epsilon_i\)</span>
+<li>Suppose that <span class="math inline">\(y_i = \beta_0 + \sum_{j=1}^p x_{ij}\beta_j + \epsilon_i\)</span>
 where <span class="math inline">\(\epsilon_1, ..., \epsilon_n\)</span> are independent and identically
 distributed from a <span class="math inline">\(N(0, \sigma^2)\)</span> distribution. Write out the likelihood
-for the data.</p></li>
-<li><p>Assume the following prior for <span class="math inline">\(\beta\)</span>: <span class="math inline">\(\beta_1, ..., \beta_p\)</span> are
+for the data.</li>
+</ol>
+</blockquote>
+<p><span class="math display">\[
+\mathcal{L} = \prod_i^n \mathcal{N}(y_i - (\beta_0 + \sum_j^p x_{ij}\beta_j), \sigma^2)
+\]</span></p>
+<p>Expand equation out to use Gaussian formula…</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Assume the following prior for <span class="math inline">\(\beta\)</span>: <span class="math inline">\(\beta_1, ..., \beta_p\)</span> are
 independent and identically distributed according to a double-exponential
 distribution with mean 0 and common scale parameter b: i.e.
 <span class="math inline">\(p(\beta) = \frac{1}{2b}\exp(-|\beta|/b)\)</span>. Write out the posterior for
-<span class="math inline">\(\beta\)</span> in this setting.</p></li>
+<span class="math inline">\(\beta\)</span> in this setting.</li>
+</ol>
+</blockquote>
+<p>Posterior can be calculated by multiplying prior and likelihood</p>
+<p>ToDo</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
 <li><p>Argue that the lasso estimate is the <em>mode</em> for <span class="math inline">\(\beta\)</span> under this
 posterior distribution.</p></li>
 <li><p>Now assume the following prior for <span class="math inline">\(\beta\)</span>: <span class="math inline">\(\beta_1, ..., \beta_p\)</span> are
@@ -558,31 +814,354 @@ for <span class="math inline">\(\beta\)</span> under this posterior distribution
 <p>In this exercise, we will generate simulated data, and will then use this
 data to perform best subset selection.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Use the <code>rnorm()</code> function to generate a predictor <span class="math inline">\(X\)</span> of length <span class="math inline">\(n = 100\)</span>,
-as well as a noise vector <span class="math inline">\(\epsilon\)</span> of length <span class="math inline">\(n = 100\)</span>.</p></li>
-<li><p>Generate a response vector <span class="math inline">\(Y\)</span> of length <span class="math inline">\(n = 100\)</span> according to the model
+<li>Use the <code>rnorm()</code> function to generate a predictor <span class="math inline">\(X\)</span> of length <span class="math inline">\(n = 100\)</span>,
+as well as a noise vector <span class="math inline">\(\epsilon\)</span> of length <span class="math inline">\(n = 100\)</span>.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="linear-model-selection-and-regularization.html#cb344-1"></a><span class="kw">library</span>(ISLR2)</span>
+<span id="cb344-2"><a href="linear-model-selection-and-regularization.html#cb344-2"></a><span class="kw">library</span>(glmnet)</span>
+<span id="cb344-3"><a href="linear-model-selection-and-regularization.html#cb344-3"></a><span class="kw">library</span>(leaps)</span>
+<span id="cb344-4"><a href="linear-model-selection-and-regularization.html#cb344-4"></a><span class="kw">library</span>(pls)</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="linear-model-selection-and-regularization.html#cb345-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb345-2"><a href="linear-model-selection-and-regularization.html#cb345-2"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb345-3"><a href="linear-model-selection-and-regularization.html#cb345-3"></a>ep &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Generate a response vector <span class="math inline">\(Y\)</span> of length <span class="math inline">\(n = 100\)</span> according to the model
 <span class="math display">\[Y = \beta_0 + \beta_1X + \beta_2X^2 + \beta_3X^3 + \epsilon,\]</span>
 where <span class="math inline">\(\beta_0, \beta_1, \beta_2,\)</span> and <span class="math inline">\(\beta_3\)</span> are constants of your
-choice.</p></li>
-<li><p>Use the <code>regsubsets()</code> function to perform best subset selection in order
+choice.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="linear-model-selection-and-regularization.html#cb346-1"></a>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">3</span><span class="op">*</span>x <span class="op">-</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span><span class="op">*</span>x<span class="op">^</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>ep</span></code></pre></div>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Use the <code>regsubsets()</code> function to perform best subset selection in order
 to choose the best model containing the predictors <span class="math inline">\(X, X^2, ..., X^{10}\)</span>.
 What is the best model obtained according to <span class="math inline">\(C_p\)</span>, BIC, and adjusted
 <span class="math inline">\(R^2\)</span>? Show some plots to provide evidence for your answer, and report the
 coefficients of the best model obtained. Note you will need to use the
 <code>data.frame()</code> function to create a single data set containing both <span class="math inline">\(X\)</span> and
-<span class="math inline">\(Y\)</span>.</p></li>
-<li><p>Repeat (c), using forward stepwise selection and also using backwards
-stepwise selection. How does your answer compare to the results in (c)?</p></li>
-<li><p>Now fit a lasso model to the simulated data, again using
+<span class="math inline">\(Y\)</span>.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="linear-model-selection-and-regularization.html#cb347-1"></a>dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x, y)</span>
+<span id="cb347-2"><a href="linear-model-selection-and-regularization.html#cb347-2"></a><span class="kw">summary</span>(<span class="kw">regsubsets</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), <span class="dt">data =</span> dat))</span></code></pre></div>
+<pre><code>## Subset selection object
+## Call: regsubsets.formula(y ~ poly(x, 10, raw = TRUE), data = dat)
+## 10 Variables  (and intercept)
+##                           Forced in Forced out
+## poly(x, 10, raw = TRUE)1      FALSE      FALSE
+## poly(x, 10, raw = TRUE)2      FALSE      FALSE
+## poly(x, 10, raw = TRUE)3      FALSE      FALSE
+## poly(x, 10, raw = TRUE)4      FALSE      FALSE
+## poly(x, 10, raw = TRUE)5      FALSE      FALSE
+## poly(x, 10, raw = TRUE)6      FALSE      FALSE
+## poly(x, 10, raw = TRUE)7      FALSE      FALSE
+## poly(x, 10, raw = TRUE)8      FALSE      FALSE
+## poly(x, 10, raw = TRUE)9      FALSE      FALSE
+## poly(x, 10, raw = TRUE)10     FALSE      FALSE
+## 1 subsets of each size up to 8
+## Selection Algorithm: exhaustive
+##          poly(x, 10, raw = TRUE)1 poly(x, 10, raw = TRUE)2
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 3  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 4  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 5  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)3 poly(x, 10, raw = TRUE)4
+## 1  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 6  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+## 7  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+##          poly(x, 10, raw = TRUE)5 poly(x, 10, raw = TRUE)6
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)7 poly(x, 10, raw = TRUE)8
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)9 poly(x, 10, raw = TRUE)10
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 3  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 4  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 5  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 6  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 7  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 8  ( 1 ) &quot;*&quot;                      &quot; &quot;</code></pre>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Repeat (c), using forward stepwise selection and also using backwards
+stepwise selection. How does your answer compare to the results in (c)?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="linear-model-selection-and-regularization.html#cb349-1"></a><span class="kw">summary</span>(<span class="kw">regsubsets</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), <span class="dt">data =</span> dat, <span class="dt">method =</span> <span class="st">&quot;forward&quot;</span>))</span></code></pre></div>
+<pre><code>## Subset selection object
+## Call: regsubsets.formula(y ~ poly(x, 10, raw = TRUE), data = dat, method = &quot;forward&quot;)
+## 10 Variables  (and intercept)
+##                           Forced in Forced out
+## poly(x, 10, raw = TRUE)1      FALSE      FALSE
+## poly(x, 10, raw = TRUE)2      FALSE      FALSE
+## poly(x, 10, raw = TRUE)3      FALSE      FALSE
+## poly(x, 10, raw = TRUE)4      FALSE      FALSE
+## poly(x, 10, raw = TRUE)5      FALSE      FALSE
+## poly(x, 10, raw = TRUE)6      FALSE      FALSE
+## poly(x, 10, raw = TRUE)7      FALSE      FALSE
+## poly(x, 10, raw = TRUE)8      FALSE      FALSE
+## poly(x, 10, raw = TRUE)9      FALSE      FALSE
+## poly(x, 10, raw = TRUE)10     FALSE      FALSE
+## 1 subsets of each size up to 8
+## Selection Algorithm: forward
+##          poly(x, 10, raw = TRUE)1 poly(x, 10, raw = TRUE)2
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+## 3  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 4  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 5  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)3 poly(x, 10, raw = TRUE)4
+## 1  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)5 poly(x, 10, raw = TRUE)6
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+##          poly(x, 10, raw = TRUE)7 poly(x, 10, raw = TRUE)8
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+##          poly(x, 10, raw = TRUE)9 poly(x, 10, raw = TRUE)10
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 3  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 4  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 5  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 6  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 7  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;</code></pre>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="linear-model-selection-and-regularization.html#cb351-1"></a><span class="kw">summary</span>(<span class="kw">regsubsets</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), <span class="dt">data =</span> dat, <span class="dt">method =</span> <span class="st">&quot;backward&quot;</span>))</span></code></pre></div>
+<pre><code>## Subset selection object
+## Call: regsubsets.formula(y ~ poly(x, 10, raw = TRUE), data = dat, method = &quot;backward&quot;)
+## 10 Variables  (and intercept)
+##                           Forced in Forced out
+## poly(x, 10, raw = TRUE)1      FALSE      FALSE
+## poly(x, 10, raw = TRUE)2      FALSE      FALSE
+## poly(x, 10, raw = TRUE)3      FALSE      FALSE
+## poly(x, 10, raw = TRUE)4      FALSE      FALSE
+## poly(x, 10, raw = TRUE)5      FALSE      FALSE
+## poly(x, 10, raw = TRUE)6      FALSE      FALSE
+## poly(x, 10, raw = TRUE)7      FALSE      FALSE
+## poly(x, 10, raw = TRUE)8      FALSE      FALSE
+## poly(x, 10, raw = TRUE)9      FALSE      FALSE
+## poly(x, 10, raw = TRUE)10     FALSE      FALSE
+## 1 subsets of each size up to 8
+## Selection Algorithm: backward
+##          poly(x, 10, raw = TRUE)1 poly(x, 10, raw = TRUE)2
+## 1  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 3  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 4  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 5  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)3 poly(x, 10, raw = TRUE)4
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 6  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 7  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 8  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+##          poly(x, 10, raw = TRUE)5 poly(x, 10, raw = TRUE)6
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)7 poly(x, 10, raw = TRUE)8
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)9 poly(x, 10, raw = TRUE)10
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 3  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 4  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 5  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 6  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 7  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;</code></pre>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Now fit a lasso model to the simulated data, again using
 <span class="math inline">\(X, X^2, ..., X^{10}\)</span> as predictors. Use cross-validation to select the
 optimal value of <span class="math inline">\(\lambda\)</span>. Create plots of the cross-validation error as a
 function of <span class="math inline">\(\lambda\)</span>. Report the resulting coefficient estimates, and
-discuss the results obtained.</p></li>
-<li><p>Now generate a response vector <span class="math inline">\(Y\)</span> according to the model
-<span class="math display">\[Y = \beta_0 + \beta_7X^7 + \epsilon,\]</span> and perform best subset selection
-and the lasso. Discuss the results obtained.</p></li>
+discuss the results obtained.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="linear-model-selection-and-regularization.html#cb353-1"></a>res &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(<span class="kw">poly</span>(dat<span class="op">$</span>x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), dat<span class="op">$</span>y, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb353-2"><a href="linear-model-selection-and-regularization.html#cb353-2"></a>(best &lt;-<span class="st"> </span>res<span class="op">$</span>lambda.min)</span></code></pre></div>
+<pre><code>## [1] 0.09804219</code></pre>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="linear-model-selection-and-regularization.html#cb355-1"></a><span class="kw">plot</span>(res)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="linear-model-selection-and-regularization.html#cb356-1"></a>out =<span class="st"> </span><span class="kw">glmnet</span>(<span class="kw">poly</span>(dat<span class="op">$</span>x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), dat<span class="op">$</span>y, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> res<span class="op">$</span>lambda.min)</span>
+<span id="cb356-2"><a href="linear-model-selection-and-regularization.html#cb356-2"></a><span class="kw">predict</span>(out, <span class="dt">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="dt">s =</span> best)</span></code></pre></div>
+<pre><code>## 11 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                     s1
+## (Intercept)  1.8457308
+## 1            2.9092918
+## 2           -1.9287428
+## 3            0.5161012
+## 4            .        
+## 5            .        
+## 6            .        
+## 7            .        
+## 8            .        
+## 9            .        
+## 10           .</code></pre>
+<p>When fitting lasso, the model that minimizes MSE uses three predictors (as per
+the simulation). The coefficients estimated (2.9, -1.9 and 0.5) are similar to
+those used in the simulation.</p>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Now generate a response vector <span class="math inline">\(Y\)</span> according to the model
+<span class="math display">\[Y = \beta_0 + \beta_7X^7 + \epsilon,\]</span> and perform best subset selection
+and the lasso. Discuss the results obtained.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="linear-model-selection-and-regularization.html#cb358-1"></a>dat<span class="op">$</span>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>x<span class="op">^</span><span class="dv">2</span> <span class="fl">+0.2</span><span class="op">*</span>x<span class="op">^</span><span class="dv">7</span> <span class="op">+</span><span class="st"> </span>ep</span>
+<span id="cb358-2"><a href="linear-model-selection-and-regularization.html#cb358-2"></a><span class="kw">summary</span>(<span class="kw">regsubsets</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), <span class="dt">data =</span> dat))</span></code></pre></div>
+<pre><code>## Subset selection object
+## Call: regsubsets.formula(y ~ poly(x, 10, raw = TRUE), data = dat)
+## 10 Variables  (and intercept)
+##                           Forced in Forced out
+## poly(x, 10, raw = TRUE)1      FALSE      FALSE
+## poly(x, 10, raw = TRUE)2      FALSE      FALSE
+## poly(x, 10, raw = TRUE)3      FALSE      FALSE
+## poly(x, 10, raw = TRUE)4      FALSE      FALSE
+## poly(x, 10, raw = TRUE)5      FALSE      FALSE
+## poly(x, 10, raw = TRUE)6      FALSE      FALSE
+## poly(x, 10, raw = TRUE)7      FALSE      FALSE
+## poly(x, 10, raw = TRUE)8      FALSE      FALSE
+## poly(x, 10, raw = TRUE)9      FALSE      FALSE
+## poly(x, 10, raw = TRUE)10     FALSE      FALSE
+## 1 subsets of each size up to 8
+## Selection Algorithm: exhaustive
+##          poly(x, 10, raw = TRUE)1 poly(x, 10, raw = TRUE)2
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+## 3  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+## 4  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+## 5  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+## 6  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+## 7  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+## 8  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)3 poly(x, 10, raw = TRUE)4
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)5 poly(x, 10, raw = TRUE)6
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 6  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 7  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)7 poly(x, 10, raw = TRUE)8
+## 1  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 2  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 3  ( 1 ) &quot;*&quot;                      &quot; &quot;                     
+## 4  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 5  ( 1 ) &quot; &quot;                      &quot; &quot;                     
+## 6  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+## 7  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+## 8  ( 1 ) &quot; &quot;                      &quot;*&quot;                     
+##          poly(x, 10, raw = TRUE)9 poly(x, 10, raw = TRUE)10
+## 1  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 2  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 3  ( 1 ) &quot; &quot;                      &quot; &quot;                      
+## 4  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 5  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 6  ( 1 ) &quot;*&quot;                      &quot; &quot;                      
+## 7  ( 1 ) &quot;*&quot;                      &quot;*&quot;                      
+## 8  ( 1 ) &quot;*&quot;                      &quot;*&quot;</code></pre>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="linear-model-selection-and-regularization.html#cb360-1"></a>res &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(<span class="kw">poly</span>(dat<span class="op">$</span>x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), dat<span class="op">$</span>y, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb360-2"><a href="linear-model-selection-and-regularization.html#cb360-2"></a>(best &lt;-<span class="st"> </span>res<span class="op">$</span>lambda.min)</span></code></pre></div>
+<pre><code>## [1] 1.126906</code></pre>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="linear-model-selection-and-regularization.html#cb362-1"></a><span class="kw">plot</span>(res)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="linear-model-selection-and-regularization.html#cb363-1"></a>out =<span class="st"> </span><span class="kw">glmnet</span>(<span class="kw">poly</span>(dat<span class="op">$</span>x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), dat<span class="op">$</span>y, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> best)</span>
+<span id="cb363-2"><a href="linear-model-selection-and-regularization.html#cb363-2"></a><span class="kw">predict</span>(out, <span class="dt">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="dt">s =</span> best)</span></code></pre></div>
+<pre><code>## 11 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                       s1
+## (Intercept)  1.061389580
+## 1            .          
+## 2           -0.883080980
+## 3            .          
+## 4           -0.121018425
+## 5            0.028984084
+## 6           -0.009540039
+## 7            0.188796928
+## 8            .          
+## 9            .          
+## 10           .</code></pre>
+<p>When fitting lasso, the model does not perfectly replicate the simulation
+(coefficients are retained for powers of <span class="math inline">\(x\)</span> that were not simulated).</p>
 </div>
 <div id="question-9-4" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.2</span> Question 9<a href="linear-model-selection-and-regularization.html#question-9-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -590,25 +1169,82 @@ and the lasso. Discuss the results obtained.</p></li>
 <p>In this exercise, we will predict the number of applications received using
 the other variables in the <code>College</code> data set.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Split the data set into a training set and a test set.</p></li>
-<li><p>Fit a linear model using least squares on the training set, and report the
-test error obtained.</p></li>
-<li><p>Fit a ridge regression model on the training set, with <span class="math inline">\(\lambda\)</span> chosen by
-cross-validation. Report the test error obtained.</p></li>
-<li><p>Fit a lasso model on the training set, with <span class="math inline">\(\lambda\)</span> chosen by cross-
-validation. Report the test error obtained, along with the number of
-non-zero coefficient estimates.</p></li>
-<li><p>Fit a PCR model on the training set, with <span class="math inline">\(M\)</span> chosen by cross-validation.
-Report the test error obtained, along with the value of <span class="math inline">\(M\)</span> selected by
-cross-validation.</p></li>
-<li><p>Fit a PLS model on the training set, with <span class="math inline">\(M\)</span> chosen by cross-validation.
-Report the test error obtained, along with the value of <span class="math inline">\(M\)</span> selected by
-cross-validation.</p></li>
-<li><p>Comment on the results obtained. How accurately can we predict the number
-of college applications received? Is there much difference among the test
-errors resulting from these five approaches?</p></li>
+<li>Split the data set into a training set and a test set.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="linear-model-selection-and-regularization.html#cb365-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb365-2"><a href="linear-model-selection-and-regularization.html#cb365-2"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(College), <span class="kw">nrow</span>(College)<span class="op">*</span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span>
+<span id="cb365-3"><a href="linear-model-selection-and-regularization.html#cb365-3"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(College)), train)</span>
+<span id="cb365-4"><a href="linear-model-selection-and-regularization.html#cb365-4"></a>mse &lt;-<span class="st"> </span><span class="kw">list</span>()</span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Fit a linear model using least squares on the training set, and report the
+test error obtained.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="linear-model-selection-and-regularization.html#cb366-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ])</span>
+<span id="cb366-2"><a href="linear-model-selection-and-regularization.html#cb366-2"></a>(mse<span class="op">$</span>lm &lt;-<span class="st"> </span><span class="kw">mean</span>((<span class="kw">predict</span>(fit, College[test, ]) <span class="op">-</span><span class="st"> </span>College<span class="op">$</span>Apps[test]) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 1695269</code></pre>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Fit a ridge regression model on the training set, with <span class="math inline">\(\lambda\)</span> chosen by
+cross-validation. Report the test error obtained.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="linear-model-selection-and-regularization.html#cb368-1"></a>mm &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ])</span>
+<span id="cb368-2"><a href="linear-model-selection-and-regularization.html#cb368-2"></a>fit2 &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(mm, College<span class="op">$</span>Apps[train], <span class="dt">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb368-3"><a href="linear-model-selection-and-regularization.html#cb368-3"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit2, <span class="kw">model.matrix</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[test, ]), <span class="dt">s =</span> fit2<span class="op">$</span>lambda.min)</span>
+<span id="cb368-4"><a href="linear-model-selection-and-regularization.html#cb368-4"></a>(mse<span class="op">$</span>ridge &lt;-<span class="st"> </span><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>College<span class="op">$</span>Apps[test]) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 2804369</code></pre>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Fit a lasso model on the training set, with <span class="math inline">\(\lambda\)</span> chosen by cross-
+validation. Report the test error obtained, along with the number of
+non-zero coefficient estimates.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="linear-model-selection-and-regularization.html#cb370-1"></a>mm &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ])</span>
+<span id="cb370-2"><a href="linear-model-selection-and-regularization.html#cb370-2"></a>fit3 &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(mm, College<span class="op">$</span>Apps[train], <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb370-3"><a href="linear-model-selection-and-regularization.html#cb370-3"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit3, <span class="kw">model.matrix</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[test, ]), <span class="dt">s =</span> fit3<span class="op">$</span>lambda.min)</span>
+<span id="cb370-4"><a href="linear-model-selection-and-regularization.html#cb370-4"></a>(mse<span class="op">$</span>lasso &lt;-<span class="st"> </span><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>College<span class="op">$</span>Apps[test]) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 1822322</code></pre>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Fit a PCR model on the training set, with <span class="math inline">\(M\)</span> chosen by cross-validation.
+Report the test error obtained, along with the value of <span class="math inline">\(M\)</span> selected by
+cross-validation.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="linear-model-selection-and-regularization.html#cb372-1"></a>fit4 &lt;-<span class="st"> </span><span class="kw">pcr</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ], <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">validation =</span> <span class="st">&quot;CV&quot;</span>)</span>
+<span id="cb372-2"><a href="linear-model-selection-and-regularization.html#cb372-2"></a><span class="kw">validationplot</span>(fit4, <span class="dt">val.type =</span> <span class="st">&quot;MSEP&quot;</span>)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="linear-model-selection-and-regularization.html#cb373-1"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit4, College[test, ], <span class="dt">ncomp =</span> <span class="dv">17</span>)</span>
+<span id="cb373-2"><a href="linear-model-selection-and-regularization.html#cb373-2"></a>(mse<span class="op">$</span>pcr &lt;-<span class="st"> </span><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>College<span class="op">$</span>Apps[test])<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 1695269</code></pre>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Fit a PLS model on the training set, with <span class="math inline">\(M\)</span> chosen by cross-validation.
+Report the test error obtained, along with the value of <span class="math inline">\(M\)</span> selected by
+cross-validation.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="linear-model-selection-and-regularization.html#cb375-1"></a>fit5 &lt;-<span class="st"> </span><span class="kw">plsr</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ], <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">validation =</span> <span class="st">&quot;CV&quot;</span>)</span>
+<span id="cb375-2"><a href="linear-model-selection-and-regularization.html#cb375-2"></a><span class="kw">validationplot</span>(fit5, <span class="dt">val.type =</span> <span class="st">&quot;MSEP&quot;</span>)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="linear-model-selection-and-regularization.html#cb376-1"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit5, College[test, ], <span class="dt">ncomp =</span> <span class="dv">12</span>)</span>
+<span id="cb376-2"><a href="linear-model-selection-and-regularization.html#cb376-2"></a>(mse<span class="op">$</span>pls &lt;-<span class="st"> </span><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>College<span class="op">$</span>Apps[test])<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 1696902</code></pre>
+<blockquote>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Comment on the results obtained. How accurately can we predict the number
+of college applications received? Is there much difference among the test
+errors resulting from these five approaches?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="linear-model-selection-and-regularization.html#cb378-1"></a><span class="kw">barplot</span>(<span class="kw">unlist</span>(mse), <span class="dt">ylab =</span> <span class="st">&quot;Test MSE&quot;</span>, <span class="dt">horiz =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Ridge and lasso give the lowest test errors but the lowest is generated by
+the ridge regression model (in this specific case with this specific seed).</p>
 </div>
 <div id="question-10-3" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.3</span> Question 10<a href="linear-model-selection-and-regularization.html#question-10-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -617,46 +1253,332 @@ errors resulting from these five approaches?</p></li>
 training error will necessarily decrease, but the test error may not. We will
 now explore this in a simulated data set.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Generate a data set with <span class="math inline">\(p = 20\)</span> features, <span class="math inline">\(n = 1,000\)</span> observations, and
+<li>Generate a data set with <span class="math inline">\(p = 20\)</span> features, <span class="math inline">\(n = 1,000\)</span> observations, and
 an associated quantitative response vector generated according to the model
 <span class="math inline">\(Y =X\beta + \epsilon\)</span>, where <span class="math inline">\(\beta\)</span> has some elements that are exactly
-equal to zero.</p></li>
-<li><p>Split your data set into a training set containing 100 observations and a
-test set containing 900 observations.</p></li>
-<li><p>Perform best subset selection on the training set, and plot the training
-set MSE associated with the best model of each size.</p></li>
-<li><p>Plot the test set MSE associated with the best model of each size.</p></li>
-<li><p>For which model size does the test set MSE take on its minimum value?
+equal to zero.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="linear-model-selection-and-regularization.html#cb379-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb379-2"><a href="linear-model-selection-and-regularization.html#cb379-2"></a>dat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span><span class="op">*</span><span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>)</span>
+<span id="cb379-3"><a href="linear-model-selection-and-regularization.html#cb379-3"></a><span class="kw">colnames</span>(dat) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</span>
+<span id="cb379-4"><a href="linear-model-selection-and-regularization.html#cb379-4"></a>beta &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">20</span>)</span>
+<span id="cb379-5"><a href="linear-model-selection-and-regularization.html#cb379-5"></a>beta[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">7</span>)</span>
+<span id="cb379-6"><a href="linear-model-selection-and-regularization.html#cb379-6"></a>y &lt;-<span class="st"> </span><span class="kw">colSums</span>((<span class="kw">t</span>(dat) <span class="op">*</span><span class="st"> </span>beta)) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb379-7"><a href="linear-model-selection-and-regularization.html#cb379-7"></a>dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(dat)</span>
+<span id="cb379-8"><a href="linear-model-selection-and-regularization.html#cb379-8"></a>dat<span class="op">$</span>y &lt;-<span class="st"> </span>y</span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Split your data set into a training set containing 100 observations and a
+test set containing 900 observations.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="linear-model-selection-and-regularization.html#cb380-1"></a>train &lt;-<span class="st"> </span>dat[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, ]</span>
+<span id="cb380-2"><a href="linear-model-selection-and-regularization.html#cb380-2"></a>test &lt;-<span class="st"> </span>dat[<span class="dv">101</span><span class="op">:</span><span class="dv">1000</span>, ]</span></code></pre></div>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Perform best subset selection on the training set, and plot the training
+set MSE associated with the best model of each size.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="linear-model-selection-and-regularization.html#cb381-1"></a>fit &lt;-<span class="st"> </span><span class="kw">regsubsets</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train, <span class="dt">nvmax =</span> <span class="dv">20</span>)</span>
+<span id="cb381-2"><a href="linear-model-selection-and-regularization.html#cb381-2"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<pre><code>## Subset selection object
+## Call: regsubsets.formula(y ~ ., data = train, nvmax = 20)
+## 20 Variables  (and intercept)
+##     Forced in Forced out
+## b1      FALSE      FALSE
+## b2      FALSE      FALSE
+## b3      FALSE      FALSE
+## b4      FALSE      FALSE
+## b5      FALSE      FALSE
+## b6      FALSE      FALSE
+## b7      FALSE      FALSE
+## b8      FALSE      FALSE
+## b9      FALSE      FALSE
+## b10     FALSE      FALSE
+## b11     FALSE      FALSE
+## b12     FALSE      FALSE
+## b13     FALSE      FALSE
+## b14     FALSE      FALSE
+## b15     FALSE      FALSE
+## b16     FALSE      FALSE
+## b17     FALSE      FALSE
+## b18     FALSE      FALSE
+## b19     FALSE      FALSE
+## b20     FALSE      FALSE
+## 1 subsets of each size up to 20
+## Selection Algorithm: exhaustive
+##           b1  b2  b3  b4  b5  b6  b7  b8  b9  b10 b11 b12 b13 b14 b15 b16 b17
+## 1  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;
+## 2  ( 1 )  &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;
+## 3  ( 1 )  &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;
+## 4  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;
+## 5  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;
+## 6  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot;
+## 7  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot;
+## 8  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 9  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 10  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 11  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 12  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 13  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 14  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 15  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 16  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 17  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 18  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 19  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 20  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+##           b18 b19 b20
+## 1  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 2  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 3  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 4  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 5  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 6  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 7  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 8  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 9  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 10  ( 1 ) &quot; &quot; &quot; &quot; &quot;*&quot;
+## 11  ( 1 ) &quot; &quot; &quot; &quot; &quot;*&quot;
+## 12  ( 1 ) &quot;*&quot; &quot; &quot; &quot;*&quot;
+## 13  ( 1 ) &quot;*&quot; &quot; &quot; &quot;*&quot;
+## 14  ( 1 ) &quot;*&quot; &quot; &quot; &quot;*&quot;
+## 15  ( 1 ) &quot;*&quot; &quot; &quot; &quot;*&quot;
+## 16  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 17  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 18  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 19  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 20  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot;</code></pre>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="linear-model-selection-and-regularization.html#cb383-1"></a><span class="kw">plot</span>(<span class="kw">summary</span>(fit)<span class="op">$</span>rss <span class="op">/</span><span class="st"> </span><span class="dv">100</span>, <span class="dt">ylab =</span> <span class="st">&quot;MSE&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Plot the test set MSE associated with the best model of each size.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="linear-model-selection-and-regularization.html#cb384-1"></a>predict.regsubsets &lt;-<span class="st"> </span><span class="cf">function</span> (object, newdata, id, ...) {</span>
+<span id="cb384-2"><a href="linear-model-selection-and-regularization.html#cb384-2"></a>  form &lt;-<span class="st"> </span><span class="kw">as.formula</span> (object<span class="op">$</span>call[[<span class="dv">2</span>]])</span>
+<span id="cb384-3"><a href="linear-model-selection-and-regularization.html#cb384-3"></a>  mat &lt;-<span class="st"> </span><span class="kw">model.matrix</span> (form , newdata)</span>
+<span id="cb384-4"><a href="linear-model-selection-and-regularization.html#cb384-4"></a>  coefi &lt;-<span class="st"> </span><span class="kw">coef</span>(object, <span class="dt">id =</span> id)</span>
+<span id="cb384-5"><a href="linear-model-selection-and-regularization.html#cb384-5"></a>  xvars &lt;-<span class="st"> </span><span class="kw">names</span>(coefi)</span>
+<span id="cb384-6"><a href="linear-model-selection-and-regularization.html#cb384-6"></a>  mat[ ,xvars] <span class="op">%*%</span><span class="st"> </span>coefi</span>
+<span id="cb384-7"><a href="linear-model-selection-and-regularization.html#cb384-7"></a>}</span>
+<span id="cb384-8"><a href="linear-model-selection-and-regularization.html#cb384-8"></a>mse &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="cf">function</span>(i) <span class="kw">mean</span>((test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit, test, i))<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb384-9"><a href="linear-model-selection-and-regularization.html#cb384-9"></a><span class="kw">plot</span>(mse, <span class="dt">ylab =</span> <span class="st">&quot;MSE&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>For which model size does the test set MSE take on its minimum value?
 Comment on your results. If it takes on its minimum value for a model
 containing only an intercept or a model containing all of the features,
 then play around with the way that you are generating the data in (a) until
 you come up with a scenario in which the test set MSE is minimized for an
-intermediate model size.</p></li>
-<li><p>How does the model at which the test set MSE is minimized compare to the
-true model used to generate the data? Comment on the coefficient values.</p></li>
-<li><p>Create a plot displaying <span class="math inline">\(\sqrt{\sum_{j=1}^p (\beta_j - \hat{\beta}{}_j^r)^2}\)</span>
-for a range of values of <span class="math inline">\(r\)</span>, where <span class="math inline">\(\hat{\beta}{}_j^r\)</span> is the <span class="math inline">\(j\)</span>th
-coefficient estimate for the best model containing <span class="math inline">\(r\)</span> coefficients. Comment
-on what you observe. How does this compare to the test MSE plot from (d)?</p></li>
+intermediate model size.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="linear-model-selection-and-regularization.html#cb385-1"></a><span class="kw">which.min</span>(mse)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>The min test MSE is found when model size is 4. This corresponds to the
+simulated data which has four non-zero coefficients.</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="linear-model-selection-and-regularization.html#cb387-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb387-2"><a href="linear-model-selection-and-regularization.html#cb387-2"></a>dat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span><span class="op">*</span><span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>)</span>
+<span id="cb387-3"><a href="linear-model-selection-and-regularization.html#cb387-3"></a><span class="kw">colnames</span>(dat) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</span>
+<span id="cb387-4"><a href="linear-model-selection-and-regularization.html#cb387-4"></a>beta &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">20</span>)</span>
+<span id="cb387-5"><a href="linear-model-selection-and-regularization.html#cb387-5"></a>beta[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">7</span>, <span class="fl">0.01</span>, <span class="fl">0.001</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb387-6"><a href="linear-model-selection-and-regularization.html#cb387-6"></a>y &lt;-<span class="st"> </span><span class="kw">colSums</span>((<span class="kw">t</span>(dat) <span class="op">*</span><span class="st"> </span>beta)) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)</span>
+<span id="cb387-7"><a href="linear-model-selection-and-regularization.html#cb387-7"></a>dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(dat)</span>
+<span id="cb387-8"><a href="linear-model-selection-and-regularization.html#cb387-8"></a>dat<span class="op">$</span>y &lt;-<span class="st"> </span>y</span>
+<span id="cb387-9"><a href="linear-model-selection-and-regularization.html#cb387-9"></a>train &lt;-<span class="st"> </span>dat[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, ]</span>
+<span id="cb387-10"><a href="linear-model-selection-and-regularization.html#cb387-10"></a>test &lt;-<span class="st"> </span>dat[<span class="dv">101</span><span class="op">:</span><span class="dv">1000</span>, ]</span>
+<span id="cb387-11"><a href="linear-model-selection-and-regularization.html#cb387-11"></a></span>
+<span id="cb387-12"><a href="linear-model-selection-and-regularization.html#cb387-12"></a>fit &lt;-<span class="st"> </span><span class="kw">regsubsets</span>(y <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train, <span class="dt">nvmax =</span> <span class="dv">20</span>)</span>
+<span id="cb387-13"><a href="linear-model-selection-and-regularization.html#cb387-13"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<pre><code>## Subset selection object
+## Call: regsubsets.formula(y ~ ., data = train, nvmax = 20)
+## 20 Variables  (and intercept)
+##     Forced in Forced out
+## b1      FALSE      FALSE
+## b2      FALSE      FALSE
+## b3      FALSE      FALSE
+## b4      FALSE      FALSE
+## b5      FALSE      FALSE
+## b6      FALSE      FALSE
+## b7      FALSE      FALSE
+## b8      FALSE      FALSE
+## b9      FALSE      FALSE
+## b10     FALSE      FALSE
+## b11     FALSE      FALSE
+## b12     FALSE      FALSE
+## b13     FALSE      FALSE
+## b14     FALSE      FALSE
+## b15     FALSE      FALSE
+## b16     FALSE      FALSE
+## b17     FALSE      FALSE
+## b18     FALSE      FALSE
+## b19     FALSE      FALSE
+## b20     FALSE      FALSE
+## 1 subsets of each size up to 20
+## Selection Algorithm: exhaustive
+##           b1  b2  b3  b4  b5  b6  b7  b8  b9  b10 b11 b12 b13 b14 b15 b16 b17
+## 1  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;
+## 2  ( 1 )  &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;
+## 3  ( 1 )  &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;
+## 4  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;
+## 5  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;
+## 6  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot;
+## 7  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot;
+## 8  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot;
+## 9  ( 1 )  &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 10  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 11  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 12  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 13  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 14  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 15  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot;
+## 16  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 17  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 18  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 19  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot; &quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 20  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot; &quot;*&quot;
+##           b18 b19 b20
+## 1  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 2  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 3  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 4  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 5  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 6  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 7  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 8  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 9  ( 1 )  &quot; &quot; &quot; &quot; &quot; &quot;
+## 10  ( 1 ) &quot; &quot; &quot; &quot; &quot; &quot;
+## 11  ( 1 ) &quot; &quot; &quot; &quot; &quot;*&quot;
+## 12  ( 1 ) &quot; &quot; &quot; &quot; &quot;*&quot;
+## 13  ( 1 ) &quot;*&quot; &quot; &quot; &quot;*&quot;
+## 14  ( 1 ) &quot;*&quot; &quot; &quot; &quot;*&quot;
+## 15  ( 1 ) &quot;*&quot; &quot; &quot; &quot;*&quot;
+## 16  ( 1 ) &quot;*&quot; &quot; &quot; &quot;*&quot;
+## 17  ( 1 ) &quot;*&quot; &quot; &quot; &quot;*&quot;
+## 18  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 19  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot;
+## 20  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot;</code></pre>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="linear-model-selection-and-regularization.html#cb389-1"></a>mse &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="cf">function</span>(i) <span class="kw">mean</span>((test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit, test, i))<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb389-2"><a href="linear-model-selection-and-regularization.html#cb389-2"></a><span class="kw">plot</span>(mse, <span class="dt">ylab =</span> <span class="st">&quot;MSE&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="linear-model-selection-and-regularization.html#cb390-1"></a><span class="kw">which.min</span>(mse)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>How does the model at which the test set MSE is minimized compare to the
+true model used to generate the data? Comment on the coefficient values.</li>
+</ol>
+</blockquote>
+<p>The min test MSE is found when model size is 5 but there are 9 non-zero
+coefficients.</p>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="linear-model-selection-and-regularization.html#cb392-1"></a><span class="kw">coef</span>(fit, <span class="dt">id =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## (Intercept)          b1          b2          b3          b4          b9 
+##  0.03507654  5.06180121  3.82785027  2.20434996  7.05312844  0.57032008</code></pre>
+<p>The coefficient values are well estimated when high, but the smaller
+coefficients are dropped.</p>
+<blockquote>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Create a plot displaying <span class="math inline">\(\sqrt{\sum_{j=1}^p (\beta_j - \hat{\beta}{}_j^r)^2}\)</span>
+for a range of values of <span class="math inline">\(r\)</span>, where <span class="math inline">\(\hat{\beta}{}_j^r\)</span> is the <span class="math inline">\(j\)</span>th
+coefficient estimate for the best model containing <span class="math inline">\(r\)</span> coefficients. Comment
+on what you observe. How does this compare to the test MSE plot from (d)?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="linear-model-selection-and-regularization.html#cb394-1"></a><span class="kw">names</span>(beta) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</span>
+<span id="cb394-2"><a href="linear-model-selection-and-regularization.html#cb394-2"></a>b &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="kw">names</span>(beta), <span class="dt">b =</span> beta)</span>
+<span id="cb394-3"><a href="linear-model-selection-and-regularization.html#cb394-3"></a></span>
+<span id="cb394-4"><a href="linear-model-selection-and-regularization.html#cb394-4"></a>out &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb394-5"><a href="linear-model-selection-and-regularization.html#cb394-5"></a>  c &lt;-<span class="st"> </span><span class="kw">coef</span>(fit, <span class="dt">id =</span> i)[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb394-6"><a href="linear-model-selection-and-regularization.html#cb394-6"></a>  c &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="kw">names</span>(c), <span class="dt">c =</span> c)</span>
+<span id="cb394-7"><a href="linear-model-selection-and-regularization.html#cb394-7"></a>  m &lt;-<span class="st"> </span><span class="kw">merge</span>(b, c)</span>
+<span id="cb394-8"><a href="linear-model-selection-and-regularization.html#cb394-8"></a>  <span class="kw">sqrt</span>(<span class="kw">sum</span>((m<span class="op">$</span>b <span class="op">-</span><span class="st"> </span>m<span class="op">$</span>c)<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb394-9"><a href="linear-model-selection-and-regularization.html#cb394-9"></a>})</span>
+<span id="cb394-10"><a href="linear-model-selection-and-regularization.html#cb394-10"></a><span class="kw">plot</span>(out, <span class="dt">ylab =</span> <span class="st">&quot;Mean squared coefficient error&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>The error of the coefficient estimates is minimized when model size is 5. This
+corresponds to the point when test MSE was minimized.</p>
 </div>
 <div id="question-11-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.4</span> Question 11<a href="linear-model-selection-and-regularization.html#question-11-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>We will now try to predict per capita crime rate in the <code>Boston</code> data set.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Try out some of the regression methods explored in this chapter, such as
+<li>Try out some of the regression methods explored in this chapter, such as
 best subset selection, the lasso, ridge regression, and PCR. Present and
-discuss results for the approaches that you consider.</p></li>
-<li><p>Propose a model (or set of models) that seem to perform well on this data
-set, and justify your answer. Make sure that you are evaluating model
-performance using validation set error, cross-validation, or some other
-reasonable alternative, as opposed to using training error.</p></li>
-<li><p>Does your chosen model involve all of the features in the data set? Why or
-why not?</p></li>
+discuss results for the approaches that you consider.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="linear-model-selection-and-regularization.html#cb395-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb395-2"><a href="linear-model-selection-and-regularization.html#cb395-2"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Boston), <span class="kw">nrow</span>(Boston)<span class="op">*</span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span>
+<span id="cb395-3"><a href="linear-model-selection-and-regularization.html#cb395-3"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(Boston)), train)</span>
+<span id="cb395-4"><a href="linear-model-selection-and-regularization.html#cb395-4"></a><span class="kw">hist</span>(<span class="kw">log</span>(Boston<span class="op">$</span>crim))</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Propose a model (or set of models) that seem to perform well on this data
+set, and justify your answer. Make sure that you are evaluating model
+performance using validation set error, cross-validation, or some other
+reasonable alternative, as opposed to using training error.</li>
+</ol>
+</blockquote>
+<p>We will try to fit models to <code>log(Boston$crim)</code> which is closer to a normal
+distribution.</p>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="linear-model-selection-and-regularization.html#cb396-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[train, ])</span>
+<span id="cb396-2"><a href="linear-model-selection-and-regularization.html#cb396-2"></a><span class="kw">mean</span>((<span class="kw">predict</span>(fit, Boston[test, ]) <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(Boston<span class="op">$</span>crim[test])) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.66578</code></pre>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="linear-model-selection-and-regularization.html#cb398-1"></a>mm &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[train, ])</span>
+<span id="cb398-2"><a href="linear-model-selection-and-regularization.html#cb398-2"></a>fit2 &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(mm, <span class="kw">log</span>(Boston<span class="op">$</span>crim[train]), <span class="dt">alpha =</span> <span class="dv">0</span>)</span>
+<span id="cb398-3"><a href="linear-model-selection-and-regularization.html#cb398-3"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit2, <span class="kw">model.matrix</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[test, ]), <span class="dt">s =</span> fit2<span class="op">$</span>lambda.min)</span>
+<span id="cb398-4"><a href="linear-model-selection-and-regularization.html#cb398-4"></a><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(Boston<span class="op">$</span>crim[test])) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.6511807</code></pre>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="linear-model-selection-and-regularization.html#cb400-1"></a>mm &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[train, ])</span>
+<span id="cb400-2"><a href="linear-model-selection-and-regularization.html#cb400-2"></a>fit3 &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(mm, <span class="kw">log</span>(Boston<span class="op">$</span>crim[train]), <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb400-3"><a href="linear-model-selection-and-regularization.html#cb400-3"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit3, <span class="kw">model.matrix</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[test, ]), <span class="dt">s =</span> fit3<span class="op">$</span>lambda.min)</span>
+<span id="cb400-4"><a href="linear-model-selection-and-regularization.html#cb400-4"></a><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(Boston<span class="op">$</span>crim[test])) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.6494337</code></pre>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="linear-model-selection-and-regularization.html#cb402-1"></a>fit4 &lt;-<span class="st"> </span><span class="kw">pcr</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[train, ], <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">validation =</span> <span class="st">&quot;CV&quot;</span>)</span>
+<span id="cb402-2"><a href="linear-model-selection-and-regularization.html#cb402-2"></a><span class="kw">validationplot</span>(fit4, <span class="dt">val.type =</span> <span class="st">&quot;MSEP&quot;</span>)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="linear-model-selection-and-regularization.html#cb403-1"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit4, Boston[test, ], <span class="dt">ncomp =</span> <span class="dv">8</span>)</span>
+<span id="cb403-2"><a href="linear-model-selection-and-regularization.html#cb403-2"></a><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(Boston<span class="op">$</span>crim[test]))<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.6561043</code></pre>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="linear-model-selection-and-regularization.html#cb405-1"></a>fit5 &lt;-<span class="st"> </span><span class="kw">plsr</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[train, ], <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">validation =</span> <span class="st">&quot;CV&quot;</span>)</span>
+<span id="cb405-2"><a href="linear-model-selection-and-regularization.html#cb405-2"></a><span class="kw">validationplot</span>(fit5, <span class="dt">val.type =</span> <span class="st">&quot;MSEP&quot;</span>)</span></code></pre></div>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="linear-model-selection-and-regularization.html#cb406-1"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit5, Boston[test, ], <span class="dt">ncomp =</span> <span class="dv">6</span>)</span>
+<span id="cb406-2"><a href="linear-model-selection-and-regularization.html#cb406-2"></a><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(Boston<span class="op">$</span>crim[test]))<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.6773353</code></pre>
+<p>In this case lasso (<code>alpha = 1</code>) seems to perform very slightly better than
+un-penalized regression. Some coefficients have been dropped:</p>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="linear-model-selection-and-regularization.html#cb408-1"></a><span class="kw">coef</span>(fit3, <span class="dt">s =</span> fit3<span class="op">$</span>lambda.min)</span></code></pre></div>
+<pre><code>## 14 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                       s1
+## (Intercept) -4.713172675
+## (Intercept)  .          
+## zn          -0.011043739
+## indus        0.022515402
+## chas         .          
+## nox          3.856157215
+## rm           .          
+## age          0.004210529
+## dis          .          
+## rad          0.145604750
+## tax          .          
+## ptratio     -0.031787696
+## lstat        0.036112321
+## medv         0.004304181</code></pre>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Does your chosen model involve all of the features in the data set? Why or
+why not?</li>
+</ol>
+</blockquote>
+<p>Not all features are included due to the lasso penalization.</p>
 
 </div>
 </div>

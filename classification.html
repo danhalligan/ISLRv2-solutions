@@ -711,7 +711,6 @@ card payment. What are the odds that she will default?</li>
 </div>
 <div id="question-10-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.10</span> Question 10<a href="classification.html#question-10-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>ToDo</p>
 <blockquote>
 <p>Equation 4.32 derived an expression for <span class="math inline">\(\log(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)})\)</span>
 in the setting where <span class="math inline">\(p &gt; 1\)</span>, so that the mean for the <span class="math inline">\(k\)</span>th class, <span class="math inline">\(\mu_k\)</span>,
@@ -722,6 +721,21 @@ are scalars. In this simpler setting, repeat the calculation in (4.32), and
 provide expressions for <span class="math inline">\(a_k\)</span> and <span class="math inline">\(b_{kj}\)</span> in terms of
 <span class="math inline">\(\pi_k, \pi_K, \mu_k, \mu_K,\)</span> and <span class="math inline">\(\sigma^2\)</span>.</p>
 </blockquote>
+<p><span class="math display">\[\begin{align*}
+\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)
+ &amp; = \log\left(\frac{\pi_k f_k(x)}{\pi_K f_K(x)}\right) \\
+ &amp; = \log\left(\frac{\pi_k \exp(-1/2((x-\mu_k)/\sigma)^2)}{\pi_K \exp(-1/2((x-\mu_K)/\sigma)^2)}\right) \\
+ &amp; = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2} \left(\frac{x-\mu_k}{\sigma}\right)^2 + \frac{1}{2} \left(\frac{x-\mu_K}{\sigma}\right)^2 \\
+ &amp; = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left((x-\mu_k)^2\right) + \frac{1}{2\sigma^2} \left((x-\mu_K)^2\right) \\
+ &amp; = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left((x-\mu_k)^2 - (x-\mu_K)^2\right) \\
+ &amp; = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left(x^2-2x\mu_k+\mu_k^2 - x^2 + 2x\mu_K - \mu_K^2\right) \\
+ &amp; = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left(2x(\mu_K - \mu_k) + \mu_k^2 -\mu_K^2\right) \\
+ &amp; = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{\mu_k^2 -\mu_K^2}{2\sigma^2} + \frac{x(\mu_k - \mu_K)}{\sigma^2}
+\end{align*}\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[a_k = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{\mu_k^2 -\mu_K^2}{2\sigma^2}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[b_k = (mu_k - mu_K)/sigma^2\]</span></p>
 </div>
 <div id="question-11-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">4.1.11</span> Question 11<a href="classification.html#question-11-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
