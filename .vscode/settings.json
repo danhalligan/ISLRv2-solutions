@@ -1,11 +1,21 @@
 {
     "cSpell.words": [
+        "ANOVA",
+        "Bonferroni",
         "boxplots",
+        "covariate",
+        "dendrogram",
+        "FWER",
+        "logit",
         "LOOCV",
+        "multinomial",
         "overfit",
         "overfitting",
+        "quantile",
+        "quantiles",
         "scatterplot",
         "scatterplots",
+        "softmax",
         "stochasticity"
     ],
     "cSpell.enabled": true,

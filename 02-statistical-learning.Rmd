@@ -380,23 +380,17 @@ displacement are highly related.
 >
 > a. To begin, load in the `Boston` data set. The `Boston` data set is part of 
 >    the `ISLR2` library in R.
->    
 >    ```r
 >    > library(ISLR2)
 >    ```
->    
 >    Now the data set is contained in the object `Boston`.
->    
 >    ```r
 >    > Boston
 >    ```
->    
 >    Read about the data set:
->    
 >    ```r
 >    > ?Boston
 >    ```
->    
 >    How many rows are in this data set? How many columns? What do the rows and
 >    columns represent?
 

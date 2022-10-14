@@ -344,8 +344,6 @@ $$0.16 / (1 - 0.16)  = 0.19$$
 
 ### Question 10
 
-ToDo
-
 > Equation 4.32 derived an expression for $\log(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)})$
 > in the setting where $p > 1$, so that the mean for the $k$th class, $\mu_k$,
 > is a $p$-dimensional vector, and the shared covariance $\Sigma$ is a 
@@ -354,6 +352,26 @@ ToDo
 > are scalars. In this simpler setting, repeat the calculation in (4.32), and 
 > provide expressions for $a_k$ and $b_{kj}$ in terms of 
 > $\pi_k, \pi_K, \mu_k, \mu_K,$ and $\sigma^2$.
+
+\begin{align*}
+\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right)
+ & = \log\left(\frac{\pi_k f_k(x)}{\pi_K f_K(x)}\right) \\
+ & = \log\left(\frac{\pi_k \exp(-1/2((x-\mu_k)/\sigma)^2)}{\pi_K \exp(-1/2((x-\mu_K)/\sigma)^2)}\right) \\
+ & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2} \left(\frac{x-\mu_k}{\sigma}\right)^2 + \frac{1}{2} \left(\frac{x-\mu_K}{\sigma}\right)^2 \\
+ & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left((x-\mu_k)^2\right) + \frac{1}{2\sigma^2} \left((x-\mu_K)^2\right) \\
+ & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left((x-\mu_k)^2 - (x-\mu_K)^2\right) \\
+ & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left(x^2-2x\mu_k+\mu_k^2 - x^2 + 2x\mu_K - \mu_K^2\right) \\
+ & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left(2x(\mu_K - \mu_k) + \mu_k^2 -\mu_K^2\right) \\
+ & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{\mu_k^2 -\mu_K^2}{2\sigma^2} + \frac{x(\mu_k - \mu_K)}{\sigma^2}
+\end{align*}
+
+Therefore,
+
+$$a_k = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{\mu_k^2 -\mu_K^2}{2\sigma^2}$$
+
+and
+
+$$b_k = (mu_k - mu_K)/sigma^2$$
 
 ### Question 11
 

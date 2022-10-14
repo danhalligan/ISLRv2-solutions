@@ -6,3 +6,4 @@ _book
 .DS_Store
 islrv2-solutions.rds
 _bookdown_files
+[0-9]*.md

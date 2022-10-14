@@ -4,12 +4,17 @@ Title: Does not matter.
 Version: 0.0.1
 Imports: 
     bookdown,
-    ISLR2,
-    tidyverse,
-    ggplot2,
-    plotly,
-    MASS,
+    boot,
     class,
     corrplot,
-    boot
+    gam,
+    ggplot2,
+    glmnet,
+    ISLR2,
+    leaps,
+    MASS,
+    plotly,
+    pls,
+    splines,
+    tidyverse,
 Remotes: rstudio/bookdown
