@@ -383,12 +383,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>This problem involves the <span class="math inline">\(K\)</span>-means clustering algorithm.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Prove (12.18).</p></li>
-<li><p>On the basis of this identity, argue that the <span class="math inline">\(K\)</span>-means clustering
-algorithm (Algorithm 12.2) decreases the objective (12.17) at each
-iteration.</p></li>
+<li>Prove (12.18).</li>
 </ol>
 </blockquote>
+<p>12.18 is:</p>
+<p><span class="math display">\[
+\frac{1}{|C_k|}\sum_{i,i&#39; \in C_k} \sum_{j=1}^p (x_{ij} - x_{i&#39;j})^2 =
+2 \sum_{i \in C_k} \sum_{j=1}^p  (x_{ij} - \bar{x}_{kj})^2
+\]</span></p>
+<p>where <span class="math display">\[\bar{x}_{kj} = \frac{1}{|C_k|}\sum_{i \in C_k} x_{ij}\]</span></p>
+<p>On the left hand side we compute the difference between each observation
+(indexed by <span class="math inline">\(i\)</span> and <span class="math inline">\(i&#39;\)</span>). In the second we compute the difference between
+each observation and the mean. Intuitively this identity is clear (the factor
+of 2 is present because we calculate the difference between each pair twice).
+However, to prove.</p>
+<p>Note first that,
+<span class="math display">\[\begin{align}
+(x_{ij} - x_{i&#39;j})^2
+  = &amp; ((x_{ij} - \bar{x}_{kj}) - (x_{i&#39;j} - \bar{x}_{kj}))^2 \\
+  = &amp; (x_{ij} - \bar{x}_{kj})^2 -
+      2(x_{ij} - \bar{x}_{kj})(x_{i&#39;j} - \bar{x}_{kj}) +
+      (x_{i&#39;j} - \bar{x}_{kj})^2
+\end{align}\]</span></p>
+<p>Note that the first term is independent of <span class="math inline">\(i&#39;\)</span> and the last is independent of
+<span class="math inline">\(i\)</span>.</p>
+<p>Therefore, 10.12 can be written as:</p>
+<p><span class="math display">\[\begin{align}
+\frac{1}{|C_k|}\sum_{i,i&#39; \in C_k} \sum_{j=1}^p (x_{ij} - x_{i&#39;j})^2
+= &amp; \frac{1}{|C_k|}\sum_{i,i&#39; \in C_k}\sum_{j=1}^p (x_{ij} - \bar{x}_{kj})^2 -
+    \frac{1}{|C_k|}\sum_{i,i&#39; \in C_k}\sum_{j=1}^p 2(x_{ij} - \bar{x}_{kj})(x_{i&#39;j} - \bar{x}_{kj}) +
+    \frac{1}{|C_k|}\sum_{i,i&#39; \in C_k}\sum_{j=1}^p (x_{i&#39;j} - \bar{x}_{kj})^2 \\
+= &amp; \frac{|C_k|}{|C_k|}\sum_{i \in C_k}\sum_{j=1}^p (x_{ij} - \bar{x}_{kj})^2 -
+    \frac{2}{|C_k|}\sum_{i,i&#39; \in C_k}\sum_{j=1}^p (x_{ij} - \bar{x}_{kj})(x_{i&#39;j} - \bar{x}_{kj}) +
+    \frac{|C_k|}{|C_k|}\sum_{i \in C_k}\sum_{j=1}^p (x_{ij} - \bar{x}_{kj})^2 \\
+= &amp; 2 \sum_{i \in C_k}\sum_{j=1}^p (x_{ij} - \bar{x}_{kj})^2
+\end{align}\]</span></p>
+<p>Note that we can drop the term containing
+<span class="math inline">\((x_{ij} - \bar{x}_{kj})(x_{i&#39;j} - \bar{x}_{kj})\)</span> since this is 0 when summed
+over combinations of <span class="math inline">\(i\)</span> and <span class="math inline">\(i&#39;\)</span> for a given <span class="math inline">\(j\)</span>.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>On the basis of this identity, argue that the <span class="math inline">\(K\)</span>-means clustering
+algorithm (Algorithm 12.2) decreases the objective (12.17) at each
+iteration.</li>
+</ol>
+</blockquote>
+<p>Equation 10.12 demonstrates that the euclidean distance between each possible
+pair of samples can be related to the difference from each sample to the mean
+of the cluster. The K-means algorithm works by minimizing the euclidean distance
+to each centroid, thus also minimizes the within-cluster variance.</p>
 </div>
 <div id="question-2-10" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.1.2</span> Question 2<a href="unsupervised-learning.html#question-2-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -404,23 +447,62 @@ matrix, given by</p>
 <p>For instance, the dissimilarity between the first and second observations is
 0.3, and the dissimilarity between the second and fourth observations is 0.8.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>On the basis of this dissimilarity matrix, sketch the dendrogram that
+<li>On the basis of this dissimilarity matrix, sketch the dendrogram that
 results from hierarchically clustering these four observations using
 complete linkage. Be sure to indicate on the plot the height at which each
 fusion occurs, as well as the observations corresponding to each leaf in
-the dendrogram.</p></li>
-<li><p>Repeat (a), this time using single linkage clustering.</p></li>
-<li><p>Suppose that we cut the dendrogram obtained in (a) such that two clusters
-result. Which observations are in each cluster?</p></li>
-<li><p>Suppose that we cut the dendrogram obtained in (b) such that two clusters
-result. Which observations are in each cluster?</p></li>
-<li><p>It is mentioned in the chapter that at each fusion in the dendrogram, the
+the dendrogram.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="unsupervised-learning.html#cb694-1"></a>m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.</span>, <span class="fl">0.45</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.45</span>, <span class="dv">0</span>), <span class="dt">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb694-2"><a href="unsupervised-learning.html#cb694-2"></a>c1 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(m), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb694-3"><a href="unsupervised-learning.html#cb694-3"></a><span class="kw">plot</span>(c1)</span></code></pre></div>
+<p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Repeat (a), this time using single linkage clustering.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb695-1"><a href="unsupervised-learning.html#cb695-1"></a>c2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(m), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</span>
+<span id="cb695-2"><a href="unsupervised-learning.html#cb695-2"></a><span class="kw">plot</span>(c2)</span></code></pre></div>
+<p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Suppose that we cut the dendrogram obtained in (a) such that two clusters
+result. Which observations are in each cluster?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="unsupervised-learning.html#cb696-1"></a><span class="kw">table</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">cutree</span>(c1, <span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##    
+##     1 2
+##   1 1 0
+##   2 1 0
+##   3 0 1
+##   4 0 1</code></pre>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Suppose that we cut the dendrogram obtained in (b) such that two clusters
+result. Which observations are in each cluster?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="unsupervised-learning.html#cb698-1"></a><span class="kw">table</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">cutree</span>(c2, <span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##    
+##     1 2
+##   1 1 0
+##   2 1 0
+##   3 1 0
+##   4 0 1</code></pre>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>It is mentioned in the chapter that at each fusion in the dendrogram, the
 position of the two clusters being fused can be swapped without changing
 the meaning of the dendrogram. Draw a dendrogram that is equivalent to the
 dendrogram in (a), for which two or more of the leaves are repositioned,
-but for which the meaning of the dendrogram is the same.</p></li>
+but for which the meaning of the dendrogram is the same.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="unsupervised-learning.html#cb700-1"></a><span class="kw">plot</span>(c1, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span></code></pre></div>
+<p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="question-3-10" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.1.3</span> Question 3<a href="unsupervised-learning.html#question-3-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -470,18 +552,60 @@ observations are as follows.</p>
 </tbody>
 </table>
 <ol style="list-style-type: lower-alpha">
-<li><p>Plot the observations.</p></li>
-<li><p>Randomly assign a cluster label to each observation. You can use the
-<code>sample()</code> command in <code>R</code> to do this. Report the cluster labels for each
-observation.</p></li>
-<li><p>Compute the centroid for each cluster.</p></li>
-<li><p>Assign each observation to the centroid to which it is closest, in terms of
-Euclidean distance. Report the cluster labels for each observation.</p></li>
-<li><p>Repeat (c) and (d) until the answers obtained stop changing.</p></li>
-<li><p>In your plot from (a), color the observations according to the cluster
-labels obtained.</p></li>
+<li>Plot the observations.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="unsupervised-learning.html#cb701-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb701-2"><a href="unsupervised-learning.html#cb701-2"></a>d &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb701-3"><a href="unsupervised-learning.html#cb701-3"></a>  <span class="dt">x1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">4</span>),</span>
+<span id="cb701-4"><a href="unsupervised-learning.html#cb701-4"></a>  <span class="dt">x2 =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>)</span>
+<span id="cb701-5"><a href="unsupervised-learning.html#cb701-5"></a>)</span>
+<span id="cb701-6"><a href="unsupervised-learning.html#cb701-6"></a><span class="kw">ggplot</span>(d, <span class="kw">aes</span>(<span class="dt">x =</span> x1, <span class="dt">y =</span> x2)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Randomly assign a cluster label to each observation. You can use the
+<code>sample()</code> command in <code>R</code> to do this. Report the cluster labels for each
+observation.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb702-1"><a href="unsupervised-learning.html#cb702-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb702-2"><a href="unsupervised-learning.html#cb702-2"></a>d<span class="op">$</span>cluster &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">size =</span> <span class="kw">nrow</span>(d), <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Compute the centroid for each cluster.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb703-1"><a href="unsupervised-learning.html#cb703-1"></a>centroids &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="cf">function</span>(i) <span class="kw">colMeans</span>(d[d<span class="op">$</span>cluster <span class="op">==</span><span class="st"> </span>i, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]))</span></code></pre></div>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Assign each observation to the centroid to which it is closest, in terms of
+Euclidean distance. Report the cluster labels for each observation.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb704-1"><a href="unsupervised-learning.html#cb704-1"></a>dist &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb704-2"><a href="unsupervised-learning.html#cb704-2"></a>    <span class="kw">sqrt</span>((d<span class="op">$</span>x1 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">1</span>, i])<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(d<span class="op">$</span>x2 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">2</span>, i])<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb704-3"><a href="unsupervised-learning.html#cb704-3"></a>})</span>
+<span id="cb704-4"><a href="unsupervised-learning.html#cb704-4"></a>d<span class="op">$</span>cluster &lt;-<span class="st"> </span><span class="kw">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Repeat (c) and (d) until the answers obtained stop changing.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb705"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb705-1"><a href="unsupervised-learning.html#cb705-1"></a>centroids &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="cf">function</span>(i) <span class="kw">colMeans</span>(d[d<span class="op">$</span>cluster <span class="op">==</span><span class="st"> </span>i, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]))</span>
+<span id="cb705-2"><a href="unsupervised-learning.html#cb705-2"></a>dist &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb705-3"><a href="unsupervised-learning.html#cb705-3"></a>    <span class="kw">sqrt</span>((d<span class="op">$</span>x1 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">1</span>, i])<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(d<span class="op">$</span>x2 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">2</span>, i])<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb705-4"><a href="unsupervised-learning.html#cb705-4"></a>})</span>
+<span id="cb705-5"><a href="unsupervised-learning.html#cb705-5"></a>d<span class="op">$</span>cluster &lt;-<span class="st"> </span><span class="kw">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
+<p>In this case, we get stable labels after the first iteration.</p>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>In your plot from (a), color the observations according to the cluster
+labels obtained.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb706-1"><a href="unsupervised-learning.html#cb706-1"></a><span class="kw">ggplot</span>(d, <span class="kw">aes</span>(<span class="dt">x =</span> x1, <span class="dt">y =</span> x2, <span class="dt">color =</span> <span class="kw">factor</span>(cluster))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="question-4-10" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.1.4</span> Question 4<a href="unsupervised-learning.html#question-4-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -489,18 +613,28 @@ labels obtained.</p></li>
 <p>Suppose that for a particular data set, we perform hierarchical clustering
 using single linkage and using complete linkage. We obtain two dendrograms.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>At a certain point on the single linkage dendrogram, the clusters {1, 2, 3}
+<li>At a certain point on the single linkage dendrogram, the clusters {1, 2, 3}
 and {4, 5} fuse. On the complete linkage dendrogram, the clusters {1, 2, 3}
 and {4, 5} also fuse at a certain point. Which fusion will occur higher on
 the tree, or will they fuse at the same height, or is there not enough
-information to tell?</p></li>
-<li><p>At a certain point on the single linkage dendrogram, the clusters {5} and
+information to tell?</li>
+</ol>
+</blockquote>
+<p>The complete linkage fusion will likely be higher in the tree since single
+linkage is defined as being the minimum distance between two clusters. However,
+there is a chance that they could be at the same height (so technically there
+is not enough information to tell).</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>At a certain point on the single linkage dendrogram, the clusters {5} and
 {6} fuse. On the complete linkage dendrogram, the clusters {5} and {6} also
 fuse at a certain point. Which fusion will occur higher on the tree, or
 will they fuse at the same height, or is there not enough information to
-tell?</p></li>
+tell?</li>
 </ol>
 </blockquote>
+<p>They will fuse at the same height (the algorithm for calculating distance is
+the same when the clusters are of size 1).</p>
 </div>
 <div id="question-5-10" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.1.5</span> Question 5<a href="unsupervised-learning.html#question-5-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -510,6 +644,23 @@ tell?</p></li>
 their sock and computer purchases, with <span class="math inline">\(K = 2\)</span>. Give three answers, one for
 each of the variable scalings displayed. Explain.</p>
 </blockquote>
+<p>In cases where variables are scaled we would expect clusters to correspond
+to whether or not the retainer sold a computer. In the first case (raw numbers
+of items sold), we would expect clusters to represent low vs high numbers of
+sock purchases.</p>
+<p>To test, we can run the analysis in R:</p>
+<div class="sourceCode" id="cb707"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb707-1"><a href="unsupervised-learning.html#cb707-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb707-2"><a href="unsupervised-learning.html#cb707-2"></a>dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb707-3"><a href="unsupervised-learning.html#cb707-3"></a>  <span class="dt">socks =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>),</span>
+<span id="cb707-4"><a href="unsupervised-learning.html#cb707-4"></a>  <span class="dt">computers =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb707-5"><a href="unsupervised-learning.html#cb707-5"></a>)</span>
+<span id="cb707-6"><a href="unsupervised-learning.html#cb707-6"></a><span class="kw">kmeans</span>(dat, <span class="dv">2</span>)<span class="op">$</span>cluster</span></code></pre></div>
+<pre><code>## [1] 1 1 2 2 2 2 2 1</code></pre>
+<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb709-1"><a href="unsupervised-learning.html#cb709-1"></a><span class="kw">kmeans</span>(<span class="kw">scale</span>(dat), <span class="dv">2</span>)<span class="op">$</span>cluster</span></code></pre></div>
+<pre><code>## [1] 1 1 1 1 2 2 2 2</code></pre>
+<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb711-1"><a href="unsupervised-learning.html#cb711-1"></a>dat<span class="op">$</span>computers &lt;-<span class="st"> </span>dat<span class="op">$</span>computers <span class="op">*</span><span class="st"> </span><span class="dv">2000</span></span>
+<span id="cb711-2"><a href="unsupervised-learning.html#cb711-2"></a><span class="kw">kmeans</span>(dat, <span class="dv">2</span>)<span class="op">$</span>cluster</span></code></pre></div>
+<pre><code>## [1] 1 1 1 1 2 2 2 2</code></pre>
 </div>
 <div id="question-6-10" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.1.6</span> Question 6<a href="unsupervised-learning.html#question-6-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -543,6 +694,11 @@ Euclidean distance between the ith and jth observations.</p>
 <p><em>Hint: The Euclidean distance can be calculated using the <code>dist()</code> function,</em>
 <em>and correlations can be calculated using the <code>cor()</code> function.</em></p>
 </blockquote>
+<div class="sourceCode" id="cb713"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb713-1"><a href="unsupervised-learning.html#cb713-1"></a>dat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">scale</span>(<span class="kw">t</span>(USArrests)))</span>
+<span id="cb713-2"><a href="unsupervised-learning.html#cb713-2"></a>d1 &lt;-<span class="st"> </span><span class="kw">dist</span>(dat)<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb713-3"><a href="unsupervised-learning.html#cb713-3"></a>d2 &lt;-<span class="st"> </span><span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(<span class="kw">t</span>(dat)))</span>
+<span id="cb713-4"><a href="unsupervised-learning.html#cb713-4"></a><span class="kw">plot</span>(d1, d2)</span></code></pre></div>
+<p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="question-8-10" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.2.2</span> Question 8<a href="unsupervised-learning.html#question-8-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -552,13 +708,25 @@ Euclidean distance between the ith and jth observations.</p>
 <code>prcomp()</code> function.</p>
 <p>On the <code>USArrests</code> data, calculate PVE in two ways:</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Using the <code>sdev</code> output of the <code>prcomp()</code> function, as was done in Section
-12.2.3.</p></li>
-<li><p>By applying Equation 12.10 directly. That is, use the <code>prcomp()</code> function to
+<li>Using the <code>sdev</code> output of the <code>prcomp()</code> function, as was done in Section
+12.2.3.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="unsupervised-learning.html#cb714-1"></a>pr &lt;-<span class="st"> </span><span class="kw">prcomp</span>(USArrests, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb714-2"><a href="unsupervised-learning.html#cb714-2"></a>pr<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(pr<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>By applying Equation 12.10 directly. That is, use the <code>prcomp()</code> function to
 compute the principal component loadings. Then, use those loadings in
-Equation 12.10 to obtain the PVE.</p></li>
+Equation 12.10 to obtain the PVE.</li>
 </ol>
 <p>These two approaches should give the same results.</p>
+</blockquote>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb716-1"><a href="unsupervised-learning.html#cb716-1"></a><span class="kw">colSums</span>(pr<span class="op">$</span>x<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(<span class="kw">scale</span>(USArrests)<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##        PC1        PC2        PC3        PC4 
+## 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
+<blockquote>
 <p><em>Hint: You will only obtain the same results in (a) and (b) if the same</em>
 <em>data is used in both cases. For instance, if in (a) you performed</em>
 <em><code>prcomp()</code> using centered and scaled variables, then you must center and</em>
@@ -571,18 +739,87 @@ Equation 12.10 to obtain the PVE.</p></li>
 <p>Consider the <code>USArrests</code> data. We will now perform hierarchical clustering on
 the states.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Using hierarchical clustering with complete linkage and Euclidean distance,
-cluster the states.</p></li>
-<li><p>Cut the dendrogram at a height that results in three distinct clusters.
-Which states belong to which clusters?</p></li>
-<li><p>Hierarchically cluster the states using complete linkage and Euclidean
-distance, <em>after scaling the variables to have standard deviation one</em>.</p></li>
-<li><p>What effect does scaling the variables have on the hierarchical clustering
-obtained? In your opinion, should the variables be scaled before the
-inter-observation dissimilarities are computed? Provide a justification for
-your answer.</p></li>
+<li>Using hierarchical clustering with complete linkage and Euclidean distance,
+cluster the states.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb718-1"><a href="unsupervised-learning.html#cb718-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb718-2"><a href="unsupervised-learning.html#cb718-2"></a>hc &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(USArrests), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Cut the dendrogram at a height that results in three distinct clusters.
+Which states belong to which clusters?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb719-1"><a href="unsupervised-learning.html#cb719-1"></a>ct &lt;-<span class="st"> </span><span class="kw">cutree</span>(hc, <span class="dv">3</span>)</span>
+<span id="cb719-2"><a href="unsupervised-learning.html#cb719-2"></a><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="cf">function</span>(i) <span class="kw">names</span>(ct)[ct <span class="op">==</span><span class="st"> </span>i])</span></code></pre></div>
+<pre><code>## [[1]]
+##  [1] &quot;Alabama&quot;        &quot;Alaska&quot;         &quot;Arizona&quot;        &quot;California&quot;    
+##  [5] &quot;Delaware&quot;       &quot;Florida&quot;        &quot;Illinois&quot;       &quot;Louisiana&quot;     
+##  [9] &quot;Maryland&quot;       &quot;Michigan&quot;       &quot;Mississippi&quot;    &quot;Nevada&quot;        
+## [13] &quot;New Mexico&quot;     &quot;New York&quot;       &quot;North Carolina&quot; &quot;South Carolina&quot;
+## 
+## [[2]]
+##  [1] &quot;Arkansas&quot;      &quot;Colorado&quot;      &quot;Georgia&quot;       &quot;Massachusetts&quot;
+##  [5] &quot;Missouri&quot;      &quot;New Jersey&quot;    &quot;Oklahoma&quot;      &quot;Oregon&quot;       
+##  [9] &quot;Rhode Island&quot;  &quot;Tennessee&quot;     &quot;Texas&quot;         &quot;Virginia&quot;     
+## [13] &quot;Washington&quot;    &quot;Wyoming&quot;      
+## 
+## [[3]]
+##  [1] &quot;Connecticut&quot;   &quot;Hawaii&quot;        &quot;Idaho&quot;         &quot;Indiana&quot;      
+##  [5] &quot;Iowa&quot;          &quot;Kansas&quot;        &quot;Kentucky&quot;      &quot;Maine&quot;        
+##  [9] &quot;Minnesota&quot;     &quot;Montana&quot;       &quot;Nebraska&quot;      &quot;New Hampshire&quot;
+## [13] &quot;North Dakota&quot;  &quot;Ohio&quot;          &quot;Pennsylvania&quot;  &quot;South Dakota&quot; 
+## [17] &quot;Utah&quot;          &quot;Vermont&quot;       &quot;West Virginia&quot; &quot;Wisconsin&quot;</code></pre>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Hierarchically cluster the states using complete linkage and Euclidean
+distance, <em>after scaling the variables to have standard deviation one</em>.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb721-1"><a href="unsupervised-learning.html#cb721-1"></a>hc2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(USArrests)), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span></code></pre></div>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>What effect does scaling the variables have on the hierarchical clustering
+obtained? In your opinion, should the variables be scaled before the
+inter-observation dissimilarities are computed? Provide a justification for
+your answer.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="unsupervised-learning.html#cb722-1"></a>ct &lt;-<span class="st"> </span><span class="kw">cutree</span>(hc, <span class="dv">3</span>)</span>
+<span id="cb722-2"><a href="unsupervised-learning.html#cb722-2"></a><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="cf">function</span>(i) <span class="kw">names</span>(ct)[ct <span class="op">==</span><span class="st"> </span>i])</span></code></pre></div>
+<pre><code>## [[1]]
+##  [1] &quot;Alabama&quot;        &quot;Alaska&quot;         &quot;Arizona&quot;        &quot;California&quot;    
+##  [5] &quot;Delaware&quot;       &quot;Florida&quot;        &quot;Illinois&quot;       &quot;Louisiana&quot;     
+##  [9] &quot;Maryland&quot;       &quot;Michigan&quot;       &quot;Mississippi&quot;    &quot;Nevada&quot;        
+## [13] &quot;New Mexico&quot;     &quot;New York&quot;       &quot;North Carolina&quot; &quot;South Carolina&quot;
+## 
+## [[2]]
+##  [1] &quot;Arkansas&quot;      &quot;Colorado&quot;      &quot;Georgia&quot;       &quot;Massachusetts&quot;
+##  [5] &quot;Missouri&quot;      &quot;New Jersey&quot;    &quot;Oklahoma&quot;      &quot;Oregon&quot;       
+##  [9] &quot;Rhode Island&quot;  &quot;Tennessee&quot;     &quot;Texas&quot;         &quot;Virginia&quot;     
+## [13] &quot;Washington&quot;    &quot;Wyoming&quot;      
+## 
+## [[3]]
+##  [1] &quot;Connecticut&quot;   &quot;Hawaii&quot;        &quot;Idaho&quot;         &quot;Indiana&quot;      
+##  [5] &quot;Iowa&quot;          &quot;Kansas&quot;        &quot;Kentucky&quot;      &quot;Maine&quot;        
+##  [9] &quot;Minnesota&quot;     &quot;Montana&quot;       &quot;Nebraska&quot;      &quot;New Hampshire&quot;
+## [13] &quot;North Dakota&quot;  &quot;Ohio&quot;          &quot;Pennsylvania&quot;  &quot;South Dakota&quot; 
+## [17] &quot;Utah&quot;          &quot;Vermont&quot;       &quot;West Virginia&quot; &quot;Wisconsin&quot;</code></pre>
+<p>Scaling results in different clusters and the choice of whether to scale or
+not depends on the data in question. In this case, the variables are:</p>
+<ul>
+<li>Murder numeric Murder arrests (per 100,000)<br />
+</li>
+<li>Assault numeric Assault arrests (per 100,000)</li>
+<li>UrbanPop numeric Percent urban population<br />
+</li>
+<li>Rape numeric Rape arrests (per 100,000)</li>
+</ul>
+<p>These variables are not naturally on the same unit and the units involved are
+somewhat arbitrary (so for example, Murder could be measured per 1 million
+rather than per 100,000) so in this case I would argue the data should be
+scaled.</p>
 </div>
 <div id="question-10-8" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.2.4</span> Question 10<a href="unsupervised-learning.html#question-10-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -596,14 +833,33 @@ your answer.</p></li>
 <em>data. One example is the <code>rnorm()</code> function; <code>runif()</code> is another option.</em>
 <em>Be sure to add a mean shift to the observations in each class so that</em>
 <em>there are three distinct classes.</em></p></li>
-<li><p>Perform PCA on the 60 observations and plot the first two principal
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb724-1"><a href="unsupervised-learning.html#cb724-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb724-2"><a href="unsupervised-learning.html#cb724-2"></a>data &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">50</span>), <span class="dt">ncol =</span> <span class="dv">50</span>)</span>
+<span id="cb724-3"><a href="unsupervised-learning.html#cb724-3"></a>classes &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">each =</span> <span class="dv">20</span>)</span>
+<span id="cb724-4"><a href="unsupervised-learning.html#cb724-4"></a><span class="kw">dimnames</span>(data) &lt;-<span class="st"> </span><span class="kw">list</span>(classes, <span class="kw">paste0</span>(<span class="st">&quot;v&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>))</span>
+<span id="cb724-5"><a href="unsupervised-learning.html#cb724-5"></a>data[classes <span class="op">==</span><span class="st"> &quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span>data[classes <span class="op">==</span><span class="st"> &quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] <span class="op">+</span><span class="st"> </span><span class="fl">1.2</span></span>
+<span id="cb724-6"><a href="unsupervised-learning.html#cb724-6"></a>data[classes <span class="op">==</span><span class="st"> &quot;C&quot;</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">30</span>] &lt;-<span class="st"> </span>data[classes <span class="op">==</span><span class="st"> &quot;C&quot;</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">30</span>] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Perform PCA on the 60 observations and plot the first two principal
 component score vectors. Use a different color to indicate the
 observations in each of the three classes. If the three classes appear
 separated in this plot, then continue on to part (c). If not, then return
 to part (a) and modify the simulation so that there is greater separation
 between the three classes. Do not continue to part (c) until the three
 classes show at least some separation in the first two principal component
-score vectors.</p></li>
+score vectors.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb725"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb725-1"><a href="unsupervised-learning.html#cb725-1"></a>pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(data)</span>
+<span id="cb725-2"><a href="unsupervised-learning.html#cb725-2"></a><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(<span class="dt">Class =</span> classes, <span class="dt">PC1 =</span> pca<span class="op">$</span>x[, <span class="dv">1</span>], <span class="dt">PC2 =</span> pca<span class="op">$</span>x[, <span class="dv">2</span>]),</span>
+<span id="cb725-3"><a href="unsupervised-learning.html#cb725-3"></a>    <span class="kw">aes</span>(<span class="dt">x =</span> PC1, <span class="dt">y =</span> PC2, <span class="dt">col =</span> Class)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb725-4"><a href="unsupervised-learning.html#cb725-4"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
 <li><p>Perform <span class="math inline">\(K\)</span>-means clustering of the observations with <span class="math inline">\(K = 3\)</span>. How well do
 the clusters that you obtained in <span class="math inline">\(K\)</span>-means clustering compare to the true
 class labels?</p>
@@ -612,18 +868,76 @@ class labels?</p>
 <em>interpret the results: <span class="math inline">\(K\)</span>-means clustering will arbitrarily number the</em>
 <em>clusters, so you cannot simply check whether the true class labels and</em>
 <em>clustering labels are the same.</em></p></li>
-<li><p>Perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 2\)</span>. Describe your results.</p></li>
-<li><p>Now perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 4\)</span>, and describe your results.</p></li>
-<li><p>Now perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 3\)</span> on the first two principal
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb726-1"><a href="unsupervised-learning.html#cb726-1"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(data, <span class="dv">3</span>)<span class="op">$</span>cluster</span>
+<span id="cb726-2"><a href="unsupervised-learning.html#cb726-2"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
+<pre><code>##    
+## km   A  B  C
+##   1  1 20  1
+##   2  0  0 19
+##   3 19  0  0</code></pre>
+<p><span class="math inline">\(K\)</span>-means separates out the clusters nearly perfectly.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 2\)</span>. Describe your results.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb728-1"><a href="unsupervised-learning.html#cb728-1"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(data, <span class="dv">2</span>)<span class="op">$</span>cluster</span>
+<span id="cb728-2"><a href="unsupervised-learning.html#cb728-2"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
+<pre><code>##    
+## km   A  B  C
+##   1 18 20  1
+##   2  2  0 19</code></pre>
+<p><span class="math inline">\(K\)</span>-means effectively defines cluster 2 to be class B, but cluster 1 is a mix
+of classes A and B.</p>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Now perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 4\)</span>, and describe your results.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb730-1"><a href="unsupervised-learning.html#cb730-1"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(data, <span class="dv">4</span>)<span class="op">$</span>cluster</span>
+<span id="cb730-2"><a href="unsupervised-learning.html#cb730-2"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
+<pre><code>##    
+## km   A  B  C
+##   1  0  7  2
+##   2 18  1  0
+##   3  0  0 18
+##   4  2 12  0</code></pre>
+<p><span class="math inline">\(K\)</span>-means effectively defines cluster 1 to be class B, cluster 2 to be class A
+but clusters 3 and 4 are split over class C.</p>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Now perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 3\)</span> on the first two principal
 component score vectors, rather than on the raw data. That is, perform
 <span class="math inline">\(K\)</span>-means clustering on the <span class="math inline">\(60 \times 2\)</span> matrix of which the first column
 is the first principal component score vector, and the second column is
-the second principal component score vector. Comment on the results.</p></li>
-<li><p>Using the <code>scale()</code> function, perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 3\)</span> on
-the data <em>after scaling each variable to have standard deviation one</em>. How
-do these results compare to those obtained in (b)? Explain.</p></li>
+the second principal component score vector. Comment on the results.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb732-1"><a href="unsupervised-learning.html#cb732-1"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(pca<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dv">3</span>)<span class="op">$</span>cluster</span>
+<span id="cb732-2"><a href="unsupervised-learning.html#cb732-2"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
+<pre><code>##    
+## km   A  B  C
+##   1  0 20  2
+##   2 20  0  0
+##   3  0  0 18</code></pre>
+<p><span class="math inline">\(K\)</span>-means again separates out the clusters nearly perfectly.</p>
+<blockquote>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Using the <code>scale()</code> function, perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 3\)</span> on
+the data <em>after scaling each variable to have standard deviation one</em>. How
+do these results compare to those obtained in (b)? Explain.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="unsupervised-learning.html#cb734-1"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(<span class="kw">scale</span>(data), <span class="dv">3</span>)<span class="op">$</span>cluster</span>
+<span id="cb734-2"><a href="unsupervised-learning.html#cb734-2"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
+<pre><code>##    
+## km   A  B  C
+##   1  1 20  1
+##   2 19  0  0
+##   3  0  0 19</code></pre>
+<p><span class="math inline">\(K\)</span>-means appears to perform less well on the scaled data in this case.</p>
 </div>
 <div id="question-11-7" class="section level3 hasAnchor">
 <h3><span class="header-section-number">12.2.5</span> Question 11<a href="unsupervised-learning.html#question-11-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -658,18 +972,53 @@ rather than <code>svd()</code>.</p>
 <h3><span class="header-section-number">12.2.7</span> Question 13<a href="unsupervised-learning.html#question-13-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>On the book website, <code>www.StatLearning.com</code>, there is a gene expression data
-set (<code>Ch10Ex11.csv</code>) that consists of 40 tissue samples with measurements on
+set (<code>Ch12Ex13.csv</code>) that consists of 40 tissue samples with measurements on
 1,000 genes. The first 20 samples are from healthy patients, while the
 second 20 are from a diseased group.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Load in the data using <code>read.csv()</code>. You will need to select <code>header = F</code>.</p></li>
-<li><p>Apply hierarchical clustering to the samples using correlation-based
-distance, and plot the dendrogram. Do the genes separate the samples into
-the two groups? Do your results depend on the type of linkage used?</p></li>
-<li><p>Your collaborator wants to know which genes differ the most across the two
-groups. Suggest a way to answer this question, and apply it here.</p></li>
+<li>Load in the data using <code>read.csv()</code>. You will need to select <code>header = F</code>.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="unsupervised-learning.html#cb736-1"></a>data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Ch12Ex13.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb736-2"><a href="unsupervised-learning.html#cb736-2"></a><span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;H&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>), <span class="kw">paste0</span>(<span class="st">&quot;D&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>))</span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Apply hierarchical clustering to the samples using correlation-based
+distance, and plot the dendrogram. Do the genes separate the samples into
+the two groups? Do your results depend on the type of linkage used?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="unsupervised-learning.html#cb737-1"></a>hc.complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(data)), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb737-2"><a href="unsupervised-learning.html#cb737-2"></a><span class="kw">plot</span>(hc.complete)</span></code></pre></div>
+<p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb738-1"><a href="unsupervised-learning.html#cb738-1"></a>hc.complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(data)), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb738-2"><a href="unsupervised-learning.html#cb738-2"></a><span class="kw">plot</span>(hc.complete)</span></code></pre></div>
+<p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
+<div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb739-1"><a href="unsupervised-learning.html#cb739-1"></a>hc.complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(data)), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</span>
+<span id="cb739-2"><a href="unsupervised-learning.html#cb739-2"></a><span class="kw">plot</span>(hc.complete)</span></code></pre></div>
+<p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-3.png" width="672" /></p>
+<p>Yes the samples clearly separate into the two groups, although the results
+depend somewhat on the linkage method used. In the case of average clustering,
+the disease samples all fall within a subset of the healthy samples.</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Your collaborator wants to know which genes differ the most across the two
+groups. Suggest a way to answer this question, and apply it here.</li>
+</ol>
+</blockquote>
+<p>This is probably best achieved with a supervised approach. A simple method
+would be to determine which genes show the most significant differences between
+the groups by applying a t-test to each group. We can then select those with a
+FDR adjusted p-value less than some given threshold (e.g. 0.05).</p>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="unsupervised-learning.html#cb740-1"></a>class &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Healthy&quot;</span>, <span class="st">&quot;Diseased&quot;</span>), <span class="dt">each =</span> <span class="dv">20</span>))</span>
+<span id="cb740-2"><a href="unsupervised-learning.html#cb740-2"></a>pvals &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(<span class="kw">apply</span>(data, <span class="dv">1</span>, <span class="cf">function</span>(v) <span class="kw">t.test</span>(v <span class="op">~</span><span class="st"> </span>class)<span class="op">$</span>p.value))</span>
+<span id="cb740-3"><a href="unsupervised-learning.html#cb740-3"></a><span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>##   [1]  11  12  13  14  15  16  17  18  19  20 501 502 503 504 505 506 507 508
+##  [19] 509 511 512 513 514 515 516 517 519 520 521 522 523 524 525 526 527 528
+##  [37] 529 530 531 532 533 534 535 536 537 538 539 540 541 542 543 544 545 546
+##  [55] 547 548 549 550 551 552 553 554 555 556 557 558 559 560 561 562 563 564
+##  [73] 565 566 567 568 569 570 571 572 574 575 576 577 578 579 580 581 582 583
+##  [91] 584 586 587 588 589 590 591 592 593 595 596 597 598 599 600</code></pre>
 
 </div>
 </div>

@@ -376,7 +376,7 @@ $$a_k = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{\mu_k^2 -\mu_K^2}{2\sigma^2
 
 and
 
-$$b_k = (mu_k - mu_K)/sigma^2$$
+$$b_k = (\mu_k - \mu_K) / \sigma^2$$
 
 ### Question 11
 
