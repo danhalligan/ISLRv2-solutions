@@ -7,10 +7,59 @@
 > This problem involves the $K$-means clustering algorithm.
 >
 > a. Prove (12.18).
->
+
+12.18 is:
+
+$$
+\frac{1}{|C_k|}\sum_{i,i' \in C_k} \sum_{j=1}^p (x_{ij} - x_{i'j})^2 =
+2 \sum_{i \in C_k} \sum_{j=1}^p  (x_{ij} - \bar{x}_{kj})^2
+$$
+
+where $$\bar{x}_{kj} = \frac{1}{|C_k|}\sum_{i \in C_k} x_{ij}$$
+
+On the left hand side we compute the difference between each observation
+(indexed by $i$ and $i'$). In the second we compute the difference between
+each observation and the mean. Intuitively this identity is clear (the factor
+of 2 is present because we calculate the difference between each pair twice).
+However, to prove.
+
+Note first that,
+\begin{align}
+(x_{ij} - x_{i'j})^2
+  = & ((x_{ij} - \bar{x}_{kj}) - (x_{i'j} - \bar{x}_{kj}))^2 \\
+  = & (x_{ij} - \bar{x}_{kj})^2 -
+      2(x_{ij} - \bar{x}_{kj})(x_{i'j} - \bar{x}_{kj}) +
+      (x_{i'j} - \bar{x}_{kj})^2
+\end{align}
+
+Note that the first term is independent of $i'$ and the last is independent of
+$i$.
+
+Therefore, 10.12 can be written as:
+
+\begin{align}
+\frac{1}{|C_k|}\sum_{i,i' \in C_k} \sum_{j=1}^p (x_{ij} - x_{i'j})^2
+= & \frac{1}{|C_k|}\sum_{i,i' \in C_k}\sum_{j=1}^p (x_{ij} - \bar{x}_{kj})^2 -
+    \frac{1}{|C_k|}\sum_{i,i' \in C_k}\sum_{j=1}^p 2(x_{ij} - \bar{x}_{kj})(x_{i'j} - \bar{x}_{kj}) +
+    \frac{1}{|C_k|}\sum_{i,i' \in C_k}\sum_{j=1}^p (x_{i'j} - \bar{x}_{kj})^2 \\
+= & \frac{|C_k|}{|C_k|}\sum_{i \in C_k}\sum_{j=1}^p (x_{ij} - \bar{x}_{kj})^2 -
+    \frac{2}{|C_k|}\sum_{i,i' \in C_k}\sum_{j=1}^p (x_{ij} - \bar{x}_{kj})(x_{i'j} - \bar{x}_{kj}) +
+    \frac{|C_k|}{|C_k|}\sum_{i \in C_k}\sum_{j=1}^p (x_{ij} - \bar{x}_{kj})^2 \\
+= & 2 \sum_{i \in C_k}\sum_{j=1}^p (x_{ij} - \bar{x}_{kj})^2
+\end{align}
+
+Note that we can drop the term containing
+$(x_{ij} - \bar{x}_{kj})(x_{i'j} - \bar{x}_{kj})$ since this is 0 when summed
+over combinations of $i$ and $i'$ for a given $j$.
+
 > b. On the basis of this identity, argue that the $K$-means clustering
 >    algorithm (Algorithm 12.2) decreases the objective (12.17) at each
 >    iteration.
+
+Equation 10.12 demonstrates that the euclidean distance between each possible
+pair of samples can be related to the difference from each sample to the mean
+of the cluster. The K-means algorithm works by minimizing the euclidean distance
+to each centroid, thus also minimizes the within-cluster variance.
 
 ### Question 2
 
@@ -32,20 +81,43 @@
 >    complete linkage. Be sure to indicate on the plot the height at which each
 >    fusion occurs, as well as the observations corresponding to each leaf in
 >    the dendrogram.
-> 
+
+```{r}
+m <- matrix(c(0, 0.3, 0.4, 0.7, 0.3, 0, 0.5, 0.8, 0.4, 0.5, 0., 0.45, 0.7, 0.8, 0.45, 0), ncol = 4)
+c1 <- hclust(as.dist(m), method = "complete")
+plot(c1)
+```
+
 > b. Repeat (a), this time using single linkage clustering.
-> 
+
+```{r}
+c2 <- hclust(as.dist(m), method = "single")
+plot(c2)
+```
+
 > c. Suppose that we cut the dendrogram obtained in (a) such that two clusters
 >    result. Which observations are in each cluster?
-> 
+
+```{r}
+table(1:4, cutree(c1, 2))
+```
+
 > d. Suppose that we cut the dendrogram obtained in (b) such that two clusters
 >    result. Which observations are in each cluster?
-> 
+
+```{r}
+table(1:4, cutree(c2, 2))
+```
+
 > e. It is mentioned in the chapter that at each fusion in the dendrogram, the
 >    position of the two clusters being fused can be swapped without changing
 >    the meaning of the dendrogram. Draw a dendrogram that is equivalent to the
 >    dendrogram in (a), for which two or more of the leaves are repositioned,
 >    but for which the meaning of the dendrogram is the same.
+
+```{r}
+plot(c1, labels = c(2, 1, 3, 4))
+```
 
 ### Question 3
 
@@ -63,20 +135,59 @@
 > | 6    | 4     | 0     |
 > 
 > a. Plot the observations.
-> 
+
+```{r}
+library(ggplot2)
+d <- data.frame(
+  x1 = c(1, 1, 0, 5, 6, 4),
+  x2 = c(4, 3, 4, 1, 2, 0)
+)
+ggplot(d, aes(x = x1, y = x2)) + geom_point()
+```
+
 > b. Randomly assign a cluster label to each observation. You can use the
 >    `sample()` command in `R` to do this. Report the cluster labels for each
 >    observation.
-> 
+
+```{r}
+set.seed(42)
+d$cluster <- sample(c(1, 2), size = nrow(d), replace = TRUE)
+```
+
 > c. Compute the centroid for each cluster.
-> 
+
+```{r}
+centroids <- sapply(c(1,2), function(i) colMeans(d[d$cluster == i, 1:2]))
+```
+
 > d. Assign each observation to the centroid to which it is closest, in terms of
 >    Euclidean distance. Report the cluster labels for each observation.
-> 
+
+```{r}
+dist <- sapply(1:2, function(i) {
+    sqrt((d$x1 - centroids[1, i])^2 + (d$x2 - centroids[2, i])^2)
+})
+d$cluster <- apply(dist, 1, which.min)
+```
+
 > e. Repeat (c) and (d) until the answers obtained stop changing.
-> 
+
+```{r}
+centroids <- sapply(c(1,2), function(i) colMeans(d[d$cluster == i, 1:2]))
+dist <- sapply(1:2, function(i) {
+    sqrt((d$x1 - centroids[1, i])^2 + (d$x2 - centroids[2, i])^2)
+})
+d$cluster <- apply(dist, 1, which.min)
+```
+
+In this case, we get stable labels after the first iteration.
+
 > f. In your plot from (a), color the observations according to the cluster
 >    labels obtained.
+
+```{r}
+ggplot(d, aes(x = x1, y = x2, color = factor(cluster))) + geom_point()
+```
 
 ### Question 4
 
@@ -88,12 +199,20 @@
 >    and {4, 5} also fuse at a certain point. Which fusion will occur higher on
 >    the tree, or will they fuse at the same height, or is there not enough
 >    information to tell?
->
+
+The complete linkage fusion will likely be higher in the tree since single
+linkage is defined as being the minimum distance between two clusters. However,
+there is a chance that they could be at the same height (so technically there
+is not enough information to tell).
+
 > b. At a certain point on the single linkage dendrogram, the clusters {5} and
 >    {6} fuse. On the complete linkage dendrogram, the clusters {5} and {6} also
 >    fuse at a certain point. Which fusion will occur higher on the tree, or
 >    will they fuse at the same height, or is there not enough information to
 >    tell?
+
+They will fuse at the same height (the algorithm for calculating distance is
+the same when the clusters are of size 1).
 
 ### Question 5
 
@@ -101,6 +220,25 @@
 > $K$-means clustering of the eight shoppers in Figure 12.16, on the basis of
 > their sock and computer purchases, with $K = 2$. Give three answers, one for
 > each of the variable scalings displayed. Explain.
+
+In cases where variables are scaled we would expect clusters to correspond
+to whether or not the retainer sold a computer. In the first case (raw numbers
+of items sold), we would expect clusters to represent low vs high numbers of 
+sock purchases.
+
+To test, we can run the analysis in R:
+
+```{r}
+set.seed(42)
+dat <- data.frame(
+  socks = c(8, 11, 7, 6, 5, 6, 7, 8),
+  computers = c(0, 0, 0, 0, 1, 1, 1, 1)
+)
+kmeans(dat, 2)$cluster
+kmeans(scale(dat), 2)$cluster
+dat$computers <- dat$computers * 2000
+kmeans(dat, 2)$cluster
+```
 
 ### Question 6
 
@@ -133,6 +271,13 @@
 > _Hint: The Euclidean distance can be calculated using the `dist()` function,_
 > _and correlations can be calculated using the `cor()` function._
 
+```{r}
+dat <- t(scale(t(USArrests)))
+d1 <- dist(dat)^2
+d2 <- as.dist(1 - cor(t(dat)))
+plot(d1, d2)
+```
+
 ### Question 8
 
 > In Section 12.2.3, a formula for calculating PVE was given in Equation
@@ -143,13 +288,22 @@
 >
 > a. Using the `sdev` output of the `prcomp()` function, as was done in Section
 >    12.2.3.
->
+
+```{r}
+pr <- prcomp(USArrests, scale = TRUE)
+pr$sdev^2 / sum(pr$sdev^2)
+```
+
 > b. By applying Equation 12.10 directly. That is, use the `prcomp()` function to
 >    compute the principal component loadings. Then, use those loadings in
 >    Equation 12.10 to obtain the PVE. 
 >
 > These two approaches should give the same results.
->
+
+```{r}
+colSums(pr$x^2) / sum(colSums(scale(USArrests)^2))
+```
+
 > _Hint: You will only obtain the same results in (a) and (b) if the same_
 > _data is used in both cases. For instance, if in (a) you performed_
 > _`prcomp()` using centered and scaled variables, then you must center and_
@@ -162,63 +316,148 @@
 >
 > a. Using hierarchical clustering with complete linkage and Euclidean distance,
 >    cluster the states.
->
+
+```{r}
+set.seed(42)
+hc <- hclust(dist(USArrests), method = "complete")
+```
+
 > b. Cut the dendrogram at a height that results in three distinct clusters.
 >    Which states belong to which clusters?
->
+
+```{r}
+ct <- cutree(hc, 3)
+sapply(1:3, function(i) names(ct)[ct == i])
+```
+
 > c. Hierarchically cluster the states using complete linkage and Euclidean
 >    distance, _after scaling the variables to have standard deviation one_.
->
+
+```{r}
+hc2 <- hclust(dist(scale(USArrests)), method = "complete")
+```
+
 > d. What effect does scaling the variables have on the hierarchical clustering
 >    obtained? In your opinion, should the variables be scaled before the
 >    inter-observation dissimilarities are computed? Provide a justification for
 >    your answer.
+
+```{r}
+ct <- cutree(hc, 3)
+sapply(1:3, function(i) names(ct)[ct == i])
+```
+
+Scaling results in different clusters and the choice of whether to scale or 
+not depends on the data in question. In this case, the variables are:
+
+  - Murder    numeric  Murder arrests (per 100,000)  
+  - Assault   numeric  Assault arrests (per 100,000) 
+  - UrbanPop  numeric  Percent urban population      
+  - Rape      numeric  Rape arrests (per 100,000)    
+
+These variables are not naturally on the same unit and the units involved are
+somewhat arbitrary (so for example, Murder could be measured per 1 million 
+rather than per 100,000) so in this case I would argue the data should be 
+scaled.
 
 ### Question 10
 
 > In this problem, you will generate simulated data, and then perform PCA and
 > $K$-means clustering on the data.
 >
-> a.  Generate a simulated data set with 20 observations in each of three classes
->     (i.e. 60 observations total), and 50 variables. 
->     
->     _Hint: There are a number of functions in `R` that you can use to generate_
->     _data. One example is the `rnorm()` function; `runif()` is another option._
->     _Be sure to add a mean shift to the observations in each class so that_
->     _there are three distinct classes._
->
-> b.  Perform PCA on the 60 observations and plot the first two principal
->     component score vectors. Use a different color to indicate the
->     observations in each of the three classes. If the three classes appear
->     separated in this plot, then continue on to part (c). If not, then return
->     to part (a) and modify the simulation so that there is greater separation
->     between the three classes. Do not continue to part (c) until the three
->     classes show at least some separation in the first two principal component
->     score vectors.
->
-> c.  Perform $K$-means clustering of the observations with $K = 3$. How well do
->     the clusters that you obtained in $K$-means clustering compare to the true
->     class labels?
->     
->     _Hint: You can use the `table()` function in `R` to compare the true class_
->     _labels to the class labels obtained by clustering. Be careful how you_
->     _interpret the results: $K$-means clustering will arbitrarily number the_
->     _clusters, so you cannot simply check whether the true class labels and_
->     _clustering labels are the same._
+> a. Generate a simulated data set with 20 observations in each of three classes
+>    (i.e. 60 observations total), and 50 variables. 
 >    
+>    _Hint: There are a number of functions in `R` that you can use to generate_
+>    _data. One example is the `rnorm()` function; `runif()` is another option._
+>    _Be sure to add a mean shift to the observations in each class so that_
+>    _there are three distinct classes._
+
+```{r}
+set.seed(42)
+data <- matrix(rnorm(60 * 50), ncol = 50)
+classes <- rep(c("A", "B", "C"), each = 20)
+dimnames(data) <- list(classes, paste0("v", 1:50))
+data[classes == "B", 1:10] <- data[classes == "B", 1:10] + 1.2
+data[classes == "C", 5:30] <- data[classes == "C", 5:30] + 1
+```
+
+> b. Perform PCA on the 60 observations and plot the first two principal
+>    component score vectors. Use a different color to indicate the
+>    observations in each of the three classes. If the three classes appear
+>    separated in this plot, then continue on to part (c). If not, then return
+>    to part (a) and modify the simulation so that there is greater separation
+>    between the three classes. Do not continue to part (c) until the three
+>    classes show at least some separation in the first two principal component
+>    score vectors.
+
+```{r}
+pca <- prcomp(data)
+ggplot(data.frame(Class = classes, PC1 = pca$x[, 1], PC2 = pca$x[, 2]),
+    aes(x = PC1, y = PC2, col = Class)) + 
+  geom_point()
+```
+
+> c. Perform $K$-means clustering of the observations with $K = 3$. How well do
+>    the clusters that you obtained in $K$-means clustering compare to the true
+>    class labels?
+>    
+>    _Hint: You can use the `table()` function in `R` to compare the true class_
+>    _labels to the class labels obtained by clustering. Be careful how you_
+>    _interpret the results: $K$-means clustering will arbitrarily number the_
+>    _clusters, so you cannot simply check whether the true class labels and_
+>    _clustering labels are the same._
+
+```{r}
+km <- kmeans(data, 3)$cluster
+table(km, names(km))
+```
+
+$K$-means separates out the clusters nearly perfectly.
+
 > d.  Perform $K$-means clustering with $K = 2$. Describe your results.
->     
+
+```{r}
+km <- kmeans(data, 2)$cluster
+table(km, names(km))
+```
+
+$K$-means effectively defines cluster 2 to be class B, but cluster 1 is a mix
+of classes A and B. 
+
 > e.  Now perform $K$-means clustering with $K = 4$, and describe your results.
->     
+
+```{r}
+km <- kmeans(data, 4)$cluster
+table(km, names(km))
+```
+
+$K$-means effectively defines cluster 1 to be class B, cluster 2 to be class A
+but clusters 3 and 4 are split over class C.
+
 > f.  Now perform $K$-means clustering with $K = 3$ on the first two principal
 >     component score vectors, rather than on the raw data. That is, perform
 >     $K$-means clustering on the $60 \times 2$ matrix of which the first column
 >     is the first principal component score vector, and the second column is
 >     the second principal component score vector. Comment on the results.
->     
+
+```{r}
+km <- kmeans(pca$x[, 1:2], 3)$cluster
+table(km, names(km))
+```
+
+$K$-means again separates out the clusters nearly perfectly.
+
 > g.  Using the `scale()` function, perform $K$-means clustering with $K = 3$ on
 >     the data _after scaling each variable to have standard deviation one_. How
 >     do these results compare to those obtained in (b)? Explain.
+
+```{r}
+km <- kmeans(scale(data), 3)$cluster
+table(km, names(km))
+```
+
+$K$-means appears to perform less well on the scaled data in this case.
 
 ### Question 11
 
@@ -251,15 +490,46 @@
 ### Question 13
 
 > On the book website, `www.StatLearning.com`, there is a gene expression data
-> set (`Ch10Ex11.csv`) that consists of 40 tissue samples with measurements on
+> set (`Ch12Ex13.csv`) that consists of 40 tissue samples with measurements on
 > 1,000 genes. The first 20 samples are from healthy patients, while the
 > second 20 are from a diseased group.
 >
 > a. Load in the data using `read.csv()`. You will need to select `header = F`.
->
+
+```{r}
+data <- read.csv("data/Ch12Ex13.csv", header = FALSE)
+colnames(data) <- c(paste0("H", 1:20), paste0("D", 1:20))
+```
+
 > b. Apply hierarchical clustering to the samples using correlation-based
 >    distance, and plot the dendrogram. Do the genes separate the samples into
 >    the two groups? Do your results depend on the type of linkage used?
-> 
+
+```{r}
+hc.complete <- hclust(as.dist(1 - cor(data)), method = "complete")
+plot(hc.complete)
+
+hc.complete <- hclust(as.dist(1 - cor(data)), method = "average")
+plot(hc.complete)
+
+hc.complete <- hclust(as.dist(1 - cor(data)), method = "single")
+plot(hc.complete)
+```
+
+Yes the samples clearly separate into the two groups, although the results 
+depend somewhat on the linkage method used. In the case of average clustering,
+the disease samples all fall within a subset of the healthy samples.
+
 > c. Your collaborator wants to know which genes differ the most across the two
 >    groups. Suggest a way to answer this question, and apply it here.
+
+This is probably best achieved with a supervised approach. A simple method
+would be to determine which genes show the most significant differences between
+the groups by applying a t-test to each group. We can then select those with a
+FDR adjusted p-value less than some given threshold (e.g. 0.05).
+
+```{r}
+class <- factor(rep(c("Healthy", "Diseased"), each = 20))
+pvals <- p.adjust(apply(data, 1, function(v) t.test(v ~ class)$p.value))
+which(pvals < 0.05)
+```

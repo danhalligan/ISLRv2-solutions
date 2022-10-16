@@ -3,18 +3,22 @@ Type: Book
 Title: Does not matter.
 Version: 0.0.1
 Imports: 
+    ape,
     bookdown,
     boot,
     class,
     corrplot,
     gam,
+    gbm,
     ggplot2,
+    ggtree,
     glmnet,
     ISLR2,
     leaps,
     MASS,
     plotly,
     pls,
+    randomForest,
     splines,
     tidyverse,
 Remotes: rstudio/bookdown
