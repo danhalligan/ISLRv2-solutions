@@ -19,6 +19,7 @@ Imports:
     plotly,
     pls,
     randomForest,
+    showtext,
     splines,
     tidyverse,
 Remotes: rstudio/bookdown
