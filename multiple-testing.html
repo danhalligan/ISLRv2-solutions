@@ -385,16 +385,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Type I error for each null hypothesis at level <span class="math inline">\(\alpha\)</span>. For each sub-problem,
 justify your answer.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>In total, how many Type I errors do we expect to make?</p></li>
+<li>In total, how many Type I errors do we expect to make?</li>
+</ol>
+</blockquote>
+<p>We expect <span class="math inline">\(\alpha\)</span>.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
 <li><p>Suppose that the m tests that we perform are independent. What is the
 family-wise error rate associated with these m tests?</p>
 <p><em>Hint: If two events A and B are independent, then Pr(A ∩ B) = Pr(A) Pr(B).</em></p></li>
+</ol>
+</blockquote>
+<p><span class="math inline">\(m\alpha\)</span></p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
 <li><p>Suppose that <span class="math inline">\(m = 2\)</span>, and that the p-values for the two tests are
 positively correlated, so that if one is small then the other will tend to
 be small as well, and if one is large then the other will tend to be large.
 How does the family-wise error rate associated with these <span class="math inline">\(m = 2\)</span> tests
 qualitatively compare to the answer in (b) with <span class="math inline">\(m = 2\)</span>?</p>
 <p><em>Hint: First, suppose that the two p-values are perfectly correlated.</em></p></li>
+</ol>
+</blockquote>
+<p>If they were perfectly correlated, we would effectively be performing a single
+test (thus FWER would be <span class="math inline">\(alpha\)</span>). In the case when they are positively
+correlated therefore, we can expect the FWER to be less than <span class="math inline">\(2\alpha\)</span>.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
 <li><p>Suppose again that <span class="math inline">\(m = 2\)</span>, but that now the p-values for the two tests are
 negatively correlated, so that if one is large then the other will tend to
 be small. How does the family-wise error rate associated with these <span class="math inline">\(m = 2\)</span>
@@ -404,6 +421,9 @@ tests qualitatively compare to the answer in (b) with <span class="math inline">
 <em>never reject both null hypotheses.</em></p></li>
 </ol>
 </blockquote>
+<p>In the case outlined in the hint, we will always have 1 false positive (type 1
+error), which, implies that when negatively correlated we expect the FWER
+to be greater than <span class="math inline">\(2\alpha\)</span>.</p>
 </div>
 <div id="question-2-11" class="section level3 hasAnchor">
 <h3><span class="header-section-number">13.1.2</span> Question 2<a href="multiple-testing.html#question-2-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -412,13 +432,25 @@ tests qualitatively compare to the answer in (b) with <span class="math inline">
 hypothesis at level <span class="math inline">\(\alpha\)</span>. Assume that all <span class="math inline">\(m\)</span> p-values are independent,
 and that all null hypotheses are true.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Let the random variable <span class="math inline">\(A_j\)</span> equal 1 if the <span class="math inline">\(j\)</span>th null hypothesis is
-rejected, and 0 otherwise. What is the distribution of <span class="math inline">\(A_j\)</span>?</p></li>
-<li><p>What is the distribution of <span class="math inline">\(\sum_{j=1}^m A_j\)</span>?</p></li>
-<li><p>What is the standard deviation of the number of Type I errors that we will
-make?</p></li>
+<li>Let the random variable <span class="math inline">\(A_j\)</span> equal 1 if the <span class="math inline">\(j\)</span>th null hypothesis is
+rejected, and 0 otherwise. What is the distribution of <span class="math inline">\(A_j\)</span>?</li>
 </ol>
 </blockquote>
+<p><span class="math inline">\(A_j\)</span> follows a Bernoulli distribution: <span class="math inline">\(A_j \sim \text{Bernoulli}(p)\)</span></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What is the distribution of <span class="math inline">\(\sum_{j=1}^m A_j\)</span>?</li>
+</ol>
+</blockquote>
+<p>Follows a binomial distribution <span class="math inline">\(\sum_{j=1}^m A_j \sim Bi(m, \alpha)\)</span>.</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>What is the standard deviation of the number of Type I errors that we will
+make?</li>
+</ol>
+</blockquote>
+<p>The variance of a Binomial is <span class="math inline">\(npq\)</span>, so for this situation the standard
+deviation would be <span class="math inline">\(\sqrt{m \alpha (1-\alpha)}\)</span>.</p>
 </div>
 <div id="question-3-11" class="section level3 hasAnchor">
 <h3><span class="header-section-number">13.1.3</span> Question 3<a href="multiple-testing.html#question-3-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -427,25 +459,65 @@ make?</p></li>
 <span class="math inline">\(j\)</span>th null hypothesis at level <span class="math inline">\(\alpha_j\)</span>, for <span class="math inline">\(j=1,...,m\)</span>. Argue that the
 family-wise error rate is no greater than <span class="math inline">\(\sum_{j=1}^m \alpha_j\)</span>.</p>
 </blockquote>
+<p><span class="math inline">\(p(A \cup B) = p(A) + p(B)\)</span> if <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent or
+<span class="math inline">\(p(A) + p(B) - p(A \cap B)\)</span> when they are not. Since <span class="math inline">\(p(A \cap B)\)</span> must be
+positive, <span class="math inline">\(p(A \cup B) &lt; p(A) + p(B)\)</span> (whether independent or not).</p>
+<p>Therefore, the probability of a type I error in <em>any</em> of <span class="math inline">\(m\)</span> hypotheses can
+be no larger than the sum of the probabilities for each individual hypothesis
+(which is <span class="math inline">\(\alpha_j\)</span> for the <span class="math inline">\(j\)</span>th).</p>
 </div>
 <div id="question-4-11" class="section level3 hasAnchor">
 <h3><span class="header-section-number">13.1.4</span> Question 4<a href="multiple-testing.html#question-4-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose we test <span class="math inline">\(m = 10\)</span> hypotheses, and obtain the p-values shown in Table
 13.4.</p>
+</blockquote>
+<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="multiple-testing.html#cb742-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.0011</span>, <span class="fl">0.031</span>, <span class="fl">0.017</span>, <span class="fl">0.32</span>, <span class="fl">0.11</span>, <span class="fl">0.90</span>, <span class="fl">0.07</span>, <span class="fl">0.006</span>, <span class="fl">0.004</span>, <span class="fl">0.0009</span>)</span>
+<span id="cb742-2"><a href="multiple-testing.html#cb742-2"></a><span class="kw">names</span>(pvals) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;H&quot;</span>, <span class="kw">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>))</span></code></pre></div>
+<blockquote>
 <ol style="list-style-type: lower-alpha">
-<li><p>Suppose that we wish to control the Type I error for each null hypothesis
-at level <span class="math inline">\(\alpha = 0.05\)</span>. Which null hypotheses will we reject?</p></li>
-<li><p>Now suppose that we wish to control the FWER at level <span class="math inline">\(\alpha = 0.05\)</span>.
-Which null hypotheses will we reject? Justify your answer.</p></li>
-<li><p>Now suppose that we wish to control the FDR at level <span class="math inline">\(q = 0.05\)</span>. Which null
-hypotheses will we reject? Justify your answer.</p></li>
-<li><p>Now suppose that we wish to control the FDR at level <span class="math inline">\(q = 0.2\)</span>. Which null
-hypotheses will we reject? Justify your answer.</p></li>
-<li><p>Of the null hypotheses rejected at FDR level <span class="math inline">\(q = 0.2\)</span>, approximately how
-many are false positives? Justify your answer.</p></li>
+<li>Suppose that we wish to control the Type I error for each null hypothesis
+at level <span class="math inline">\(\alpha = 0.05\)</span>. Which null hypotheses will we reject?</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb743-1"><a href="multiple-testing.html#cb743-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;H01&quot; &quot;H02&quot; &quot;H03&quot; &quot;H08&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
+<p>We reject all NULL hypotheses where <span class="math inline">\(p &lt; 0.05\)</span>.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Now suppose that we wish to control the FWER at level <span class="math inline">\(\alpha = 0.05\)</span>.
+Which null hypotheses will we reject? Justify your answer.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb745-1"><a href="multiple-testing.html#cb745-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;H01&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
+<p>We reject all NULL hypotheses where <span class="math inline">\(p &lt; 0.005\)</span>.</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Now suppose that we wish to control the FDR at level <span class="math inline">\(q = 0.05\)</span>. Which null
+hypotheses will we reject? Justify your answer.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb747-1"><a href="multiple-testing.html#cb747-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;H01&quot; &quot;H03&quot; &quot;H08&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
+<p>We reject all NULL hypotheses where <span class="math inline">\(q &lt; 0.05\)</span>.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Now suppose that we wish to control the FDR at level <span class="math inline">\(q = 0.2\)</span>. Which null
+hypotheses will we reject? Justify your answer.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb749-1"><a href="multiple-testing.html#cb749-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;H01&quot; &quot;H02&quot; &quot;H03&quot; &quot;H05&quot; &quot;H07&quot; &quot;H08&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
+<p>We reject all NULL hypotheses where <span class="math inline">\(q &lt; 0.2\)</span>.</p>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Of the null hypotheses rejected at FDR level <span class="math inline">\(q = 0.2\)</span>, approximately how
+many are false positives? Justify your answer.</li>
+</ol>
+</blockquote>
+<p>We expect 20% (in this case 2 out of the 8) rejections to be false (false
+positives).</p>
 </div>
 <div id="question-5-11" class="section level3 hasAnchor">
 <h3><span class="header-section-number">13.1.5</span> Question 5<a href="multiple-testing.html#question-5-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -453,34 +525,169 @@ many are false positives? Justify your answer.</p></li>
 <p>For this problem, you will make up p-values that lead to a certain number of
 rejections using the Bonferroni and Holm procedures.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Give an example of five p-values (i.e. five numbers between 0 and 1 which,
+<li>Give an example of five p-values (i.e. five numbers between 0 and 1 which,
 for the purpose of this problem, we will interpret as p-values) for which
 both Bonferroni’s method and Holm’s method reject exactly one null hypothesis
-when controlling the FWER at level 0.1.</p></li>
-<li><p>Now give an example of five p-values for which Bonferroni rejects one
-null hypothesis and Holm rejects more than one null hypothesis at level 0.1.</p></li>
+when controlling the FWER at level 0.1.</li>
 </ol>
 </blockquote>
+<p>In this case, for Bonferroni, we need one p-value to be less than <span class="math inline">\(0.1 / 5 = 0.02\)</span>. and the others to be above. For Holm’s method, we need the most
+significant p-value to be below <span class="math inline">\(0.1/(5 + 1 - 1) = 0.02\)</span> also.</p>
+<p>An example would be: 1, 1, 1, 1, 0.001.</p>
+<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="multiple-testing.html#cb751-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
+<span id="cb751-2"><a href="multiple-testing.html#cb751-2"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;bonferroni&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="multiple-testing.html#cb753-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;holm&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Now give an example of five p-values for which Bonferroni rejects one
+null hypothesis and Holm rejects more than one null hypothesis at level 0.1.</li>
+</ol>
+</blockquote>
+<p>An example would be: 1, 1, 1, 0.02, 0.001. For Holm’s method we reject two
+because <span class="math inline">\(0.02 &lt; 0.1/(5 + 1 - 2)\)</span>.</p>
+<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="multiple-testing.html#cb755-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.02</span>, <span class="fl">0.001</span>)</span>
+<span id="cb755-2"><a href="multiple-testing.html#cb755-2"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;bonferroni&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="multiple-testing.html#cb757-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;holm&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
 </div>
 <div id="question-6-11" class="section level3 hasAnchor">
 <h3><span class="header-section-number">13.1.6</span> Question 6<a href="multiple-testing.html#question-6-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>For each of the three panels in Figure 13.3, answer the following questions:</p>
+</blockquote>
+<ul>
+<li>There are always: 8 positives (red) and 2 negatives (black).</li>
+<li>False / true positives are black / red points <em>below</em> the line respectively.</li>
+<li>False / true negatives are red / black points <em>above</em> the line respectively.</li>
+<li>Type I / II errors are the same as false positives and false negatives
+respectively.</li>
+</ul>
+<blockquote>
 <ol style="list-style-type: lower-alpha">
-<li><p>How many false positives, false negatives, true positives, true negatives,
+<li>How many false positives, false negatives, true positives, true negatives,
 Type I errors, and Type II errors result from applying the Bonferroni
-procedure to control the FWER at level <span class="math inline">\(\alpha = 0.05\)</span>?</p></li>
-<li><p>How many false positives, false negatives, true positives, true negatives,
-Type I errors, and Type II errors result from applying the Holm procedure to
-control the FWER at level <span class="math inline">\(\alpha = 0.05\)</span>?</p></li>
-<li><p>What is the false discovery rate associated with using the Bonferroni
-procedure to control the FWER at level <span class="math inline">\(\alpha = 0.05\)</span>?</p></li>
-<li><p>What is the false discovery rate associated with using the Holm procedure
-to control the FWER at level <span class="math inline">\(\alpha = 0.05\)</span>?</p></li>
-<li><p>How would the answers to (a) and (c) change if we instead used the
-Bonferroni procedure to control the FWER at level <span class="math inline">\(\alpha = 0.001\)</span>?</p></li>
+procedure to control the FWER at level <span class="math inline">\(\alpha = 0.05\)</span>?</li>
 </ol>
 </blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>Panel</th>
+<th>FP</th>
+<th>FN</th>
+<th>TP</th>
+<th>TN</th>
+<th>Type I</th>
+<th>Type II</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0</td>
+<td>5</td>
+<td>3</td>
+<td>2</td>
+<td>0</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>How many false positives, false negatives, true positives, true negatives,
+Type I errors, and Type II errors result from applying the Holm procedure to
+control the FWER at level <span class="math inline">\(\alpha = 0.05\)</span>?</li>
+</ol>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>Panel</th>
+<th>FP</th>
+<th>FN</th>
+<th>TP</th>
+<th>TN</th>
+<th>Type I</th>
+<th>Type II</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>8</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>8</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>What is the false discovery rate associated with using the Bonferroni
+procedure to control the FWER at level <span class="math inline">\(\alpha = 0.05\)</span>?</li>
+</ol>
+</blockquote>
+<p>False discovery rate is the expected ratio of false positives to total
+positives. There are never any false positives (black points below the line).
+There are always the same number of total positives (8).</p>
+<p>For panels 1, 2, 3 this would be 0/8, 0/8 and 0/8 respectively.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>What is the false discovery rate associated with using the Holm procedure
+to control the FWER at level <span class="math inline">\(\alpha = 0.05\)</span>?</li>
+</ol>
+</blockquote>
+<p>For panels 1, 2, 3 this would be 0/8, 0/8 and 0/8 respectively.</p>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>How would the answers to (a) and (c) change if we instead used the
+Bonferroni procedure to control the FWER at level <span class="math inline">\(\alpha = 0.001\)</span>?</li>
+</ol>
+</blockquote>
+<p>This would equate to a more stringent threshold. We would not call any more
+false positives, so the results would not change.</p>
 </div>
 </div>
 <div id="applied-11" class="section level2 hasAnchor">
@@ -490,53 +697,120 @@ Bonferroni procedure to control the FWER at level <span class="math inline">\(\a
 <blockquote>
 <p>This problem makes use of the <code>Carseats</code> dataset in the <code>ISLR2</code> package.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>For each quantitative variable in the dataset besides <code>Sales</code>, fit a linear
+<li>For each quantitative variable in the dataset besides <code>Sales</code>, fit a linear
 model to predict <code>Sales</code> using that quantitative variable. Report the p-values
 associated with the coefficients for the variables. That is, for each model of
 the form <span class="math inline">\(Y = \beta_0 + \beta_1X + \epsilon\)</span>, report the p-value associated
 with the coefficient <span class="math inline">\(\beta_1\)</span>. Here, <span class="math inline">\(Y\)</span> represents <code>Sales</code> and <span class="math inline">\(X\)</span>
-represents one of the other quantitative variables.</p></li>
-<li><p>Suppose we control the Type I error at level <span class="math inline">\(\alpha = 0.05\)</span> for the
-p-values obtained in (a). Which null hypotheses do we reject?</p></li>
-<li><p>Now suppose we control the FWER at level 0.05 for the p-values. Which null
-hypotheses do we reject?</p></li>
-<li><p>Finally, suppose we control the FDR at level 0.2 for the p-values. Which
-null hypotheses do we reject?</p></li>
+represents one of the other quantitative variables.</li>
 </ol>
 </blockquote>
+<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="multiple-testing.html#cb759-1"></a><span class="kw">library</span>(ISLR2)</span>
+<span id="cb759-2"><a href="multiple-testing.html#cb759-2"></a></span>
+<span id="cb759-3"><a href="multiple-testing.html#cb759-3"></a>nm &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;CompPrice&quot;</span>, <span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Advertising&quot;</span>, <span class="st">&quot;Population&quot;</span>, <span class="st">&quot;Price&quot;</span>, <span class="st">&quot;Age&quot;</span>)</span>
+<span id="cb759-4"><a href="multiple-testing.html#cb759-4"></a>pvals &lt;-<span class="st"> </span><span class="kw">sapply</span>(nm, <span class="cf">function</span>(n) {</span>
+<span id="cb759-5"><a href="multiple-testing.html#cb759-5"></a>  <span class="kw">summary</span>(<span class="kw">lm</span>(Carseats[[<span class="st">&quot;Sales&quot;</span>]] <span class="op">~</span><span class="st"> </span>Carseats[[n]]))<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">4</span>]</span>
+<span id="cb759-6"><a href="multiple-testing.html#cb759-6"></a>})</span></code></pre></div>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Suppose we control the Type I error at level <span class="math inline">\(\alpha = 0.05\)</span> for the
+p-values obtained in (a). Which null hypotheses do we reject?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="multiple-testing.html#cb760-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;Income&quot;      &quot;Advertising&quot; &quot;Price&quot;       &quot;Age&quot;</code></pre>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Now suppose we control the FWER at level 0.05 for the p-values. Which null
+hypotheses do we reject?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="multiple-testing.html#cb762-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span><span class="op">/</span><span class="kw">length</span>(nm)))</span></code></pre></div>
+<pre><code>## [1] &quot;Income&quot;      &quot;Advertising&quot; &quot;Price&quot;       &quot;Age&quot;</code></pre>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Finally, suppose we control the FDR at level 0.2 for the p-values. Which
+null hypotheses do we reject?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb764-1"><a href="multiple-testing.html#cb764-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;Income&quot;      &quot;Advertising&quot; &quot;Price&quot;       &quot;Age&quot;</code></pre>
 </div>
 <div id="question-8-11" class="section level3 hasAnchor">
 <h3><span class="header-section-number">13.2.2</span> Question 8<a href="multiple-testing.html#question-8-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In this problem, we will simulate data from <span class="math inline">\(m = 100\)</span> fund managers.</p>
-<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="multiple-testing.html#cb742-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb742-2"><a href="multiple-testing.html#cb742-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb742-3"><a href="multiple-testing.html#cb742-3"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb742-4"><a href="multiple-testing.html#cb742-4"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="multiple-testing.html#cb766-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb766-2"><a href="multiple-testing.html#cb766-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb766-3"><a href="multiple-testing.html#cb766-3"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb766-4"><a href="multiple-testing.html#cb766-4"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
+</blockquote>
+<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="multiple-testing.html#cb767-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb767-2"><a href="multiple-testing.html#cb767-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb767-3"><a href="multiple-testing.html#cb767-3"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb767-4"><a href="multiple-testing.html#cb767-4"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
+<blockquote>
 <p>These data represent each fund manager’s percentage returns for each of <span class="math inline">\(n = 20\)</span> months. We wish to test the null hypothesis that each fund manager’s
 percentage returns have population mean equal to zero. Notice that we
 simulated the data in such a way that each fund manager’s percentage returns
 do have population mean zero; in other words, all <span class="math inline">\(m\)</span> null hypotheses are true.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Conduct a one-sample <span class="math inline">\(t\)</span>-test for each fund manager, and plot a histogram of
-the <span class="math inline">\(p\)</span>-values obtained.</p></li>
-<li><p>If we control Type I error for each null hypothesis at level <span class="math inline">\(\alpha = 0.05\)</span>, then how many null hypotheses do we reject?</p></li>
-<li><p>If we control the FWER at level 0.05, then how many null hypotheses do we
-reject?</p></li>
-<li><p>If we control the FDR at level 0.05, then how many null hypotheses do we
-reject?</p></li>
-<li><p>Now suppose we “cherry-pick” the 10 fund managers who perform the best in
+<li>Conduct a one-sample <span class="math inline">\(t\)</span>-test for each fund manager, and plot a histogram
+of the <span class="math inline">\(p\)</span>-values obtained.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="multiple-testing.html#cb768-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">apply</span>(X, <span class="dv">2</span>, <span class="cf">function</span>(p) <span class="kw">t.test</span>(p)<span class="op">$</span>p.value)</span>
+<span id="cb768-2"><a href="multiple-testing.html#cb768-2"></a><span class="kw">hist</span>(pvals, <span class="dt">main =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<p><img src="13-multiple-testing_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>If we control Type I error for each null hypothesis at level <span class="math inline">\(\alpha = 0.05\)</span>, then how many null hypotheses do we reject?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb769-1"><a href="multiple-testing.html#cb769-1"></a><span class="kw">sum</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>If we control the FWER at level 0.05, then how many null hypotheses do we
+reject?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb771"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb771-1"><a href="multiple-testing.html#cb771-1"></a><span class="kw">sum</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(pvals))</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>If we control the FDR at level 0.05, then how many null hypotheses do we
+reject?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb773"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb773-1"><a href="multiple-testing.html#cb773-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Now suppose we “cherry-pick” the 10 fund managers who perform the best in
 our data. If we control the FWER for just these 10 fund managers at level
 0.05, then how many null hypotheses do we reject? If we control the FDR for
 just these 10 fund managers at level 0.05, then how many null hypotheses do we
-reject?</p></li>
-<li><p>Explain why the analysis in (e) is misleading.</p></li>
+reject?</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="multiple-testing.html#cb775-1"></a>best &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">apply</span>(X, <span class="dv">2</span>, sum), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span>
+<span id="cb775-2"><a href="multiple-testing.html#cb775-2"></a><span class="kw">sum</span>(pvals[best] <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="multiple-testing.html#cb777-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals[best], <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Explain why the analysis in (e) is misleading.</li>
 </ol>
 <p><em>Hint The standard approaches for controlling the FWER and FDR assume that all
 tested null hypotheses are adjusted for multiplicity, and that no
 “cherry-picking” of the smallest p-values has occurred. What goes wrong if we
 cherry-pick?</em></p>
 </blockquote>
+<p>This is misleading because we are not correctly accounting for all tests
+performed. Cherry picking the similar to repeating a test until by chance we
+find a significant result.</p>
 
 </div>
 </div>

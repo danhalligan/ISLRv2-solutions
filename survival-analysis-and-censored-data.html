@@ -384,27 +384,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For each example, state whether or not the censoring mechanism is independent.
 Justify your answer.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>In a study of disease relapse, due to a careless research scientist, all
-patients whose phone numbers begin with the number “2” are lost to follow up.</p></li>
-<li><p>In a study of longevity, a formatting error causes all patient ages that
+<li>In a study of disease relapse, due to a careless research scientist, all
+patients whose phone numbers begin with the number “2” are lost to follow up.</li>
+</ol>
+</blockquote>
+<p>Independent. There’s no reason to think disease relapse should be related to
+the first digit of a phone number.</p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>In a study of longevity, a formatting error causes all patient ages that
 exceed 99 years to be lost (i.e. we know that those patients are more than 99
-years old, but we do not know their exact ages).</p></li>
-<li><p>Hospital A conducts a study of longevity. However, very sick patients tend
-to be transferred to Hospital B, and are lost to follow up.</p></li>
-<li><p>In a study of unemployment duration, the people who find work earlier are
+years old, but we do not know their exact ages).</li>
+</ol>
+</blockquote>
+<p>Not independent. Older patients are more likely to see an event that younger.</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Hospital A conducts a study of longevity. However, very sick patients tend
+to be transferred to Hospital B, and are lost to follow up.</li>
+</ol>
+</blockquote>
+<p>Not independent. Sick patients are more likely to see an event that healthy.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>In a study of unemployment duration, the people who find work earlier are
 less motivated to stay in touch with study investigators, and therefore are
-more likely to be lost to follow up.</p></li>
-<li><p>In a study of pregnancy duration, women who deliver their babies pre-term
+more likely to be lost to follow up.</li>
+</ol>
+</blockquote>
+<p>Not independent. More employable individuals are more likely to see an event.</p>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>In a study of pregnancy duration, women who deliver their babies pre-term
 are more likely to do so away from their usual hospital, and thus are more
-likely to be censored, relative to women who deliver full-term babies.</p></li>
-<li><p>A researcher wishes to model the number of years of education of the
+likely to be censored, relative to women who deliver full-term babies.</li>
+</ol>
+</blockquote>
+<p>Not independent. Delivery away from hospital will be associated with pregnancy
+duration.</p>
+<blockquote>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>A researcher wishes to model the number of years of education of the
 residents of a small town. Residents who enroll in college out of town are
 more likely to be lost to follow up, and are also more likely to attend
-graduate school, relative to those who attend college in town.</p></li>
-<li><p>Researchers conduct a study of disease-free survival (i.e. time until
+graduate school, relative to those who attend college in town.</li>
+</ol>
+</blockquote>
+<p>Not independent. Years of education will be associated with enrolling in out
+of town colleges.</p>
+<blockquote>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Researchers conduct a study of disease-free survival (i.e. time until
 disease relapse following treatment). Patients who have not relapsed within
 five years are considered to be cured, and thus their survival time is
-censored at five years.</p></li>
+censored at five years.</li>
+</ol>
+</blockquote>
+<p>It is possible that patients could still relapse after 5 years. If this is the
+case then considering them as cured may be problematic.</p>
+<blockquote>
+<ol start="8" style="list-style-type: lower-alpha">
 <li><p>We wish to model the failure time for some electrical component. This
 component can be manufactured in Iowa or in Pittsburgh, with no difference in
 quality. The Iowa factory opened five years ago, and so components
@@ -437,6 +476,7 @@ questions using the notation introduced in Section 11.1:</p>
 <li><p>Is the value of <span class="math inline">\(\delta_i\)</span> known, and if so, then what is it?</p></li>
 </ol>
 </blockquote>
+<p>ToDo</p>
 </div>
 <div id="question-3-9" class="section level3 hasAnchor">
 <h3><span class="header-section-number">11.1.3</span> Question 3<a href="survival-analysis-and-censored-data.html#question-3-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -445,6 +485,7 @@ questions using the notation introduced in Section 11.1:</p>
 <span class="math inline">\(r_1,...,r_K\)</span>, and <span class="math inline">\(q_1,...,q_K\)</span>, where this notation was defined in Section
 11.3.</p>
 </blockquote>
+<p>ToDo</p>
 </div>
 <div id="question-4-9" class="section level3 hasAnchor">
 <h3><span class="header-section-number">11.1.4</span> Question 4<a href="survival-analysis-and-censored-data.html#question-4-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -467,6 +508,7 @@ instance, your answer might be something along the lines of</p></li>
 <p>(The previous equation is for illustration only: it is not the correct
 answer!)</p>
 </blockquote>
+<p>ToDo</p>
 </div>
 <div id="question-5-9" class="section level3 hasAnchor">
 <h3><span class="header-section-number">11.1.5</span> Question 5<a href="survival-analysis-and-censored-data.html#question-5-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -481,6 +523,7 @@ answer!)</p>
 \]</span></p>
 <p>Your answer should look something like Figure 11.9.</p>
 </blockquote>
+<p>ToDo</p>
 </div>
 <div id="question-6-9" class="section level3 hasAnchor">
 <h3><span class="header-section-number">11.1.6</span> Question 6<a href="survival-analysis-and-censored-data.html#question-6-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -502,6 +545,7 @@ not occur within 310 days?</p></li>
 <li><p>Write out an expression for the estimated survival curve from (b).</p></li>
 </ol>
 </blockquote>
+<p>ToDo</p>
 </div>
 <div id="question-7-9" class="section level3 hasAnchor">
 <h3><span class="header-section-number">11.1.7</span> Question 7<a href="survival-analysis-and-censored-data.html#question-7-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -521,6 +565,7 @@ distribution, what are the mean and variance of <span class="math inline">\(q_{1
 to (11.5) and (11.6).</p></li>
 </ol>
 </blockquote>
+<p>ToDo</p>
 </div>
 <div id="question-8-9" class="section level3 hasAnchor">
 <h3><span class="header-section-number">11.1.8</span> Question 8<a href="survival-analysis-and-censored-data.html#question-8-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -534,6 +579,7 @@ f(t) = dF(t)/dt \\
 S(t) = \exp\left(-\int_0^t h(u)du\right)
 \]</span></p>
 </blockquote>
+<p>ToDo</p>
 </div>
 <div id="question-9-8" class="section level3 hasAnchor">
 <h3><span class="header-section-number">11.1.9</span> Question 9<a href="survival-analysis-and-censored-data.html#question-9-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -556,6 +602,7 @@ function (11.13).</p></li>
 <p><em>Hint: For (d), recall that the mean of an <span class="math inline">\(Exp(\lambda)\)</span> random variable is
 <span class="math inline">\(1/\lambda\)</span>.</em></p>
 </blockquote>
+<p>ToDo</p>
 </div>
 </div>
 <div id="applied-9" class="section level2 hasAnchor">
@@ -581,6 +628,7 @@ have <code>ki=60</code>.) Plot Kaplan-Meier survival curves for each of the five
 adjusted for the other predictors.</p></li>
 </ol>
 </blockquote>
+<p>ToDo</p>
 </div>
 <div id="question-11-6" class="section level3 hasAnchor">
 <h3><span class="header-section-number">11.2.2</span> Question 11<a href="survival-analysis-and-censored-data.html#question-11-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -605,6 +653,7 @@ log-rank test statistic compare to the <span class="math inline">\(p\)</span>-va
 the Cox model from (b)?</p></li>
 </ol>
 </blockquote>
+<p>ToDo</p>
 
 </div>
 </div>

@@ -18,6 +18,8 @@
 >
 > d. How many parameters are there?
 
+ToDo
+
 ### Question 2
 
 > Consider the _softmax_ function in (10.13) (see also (4.13) on page 141)
@@ -34,11 +36,15 @@
 > regularization and SGD typically constrain the solutions so that this is not a
 > problem.
 
+ToDo
+
 ### Question 3
 
 > Show that the negative multinomial log-likelihood (10.14) is equivalent to
 > the negative log of the likelihood expression (4.5) when there are $M = 2$
 > classes.
+
+ToDo
 
 ### Question 4
 
@@ -57,11 +63,15 @@
 > d. If there were no constraints, then how many weights would there be in the
 > ordinary feed-forward neural network in (c)?
 
+ToDo
+
 ### Question 5
 
 > In Table 10.2 on page 433, we see that the ordering of the three methods with
 > respect to mean absolute error is different from the ordering with respect to
 > test set $R^2$. How can this be?
+
+ToDo
 
 ## Applied
 
@@ -79,12 +89,16 @@
 >
 > d. Repeat with $\beta^0 = 1.4$.
 
+ToDo
+
 ### Question 7
 
 > Fit a neural network to the `Default` data. Use a single hidden layer with 10
 > units, and dropout regularization. Have a look at Labs 10.9.1–-10.9.2 for
 > guidance. Compare the classification performance of your model with that of
 > linear logistic regression.
+
+ToDo
 
 ### Question 8
 
@@ -95,11 +109,15 @@
 > images, and report the probabilities for the top five predicted classes for
 > each image.
 
+ToDo
+
 ### Question 9
 
 > Fit a lag-5 autoregressive model to the `NYSE` data, as described in the text
 > and Lab 10.9.6. Refit the model with a 12-level factor representing the
 > month. Does this factor improve the performance of the model?
+
+ToDo
 
 ### Question 10
 
@@ -111,10 +129,14 @@
 > that we fit in the lab. What are the advantages/disadvantages of each
 > approach?
 
+ToDo
+
 ### Question 11
 
 > Repeat the previous exercise, but now fit a nonlinear AR model by "flattening"
 > the short sequences produced for the RNN model.
+
+ToDo
 
 ### Question 12
 
@@ -122,9 +144,13 @@
 > allow inclusion of the variable `day_of_week`, and fit the RNN. Compute the
 > test $R^2$.
 
+ToDo
+
 ### Question 13
 
 > Repeat the analysis of Lab 10.9.5 on the `IMDb` data using a similarly
 > structured neural network. There we used a dictionary of size 10,000. Consider
 > the effects of varying the dictionary size. Try the values 1000, 3000, 5000,
 > and 10,000, and compare the results.
+
+ToDo
