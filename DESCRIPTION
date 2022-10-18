@@ -15,6 +15,7 @@ Imports:
     ggtree,
     glmnet,
     ISLR2,
+    knitr,
     leaps,
     MASS,
     plotly,

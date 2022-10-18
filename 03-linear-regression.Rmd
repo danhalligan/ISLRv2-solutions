@@ -261,7 +261,7 @@ predict(fit, data.frame(horsepower = 98), interval = "prediction")
 >   the least squares regression line.
 
 ```{r}
-plot(Auto$horsepower, Auto$mpg)
+plot(Auto$horsepower, Auto$mpg, xlab = "horsepower", ylab = "mpg")
 abline(fit)
 ```
 

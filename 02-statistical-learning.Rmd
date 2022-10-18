@@ -11,22 +11,22 @@
 > a. The sample size n is extremely large, and the number of predictors p is
 >    small.
 
-Flexible best - opposite of b
+Flexible best - opposite of b.
 
 > b. The number of predictors p is extremely large, and the number of
 >    observations n is small.
 
-Inflexible best - high chance of some predictors being randomly associated
+Inflexible best - high chance of some predictors being randomly associated.
 
 > c. The relationship between the predictors and response is highly
 >    non-linear.
 
-Flexible best - inflexible leads to high bias
+Flexible best - inflexible leads to high bias.
 
 > d. The variance of the error terms, i.e. $\sigma^2 = Var(\epsilon)$, is
 >    extremely high.
 
-Inflexible best - opposite of c
+Inflexible best - opposite of c.
 
 ### Question 2
 
@@ -38,7 +38,7 @@ Inflexible best - opposite of c
 >    we record profit, number of employees, industry and the CEO salary. We are
 >    interested in understanding which factors affect CEO salary.
 
-n=500, p=3, regression, inference
+$n=500$, $p=3$, regression, inference.
 
 > b. We are considering launching a new product and wish to know whether
 >    it will be a success or a failure. We collect data on 20 similar products
@@ -46,7 +46,7 @@ n=500, p=3, regression, inference
 >    was a success or failure, price charged for the product, marketing budget,
 >    competition price, and ten other variables.
 
-n=20, p=13, classification, prediction
+$n=20$, $p=13$, classification, prediction.
 
 > c. We are interested in predicting the % change in the USD/Euro exchange
 >    rate in relation to the weekly changes in the world stock markets. Hence we
@@ -54,7 +54,7 @@ n=20, p=13, classification, prediction
 >    in the USD/Euro, the % change in the US market, the % change in the British
 >    market, and the % change in the German market.
 
-n=52, p=3, regression, prediction
+$n=52$, $p=3$, regression, prediction.
 
 ### Question 3
 
@@ -89,7 +89,7 @@ n=52, p=3, regression, prediction
 >    each application inference or prediction? Explain your answer.
 
 * Coffee machine cleaned? (day of week, person assigned), inference.
-* Is a flight delayed? (airline, airport etc). inference.
+* Is a flight delayed? (airline, airport etc), inference.
 * Beer type (IPA, pilsner etc.), prediction.
 
 > b. Describe three real-life applications in which regression might be
@@ -103,9 +103,9 @@ n=52, p=3, regression, prediction
 > c. Describe three real-life applications in which cluster analysis might be
 >    useful.
 
-* RNAseq tumour gene expression.
+* RNAseq tumour gene expression data.
 * SNPs in human populations.
-* Types of client.
+* Frequencies of mutations (with base pair context) in somatic mutation data.
 
 ### Question 5
 
@@ -115,7 +115,7 @@ n=52, p=3, regression, prediction
 > might a less flexible approach be preferred?
 
 Inflexible is more interpretable, fewer observations required, can be biased.
-Flexible can overfit (high error variance). In cases where we have high n or
+Flexible can overfit (high error variance). In cases where we have high $n$ or
 non-linear patterns flexible will be preferred.
 
 ### Question 6
@@ -136,7 +136,7 @@ of observations may be needed to obtain accurate estimates.
 ### Question 7
 
 > The table below provides a training data set containing six observations,
-> three predictors, and one qualitative response variable. 
+> three predictors, and one qualitative response variable.
 > 
 > | Obs. | $X_1$ | $X_2$ | $X_3$ | $Y$   |
 > |------|-------|-------|-------|-------|
@@ -188,7 +188,7 @@ Red (based on data points 2, 5, 6)
 > d. If the Bayes decision boundary in this problem is highly non-linear, then
 >    would we expect the best value for $K$ to be large or small? Why?
 
-Small (high k leads to linear boundaries due to averaging)
+Small (high $k$ leads to linear boundaries due to averaging)
 
 ## Applied
 
@@ -296,17 +296,16 @@ summary(college)
 
 college$Private <- college$Private == "Yes"
 pairs(college[, 1:10], cex = 0.2)
-plot(college$Outstate ~ factor(college$Private))
+plot(college$Outstate ~ factor(college$Private), xlab = "Private", ylab = "Outstate")
 
 college$Elite <- factor(ifelse(college$Top10perc > 50, "Yes", "No"))
 summary(college$Elite)
-plot(college$Outstate ~ college$Elite)
+plot(college$Outstate ~ college$Elite, xlab = "Elite", ylab = "Outstate")
 
 par(mfrow = c(2,2))
-hist(college$Enroll, breaks = 5, main = "n = 5")
-hist(college$Enroll, breaks = 10, main = "n = 10")
-hist(college$Enroll, breaks = 20, main = "n = 20")
-hist(college$Enroll, breaks = 50, main = "n = 50")
+for (n in c(5, 10, 20, 50)) {
+  hist(college$Enroll, breaks = n, main = paste("n =", n), xlab = "Enroll")
+}
 
 chisq.test(college$Private, college$Elite)
 ```
@@ -328,6 +327,7 @@ x <- na.omit(x)
 ```{r}
 sapply(x, class)
 numeric <- which(sapply(x, class) == "numeric")
+names(numeric)
 ```
 
 > b. What is the range of each quantitative predictor? You can answer this using
@@ -340,8 +340,17 @@ sapply(x[, numeric], function(x) diff(range(x)))
 > c. What is the mean and standard deviation of each quantitative predictor?
 
 ```{r}
-sapply(x[, numeric], mean)
-sapply(x[, numeric], sd)
+library(tidyverse)
+library(knitr)
+
+x[, numeric] |>
+  pivot_longer(everything()) |>
+  group_by(name) |>
+  summarise(
+    Mean = mean(value),
+    SD = sd(value)
+  ) |>
+  kable()
 ```
 
 > d. Now remove the 10th through 85th observations. What is the range, mean, and
@@ -349,9 +358,15 @@ sapply(x[, numeric], sd)
 >    remains?
 
 ```{r}
-sapply(x[-(10:85), numeric], function(x) diff(range(x)))
-sapply(x[-(10:85), numeric], mean)
-sapply(x[-(10:85), numeric], sd)
+x[-(10:85), numeric] |>
+  pivot_longer(everything()) |>
+  group_by(name) |>
+  summarise(
+    Range = diff(range(value)),
+    Mean = mean(value),
+    SD = sd(value)
+  ) |>
+  kable()
 ```
 
 > e. Using the full data set, investigate the predictors graphically, using
@@ -360,8 +375,10 @@ sapply(x[-(10:85), numeric], sd)
 
 ```{r}
 pairs(x[, numeric], cex = 0.2) 
-cor(x[, numeric])
-heatmap(cor(x[, numeric]))
+cor(x[, numeric]) |>
+  kable()
+
+heatmap(cor(x[, numeric]), cexRow = 1.1, cexCol = 1.1, margins = c(8, 8))
 ```
 
 Many of the variables appear to be highly (positively or negatively) correlated
@@ -410,7 +427,7 @@ library(tidyverse)
 ```{r}
 ggplot(Boston, aes(nox, rm)) + geom_point()
 ggplot(Boston, aes(ptratio, rm)) + geom_point()
-heatmap(cor(Boston, method = "spearman"))
+heatmap(cor(Boston, method = "spearman"), cexRow = 1.1, cexCol = 1.1)
 ```
 
 > c. Are any of the predictors associated with per capita crime rate? If so,
@@ -451,8 +468,11 @@ median(Boston$ptratio)
 >    Comment on your findings.
 
 ```{r}
-Boston[Boston$medv == min(Boston$medv), ]
-sapply(Boston, quantile)
+Boston[Boston$medv == min(Boston$medv), ] |>
+  kable()
+
+sapply(Boston, quantile) |>
+  kable()
 ```
 
 > h. In this data set, how many of the census tract average more than seven
@@ -462,5 +482,26 @@ sapply(Boston, quantile)
 ```{r}
 sum(Boston$rm > 7)
 sum(Boston$rm > 8)
-sapply(Boston[Boston$rm > 8, ], median)
 ```
+
+Let's compare median statistics for those census tracts with more than eight
+rooms per dwelling on average, with the statistics for those with fewer.
+
+```{r}
+Boston |>
+  mutate(
+    `log(crim)` = log(crim),
+    `log(zn)` = log(zn)
+  ) |>
+  select(-c(crim, zn)) |>
+  pivot_longer(!rm) |>
+  mutate(">8 rooms" = rm > 8) |>
+  ggplot(aes(`>8 rooms`, value)) + 
+    geom_boxplot() + 
+    facet_wrap(~name, scales = "free")
+```
+
+Census tracts with big average properties (more than eight rooms per dwelling)
+have higher median value (`medv`), a lower proportion of non-retail
+business acres (`indus`), a lower pupil-teacher ratio (`ptratio`), a lower
+status of the population (`lstat`) among other differences.

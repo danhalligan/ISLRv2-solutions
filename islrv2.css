@@ -31,3 +31,7 @@ h3>.header-section-number {
 .book .book-body .page-wrapper .page-inner section.normal pre.sourceCode {
   background: #FDF5E7;
 }
+
+.book .book-body .page-wrapper .page-inner {
+  max-width: 1200px !important;
+}
