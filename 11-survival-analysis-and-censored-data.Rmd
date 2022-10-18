@@ -9,32 +9,50 @@
 >
 > a. In a study of disease relapse, due to a careless research scientist, all
 > patients whose phone numbers begin with the number "2" are lost to follow up.
->
+
+Independent. There's no reason to think disease relapse should be related to 
+the first digit of a phone number.
+
 > b. In a study of longevity, a formatting error causes all patient ages that
 > exceed 99 years to be lost (i.e. we know that those patients are more than 99
 > years old, but we do not know their exact ages).
->
+
+Not independent. Older patients are more likely to see an event that younger.
+
 > c. Hospital A conducts a study of longevity. However, very sick patients tend
 > to be transferred to Hospital B, and are lost to follow up.
->
+
+Not independent. Sick patients are more likely to see an event that healthy.
+
 > d. In a study of unemployment duration, the people who find work earlier are
 > less motivated to stay in touch with study investigators, and therefore are
 > more likely to be lost to follow up.
->
+
+Not independent. More employable individuals are more likely to see an event.
+
 > e. In a study of pregnancy duration, women who deliver their babies pre-term
 > are more likely to do so away from their usual hospital, and thus are more
 > likely to be censored, relative to women who deliver full-term babies.
->
+
+Not independent. Delivery away from hospital will be associated with pregnancy
+duration.
+
 > f. A researcher wishes to model the number of years of education of the
 > residents of a small town. Residents who enroll in college out of town are
 > more likely to be lost to follow up, and are also more likely to attend
 > graduate school, relative to those who attend college in town.
->
+
+Not independent. Years of education will be associated with enrolling in out
+of town colleges.
+
 > g. Researchers conduct a study of disease-free survival (i.e. time until
 > disease relapse following treatment). Patients who have not relapsed within
 > five years are considered to be cured, and thus their survival time is
 > censored at five years.
->
+
+It is possible that patients could still relapse after 5 years. If this is the
+case then considering them as cured may be problematic.
+
 > h. We wish to model the failure time for some electrical component. This
 > component can be manufactured in Iowa or in Pittsburgh, with no difference in
 > quality. The Iowa factory opened five years ago, and so components
@@ -70,14 +88,17 @@
 >
 > e. Is the value of $\delta_i$ known, and if so, then what is it?
 
+ToDo
+
 ### Question 3
 
 > For the example in Exercise 2, report the values of $K$, $d_1,...,d_K$,
 > $r_1,...,r_K$, and $q_1,...,q_K$, where this notation was defined in Section
 > 11.3.
 
-### Question 4
+ToDo
 
+### Question 4
 
 > This problem makes use of the Kaplan-Meier survival curve displayed in Figure
 > 11.9. The raw data that went into plotting this survival curve is given in
@@ -99,6 +120,8 @@
 > (The previous equation is for illustration only: it is not the correct
 > answer!)
 
+ToDo
+
 ### Question 5
 
 > Sketch the survival function given by the equation
@@ -112,6 +135,8 @@
 > $$
 >
 > Your answer should look something like Figure 11.9.
+
+ToDo
 
 ### Question 6
 
@@ -134,6 +159,8 @@
 >
 > d. Write out an expression for the estimated survival curve from (b).
 
+ToDo
+
 ### Question 7
 
 > In this problem, we will derive (11.5) and (11.6), which are needed for the
@@ -151,6 +178,8 @@
 > distribution, what are the mean and variance of $q_{1k}$? Compare your answer
 > to (11.5) and (11.6).
 
+ToDo
+
 ### Question 8
 
 > Recall that the survival function $S(t)$, the hazard function $h(t)$, and the
@@ -162,6 +191,8 @@
 > f(t) = dF(t)/dt \\
 > S(t) = \exp\left(-\int_0^t h(u)du\right)
 > $$
+
+ToDo
 
 ### Question 9
 
@@ -185,6 +216,8 @@
 >
 > _Hint: For (d), recall that the mean of an $Exp(\lambda)$ random variable is
 > $1/\lambda$._
+
+ToDo
 
 ## Applied
 
@@ -210,6 +243,8 @@
 > have `ki=60`.) Plot Kaplan-Meier survival curves for each of the five strata,
 > adjusted for the other predictors.
 
+ToDo
+
 ### Question 11
 
 > This example makes use of the data in Table 11.4.
@@ -232,3 +267,5 @@
 > between the survival curves for the two groups. How does the p-value for the
 > log-rank test statistic compare to the $p$-value for the score statistic for
 > the Cox model from (b)?
+
+ToDo

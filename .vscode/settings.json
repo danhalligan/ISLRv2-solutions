@@ -7,6 +7,8 @@
         "dendrogram",
         "dendrograms",
         "FWER",
+        "hypergeometric",
+        "Kaplan",
         "logit",
         "LOOCV",
         "multinomial",
@@ -18,7 +20,8 @@
         "scatterplot",
         "scatterplots",
         "softmax",
-        "stochasticity"
+        "stochasticity",
+        "timepoint"
     ],
     "cSpell.enabled": true,
     "cSpell.language": "en-US"
