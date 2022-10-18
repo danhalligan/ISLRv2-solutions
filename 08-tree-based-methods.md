@@ -62,14 +62,13 @@ library(ggtree)
 ## trees with their covariates and other associated data. Methods in
 ## Ecology and Evolution. 2017, 8(1):28-36. doi:10.1111/2041-210X.12628
 ## 
-## G Yu. Data Integration, Manipulation and Visualization of Phylogenetic
-## Trees (1st ed.). Chapman and Hall/CRC. 2022. ISBN: 9781032233574
+## Guangchuang Yu. Using ggtree to visualize data on tree-like structures.
+## Current Protocols in Bioinformatics. 2020, 69:e96. doi:10.1002/cpbi.96
 ## 
-## LG Wang, TTY Lam, S Xu, Z Dai, L Zhou, T Feng, P Guo, CW Dunn, BR
-## Jones, T Bradley, H Zhu, Y Guan, Y Jiang, G Yu. treeio: an R package
-## for phylogenetic tree input and output with richly annotated and
-## associated data. Molecular Biology and Evolution. 2020, 37(2):599-603.
-## doi: 10.1093/molbev/msz240
+## Shuangbin Xu, Lin Li, Xiao Luo, Meijun Chen, Wenli Tang, Li Zhan, Zehan
+## Dai, Tommy T. Lam, Yi Guan, Guangchuang Yu. Ggtree: A serialized data
+## object for visualization of a phylogenetic tree and annotation data.
+## iMeta 2022, 4(1):e56. doi:10.1002/imt2.56
 ## 
 ## Attaching package: 'ggtree'
 ## 

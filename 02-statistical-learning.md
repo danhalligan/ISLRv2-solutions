@@ -11,22 +11,22 @@
 > a. The sample size n is extremely large, and the number of predictors p is
 >    small.
 
-Flexible best - opposite of b
+Flexible best - opposite of b.
 
 > b. The number of predictors p is extremely large, and the number of
 >    observations n is small.
 
-Inflexible best - high chance of some predictors being randomly associated
+Inflexible best - high chance of some predictors being randomly associated.
 
 > c. The relationship between the predictors and response is highly
 >    non-linear.
 
-Flexible best - inflexible leads to high bias
+Flexible best - inflexible leads to high bias.
 
 > d. The variance of the error terms, i.e. $\sigma^2 = Var(\epsilon)$, is
 >    extremely high.
 
-Inflexible best - opposite of c
+Inflexible best - opposite of c.
 
 ### Question 2
 
@@ -38,7 +38,7 @@ Inflexible best - opposite of c
 >    we record profit, number of employees, industry and the CEO salary. We are
 >    interested in understanding which factors affect CEO salary.
 
-n=500, p=3, regression, inference
+$n=500$, $p=3$, regression, inference.
 
 > b. We are considering launching a new product and wish to know whether
 >    it will be a success or a failure. We collect data on 20 similar products
@@ -46,7 +46,7 @@ n=500, p=3, regression, inference
 >    was a success or failure, price charged for the product, marketing budget,
 >    competition price, and ten other variables.
 
-n=20, p=13, classification, prediction
+$n=20$, $p=13$, classification, prediction.
 
 > c. We are interested in predicting the % change in the USD/Euro exchange
 >    rate in relation to the weekly changes in the world stock markets. Hence we
@@ -54,7 +54,7 @@ n=20, p=13, classification, prediction
 >    in the USD/Euro, the % change in the US market, the % change in the British
 >    market, and the % change in the German market.
 
-n=52, p=3, regression, prediction
+$n=52$, $p=3$, regression, prediction.
 
 ### Question 3
 
@@ -89,7 +89,7 @@ n=52, p=3, regression, prediction
 >    each application inference or prediction? Explain your answer.
 
 * Coffee machine cleaned? (day of week, person assigned), inference.
-* Is a flight delayed? (airline, airport etc). inference.
+* Is a flight delayed? (airline, airport etc), inference.
 * Beer type (IPA, pilsner etc.), prediction.
 
 > b. Describe three real-life applications in which regression might be
@@ -103,9 +103,9 @@ n=52, p=3, regression, prediction
 > c. Describe three real-life applications in which cluster analysis might be
 >    useful.
 
-* RNAseq tumour gene expression.
+* RNAseq tumour gene expression data.
 * SNPs in human populations.
-* Types of client.
+* Frequencies of mutations (with base pair context) in somatic mutation data.
 
 ### Question 5
 
@@ -115,7 +115,7 @@ n=52, p=3, regression, prediction
 > might a less flexible approach be preferred?
 
 Inflexible is more interpretable, fewer observations required, can be biased.
-Flexible can overfit (high error variance). In cases where we have high n or
+Flexible can overfit (high error variance). In cases where we have high $n$ or
 non-linear patterns flexible will be preferred.
 
 ### Question 6
@@ -136,7 +136,7 @@ of observations may be needed to obtain accurate estimates.
 ### Question 7
 
 > The table below provides a training data set containing six observations,
-> three predictors, and one qualitative response variable. 
+> three predictors, and one qualitative response variable.
 > 
 > | Obs. | $X_1$ | $X_2$ | $X_3$ | $Y$   |
 > |------|-------|-------|-------|-------|
@@ -203,7 +203,7 @@ Red (based on data points 2, 5, 6)
 > d. If the Bayes decision boundary in this problem is highly non-linear, then
 >    would we expect the best value for $K$ to be large or small? Why?
 
-Small (high k leads to linear boundaries due to averaging)
+Small (high $k$ leads to linear boundaries due to averaging)
 
 ## Applied
 
@@ -359,7 +359,7 @@ pairs(college[, 1:10], cex = 0.2)
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 ```r
-plot(college$Outstate ~ factor(college$Private))
+plot(college$Outstate ~ factor(college$Private), xlab = "Private", ylab = "Outstate")
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-2.png" width="672" />
@@ -375,17 +375,16 @@ summary(college$Elite)
 ```
 
 ```r
-plot(college$Outstate ~ college$Elite)
+plot(college$Outstate ~ college$Elite, xlab = "Elite", ylab = "Outstate")
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-3.png" width="672" />
 
 ```r
 par(mfrow = c(2,2))
-hist(college$Enroll, breaks = 5, main = "n = 5")
-hist(college$Enroll, breaks = 10, main = "n = 10")
-hist(college$Enroll, breaks = 20, main = "n = 20")
-hist(college$Enroll, breaks = 50, main = "n = 50")
+for (n in c(5, 10, 20, 50)) {
+  hist(college$Enroll, breaks = n, main = paste("n =", n), xlab = "Enroll")
+}
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-4.png" width="672" />
@@ -431,6 +430,11 @@ sapply(x, class)
 
 ```r
 numeric <- which(sapply(x, class) == "numeric")
+names(numeric)
+```
+
+```
+## [1] "mpg"          "displacement" "horsepower"   "weight"       "acceleration"
 ```
 
 > b. What is the range of each quantitative predictor? You can answer this using
@@ -450,22 +454,42 @@ sapply(x[, numeric], function(x) diff(range(x)))
 
 
 ```r
-sapply(x[, numeric], mean)
+library(tidyverse)
 ```
 
 ```
-##          mpg displacement   horsepower       weight acceleration 
-##     23.44592    194.41199    104.46939   2977.58418     15.54133
+## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+## ✔ readr   2.1.3      ✔ forcats 0.5.2 
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
 ```
 
 ```r
-sapply(x[, numeric], sd)
+library(knitr)
+
+x[, numeric] |>
+  pivot_longer(everything()) |>
+  group_by(name) |>
+  summarise(
+    Mean = mean(value),
+    SD = sd(value)
+  ) |>
+  kable()
 ```
 
-```
-##          mpg displacement   horsepower       weight acceleration 
-##     7.805007   104.644004    38.491160   849.402560     2.758864
-```
+
+
+|name         |       Mean|         SD|
+|:------------|----------:|----------:|
+|acceleration |   15.54133|   2.758864|
+|displacement |  194.41199| 104.644004|
+|horsepower   |  104.46939|  38.491160|
+|mpg          |   23.44592|   7.805008|
+|weight       | 2977.58418| 849.402560|
 
 > d. Now remove the 10th through 85th observations. What is the range, mean, and
 >    standard deviation of each predictor in the subset of the data that 
@@ -473,31 +497,26 @@ sapply(x[, numeric], sd)
 
 
 ```r
-sapply(x[-(10:85), numeric], function(x) diff(range(x)))
+x[-(10:85), numeric] |>
+  pivot_longer(everything()) |>
+  group_by(name) |>
+  summarise(
+    Range = diff(range(value)),
+    Mean = mean(value),
+    SD = sd(value)
+  ) |>
+  kable()
 ```
 
-```
-##          mpg displacement   horsepower       weight acceleration 
-##         35.6        387.0        184.0       3348.0         16.3
-```
 
-```r
-sapply(x[-(10:85), numeric], mean)
-```
 
-```
-##          mpg displacement   horsepower       weight acceleration 
-##     24.40443    187.24051    100.72152   2935.97152     15.72690
-```
-
-```r
-sapply(x[-(10:85), numeric], sd)
-```
-
-```
-##          mpg displacement   horsepower       weight acceleration 
-##     7.867283    99.678367    35.708853   811.300208     2.693721
-```
+|name         |  Range|       Mean|         SD|
+|:------------|------:|----------:|----------:|
+|acceleration |   16.3|   15.72690|   2.693721|
+|displacement |  387.0|  187.24051|  99.678367|
+|horsepower   |  184.0|  100.72152|  35.708853|
+|mpg          |   35.6|   24.40443|   7.867283|
+|weight       | 3348.0| 2935.97152| 811.300208|
 
 > e. Using the full data set, investigate the predictors graphically, using
 >    scatterplots or other tools of your choice. Create some plots highlighting
@@ -511,20 +530,22 @@ pairs(x[, numeric], cex = 0.2)
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 ```r
-cor(x[, numeric])
+cor(x[, numeric]) |>
+  kable()
 ```
 
-```
-##                     mpg displacement horsepower     weight acceleration
-## mpg           1.0000000   -0.8051269 -0.7784268 -0.8322442    0.4233285
-## displacement -0.8051269    1.0000000  0.8972570  0.9329944   -0.5438005
-## horsepower   -0.7784268    0.8972570  1.0000000  0.8645377   -0.6891955
-## weight       -0.8322442    0.9329944  0.8645377  1.0000000   -0.4168392
-## acceleration  0.4233285   -0.5438005 -0.6891955 -0.4168392    1.0000000
-```
+
+
+|             |        mpg| displacement| horsepower|     weight| acceleration|
+|:------------|----------:|------------:|----------:|----------:|------------:|
+|mpg          |  1.0000000|   -0.8051269| -0.7784268| -0.8322442|    0.4233285|
+|displacement | -0.8051269|    1.0000000|  0.8972570|  0.9329944|   -0.5438005|
+|horsepower   | -0.7784268|    0.8972570|  1.0000000|  0.8645377|   -0.6891955|
+|weight       | -0.8322442|    0.9329944|  0.8645377|  1.0000000|   -0.4168392|
+|acceleration |  0.4233285|   -0.5438005| -0.6891955| -0.4168392|    1.0000000|
 
 ```r
-heatmap(cor(x[, numeric]))
+heatmap(cor(x[, numeric]), cexRow = 1.1, cexCol = 1.1, margins = c(8, 8))
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-2.png" width="672" />
@@ -592,7 +613,7 @@ ggplot(Boston, aes(ptratio, rm)) + geom_point()
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-2.png" width="672" />
 
 ```r
-heatmap(cor(Boston, method = "spearman"))
+heatmap(cor(Boston, method = "spearman"), cexRow = 1.1, cexCol = 1.1)
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-3.png" width="672" />
@@ -649,33 +670,31 @@ median(Boston$ptratio)
 
 
 ```r
-Boston[Boston$medv == min(Boston$medv), ]
+Boston[Boston$medv == min(Boston$medv), ] |>
+  kable()
 ```
 
-```
-##        crim zn indus chas   nox    rm age    dis rad tax ptratio lstat medv
-## 399 38.3518  0  18.1    0 0.693 5.453 100 1.4896  24 666    20.2 30.59    5
-## 406 67.9208  0  18.1    0 0.693 5.683 100 1.4254  24 666    20.2 22.98    5
-```
+
+
+|    |    crim| zn| indus| chas|   nox|    rm| age|    dis| rad| tax| ptratio| lstat| medv|
+|:---|-------:|--:|-----:|----:|-----:|-----:|---:|------:|---:|---:|-------:|-----:|----:|
+|399 | 38.3518|  0|  18.1|    0| 0.693| 5.453| 100| 1.4896|  24| 666|    20.2| 30.59|    5|
+|406 | 67.9208|  0|  18.1|    0| 0.693| 5.683| 100| 1.4254|  24| 666|    20.2| 22.98|    5|
 
 ```r
-sapply(Boston, quantile)
+sapply(Boston, quantile) |>
+  kable()
 ```
 
-```
-##           crim    zn indus chas   nox     rm     age       dis rad tax ptratio
-## 0%    0.006320   0.0  0.46    0 0.385 3.5610   2.900  1.129600   1 187   12.60
-## 25%   0.082045   0.0  5.19    0 0.449 5.8855  45.025  2.100175   4 279   17.40
-## 50%   0.256510   0.0  9.69    0 0.538 6.2085  77.500  3.207450   5 330   19.05
-## 75%   3.677083  12.5 18.10    0 0.624 6.6235  94.075  5.188425  24 666   20.20
-## 100% 88.976200 100.0 27.74    1 0.871 8.7800 100.000 12.126500  24 711   22.00
-##       lstat   medv
-## 0%    1.730  5.000
-## 25%   6.950 17.025
-## 50%  11.360 21.200
-## 75%  16.955 25.000
-## 100% 37.970 50.000
-```
+
+
+|     |      crim|    zn| indus| chas|   nox|     rm|     age|       dis| rad| tax| ptratio|  lstat|   medv|
+|:----|---------:|-----:|-----:|----:|-----:|------:|-------:|---------:|---:|---:|-------:|------:|------:|
+|0%   |  0.006320|   0.0|  0.46|    0| 0.385| 3.5610|   2.900|  1.129600|   1| 187|   12.60|  1.730|  5.000|
+|25%  |  0.082045|   0.0|  5.19|    0| 0.449| 5.8855|  45.025|  2.100175|   4| 279|   17.40|  6.950| 17.025|
+|50%  |  0.256510|   0.0|  9.69|    0| 0.538| 6.2085|  77.500|  3.207450|   5| 330|   19.05| 11.360| 21.200|
+|75%  |  3.677083|  12.5| 18.10|    0| 0.624| 6.6235|  94.075|  5.188425|  24| 666|   20.20| 16.955| 25.000|
+|100% | 88.976200| 100.0| 27.74|    1| 0.871| 8.7800| 100.000| 12.126500|  24| 711|   22.00| 37.970| 50.000|
 
 > h. In this data set, how many of the census tract average more than seven
 >    rooms per dwelling? More than eight rooms per dwelling? Comment on the
@@ -698,13 +717,31 @@ sum(Boston$rm > 8)
 ## [1] 13
 ```
 
+Let's compare median statistics for those census tracts with more than eight
+rooms per dwelling on average, with the statistics for those with fewer.
+
+
 ```r
-sapply(Boston[Boston$rm > 8, ], median)
+Boston |>
+  mutate(
+    `log(crim)` = log(crim),
+    `log(zn)` = log(zn)
+  ) |>
+  select(-c(crim, zn)) |>
+  pivot_longer(!rm) |>
+  mutate(">8 rooms" = rm > 8) |>
+  ggplot(aes(`>8 rooms`, value)) + 
+    geom_boxplot() + 
+    facet_wrap(~name, scales = "free")
 ```
 
 ```
-##      crim        zn     indus      chas       nox        rm       age       dis 
-##   0.52014   0.00000   6.20000   0.00000   0.50700   8.29700  78.30000   2.89440 
-##       rad       tax   ptratio     lstat      medv 
-##   7.00000 307.00000  17.40000   4.14000  48.30000
+## Warning: Removed 372 rows containing non-finite values (stat_boxplot).
 ```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+
+Census tracts with big average properties (more than eight rooms per dwelling)
+have higher median value (`medv`), a lower proportion of non-retail
+business acres (`indus`), a lower pupil-teacher ratio (`ptratio`), a lower
+status of the population (`lstat`) among other differences.

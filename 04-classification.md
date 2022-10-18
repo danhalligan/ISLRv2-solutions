@@ -301,7 +301,7 @@ p(D|v) &= \frac{p(v|D) p(D)}{p(v|D)p(D) + p(v|N)p(N)} \\
                 \pi_N e^{-(x-\mu_N)^2/2\sigma^2}} \\
        &= \frac{0.8 \times e^{-(4-10)^2/(2 \times 36)}}
                {0.8 \times e^{-(4-10)^2/(2 \times 36)} + 0.2 \times e^{-(4-0)^2/(2 \times 36)}} \\
-       &= \frac{0.8 \times e^{-1/2}}{0.8 \times e^{-1/2} + 0.2 \times e^{-2/9}}
+       &= \frac{0.8 e^{-1/2}}{0.8 e^{-1/2} + 0.2 e^{-2/9}}
 \end{align}
 
 
@@ -363,7 +363,7 @@ $$0.16 / (1 - 0.16)  = 0.19$$
  & = \log\left(\frac{\pi_k f_k(x)}{\pi_K f_K(x)}\right) \\
  & = \log\left(\frac{\pi_k \exp(-1/2((x-\mu_k)/\sigma)^2)}{\pi_K \exp(-1/2((x-\mu_K)/\sigma)^2)}\right) \\
  & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2} \left(\frac{x-\mu_k}{\sigma}\right)^2 + \frac{1}{2} \left(\frac{x-\mu_K}{\sigma}\right)^2 \\
- & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left((x-\mu_k)^2\right) + \frac{1}{2\sigma^2} \left((x-\mu_K)^2\right) \\
+ & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} (x-\mu_k)^2 + \frac{1}{2\sigma^2} (x-\mu_K)^2 \\
  & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left((x-\mu_k)^2 - (x-\mu_K)^2\right) \\
  & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left(x^2-2x\mu_k+\mu_k^2 - x^2 + 2x\mu_K - \mu_K^2\right) \\
  & = \log\left(\frac{\pi_k}{\pi_K}\right) - \frac{1}{2\sigma^2} \left(2x(\mu_K - \mu_k) + \mu_k^2 -\mu_K^2\right) \\
@@ -661,8 +661,8 @@ fit <- knn(
 ```
 ##       
 ## fit    Down Up
-##   Down   21 30
-##   Up     22 31
+##   Down   21 29
+##   Up     22 32
 ```
 
 ```r
@@ -670,7 +670,7 @@ sum(diag(t)) / sum(t)
 ```
 
 ```
-## [1] 0.5
+## [1] 0.5096154
 ```
 
 > h. Repeat (d) using naive Bayes.
