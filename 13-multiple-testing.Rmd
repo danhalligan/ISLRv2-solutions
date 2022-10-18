@@ -229,6 +229,8 @@ false positives, so the results would not change.
 > represents one of the other quantitative variables.
 
 ```{r}
+library(ISLR2)
+
 nm <- c("CompPrice", "Income", "Advertising", "Population", "Price", "Age")
 pvals <- sapply(nm, function(n) {
   summary(lm(Carseats[["Sales"]] ~ Carseats[[n]]))$coef[2,4]
