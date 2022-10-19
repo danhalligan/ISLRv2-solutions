@@ -472,15 +472,15 @@ be no larger than the sum of the probabilities for each individual hypothesis
 <p>Suppose we test <span class="math inline">\(m = 10\)</span> hypotheses, and obtain the p-values shown in Table
 13.4.</p>
 </blockquote>
-<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="multiple-testing.html#cb734-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.0011</span>, <span class="fl">0.031</span>, <span class="fl">0.017</span>, <span class="fl">0.32</span>, <span class="fl">0.11</span>, <span class="fl">0.90</span>, <span class="fl">0.07</span>, <span class="fl">0.006</span>, <span class="fl">0.004</span>, <span class="fl">0.0009</span>)</span>
-<span id="cb734-2"><a href="multiple-testing.html#cb734-2"></a><span class="kw">names</span>(pvals) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;H&quot;</span>, <span class="kw">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb741-1"><a href="multiple-testing.html#cb741-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.0011</span>, <span class="fl">0.031</span>, <span class="fl">0.017</span>, <span class="fl">0.32</span>, <span class="fl">0.11</span>, <span class="fl">0.90</span>, <span class="fl">0.07</span>, <span class="fl">0.006</span>, <span class="fl">0.004</span>, <span class="fl">0.0009</span>)</span>
+<span id="cb741-2"><a href="multiple-testing.html#cb741-2"></a><span class="kw">names</span>(pvals) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;H&quot;</span>, <span class="kw">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>))</span></code></pre></div>
 <blockquote>
 <ol style="list-style-type: lower-alpha">
 <li>Suppose that we wish to control the Type I error for each null hypothesis
 at level <span class="math inline">\(\alpha = 0.05\)</span>. Which null hypotheses will we reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb735-1"><a href="multiple-testing.html#cb735-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="multiple-testing.html#cb742-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;H01&quot; &quot;H02&quot; &quot;H03&quot; &quot;H08&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
 <p>We reject all NULL hypotheses where <span class="math inline">\(p &lt; 0.05\)</span>.</p>
 <blockquote>
@@ -489,7 +489,7 @@ at level <span class="math inline">\(\alpha = 0.05\)</span>. Which null hypothes
 Which null hypotheses will we reject? Justify your answer.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="multiple-testing.html#cb737-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb744-1"><a href="multiple-testing.html#cb744-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;H01&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
 <p>We reject all NULL hypotheses where <span class="math inline">\(p &lt; 0.005\)</span>.</p>
 <blockquote>
@@ -498,7 +498,7 @@ Which null hypotheses will we reject? Justify your answer.</li>
 hypotheses will we reject? Justify your answer.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb739-1"><a href="multiple-testing.html#cb739-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb746-1"><a href="multiple-testing.html#cb746-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;H01&quot; &quot;H03&quot; &quot;H08&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
 <p>We reject all NULL hypotheses where <span class="math inline">\(q &lt; 0.05\)</span>.</p>
 <blockquote>
@@ -507,7 +507,7 @@ hypotheses will we reject? Justify your answer.</li>
 hypotheses will we reject? Justify your answer.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb741-1"><a href="multiple-testing.html#cb741-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="multiple-testing.html#cb748-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;H01&quot; &quot;H02&quot; &quot;H03&quot; &quot;H05&quot; &quot;H07&quot; &quot;H08&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
 <p>We reject all NULL hypotheses where <span class="math inline">\(q &lt; 0.2\)</span>.</p>
 <blockquote>
@@ -534,10 +534,10 @@ when controlling the FWER at level 0.1.</li>
 <p>In this case, for Bonferroni, we need one p-value to be less than <span class="math inline">\(0.1 / 5 = 0.02\)</span>. and the others to be above. For Holm’s method, we need the most
 significant p-value to be below <span class="math inline">\(0.1/(5 + 1 - 1) = 0.02\)</span> also.</p>
 <p>An example would be: 1, 1, 1, 1, 0.001.</p>
-<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb743-1"><a href="multiple-testing.html#cb743-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
-<span id="cb743-2"><a href="multiple-testing.html#cb743-2"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;bonferroni&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="multiple-testing.html#cb750-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
+<span id="cb750-2"><a href="multiple-testing.html#cb750-2"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;bonferroni&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb745-1"><a href="multiple-testing.html#cb745-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;holm&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="multiple-testing.html#cb752-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;holm&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -547,10 +547,10 @@ null hypothesis and Holm rejects more than one null hypothesis at level 0.1.</li
 </blockquote>
 <p>An example would be: 1, 1, 1, 0.02, 0.001. For Holm’s method we reject two
 because <span class="math inline">\(0.02 &lt; 0.1/(5 + 1 - 2)\)</span>.</p>
-<div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb747-1"><a href="multiple-testing.html#cb747-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.02</span>, <span class="fl">0.001</span>)</span>
-<span id="cb747-2"><a href="multiple-testing.html#cb747-2"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;bonferroni&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="multiple-testing.html#cb754-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.02</span>, <span class="fl">0.001</span>)</span>
+<span id="cb754-2"><a href="multiple-testing.html#cb754-2"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;bonferroni&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb749-1"><a href="multiple-testing.html#cb749-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;holm&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="multiple-testing.html#cb756-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;holm&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 </div>
 <div id="question-6-11" class="section level3 hasAnchor">
@@ -705,19 +705,19 @@ with the coefficient <span class="math inline">\(\beta_1\)</span>. Here, <span c
 represents one of the other quantitative variables.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="multiple-testing.html#cb751-1"></a><span class="kw">library</span>(ISLR2)</span>
-<span id="cb751-2"><a href="multiple-testing.html#cb751-2"></a></span>
-<span id="cb751-3"><a href="multiple-testing.html#cb751-3"></a>nm &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;CompPrice&quot;</span>, <span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Advertising&quot;</span>, <span class="st">&quot;Population&quot;</span>, <span class="st">&quot;Price&quot;</span>, <span class="st">&quot;Age&quot;</span>)</span>
-<span id="cb751-4"><a href="multiple-testing.html#cb751-4"></a>pvals &lt;-<span class="st"> </span><span class="kw">sapply</span>(nm, <span class="cf">function</span>(n) {</span>
-<span id="cb751-5"><a href="multiple-testing.html#cb751-5"></a>  <span class="kw">summary</span>(<span class="kw">lm</span>(Carseats[[<span class="st">&quot;Sales&quot;</span>]] <span class="op">~</span><span class="st"> </span>Carseats[[n]]))<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">4</span>]</span>
-<span id="cb751-6"><a href="multiple-testing.html#cb751-6"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="multiple-testing.html#cb758-1"></a><span class="kw">library</span>(ISLR2)</span>
+<span id="cb758-2"><a href="multiple-testing.html#cb758-2"></a></span>
+<span id="cb758-3"><a href="multiple-testing.html#cb758-3"></a>nm &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;CompPrice&quot;</span>, <span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Advertising&quot;</span>, <span class="st">&quot;Population&quot;</span>, <span class="st">&quot;Price&quot;</span>, <span class="st">&quot;Age&quot;</span>)</span>
+<span id="cb758-4"><a href="multiple-testing.html#cb758-4"></a>pvals &lt;-<span class="st"> </span><span class="kw">sapply</span>(nm, <span class="cf">function</span>(n) {</span>
+<span id="cb758-5"><a href="multiple-testing.html#cb758-5"></a>  <span class="kw">summary</span>(<span class="kw">lm</span>(Carseats[[<span class="st">&quot;Sales&quot;</span>]] <span class="op">~</span><span class="st"> </span>Carseats[[n]]))<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">4</span>]</span>
+<span id="cb758-6"><a href="multiple-testing.html#cb758-6"></a>})</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Suppose we control the Type I error at level <span class="math inline">\(\alpha = 0.05\)</span> for the
 p-values obtained in (a). Which null hypotheses do we reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="multiple-testing.html#cb752-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="multiple-testing.html#cb759-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;Income&quot;      &quot;Advertising&quot; &quot;Price&quot;       &quot;Age&quot;</code></pre>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -725,7 +725,7 @@ p-values obtained in (a). Which null hypotheses do we reject?</li>
 hypotheses do we reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="multiple-testing.html#cb754-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span><span class="op">/</span><span class="kw">length</span>(nm)))</span></code></pre></div>
+<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="multiple-testing.html#cb761-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span><span class="op">/</span><span class="kw">length</span>(nm)))</span></code></pre></div>
 <pre><code>## [1] &quot;Income&quot;      &quot;Advertising&quot; &quot;Price&quot;       &quot;Age&quot;</code></pre>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
@@ -733,22 +733,22 @@ hypotheses do we reject?</li>
 null hypotheses do we reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="multiple-testing.html#cb756-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="multiple-testing.html#cb763-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;Income&quot;      &quot;Advertising&quot; &quot;Price&quot;       &quot;Age&quot;</code></pre>
 </div>
 <div id="question-8-11" class="section level3 hasAnchor">
 <h3><span class="header-section-number">13.2.2</span> Question 8<a href="multiple-testing.html#question-8-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In this problem, we will simulate data from <span class="math inline">\(m = 100\)</span> fund managers.</p>
-<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="multiple-testing.html#cb758-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb758-2"><a href="multiple-testing.html#cb758-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb758-3"><a href="multiple-testing.html#cb758-3"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb758-4"><a href="multiple-testing.html#cb758-4"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
+<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="multiple-testing.html#cb765-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb765-2"><a href="multiple-testing.html#cb765-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb765-3"><a href="multiple-testing.html#cb765-3"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb765-4"><a href="multiple-testing.html#cb765-4"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
 </blockquote>
-<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="multiple-testing.html#cb759-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb759-2"><a href="multiple-testing.html#cb759-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb759-3"><a href="multiple-testing.html#cb759-3"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb759-4"><a href="multiple-testing.html#cb759-4"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="multiple-testing.html#cb766-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb766-2"><a href="multiple-testing.html#cb766-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb766-3"><a href="multiple-testing.html#cb766-3"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb766-4"><a href="multiple-testing.html#cb766-4"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
 <blockquote>
 <p>These data represent each fund manager’s percentage returns for each of <span class="math inline">\(n = 20\)</span> months. We wish to test the null hypothesis that each fund manager’s
 percentage returns have population mean equal to zero. Notice that we
@@ -759,15 +759,15 @@ do have population mean zero; in other words, all <span class="math inline">\(m\
 of the <span class="math inline">\(p\)</span>-values obtained.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="multiple-testing.html#cb760-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">apply</span>(X, <span class="dv">2</span>, <span class="cf">function</span>(p) <span class="kw">t.test</span>(p)<span class="op">$</span>p.value)</span>
-<span id="cb760-2"><a href="multiple-testing.html#cb760-2"></a><span class="kw">hist</span>(pvals, <span class="dt">main =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="multiple-testing.html#cb767-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">apply</span>(X, <span class="dv">2</span>, <span class="cf">function</span>(p) <span class="kw">t.test</span>(p)<span class="op">$</span>p.value)</span>
+<span id="cb767-2"><a href="multiple-testing.html#cb767-2"></a><span class="kw">hist</span>(pvals, <span class="dt">main =</span> <span class="ot">NULL</span>)</span></code></pre></div>
 <p><img src="13-multiple-testing_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>If we control Type I error for each null hypothesis at level <span class="math inline">\(\alpha = 0.05\)</span>, then how many null hypotheses do we reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="multiple-testing.html#cb761-1"></a><span class="kw">sum</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="multiple-testing.html#cb768-1"></a><span class="kw">sum</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -775,7 +775,7 @@ of the <span class="math inline">\(p\)</span>-values obtained.</li>
 reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="multiple-testing.html#cb763-1"></a><span class="kw">sum</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(pvals))</span></code></pre></div>
+<div class="sourceCode" id="cb770"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb770-1"><a href="multiple-testing.html#cb770-1"></a><span class="kw">sum</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(pvals))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
@@ -783,7 +783,7 @@ reject?</li>
 reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="multiple-testing.html#cb765-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="multiple-testing.html#cb772-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
@@ -794,10 +794,10 @@ just these 10 fund managers at level 0.05, then how many null hypotheses do we
 reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="multiple-testing.html#cb767-1"></a>best &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">apply</span>(X, <span class="dv">2</span>, sum), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span>
-<span id="cb767-2"><a href="multiple-testing.html#cb767-2"></a><span class="kw">sum</span>(pvals[best] <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="multiple-testing.html#cb774-1"></a>best &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">apply</span>(X, <span class="dv">2</span>, sum), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span>
+<span id="cb774-2"><a href="multiple-testing.html#cb774-2"></a><span class="kw">sum</span>(pvals[best] <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb769-1"><a href="multiple-testing.html#cb769-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals[best], <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="multiple-testing.html#cb776-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals[best], <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">

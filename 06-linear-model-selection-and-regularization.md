@@ -359,11 +359,12 @@ abline(v = y -  lambda/2, lty = 2)
 >    distributed from a $N(0, \sigma^2)$ distribution. Write out the likelihood
 >    for the data.
 
-$$
-\mathcal{L} = \prod_i^n \mathcal{N}(y_i - (\beta_0 + \sum_j^p x_{ij}\beta_j), \sigma^2)
-$$
-
-Expand equation out to use Gaussian formula...
+\begin{align*}
+\mathcal{L} 
+  &= \prod_i^n \mathcal{N}(0, \sigma^2) \\
+  &= \prod_i^n \frac{1}{\sqrt{2\pi\sigma}}\exp\left(-\frac{\epsilon_i^2}{2\sigma^2}\right) \\
+  &= \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right)
+\end{align*}
 
 > b. Assume the following prior for $\beta$: $\beta_1, ..., \beta_p$ are
 >    independent and identically distributed according to a double-exponential
@@ -371,20 +372,80 @@ Expand equation out to use Gaussian formula...
 >    $p(\beta) = \frac{1}{2b}\exp(-|\beta|/b)$. Write out the posterior for
 >    $\beta$ in this setting.
 
-Posterior can be calculated by multiplying prior and likelihood
+The posterior can be calculated by multiplying the prior and likelihood
+(up to a proportionality constant).
 
-ToDo
+\begin{align*}
+p(\beta|X,Y) 
+  &\propto \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right) \prod_j^p\frac{1}{2b}\exp\left(-\frac{|\beta_j|}{b}\right)  \\
+  &\propto \frac{1}{2b} \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 -\sum_j^p\frac{|\beta_j|}{b}\right)
+\end{align*}
 
 > c. Argue that the lasso estimate is the _mode_ for $\beta$ under this
 >    posterior distribution.
->
+
+Let us find the maximum of the posterior distribution (the mode). Maximizing
+the posterior probability is equivalent to maximizing its log which is:
+
+$$
+\log(p(\beta|X,Y)) \propto  \log\left[ \frac{1}{2b} \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \right ] - \left(\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \sum_j^p\frac{|\beta_j|}{b}\right)
+$$
+
+Since, the first term is independent of $\beta$, our solution will be when
+we minimize the second term.
+
+\begin{align*}
+\DeclareMathOperator*{\argmin}{arg\,min} % Jan Hlavacek
+\argmin_\beta \left(\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \sum_j^p\frac{|\beta|}{b}\right)
+&= \argmin_\beta \left(\frac{1}{2\sigma^2} \right ) \left( \sum_i^n \epsilon_i^2 +\frac{2\sigma^2}{b}\sum_j^p|\beta_j|\right) \\
+&= \argmin_\beta \left( \sum_i^n \epsilon_i^2 +\frac{2\sigma^2}{b}\sum_j^p|\beta_j|\right)
+\end{align*}
+
+Note, that $RSS = \sum_i^n \epsilon_i^2$ and if we set $\lambda =
+\frac{2\sigma^2}{b}$, the mode corresponds to lasso optimization.
+$$
+\argmin_\beta RSS + \lambda\sum_j^p|\beta_j|
+$$
+
 > d. Now assume the following prior for $\beta$: $\beta_1, ..., \beta_p$ are
 >    independent and identically distributed according to a normal distribution
 >    with mean zero and variance $c$. Write out the posterior for $\beta$ in
 >    this setting.
->
+
+The posterior is now:
+
+\begin{align*}
+p(\beta|X,Y) 
+  &\propto \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right) \prod_j^p\frac{1}{\sqrt{2\pi c}}\exp\left(-\frac{\beta_j^2}{2c}\right)  \\
+  &\propto 
+   \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n 
+   \left(\frac{1}{\sqrt{2\pi c}}\right)^p
+\exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 - \frac{1}{2c}\sum_j^p\beta_j^2\right)
+\end{align*}
+
 > e. Argue that the ridge regression estimate is both the _mode_ and the _mean_
 >    for $\beta$ under this posterior distribution.
+
+To show that the ridge estimate is the mode we can again find the maximum by
+maximizing the log of the posterior. The log is 
+
+$$
+\log{p(\beta|X,Y)}
+  &\propto 
+   \log{\left[\left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \left(\frac{1}{\sqrt{2\pi c}}\right)^p  \right ]}
+- \left(\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \frac{1}{2c}\sum_j^p\beta_j^2 \right)
+$$
+
+We can maximize (wrt $\beta$ by ignoring the first term and minimizing the
+second term. i.e. we minimize:
+
+$$
+\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \frac{1}{2c}\sum_j^p\beta_j^2 =
+\frac{1}{2\sigma^2} \left( \sum_i^n \epsilon_i^2 + \frac{\sigma^2}{c}\sum_j^p\beta_j^2 \right)
+$$
+
+As above, if $RSS = \sum_i^n \epsilon_i^2$ and if we set $\lambda =
+\frac{\sigma^2}{c}$, the mode corresponds to ridge optimization.
 
 ## Applied
 

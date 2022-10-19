@@ -388,8 +388,6 @@ ToDo
 
 ### Question 12
 
-ToDo
-
 > Suppose that you wish to classify an observation $X \in \mathbb{R}$ into 
 > `apples` and `oranges`. You fit a logistic regression model and find that
 >
@@ -408,19 +406,40 @@ ToDo
 > $$
 > 
 > a. What is the log odds of `orange` versus `apple` in your model?
+
+The log odds is just $\hat\beta_0 + \hat\beta_1x)$
+
 > b. What is the log odds of `orange` versus `apple` in your friend's model?
+
+From 4.14, log odds of our friend's model is:
+
+$$
+(\hat\alpha_{orange0} - \hat\alpha_{apple0}) + (\hat\alpha_{orange1} - \hat\alpha_{apple1})x
+$$
+
 > c. Suppose that in your model, $\hat\beta_0 = 2$ and $\hat\beta = −1$. What
 >    are the coefficient estimates in your friend's model? Be as specific as
 >    possible.
+
+In our friend's model $\hat\alpha_{orange0} - \hat\alpha_{apple0} = 2$ and
+$\hat\alpha_{orange1} - \hat\alpha_{apple1} = -1$. We can not know the specific
+values, we can only determine what they sum to.
+
 > d. Now suppose that you and your friend fit the same two models on a different
 >    data set. This time, your friend gets the coefficient estimates 
 >    $\hat\alpha_{orange0} = 1.2$, $\hat\alpha_{orange1} = −2$, 
 >    $\hat\alpha_{apple0} = 3$, $\hat\alpha_{apple1} = 0.6$. What are the 
 >    coefficient estimates in your model?
+
+In our model $\hat\beta_0 = 1.2 - 3 = -1.8$ and $\hat\beta_1 = -2 - 0.6 = -2.6$
+
 > e. Finally, suppose you apply both models from (d) to a data set with 2,000
 >    test observations. What fraction of the time do you expect the predicted 
 >    class labels from your model to agree with those from your friend's model?
 >    Explain your answer.
+
+The models are identical with different parameterization so they should 
+perfectly agree.
 
 ## Applied
 
@@ -441,6 +460,7 @@ library(class)
 library(tidyverse)
 library(corrplot)
 library(ISLR2)
+library(e1071)
 ```
 
 
@@ -675,11 +695,30 @@ sum(diag(t)) / sum(t)
 
 > h. Repeat (d) using naive Bayes.
 
-ToDo
+
+```r
+fit <- naiveBayes(Direction ~ Lag2, data = Smarket, subset = train)
+pred <- predict(fit, Weekly[!train, ], type = "class")
+(t <- table(pred, Weekly[!train, ]$Direction))
+```
+
+```
+##       
+## pred   Down Up
+##   Down   27 29
+##   Up     16 32
+```
+
+```r
+sum(diag(t)) / sum(t)
+```
+
+```
+## [1] 0.5673077
+```
 
 > i. Which of these methods appears to provide the best results on this data?
 
-ToDo
 Logistic regression and LDA are the best performing.
 
 > j. Experiment with different combinations of predictors, including possible
@@ -687,8 +726,6 @@ Logistic regression and LDA are the best performing.
 >    variables, method, and associated confusion matrix that appears to provide
 >    the best results on the held out data. Note that you should also
 >    experiment with values for $K$ in the KNN classifier.
-
-ToDo
 
 
 ```r
@@ -762,6 +799,16 @@ mean(pred == Weekly[!train, ]$Direction)
 ```
 
 ```r
+fit <- naiveBayes(Direction ~ Lag1 + Lag2 + Lag3 + Lag4, data = Weekly[train, ])
+pred <- predict(fit, Weekly[!train, ], type = "class")
+mean(pred == Weekly[!train, ]$Direction)
+```
+
+```
+## [1] 0.5096154
+```
+
+```r
 set.seed(1)
 res <- sapply(1:30, function(k) {
   fit <- knn(
@@ -775,7 +822,7 @@ res <- sapply(1:30, function(k) {
 plot(1:30, res, type = "o", xlab = "k", ylab = "Fraction correct")
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 ```r
 (k <- which.max(res))
@@ -811,7 +858,7 @@ mean(fit == Weekly[!train, ]$Direction)
 ```
 
 KNN using the first 3 Lag variables performs marginally better than logistic
-regression with `Lag2` if we tune $k$.
+regression with `Lag2` if we tune $k$ to be $k = 26$.
 
 ### Question 14
 
@@ -842,7 +889,7 @@ for (i in 1:7) hist(x[, i], breaks = 20, main = colnames(x)[i])
 par(mfrow = c(2, 4))
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 ```r
 for (i in 1:7) boxplot(x[, i] ~ x$mpg01, main = colnames(x)[i])
@@ -850,7 +897,7 @@ for (i in 1:7) boxplot(x[, i] ~ x$mpg01, main = colnames(x)[i])
 pairs(x[, 1:7])
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-12-2.png" width="672" /><img src="04-classification_files/figure-html/unnamed-chunk-12-3.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-13-2.png" width="672" /><img src="04-classification_files/figure-html/unnamed-chunk-13-3.png" width="672" />
 
 Most variables show an association with `mpg01` category, and several
 variables are colinear.
@@ -925,7 +972,16 @@ mean(pred != x[-train, ]$mpg01)
 >    the variables that seemed most associated with `mpg01` in (b). What is the
 >    test error of the model obtained?
 
-ToDo
+
+```r
+fit <- naiveBayes(mpg01 ~ cylinders + weight + displacement, data = x[train, ])
+pred <- predict(fit, x[-train, ], type = "class")
+mean(pred != x[-train, ]$mpg01)
+```
+
+```
+## [1] 0.09923664
+```
 
 > h. Perform KNN on the training data, with several values of $K$, in order to
 >    predict `mpg01`. Use only the variables that seemed most associated with
@@ -942,7 +998,7 @@ names(res) <- 1:50
 plot(res, type = "o")
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 ```r
 res[which.min(res)]
@@ -1042,7 +1098,7 @@ plot(1:10, Power3(1:10, 2),
 )
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 > f. Create a function, `PlotPower()`, that allows you to create a plot of `x`
 >    against `x^a` for a fixed `a` and for a range of values of `x`. For
@@ -1066,7 +1122,7 @@ PlotPower <- function(x, a, log = "y") {
 PlotPower(1:10, 3)
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 ### Question 13
 
@@ -1078,25 +1134,65 @@ PlotPower(1:10, 3)
 > _Hint: You will have to create the response variable yourself, using the_
 > _variables that are contained in the `Boston` data set._
 
-ToDo
-
 
 ```r
 x <- cbind(
-  Boston[, -1], 
+  ISLR2::Boston[, -1], 
   data.frame("highcrim" = Boston$crim > median(Boston$crim))
 )
-
 set.seed(1)
 train <- sample(seq_len(nrow(x)), nrow(x) * 2/3)
 ```
 
-Fit lda, logistic regression and KNN models (with k = 1..50) for a set of
-specific predictors and return the error rate.
+We can find the most associated variables by performing wilcox tests.
 
 
 ```r
-f <- function(cols, k_vals = 1:50) {
+ord <- order(sapply(1:12, function(i) {
+  p <- wilcox.test(as.numeric(x[train, i]) ~ x[train, ]$highcrim)$p.value
+  setNames(log10(p), colnames(x)[i])
+}))
+ord <- names(x)[ord]
+ord
+```
+
+```
+##  [1] "nox"     "dis"     "indus"   "tax"     "age"     "rad"     "zn"     
+##  [8] "lstat"   "medv"    "ptratio" "rm"      "chas"
+```
+
+Variables `nox` (nitrogen oxides concentration) followed by `dis` (distance to
+employment center) appear to be most associated with high crime.
+
+Let's reorder columns by those most associated with highcrim (in the training
+data)
+
+
+```r
+x <- x[, c(ord, "highcrim")]
+```
+
+Let's look at univariate associations with `highcrim` (in the training data)
+
+
+```r
+x[train, ] |>
+  pivot_longer(!highcrim) |>
+  mutate(name = factor(name, levels = ord)) |>
+  ggplot(aes(highcrim, value)) + 
+  geom_boxplot() + 
+  facet_wrap(~name, scale = "free")
+```
+
+<img src="04-classification_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+
+Fit lda, logistic regression, naive Bayes and KNN models (with k = 1..50) for a
+set of specific predictors and return the error rate. We fit models using
+increasing numbers of predictors: column 1, then columns 1 and 2 etc.
+
+
+```r
+fit_models <- function(cols, k_vals = 1:50) {
   dat_train <- x[train, cols, drop = FALSE]
   dat_test <- x[-train, cols, drop = FALSE]
 
@@ -1108,60 +1204,46 @@ f <- function(cols, k_vals = 1:50) {
   pred <- predict(fit, dat_test, type = "response") > 0.5
   logreg_err <- mean(pred != x$highcrim[-train])
 
+  fit <- naiveBayes(x$highcrim[train] ~ ., data = dat_train)
+  pred <- predict(fit, dat_test, type = "class")
+  nb_err <- mean(pred != x$highcrim[-train])
+
   res <- sapply(k_vals, function(k) {
     fit <- knn(dat_train, dat_test, x$highcrim[train], k = k)
     mean(fit != x$highcrim[-train])
   })
   knn_err <- min(res)
 
-  c("LDA" = lda_err, "LR" = logreg_err, "KNN" = knn_err)
+  c("LDA" = lda_err, "LR" = logreg_err, "NB" = nb_err, "KNN" = knn_err)
 }
-
-n <- sort(sapply(1:13, function(i) {
-  setNames(abs(wilcox.test(as.numeric(x[, i]) ~ x$highcrim)$p.value), colnames(x)[i])
-}))
-n
 ```
-
-```
-##      highcrim           nox           dis           age         indus 
-## 7.825553e-112  2.412920e-64  1.056245e-48  2.938048e-45  3.100164e-44 
-##           tax           rad            zn         lstat          medv 
-##  1.902875e-41  5.061325e-38  3.505222e-27  4.460639e-25  4.896101e-19 
-##       ptratio            rm          chas 
-##  2.666494e-16  5.164707e-05  1.153633e-01
-```
-
-Variables `nox` (nitrogen oxides concentration) followed by `dis` (distance to
-employment center) appear to be most associated with high crime. 
 
 
 ```r
-res <- sapply(1:13, function(max) f(1:max))
+res <- sapply(1:12, function(max) fit_models(1:max))
 (res <- as_tibble(t(res)))
 ```
 
 ```
-## # A tibble: 13 × 3
-##      LDA    LR    KNN
-##    <dbl> <dbl>  <dbl>
-##  1 0.296 0.296 0.296 
-##  2 0.249 0.225 0.0296
-##  3 0.243 0.225 0.0296
-##  4 0.178 0.118 0.0296
-##  5 0.172 0.130 0.0533
-##  6 0.166 0.142 0.154 
-##  7 0.160 0.142 0.130 
-##  8 0.148 0.130 0.107 
-##  9 0.154 0.130 0.0769
-## 10 0.154 0.101 0.0710
-## 11 0.154 0.130 0.0769
-## 12 0.166 0.118 0.0769
-## 13 0.166 0.118 0.0769
+## # A tibble: 12 × 4
+##      LDA    LR    NB    KNN
+##    <dbl> <dbl> <dbl>  <dbl>
+##  1 0.178 0.166 0.178 0.0296
+##  2 0.195 0.166 0.183 0.124 
+##  3 0.178 0.166 0.178 0.0473
+##  4 0.178 0.160 0.201 0.0414
+##  5 0.178 0.154 0.213 0.0769
+##  6 0.154 0.136 0.189 0.0769
+##  7 0.154 0.130 0.243 0.0769
+##  8 0.154 0.130 0.237 0.0769
+##  9 0.166 0.142 0.225 0.0769
+## 10 0.172 0.124 0.231 0.0769
+## 11 0.172 0.124 0.225 0.0769
+## 12 0.166 0.118 0.231 0.0769
 ```
 
 ```r
-res$n_var <- 1:13
+res$n_var <- 1:12
 pivot_longer(res, cols = !n_var) |>
   ggplot(aes(n_var, value, col = name)) + 
   geom_line() + 
@@ -1169,7 +1251,7 @@ pivot_longer(res, cols = !n_var) |>
   ylab("Error rate")
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 KNN appears to perform better (if we tune $k$) for all numbers of predictors.
 
@@ -1199,36 +1281,40 @@ mean(fit != x[-train, ]$highcrim) * 100
 ## [1] 2.95858
 ```
 
-Surprisingly, the best model (with an error rate of ~5%) uses $k = 1$ and
+Surprisingly, the best model (with an error rate of <5%) uses $k = 1$ and
 assigns crime rate categories based on the town with the single most similar
-nitrogen oxide concentration. This might be, for example, because nearby towns
-have similar crime rates, and we can obtain good predictions by predicting
+nitrogen oxide concentration (`nox`). This might be, for example, because nearby
+towns have similar crime rates, and we can obtain good predictions by predicting
 crime rate based on a nearby town.
 
-But what if we only consider $k = 20$ and up to 8 predictors.
+But what if we only consider $k = 20$.
 
 
 ```r
-res <- sapply(1:8, function(max) f(1:max, k_vals = 20))
+res <- sapply(1:12, function(max) fit_models(1:max, k_vals = 20))
 (res <- as_tibble(t(res)))
 ```
 
 ```
-## # A tibble: 8 × 3
-##     LDA    LR   KNN
-##   <dbl> <dbl> <dbl>
-## 1 0.296 0.296 0.296
-## 2 0.249 0.225 0.172
-## 3 0.243 0.225 0.166
-## 4 0.178 0.118 0.172
-## 5 0.172 0.130 0.154
-## 6 0.166 0.142 0.213
-## 7 0.160 0.142 0.201
-## 8 0.148 0.130 0.195
+## # A tibble: 12 × 4
+##      LDA    LR    NB   KNN
+##    <dbl> <dbl> <dbl> <dbl>
+##  1 0.178 0.166 0.178 0.107
+##  2 0.195 0.166 0.183 0.207
+##  3 0.178 0.166 0.178 0.136
+##  4 0.178 0.160 0.201 0.166
+##  5 0.178 0.154 0.213 0.178
+##  6 0.154 0.136 0.189 0.178
+##  7 0.154 0.130 0.243 0.172
+##  8 0.154 0.130 0.237 0.172
+##  9 0.166 0.142 0.225 0.178
+## 10 0.172 0.124 0.231 0.178
+## 11 0.172 0.124 0.225 0.178
+## 12 0.166 0.118 0.231 0.178
 ```
 
 ```r
-res$n_var <- 1:8
+res$n_var <- 1:12
 pivot_longer(res, cols = !n_var) |>
   ggplot(aes(n_var, value, col = name)) +
   geom_line() +
@@ -1236,41 +1322,18 @@ pivot_longer(res, cols = !n_var) |>
   ylab("Error rate")
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
-We can see that there best model now is logistic regression with 6 predictors
-which has ~10% error rate.
+KNN still performs best with a single predictor (`nox`), but logistic regression
+with 12 predictors also performs well and has an error rate of ~12%.
 
-
-```r
-(vars <- names(n)[1:6])
-```
-
-```
-## [1] "highcrim" "nox"      "dis"      "age"      "indus"    "tax"
-```
 
 ```r
+vars <- names(x)[1:12]
 dat_train <- x[train, vars]
 dat_test <- x[-train, vars]
 
-(fit <- glm(x$highcrim[train] ~ ., data = dat_train, family = binomial))
-```
-
-```
-## 
-## Call:  glm(formula = x$highcrim[train] ~ ., family = binomial, data = dat_train)
-## 
-## Coefficients:
-## (Intercept)          nox          dis          age        indus          tax  
-##  -21.205733    36.357909     0.270415     0.006280    -0.102454     0.003696  
-## 
-## Degrees of Freedom: 336 Total (i.e. Null);  331 Residual
-## Null Deviance:	    467 
-## Residual Deviance: 206.5 	AIC: 218.5
-```
-
-```r
+fit <- glm(x$highcrim[train] ~ ., data = dat_train, family = binomial)
 pred <- predict(fit, dat_test, type = "response") > 0.5
 table(pred, x[-train, ]$highcrim)
 ```
@@ -1278,8 +1341,8 @@ table(pred, x[-train, ]$highcrim)
 ```
 ##        
 ## pred    FALSE TRUE
-##   FALSE    65   10
-##   TRUE     16   78
+##   FALSE    70    9
+##   TRUE     11   79
 ```
 
 ```r
@@ -1287,7 +1350,7 @@ mean(pred != x$highcrim[-train]) * 100
 ```
 
 ```
-## [1] 15.38462
+## [1] 11.83432
 ```
 
 ```r
@@ -1301,24 +1364,31 @@ summary(fit)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.0291  -0.4497  -0.1615   0.2717   2.3764  
+## -2.3277  -0.1603  -0.0010   0.0015   3.5339  
 ## 
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(>|z|)    
-## (Intercept) -21.205733   3.575588  -5.931 3.02e-09 ***
-## nox          36.357909   6.546083   5.554 2.79e-08 ***
-## dis           0.270415   0.170125   1.590   0.1119    
-## age           0.006280   0.009748   0.644   0.5194    
-## indus        -0.102454   0.044403  -2.307   0.0210 *  
-## tax           0.003696   0.001594   2.319   0.0204 *  
+## (Intercept) -44.525356   7.935621  -5.611 2.01e-08 ***
+## nox          55.062428  10.281556   5.355 8.53e-08 ***
+## dis           1.080847   0.304084   3.554 0.000379 ***
+## indus        -0.067493   0.058547  -1.153 0.248997    
+## tax          -0.005336   0.003138  -1.700 0.089060 .  
+## age           0.020965   0.014190   1.477 0.139556    
+## rad           0.678196   0.192193   3.529 0.000418 ***
+## zn           -0.099558   0.045914  -2.168 0.030134 *  
+## lstat         0.134035   0.058623   2.286 0.022231 *  
+## medv          0.213114   0.088922   2.397 0.016547 *  
+## ptratio       0.294396   0.155285   1.896 0.057981 .  
+## rm           -0.518115   0.896423  -0.578 0.563278    
+## chas          0.139557   0.798632   0.175 0.861280    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 467.04  on 336  degrees of freedom
-## Residual deviance: 206.47  on 331  degrees of freedom
-## AIC: 218.47
+## Residual deviance: 135.80  on 324  degrees of freedom
+## AIC: 161.8
 ## 
-## Number of Fisher Scoring iterations: 7
+## Number of Fisher Scoring iterations: 9
 ```
