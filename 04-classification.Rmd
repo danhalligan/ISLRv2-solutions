@@ -825,7 +825,7 @@ PlotPower(1:10, 3)
 
 ```{r}
 x <- cbind(
-  Boston[, -1], 
+  ISLR2::Boston[, -1], 
   data.frame("highcrim" = Boston$crim > median(Boston$crim))
 )
 set.seed(1)
@@ -835,7 +835,7 @@ train <- sample(seq_len(nrow(x)), nrow(x) * 2/3)
 We can find the most associated variables by performing wilcox tests.
 
 ```{r}
-ord <- order(sapply(1:13, function(i) {
+ord <- order(sapply(1:12, function(i) {
   p <- wilcox.test(as.numeric(x[train, i]) ~ x[train, ]$highcrim)$p.value
   setNames(log10(p), colnames(x)[i])
 }))
@@ -864,7 +864,7 @@ x[train, ] |>
   facet_wrap(~name, scale = "free")
 ```
 
-Fit lda, logistic regression, naiveBayes and KNN models (with k = 1..50) for a
+Fit lda, logistic regression, naive Bayes and KNN models (with k = 1..50) for a
 set of specific predictors and return the error rate. We fit models using
 increasing numbers of predictors: column 1, then columns 1 and 2 etc.
 
@@ -893,10 +893,12 @@ fit_models <- function(cols, k_vals = 1:50) {
 
   c("LDA" = lda_err, "LR" = logreg_err, "NB" = nb_err, "KNN" = knn_err)
 }
+```
 
-res <- sapply(1:13, function(max) fit_models(1:max))
+```{r}
+res <- sapply(1:12, function(max) fit_models(1:max))
 (res <- as_tibble(t(res)))
-res$n_var <- 1:13
+res$n_var <- 1:12
 pivot_longer(res, cols = !n_var) |>
   ggplot(aes(n_var, value, col = name)) + 
   geom_line() + 
@@ -926,9 +928,9 @@ crime rate based on a nearby town.
 But what if we only consider $k = 20$.
 
 ```{r}
-res <- sapply(1:8, function(max) fit_models(1:max, k_vals = 20))
+res <- sapply(1:12, function(max) fit_models(1:max, k_vals = 20))
 (res <- as_tibble(t(res)))
-res$n_var <- 1:8
+res$n_var <- 1:12
 pivot_longer(res, cols = !n_var) |>
   ggplot(aes(n_var, value, col = name)) +
   geom_line() +
@@ -937,14 +939,14 @@ pivot_longer(res, cols = !n_var) |>
 ```
 
 KNN still performs best with a single predictor (`nox`), but logistic regression
-with 7 predictors also performs well and has an error rate of ~13%.
+with 12 predictors also performs well and has an error rate of ~12%.
 
 ```{r}
-(vars <- names(x)[1:7])
+vars <- names(x)[1:12]
 dat_train <- x[train, vars]
 dat_test <- x[-train, vars]
 
-(fit <- glm(x$highcrim[train] ~ ., data = dat_train, family = binomial))
+fit <- glm(x$highcrim[train] ~ ., data = dat_train, family = binomial)
 pred <- predict(fit, dat_test, type = "response") > 0.5
 table(pred, x[-train, ]$highcrim)
 mean(pred != x$highcrim[-train]) * 100
