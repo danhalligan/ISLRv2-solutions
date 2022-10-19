@@ -383,8 +383,6 @@ ToDo
 
 ### Question 12
 
-ToDo
-
 > Suppose that you wish to classify an observation $X \in \mathbb{R}$ into 
 > `apples` and `oranges`. You fit a logistic regression model and find that
 >
@@ -403,19 +401,40 @@ ToDo
 > $$
 > 
 > a. What is the log odds of `orange` versus `apple` in your model?
+
+The log odds is just $\hat\beta_0 + \hat\beta_1x)$
+
 > b. What is the log odds of `orange` versus `apple` in your friend's model?
+
+From 4.14, log odds of our friend's model is:
+
+$$
+(\hat\alpha_{orange0} - \hat\alpha_{apple0}) + (\hat\alpha_{orange1} - \hat\alpha_{apple1})x
+$$
+
 > c. Suppose that in your model, $\hat\beta_0 = 2$ and $\hat\beta = −1$. What
 >    are the coefficient estimates in your friend's model? Be as specific as
 >    possible.
+
+In our friend's model $\hat\alpha_{orange0} - \hat\alpha_{apple0} = 2$ and
+$\hat\alpha_{orange1} - \hat\alpha_{apple1} = -1$. We can not know the specific
+values, we can only determine what they sum to.
+
 > d. Now suppose that you and your friend fit the same two models on a different
 >    data set. This time, your friend gets the coefficient estimates 
 >    $\hat\alpha_{orange0} = 1.2$, $\hat\alpha_{orange1} = −2$, 
 >    $\hat\alpha_{apple0} = 3$, $\hat\alpha_{apple1} = 0.6$. What are the 
 >    coefficient estimates in your model?
+
+In our model $\hat\beta_0 = 1.2 - 3 = -1.8$ and $\hat\beta_1 = -2 - 0.6 = -2.6$
+
 > e. Finally, suppose you apply both models from (d) to a data set with 2,000
 >    test observations. What fraction of the time do you expect the predicted 
 >    class labels from your model to agree with those from your friend's model?
 >    Explain your answer.
+
+The models are identical with different parameterization so they should 
+perfectly agree.
 
 ## Applied
 
@@ -435,6 +454,7 @@ library(class)
 library(tidyverse)
 library(corrplot)
 library(ISLR2)
+library(e1071)
 ```
 
 ```{r}
@@ -523,11 +543,15 @@ sum(diag(t)) / sum(t)
 
 > h. Repeat (d) using naive Bayes.
 
-ToDo
+```{r}
+fit <- naiveBayes(Direction ~ Lag2, data = Smarket, subset = train)
+pred <- predict(fit, Weekly[!train, ], type = "class")
+(t <- table(pred, Weekly[!train, ]$Direction))
+sum(diag(t)) / sum(t)
+```
 
 > i. Which of these methods appears to provide the best results on this data?
 
-ToDo
 Logistic regression and LDA are the best performing.
 
 > j. Experiment with different combinations of predictors, including possible
@@ -535,8 +559,6 @@ Logistic regression and LDA are the best performing.
 >    variables, method, and associated confusion matrix that appears to provide
 >    the best results on the held out data. Note that you should also
 >    experiment with values for $K$ in the KNN classifier.
-
-ToDo
 
 ```{r}
 fit <- glm(Direction ~ Lag1, data = Weekly[train, ], family = binomial)
@@ -567,6 +589,10 @@ fit <- qda(Direction ~ Lag1 + Lag2 + Lag3 + Lag4, data = Weekly[train, ])
 pred <- predict(fit, Weekly[!train, ], type = "response")$class
 mean(pred == Weekly[!train, ]$Direction)
 
+fit <- naiveBayes(Direction ~ Lag1 + Lag2 + Lag3 + Lag4, data = Weekly[train, ])
+pred <- predict(fit, Weekly[!train, ], type = "class")
+mean(pred == Weekly[!train, ]$Direction)
+
 set.seed(1)
 res <- sapply(1:30, function(k) {
   fit <- knn(
@@ -591,7 +617,7 @@ mean(fit == Weekly[!train, ]$Direction)
 ```
 
 KNN using the first 3 Lag variables performs marginally better than logistic
-regression with `Lag2` if we tune $k$.
+regression with `Lag2` if we tune $k$ to be $k = 26$.
 
 ### Question 14
 
@@ -671,7 +697,11 @@ mean(pred != x[-train, ]$mpg01)
 >    the variables that seemed most associated with `mpg01` in (b). What is the
 >    test error of the model obtained?
 
-ToDo
+```{r}
+fit <- naiveBayes(mpg01 ~ cylinders + weight + displacement, data = x[train, ])
+pred <- predict(fit, x[-train, ], type = "class")
+mean(pred != x[-train, ]$mpg01)
+```
 
 > h. Perform KNN on the training data, with several values of $K$, in order to
 >    predict `mpg01`. Use only the variables that seemed most associated with
@@ -793,23 +823,53 @@ PlotPower(1:10, 3)
 > _Hint: You will have to create the response variable yourself, using the_
 > _variables that are contained in the `Boston` data set._
 
-ToDo
-
 ```{r}
 x <- cbind(
   Boston[, -1], 
   data.frame("highcrim" = Boston$crim > median(Boston$crim))
 )
-
 set.seed(1)
 train <- sample(seq_len(nrow(x)), nrow(x) * 2/3)
 ```
 
-Fit lda, logistic regression and KNN models (with k = 1..50) for a set of
-specific predictors and return the error rate.
+We can find the most associated variables by performing wilcox tests.
 
 ```{r}
-f <- function(cols, k_vals = 1:50) {
+ord <- order(sapply(1:13, function(i) {
+  p <- wilcox.test(as.numeric(x[train, i]) ~ x[train, ]$highcrim)$p.value
+  setNames(log10(p), colnames(x)[i])
+}))
+ord <- names(x)[ord]
+ord
+```
+
+Variables `nox` (nitrogen oxides concentration) followed by `dis` (distance to
+employment center) appear to be most associated with high crime.
+
+Let's reorder columns by those most associated with highcrim (in the training
+data)
+
+```{r}
+x <- x[, c(ord, "highcrim")]
+```
+
+Let's look at univariate associations with `highcrim` (in the training data)
+
+```{r}
+x[train, ] |>
+  pivot_longer(!highcrim) |>
+  mutate(name = factor(name, levels = ord)) |>
+  ggplot(aes(highcrim, value)) + 
+  geom_boxplot() + 
+  facet_wrap(~name, scale = "free")
+```
+
+Fit lda, logistic regression, naiveBayes and KNN models (with k = 1..50) for a
+set of specific predictors and return the error rate. We fit models using
+increasing numbers of predictors: column 1, then columns 1 and 2 etc.
+
+```{r}
+fit_models <- function(cols, k_vals = 1:50) {
   dat_train <- x[train, cols, drop = FALSE]
   dat_test <- x[-train, cols, drop = FALSE]
 
@@ -821,26 +881,20 @@ f <- function(cols, k_vals = 1:50) {
   pred <- predict(fit, dat_test, type = "response") > 0.5
   logreg_err <- mean(pred != x$highcrim[-train])
 
+  fit <- naiveBayes(x$highcrim[train] ~ ., data = dat_train)
+  pred <- predict(fit, dat_test, type = "class")
+  nb_err <- mean(pred != x$highcrim[-train])
+
   res <- sapply(k_vals, function(k) {
     fit <- knn(dat_train, dat_test, x$highcrim[train], k = k)
     mean(fit != x$highcrim[-train])
   })
   knn_err <- min(res)
 
-  c("LDA" = lda_err, "LR" = logreg_err, "KNN" = knn_err)
+  c("LDA" = lda_err, "LR" = logreg_err, "NB" = nb_err, "KNN" = knn_err)
 }
 
-n <- sort(sapply(1:13, function(i) {
-  setNames(abs(wilcox.test(as.numeric(x[, i]) ~ x$highcrim)$p.value), colnames(x)[i])
-}))
-n
-```
-
-Variables `nox` (nitrogen oxides concentration) followed by `dis` (distance to
-employment center) appear to be most associated with high crime. 
-
-```{r}
-res <- sapply(1:13, function(max) f(1:max))
+res <- sapply(1:13, function(max) fit_models(1:max))
 (res <- as_tibble(t(res)))
 res$n_var <- 1:13
 pivot_longer(res, cols = !n_var) |>
@@ -848,7 +902,6 @@ pivot_longer(res, cols = !n_var) |>
   geom_line() + 
   xlab("Number of predictors") + 
   ylab("Error rate")
-
 ```
 
 KNN appears to perform better (if we tune $k$) for all numbers of predictors.
@@ -864,16 +917,16 @@ table(fit, x[-train, ]$highcrim)
 mean(fit != x[-train, ]$highcrim) * 100
 ```
 
-Surprisingly, the best model (with an error rate of ~5%) uses $k = 1$ and
+Surprisingly, the best model (with an error rate of <5%) uses $k = 1$ and
 assigns crime rate categories based on the town with the single most similar
-nitrogen oxide concentration. This might be, for example, because nearby towns
-have similar crime rates, and we can obtain good predictions by predicting
+nitrogen oxide concentration (`nox`). This might be, for example, because nearby
+towns have similar crime rates, and we can obtain good predictions by predicting
 crime rate based on a nearby town.
 
-But what if we only consider $k = 20$ and up to 8 predictors.
+But what if we only consider $k = 20$.
 
 ```{r}
-res <- sapply(1:8, function(max) f(1:max, k_vals = 20))
+res <- sapply(1:8, function(max) fit_models(1:max, k_vals = 20))
 (res <- as_tibble(t(res)))
 res$n_var <- 1:8
 pivot_longer(res, cols = !n_var) |>
@@ -881,14 +934,13 @@ pivot_longer(res, cols = !n_var) |>
   geom_line() +
   xlab("Number of predictors") +
   ylab("Error rate")
-
 ```
 
-We can see that there best model now is logistic regression with 6 predictors
-which has ~10% error rate.
+KNN still performs best with a single predictor (`nox`), but logistic regression
+with 7 predictors also performs well and has an error rate of ~13%.
 
 ```{r}
-(vars <- names(n)[1:6])
+(vars <- names(x)[1:7])
 dat_train <- x[train, vars]
 dat_test <- x[-train, vars]
 
