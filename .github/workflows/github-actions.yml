@@ -17,6 +17,9 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v1
 
+      - name: Setup keras
+        run: Rscript -e "keras::install_keras()"
+
       - name: Build 🔧 
         run: Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
 

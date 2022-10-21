@@ -19,6 +19,7 @@ Imports:
     knitr,
     leaps,
     MASS,
+    neuralnet,
     plotly,
     pls,
     randomForest,
