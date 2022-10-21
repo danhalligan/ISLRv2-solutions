@@ -402,7 +402,7 @@ ToDo
 > 
 > a. What is the log odds of `orange` versus `apple` in your model?
 
-The log odds is just $\hat\beta_0 + \hat\beta_1x)$
+The log odds is just $\hat\beta_0 + \hat\beta_1x$
 
 > b. What is the log odds of `orange` versus `apple` in your friend's model?
 
@@ -416,9 +416,10 @@ $$
 >    are the coefficient estimates in your friend's model? Be as specific as
 >    possible.
 
-In our friend's model $\hat\alpha_{orange0} - \hat\alpha_{apple0} = 2$ and
-$\hat\alpha_{orange1} - \hat\alpha_{apple1} = -1$. We can not know the specific
-values, we can only determine what they sum to.
+We can say that in our friend's model $\hat\alpha_{orange0} -
+\hat\alpha_{apple0} = 2$ and $\hat\alpha_{orange1} - \hat\alpha_{apple1} = -1$.
+
+We are unable to know the specific value of each parameter however.
 
 > d. Now suppose that you and your friend fit the same two models on a different
 >    data set. This time, your friend gets the coefficient estimates 
@@ -426,7 +427,8 @@ values, we can only determine what they sum to.
 >    $\hat\alpha_{apple0} = 3$, $\hat\alpha_{apple1} = 0.6$. What are the 
 >    coefficient estimates in your model?
 
-In our model $\hat\beta_0 = 1.2 - 3 = -1.8$ and $\hat\beta_1 = -2 - 0.6 = -2.6$
+The coefficients in our model would be $\hat\beta_0 = 1.2 - 3 = -1.8$ and
+$\hat\beta_1 = -2 - 0.6 = -2.6$
 
 > e. Finally, suppose you apply both models from (d) to a data set with 2,000
 >    test observations. What fraction of the time do you expect the predicted 
@@ -897,7 +899,7 @@ fit_models <- function(cols, k_vals = 1:50) {
 
 ```{r}
 res <- sapply(1:12, function(max) fit_models(1:max))
-(res <- as_tibble(t(res)))
+res <- as_tibble(t(res))
 res$n_var <- 1:12
 pivot_longer(res, cols = !n_var) |>
   ggplot(aes(n_var, value, col = name)) + 
@@ -929,7 +931,7 @@ But what if we only consider $k = 20$.
 
 ```{r}
 res <- sapply(1:12, function(max) fit_models(1:max, k_vals = 20))
-(res <- as_tibble(t(res)))
+res <- as_tibble(t(res))
 res$n_var <- 1:12
 pivot_longer(res, cols = !n_var) |>
   ggplot(aes(n_var, value, col = name)) +

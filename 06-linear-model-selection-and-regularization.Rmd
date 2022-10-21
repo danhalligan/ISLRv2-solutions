@@ -23,37 +23,37 @@ We cannot tell which model will perform best on the test RSS. The answer will
 depend on the tradeoff between fitting to the data and overfitting.
 
 > c. True or False:
->     i. The predictors in the $k$-variable model identified by forward stepwise
->        are a subset of the predictors in the ($k+1$)-variable model identified
->        by forward stepwise selection.
+>    i. The predictors in the $k$-variable model identified by forward stepwise
+>       are a subset of the predictors in the ($k+1$)-variable model identified
+>       by forward stepwise selection.
 
 True. Forward stepwise selection retains all features identified in previous
 models as $k$ is increased.
 
->     ii. The predictors in the $k$-variable model identified by backward stepwise
->        are a subset of the predictors in the $(k+1)$-variable model identified
->        by backward stepwise selection.
+>    ii. The predictors in the $k$-variable model identified by backward stepwise
+>       are a subset of the predictors in the $(k+1)$-variable model identified
+>       by backward stepwise selection.
 
 True. Backward stepwise selection removes features one by one as $k$ is 
 decreased.
 
->     iii. The predictors in the $k$-variable model identified by backward
->        stepwise are a subset of the predictors in the $(k+1)$-variable model
->        identified by forward stepwise selection.
+>    iii. The predictors in the $k$-variable model identified by backward
+>       stepwise are a subset of the predictors in the $(k+1)$-variable model
+>       identified by forward stepwise selection.
 
 False. Forward and backward stepwise selection can identify different 
 combinations of variables due to differing algorithms.
 
->     iv. The predictors in the $k$-variable model identified by forward stepwise
->        are a subset of the predictors in the $(k+1)$-variable model identified
->        by backward stepwise selection.
+>    iv. The predictors in the $k$-variable model identified by forward stepwise
+>       are a subset of the predictors in the $(k+1)$-variable model identified
+>       by backward stepwise selection.
 
 False. Forward and backward stepwise selection can identify different 
 combinations of variables due to differing algorithms.
 
->     v. The predictors in the $k$-variable model identified by best subset are a
->        subset of the predictors in the $(k+1)$-variable model identified by best
->        subset selection.
+>    v. The predictors in the $k$-variable model identified by best subset are a
+>       subset of the predictors in the $(k+1)$-variable model identified by best
+>       subset selection.
 
 False. Best subset selection can identify different combinations of variables
 for each $k$ by considering all possible models.
@@ -64,14 +64,14 @@ for each $k$ by considering all possible models.
 > Justify your answer.
 >
 > a. The lasso, relative to least squares, is:
->     i. More flexible and hence will give improved prediction accuracy when its
->       increase in bias is less than its decrease in variance.
->     ii. More flexible and hence will give improved prediction accuracy when its
->       increase in variance is less than its decrease in bias.
->     iii. Less flexible and hence will give improved prediction accuracy when its
->       increase in bias is less than its decrease in variance.
->     iv. Less flexible and hence will give improved prediction accuracy when
->       its increase in variance is less than its decrease in bias.
+>    i. More flexible and hence will give improved prediction accuracy when its
+>      increase in bias is less than its decrease in variance.
+>    ii. More flexible and hence will give improved prediction accuracy when its
+>      increase in variance is less than its decrease in bias.
+>    iii. Less flexible and hence will give improved prediction accuracy when its
+>      increase in bias is less than its decrease in variance.
+>    iv. Less flexible and hence will give improved prediction accuracy when
+>      its increase in variance is less than its decrease in bias.
 
 iii. By using shrinkage, lasso can reduce the number of predictors so is less
 flexible. As a result, it will lead to an increase in bias by approximating the
@@ -103,12 +103,12 @@ they don't substantially increase variance.
 > which of i. through v. is correct. Justify your answer.
 >
 > a. As we increase $s$ from 0, the training RSS will:
->     i. Increase initially, and then eventually start decreasing in an
->       inverted U shape.
->     ii. Decrease initially, and then eventually start increasing in a U shape.
->     iii. Steadily increase.
->     iv. Steadily decrease.
->     v. Remain constant.
+>    i. Increase initially, and then eventually start decreasing in an
+>      inverted U shape.
+>    ii. Decrease initially, and then eventually start increasing in a U shape.
+>    iii. Steadily increase.
+>    iv. Steadily decrease.
+>    v. Remain constant.
 
 iv. As $s$ increases, the model becomes more flexible (the sum of absolute 
 coefficients can be higher). With more flexible models, training RSS will
@@ -146,12 +146,12 @@ v. The irreducible error is unchanged.
 > of i. through v. is correct. Justify your answer.
 >
 > a. As we increase $\lambda$ from 0, the training RSS will:
->     i. Increase initially, and then eventually start decreasing in an
->     inverted U shape.
->     ii. Decrease initially, and then eventually start increasing in a U shape.
->     iii. Steadily increase.
->     iv. Steadily decrease.
->     v. Remain constant.
+>    i. Increase initially, and then eventually start decreasing in an
+>    inverted U shape.
+>    ii. Decrease initially, and then eventually start increasing in a U shape.
+>    iii. Steadily increase.
+>    iv. Steadily decrease.
+>    v. Remain constant.
 
 iii. As $\lambda$ is increased, more weight is placed on the sum of squared
 coefficients and so the model becomes less flexible. As a result, training RSS
@@ -425,21 +425,21 @@ maximizing the log of the posterior. The log is
 
 $$
 \log{p(\beta|X,Y)}
-  &\propto 
-   \log{\left[\left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \left(\frac{1}{\sqrt{2\pi c}}\right)^p  \right ]}
+  \propto 
+   \log{\left[\left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \left(\frac{1}{\sqrt{2\pi c}}\right)^p \right ]}
 - \left(\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \frac{1}{2c}\sum_j^p\beta_j^2 \right)
 $$
 
-We can maximize (wrt $\beta$ by ignoring the first term and minimizing the
+We can maximize (wrt $\beta$) by ignoring the first term and minimizing the
 second term. i.e. we minimize:
 
 $$
-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \frac{1}{2c}\sum_j^p\beta_j^2 =
-\frac{1}{2\sigma^2} \left( \sum_i^n \epsilon_i^2 + \frac{\sigma^2}{c}\sum_j^p\beta_j^2 \right)
+\argmin_\beta \left( \frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \frac{1}{2c}\sum_j^p\beta_j^2 \right)\\
+= \argmin_\beta \left( \frac{1}{2\sigma^2} \left( \sum_i^n \epsilon_i^2 + \frac{\sigma^2}{c}\sum_j^p\beta_j^2 \right) \right)
 $$
 
 As above, if $RSS = \sum_i^n \epsilon_i^2$ and if we set $\lambda =
-\frac{\sigma^2}{c}$, the mode corresponds to ridge optimization.
+\frac{\sigma^2}{c}$, we can see that the mode corresponds to ridge optimization.
 
 ## Applied
 
