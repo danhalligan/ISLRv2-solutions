@@ -62,14 +62,13 @@ library(ggtree)
 ## trees with their covariates and other associated data. Methods in
 ## Ecology and Evolution. 2017, 8(1):28-36. doi:10.1111/2041-210X.12628
 ## 
-## Shuangbin Xu, Lin Li, Xiao Luo, Meijun Chen, Wenli Tang, Li Zhan, Zehan
-## Dai, Tommy T. Lam, Yi Guan, Guangchuang Yu. Ggtree: A serialized data
-## object for visualization of a phylogenetic tree and annotation data.
-## iMeta 2022, 4(1):e56. doi:10.1002/imt2.56
+## Guangchuang Yu, Tommy Tsan-Yuk Lam, Huachen Zhu, Yi Guan. Two methods
+## for mapping and visualizing associated data on phylogeny using ggtree.
+## Molecular Biology and Evolution. 2018, 35(12):3041-3043.
+## doi:10.1093/molbev/msy194
 ## 
-## Guangchuang Yu.  Data Integration, Manipulation and Visualization of
-## Phylogenetic Trees (1st edition). Chapman and Hall/CRC. 2022,
-## doi:10.1201/9781003279242
+## G Yu. Data Integration, Manipulation and Visualization of Phylogenetic
+## Trees (1st ed.). Chapman and Hall/CRC. 2022. ISBN: 9781032233574
 ## 
 ## Attaching package: 'ggtree'
 ## 
@@ -1028,6 +1027,8 @@ For KNN we correctly predict 8.7% of those predicted to purchase.
 > on a test set. How accurate are the results compared to simple methods like
 > linear or logistic regression? Which of these approaches yields the best
 > performance?
+
+ToDo
 
 Here I'm going to use the College dataset (used in Question 10 from Chapter 7
 to compare performance with the GAM we previously built). In this model we 

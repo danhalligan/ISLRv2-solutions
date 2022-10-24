@@ -407,7 +407,7 @@ ToDo
 > 
 > a. What is the log odds of `orange` versus `apple` in your model?
 
-The log odds is just $\hat\beta_0 + \hat\beta_1x)$
+The log odds is just $\hat\beta_0 + \hat\beta_1x$
 
 > b. What is the log odds of `orange` versus `apple` in your friend's model?
 
@@ -421,9 +421,10 @@ $$
 >    are the coefficient estimates in your friend's model? Be as specific as
 >    possible.
 
-In our friend's model $\hat\alpha_{orange0} - \hat\alpha_{apple0} = 2$ and
-$\hat\alpha_{orange1} - \hat\alpha_{apple1} = -1$. We can not know the specific
-values, we can only determine what they sum to.
+We can say that in our friend's model $\hat\alpha_{orange0} -
+\hat\alpha_{apple0} = 2$ and $\hat\alpha_{orange1} - \hat\alpha_{apple1} = -1$.
+
+We are unable to know the specific value of each parameter however.
 
 > d. Now suppose that you and your friend fit the same two models on a different
 >    data set. This time, your friend gets the coefficient estimates 
@@ -431,7 +432,8 @@ values, we can only determine what they sum to.
 >    $\hat\alpha_{apple0} = 3$, $\hat\alpha_{apple1} = 0.6$. What are the 
 >    coefficient estimates in your model?
 
-In our model $\hat\beta_0 = 1.2 - 3 = -1.8$ and $\hat\beta_1 = -2 - 0.6 = -2.6$
+The coefficients in our model would be $\hat\beta_0 = 1.2 - 3 = -1.8$ and
+$\hat\beta_1 = -2 - 0.6 = -2.6$
 
 > e. Finally, suppose you apply both models from (d) to a data set with 2,000
 >    test observations. What fraction of the time do you expect the predicted 
@@ -681,8 +683,8 @@ fit <- knn(
 ```
 ##       
 ## fit    Down Up
-##   Down   21 29
-##   Up     22 32
+##   Down   21 30
+##   Up     22 31
 ```
 
 ```r
@@ -690,7 +692,7 @@ sum(diag(t)) / sum(t)
 ```
 
 ```
-## [1] 0.5096154
+## [1] 0.5
 ```
 
 > h. Repeat (d) using naive Bayes.
@@ -1221,28 +1223,7 @@ fit_models <- function(cols, k_vals = 1:50) {
 
 ```r
 res <- sapply(1:12, function(max) fit_models(1:max))
-(res <- as_tibble(t(res)))
-```
-
-```
-## # A tibble: 12 × 4
-##      LDA    LR    NB    KNN
-##    <dbl> <dbl> <dbl>  <dbl>
-##  1 0.178 0.166 0.178 0.0296
-##  2 0.195 0.166 0.183 0.124 
-##  3 0.178 0.166 0.178 0.0473
-##  4 0.178 0.160 0.201 0.0414
-##  5 0.178 0.154 0.213 0.0769
-##  6 0.154 0.136 0.189 0.0769
-##  7 0.154 0.130 0.243 0.0769
-##  8 0.154 0.130 0.237 0.0769
-##  9 0.166 0.142 0.225 0.0769
-## 10 0.172 0.124 0.231 0.0769
-## 11 0.172 0.124 0.225 0.0769
-## 12 0.166 0.118 0.231 0.0769
-```
-
-```r
+res <- as_tibble(t(res))
 res$n_var <- 1:12
 pivot_longer(res, cols = !n_var) |>
   ggplot(aes(n_var, value, col = name)) + 
@@ -1292,28 +1273,7 @@ But what if we only consider $k = 20$.
 
 ```r
 res <- sapply(1:12, function(max) fit_models(1:max, k_vals = 20))
-(res <- as_tibble(t(res)))
-```
-
-```
-## # A tibble: 12 × 4
-##      LDA    LR    NB   KNN
-##    <dbl> <dbl> <dbl> <dbl>
-##  1 0.178 0.166 0.178 0.107
-##  2 0.195 0.166 0.183 0.207
-##  3 0.178 0.166 0.178 0.136
-##  4 0.178 0.160 0.201 0.166
-##  5 0.178 0.154 0.213 0.178
-##  6 0.154 0.136 0.189 0.178
-##  7 0.154 0.130 0.243 0.172
-##  8 0.154 0.130 0.237 0.172
-##  9 0.166 0.142 0.225 0.178
-## 10 0.172 0.124 0.231 0.178
-## 11 0.172 0.124 0.225 0.178
-## 12 0.166 0.118 0.231 0.178
-```
-
-```r
+res <- as_tibble(t(res))
 res$n_var <- 1:12
 pivot_longer(res, cols = !n_var) |>
   ggplot(aes(n_var, value, col = name)) +

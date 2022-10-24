@@ -766,7 +766,7 @@ and <span class="math inline">\(\Sigma_K\)</span>.</p>
 <li>What is the log odds of <code>orange</code> versus <code>apple</code> in your model?</li>
 </ol>
 </blockquote>
-<p>The log odds is just <span class="math inline">\(\hat\beta_0 + \hat\beta_1x)\)</span></p>
+<p>The log odds is just <span class="math inline">\(\hat\beta_0 + \hat\beta_1x\)</span></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>What is the log odds of <code>orange</code> versus <code>apple</code> in your friend’s model?</li>
@@ -783,9 +783,8 @@ are the coefficient estimates in your friend’s model? Be as specific as
 possible.</li>
 </ol>
 </blockquote>
-<p>In our friend’s model <span class="math inline">\(\hat\alpha_{orange0} - \hat\alpha_{apple0} = 2\)</span> and
-<span class="math inline">\(\hat\alpha_{orange1} - \hat\alpha_{apple1} = -1\)</span>. We can not know the specific
-values, we can only determine what they sum to.</p>
+<p>We can say that in our friend’s model <span class="math inline">\(\hat\alpha_{orange0} - \hat\alpha_{apple0} = 2\)</span> and <span class="math inline">\(\hat\alpha_{orange1} - \hat\alpha_{apple1} = -1\)</span>.</p>
+<p>We are unable to know the specific value of each parameter however.</p>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Now suppose that you and your friend fit the same two models on a different
@@ -795,7 +794,8 @@ data set. This time, your friend gets the coefficient estimates
 coefficient estimates in your model?</li>
 </ol>
 </blockquote>
-<p>In our model <span class="math inline">\(\hat\beta_0 = 1.2 - 3 = -1.8\)</span> and <span class="math inline">\(\hat\beta_1 = -2 - 0.6 = -2.6\)</span></p>
+<p>The coefficients in our model would be <span class="math inline">\(\hat\beta_0 = 1.2 - 3 = -1.8\)</span> and
+<span class="math inline">\(\hat\beta_1 = -2 - 0.6 = -2.6\)</span></p>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Finally, suppose you apply both models from (d) to a data set with 2,000
@@ -980,10 +980,10 @@ data (that is, the data from 2009 and 2010).</li>
 <span id="cb199-6"><a href="classification.html#cb199-6"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(fit, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
 <pre><code>##       
 ## fit    Down Up
-##   Down   21 29
-##   Up     22 32</code></pre>
+##   Down   21 30
+##   Up     22 31</code></pre>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="classification.html#cb201-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
-<pre><code>## [1] 0.5096154</code></pre>
+<pre><code>## [1] 0.5</code></pre>
 <blockquote>
 <ol start="8" style="list-style-type: lower-alpha">
 <li>Repeat (d) using naive Bayes.</li>
@@ -1342,42 +1342,27 @@ increasing numbers of predictors: column 1, then columns 1 and 2 etc.</p>
 <span id="cb264-23"><a href="classification.html#cb264-23"></a>  <span class="kw">c</span>(<span class="st">&quot;LDA&quot;</span> =<span class="st"> </span>lda_err, <span class="st">&quot;LR&quot;</span> =<span class="st"> </span>logreg_err, <span class="st">&quot;NB&quot;</span> =<span class="st"> </span>nb_err, <span class="st">&quot;KNN&quot;</span> =<span class="st"> </span>knn_err)</span>
 <span id="cb264-24"><a href="classification.html#cb264-24"></a>}</span></code></pre></div>
 <div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="classification.html#cb265-1"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="cf">function</span>(max) <span class="kw">fit_models</span>(<span class="dv">1</span><span class="op">:</span>max))</span>
-<span id="cb265-2"><a href="classification.html#cb265-2"></a>(res &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">t</span>(res)))</span></code></pre></div>
-<pre><code>## # A tibble: 12 × 4
-##      LDA    LR    NB    KNN
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-##  1 0.178 0.166 0.178 0.0296
-##  2 0.195 0.166 0.183 0.124 
-##  3 0.178 0.166 0.178 0.0473
-##  4 0.178 0.160 0.201 0.0414
-##  5 0.178 0.154 0.213 0.0769
-##  6 0.154 0.136 0.189 0.0769
-##  7 0.154 0.130 0.243 0.0769
-##  8 0.154 0.130 0.237 0.0769
-##  9 0.166 0.142 0.225 0.0769
-## 10 0.172 0.124 0.231 0.0769
-## 11 0.172 0.124 0.225 0.0769
-## 12 0.166 0.118 0.231 0.0769</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="classification.html#cb267-1"></a>res<span class="op">$</span>n_var &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">12</span></span>
-<span id="cb267-2"><a href="classification.html#cb267-2"></a><span class="kw">pivot_longer</span>(res, <span class="dt">cols =</span> <span class="op">!</span>n_var) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb267-3"><a href="classification.html#cb267-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb267-4"><a href="classification.html#cb267-4"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb267-5"><a href="classification.html#cb267-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb267-6"><a href="classification.html#cb267-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
+<span id="cb265-2"><a href="classification.html#cb265-2"></a>res &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">t</span>(res))</span>
+<span id="cb265-3"><a href="classification.html#cb265-3"></a>res<span class="op">$</span>n_var &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">12</span></span>
+<span id="cb265-4"><a href="classification.html#cb265-4"></a><span class="kw">pivot_longer</span>(res, <span class="dt">cols =</span> <span class="op">!</span>n_var) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb265-5"><a href="classification.html#cb265-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb265-6"><a href="classification.html#cb265-6"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb265-7"><a href="classification.html#cb265-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb265-8"><a href="classification.html#cb265-8"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>KNN appears to perform better (if we tune <span class="math inline">\(k\)</span>) for all numbers of predictors.</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="classification.html#cb268-1"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
-<span id="cb268-2"><a href="classification.html#cb268-2"></a>  x[train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
-<span id="cb268-3"><a href="classification.html#cb268-3"></a>  x[<span class="op">-</span>train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
-<span id="cb268-4"><a href="classification.html#cb268-4"></a>  x<span class="op">$</span>highcrim[train],</span>
-<span id="cb268-5"><a href="classification.html#cb268-5"></a>  <span class="dt">k =</span> <span class="dv">1</span></span>
-<span id="cb268-6"><a href="classification.html#cb268-6"></a>)</span>
-<span id="cb268-7"><a href="classification.html#cb268-7"></a><span class="kw">table</span>(fit, x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="classification.html#cb266-1"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
+<span id="cb266-2"><a href="classification.html#cb266-2"></a>  x[train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb266-3"><a href="classification.html#cb266-3"></a>  x[<span class="op">-</span>train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb266-4"><a href="classification.html#cb266-4"></a>  x<span class="op">$</span>highcrim[train],</span>
+<span id="cb266-5"><a href="classification.html#cb266-5"></a>  <span class="dt">k =</span> <span class="dv">1</span></span>
+<span id="cb266-6"><a href="classification.html#cb266-6"></a>)</span>
+<span id="cb266-7"><a href="classification.html#cb266-7"></a><span class="kw">table</span>(fit, x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim)</span></code></pre></div>
 <pre><code>##        
 ## fit     FALSE TRUE
 ##   FALSE    78    2
 ##   TRUE      3   86</code></pre>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="classification.html#cb270-1"></a><span class="kw">mean</span>(fit <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="classification.html#cb268-1"></a><span class="kw">mean</span>(fit <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] 2.95858</code></pre>
 <p>Surprisingly, the best model (with an error rate of &lt;5%) uses <span class="math inline">\(k = 1\)</span> and
 assigns crime rate categories based on the town with the single most similar
@@ -1385,46 +1370,31 @@ nitrogen oxide concentration (<code>nox</code>). This might be, for example, bec
 towns have similar crime rates, and we can obtain good predictions by predicting
 crime rate based on a nearby town.</p>
 <p>But what if we only consider <span class="math inline">\(k = 20\)</span>.</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="classification.html#cb272-1"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="cf">function</span>(max) <span class="kw">fit_models</span>(<span class="dv">1</span><span class="op">:</span>max, <span class="dt">k_vals =</span> <span class="dv">20</span>))</span>
-<span id="cb272-2"><a href="classification.html#cb272-2"></a>(res &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">t</span>(res)))</span></code></pre></div>
-<pre><code>## # A tibble: 12 × 4
-##      LDA    LR    NB   KNN
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 0.178 0.166 0.178 0.107
-##  2 0.195 0.166 0.183 0.207
-##  3 0.178 0.166 0.178 0.136
-##  4 0.178 0.160 0.201 0.166
-##  5 0.178 0.154 0.213 0.178
-##  6 0.154 0.136 0.189 0.178
-##  7 0.154 0.130 0.243 0.172
-##  8 0.154 0.130 0.237 0.172
-##  9 0.166 0.142 0.225 0.178
-## 10 0.172 0.124 0.231 0.178
-## 11 0.172 0.124 0.225 0.178
-## 12 0.166 0.118 0.231 0.178</code></pre>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="classification.html#cb274-1"></a>res<span class="op">$</span>n_var &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">12</span></span>
-<span id="cb274-2"><a href="classification.html#cb274-2"></a><span class="kw">pivot_longer</span>(res, <span class="dt">cols =</span> <span class="op">!</span>n_var) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb274-3"><a href="classification.html#cb274-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span></span>
-<span id="cb274-4"><a href="classification.html#cb274-4"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
-<span id="cb274-5"><a href="classification.html#cb274-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span></span>
-<span id="cb274-6"><a href="classification.html#cb274-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="classification.html#cb270-1"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="cf">function</span>(max) <span class="kw">fit_models</span>(<span class="dv">1</span><span class="op">:</span>max, <span class="dt">k_vals =</span> <span class="dv">20</span>))</span>
+<span id="cb270-2"><a href="classification.html#cb270-2"></a>res &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">t</span>(res))</span>
+<span id="cb270-3"><a href="classification.html#cb270-3"></a>res<span class="op">$</span>n_var &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">12</span></span>
+<span id="cb270-4"><a href="classification.html#cb270-4"></a><span class="kw">pivot_longer</span>(res, <span class="dt">cols =</span> <span class="op">!</span>n_var) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb270-5"><a href="classification.html#cb270-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span></span>
+<span id="cb270-6"><a href="classification.html#cb270-6"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb270-7"><a href="classification.html#cb270-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span></span>
+<span id="cb270-8"><a href="classification.html#cb270-8"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>KNN still performs best with a single predictor (<code>nox</code>), but logistic regression
 with 12 predictors also performs well and has an error rate of ~12%.</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="classification.html#cb275-1"></a>vars &lt;-<span class="st"> </span><span class="kw">names</span>(x)[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>]</span>
-<span id="cb275-2"><a href="classification.html#cb275-2"></a>dat_train &lt;-<span class="st"> </span>x[train, vars]</span>
-<span id="cb275-3"><a href="classification.html#cb275-3"></a>dat_test &lt;-<span class="st"> </span>x[<span class="op">-</span>train, vars]</span>
-<span id="cb275-4"><a href="classification.html#cb275-4"></a></span>
-<span id="cb275-5"><a href="classification.html#cb275-5"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train, <span class="dt">family =</span> binomial)</span>
-<span id="cb275-6"><a href="classification.html#cb275-6"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb275-7"><a href="classification.html#cb275-7"></a><span class="kw">table</span>(pred, x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="classification.html#cb271-1"></a>vars &lt;-<span class="st"> </span><span class="kw">names</span>(x)[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>]</span>
+<span id="cb271-2"><a href="classification.html#cb271-2"></a>dat_train &lt;-<span class="st"> </span>x[train, vars]</span>
+<span id="cb271-3"><a href="classification.html#cb271-3"></a>dat_test &lt;-<span class="st"> </span>x[<span class="op">-</span>train, vars]</span>
+<span id="cb271-4"><a href="classification.html#cb271-4"></a></span>
+<span id="cb271-5"><a href="classification.html#cb271-5"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train, <span class="dt">family =</span> binomial)</span>
+<span id="cb271-6"><a href="classification.html#cb271-6"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb271-7"><a href="classification.html#cb271-7"></a><span class="kw">table</span>(pred, x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim)</span></code></pre></div>
 <pre><code>##        
 ## pred    FALSE TRUE
 ##   FALSE    70    9
 ##   TRUE     11   79</code></pre>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="classification.html#cb277-1"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train]) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="classification.html#cb273-1"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train]) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] 11.83432</code></pre>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="classification.html#cb279-1"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="classification.html#cb275-1"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = x$highcrim[train] ~ ., family = binomial, data = dat_train)

@@ -170,7 +170,7 @@ mean(store)
 ```
 
 ```
-## [1] 0.636
+## [1] 0.6388
 ```
 
 The probability of including $4$ when resampling numbers $1...100$ is close to
@@ -536,6 +536,7 @@ $y$ has a (negative) quadratic relationship with $x$.
 
 
 ```r
+library(boot)
 set.seed(42)
 dat <- data.frame(x, y)
 sapply(1:4, function(i) cv.glm(dat, glm(y ~ poly(x, i)))$delta[1])

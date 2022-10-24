@@ -8,13 +8,13 @@
 > the performance of a flexible statistical learning method to be better or
 > worse than an inflexible method. Justify your answer.
 >
-> a. The sample size n is extremely large, and the number of predictors p is
+> a. The sample size $n$ is extremely large, and the number of predictors $p$ is
 >    small.
 
 Flexible best - opposite of b.
 
-> b. The number of predictors p is extremely large, and the number of
->    observations n is small.
+> b. The number of predictors $p$ is extremely large, and the number of
+>    observations $n$ is small.
 
 Inflexible best - high chance of some predictors being randomly associated.
 
@@ -32,7 +32,7 @@ Inflexible best - opposite of c.
 
 > Explain whether each scenario is a classification or regression problem, and
 > indicate whether we are most interested in inference or prediction. Finally,
-> provide n and p.
+> provide $n$ and $p$.
 >
 > a. We collect a set of data on the top 500 firms in the US. For each firm
 >    we record profit, number of employees, industry and the CEO salary. We are

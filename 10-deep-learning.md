@@ -9,16 +9,100 @@
 > output.
 >
 > a. Draw a picture of the network, similar to Figures 10.1 or 10.4.
->
+
+![](images/nn.png)
+
 > b. Write out an expression for $f(X)$, assuming ReLU activation functions. Be
 > as explicit as you can!
->
+
+The three layers (from our final output layer back to the start of our network)
+can be described as:
+
+\begin{align*}
+f(X) &= g(w_{0}^{(3)} + \sum^{K_2}_{l=1} w_{l}^{(3)} A_l^{(2)}) \\
+A_l^{(2)} &= h_l^{(2)}(X) = g(w_{l0}^{(2)} + \sum_{k=1}^{K_1} w_{lk}^{(2)} A_k^{(1)})\\
+A_k^{(1)} &= h_k^{(1)}(X) = g(w_{k0}^{(1)} + \sum_{j=1}^p w_{kj}^{(1)} X_j) \\
+\end{align*}
+
+for $l = 1, ..., K_2 = 3$ and $k = 1, ..., K_1 = 2$ and $p = 4$, where,
+
+$$
+g(z) = (z)_+ = \begin{cases}
+  0, & \text{if } z < 0 \\
+  z, & \text{otherwise}
+\end{cases}
+$$
+
 > c. Now plug in some values for the coefficients and write out the value of
 > $f(X)$.
->
+
+We can perhaps achieve this most easily by fitting a real model. Note,
+in the plot shown here, we also include the "bias" or intercept terms.
+
+
+```r
+library(ISLR2)
+library(neuralnet)
+library(sigmoid)
+set.seed(5)
+train <- sample(seq_len(nrow(ISLR2::Boston)), nrow(ISLR2::Boston) * 2/3)
+
+net <- neuralnet(crim ~ lstat + medv + ptratio + rm,
+    data = ISLR2::Boston[train, ],
+    act.fct = relu,
+    hidden = c(2, 3)
+)
+plot(net)
+```
+
+We can make a prediction for a given observation using this object.
+
+Firstly, let's find an "ambiguous" test sample
+
+
+```r
+p <- predict(net, ISLR2::Boston[-train, ])
+x <- ISLR2::Boston[-train, ][which.min(abs(p - mean(c(max(p), min(p))))), ]
+x <- x[, c("lstat", "medv", "ptratio", "rm")]
+predict(net, x)
+```
+
+```
+##         [,1]
+## 441 19.14392
+```
+
+Or, repeating by "hand":
+
+
+```r
+g <- function(x) ifelse(x > 0, x, 0) # relu activation function
+w <- net$weights[[1]] # the estimated weights for each layer
+v <- as.numeric(x) # our input predictors
+
+# to calculate our prediction we can take the dot product of our predictors
+# (with 1 at the start for the bias term) and our layer weights, lw)
+for (lw in w) v <- g(c(1, v) %*% lw)
+v
+```
+
+```
+##          [,1]
+## [1,] 19.14392
+```
+
 > d. How many parameters are there?
 
-ToDo
+
+```r
+length(unlist(net$weights))
+```
+
+```
+## [1] 23
+```
+
+There are $4*2+2 + 2*3+3 + 3*1+1 = 23$ parameters.
 
 ### Question 2
 
@@ -27,16 +111,54 @@ ToDo
 >
 > a. In (10.13), show that if we add a constant $c$ to each of the $z_l$, then
 > the probability is unchanged.
->
+
+If we add a constant $c$ to each $Z_l$ in equation 10.13 we get:
+
+\begin{align*}
+Pr(Y=m|X) 
+ &= \frac{e^{Z_m+c}}{\sum_{l=0}^9e^{Z_l+c}} \\
+ &= \frac{e^{Z_m}e^c}{\sum_{l=0}^9e^{Z_l}e^c} \\
+ &= \frac{e^{Z_m}e^c}{e^c\sum_{l=0}^9e^{Z_l}} \\
+ &= \frac{e^{Z_m}}{\sum_{l=0}^9e^{Z_l}} \\
+\end{align*}
+
+which is just equation 10.13.
+
 > b. In (4.13), show that if we add constants $c_j$, $j = 0,1,...,p$, to each of
 > the corresponding coefficients for each of the classes, then the predictions
 > at any new point $x$ are unchanged.
 
+4.13 is 
+
+$$
+Pr(Y=k|X=x) = \frac
+{e^{\beta_{K0} + \beta_{K1}x_1 + ... + \beta_{Kp}x_p}}
+{\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x1 + ... + \beta_{lp}x_p}}
+$$
+
+adding constants $c_j$ to each class gives:
+
+\begin{align*}
+Pr(Y=k|X=x) 
+&= \frac
+  {e^{\beta_{K0} + \beta_{K1}x_1 + c_1 + ... + \beta_{Kp}x_p + c_p}}
+  {\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x1 + c_1 + ... + \beta_{lp}x_p + c_p}} \\
+&= \frac
+  {e^{c1 + ... + c_p}e^{\beta_{K0} + \beta_{K1}x_1 + ... + \beta_{Kp}x_p}}
+  {\sum_{l=1}^K e^{c1 + ... + c_p}e^{\beta_{l0} + \beta_{l1}x1 + ... + \beta_{lp}x_p}} \\
+&= \frac
+  {e^{c1 + ... + c_p}e^{\beta_{K0} + \beta_{K1}x_1 + ... + \beta_{Kp}x_p}}
+  {e^{c1 + ... + c_p}\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x1 + ... + \beta_{lp}x_p}} \\
+&= \frac
+  {e^{\beta_{K0} + \beta_{K1}x_1 + ... + \beta_{Kp}x_p}}
+  {\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x1 + ... + \beta_{lp}x_p}} \\
+\end{align*}
+
+which collapses to 4.13 (with the same argument as above).
+
 > This shows that the softmax function is _over-parametrized_. However,
 > regularization and SGD typically constrain the solutions so that this is not a
 > problem.
-
-ToDo
 
 ### Question 3
 
@@ -44,7 +166,44 @@ ToDo
 > the negative log of the likelihood expression (4.5) when there are $M = 2$
 > classes.
 
-ToDo
+Equation 10.14 is 
+
+$$
+-\sum_{i=1}^n \sum_{m=0}^9 y_{im}\log(f_m(x_i))
+$$
+
+Equation 4.5 is:
+
+$$
+\ell(\beta_0, \beta_1) = \prod_{i:y_i=1}p(x_i) \prod_{i':y_i'=0}(1-p(x_i'))
+$$
+
+So, $\log(\ell)$ is:
+
+\begin{align*}
+\log(\ell) 
+ &= \log \left( \prod_{i:y_i=1}p(x_i) \prod_{i':y_i'=0}(1-p(x_i')) \right ) \\
+ &= \sum_{i:y_1=1}\log(p(x_i)) + \sum_{i':y_i'=0}\log(1-p(x_i')) \\
+\end{align*}
+
+If we set $y_i$ to be an indicator variable such that $y_{i1}$ and $y_{i0}$ are
+1 and 0 (or 0 and 1) when our $i$th observation is 1 (or 0) respectively, then
+we can write:
+
+$$
+\log(\ell) = \sum_{i}y_{i1}\log(p(x_i)) + \sum_{i}y_{i0}\log(1-p(x_i'))
+$$
+
+If we also let $f_1(x) = p(x)$ and $f_0(x) = 1 - p(x)$ then:
+
+\begin{align*}
+\log(\ell) 
+ &= \sum_i y_{i1}\log(f_1(x_i)) + \sum_{i}y_{i0}\log(f_0(x_i')) \\
+ &= \sum_i \sum_{m=0}^1 y_{im}\log(f_m(x_i)) \\
+\end{align*}
+
+When we take the negative of this, it is equivalent to 10.14 for two classes 
+($m = 0,1$).
 
 ### Question 4
 
@@ -53,17 +212,33 @@ ToDo
 > boundary padding).
 >
 > a. Draw a sketch of the input and first hidden layer similar to Figure 10.8.
->
+
+![](images/nn2.png)
+
 > b. How many parameters are in this model?
->
+
+There are 5 convolution matrices each with 5x5 weights (plus 5 bias terms) to
+estimate, therefore 130 parameters 
+
 > c. Explain how this model can be thought of as an ordinary feed-forward
 > neural network with the individual pixels as inputs, and with constraints on
 > the weights in the hidden units. What are the constraints?
->
+
+We can think of a convolution layer as a regularized fully connected layer.
+The regularization in this case is due to not all inputs being connected to
+all outputs, and weights being shared between connections.
+
+Each output node in the convolved image can be thought of as taking inputs from
+a limited number of input pixels (the neighboring pixels), with a set of
+weights specified by the convolution layer which are then shared by the
+connections to all other output nodes.
+
 > d. If there were no constraints, then how many weights would there be in the
 > ordinary feed-forward neural network in (c)?
 
-ToDo
+With no constraints, we would connect each output pixel in our 5x32x32
+convolution layer to each node in the 32x32 original image (plus 5 bias terms),
+giving a total of 5,242,885 weights to estimate.
 
 ### Question 5
 
@@ -71,7 +246,10 @@ ToDo
 > respect to mean absolute error is different from the ordering with respect to
 > test set $R^2$. How can this be?
 
-ToDo
+Mean absolute error considers _absolute_ differences between predictions and 
+observed values, whereas $R^2$ considers the (normalized) sum of _squared_
+differences, thus larger errors contribute relatively ore to $R^2$ than mean
+absolute error.
 
 ## Applied
 
@@ -80,16 +258,82 @@ ToDo
 > Consider the simple function $R(\beta) = sin(\beta) + \beta/10$.
 >
 > a. Draw a graph of this function over the range $\beta \in [−6, 6]$.
->
+
+
+```r
+r <- function(x) sin(x) + x/10
+x <- seq(-6, 6, 0.1)
+plot(x, r(x), type = "l")
+```
+
+<img src="10-deep-learning_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 > b. What is the derivative of this function?
->
+
+$$
+cos(x) + 1/10
+$$
+
 > c. Given $\beta^0 = 2.3$, run gradient descent to find a local minimum of
 > $R(\beta)$ using a learning rate of $\rho = 0.1$. Show each of 
 > $\beta^0, \beta^1, ...$ in your plot, as well as the final answer.
->
+
+The derivative of our function, i.e. $cos(x) + 1/10$ gives us the gradient for
+a given $x$. For gradient descent, we move $x$ a little in the _opposite_
+direction, for some learning rate $\rho = 0.1$:
+
+$$
+x^{m+1} = x^m - \rho (cos(x^m) + 1/10)
+$$
+
+
+```r
+iter <- function(x, rho) x - rho*(cos(x) + 1/10)
+gd <- function(start, rho = 0.1) {
+  b <- start
+  v <- b
+  while(abs(b - iter(b, 0.1)) > 1e-8) {
+    b <- iter(b, 0.1)
+    v <- c(v, b)
+  }
+  v
+}
+
+res <- gd(2.3)
+res[length(res)]
+```
+
+```
+## [1] 4.612221
+```
+
+
+```r
+plot(x, r(x), type = "l")
+points(res, r(res), col = "red", pch = 19)
+```
+
+<img src="10-deep-learning_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+
 > d. Repeat with $\beta^0 = 1.4$.
 
-ToDo
+
+```r
+res <- gd(1.4)
+res[length(res)]
+```
+
+```
+## [1] -1.670964
+```
+
+
+```r
+plot(x, r(x), type = "l")
+points(v, r(v), col = "red", pch = 19)
+```
+
+<img src="10-deep-learning_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 ### Question 7
 
@@ -98,7 +342,68 @@ ToDo
 > guidance. Compare the classification performance of your model with that of
 > linear logistic regression.
 
-ToDo
+
+```r
+library(keras)
+
+dat <- ISLR2::Boston
+x <- scale(model.matrix(crim ~ . - 1, data = dat))
+n <- nrow(dat)
+ntest <- trunc(n / 3)
+testid <- sample(1:n, ntest)
+y <- dat$crim
+
+# logistic regression
+lfit <- lm(crim ~ ., data = dat[-testid, ])
+lpred <- predict(lfit, dat[testid, ])
+with(dat[testid, ], mean(abs(lpred - crim)))
+```
+
+```
+## [1] 2.99129
+```
+
+```r
+# keras
+nn <- keras_model_sequential() |>
+  layer_dense(units = 10, activation = "relu", input_shape = ncol(x)) |>
+  layer_dropout(rate = 0.4) |>
+  layer_dense(units = 1)
+```
+
+```
+## Loaded Tensorflow version 2.9.2
+```
+
+```r
+compile(nn, loss = "mse", 
+  optimizer = optimizer_rmsprop(), 
+  metrics = list("mean_absolute_error") 
+)
+
+history <- fit(nn,
+  x[-testid, ], y[-testid], 
+  epochs = 100, 
+  batch_size = 26, 
+  validation_data = list(x[testid, ], y[testid]),
+  verbose = 0
+)
+plot(history)
+```
+
+<img src="10-deep-learning_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+
+```r
+npred <- predict(nn, x[testid, ])
+mean(abs(y[testid] - npred))
+```
+
+```
+## [1] 2.27749
+```
+
+In this case, the neural network outperforms logistic regression having a lower
+absolute error rate on the test data.
 
 ### Question 8
 
@@ -109,7 +414,507 @@ ToDo
 > images, and report the probabilities for the top five predicted classes for
 > each image.
 
-ToDo
+
+```r
+library(keras)
+images <- list.files("images/animals")
+x <- array(dim = c(length(images), 224, 224, 3))
+for (i in seq_len(length(images))) {
+  img <- image_load(paste0("images/animals/", images[i]), target_size = c(224, 224))
+  x[i,,,] <- image_to_array(img)
+}
+
+model <- application_resnet50(weights = "imagenet")
+summary(model)
+```
+
+```
+## Model: "resnet50"
+## ________________________________________________________________________________
+##  Layer (type)         Output Shape   Param #  Connected to           Trainable  
+## ================================================================================
+##  input_1 (InputLayer)  [(None, 224,   0       []                     Y          
+##                       224, 3)]                                                  
+##  conv1_pad (ZeroPaddi  (None, 230, 2  0       ['input_1[0][0]']      Y          
+##  ng2D)                30, 3)                                                    
+##  conv1_conv (Conv2D)  (None, 112, 1  9472     ['conv1_pad[0][0]']    Y          
+##                       12, 64)                                                   
+##  conv1_bn (BatchNorma  (None, 112, 1  256     ['conv1_conv[0][0]']   Y          
+##  lization)            12, 64)                                                   
+##  conv1_relu (Activati  (None, 112, 1  0       ['conv1_bn[0][0]']     Y          
+##  on)                  12, 64)                                                   
+##  pool1_pad (ZeroPaddi  (None, 114, 1  0       ['conv1_relu[0][0]']   Y          
+##  ng2D)                14, 64)                                                   
+##  pool1_pool (MaxPooli  (None, 56, 56  0       ['pool1_pad[0][0]']    Y          
+##  ng2D)                , 64)                                                     
+##  conv2_block1_1_conv   (None, 56, 56  4160    ['pool1_pool[0][0]']   Y          
+##  (Conv2D)             , 64)                                                     
+##  conv2_block1_1_bn (B  (None, 56, 56  256     ['conv2_block1_1_conv  Y          
+##  atchNormalization)   , 64)                   [0][0]']                          
+##  conv2_block1_1_relu   (None, 56, 56  0       ['conv2_block1_1_bn[0  Y          
+##  (Activation)         , 64)                   ][0]']                            
+##  conv2_block1_2_conv   (None, 56, 56  36928   ['conv2_block1_1_relu  Y          
+##  (Conv2D)             , 64)                   [0][0]']                          
+##  conv2_block1_2_bn (B  (None, 56, 56  256     ['conv2_block1_2_conv  Y          
+##  atchNormalization)   , 64)                   [0][0]']                          
+##  conv2_block1_2_relu   (None, 56, 56  0       ['conv2_block1_2_bn[0  Y          
+##  (Activation)         , 64)                   ][0]']                            
+##  conv2_block1_0_conv   (None, 56, 56  16640   ['pool1_pool[0][0]']   Y          
+##  (Conv2D)             , 256)                                                    
+##  conv2_block1_3_conv   (None, 56, 56  16640   ['conv2_block1_2_relu  Y          
+##  (Conv2D)             , 256)                  [0][0]']                          
+##  conv2_block1_0_bn (B  (None, 56, 56  1024    ['conv2_block1_0_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv2_block1_3_bn (B  (None, 56, 56  1024    ['conv2_block1_3_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv2_block1_add (Ad  (None, 56, 56  0       ['conv2_block1_0_bn[0  Y          
+##  d)                   , 256)                  ][0]',                            
+##                                                'conv2_block1_3_bn[0             
+##                                               ][0]']                            
+##  conv2_block1_out (Ac  (None, 56, 56  0       ['conv2_block1_add[0]  Y          
+##  tivation)            , 256)                  [0]']                             
+##  conv2_block2_1_conv   (None, 56, 56  16448   ['conv2_block1_out[0]  Y          
+##  (Conv2D)             , 64)                   [0]']                             
+##  conv2_block2_1_bn (B  (None, 56, 56  256     ['conv2_block2_1_conv  Y          
+##  atchNormalization)   , 64)                   [0][0]']                          
+##  conv2_block2_1_relu   (None, 56, 56  0       ['conv2_block2_1_bn[0  Y          
+##  (Activation)         , 64)                   ][0]']                            
+##  conv2_block2_2_conv   (None, 56, 56  36928   ['conv2_block2_1_relu  Y          
+##  (Conv2D)             , 64)                   [0][0]']                          
+##  conv2_block2_2_bn (B  (None, 56, 56  256     ['conv2_block2_2_conv  Y          
+##  atchNormalization)   , 64)                   [0][0]']                          
+##  conv2_block2_2_relu   (None, 56, 56  0       ['conv2_block2_2_bn[0  Y          
+##  (Activation)         , 64)                   ][0]']                            
+##  conv2_block2_3_conv   (None, 56, 56  16640   ['conv2_block2_2_relu  Y          
+##  (Conv2D)             , 256)                  [0][0]']                          
+##  conv2_block2_3_bn (B  (None, 56, 56  1024    ['conv2_block2_3_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv2_block2_add (Ad  (None, 56, 56  0       ['conv2_block1_out[0]  Y          
+##  d)                   , 256)                  [0]',                             
+##                                                'conv2_block2_3_bn[0             
+##                                               ][0]']                            
+##  conv2_block2_out (Ac  (None, 56, 56  0       ['conv2_block2_add[0]  Y          
+##  tivation)            , 256)                  [0]']                             
+##  conv2_block3_1_conv   (None, 56, 56  16448   ['conv2_block2_out[0]  Y          
+##  (Conv2D)             , 64)                   [0]']                             
+##  conv2_block3_1_bn (B  (None, 56, 56  256     ['conv2_block3_1_conv  Y          
+##  atchNormalization)   , 64)                   [0][0]']                          
+##  conv2_block3_1_relu   (None, 56, 56  0       ['conv2_block3_1_bn[0  Y          
+##  (Activation)         , 64)                   ][0]']                            
+##  conv2_block3_2_conv   (None, 56, 56  36928   ['conv2_block3_1_relu  Y          
+##  (Conv2D)             , 64)                   [0][0]']                          
+##  conv2_block3_2_bn (B  (None, 56, 56  256     ['conv2_block3_2_conv  Y          
+##  atchNormalization)   , 64)                   [0][0]']                          
+##  conv2_block3_2_relu   (None, 56, 56  0       ['conv2_block3_2_bn[0  Y          
+##  (Activation)         , 64)                   ][0]']                            
+##  conv2_block3_3_conv   (None, 56, 56  16640   ['conv2_block3_2_relu  Y          
+##  (Conv2D)             , 256)                  [0][0]']                          
+##  conv2_block3_3_bn (B  (None, 56, 56  1024    ['conv2_block3_3_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv2_block3_add (Ad  (None, 56, 56  0       ['conv2_block2_out[0]  Y          
+##  d)                   , 256)                  [0]',                             
+##                                                'conv2_block3_3_bn[0             
+##                                               ][0]']                            
+##  conv2_block3_out (Ac  (None, 56, 56  0       ['conv2_block3_add[0]  Y          
+##  tivation)            , 256)                  [0]']                             
+##  conv3_block1_1_conv   (None, 28, 28  32896   ['conv2_block3_out[0]  Y          
+##  (Conv2D)             , 128)                  [0]']                             
+##  conv3_block1_1_bn (B  (None, 28, 28  512     ['conv3_block1_1_conv  Y          
+##  atchNormalization)   , 128)                  [0][0]']                          
+##  conv3_block1_1_relu   (None, 28, 28  0       ['conv3_block1_1_bn[0  Y          
+##  (Activation)         , 128)                  ][0]']                            
+##  conv3_block1_2_conv   (None, 28, 28  147584  ['conv3_block1_1_relu  Y          
+##  (Conv2D)             , 128)                  [0][0]']                          
+##  conv3_block1_2_bn (B  (None, 28, 28  512     ['conv3_block1_2_conv  Y          
+##  atchNormalization)   , 128)                  [0][0]']                          
+##  conv3_block1_2_relu   (None, 28, 28  0       ['conv3_block1_2_bn[0  Y          
+##  (Activation)         , 128)                  ][0]']                            
+##  conv3_block1_0_conv   (None, 28, 28  131584  ['conv2_block3_out[0]  Y          
+##  (Conv2D)             , 512)                  [0]']                             
+##  conv3_block1_3_conv   (None, 28, 28  66048   ['conv3_block1_2_relu  Y          
+##  (Conv2D)             , 512)                  [0][0]']                          
+##  conv3_block1_0_bn (B  (None, 28, 28  2048    ['conv3_block1_0_conv  Y          
+##  atchNormalization)   , 512)                  [0][0]']                          
+##  conv3_block1_3_bn (B  (None, 28, 28  2048    ['conv3_block1_3_conv  Y          
+##  atchNormalization)   , 512)                  [0][0]']                          
+##  conv3_block1_add (Ad  (None, 28, 28  0       ['conv3_block1_0_bn[0  Y          
+##  d)                   , 512)                  ][0]',                            
+##                                                'conv3_block1_3_bn[0             
+##                                               ][0]']                            
+##  conv3_block1_out (Ac  (None, 28, 28  0       ['conv3_block1_add[0]  Y          
+##  tivation)            , 512)                  [0]']                             
+##  conv3_block2_1_conv   (None, 28, 28  65664   ['conv3_block1_out[0]  Y          
+##  (Conv2D)             , 128)                  [0]']                             
+##  conv3_block2_1_bn (B  (None, 28, 28  512     ['conv3_block2_1_conv  Y          
+##  atchNormalization)   , 128)                  [0][0]']                          
+##  conv3_block2_1_relu   (None, 28, 28  0       ['conv3_block2_1_bn[0  Y          
+##  (Activation)         , 128)                  ][0]']                            
+##  conv3_block2_2_conv   (None, 28, 28  147584  ['conv3_block2_1_relu  Y          
+##  (Conv2D)             , 128)                  [0][0]']                          
+##  conv3_block2_2_bn (B  (None, 28, 28  512     ['conv3_block2_2_conv  Y          
+##  atchNormalization)   , 128)                  [0][0]']                          
+##  conv3_block2_2_relu   (None, 28, 28  0       ['conv3_block2_2_bn[0  Y          
+##  (Activation)         , 128)                  ][0]']                            
+##  conv3_block2_3_conv   (None, 28, 28  66048   ['conv3_block2_2_relu  Y          
+##  (Conv2D)             , 512)                  [0][0]']                          
+##  conv3_block2_3_bn (B  (None, 28, 28  2048    ['conv3_block2_3_conv  Y          
+##  atchNormalization)   , 512)                  [0][0]']                          
+##  conv3_block2_add (Ad  (None, 28, 28  0       ['conv3_block1_out[0]  Y          
+##  d)                   , 512)                  [0]',                             
+##                                                'conv3_block2_3_bn[0             
+##                                               ][0]']                            
+##  conv3_block2_out (Ac  (None, 28, 28  0       ['conv3_block2_add[0]  Y          
+##  tivation)            , 512)                  [0]']                             
+##  conv3_block3_1_conv   (None, 28, 28  65664   ['conv3_block2_out[0]  Y          
+##  (Conv2D)             , 128)                  [0]']                             
+##  conv3_block3_1_bn (B  (None, 28, 28  512     ['conv3_block3_1_conv  Y          
+##  atchNormalization)   , 128)                  [0][0]']                          
+##  conv3_block3_1_relu   (None, 28, 28  0       ['conv3_block3_1_bn[0  Y          
+##  (Activation)         , 128)                  ][0]']                            
+##  conv3_block3_2_conv   (None, 28, 28  147584  ['conv3_block3_1_relu  Y          
+##  (Conv2D)             , 128)                  [0][0]']                          
+##  conv3_block3_2_bn (B  (None, 28, 28  512     ['conv3_block3_2_conv  Y          
+##  atchNormalization)   , 128)                  [0][0]']                          
+##  conv3_block3_2_relu   (None, 28, 28  0       ['conv3_block3_2_bn[0  Y          
+##  (Activation)         , 128)                  ][0]']                            
+##  conv3_block3_3_conv   (None, 28, 28  66048   ['conv3_block3_2_relu  Y          
+##  (Conv2D)             , 512)                  [0][0]']                          
+##  conv3_block3_3_bn (B  (None, 28, 28  2048    ['conv3_block3_3_conv  Y          
+##  atchNormalization)   , 512)                  [0][0]']                          
+##  conv3_block3_add (Ad  (None, 28, 28  0       ['conv3_block2_out[0]  Y          
+##  d)                   , 512)                  [0]',                             
+##                                                'conv3_block3_3_bn[0             
+##                                               ][0]']                            
+##  conv3_block3_out (Ac  (None, 28, 28  0       ['conv3_block3_add[0]  Y          
+##  tivation)            , 512)                  [0]']                             
+##  conv3_block4_1_conv   (None, 28, 28  65664   ['conv3_block3_out[0]  Y          
+##  (Conv2D)             , 128)                  [0]']                             
+##  conv3_block4_1_bn (B  (None, 28, 28  512     ['conv3_block4_1_conv  Y          
+##  atchNormalization)   , 128)                  [0][0]']                          
+##  conv3_block4_1_relu   (None, 28, 28  0       ['conv3_block4_1_bn[0  Y          
+##  (Activation)         , 128)                  ][0]']                            
+##  conv3_block4_2_conv   (None, 28, 28  147584  ['conv3_block4_1_relu  Y          
+##  (Conv2D)             , 128)                  [0][0]']                          
+##  conv3_block4_2_bn (B  (None, 28, 28  512     ['conv3_block4_2_conv  Y          
+##  atchNormalization)   , 128)                  [0][0]']                          
+##  conv3_block4_2_relu   (None, 28, 28  0       ['conv3_block4_2_bn[0  Y          
+##  (Activation)         , 128)                  ][0]']                            
+##  conv3_block4_3_conv   (None, 28, 28  66048   ['conv3_block4_2_relu  Y          
+##  (Conv2D)             , 512)                  [0][0]']                          
+##  conv3_block4_3_bn (B  (None, 28, 28  2048    ['conv3_block4_3_conv  Y          
+##  atchNormalization)   , 512)                  [0][0]']                          
+##  conv3_block4_add (Ad  (None, 28, 28  0       ['conv3_block3_out[0]  Y          
+##  d)                   , 512)                  [0]',                             
+##                                                'conv3_block4_3_bn[0             
+##                                               ][0]']                            
+##  conv3_block4_out (Ac  (None, 28, 28  0       ['conv3_block4_add[0]  Y          
+##  tivation)            , 512)                  [0]']                             
+##  conv4_block1_1_conv   (None, 14, 14  131328  ['conv3_block4_out[0]  Y          
+##  (Conv2D)             , 256)                  [0]']                             
+##  conv4_block1_1_bn (B  (None, 14, 14  1024    ['conv4_block1_1_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block1_1_relu   (None, 14, 14  0       ['conv4_block1_1_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block1_2_conv   (None, 14, 14  590080  ['conv4_block1_1_relu  Y          
+##  (Conv2D)             , 256)                  [0][0]']                          
+##  conv4_block1_2_bn (B  (None, 14, 14  1024    ['conv4_block1_2_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block1_2_relu   (None, 14, 14  0       ['conv4_block1_2_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block1_0_conv   (None, 14, 14  525312  ['conv3_block4_out[0]  Y          
+##  (Conv2D)             , 1024)                 [0]']                             
+##  conv4_block1_3_conv   (None, 14, 14  263168  ['conv4_block1_2_relu  Y          
+##  (Conv2D)             , 1024)                 [0][0]']                          
+##  conv4_block1_0_bn (B  (None, 14, 14  4096    ['conv4_block1_0_conv  Y          
+##  atchNormalization)   , 1024)                 [0][0]']                          
+##  conv4_block1_3_bn (B  (None, 14, 14  4096    ['conv4_block1_3_conv  Y          
+##  atchNormalization)   , 1024)                 [0][0]']                          
+##  conv4_block1_add (Ad  (None, 14, 14  0       ['conv4_block1_0_bn[0  Y          
+##  d)                   , 1024)                 ][0]',                            
+##                                                'conv4_block1_3_bn[0             
+##                                               ][0]']                            
+##  conv4_block1_out (Ac  (None, 14, 14  0       ['conv4_block1_add[0]  Y          
+##  tivation)            , 1024)                 [0]']                             
+##  conv4_block2_1_conv   (None, 14, 14  262400  ['conv4_block1_out[0]  Y          
+##  (Conv2D)             , 256)                  [0]']                             
+##  conv4_block2_1_bn (B  (None, 14, 14  1024    ['conv4_block2_1_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block2_1_relu   (None, 14, 14  0       ['conv4_block2_1_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block2_2_conv   (None, 14, 14  590080  ['conv4_block2_1_relu  Y          
+##  (Conv2D)             , 256)                  [0][0]']                          
+##  conv4_block2_2_bn (B  (None, 14, 14  1024    ['conv4_block2_2_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block2_2_relu   (None, 14, 14  0       ['conv4_block2_2_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block2_3_conv   (None, 14, 14  263168  ['conv4_block2_2_relu  Y          
+##  (Conv2D)             , 1024)                 [0][0]']                          
+##  conv4_block2_3_bn (B  (None, 14, 14  4096    ['conv4_block2_3_conv  Y          
+##  atchNormalization)   , 1024)                 [0][0]']                          
+##  conv4_block2_add (Ad  (None, 14, 14  0       ['conv4_block1_out[0]  Y          
+##  d)                   , 1024)                 [0]',                             
+##                                                'conv4_block2_3_bn[0             
+##                                               ][0]']                            
+##  conv4_block2_out (Ac  (None, 14, 14  0       ['conv4_block2_add[0]  Y          
+##  tivation)            , 1024)                 [0]']                             
+##  conv4_block3_1_conv   (None, 14, 14  262400  ['conv4_block2_out[0]  Y          
+##  (Conv2D)             , 256)                  [0]']                             
+##  conv4_block3_1_bn (B  (None, 14, 14  1024    ['conv4_block3_1_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block3_1_relu   (None, 14, 14  0       ['conv4_block3_1_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block3_2_conv   (None, 14, 14  590080  ['conv4_block3_1_relu  Y          
+##  (Conv2D)             , 256)                  [0][0]']                          
+##  conv4_block3_2_bn (B  (None, 14, 14  1024    ['conv4_block3_2_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block3_2_relu   (None, 14, 14  0       ['conv4_block3_2_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block3_3_conv   (None, 14, 14  263168  ['conv4_block3_2_relu  Y          
+##  (Conv2D)             , 1024)                 [0][0]']                          
+##  conv4_block3_3_bn (B  (None, 14, 14  4096    ['conv4_block3_3_conv  Y          
+##  atchNormalization)   , 1024)                 [0][0]']                          
+##  conv4_block3_add (Ad  (None, 14, 14  0       ['conv4_block2_out[0]  Y          
+##  d)                   , 1024)                 [0]',                             
+##                                                'conv4_block3_3_bn[0             
+##                                               ][0]']                            
+##  conv4_block3_out (Ac  (None, 14, 14  0       ['conv4_block3_add[0]  Y          
+##  tivation)            , 1024)                 [0]']                             
+##  conv4_block4_1_conv   (None, 14, 14  262400  ['conv4_block3_out[0]  Y          
+##  (Conv2D)             , 256)                  [0]']                             
+##  conv4_block4_1_bn (B  (None, 14, 14  1024    ['conv4_block4_1_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block4_1_relu   (None, 14, 14  0       ['conv4_block4_1_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block4_2_conv   (None, 14, 14  590080  ['conv4_block4_1_relu  Y          
+##  (Conv2D)             , 256)                  [0][0]']                          
+##  conv4_block4_2_bn (B  (None, 14, 14  1024    ['conv4_block4_2_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block4_2_relu   (None, 14, 14  0       ['conv4_block4_2_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block4_3_conv   (None, 14, 14  263168  ['conv4_block4_2_relu  Y          
+##  (Conv2D)             , 1024)                 [0][0]']                          
+##  conv4_block4_3_bn (B  (None, 14, 14  4096    ['conv4_block4_3_conv  Y          
+##  atchNormalization)   , 1024)                 [0][0]']                          
+##  conv4_block4_add (Ad  (None, 14, 14  0       ['conv4_block3_out[0]  Y          
+##  d)                   , 1024)                 [0]',                             
+##                                                'conv4_block4_3_bn[0             
+##                                               ][0]']                            
+##  conv4_block4_out (Ac  (None, 14, 14  0       ['conv4_block4_add[0]  Y          
+##  tivation)            , 1024)                 [0]']                             
+##  conv4_block5_1_conv   (None, 14, 14  262400  ['conv4_block4_out[0]  Y          
+##  (Conv2D)             , 256)                  [0]']                             
+##  conv4_block5_1_bn (B  (None, 14, 14  1024    ['conv4_block5_1_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block5_1_relu   (None, 14, 14  0       ['conv4_block5_1_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block5_2_conv   (None, 14, 14  590080  ['conv4_block5_1_relu  Y          
+##  (Conv2D)             , 256)                  [0][0]']                          
+##  conv4_block5_2_bn (B  (None, 14, 14  1024    ['conv4_block5_2_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block5_2_relu   (None, 14, 14  0       ['conv4_block5_2_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block5_3_conv   (None, 14, 14  263168  ['conv4_block5_2_relu  Y          
+##  (Conv2D)             , 1024)                 [0][0]']                          
+##  conv4_block5_3_bn (B  (None, 14, 14  4096    ['conv4_block5_3_conv  Y          
+##  atchNormalization)   , 1024)                 [0][0]']                          
+##  conv4_block5_add (Ad  (None, 14, 14  0       ['conv4_block4_out[0]  Y          
+##  d)                   , 1024)                 [0]',                             
+##                                                'conv4_block5_3_bn[0             
+##                                               ][0]']                            
+##  conv4_block5_out (Ac  (None, 14, 14  0       ['conv4_block5_add[0]  Y          
+##  tivation)            , 1024)                 [0]']                             
+##  conv4_block6_1_conv   (None, 14, 14  262400  ['conv4_block5_out[0]  Y          
+##  (Conv2D)             , 256)                  [0]']                             
+##  conv4_block6_1_bn (B  (None, 14, 14  1024    ['conv4_block6_1_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block6_1_relu   (None, 14, 14  0       ['conv4_block6_1_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block6_2_conv   (None, 14, 14  590080  ['conv4_block6_1_relu  Y          
+##  (Conv2D)             , 256)                  [0][0]']                          
+##  conv4_block6_2_bn (B  (None, 14, 14  1024    ['conv4_block6_2_conv  Y          
+##  atchNormalization)   , 256)                  [0][0]']                          
+##  conv4_block6_2_relu   (None, 14, 14  0       ['conv4_block6_2_bn[0  Y          
+##  (Activation)         , 256)                  ][0]']                            
+##  conv4_block6_3_conv   (None, 14, 14  263168  ['conv4_block6_2_relu  Y          
+##  (Conv2D)             , 1024)                 [0][0]']                          
+##  conv4_block6_3_bn (B  (None, 14, 14  4096    ['conv4_block6_3_conv  Y          
+##  atchNormalization)   , 1024)                 [0][0]']                          
+##  conv4_block6_add (Ad  (None, 14, 14  0       ['conv4_block5_out[0]  Y          
+##  d)                   , 1024)                 [0]',                             
+##                                                'conv4_block6_3_bn[0             
+##                                               ][0]']                            
+##  conv4_block6_out (Ac  (None, 14, 14  0       ['conv4_block6_add[0]  Y          
+##  tivation)            , 1024)                 [0]']                             
+##  conv5_block1_1_conv   (None, 7, 7,   524800  ['conv4_block6_out[0]  Y          
+##  (Conv2D)             512)                    [0]']                             
+##  conv5_block1_1_bn (B  (None, 7, 7,   2048    ['conv5_block1_1_conv  Y          
+##  atchNormalization)   512)                    [0][0]']                          
+##  conv5_block1_1_relu   (None, 7, 7,   0       ['conv5_block1_1_bn[0  Y          
+##  (Activation)         512)                    ][0]']                            
+##  conv5_block1_2_conv   (None, 7, 7,   2359808  ['conv5_block1_1_relu  Y         
+##  (Conv2D)             512)                    [0][0]']                          
+##  conv5_block1_2_bn (B  (None, 7, 7,   2048    ['conv5_block1_2_conv  Y          
+##  atchNormalization)   512)                    [0][0]']                          
+##  conv5_block1_2_relu   (None, 7, 7,   0       ['conv5_block1_2_bn[0  Y          
+##  (Activation)         512)                    ][0]']                            
+##  conv5_block1_0_conv   (None, 7, 7,   2099200  ['conv4_block6_out[0]  Y         
+##  (Conv2D)             2048)                   [0]']                             
+##  conv5_block1_3_conv   (None, 7, 7,   1050624  ['conv5_block1_2_relu  Y         
+##  (Conv2D)             2048)                   [0][0]']                          
+##  conv5_block1_0_bn (B  (None, 7, 7,   8192    ['conv5_block1_0_conv  Y          
+##  atchNormalization)   2048)                   [0][0]']                          
+##  conv5_block1_3_bn (B  (None, 7, 7,   8192    ['conv5_block1_3_conv  Y          
+##  atchNormalization)   2048)                   [0][0]']                          
+##  conv5_block1_add (Ad  (None, 7, 7,   0       ['conv5_block1_0_bn[0  Y          
+##  d)                   2048)                   ][0]',                            
+##                                                'conv5_block1_3_bn[0             
+##                                               ][0]']                            
+##  conv5_block1_out (Ac  (None, 7, 7,   0       ['conv5_block1_add[0]  Y          
+##  tivation)            2048)                   [0]']                             
+##  conv5_block2_1_conv   (None, 7, 7,   1049088  ['conv5_block1_out[0]  Y         
+##  (Conv2D)             512)                    [0]']                             
+##  conv5_block2_1_bn (B  (None, 7, 7,   2048    ['conv5_block2_1_conv  Y          
+##  atchNormalization)   512)                    [0][0]']                          
+##  conv5_block2_1_relu   (None, 7, 7,   0       ['conv5_block2_1_bn[0  Y          
+##  (Activation)         512)                    ][0]']                            
+##  conv5_block2_2_conv   (None, 7, 7,   2359808  ['conv5_block2_1_relu  Y         
+##  (Conv2D)             512)                    [0][0]']                          
+##  conv5_block2_2_bn (B  (None, 7, 7,   2048    ['conv5_block2_2_conv  Y          
+##  atchNormalization)   512)                    [0][0]']                          
+##  conv5_block2_2_relu   (None, 7, 7,   0       ['conv5_block2_2_bn[0  Y          
+##  (Activation)         512)                    ][0]']                            
+##  conv5_block2_3_conv   (None, 7, 7,   1050624  ['conv5_block2_2_relu  Y         
+##  (Conv2D)             2048)                   [0][0]']                          
+##  conv5_block2_3_bn (B  (None, 7, 7,   8192    ['conv5_block2_3_conv  Y          
+##  atchNormalization)   2048)                   [0][0]']                          
+##  conv5_block2_add (Ad  (None, 7, 7,   0       ['conv5_block1_out[0]  Y          
+##  d)                   2048)                   [0]',                             
+##                                                'conv5_block2_3_bn[0             
+##                                               ][0]']                            
+##  conv5_block2_out (Ac  (None, 7, 7,   0       ['conv5_block2_add[0]  Y          
+##  tivation)            2048)                   [0]']                             
+##  conv5_block3_1_conv   (None, 7, 7,   1049088  ['conv5_block2_out[0]  Y         
+##  (Conv2D)             512)                    [0]']                             
+##  conv5_block3_1_bn (B  (None, 7, 7,   2048    ['conv5_block3_1_conv  Y          
+##  atchNormalization)   512)                    [0][0]']                          
+##  conv5_block3_1_relu   (None, 7, 7,   0       ['conv5_block3_1_bn[0  Y          
+##  (Activation)         512)                    ][0]']                            
+##  conv5_block3_2_conv   (None, 7, 7,   2359808  ['conv5_block3_1_relu  Y         
+##  (Conv2D)             512)                    [0][0]']                          
+##  conv5_block3_2_bn (B  (None, 7, 7,   2048    ['conv5_block3_2_conv  Y          
+##  atchNormalization)   512)                    [0][0]']                          
+##  conv5_block3_2_relu   (None, 7, 7,   0       ['conv5_block3_2_bn[0  Y          
+##  (Activation)         512)                    ][0]']                            
+##  conv5_block3_3_conv   (None, 7, 7,   1050624  ['conv5_block3_2_relu  Y         
+##  (Conv2D)             2048)                   [0][0]']                          
+##  conv5_block3_3_bn (B  (None, 7, 7,   8192    ['conv5_block3_3_conv  Y          
+##  atchNormalization)   2048)                   [0][0]']                          
+##  conv5_block3_add (Ad  (None, 7, 7,   0       ['conv5_block2_out[0]  Y          
+##  d)                   2048)                   [0]',                             
+##                                                'conv5_block3_3_bn[0             
+##                                               ][0]']                            
+##  conv5_block3_out (Ac  (None, 7, 7,   0       ['conv5_block3_add[0]  Y          
+##  tivation)            2048)                   [0]']                             
+##  avg_pool (GlobalAver  (None, 2048)  0        ['conv5_block3_out[0]  Y          
+##  agePooling2D)                                [0]']                             
+##  predictions (Dense)  (None, 1000)   2049000  ['avg_pool[0][0]']     Y          
+## ================================================================================
+## Total params: 25,636,712
+## Trainable params: 25,583,592
+## Non-trainable params: 53,120
+## ________________________________________________________________________________
+```
+
+```r
+pred <- model |>
+  predict(x) |>
+  imagenet_decode_predictions(top = 5)
+  
+names(pred) <- images
+print(pred)
+```
+
+```
+## $bird.jpg
+##   class_name        class_description      score
+## 1  n01819313 sulphur-crested_cockatoo 0.33546212
+## 2  n01580077                      jay 0.18020961
+## 3  n02441942                   weasel 0.08320860
+## 4  n02058221                albatross 0.07002071
+## 5  n01855672                    goose 0.05195731
+## 
+## $bird2.jpg
+##   class_name        class_description       score
+## 1  n02006656                spoonbill 0.840428352
+## 2  n02012849                    crane 0.016258694
+## 3  n01819313 sulphur-crested_cockatoo 0.009740738
+## 4  n02007558                 flamingo 0.007816136
+## 5  n01667778                 terrapin 0.007497438
+## 
+## $bird3.jpg
+##   class_name class_description        score
+## 1  n01833805       hummingbird 0.9767878056
+## 2  n02033041         dowitcher 0.0111253904
+## 3  n02028035          redshank 0.0042764195
+## 4  n02009229 little_blue_heron 0.0012727552
+## 5  n02002724       black_stork 0.0008971337
+## 
+## $bug.jpg
+##   class_name  class_description      score
+## 1  n02190166                fly 0.67558521
+## 2  n02167151      ground_beetle 0.10097029
+## 3  n02172182        dung_beetle 0.05490869
+## 4  n02169497        leaf_beetle 0.03541917
+## 5  n02168699 long-horned_beetle 0.03515299
+## 
+## $butterfly.jpg
+##   class_name class_description      score
+## 1  n02951585        can_opener 0.20600407
+## 2  n03476684        hair_slide 0.09360629
+## 3  n04074963    remote_control 0.06316835
+## 4  n02110185    Siberian_husky 0.05179008
+## 5  n02123597       Siamese_cat 0.03785334
+## 
+## $butterfly2.jpg
+##   class_name class_description        score
+## 1  n02276258           admiral 9.999689e-01
+## 2  n01580077               jay 1.388068e-05
+## 3  n02277742           ringlet 1.235038e-05
+## 4  n02279972           monarch 3.037850e-06
+## 5  n02281787          lycaenid 1.261886e-06
+## 
+## $elba.jpg
+##   class_name class_description      score
+## 1  n02085620         Chihuahua 0.29891992
+## 2  n02091032 Italian_greyhound 0.20332786
+## 3  n02109961        Eskimo_dog 0.08477236
+## 4  n02086910          papillon 0.05140281
+## 5  n02110185    Siberian_husky 0.05064548
+## 
+## $hamish.jpeg
+##   class_name   class_description       score
+## 1  n02097209  standard_schnauzer 0.636145115
+## 2  n02097047 miniature_schnauzer 0.345084578
+## 3  n02097130     giant_schnauzer 0.016421778
+## 4  n02097298      Scotch_terrier 0.001911605
+## 5  n02096177               cairn 0.000205432
+## 
+## $poodle.jpg
+##   class_name   class_description       score
+## 1  n02113799     standard_poodle 0.829671085
+## 2  n02088094        Afghan_hound 0.074567921
+## 3  n02113712    miniature_poodle 0.032005541
+## 4  n02102973 Irish_water_spaniel 0.018583104
+## 5  n02102318      cocker_spaniel 0.008629764
+## 
+## $tortoise.jpg
+##   class_name class_description      score
+## 1  n04033995             quilt 0.28395900
+## 2  n02110958               pug 0.15959540
+## 3  n03188531            diaper 0.14018074
+## 4  n02108915    French_bulldog 0.09364171
+## 5  n04235860      sleeping_bag 0.02608397
+```
 
 ### Question 9
 
@@ -117,7 +922,111 @@ ToDo
 > and Lab 10.9.6. Refit the model with a 12-level factor representing the
 > month. Does this factor improve the performance of the model?
 
-ToDo
+Fitting the model as described in the text.
+
+
+```r
+library(tidyverse)
+```
+
+```
+## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+## ✔ readr   2.1.3      ✔ forcats 0.5.2 
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::compute() masks neuralnet::compute()
+## ✖ dplyr::filter()  masks stats::filter()
+## ✖ dplyr::lag()     masks stats::lag()
+```
+
+```r
+library(ISLR2)
+xdata <- data.matrix(NYSE[, c("DJ_return", "log_volume","log_volatility")])
+istrain <- NYSE[, "train"]
+xdata <- scale(xdata)
+
+lagm <- function(x, k = 1) {
+  n <- nrow(x)
+  pad <- matrix(NA, k, ncol(x))
+  rbind(pad, x[1:(n - k), ])
+}
+
+arframe <- data.frame(
+  log_volume = xdata[, "log_volume"], 
+  L1 = lagm(xdata, 1), 
+  L2 = lagm(xdata, 2),
+  L3 = lagm(xdata, 3),
+  L4 = lagm(xdata, 4),
+  L5 = lagm(xdata, 5)
+)
+
+arframe <- arframe[-(1:5), ]
+istrain <- istrain[-(1:5)]
+
+arfit <- lm(log_volume ~ ., data = arframe[istrain, ])
+arpred <- predict(arfit, arframe[!istrain, ])
+V0 <- var(arframe[!istrain, "log_volume"])
+1 - mean((arpred - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+```
+## [1] 0.413223
+```
+
+Now we add month (and work with tidyverse).
+
+
+```r
+arframe$month = as.factor(str_match(NYSE$date, "-(\\d+)-")[,2])[-(1:5)]
+arfit2 <- lm(log_volume ~ ., data = arframe[istrain, ])
+arpred2 <- predict(arfit2, arframe[!istrain, ])
+V0 <- var(arframe[!istrain, "log_volume"])
+1 - mean((arpred2 - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+```
+## [1] 0.4170418
+```
+
+Adding month as a factor marginally improves the $R^2$ of our model (from 
+0.413223 to 0.4170418). This is a significant improvement in fit and model
+2 has a lower AIC.
+
+
+```r
+anova(arfit, arfit2)
+```
+
+```
+## Analysis of Variance Table
+## 
+## Model 1: log_volume ~ L1.DJ_return + L1.log_volume + L1.log_volatility + 
+##     L2.DJ_return + L2.log_volume + L2.log_volatility + L3.DJ_return + 
+##     L3.log_volume + L3.log_volatility + L4.DJ_return + L4.log_volume + 
+##     L4.log_volatility + L5.DJ_return + L5.log_volume + L5.log_volatility
+## Model 2: log_volume ~ L1.DJ_return + L1.log_volume + L1.log_volatility + 
+##     L2.DJ_return + L2.log_volume + L2.log_volatility + L3.DJ_return + 
+##     L3.log_volume + L3.log_volatility + L4.DJ_return + L4.log_volume + 
+##     L4.log_volatility + L5.DJ_return + L5.log_volume + L5.log_volatility + 
+##     month
+##   Res.Df    RSS Df Sum of Sq      F   Pr(>F)    
+## 1   4260 1791.0                                 
+## 2   4249 1775.8 11    15.278 3.3234 0.000143 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+AIC(arfit, arfit2)
+```
+
+```
+##        df      AIC
+## arfit  17 8447.663
+## arfit2 28 8433.031
+```
 
 ### Question 10
 
@@ -129,14 +1038,178 @@ ToDo
 > that we fit in the lab. What are the advantages/disadvantages of each
 > approach?
 
-ToDo
+The `lm` model is the same as that fit above:
+
+
+```r
+arfit <- lm(log_volume ~ ., data = arframe[istrain, ])
+arpred <- predict(arfit, arframe[!istrain, ])
+V0 <- var(arframe[!istrain, "log_volume"])
+1 - mean((arpred - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+```
+## [1] 0.4170418
+```
+
+Now we reshape the data for the RNN
+
+
+```r
+n <- nrow(arframe)
+xrnn <- data.matrix(arframe[, -1])
+xrnn <- array(xrnn, c(n, 3, 5))
+xrnn <- xrnn[, , 5:1]
+xrnn <- aperm(xrnn, c(1, 3, 2))
+```
+
+We can add a "flatten" layer to turn the reshaped data into a long vector of
+predictors resulting in a linear AR model.
+
+
+```r
+model <- keras_model_sequential() |>
+  layer_flatten(input_shape = c(5, 3)) |>
+  layer_dense(units = 1)
+```
+
+Now let's fit this model.
+
+
+```r
+model |>
+  compile(optimizer = optimizer_rmsprop(), loss = "mse")
+
+history <- model |>
+  fit(
+    xrnn[istrain,, ],
+    arframe[istrain, "log_volume"],
+    batch_size = 64,
+    epochs = 200,
+    validation_data = list(xrnn[!istrain,, ], arframe[!istrain, "log_volume"]),
+    verbose = 0
+  )
+
+plot(history)
+```
+
+<img src="10-deep-learning_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+
+```r
+kpred <- predict(model, xrnn[!istrain,, ])
+1 - mean((kpred - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+```
+## [1] 0.4129385
+```
+
+Both models estimate the same number of coefficients/weights (16):
+
+
+```r
+coef(arfit)
+```
+
+```
+##       (Intercept)      L1.DJ_return     L1.log_volume L1.log_volatility 
+##       0.067916689       0.094410214       0.498673056       0.586274266 
+##      L2.DJ_return     L2.log_volume L2.log_volatility      L3.DJ_return 
+##      -0.027299158       0.036903027      -0.931509135       0.037995916 
+##     L3.log_volume L3.log_volatility      L4.DJ_return     L4.log_volume 
+##       0.070312741       0.216160520      -0.004954842       0.117079461 
+## L4.log_volatility      L5.DJ_return     L5.log_volume L5.log_volatility 
+##      -0.039752786      -0.029620296       0.096034795       0.144510264 
+##           month02           month03           month04           month05 
+##      -0.100003367      -0.143781381      -0.028242819      -0.131120579 
+##           month06           month07           month08           month09 
+##      -0.125993911      -0.141608808      -0.163030102      -0.018889698 
+##           month10           month11           month12 
+##      -0.017206826      -0.037298183       0.008361380
+```
+
+```r
+model$get_weights()
+```
+
+```
+## [[1]]
+##               [,1]
+##  [1,] -0.030708615
+##  [2,]  0.097789079
+##  [3,]  0.115437776
+##  [4,] -0.007742772
+##  [5,]  0.112455480
+##  [6,]  0.071661688
+##  [7,]  0.038955797
+##  [8,]  0.079058483
+##  [9,]  0.046480309
+## [10,] -0.030310772
+## [11,]  0.033173215
+## [12,] -0.746510804
+## [13,]  0.092959389
+## [14,]  0.507304847
+## [15,]  0.491880745
+## 
+## [[2]]
+## [1] -0.006767856
+```
+
+The flattened RNN has a lower $R^2$ on the test data than our `lm` model
+above. The `lm` model is quicker to fit and conceptually simpler also 
+giving us the ability to inspect the coefficients for different variables.
+
+The flattened RNN is regularized to some extent as data are processed in
+batches.
 
 ### Question 11
 
 > Repeat the previous exercise, but now fit a nonlinear AR model by "flattening"
 > the short sequences produced for the RNN model.
 
-ToDo
+From the book:
+
+> To fit a nonlinear AR model, we could add in a hidden layer.
+
+
+```r
+model <- keras_model_sequential() |> 
+  layer_flatten(input_shape = c(5, 3)) |>
+  layer_dense(units = 32, activation = "relu") |>
+  layer_dropout(rate = 0.4) |> 
+  layer_dense(units = 1)
+
+model |> compile(
+  loss = "mse", 
+  optimizer = optimizer_rmsprop(), 
+  metrics = "mse"
+)
+
+history <- model |>
+  fit(
+    xrnn[istrain,, ],
+    arframe[istrain, "log_volume"],
+    batch_size = 64,
+    epochs = 200,
+    validation_data = list(xrnn[!istrain,, ], arframe[!istrain, "log_volume"]),
+    verbose = 0
+  )
+
+plot(history, smooth = FALSE, metrics = "mse")
+```
+
+<img src="10-deep-learning_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+
+```r
+kpred <- predict(model, xrnn[!istrain,, ])
+1 - mean((kpred - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+```
+## [1] 0.4247948
+```
+
+This approach improves our $R^2$ over the linear model above.
 
 ### Question 12
 
@@ -144,7 +1217,69 @@ ToDo
 > allow inclusion of the variable `day_of_week`, and fit the RNN. Compute the
 > test $R^2$.
 
-ToDo
+To accomplish this, I'll include day of the week as one of the lagged variables
+in the RNN. Thus, our input for each observation will be 4 x 5 (rather than
+3 x 5).
+
+
+```r
+xdata <- data.matrix(
+  NYSE[, c("day_of_week", "DJ_return", "log_volume","log_volatility")] 
+)
+istrain <- NYSE[, "train"]
+xdata <- scale(xdata)
+
+arframe <- data.frame(
+  log_volume = xdata[, "log_volume"], 
+  L1 = lagm(xdata, 1),
+  L2 = lagm(xdata, 2),
+  L3 = lagm(xdata, 3), 
+  L4 = lagm(xdata, 4),
+  L5 = lagm(xdata, 5)
+)
+arframe <- arframe[-(1:5), ]
+istrain <- istrain[-(1:5)]
+
+n <- nrow(arframe)
+xrnn <- data.matrix(arframe[, -1])
+xrnn <- array(xrnn, c(n, 4, 5))
+xrnn <- xrnn[,, 5:1]
+xrnn <- aperm(xrnn, c(1, 3, 2))
+dim(xrnn)
+```
+
+```
+## [1] 6046    5    4
+```
+
+```r
+model <- keras_model_sequential() |>
+    layer_simple_rnn(units = 12,
+    input_shape = list(5, 4),
+    dropout = 0.1, 
+    recurrent_dropout = 0.1
+  ) |>
+  layer_dense(units = 1)
+
+model |> compile(optimizer = optimizer_rmsprop(), loss = "mse")
+
+history <- model |> 
+  fit(
+    xrnn[istrain,, ],
+    arframe[istrain, "log_volume"],
+    batch_size = 64,
+    epochs = 200,
+    validation_data = list(xrnn[!istrain,, ], arframe[!istrain, "log_volume"]),
+    verbose = 0
+)
+
+kpred <- predict(model, xrnn[!istrain,, ])
+1 - mean((kpred - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+```
+## [1] 0.4437875
+```
 
 ### Question 13
 
@@ -153,4 +1288,59 @@ ToDo
 > the effects of varying the dictionary size. Try the values 1000, 3000, 5000,
 > and 10,000, and compare the results.
 
-ToDo
+
+```r
+library(knitr)
+accuracy <- c()
+for(max_features in c(1000, 3000, 5000, 10000)) {
+  imdb <- dataset_imdb(num_words = max_features)
+  c(c(x_train, y_train), c(x_test, y_test)) %<-% imdb
+
+  maxlen <- 500
+  x_train <- pad_sequences(x_train, maxlen = maxlen)
+  x_test <- pad_sequences(x_test, maxlen = maxlen)
+
+  model <- keras_model_sequential() |>
+    layer_embedding(input_dim = max_features, output_dim = 32) |>
+    layer_lstm(units = 32) |>
+    layer_dense(units = 1, activation = "sigmoid")
+
+  model |> compile(
+    optimizer = "rmsprop",
+    loss = "binary_crossentropy", 
+    metrics = "acc"
+  )
+
+  history <- fit(model, x_train, y_train, 
+    epochs = 10, 
+    batch_size = 128, 
+    validation_data = list(x_test, y_test),
+    verbose = 1
+  )
+
+  predy <- predict(model, x_test) > 0.5
+  accuracy <- c(accuracy, mean(abs(y_test == as.numeric(predy))))
+}
+
+tibble(
+  "Max Features" = c(1000, 3000, 5000, 10000),
+  "Accuracy" = accuracy
+) |>
+  kable()
+```
+
+
+
+| Max Features| Accuracy|
+|------------:|--------:|
+|         1000|  0.84888|
+|         3000|  0.87820|
+|         5000|  0.87340|
+|        10000|  0.85844|
+
+Varying the dictionary size does not make a substantial impact on our estimates
+of accuracy. However, the models do take a substantial amount of time to fit and
+it is not clear we are finding the best fitting models in each case. For
+example, the model using a dictionary size of 10,000 obtained an accuracy of
+0.8721 in the text which is as different from the estimate obtained here as
+are the differences between the models with different dictionary sizes.
