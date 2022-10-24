@@ -558,6 +558,8 @@ For KNN we correctly predict 8.7% of those predicted to purchase.
 > linear or logistic regression? Which of these approaches yields the best
 > performance?
 
+ToDo
+
 Here I'm going to use the College dataset (used in Question 10 from Chapter 7
 to compare performance with the GAM we previously built). In this model we 
 were trying to predict `Outstate` using the other variables in `College`.

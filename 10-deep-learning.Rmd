@@ -305,7 +305,7 @@ points(v, r(v), col = "red", pch = 19)
 > guidance. Compare the classification performance of your model with that of
 > linear logistic regression.
 
-```{r}
+```{r, cache = TRUE}
 library(keras)
 
 dat <- ISLR2::Boston
@@ -356,6 +356,7 @@ absolute error rate on the test data.
 > each image.
 
 ```{r}
+library(keras)
 images <- list.files("images/animals")
 x <- array(dim = c(length(images), 224, 224, 3))
 for (i in seq_len(length(images))) {
@@ -380,7 +381,57 @@ print(pred)
 > and Lab 10.9.6. Refit the model with a 12-level factor representing the
 > month. Does this factor improve the performance of the model?
 
-ToDo
+Fitting the model as described in the text.
+
+```{r}
+library(tidyverse)
+library(ISLR2)
+xdata <- data.matrix(NYSE[, c("DJ_return", "log_volume","log_volatility")])
+istrain <- NYSE[, "train"]
+xdata <- scale(xdata)
+
+lagm <- function(x, k = 1) {
+  n <- nrow(x)
+  pad <- matrix(NA, k, ncol(x))
+  rbind(pad, x[1:(n - k), ])
+}
+
+arframe <- data.frame(
+  log_volume = xdata[, "log_volume"], 
+  L1 = lagm(xdata, 1), 
+  L2 = lagm(xdata, 2),
+  L3 = lagm(xdata, 3),
+  L4 = lagm(xdata, 4),
+  L5 = lagm(xdata, 5)
+)
+
+arframe <- arframe[-(1:5), ]
+istrain <- istrain[-(1:5)]
+
+arfit <- lm(log_volume ~ ., data = arframe[istrain, ])
+arpred <- predict(arfit, arframe[!istrain, ])
+V0 <- var(arframe[!istrain, "log_volume"])
+1 - mean((arpred - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+Now we add month (and work with tidyverse).
+
+```{r}
+arframe$month = as.factor(str_match(NYSE$date, "-(\\d+)-")[,2])[-(1:5)]
+arfit2 <- lm(log_volume ~ ., data = arframe[istrain, ])
+arpred2 <- predict(arfit2, arframe[!istrain, ])
+V0 <- var(arframe[!istrain, "log_volume"])
+1 - mean((arpred2 - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+Adding month as a factor marginally improves the $R^2$ of our model (from 
+0.413223 to 0.4170418). This is a significant improvement in fit and model
+2 has a lower AIC.
+
+```{r}
+anova(arfit, arfit2)
+AIC(arfit, arfit2)
+```
 
 ### Question 10
 
@@ -392,14 +443,107 @@ ToDo
 > that we fit in the lab. What are the advantages/disadvantages of each
 > approach?
 
-ToDo
+The `lm` model is the same as that fit above:
+
+```{r}
+arfit <- lm(log_volume ~ ., data = arframe[istrain, ])
+arpred <- predict(arfit, arframe[!istrain, ])
+V0 <- var(arframe[!istrain, "log_volume"])
+1 - mean((arpred - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+Now we reshape the data for the RNN
+
+```{r}
+n <- nrow(arframe)
+xrnn <- data.matrix(arframe[, -1])
+xrnn <- array(xrnn, c(n, 3, 5))
+xrnn <- xrnn[, , 5:1]
+xrnn <- aperm(xrnn, c(1, 3, 2))
+```
+
+We can add a "flatten" layer to turn the reshaped data into a long vector of
+predictors resulting in a linear AR model.
+
+```{r}
+model <- keras_model_sequential() |>
+  layer_flatten(input_shape = c(5, 3)) |>
+  layer_dense(units = 1)
+```
+
+Now let's fit this model.
+
+```{r}
+model |>
+  compile(optimizer = optimizer_rmsprop(), loss = "mse")
+
+history <- model |>
+  fit(
+    xrnn[istrain,, ],
+    arframe[istrain, "log_volume"],
+    batch_size = 64,
+    epochs = 200,
+    validation_data = list(xrnn[!istrain,, ], arframe[!istrain, "log_volume"]),
+    verbose = 0
+  )
+
+plot(history)
+kpred <- predict(model, xrnn[!istrain,, ])
+1 - mean((kpred - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+Both models estimate the same number of coefficients/weights (16):
+
+```{r}
+coef(arfit)
+model$get_weights()
+```
+
+The flattened RNN has a lower $R^2$ on the test data than our `lm` model
+above. The `lm` model is quicker to fit and conceptually simpler also 
+giving us the ability to inspect the coefficients for different variables.
+
+The flattened RNN is regularized to some extent as data are processed in
+batches.
 
 ### Question 11
 
 > Repeat the previous exercise, but now fit a nonlinear AR model by "flattening"
 > the short sequences produced for the RNN model.
 
-ToDo
+From the book:
+
+> To fit a nonlinear AR model, we could add in a hidden layer.
+
+```{r, cache = TRUE}
+model <- keras_model_sequential() |> 
+  layer_flatten(input_shape = c(5, 3)) |>
+  layer_dense(units = 32, activation = "relu") |>
+  layer_dropout(rate = 0.4) |> 
+  layer_dense(units = 1)
+
+model |> compile(
+  loss = "mse", 
+  optimizer = optimizer_rmsprop(), 
+  metrics = "mse"
+)
+
+history <- model |>
+  fit(
+    xrnn[istrain,, ],
+    arframe[istrain, "log_volume"],
+    batch_size = 64,
+    epochs = 200,
+    validation_data = list(xrnn[!istrain,, ], arframe[!istrain, "log_volume"]),
+    verbose = 0
+  )
+
+plot(history, smooth = FALSE, metrics = "mse")
+kpred <- predict(model, xrnn[!istrain,, ])
+1 - mean((kpred - arframe[!istrain, "log_volume"])^2) / V0
+```
+
+This approach improves our $R^2$ over the linear model above.
 
 ### Question 12
 
@@ -407,7 +551,58 @@ ToDo
 > allow inclusion of the variable `day_of_week`, and fit the RNN. Compute the
 > test $R^2$.
 
-ToDo
+To accomplish this, I'll include day of the week as one of the lagged variables
+in the RNN. Thus, our input for each observation will be 4 x 5 (rather than
+3 x 5).
+
+```{r, cache = TRUE}
+xdata <- data.matrix(
+  NYSE[, c("day_of_week", "DJ_return", "log_volume","log_volatility")] 
+)
+istrain <- NYSE[, "train"]
+xdata <- scale(xdata)
+
+arframe <- data.frame(
+  log_volume = xdata[, "log_volume"], 
+  L1 = lagm(xdata, 1),
+  L2 = lagm(xdata, 2),
+  L3 = lagm(xdata, 3), 
+  L4 = lagm(xdata, 4),
+  L5 = lagm(xdata, 5)
+)
+arframe <- arframe[-(1:5), ]
+istrain <- istrain[-(1:5)]
+
+n <- nrow(arframe)
+xrnn <- data.matrix(arframe[, -1])
+xrnn <- array(xrnn, c(n, 4, 5))
+xrnn <- xrnn[,, 5:1]
+xrnn <- aperm(xrnn, c(1, 3, 2))
+dim(xrnn)
+
+model <- keras_model_sequential() |>
+    layer_simple_rnn(units = 12,
+    input_shape = list(5, 4),
+    dropout = 0.1, 
+    recurrent_dropout = 0.1
+  ) |>
+  layer_dense(units = 1)
+
+model |> compile(optimizer = optimizer_rmsprop(), loss = "mse")
+
+history <- model |> 
+  fit(
+    xrnn[istrain,, ],
+    arframe[istrain, "log_volume"],
+    batch_size = 64,
+    epochs = 200,
+    validation_data = list(xrnn[!istrain,, ], arframe[!istrain, "log_volume"]),
+    verbose = 0
+)
+
+kpred <- predict(model, xrnn[!istrain,, ])
+1 - mean((kpred - arframe[!istrain, "log_volume"])^2) / V0
+```
 
 ### Question 13
 
@@ -416,4 +611,49 @@ ToDo
 > the effects of varying the dictionary size. Try the values 1000, 3000, 5000,
 > and 10,000, and compare the results.
 
-ToDo
+```{r, cache = TRUE}
+library(knitr)
+accuracy <- c()
+for(max_features in c(1000, 3000, 5000, 10000)) {
+  imdb <- dataset_imdb(num_words = max_features)
+  c(c(x_train, y_train), c(x_test, y_test)) %<-% imdb
+
+  maxlen <- 500
+  x_train <- pad_sequences(x_train, maxlen = maxlen)
+  x_test <- pad_sequences(x_test, maxlen = maxlen)
+
+  model <- keras_model_sequential() |>
+    layer_embedding(input_dim = max_features, output_dim = 32) |>
+    layer_lstm(units = 32) |>
+    layer_dense(units = 1, activation = "sigmoid")
+
+  model |> compile(
+    optimizer = "rmsprop",
+    loss = "binary_crossentropy", 
+    metrics = "acc"
+  )
+
+  history <- fit(model, x_train, y_train, 
+    epochs = 10, 
+    batch_size = 128, 
+    validation_data = list(x_test, y_test),
+    verbose = 1
+  )
+
+  predy <- predict(model, x_test) > 0.5
+  accuracy <- c(accuracy, mean(abs(y_test == as.numeric(predy))))
+}
+
+tibble(
+  "Max Features" = c(1000, 3000, 5000, 10000),
+  "Accuracy" = accuracy
+) |>
+  kable()
+```
+
+Varying the dictionary size does not make a substantial impact on our estimates
+of accuracy. However, the models do take a substantial amount of time to fit and
+it is not clear we are finding the best fitting models in each case. For
+example, the model using a dictionary size of 10,000 obtained an accuracy of
+0.8721 in the text which is as different from the estimate obtained here as
+are the differences between the models with different dictionary sizes.

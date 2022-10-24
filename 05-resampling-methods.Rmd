@@ -304,7 +304,7 @@ boot.fn <- function(x, i) {
 >    estimate the standard errors of the logistic regression coefficients for
 >    income and balance.
 
-```{r}
+```{r, cache = TRUE}
 library(boot)
 set.seed(42)
 boot(Default, boot.fn, R = 1000)
@@ -423,6 +423,7 @@ $y$ has a (negative) quadratic relationship with $x$.
 >    to create a single data set containing both $X$ and $Y$.
 
 ```{r}
+library(boot)
 set.seed(42)
 dat <- data.frame(x, y)
 sapply(1:4, function(i) cv.glm(dat, glm(y ~ poly(x, i)))$delta[1])
