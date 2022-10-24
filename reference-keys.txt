@@ -1,3 +1,5 @@
+fig:unnamed-chunk-1
+fig:unnamed-chunk-6
 introduction
 statistical-learning
 conceptual
