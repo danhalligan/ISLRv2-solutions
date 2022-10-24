@@ -28,4 +28,5 @@ Imports:
     splines,
     tree,
     tidyverse,
+    xfun
 Remotes: rstudio/bookdown
