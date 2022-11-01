@@ -6,5 +6,7 @@ Trevor Hastie and Robert Tibshirani.
 
 ![ISLR cover](images/isl_small.jpg)
 
-These solutions were generate using (my) ISLRv2 solutions 
+View my [solutions](https://danhalligan.github.io/ISLRv2-solutions/)!
+
+These solutions were generated using (my) ISLRv2 solutions 
 [bookdown template repository](https://github.com/danhalligan/ISLRv2-solutions-template).

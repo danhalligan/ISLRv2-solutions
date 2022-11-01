@@ -12,13 +12,15 @@
 >
 > _Hint: Your result should look something like Figures 8.1 and 8.2._
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 library(showtext)
 showtext::showtext_auto()
 library(ggplot2)
 library(tidyverse)
 library(ggtree)
+```
 
+```{r}
 tree <- ape::read.tree(text = "(((R1:1,R2:1)N1:2,R3:4)N2:2,(R4:2,(R5:1,R6:1)R3:2)N4:5)R;")
 tree$node.label <- c("Age < 40", "Weight < 100", "Weight < 70", "Age < 60", "Weight < 80")
 

@@ -11,6 +11,7 @@ Imports:
     e1071,
     gam,
     gbm,
+    ggfortify,
     ggplot2,
     ggtree,
     glmnet,
@@ -26,6 +27,7 @@ Imports:
     showtext,
     sigmoid,
     splines,
+    survival,
     tree,
     tidyverse,
     xfun
