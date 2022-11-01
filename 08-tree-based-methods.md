@@ -15,70 +15,12 @@
 
 ```r
 library(showtext)
-```
-
-```
-## Loading required package: sysfonts
-```
-
-```
-## Loading required package: showtextdb
-```
-
-```r
 showtext::showtext_auto()
 library(ggplot2)
 library(tidyverse)
-```
-
-```
-## ── Attaching packages
-## ───────────────────────────────────────
-## tidyverse 1.3.2 ──
-```
-
-```
-## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
-## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-## ✔ readr   2.1.3      ✔ forcats 0.5.2 
-## ✔ purrr   0.3.5      
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-```
-
-```r
 library(ggtree)
 ```
 
-```
-## ggtree v3.4.4 For help: https://yulab-smu.top/treedata-book/
-## 
-## If you use the ggtree package suite in published research, please cite
-## the appropriate paper(s):
-## 
-## Guangchuang Yu, David Smith, Huachen Zhu, Yi Guan, Tommy Tsan-Yuk Lam.
-## ggtree: an R package for visualization and annotation of phylogenetic
-## trees with their covariates and other associated data. Methods in
-## Ecology and Evolution. 2017, 8(1):28-36. doi:10.1111/2041-210X.12628
-## 
-## Shuangbin Xu, Lin Li, Xiao Luo, Meijun Chen, Wenli Tang, Li Zhan, Zehan
-## Dai, Tommy T. Lam, Yi Guan, Guangchuang Yu. Ggtree: A serialized data
-## object for visualization of a phylogenetic tree and annotation data.
-## iMeta 2022, 4(1):e56. doi:10.1002/imt2.56
-## 
-## LG Wang, TTY Lam, S Xu, Z Dai, L Zhou, T Feng, P Guo, CW Dunn, BR
-## Jones, T Bradley, H Zhu, Y Guan, Y Jiang, G Yu. treeio: an R package
-## for phylogenetic tree input and output with richly annotated and
-## associated data. Molecular Biology and Evolution. 2020, 37(2):599-603.
-## doi: 10.1093/molbev/msz240
-## 
-## Attaching package: 'ggtree'
-## 
-## The following object is masked from 'package:tidyr':
-## 
-##     expand
-```
 
 ```r
 tree <- ape::read.tree(text = "(((R1:1,R2:1)N1:2,R3:4)N2:2,(R4:2,(R5:1,R6:1)R3:2)N4:5)R;")
@@ -89,7 +31,7 @@ ggtree(tree, ladderize = FALSE) + scale_x_reverse() + coord_flip() +
   geom_text2(aes(label=label, subset=!isTip), hjust = -0.1, vjust = -1)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 
 ```r
@@ -108,7 +50,7 @@ text(
 )
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 ### Question 2
 
@@ -169,7 +111,7 @@ data.frame(
     geom_line(na.rm = TRUE)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 ### Question 4
 
@@ -189,7 +131,7 @@ ggtree(tree, ladderize = FALSE) + scale_x_reverse() + coord_flip() +
   geom_text2(aes(label=label, subset=!isTip), hjust = -0.1, vjust = -1)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 > b. Create a diagram similar to the left-hand panel of Figure 8.12, using the
 >    tree illustrated in the right-hand panel of the same figure. You should
@@ -210,7 +152,7 @@ text(
 )
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 ### Question 5
 
@@ -329,7 +271,7 @@ data.frame(res, check.names = FALSE) |>
     scale_color_discrete(name = "No. variables at\neach split")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 ### Question 8
 
@@ -375,7 +317,7 @@ plot(tr)
 text(tr, pretty = 0, digits = 2, cex = 0.8)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 ```r
 carseats_mse <- function(model) {
@@ -400,7 +342,7 @@ min <- which.min(res$dev)
 abline(v = res$size[min], lty = 2, col = "red")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 Pruning improves performance very slightly (though this is not repeatable in
 different rounds of cross-validation). Arguably, a good balance is achieved
@@ -413,7 +355,7 @@ plot(ptr)
 text(ptr, pretty = 0, digits = 2, cex = 0.8)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 ```r
 carseats_mse(ptr)
@@ -576,7 +518,7 @@ plot(tr)
 text(tr, pretty = 0, digits = 2, cex = 0.8)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 > e. Predict the response on the test data, and produce a confusion matrix
 >    comparing the test labels to the predicted test labels. What is the test
@@ -613,7 +555,7 @@ min <- which.min(res$dev)
 abline(v = res$size[min], lty = 2, col = "red")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 > h. Which tree size corresponds to the lowest cross-validated classification
 >    error rate?
@@ -638,7 +580,7 @@ plot(ptr)
 text(ptr, pretty = 0, digits = 2, cex = 0.8)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 > j. Compare the training error rates between the pruned and unpruned trees.
 >    Which is higher?
@@ -743,7 +685,7 @@ plot(lambdas, errs, type = "b", xlab = "Shrinkage values",
   ylab = "Training MSE", log = "xy")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 > d. Produce a plot with different shrinkage values on the $x$-axis and the
 >    corresponding test set MSE on the $y$-axis.
@@ -767,7 +709,7 @@ min(errs)
 abline(v = lambdas[which.min(errs)], lty = 2, col = "red")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 > e. Compare the test MSE of boosting to the test MSE that results from applying
 >    two of the regression approaches seen in Chapters 3 and 6.
@@ -836,7 +778,7 @@ mean((predict(fit2, s = 0.1, newx = x.test) - dat[test, "Salary"])^2)
 summary(fits[[which.min(errs)]])
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 ```
 ##                 var    rel.inf
@@ -916,7 +858,7 @@ fit <- gbm(Purchase == "Yes" ~ ., data = Caravan[train, ], n.trees = 1000, shrin
 head(summary(fit))
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-34-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 ```
 ##               var   rel.inf
@@ -1109,7 +1051,7 @@ ggplot(res, aes(Model, MSE)) + coord_flip() +
   geom_bar(stat = "identity", fill = "steelblue")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
 In this case, it looks like bagging produces the best performing model in terms
 of test mean square error.

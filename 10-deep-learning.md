@@ -406,7 +406,7 @@ mean(abs(y[testid] - npred))
 ```
 
 ```
-## [1] 2.239367
+## [1] 2.219115
 ```
 
 In this case, the neural network outperforms logistic regression having a lower
@@ -710,7 +710,7 @@ kpred <- predict(model, xrnn[!istrain,, ])
 ```
 
 ```
-## [1] 0.4120764
+## [1] 0.4119068
 ```
 
 Both models estimate the same number of coefficients/weights (16):
@@ -743,25 +743,25 @@ model$get_weights()
 
 ```
 ## [[1]]
-##               [,1]
-##  [1,] -0.030247919
-##  [2,]  0.101361901
-##  [3,]  0.124982111
-##  [4,] -0.006559406
-##  [5,]  0.117189959
-##  [6,]  0.053089373
-##  [7,]  0.038364843
-##  [8,]  0.081733100
-##  [9,]  0.045528077
-## [10,] -0.026259480
-## [11,]  0.032308374
-## [12,] -0.731617033
-## [13,]  0.094153978
-## [14,]  0.508704364
-## [15,]  0.479608297
+##              [,1]
+##  [1,] -0.03260402
+##  [2,]  0.09947537
+##  [3,]  0.16877997
+##  [4,] -0.00500190
+##  [5,]  0.12155584
+##  [6,] -0.02435724
+##  [7,]  0.03784479
+##  [8,]  0.08295742
+##  [9,]  0.07800607
+## [10,] -0.02734835
+## [11,]  0.03003222
+## [12,] -0.71551293
+## [13,]  0.09632454
+## [14,]  0.51101607
+## [15,]  0.46953788
 ## 
 ## [[2]]
-## [1] -0.008595592
+## [1] -0.006536772
 ```
 
 The flattened RNN has a lower $R^2$ on the test data than our `lm` model
@@ -814,7 +814,7 @@ xfun::cache_rds({
 ```
 
 ```
-## [1] 0.4246722
+## [1] 0.4269108
 ```
 
 This approach improves our $R^2$ over the linear model above.
@@ -883,7 +883,7 @@ xfun::cache_rds({
 ```
 
 ```
-## [1] 0.447159
+## [1] 0.4538407
 ```
 
 ### Question 13
@@ -941,10 +941,10 @@ xfun::cache_rds({
 
 | Max Features| Accuracy|
 |------------:|--------:|
-|         1000|  0.83124|
-|         3000|  0.75764|
-|         5000|  0.87820|
-|        10000|  0.86132|
+|         1000|  0.85184|
+|         3000|  0.84756|
+|         5000|  0.87788|
+|        10000|  0.86644|
 
 Varying the dictionary size does not make a substantial impact on our estimates
 of accuracy. However, the models do take a substantial amount of time to fit and
