@@ -406,7 +406,7 @@ mean(abs(y[testid] - npred))
 ```
 
 ```
-## [1] 2.219115
+## [1] 2.233284
 ```
 
 In this case, the neural network outperforms logistic regression having a lower
@@ -446,83 +446,83 @@ print(pred)
 ```
 ## $bird.jpg
 ##   class_name        class_description      score
-## 1  n01819313 sulphur-crested_cockatoo 0.33546346
-## 2  n01580077                      jay 0.18020913
-## 3  n02441942                   weasel 0.08320846
-## 4  n02058221                albatross 0.07002052
-## 5  n01855672                    goose 0.05195727
+## 1  n01819313 sulphur-crested_cockatoo 0.33546212
+## 2  n01580077                      jay 0.18020961
+## 3  n02441942                   weasel 0.08320860
+## 4  n02058221                albatross 0.07002071
+## 5  n01855672                    goose 0.05195731
 ## 
 ## $bird2.jpg
 ##   class_name        class_description       score
-## 1  n02006656                spoonbill 0.840428472
-## 2  n02012849                    crane 0.016258651
-## 3  n01819313 sulphur-crested_cockatoo 0.009740693
-## 4  n02007558                 flamingo 0.007816133
-## 5  n01667778                 terrapin 0.007497436
+## 1  n02006656                spoonbill 0.840428352
+## 2  n02012849                    crane 0.016258694
+## 3  n01819313 sulphur-crested_cockatoo 0.009740738
+## 4  n02007558                 flamingo 0.007816136
+## 5  n01667778                 terrapin 0.007497438
 ## 
 ## $bird3.jpg
 ##   class_name class_description        score
-## 1  n01833805       hummingbird 0.9767878652
-## 2  n02033041         dowitcher 0.0111253178
-## 3  n02028035          redshank 0.0042763753
-## 4  n02009229 little_blue_heron 0.0012727333
-## 5  n02002724       black_stork 0.0008971227
+## 1  n01833805       hummingbird 0.9767878056
+## 2  n02033041         dowitcher 0.0111253904
+## 3  n02028035          redshank 0.0042764195
+## 4  n02009229 little_blue_heron 0.0012727552
+## 5  n02002724       black_stork 0.0008971337
 ## 
 ## $bug.jpg
 ##   class_name  class_description      score
-## 1  n02190166                fly 0.67558432
-## 2  n02167151      ground_beetle 0.10097054
-## 3  n02172182        dung_beetle 0.05490898
-## 4  n02169497        leaf_beetle 0.03541923
-## 5  n02168699 long-horned_beetle 0.03515314
+## 1  n02190166                fly 0.67558521
+## 2  n02167151      ground_beetle 0.10097029
+## 3  n02172182        dung_beetle 0.05490869
+## 4  n02169497        leaf_beetle 0.03541917
+## 5  n02168699 long-horned_beetle 0.03515299
 ## 
 ## $butterfly.jpg
 ##   class_name class_description      score
-## 1  n02951585        can_opener 0.20600472
-## 2  n03476684        hair_slide 0.09360614
-## 3  n04074963    remote_control 0.06316839
-## 4  n02110185    Siberian_husky 0.05179002
-## 5  n02123597       Siamese_cat 0.03785341
+## 1  n02951585        can_opener 0.20600407
+## 2  n03476684        hair_slide 0.09360629
+## 3  n04074963    remote_control 0.06316835
+## 4  n02110185    Siberian_husky 0.05179008
+## 5  n02123597       Siamese_cat 0.03785334
 ## 
 ## $butterfly2.jpg
 ##   class_name class_description        score
 ## 1  n02276258           admiral 9.999689e-01
-## 2  n01580077               jay 1.388075e-05
-## 3  n02277742           ringlet 1.235042e-05
-## 4  n02279972           monarch 3.037862e-06
+## 2  n01580077               jay 1.388068e-05
+## 3  n02277742           ringlet 1.235038e-05
+## 4  n02279972           monarch 3.037850e-06
 ## 5  n02281787          lycaenid 1.261886e-06
 ## 
 ## $elba.jpg
 ##   class_name class_description      score
-## 1  n02085620         Chihuahua 0.29891965
-## 2  n02091032 Italian_greyhound 0.20332769
-## 3  n02109961        Eskimo_dog 0.08477259
-## 4  n02086910          papillon 0.05140292
-## 5  n02110185    Siberian_husky 0.05064534
+## 1  n02085620         Chihuahua 0.29891992
+## 2  n02091032 Italian_greyhound 0.20332786
+## 3  n02109961        Eskimo_dog 0.08477236
+## 4  n02086910          papillon 0.05140281
+## 5  n02110185    Siberian_husky 0.05064548
 ## 
 ## $hamish.jpg
 ##   class_name   class_description       score
-## 1  n02097209  standard_schnauzer 0.636144340
-## 2  n02097047 miniature_schnauzer 0.345085502
-## 3  n02097130     giant_schnauzer 0.016421758
-## 4  n02097298      Scotch_terrier 0.001911599
+## 1  n02097209  standard_schnauzer 0.636145115
+## 2  n02097047 miniature_schnauzer 0.345084578
+## 3  n02097130     giant_schnauzer 0.016421778
+## 4  n02097298      Scotch_terrier 0.001911605
 ## 5  n02096177               cairn 0.000205432
 ## 
 ## $poodle.jpg
 ##   class_name   class_description       score
-## 1  n02113799     standard_poodle 0.829671025
-## 2  n02088094        Afghan_hound 0.074567847
+## 1  n02113799     standard_poodle 0.829671085
+## 2  n02088094        Afghan_hound 0.074567921
 ## 3  n02113712    miniature_poodle 0.032005541
-## 4  n02102973 Irish_water_spaniel 0.018583138
-## 5  n02102318      cocker_spaniel 0.008629773
+## 4  n02102973 Irish_water_spaniel 0.018583104
+## 5  n02102318      cocker_spaniel 0.008629764
 ## 
 ## $tortoise.jpg
 ##   class_name class_description      score
-## 1  n04033995             quilt 0.28395891
-## 2  n02110958               pug 0.15959547
-## 3  n03188531            diaper 0.14018108
-## 4  n02108915    French_bulldog 0.09364159
-## 5  n04235860      sleeping_bag 0.02608400
+## 1  n04033995             quilt 0.28395900
+## 2  n02110958               pug 0.15959540
+## 3  n03188531            diaper 0.14018074
+## 4  n02108915    French_bulldog 0.09364171
+## 5  n04235860      sleeping_bag 0.02608397
 ```
 
 ### Question 9
@@ -710,7 +710,7 @@ kpred <- predict(model, xrnn[!istrain,, ])
 ```
 
 ```
-## [1] 0.4119068
+## [1] 0.4127228
 ```
 
 Both models estimate the same number of coefficients/weights (16):
@@ -743,25 +743,25 @@ model$get_weights()
 
 ```
 ## [[1]]
-##              [,1]
-##  [1,] -0.03260402
-##  [2,]  0.09947537
-##  [3,]  0.16877997
-##  [4,] -0.00500190
-##  [5,]  0.12155584
-##  [6,] -0.02435724
-##  [7,]  0.03784479
-##  [8,]  0.08295742
-##  [9,]  0.07800607
-## [10,] -0.02734835
-## [11,]  0.03003222
-## [12,] -0.71551293
-## [13,]  0.09632454
-## [14,]  0.51101607
-## [15,]  0.46953788
+##               [,1]
+##  [1,] -0.024989385
+##  [2,]  0.104085557
+##  [3,]  0.093094356
+##  [4,] -0.003934865
+##  [5,]  0.111109793
+##  [6,]  0.111790396
+##  [7,]  0.036084682
+##  [8,]  0.079202369
+##  [9,]  0.048943024
+## [10,] -0.028881799
+## [11,]  0.041087020
+## [12,] -0.807094216
+## [13,]  0.098281182
+## [14,]  0.503474474
+## [15,]  0.529759765
 ## 
 ## [[2]]
-## [1] -0.006536772
+## [1] -0.008406755
 ```
 
 The flattened RNN has a lower $R^2$ on the test data than our `lm` model
@@ -814,7 +814,7 @@ xfun::cache_rds({
 ```
 
 ```
-## [1] 0.4269108
+## [1] 0.4268862
 ```
 
 This approach improves our $R^2$ over the linear model above.
@@ -883,7 +883,7 @@ xfun::cache_rds({
 ```
 
 ```
-## [1] 0.4538407
+## [1] 0.4520158
 ```
 
 ### Question 13
@@ -941,10 +941,10 @@ xfun::cache_rds({
 
 | Max Features| Accuracy|
 |------------:|--------:|
-|         1000|  0.85184|
-|         3000|  0.84756|
-|         5000|  0.87788|
-|        10000|  0.86644|
+|         1000|  0.83320|
+|         3000|  0.84200|
+|         5000|  0.84480|
+|        10000|  0.86608|
 
 Varying the dictionary size does not make a substantial impact on our estimates
 of accuracy. However, the models do take a substantial amount of time to fit and

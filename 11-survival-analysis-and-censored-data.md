@@ -382,18 +382,38 @@ $S(t)$ is $1 - F(t)$ where $F(t)$ is the cdf. Hence, $S(t) = \exp(−\lambda t)$
 > b. Now suppose that each of $n$ independent survival times follows an
 > $Exp(\lambda)$ distribution. Write out an expression for the likelihood
 > function (11.13).
->
+
+$$
+\ell = \prod_i \lambda^{d_i}y_i^{-\lambda}
+$$
+
 > c. Show that the maximum likelihood estimator for $\lambda$ is
 > $$ 
 > \hat\lambda = \sum_{i=1}^n \delta_i / \sum_{i=1}^n y_i.
 > $$
-> 
+
+\begin{align*}
+\log \ell &= \sum_i{\delta_i\log\lambda - \lambda y_i} \\
+          &= \log\lambda\sum_i{\delta_i} - \lambda\sum_i{y_i}
+\end{align*}
+
+Differentiating this expression with respect to λ we get:
+
+$$
+\frac{d \log \ell}{d \lambda} = \frac{\sum_i{\delta_i}}{\lambda} - \sum_i{y_i}
+$$
+
+A maximum is when this is 0, or  when
+$\hat\lambda = \sum_{i=1}^n \delta_i / \sum_{i=1}^n y_i$.
+
 > d. Use your answer to (c) to derive an estimator of the mean survival time.
 >
 > _Hint: For (d), recall that the mean of an $Exp(\lambda)$ random variable is
 > $1/\lambda$._
 
-ToDo
+Estimated mean survival would be $1/\lambda$ which given the above would be
+$\sum_{i=1}^n y_i / \sum_{i=1}^n \delta_i$, which can be thought of as 
+the total observation time over the total number of deaths.
 
 ## Applied
 

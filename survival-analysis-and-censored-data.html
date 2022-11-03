@@ -764,19 +764,42 @@ relationships provided in Exercise 8, show that <span class="math inline">\(S(t)
 <span class="math inline">\(S(t)\)</span> is <span class="math inline">\(1 - F(t)\)</span> where <span class="math inline">\(F(t)\)</span> is the cdf. Hence, <span class="math inline">\(S(t) = \exp(−\lambda t)\)</span>.</p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
-<li><p>Now suppose that each of <span class="math inline">\(n\)</span> independent survival times follows an
+<li>Now suppose that each of <span class="math inline">\(n\)</span> independent survival times follows an
 <span class="math inline">\(Exp(\lambda)\)</span> distribution. Write out an expression for the likelihood
-function (11.13).</p></li>
-<li><p>Show that the maximum likelihood estimator for <span class="math inline">\(\lambda\)</span> is
+function (11.13).</li>
+</ol>
+</blockquote>
+<p><span class="math display">\[
+\ell = \prod_i \lambda^{d_i}y_i^{-\lambda}
+\]</span></p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Show that the maximum likelihood estimator for <span class="math inline">\(\lambda\)</span> is
 <span class="math display">\[ 
 \hat\lambda = \sum_{i=1}^n \delta_i / \sum_{i=1}^n y_i.
-\]</span></p></li>
-<li><p>Use your answer to (c) to derive an estimator of the mean survival time.</p></li>
+\]</span></li>
+</ol>
+</blockquote>
+<p><span class="math display">\[\begin{align*}
+\log \ell &amp;= \sum_i{\delta_i\log\lambda - \lambda y_i} \\
+          &amp;= \log\lambda\sum_i{\delta_i} - \lambda\sum_i{y_i}
+\end{align*}\]</span></p>
+<p>Differentiating this expression with respect to λ we get:</p>
+<p><span class="math display">\[
+\frac{d \log \ell}{d \lambda} = \frac{\sum_i{\delta_i}}{\lambda} - \sum_i{y_i}
+\]</span></p>
+<p>A maximum is when this is 0, or when
+<span class="math inline">\(\hat\lambda = \sum_{i=1}^n \delta_i / \sum_{i=1}^n y_i\)</span>.</p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Use your answer to (c) to derive an estimator of the mean survival time.</li>
 </ol>
 <p><em>Hint: For (d), recall that the mean of an <span class="math inline">\(Exp(\lambda)\)</span> random variable is
 <span class="math inline">\(1/\lambda\)</span>.</em></p>
 </blockquote>
-<p>ToDo</p>
+<p>Estimated mean survival would be <span class="math inline">\(1/\lambda\)</span> which given the above would be
+<span class="math inline">\(\sum_{i=1}^n y_i / \sum_{i=1}^n \delta_i\)</span>, which can be thought of as
+the total observation time over the total number of deaths.</p>
 </div>
 </div>
 <div id="applied-9" class="section level2 hasAnchor">
