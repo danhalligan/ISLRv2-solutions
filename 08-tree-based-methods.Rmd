@@ -293,7 +293,20 @@ regression tree above, although not quite as good as the bagging approach.
 
 > f. Now analyze the data using BART, and report your results.
 
-ToDo
+```{r}
+library(BART)
+
+# For ease, we'll create a fake "predict" method that just returns 
+# yhat.test.mean regardless of provided "newdata"
+predict.wbart <- function(model, ...) model$yhat.test.mean
+
+bartfit <- gbart(Carseats[train, 2:11], Carseats[train, 1], 
+  x.test = Carseats[!train, 2:11])
+carseats_mse(bartfit)
+```
+
+The test error rate is ~1.6 which is an improvement over random forest and
+bagging.
 
 ### Question 9
 
@@ -560,8 +573,6 @@ For KNN we correctly predict 8.7% of those predicted to purchase.
 > linear or logistic regression? Which of these approaches yields the best
 > performance?
 
-ToDo
-
 Here I'm going to use the College dataset (used in Question 10 from Chapter 7
 to compare performance with the GAM we previously built). In this model we 
 were trying to predict `Outstate` using the other variables in `College`.
@@ -588,16 +599,23 @@ bagged <- randomForest(Outstate ~ ., data = College[train, ], mtry = 17, ntree =
 # Random forest with mtry = sqrt(no. predictors)
 rf <- randomForest(Outstate ~ ., data = College[train, ], mtry = 4, ntree = 1000)
 
+# BART
+pred <- setdiff(colnames(College), "Outstate")
+bart <- gbart(College[train, pred], College[train, "Outstate"], 
+  x.test = College[test, pred])
+
 mse <- function(model, ...) {
   pred <- predict(model, College[test, ], ...)
   mean((College$Outstate[test] - pred)^2)
 }
+
 res <- c(
   "Linear regression" = mse(lr),
   "GAM" = mse(gam),
   "Boosting" = mse(boosted, n.trees = 1000),
   "Bagging" = mse(bagged),
-  "Random forest" = mse(rf)
+  "Random forest" = mse(rf),
+  "BART" = mse(bart)
 )
 res <- data.frame("MSE" = res)
 res$Model <- factor(row.names(res), levels = rev(row.names(res)))
