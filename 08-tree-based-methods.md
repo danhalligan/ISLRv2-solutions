@@ -442,7 +442,91 @@ regression tree above, although not quite as good as the bagging approach.
 
 > f. Now analyze the data using BART, and report your results.
 
-ToDo
+
+```r
+library(BART)
+```
+
+```
+## Loading required package: nlme
+```
+
+```
+## 
+## Attaching package: 'nlme'
+```
+
+```
+## The following object is masked from 'package:ggtree':
+## 
+##     collapse
+```
+
+```
+## The following object is masked from 'package:dplyr':
+## 
+##     collapse
+```
+
+```
+## Loading required package: nnet
+```
+
+```
+## Loading required package: survival
+```
+
+```r
+# For ease, we'll create a fake "predict" method that just returns 
+# yhat.test.mean regardless of provided "newdata"
+predict.wbart <- function(model, ...) model$yhat.test.mean
+
+bartfit <- gbart(Carseats[train, 2:11], Carseats[train, 1], 
+  x.test = Carseats[!train, 2:11])
+```
+
+```
+## *****Calling gbart: type=1
+## *****Data:
+## data:n,p,np: 196, 14, 204
+## y1,yn: 2.070867, 2.280867
+## x1,x[n*p]: 138.000000, 1.000000
+## xp1,xp[np*p]: 141.000000, 1.000000
+## *****Number of Trees: 200
+## *****Number of Cut Points: 58 ... 1
+## *****burn,nd,thin: 100,1000,1
+## *****Prior:beta,alpha,tau,nu,lambda,offset: 2,0.95,0.287616,3,0.21118,7.42913
+## *****sigma: 1.041218
+## *****w (weights): 1.000000 ... 1.000000
+## *****Dirichlet:sparse,theta,omega,a,b,rho,augment: 0,0,1,0.5,1,14,0
+## *****printevery: 100
+## 
+## MCMC
+## done 0 (out of 1100)
+## done 100 (out of 1100)
+## done 200 (out of 1100)
+## done 300 (out of 1100)
+## done 400 (out of 1100)
+## done 500 (out of 1100)
+## done 600 (out of 1100)
+## done 700 (out of 1100)
+## done 800 (out of 1100)
+## done 900 (out of 1100)
+## done 1000 (out of 1100)
+## time: 3s
+## trcnt,tecnt: 1000,1000
+```
+
+```r
+carseats_mse(bartfit)
+```
+
+```
+## [1] 1.631285
+```
+
+The test error rate is ~1.6 which is an improvement over random forest and
+bagging.
 
 ### Question 9
 
@@ -518,7 +602,7 @@ plot(tr)
 text(tr, pretty = 0, digits = 2, cex = 0.8)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 > e. Predict the response on the test data, and produce a confusion matrix
 >    comparing the test labels to the predicted test labels. What is the test
@@ -555,7 +639,7 @@ min <- which.min(res$dev)
 abline(v = res$size[min], lty = 2, col = "red")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 > h. Which tree size corresponds to the lowest cross-validated classification
 >    error rate?
@@ -580,7 +664,7 @@ plot(ptr)
 text(ptr, pretty = 0, digits = 2, cex = 0.8)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 > j. Compare the training error rates between the pruned and unpruned trees.
 >    Which is higher?
@@ -685,7 +769,7 @@ plot(lambdas, errs, type = "b", xlab = "Shrinkage values",
   ylab = "Training MSE", log = "xy")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 > d. Produce a plot with different shrinkage values on the $x$-axis and the
 >    corresponding test set MSE on the $y$-axis.
@@ -709,7 +793,7 @@ min(errs)
 abline(v = lambdas[which.min(errs)], lty = 2, col = "red")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 > e. Compare the test MSE of boosting to the test MSE that results from applying
 >    two of the regression approaches seen in Chapters 3 and 6.
@@ -778,7 +862,7 @@ mean((predict(fit2, s = 0.1, newx = x.test) - dat[test, "Salary"])^2)
 summary(fits[[which.min(errs)]])
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
 ```
 ##                 var    rel.inf
@@ -858,7 +942,7 @@ fit <- gbm(Purchase == "Yes" ~ ., data = Caravan[train, ], n.trees = 1000, shrin
 head(summary(fit))
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-36-1.png" width="672" />
 
 ```
 ##               var   rel.inf
@@ -973,8 +1057,6 @@ For KNN we correctly predict 8.7% of those predicted to purchase.
 > linear or logistic regression? Which of these approaches yields the best
 > performance?
 
-ToDo
-
 Here I'm going to use the College dataset (used in Question 10 from Chapter 7
 to compare performance with the GAM we previously built). In this model we 
 were trying to predict `Outstate` using the other variables in `College`.
@@ -1034,16 +1116,57 @@ bagged <- randomForest(Outstate ~ ., data = College[train, ], mtry = 17, ntree =
 # Random forest with mtry = sqrt(no. predictors)
 rf <- randomForest(Outstate ~ ., data = College[train, ], mtry = 4, ntree = 1000)
 
+# BART
+pred <- setdiff(colnames(College), "Outstate")
+bart <- gbart(College[train, pred], College[train, "Outstate"], 
+  x.test = College[test, pred])
+```
+
+```
+## *****Calling gbart: type=1
+## *****Data:
+## data:n,p,np: 400, 18, 377
+## y1,yn: -4030.802500, 77.197500
+## x1,x[n*p]: 1.000000, 71.000000
+## xp1,xp[np*p]: 0.000000, 99.000000
+## *****Number of Trees: 200
+## *****Number of Cut Points: 1 ... 75
+## *****burn,nd,thin: 100,1000,1
+## *****Prior:beta,alpha,tau,nu,lambda,offset: 2,0.95,301.581,3,715815,10580.8
+## *****sigma: 1916.969943
+## *****w (weights): 1.000000 ... 1.000000
+## *****Dirichlet:sparse,theta,omega,a,b,rho,augment: 0,0,1,0.5,1,18,0
+## *****printevery: 100
+## 
+## MCMC
+## done 0 (out of 1100)
+## done 100 (out of 1100)
+## done 200 (out of 1100)
+## done 300 (out of 1100)
+## done 400 (out of 1100)
+## done 500 (out of 1100)
+## done 600 (out of 1100)
+## done 700 (out of 1100)
+## done 800 (out of 1100)
+## done 900 (out of 1100)
+## done 1000 (out of 1100)
+## time: 5s
+## trcnt,tecnt: 1000,1000
+```
+
+```r
 mse <- function(model, ...) {
   pred <- predict(model, College[test, ], ...)
   mean((College$Outstate[test] - pred)^2)
 }
+
 res <- c(
   "Linear regression" = mse(lr),
   "GAM" = mse(gam),
   "Boosting" = mse(boosted, n.trees = 1000),
   "Bagging" = mse(bagged),
-  "Random forest" = mse(rf)
+  "Random forest" = mse(rf),
+  "BART" = mse(bart)
 )
 res <- data.frame("MSE" = res)
 res$Model <- factor(row.names(res), levels = rev(row.names(res)))
@@ -1051,7 +1174,7 @@ ggplot(res, aes(Model, MSE)) + coord_flip() +
   geom_bar(stat = "identity", fill = "steelblue")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 In this case, it looks like bagging produces the best performing model in terms
 of test mean square error.

@@ -532,9 +532,9 @@ censored and finally the study ends with patient 2 still involved. Therefore
 takes values: 1, 1.</li>
 </ul>
 <p>We can check by using the <code>survival</code> package.</p>
-<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb727-1"><a href="survival-analysis-and-censored-data.html#cb727-1"></a><span class="kw">library</span>(survival)</span>
-<span id="cb727-2"><a href="survival-analysis-and-censored-data.html#cb727-2"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(<span class="kw">c</span>(<span class="fl">1.2</span>, <span class="dv">2</span>, <span class="fl">1.5</span>, <span class="fl">0.2</span>), <span class="dt">event =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb727-3"><a href="survival-analysis-and-censored-data.html#cb727-3"></a><span class="kw">summary</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="survival-analysis-and-censored-data.html#cb740-1"></a><span class="kw">library</span>(survival)</span>
+<span id="cb740-2"><a href="survival-analysis-and-censored-data.html#cb740-2"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(<span class="kw">c</span>(<span class="fl">1.2</span>, <span class="dv">2</span>, <span class="fl">1.5</span>, <span class="fl">0.2</span>), <span class="dt">event =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb740-3"><a href="survival-analysis-and-censored-data.html#cb740-3"></a><span class="kw">summary</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## Call: survfit(formula = x ~ 1)
 ## 
 ##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
@@ -555,7 +555,7 @@ Table 11.4. The covariate column of that table is not needed for this problem.</
 risk <span class="math inline">\(r_k\)</span> are 5 and 4 (one was censored early on), thus survival probability is
 <span class="math inline">\(4/5 * 3/4 = 0.6\)</span>.</p>
 <p>Equivalently, we can use the survival package.</p>
-<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb729-1"><a href="survival-analysis-and-censored-data.html#cb729-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="survival-analysis-and-censored-data.html#cb742-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
 ## ✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
 ## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
@@ -564,17 +564,17 @@ risk <span class="math inline">\(r_k\)</span> are 5 and 4 (one was censored earl
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb731"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb731-1"><a href="survival-analysis-and-censored-data.html#cb731-1"></a>table_data &lt;-<span class="st"> </span><span class="kw">tribble</span>(</span>
-<span id="cb731-2"><a href="survival-analysis-and-censored-data.html#cb731-2"></a>  <span class="op">~</span>Y, <span class="op">~</span>D, <span class="op">~</span>X, </span>
-<span id="cb731-3"><a href="survival-analysis-and-censored-data.html#cb731-3"></a>  <span class="fl">26.5</span>, <span class="dv">1</span>, <span class="fl">0.1</span>,</span>
-<span id="cb731-4"><a href="survival-analysis-and-censored-data.html#cb731-4"></a>  <span class="fl">37.2</span>, <span class="dv">1</span>, <span class="dv">11</span>,</span>
-<span id="cb731-5"><a href="survival-analysis-and-censored-data.html#cb731-5"></a>  <span class="fl">57.3</span>, <span class="dv">1</span>, <span class="fl">-0.3</span>,</span>
-<span id="cb731-6"><a href="survival-analysis-and-censored-data.html#cb731-6"></a>  <span class="fl">90.8</span>, <span class="dv">0</span>, <span class="fl">2.8</span>,</span>
-<span id="cb731-7"><a href="survival-analysis-and-censored-data.html#cb731-7"></a>  <span class="fl">20.2</span>, <span class="dv">0</span>, <span class="fl">1.8</span>,</span>
-<span id="cb731-8"><a href="survival-analysis-and-censored-data.html#cb731-8"></a>  <span class="fl">89.8</span>, <span class="dv">0</span>, <span class="fl">0.4</span></span>
-<span id="cb731-9"><a href="survival-analysis-and-censored-data.html#cb731-9"></a>)</span>
-<span id="cb731-10"><a href="survival-analysis-and-censored-data.html#cb731-10"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(table_data<span class="op">$</span>Y, table_data<span class="op">$</span>D)</span>
-<span id="cb731-11"><a href="survival-analysis-and-censored-data.html#cb731-11"></a><span class="kw">summary</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb744-1"><a href="survival-analysis-and-censored-data.html#cb744-1"></a>table_data &lt;-<span class="st"> </span><span class="kw">tribble</span>(</span>
+<span id="cb744-2"><a href="survival-analysis-and-censored-data.html#cb744-2"></a>  <span class="op">~</span>Y, <span class="op">~</span>D, <span class="op">~</span>X, </span>
+<span id="cb744-3"><a href="survival-analysis-and-censored-data.html#cb744-3"></a>  <span class="fl">26.5</span>, <span class="dv">1</span>, <span class="fl">0.1</span>,</span>
+<span id="cb744-4"><a href="survival-analysis-and-censored-data.html#cb744-4"></a>  <span class="fl">37.2</span>, <span class="dv">1</span>, <span class="dv">11</span>,</span>
+<span id="cb744-5"><a href="survival-analysis-and-censored-data.html#cb744-5"></a>  <span class="fl">57.3</span>, <span class="dv">1</span>, <span class="fl">-0.3</span>,</span>
+<span id="cb744-6"><a href="survival-analysis-and-censored-data.html#cb744-6"></a>  <span class="fl">90.8</span>, <span class="dv">0</span>, <span class="fl">2.8</span>,</span>
+<span id="cb744-7"><a href="survival-analysis-and-censored-data.html#cb744-7"></a>  <span class="fl">20.2</span>, <span class="dv">0</span>, <span class="fl">1.8</span>,</span>
+<span id="cb744-8"><a href="survival-analysis-and-censored-data.html#cb744-8"></a>  <span class="fl">89.8</span>, <span class="dv">0</span>, <span class="fl">0.4</span></span>
+<span id="cb744-9"><a href="survival-analysis-and-censored-data.html#cb744-9"></a>)</span>
+<span id="cb744-10"><a href="survival-analysis-and-censored-data.html#cb744-10"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(table_data<span class="op">$</span>Y, table_data<span class="op">$</span>D)</span>
+<span id="cb744-11"><a href="survival-analysis-and-censored-data.html#cb744-11"></a><span class="kw">summary</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## Call: survfit(formula = x ~ 1)
 ## 
 ##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
@@ -620,16 +620,16 @@ answer!)</p>
 </blockquote>
 <p>We can draw this plot, or even engineer data that will generate the required
 plot…</p>
-<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="survival-analysis-and-censored-data.html#cb733-1"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, </span>
-<span id="cb733-2"><a href="survival-analysis-and-censored-data.html#cb733-2"></a>    <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), </span>
-<span id="cb733-3"><a href="survival-analysis-and-censored-data.html#cb733-3"></a>    <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb733-4"><a href="survival-analysis-and-censored-data.html#cb733-4"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>, </span>
-<span id="cb733-5"><a href="survival-analysis-and-censored-data.html#cb733-5"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Time in Days&quot;</span></span>
-<span id="cb733-6"><a href="survival-analysis-and-censored-data.html#cb733-6"></a>)</span>
-<span id="cb733-7"><a href="survival-analysis-and-censored-data.html#cb733-7"></a><span class="kw">lines</span>(</span>
-<span id="cb733-8"><a href="survival-analysis-and-censored-data.html#cb733-8"></a>    <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">31</span>, <span class="dv">31</span>, <span class="dv">77</span>, <span class="dv">77</span>, <span class="dv">100</span>),</span>
-<span id="cb733-9"><a href="survival-analysis-and-censored-data.html#cb733-9"></a>    <span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.22</span>, <span class="fl">0.22</span>)</span>
-<span id="cb733-10"><a href="survival-analysis-and-censored-data.html#cb733-10"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb746-1"><a href="survival-analysis-and-censored-data.html#cb746-1"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, </span>
+<span id="cb746-2"><a href="survival-analysis-and-censored-data.html#cb746-2"></a>    <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), </span>
+<span id="cb746-3"><a href="survival-analysis-and-censored-data.html#cb746-3"></a>    <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb746-4"><a href="survival-analysis-and-censored-data.html#cb746-4"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>, </span>
+<span id="cb746-5"><a href="survival-analysis-and-censored-data.html#cb746-5"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Time in Days&quot;</span></span>
+<span id="cb746-6"><a href="survival-analysis-and-censored-data.html#cb746-6"></a>)</span>
+<span id="cb746-7"><a href="survival-analysis-and-censored-data.html#cb746-7"></a><span class="kw">lines</span>(</span>
+<span id="cb746-8"><a href="survival-analysis-and-censored-data.html#cb746-8"></a>    <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">31</span>, <span class="dv">31</span>, <span class="dv">77</span>, <span class="dv">77</span>, <span class="dv">100</span>),</span>
+<span id="cb746-9"><a href="survival-analysis-and-censored-data.html#cb746-9"></a>    <span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.22</span>, <span class="fl">0.22</span>)</span>
+<span id="cb746-10"><a href="survival-analysis-and-censored-data.html#cb746-10"></a>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 <div id="question-6-9" class="section level3 hasAnchor">
@@ -659,16 +659,16 @@ do not need to use any software to do this—you can sketch it by hand using
 the results obtained in (a).)</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="survival-analysis-and-censored-data.html#cb734-1"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, </span>
-<span id="cb734-2"><a href="survival-analysis-and-censored-data.html#cb734-2"></a>    <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">350</span>), </span>
-<span id="cb734-3"><a href="survival-analysis-and-censored-data.html#cb734-3"></a>    <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb734-4"><a href="survival-analysis-and-censored-data.html#cb734-4"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>, </span>
-<span id="cb734-5"><a href="survival-analysis-and-censored-data.html#cb734-5"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Time in Days&quot;</span></span>
-<span id="cb734-6"><a href="survival-analysis-and-censored-data.html#cb734-6"></a>)</span>
-<span id="cb734-7"><a href="survival-analysis-and-censored-data.html#cb734-7"></a><span class="kw">lines</span>(</span>
-<span id="cb734-8"><a href="survival-analysis-and-censored-data.html#cb734-8"></a>    <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">300</span>, <span class="dv">300</span>, <span class="dv">350</span>),</span>
-<span id="cb734-9"><a href="survival-analysis-and-censored-data.html#cb734-9"></a>    <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.75</span>, <span class="fl">0.75</span>, <span class="fl">0.375</span>, <span class="fl">0.375</span>)</span>
-<span id="cb734-10"><a href="survival-analysis-and-censored-data.html#cb734-10"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb747-1"><a href="survival-analysis-and-censored-data.html#cb747-1"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, </span>
+<span id="cb747-2"><a href="survival-analysis-and-censored-data.html#cb747-2"></a>    <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">350</span>), </span>
+<span id="cb747-3"><a href="survival-analysis-and-censored-data.html#cb747-3"></a>    <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb747-4"><a href="survival-analysis-and-censored-data.html#cb747-4"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>, </span>
+<span id="cb747-5"><a href="survival-analysis-and-censored-data.html#cb747-5"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Time in Days&quot;</span></span>
+<span id="cb747-6"><a href="survival-analysis-and-censored-data.html#cb747-6"></a>)</span>
+<span id="cb747-7"><a href="survival-analysis-and-censored-data.html#cb747-7"></a><span class="kw">lines</span>(</span>
+<span id="cb747-8"><a href="survival-analysis-and-censored-data.html#cb747-8"></a>    <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">300</span>, <span class="dv">300</span>, <span class="dv">350</span>),</span>
+<span id="cb747-9"><a href="survival-analysis-and-censored-data.html#cb747-9"></a>    <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.75</span>, <span class="fl">0.75</span>, <span class="fl">0.375</span>, <span class="fl">0.375</span>)</span>
+<span id="cb747-10"><a href="survival-analysis-and-censored-data.html#cb747-10"></a>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>x &lt;- Surv(c(300, 350, 150, 250), c(1, 0, 1, 0))</p>
 <blockquote>
@@ -814,14 +814,14 @@ the total observation time over the total number of deaths.</p>
 the <code>survfit()</code> function in the <code>survival</code> package.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb735-1"><a href="survival-analysis-and-censored-data.html#cb735-1"></a><span class="kw">library</span>(ISLR2)</span>
-<span id="cb735-2"><a href="survival-analysis-and-censored-data.html#cb735-2"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(BrainCancer<span class="op">$</span>time, BrainCancer<span class="op">$</span>status)</span>
-<span id="cb735-3"><a href="survival-analysis-and-censored-data.html#cb735-3"></a><span class="kw">plot</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), </span>
-<span id="cb735-4"><a href="survival-analysis-and-censored-data.html#cb735-4"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, </span>
-<span id="cb735-5"><a href="survival-analysis-and-censored-data.html#cb735-5"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>,</span>
-<span id="cb735-6"><a href="survival-analysis-and-censored-data.html#cb735-6"></a>    <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
-<span id="cb735-7"><a href="survival-analysis-and-censored-data.html#cb735-7"></a>    <span class="dt">conf.int =</span> <span class="fl">0.67</span></span>
-<span id="cb735-8"><a href="survival-analysis-and-censored-data.html#cb735-8"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="survival-analysis-and-censored-data.html#cb748-1"></a><span class="kw">library</span>(ISLR2)</span>
+<span id="cb748-2"><a href="survival-analysis-and-censored-data.html#cb748-2"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(BrainCancer<span class="op">$</span>time, BrainCancer<span class="op">$</span>status)</span>
+<span id="cb748-3"><a href="survival-analysis-and-censored-data.html#cb748-3"></a><span class="kw">plot</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), </span>
+<span id="cb748-4"><a href="survival-analysis-and-censored-data.html#cb748-4"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, </span>
+<span id="cb748-5"><a href="survival-analysis-and-censored-data.html#cb748-5"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>,</span>
+<span id="cb748-6"><a href="survival-analysis-and-censored-data.html#cb748-6"></a>    <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
+<span id="cb748-7"><a href="survival-analysis-and-censored-data.html#cb748-7"></a>    <span class="dt">conf.int =</span> <span class="fl">0.67</span></span>
+<span id="cb748-8"><a href="survival-analysis-and-censored-data.html#cb748-8"></a>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -832,26 +832,26 @@ standard error of the Kaplan-Meier survival curve at each timepoint. Compare
 this to the standard errors obtained in (a).</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="survival-analysis-and-censored-data.html#cb736-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb736-2"><a href="survival-analysis-and-censored-data.html#cb736-2"></a><span class="kw">plot</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), </span>
-<span id="cb736-3"><a href="survival-analysis-and-censored-data.html#cb736-3"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, </span>
-<span id="cb736-4"><a href="survival-analysis-and-censored-data.html#cb736-4"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>,</span>
-<span id="cb736-5"><a href="survival-analysis-and-censored-data.html#cb736-5"></a>    <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
-<span id="cb736-6"><a href="survival-analysis-and-censored-data.html#cb736-6"></a>    <span class="dt">conf.int =</span> <span class="fl">0.67</span></span>
-<span id="cb736-7"><a href="survival-analysis-and-censored-data.html#cb736-7"></a>)</span>
-<span id="cb736-8"><a href="survival-analysis-and-censored-data.html#cb736-8"></a>fit &lt;-<span class="st"> </span><span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb736-9"><a href="survival-analysis-and-censored-data.html#cb736-9"></a>dat &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="dv">0</span>, fit<span class="op">$</span>time))</span>
-<span id="cb736-10"><a href="survival-analysis-and-censored-data.html#cb736-10"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">200</span>) {</span>
-<span id="cb736-11"><a href="survival-analysis-and-censored-data.html#cb736-11"></a>    y &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">sample</span>(x, <span class="dv">88</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb736-12"><a href="survival-analysis-and-censored-data.html#cb736-12"></a>    y &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="dv">0</span>, y<span class="op">$</span>time), <span class="st">&quot;s{i}&quot;</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, y<span class="op">$</span>surv))</span>
-<span id="cb736-13"><a href="survival-analysis-and-censored-data.html#cb736-13"></a>    dat &lt;-<span class="st"> </span><span class="kw">left_join</span>(dat, y, <span class="dt">by =</span> <span class="st">&quot;time&quot;</span>)</span>
-<span id="cb736-14"><a href="survival-analysis-and-censored-data.html#cb736-14"></a>}</span>
-<span id="cb736-15"><a href="survival-analysis-and-censored-data.html#cb736-15"></a>res &lt;-<span class="st"> </span><span class="kw">fill</span>(dat, <span class="kw">starts_with</span>(<span class="st">&quot;s&quot;</span>)) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb736-16"><a href="survival-analysis-and-censored-data.html#cb736-16"></a><span class="st">    </span><span class="kw">rowwise</span>() <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb736-17"><a href="survival-analysis-and-censored-data.html#cb736-17"></a><span class="st">    </span><span class="kw">transmute</span>(<span class="dt">sd =</span> <span class="kw">sd</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;s&quot;</span>))))</span>
-<span id="cb736-18"><a href="survival-analysis-and-censored-data.html#cb736-18"></a>se &lt;-<span class="st"> </span>res<span class="op">$</span>sd[<span class="dv">2</span><span class="op">:</span><span class="kw">nrow</span>(res)]</span>
-<span id="cb736-19"><a href="survival-analysis-and-censored-data.html#cb736-19"></a><span class="kw">lines</span>(fit<span class="op">$</span>time, fit<span class="op">$</span>surv <span class="op">-</span><span class="st"> </span>se, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb736-20"><a href="survival-analysis-and-censored-data.html#cb736-20"></a><span class="kw">lines</span>(fit<span class="op">$</span>time, fit<span class="op">$</span>surv <span class="op">+</span><span class="st"> </span>se, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb749-1"><a href="survival-analysis-and-censored-data.html#cb749-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb749-2"><a href="survival-analysis-and-censored-data.html#cb749-2"></a><span class="kw">plot</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), </span>
+<span id="cb749-3"><a href="survival-analysis-and-censored-data.html#cb749-3"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, </span>
+<span id="cb749-4"><a href="survival-analysis-and-censored-data.html#cb749-4"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>,</span>
+<span id="cb749-5"><a href="survival-analysis-and-censored-data.html#cb749-5"></a>    <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
+<span id="cb749-6"><a href="survival-analysis-and-censored-data.html#cb749-6"></a>    <span class="dt">conf.int =</span> <span class="fl">0.67</span></span>
+<span id="cb749-7"><a href="survival-analysis-and-censored-data.html#cb749-7"></a>)</span>
+<span id="cb749-8"><a href="survival-analysis-and-censored-data.html#cb749-8"></a>fit &lt;-<span class="st"> </span><span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb749-9"><a href="survival-analysis-and-censored-data.html#cb749-9"></a>dat &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="dv">0</span>, fit<span class="op">$</span>time))</span>
+<span id="cb749-10"><a href="survival-analysis-and-censored-data.html#cb749-10"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">200</span>) {</span>
+<span id="cb749-11"><a href="survival-analysis-and-censored-data.html#cb749-11"></a>    y &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">sample</span>(x, <span class="dv">88</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb749-12"><a href="survival-analysis-and-censored-data.html#cb749-12"></a>    y &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="dv">0</span>, y<span class="op">$</span>time), <span class="st">&quot;s{i}&quot;</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, y<span class="op">$</span>surv))</span>
+<span id="cb749-13"><a href="survival-analysis-and-censored-data.html#cb749-13"></a>    dat &lt;-<span class="st"> </span><span class="kw">left_join</span>(dat, y, <span class="dt">by =</span> <span class="st">&quot;time&quot;</span>)</span>
+<span id="cb749-14"><a href="survival-analysis-and-censored-data.html#cb749-14"></a>}</span>
+<span id="cb749-15"><a href="survival-analysis-and-censored-data.html#cb749-15"></a>res &lt;-<span class="st"> </span><span class="kw">fill</span>(dat, <span class="kw">starts_with</span>(<span class="st">&quot;s&quot;</span>)) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb749-16"><a href="survival-analysis-and-censored-data.html#cb749-16"></a><span class="st">    </span><span class="kw">rowwise</span>() <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb749-17"><a href="survival-analysis-and-censored-data.html#cb749-17"></a><span class="st">    </span><span class="kw">transmute</span>(<span class="dt">sd =</span> <span class="kw">sd</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;s&quot;</span>))))</span>
+<span id="cb749-18"><a href="survival-analysis-and-censored-data.html#cb749-18"></a>se &lt;-<span class="st"> </span>res<span class="op">$</span>sd[<span class="dv">2</span><span class="op">:</span><span class="kw">nrow</span>(res)]</span>
+<span id="cb749-19"><a href="survival-analysis-and-censored-data.html#cb749-19"></a><span class="kw">lines</span>(fit<span class="op">$</span>time, fit<span class="op">$</span>surv <span class="op">-</span><span class="st"> </span>se, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb749-20"><a href="survival-analysis-and-censored-data.html#cb749-20"></a><span class="kw">lines</span>(fit<span class="op">$</span>time, fit<span class="op">$</span>surv <span class="op">+</span><span class="st"> </span>se, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -859,8 +859,8 @@ this to the standard errors obtained in (a).</li>
 predict survival. Summarize the main findings.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="survival-analysis-and-censored-data.html#cb737-1"></a>fit &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(time, status) <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>diagnosis <span class="op">+</span><span class="st"> </span>loc <span class="op">+</span><span class="st"> </span>ki <span class="op">+</span><span class="st"> </span>gtv <span class="op">+</span><span class="st"> </span>stereo, <span class="dt">data =</span> BrainCancer)</span>
-<span id="cb737-2"><a href="survival-analysis-and-censored-data.html#cb737-2"></a>fit </span></code></pre></div>
+<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="survival-analysis-and-censored-data.html#cb750-1"></a>fit &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(time, status) <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>diagnosis <span class="op">+</span><span class="st"> </span>loc <span class="op">+</span><span class="st"> </span>ki <span class="op">+</span><span class="st"> </span>gtv <span class="op">+</span><span class="st"> </span>stereo, <span class="dt">data =</span> BrainCancer)</span>
+<span id="cb750-2"><a href="survival-analysis-and-censored-data.html#cb750-2"></a>fit </span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(time, status) ~ sex + diagnosis + loc + 
 ##     ki + gtv + stereo, data = BrainCancer)
@@ -891,19 +891,19 @@ adjusted for the other predictors.</li>
 and use this model to predict new, artificial, data where we allow <code>ki</code> to
 take each possible value, but set the other predictors to be the mode or mean
 of the other predictors.</p>
-<div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb739-1"><a href="survival-analysis-and-censored-data.html#cb739-1"></a><span class="kw">library</span>(ggfortify)</span>
-<span id="cb739-2"><a href="survival-analysis-and-censored-data.html#cb739-2"></a></span>
-<span id="cb739-3"><a href="survival-analysis-and-censored-data.html#cb739-3"></a>modaldata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb739-4"><a href="survival-analysis-and-censored-data.html#cb739-4"></a>  <span class="dt">sex =</span> <span class="kw">rep</span>(<span class="st">&quot;Female&quot;</span>, <span class="dv">5</span>),</span>
-<span id="cb739-5"><a href="survival-analysis-and-censored-data.html#cb739-5"></a>  <span class="dt">diagnosis =</span> <span class="kw">rep</span>(<span class="st">&quot;Meningioma&quot;</span>, <span class="dv">5</span>),</span>
-<span id="cb739-6"><a href="survival-analysis-and-censored-data.html#cb739-6"></a>  <span class="dt">loc =</span> <span class="kw">rep</span>(<span class="st">&quot;Supratentorial&quot;</span>, <span class="dv">5</span>),</span>
-<span id="cb739-7"><a href="survival-analysis-and-censored-data.html#cb739-7"></a>  <span class="dt">ki =</span> <span class="kw">c</span>(<span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>), </span>
-<span id="cb739-8"><a href="survival-analysis-and-censored-data.html#cb739-8"></a>  <span class="dt">gtv =</span> <span class="kw">rep</span>(<span class="kw">mean</span>(BrainCancer<span class="op">$</span>gtv), <span class="dv">5</span>),</span>
-<span id="cb739-9"><a href="survival-analysis-and-censored-data.html#cb739-9"></a>  <span class="dt">stereo =</span> <span class="kw">rep</span>(<span class="st">&quot;SRT&quot;</span>, <span class="dv">5</span>)</span>
-<span id="cb739-10"><a href="survival-analysis-and-censored-data.html#cb739-10"></a>)</span>
-<span id="cb739-11"><a href="survival-analysis-and-censored-data.html#cb739-11"></a>survplots &lt;-<span class="st"> </span><span class="kw">survfit</span>(fit, <span class="dt">newdata =</span> modaldata)</span>
-<span id="cb739-12"><a href="survival-analysis-and-censored-data.html#cb739-12"></a><span class="kw">plot</span>(survplots, <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Survival Probability&quot;</span>, <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>)</span>
-<span id="cb739-13"><a href="survival-analysis-and-censored-data.html#cb739-13"></a><span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;60&quot;</span>, <span class="st">&quot;70&quot;</span>, <span class="st">&quot;80&quot;</span>, <span class="st">&quot;90&quot;</span>, <span class="st">&quot;100&quot;</span>), <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="survival-analysis-and-censored-data.html#cb752-1"></a><span class="kw">library</span>(ggfortify)</span>
+<span id="cb752-2"><a href="survival-analysis-and-censored-data.html#cb752-2"></a></span>
+<span id="cb752-3"><a href="survival-analysis-and-censored-data.html#cb752-3"></a>modaldata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb752-4"><a href="survival-analysis-and-censored-data.html#cb752-4"></a>  <span class="dt">sex =</span> <span class="kw">rep</span>(<span class="st">&quot;Female&quot;</span>, <span class="dv">5</span>),</span>
+<span id="cb752-5"><a href="survival-analysis-and-censored-data.html#cb752-5"></a>  <span class="dt">diagnosis =</span> <span class="kw">rep</span>(<span class="st">&quot;Meningioma&quot;</span>, <span class="dv">5</span>),</span>
+<span id="cb752-6"><a href="survival-analysis-and-censored-data.html#cb752-6"></a>  <span class="dt">loc =</span> <span class="kw">rep</span>(<span class="st">&quot;Supratentorial&quot;</span>, <span class="dv">5</span>),</span>
+<span id="cb752-7"><a href="survival-analysis-and-censored-data.html#cb752-7"></a>  <span class="dt">ki =</span> <span class="kw">c</span>(<span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>), </span>
+<span id="cb752-8"><a href="survival-analysis-and-censored-data.html#cb752-8"></a>  <span class="dt">gtv =</span> <span class="kw">rep</span>(<span class="kw">mean</span>(BrainCancer<span class="op">$</span>gtv), <span class="dv">5</span>),</span>
+<span id="cb752-9"><a href="survival-analysis-and-censored-data.html#cb752-9"></a>  <span class="dt">stereo =</span> <span class="kw">rep</span>(<span class="st">&quot;SRT&quot;</span>, <span class="dv">5</span>)</span>
+<span id="cb752-10"><a href="survival-analysis-and-censored-data.html#cb752-10"></a>)</span>
+<span id="cb752-11"><a href="survival-analysis-and-censored-data.html#cb752-11"></a>survplots &lt;-<span class="st"> </span><span class="kw">survfit</span>(fit, <span class="dt">newdata =</span> modaldata)</span>
+<span id="cb752-12"><a href="survival-analysis-and-censored-data.html#cb752-12"></a><span class="kw">plot</span>(survplots, <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Survival Probability&quot;</span>, <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>)</span>
+<span id="cb752-13"><a href="survival-analysis-and-censored-data.html#cb752-13"></a><span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;60&quot;</span>, <span class="st">&quot;70&quot;</span>, <span class="st">&quot;80&quot;</span>, <span class="st">&quot;90&quot;</span>, <span class="st">&quot;100&quot;</span>), <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="question-11-6" class="section level3 hasAnchor">
@@ -918,11 +918,11 @@ corresponds to which group. By eye, does there appear to be a difference
 between the two groups’ survival curves?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="survival-analysis-and-censored-data.html#cb740-1"></a>x &lt;-<span class="st"> </span><span class="kw">split</span>(<span class="kw">Surv</span>(table_data<span class="op">$</span>Y, table_data<span class="op">$</span>D), table_data<span class="op">$</span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>)</span>
-<span id="cb740-2"><a href="survival-analysis-and-censored-data.html#cb740-2"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">ylab =</span> <span class="st">&quot;Survival Probability&quot;</span>)</span>
-<span id="cb740-3"><a href="survival-analysis-and-censored-data.html#cb740-3"></a><span class="kw">lines</span>(<span class="kw">survfit</span>(x[[<span class="dv">1</span>]] <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">conf.int=</span><span class="ot">FALSE</span>, <span class="dt">col =</span> <span class="dv">2</span>)</span>
-<span id="cb740-4"><a href="survival-analysis-and-censored-data.html#cb740-4"></a><span class="kw">lines</span>(<span class="kw">survfit</span>(x[[<span class="dv">2</span>]] <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">conf.int=</span><span class="ot">FALSE</span>, <span class="dt">col =</span> <span class="dv">3</span>)</span>
-<span id="cb740-5"><a href="survival-analysis-and-censored-data.html#cb740-5"></a><span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;&gt;= 2&quot;</span>, <span class="st">&quot;&lt;2&quot;</span>), <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="survival-analysis-and-censored-data.html#cb753-1"></a>x &lt;-<span class="st"> </span><span class="kw">split</span>(<span class="kw">Surv</span>(table_data<span class="op">$</span>Y, table_data<span class="op">$</span>D), table_data<span class="op">$</span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb753-2"><a href="survival-analysis-and-censored-data.html#cb753-2"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">ylab =</span> <span class="st">&quot;Survival Probability&quot;</span>)</span>
+<span id="cb753-3"><a href="survival-analysis-and-censored-data.html#cb753-3"></a><span class="kw">lines</span>(<span class="kw">survfit</span>(x[[<span class="dv">1</span>]] <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">conf.int=</span><span class="ot">FALSE</span>, <span class="dt">col =</span> <span class="dv">2</span>)</span>
+<span id="cb753-4"><a href="survival-analysis-and-censored-data.html#cb753-4"></a><span class="kw">lines</span>(<span class="kw">survfit</span>(x[[<span class="dv">2</span>]] <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">conf.int=</span><span class="ot">FALSE</span>, <span class="dt">col =</span> <span class="dv">3</span>)</span>
+<span id="cb753-5"><a href="survival-analysis-and-censored-data.html#cb753-5"></a><span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;&gt;= 2&quot;</span>, <span class="st">&quot;&lt;2&quot;</span>), <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>There does not appear to be any difference between the curves.</p>
 <blockquote>
@@ -934,8 +934,8 @@ instantaneous probability of the event. Is there evidence that the true
 coefficient value is non-zero?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb741-1"><a href="survival-analysis-and-censored-data.html#cb741-1"></a>fit &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(Y, D) <span class="op">~</span><span class="st"> </span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> table_data)</span>
-<span id="cb741-2"><a href="survival-analysis-and-censored-data.html#cb741-2"></a>fit</span></code></pre></div>
+<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="survival-analysis-and-censored-data.html#cb754-1"></a>fit &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(Y, D) <span class="op">~</span><span class="st"> </span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> table_data)</span>
+<span id="cb754-2"><a href="survival-analysis-and-censored-data.html#cb754-2"></a>fit</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(Y, D) ~ X &lt; 2, data = table_data)
 ## 
@@ -956,10 +956,10 @@ log-rank test statistic compare to the <span class="math inline">\(p\)</span>-va
 the Cox model from (b)?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb743-1"><a href="survival-analysis-and-censored-data.html#cb743-1"></a><span class="kw">summary</span>(fit)<span class="op">$</span>sctest</span></code></pre></div>
+<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="survival-analysis-and-censored-data.html#cb756-1"></a><span class="kw">summary</span>(fit)<span class="op">$</span>sctest</span></code></pre></div>
 <pre><code>##       test         df     pvalue 
 ## 0.07644306 1.00000000 0.78217683</code></pre>
-<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb745-1"><a href="survival-analysis-and-censored-data.html#cb745-1"></a><span class="kw">survdiff</span>(<span class="kw">Surv</span>(Y, D) <span class="op">~</span><span class="st"> </span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> table_data)<span class="op">$</span>chisq</span></code></pre></div>
+<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="survival-analysis-and-censored-data.html#cb758-1"></a><span class="kw">survdiff</span>(<span class="kw">Surv</span>(Y, D) <span class="op">~</span><span class="st"> </span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> table_data)<span class="op">$</span>chisq</span></code></pre></div>
 <pre><code>## [1] 0.07644306</code></pre>
 <p>They are identical.</p>
 
