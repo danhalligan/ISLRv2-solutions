@@ -4,6 +4,7 @@ Title: Does not matter.
 Version: 0.0.1
 Imports: 
     ape,
+    BART,
     bookdown,
     boot,
     class,
