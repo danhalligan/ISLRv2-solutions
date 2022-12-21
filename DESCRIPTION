@@ -14,7 +14,7 @@ Imports:
     gbm,
     ggfortify,
     ggplot2,
-    ggtree,
+    bioc::ggtree,
     glmnet,
     ISLR2,
     keras,
