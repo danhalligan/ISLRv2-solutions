@@ -16,6 +16,7 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v2
+        cache: false
 
       - name: Setup keras
         run: Rscript -e "keras::install_keras()"
