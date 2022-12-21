@@ -14,7 +14,7 @@ Imports:
     gbm,
     ggfortify,
     ggplot2,
-    github:YuLab-SMU/ggtree,
+    ggtree,
     glmnet,
     ISLR2,
     keras,
@@ -32,4 +32,7 @@ Imports:
     tree,
     tidyverse,
     xfun
-Remotes: rstudio/bookdown
+Remotes: 
+    rstudio/bookdown,
+    bioc::ggtree
+    
