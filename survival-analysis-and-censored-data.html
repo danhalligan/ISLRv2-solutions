@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11 Survival Analysis and Censored Data | An Introduction to Statistical Learning</title>
   <meta name="description" content="11 Survival Analysis and Censored Data | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.29.3 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11 Survival Analysis and Censored Data | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -51,28 +51,27 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -92,7 +91,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -125,6 +124,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="islrv2.css" type="text/css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css" />
@@ -144,8 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="statistical-learning.html"><a href="statistical-learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a><ul>
-<li class="chapter" data-level="2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#conceptual"><i class="fa fa-check"></i><b>2.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="2" data-path="statistical-learning.html"><a href="statistical-learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#conceptual"><i class="fa fa-check"></i><b>2.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-1"><i class="fa fa-check"></i><b>2.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="2.1.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-2"><i class="fa fa-check"></i><b>2.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="2.1.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-3"><i class="fa fa-check"></i><b>2.1.3</b> Question 3</a></li>
@@ -154,14 +159,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.6" data-path="statistical-learning.html"><a href="statistical-learning.html#question-6"><i class="fa fa-check"></i><b>2.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="2.1.7" data-path="statistical-learning.html"><a href="statistical-learning.html#question-7"><i class="fa fa-check"></i><b>2.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#applied"><i class="fa fa-check"></i><b>2.2</b> Applied</a><ul>
+<li class="chapter" data-level="2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#applied"><i class="fa fa-check"></i><b>2.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-8"><i class="fa fa-check"></i><b>2.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="2.2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-9"><i class="fa fa-check"></i><b>2.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="2.2.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-10"><i class="fa fa-check"></i><b>2.2.3</b> Question 10</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#conceptual-1"><i class="fa fa-check"></i><b>3.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#conceptual-1"><i class="fa fa-check"></i><b>3.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="linear-regression.html"><a href="linear-regression.html#question-1-1"><i class="fa fa-check"></i><b>3.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="3.1.2" data-path="linear-regression.html"><a href="linear-regression.html#question-2-1"><i class="fa fa-check"></i><b>3.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="3.1.3" data-path="linear-regression.html"><a href="linear-regression.html#question-3-1"><i class="fa fa-check"></i><b>3.1.3</b> Question 3</a></li>
@@ -170,7 +178,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.6" data-path="linear-regression.html"><a href="linear-regression.html#question-6-1"><i class="fa fa-check"></i><b>3.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="3.1.7" data-path="linear-regression.html"><a href="linear-regression.html#question-7-1"><i class="fa fa-check"></i><b>3.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#applied-1"><i class="fa fa-check"></i><b>3.2</b> Applied</a><ul>
+<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#applied-1"><i class="fa fa-check"></i><b>3.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="linear-regression.html"><a href="linear-regression.html#question-8-1"><i class="fa fa-check"></i><b>3.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="3.2.2" data-path="linear-regression.html"><a href="linear-regression.html#question-9-1"><i class="fa fa-check"></i><b>3.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="3.2.3" data-path="linear-regression.html"><a href="linear-regression.html#question-10-1"><i class="fa fa-check"></i><b>3.2.3</b> Question 10</a></li>
@@ -181,8 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.8" data-path="linear-regression.html"><a href="linear-regression.html#question-15"><i class="fa fa-check"></i><b>3.2.8</b> Question 15</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a><ul>
-<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#conceptual-2"><i class="fa fa-check"></i><b>4.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#conceptual-2"><i class="fa fa-check"></i><b>4.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="classification.html"><a href="classification.html#question-1-2"><i class="fa fa-check"></i><b>4.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="4.1.2" data-path="classification.html"><a href="classification.html#question-2-2"><i class="fa fa-check"></i><b>4.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="4.1.3" data-path="classification.html"><a href="classification.html#question-3-2"><i class="fa fa-check"></i><b>4.1.3</b> Question 3</a></li>
@@ -196,21 +207,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.11" data-path="classification.html"><a href="classification.html#question-11-1"><i class="fa fa-check"></i><b>4.1.11</b> Question 11</a></li>
 <li class="chapter" data-level="4.1.12" data-path="classification.html"><a href="classification.html#question-12-1"><i class="fa fa-check"></i><b>4.1.12</b> Question 12</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#applied-2"><i class="fa fa-check"></i><b>4.2</b> Applied</a><ul>
+<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#applied-2"><i class="fa fa-check"></i><b>4.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="classification.html"><a href="classification.html#question-13-1"><i class="fa fa-check"></i><b>4.2.1</b> Question 13</a></li>
 <li class="chapter" data-level="4.2.2" data-path="classification.html"><a href="classification.html#question-14-1"><i class="fa fa-check"></i><b>4.2.2</b> Question 14</a></li>
 <li class="chapter" data-level="4.2.3" data-path="classification.html"><a href="classification.html#question-15-1"><i class="fa fa-check"></i><b>4.2.3</b> Question 15</a></li>
 <li class="chapter" data-level="4.2.4" data-path="classification.html"><a href="classification.html#question-13-2"><i class="fa fa-check"></i><b>4.2.4</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a><ul>
-<li class="chapter" data-level="5.1" data-path="resampling-methods.html"><a href="resampling-methods.html#conceptual-3"><i class="fa fa-check"></i><b>5.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="resampling-methods.html"><a href="resampling-methods.html#conceptual-3"><i class="fa fa-check"></i><b>5.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-1-3"><i class="fa fa-check"></i><b>5.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="5.1.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-2-3"><i class="fa fa-check"></i><b>5.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="5.1.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-3-3"><i class="fa fa-check"></i><b>5.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="5.1.4" data-path="resampling-methods.html"><a href="resampling-methods.html#question-4-3"><i class="fa fa-check"></i><b>5.1.4</b> Question 4</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="resampling-methods.html"><a href="resampling-methods.html#applied-3"><i class="fa fa-check"></i><b>5.2</b> Applied</a><ul>
+<li class="chapter" data-level="5.2" data-path="resampling-methods.html"><a href="resampling-methods.html#applied-3"><i class="fa fa-check"></i><b>5.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-5-3"><i class="fa fa-check"></i><b>5.2.1</b> Question 5</a></li>
 <li class="chapter" data-level="5.2.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-6-3"><i class="fa fa-check"></i><b>5.2.2</b> Question 6</a></li>
 <li class="chapter" data-level="5.2.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-7-3"><i class="fa fa-check"></i><b>5.2.3</b> Question 7</a></li>
@@ -218,8 +233,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.5" data-path="resampling-methods.html"><a href="resampling-methods.html#question-9-3"><i class="fa fa-check"></i><b>5.2.5</b> Question 9</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a><ul>
-<li class="chapter" data-level="6.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#conceptual-4"><i class="fa fa-check"></i><b>6.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#conceptual-4"><i class="fa fa-check"></i><b>6.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-1-4"><i class="fa fa-check"></i><b>6.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="6.1.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-2-4"><i class="fa fa-check"></i><b>6.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="6.1.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-3-4"><i class="fa fa-check"></i><b>6.1.3</b> Question 3</a></li>
@@ -228,22 +245,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-6-4"><i class="fa fa-check"></i><b>6.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="6.1.7" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-7-4"><i class="fa fa-check"></i><b>6.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#applied-4"><i class="fa fa-check"></i><b>6.2</b> Applied</a><ul>
+<li class="chapter" data-level="6.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#applied-4"><i class="fa fa-check"></i><b>6.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-8-4"><i class="fa fa-check"></i><b>6.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="6.2.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-9-4"><i class="fa fa-check"></i><b>6.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="6.2.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-10-3"><i class="fa fa-check"></i><b>6.2.3</b> Question 10</a></li>
 <li class="chapter" data-level="6.2.4" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-11-2"><i class="fa fa-check"></i><b>6.2.4</b> Question 11</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a><ul>
-<li class="chapter" data-level="7.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#conceptual-5"><i class="fa fa-check"></i><b>7.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#conceptual-5"><i class="fa fa-check"></i><b>7.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-1-5"><i class="fa fa-check"></i><b>7.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="7.1.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-2-5"><i class="fa fa-check"></i><b>7.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="7.1.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-3-5"><i class="fa fa-check"></i><b>7.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="7.1.4" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-4-5"><i class="fa fa-check"></i><b>7.1.4</b> Question 4</a></li>
 <li class="chapter" data-level="7.1.5" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-5-5"><i class="fa fa-check"></i><b>7.1.5</b> Question 5</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#applied-5"><i class="fa fa-check"></i><b>7.2</b> Applied</a><ul>
+<li class="chapter" data-level="7.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#applied-5"><i class="fa fa-check"></i><b>7.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-6-5"><i class="fa fa-check"></i><b>7.2.1</b> Question 6</a></li>
 <li class="chapter" data-level="7.2.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-7-5"><i class="fa fa-check"></i><b>7.2.2</b> Question 7</a></li>
 <li class="chapter" data-level="7.2.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-8-5"><i class="fa fa-check"></i><b>7.2.3</b> Question 8</a></li>
@@ -253,8 +274,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-12-2"><i class="fa fa-check"></i><b>7.2.7</b> Question 12</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a><ul>
-<li class="chapter" data-level="8.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#conceptual-6"><i class="fa fa-check"></i><b>8.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#conceptual-6"><i class="fa fa-check"></i><b>8.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-1-6"><i class="fa fa-check"></i><b>8.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="8.1.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-2-6"><i class="fa fa-check"></i><b>8.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="8.1.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-3-6"><i class="fa fa-check"></i><b>8.1.3</b> Question 3</a></li>
@@ -262,7 +285,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.5" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-5-6"><i class="fa fa-check"></i><b>8.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="8.1.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-6-6"><i class="fa fa-check"></i><b>8.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#applied-6"><i class="fa fa-check"></i><b>8.2</b> Applied</a><ul>
+<li class="chapter" data-level="8.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#applied-6"><i class="fa fa-check"></i><b>8.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="8.2.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-7-6"><i class="fa fa-check"></i><b>8.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="8.2.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-8-6"><i class="fa fa-check"></i><b>8.2.2</b> Question 8</a></li>
 <li class="chapter" data-level="8.2.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-9-6"><i class="fa fa-check"></i><b>8.2.3</b> Question 9</a></li>
@@ -271,13 +295,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-12-3"><i class="fa fa-check"></i><b>8.2.6</b> Question 12</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a><ul>
-<li class="chapter" data-level="9.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#conceptual-7"><i class="fa fa-check"></i><b>9.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#conceptual-7"><i class="fa fa-check"></i><b>9.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-1-7"><i class="fa fa-check"></i><b>9.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="9.1.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-2-7"><i class="fa fa-check"></i><b>9.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="9.1.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-3-7"><i class="fa fa-check"></i><b>9.1.3</b> Question 3</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#applied-7"><i class="fa fa-check"></i><b>9.2</b> Applied</a><ul>
+<li class="chapter" data-level="9.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#applied-7"><i class="fa fa-check"></i><b>9.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-4-7"><i class="fa fa-check"></i><b>9.2.1</b> Question 4</a></li>
 <li class="chapter" data-level="9.2.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-5-7"><i class="fa fa-check"></i><b>9.2.2</b> Question 5</a></li>
 <li class="chapter" data-level="9.2.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-6-7"><i class="fa fa-check"></i><b>9.2.3</b> Question 6</a></li>
@@ -285,15 +312,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-8-7"><i class="fa fa-check"></i><b>9.2.5</b> Question 8</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a><ul>
-<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#conceptual-8"><i class="fa fa-check"></i><b>10.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#conceptual-8"><i class="fa fa-check"></i><b>10.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="10.1.1" data-path="deep-learning.html"><a href="deep-learning.html#question-1-8"><i class="fa fa-check"></i><b>10.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="10.1.2" data-path="deep-learning.html"><a href="deep-learning.html#question-2-8"><i class="fa fa-check"></i><b>10.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="10.1.3" data-path="deep-learning.html"><a href="deep-learning.html#question-3-8"><i class="fa fa-check"></i><b>10.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="10.1.4" data-path="deep-learning.html"><a href="deep-learning.html#question-4-8"><i class="fa fa-check"></i><b>10.1.4</b> Question 4</a></li>
 <li class="chapter" data-level="10.1.5" data-path="deep-learning.html"><a href="deep-learning.html#question-5-8"><i class="fa fa-check"></i><b>10.1.5</b> Question 5</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#applied-8"><i class="fa fa-check"></i><b>10.2</b> Applied</a><ul>
+<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#applied-8"><i class="fa fa-check"></i><b>10.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="deep-learning.html"><a href="deep-learning.html#question-6-8"><i class="fa fa-check"></i><b>10.2.1</b> Question 6</a></li>
 <li class="chapter" data-level="10.2.2" data-path="deep-learning.html"><a href="deep-learning.html#question-7-8"><i class="fa fa-check"></i><b>10.2.2</b> Question 7</a></li>
 <li class="chapter" data-level="10.2.3" data-path="deep-learning.html"><a href="deep-learning.html#question-8-8"><i class="fa fa-check"></i><b>10.2.3</b> Question 8</a></li>
@@ -304,8 +334,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.8" data-path="deep-learning.html"><a href="deep-learning.html#question-13-3"><i class="fa fa-check"></i><b>10.2.8</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a><ul>
-<li class="chapter" data-level="11.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#conceptual-9"><i class="fa fa-check"></i><b>11.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#conceptual-9"><i class="fa fa-check"></i><b>11.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-1-9"><i class="fa fa-check"></i><b>11.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="11.1.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-2-9"><i class="fa fa-check"></i><b>11.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="11.1.3" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-3-9"><i class="fa fa-check"></i><b>11.1.3</b> Question 3</a></li>
@@ -316,13 +348,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.8" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-8-9"><i class="fa fa-check"></i><b>11.1.8</b> Question 8</a></li>
 <li class="chapter" data-level="11.1.9" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-9-8"><i class="fa fa-check"></i><b>11.1.9</b> Question 9</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#applied-9"><i class="fa fa-check"></i><b>11.2</b> Applied</a><ul>
+<li class="chapter" data-level="11.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#applied-9"><i class="fa fa-check"></i><b>11.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="11.2.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-10-7"><i class="fa fa-check"></i><b>11.2.1</b> Question 10</a></li>
 <li class="chapter" data-level="11.2.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-11-6"><i class="fa fa-check"></i><b>11.2.2</b> Question 11</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a><ul>
-<li class="chapter" data-level="12.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#conceptual-10"><i class="fa fa-check"></i><b>12.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#conceptual-10"><i class="fa fa-check"></i><b>12.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-1-10"><i class="fa fa-check"></i><b>12.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="12.1.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-2-10"><i class="fa fa-check"></i><b>12.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="12.1.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-3-10"><i class="fa fa-check"></i><b>12.1.3</b> Question 3</a></li>
@@ -330,7 +365,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.5" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-5-10"><i class="fa fa-check"></i><b>12.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="12.1.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-6-10"><i class="fa fa-check"></i><b>12.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#applied-10"><i class="fa fa-check"></i><b>12.2</b> Applied</a><ul>
+<li class="chapter" data-level="12.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#applied-10"><i class="fa fa-check"></i><b>12.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-7-10"><i class="fa fa-check"></i><b>12.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="12.2.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-8-10"><i class="fa fa-check"></i><b>12.2.2</b> Question 8</a></li>
 <li class="chapter" data-level="12.2.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-9-9"><i class="fa fa-check"></i><b>12.2.3</b> Question 9</a></li>
@@ -340,8 +376,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.7" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-13-4"><i class="fa fa-check"></i><b>12.2.7</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a><ul>
-<li class="chapter" data-level="13.1" data-path="multiple-testing.html"><a href="multiple-testing.html#conceptual-11"><i class="fa fa-check"></i><b>13.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="multiple-testing.html"><a href="multiple-testing.html#conceptual-11"><i class="fa fa-check"></i><b>13.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-1-11"><i class="fa fa-check"></i><b>13.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="13.1.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-2-11"><i class="fa fa-check"></i><b>13.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="13.1.3" data-path="multiple-testing.html"><a href="multiple-testing.html#question-3-11"><i class="fa fa-check"></i><b>13.1.3</b> Question 3</a></li>
@@ -349,7 +387,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.1.5" data-path="multiple-testing.html"><a href="multiple-testing.html#question-5-11"><i class="fa fa-check"></i><b>13.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="13.1.6" data-path="multiple-testing.html"><a href="multiple-testing.html#question-6-11"><i class="fa fa-check"></i><b>13.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="multiple-testing.html"><a href="multiple-testing.html#applied-11"><i class="fa fa-check"></i><b>13.2</b> Applied</a><ul>
+<li class="chapter" data-level="13.2" data-path="multiple-testing.html"><a href="multiple-testing.html#applied-11"><i class="fa fa-check"></i><b>13.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-7-11"><i class="fa fa-check"></i><b>13.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="13.2.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-8-11"><i class="fa fa-check"></i><b>13.2.2</b> Question 8</a></li>
 </ul></li>
@@ -374,11 +413,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="survival-analysis-and-censored-data" class="section level1 hasAnchor">
+<div id="survival-analysis-and-censored-data" class="section level1 hasAnchor" number="11">
 <h1><span class="header-section-number">11</span> Survival Analysis and Censored Data<a href="survival-analysis-and-censored-data.html#survival-analysis-and-censored-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="conceptual-9" class="section level2 hasAnchor">
+<div id="conceptual-9" class="section level2 hasAnchor" number="11.1">
 <h2><span class="header-section-number">11.1</span> Conceptual<a href="survival-analysis-and-censored-data.html#conceptual-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="question-1-9" class="section level3 hasAnchor">
+<div id="question-1-9" class="section level3 hasAnchor" number="11.1.1">
 <h3><span class="header-section-number">11.1.1</span> Question 1<a href="survival-analysis-and-censored-data.html#question-1-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>For each example, state whether or not the censoring mechanism is independent.
@@ -466,7 +505,7 @@ are of higher quality.</li>
 that any difference in quality between locations will be associated with
 censoring, so censoring is not independent.</p>
 </div>
-<div id="question-2-9" class="section level3 hasAnchor">
+<div id="question-2-9" class="section level3 hasAnchor" number="11.1.2">
 <h3><span class="header-section-number">11.1.2</span> Question 2<a href="survival-analysis-and-censored-data.html#question-2-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>We conduct a study with <span class="math inline">\(n = 4\)</span> participants who have just purchased cell
@@ -514,7 +553,7 @@ defines this to be 1 if we observe the true “survival” time and 0 if we obse
 the censored time. Therefore, for these participants, the values are: 1, 0, 0
 and 1.</p>
 </div>
-<div id="question-3-9" class="section level3 hasAnchor">
+<div id="question-3-9" class="section level3 hasAnchor" number="11.1.3">
 <h3><span class="header-section-number">11.1.3</span> Question 3<a href="survival-analysis-and-censored-data.html#question-3-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>For the example in Exercise 2, report the values of <span class="math inline">\(K\)</span>, <span class="math inline">\(d_1,...,d_K\)</span>,
@@ -532,16 +571,16 @@ censored and finally the study ends with patient 2 still involved. Therefore
 takes values: 1, 1.</li>
 </ul>
 <p>We can check by using the <code>survival</code> package.</p>
-<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="survival-analysis-and-censored-data.html#cb740-1"></a><span class="kw">library</span>(survival)</span>
-<span id="cb740-2"><a href="survival-analysis-and-censored-data.html#cb740-2"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(<span class="kw">c</span>(<span class="fl">1.2</span>, <span class="dv">2</span>, <span class="fl">1.5</span>, <span class="fl">0.2</span>), <span class="dt">event =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb740-3"><a href="survival-analysis-and-censored-data.html#cb740-3"></a><span class="kw">summary</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb749-1"><a href="survival-analysis-and-censored-data.html#cb749-1" aria-hidden="true"></a><span class="kw">library</span>(survival)</span>
+<span id="cb749-2"><a href="survival-analysis-and-censored-data.html#cb749-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(<span class="kw">c</span>(<span class="fl">1.2</span>, <span class="dv">2</span>, <span class="fl">1.5</span>, <span class="fl">0.2</span>), <span class="dt">event =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb749-3"><a href="survival-analysis-and-censored-data.html#cb749-3" aria-hidden="true"></a><span class="kw">summary</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## Call: survfit(formula = x ~ 1)
 ## 
 ##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
 ##   0.2      4       1     0.75   0.217        0.426            1
 ##   1.2      3       1     0.50   0.250        0.188            1</code></pre>
 </div>
-<div id="question-4-9" class="section level3 hasAnchor">
+<div id="question-4-9" class="section level3 hasAnchor" number="11.1.4">
 <h3><span class="header-section-number">11.1.4</span> Question 4<a href="survival-analysis-and-censored-data.html#question-4-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This problem makes use of the Kaplan-Meier survival curve displayed in Figure
@@ -555,26 +594,28 @@ Table 11.4. The covariate column of that table is not needed for this problem.</
 risk <span class="math inline">\(r_k\)</span> are 5 and 4 (one was censored early on), thus survival probability is
 <span class="math inline">\(4/5 * 3/4 = 0.6\)</span>.</p>
 <p>Equivalently, we can use the survival package.</p>
-<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="survival-analysis-and-censored-data.html#cb742-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-## ✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
-## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
-## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-## ✔ readr   2.1.3      ✔ forcats 0.5.2 
+<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="survival-analysis-and-censored-data.html#cb751-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.3     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.2     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb744-1"><a href="survival-analysis-and-censored-data.html#cb744-1"></a>table_data &lt;-<span class="st"> </span><span class="kw">tribble</span>(</span>
-<span id="cb744-2"><a href="survival-analysis-and-censored-data.html#cb744-2"></a>  <span class="op">~</span>Y, <span class="op">~</span>D, <span class="op">~</span>X, </span>
-<span id="cb744-3"><a href="survival-analysis-and-censored-data.html#cb744-3"></a>  <span class="fl">26.5</span>, <span class="dv">1</span>, <span class="fl">0.1</span>,</span>
-<span id="cb744-4"><a href="survival-analysis-and-censored-data.html#cb744-4"></a>  <span class="fl">37.2</span>, <span class="dv">1</span>, <span class="dv">11</span>,</span>
-<span id="cb744-5"><a href="survival-analysis-and-censored-data.html#cb744-5"></a>  <span class="fl">57.3</span>, <span class="dv">1</span>, <span class="fl">-0.3</span>,</span>
-<span id="cb744-6"><a href="survival-analysis-and-censored-data.html#cb744-6"></a>  <span class="fl">90.8</span>, <span class="dv">0</span>, <span class="fl">2.8</span>,</span>
-<span id="cb744-7"><a href="survival-analysis-and-censored-data.html#cb744-7"></a>  <span class="fl">20.2</span>, <span class="dv">0</span>, <span class="fl">1.8</span>,</span>
-<span id="cb744-8"><a href="survival-analysis-and-censored-data.html#cb744-8"></a>  <span class="fl">89.8</span>, <span class="dv">0</span>, <span class="fl">0.4</span></span>
-<span id="cb744-9"><a href="survival-analysis-and-censored-data.html#cb744-9"></a>)</span>
-<span id="cb744-10"><a href="survival-analysis-and-censored-data.html#cb744-10"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(table_data<span class="op">$</span>Y, table_data<span class="op">$</span>D)</span>
-<span id="cb744-11"><a href="survival-analysis-and-censored-data.html#cb744-11"></a><span class="kw">summary</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>))</span></code></pre></div>
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="survival-analysis-and-censored-data.html#cb753-1" aria-hidden="true"></a>table_data &lt;-<span class="st"> </span><span class="kw">tribble</span>(</span>
+<span id="cb753-2"><a href="survival-analysis-and-censored-data.html#cb753-2" aria-hidden="true"></a>  <span class="op">~</span>Y, <span class="op">~</span>D, <span class="op">~</span>X, </span>
+<span id="cb753-3"><a href="survival-analysis-and-censored-data.html#cb753-3" aria-hidden="true"></a>  <span class="fl">26.5</span>, <span class="dv">1</span>, <span class="fl">0.1</span>,</span>
+<span id="cb753-4"><a href="survival-analysis-and-censored-data.html#cb753-4" aria-hidden="true"></a>  <span class="fl">37.2</span>, <span class="dv">1</span>, <span class="dv">11</span>,</span>
+<span id="cb753-5"><a href="survival-analysis-and-censored-data.html#cb753-5" aria-hidden="true"></a>  <span class="fl">57.3</span>, <span class="dv">1</span>, <span class="fl">-0.3</span>,</span>
+<span id="cb753-6"><a href="survival-analysis-and-censored-data.html#cb753-6" aria-hidden="true"></a>  <span class="fl">90.8</span>, <span class="dv">0</span>, <span class="fl">2.8</span>,</span>
+<span id="cb753-7"><a href="survival-analysis-and-censored-data.html#cb753-7" aria-hidden="true"></a>  <span class="fl">20.2</span>, <span class="dv">0</span>, <span class="fl">1.8</span>,</span>
+<span id="cb753-8"><a href="survival-analysis-and-censored-data.html#cb753-8" aria-hidden="true"></a>  <span class="fl">89.8</span>, <span class="dv">0</span>, <span class="fl">0.4</span></span>
+<span id="cb753-9"><a href="survival-analysis-and-censored-data.html#cb753-9" aria-hidden="true"></a>)</span>
+<span id="cb753-10"><a href="survival-analysis-and-censored-data.html#cb753-10" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(table_data<span class="op">$</span>Y, table_data<span class="op">$</span>D)</span>
+<span id="cb753-11"><a href="survival-analysis-and-censored-data.html#cb753-11" aria-hidden="true"></a><span class="kw">summary</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## Call: survfit(formula = x ~ 1)
 ## 
 ##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
@@ -605,7 +646,7 @@ answer!)</p>
 \end{cases}
 \]</span></p>
 </div>
-<div id="question-5-9" class="section level3 hasAnchor">
+<div id="question-5-9" class="section level3 hasAnchor" number="11.1.5">
 <h3><span class="header-section-number">11.1.5</span> Question 5<a href="survival-analysis-and-censored-data.html#question-5-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Sketch the survival function given by the equation</p>
@@ -620,19 +661,19 @@ answer!)</p>
 </blockquote>
 <p>We can draw this plot, or even engineer data that will generate the required
 plot…</p>
-<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb746-1"><a href="survival-analysis-and-censored-data.html#cb746-1"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, </span>
-<span id="cb746-2"><a href="survival-analysis-and-censored-data.html#cb746-2"></a>    <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), </span>
-<span id="cb746-3"><a href="survival-analysis-and-censored-data.html#cb746-3"></a>    <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb746-4"><a href="survival-analysis-and-censored-data.html#cb746-4"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>, </span>
-<span id="cb746-5"><a href="survival-analysis-and-censored-data.html#cb746-5"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Time in Days&quot;</span></span>
-<span id="cb746-6"><a href="survival-analysis-and-censored-data.html#cb746-6"></a>)</span>
-<span id="cb746-7"><a href="survival-analysis-and-censored-data.html#cb746-7"></a><span class="kw">lines</span>(</span>
-<span id="cb746-8"><a href="survival-analysis-and-censored-data.html#cb746-8"></a>    <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">31</span>, <span class="dv">31</span>, <span class="dv">77</span>, <span class="dv">77</span>, <span class="dv">100</span>),</span>
-<span id="cb746-9"><a href="survival-analysis-and-censored-data.html#cb746-9"></a>    <span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.22</span>, <span class="fl">0.22</span>)</span>
-<span id="cb746-10"><a href="survival-analysis-and-censored-data.html#cb746-10"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="survival-analysis-and-censored-data.html#cb755-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, </span>
+<span id="cb755-2"><a href="survival-analysis-and-censored-data.html#cb755-2" aria-hidden="true"></a>    <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), </span>
+<span id="cb755-3"><a href="survival-analysis-and-censored-data.html#cb755-3" aria-hidden="true"></a>    <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb755-4"><a href="survival-analysis-and-censored-data.html#cb755-4" aria-hidden="true"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>, </span>
+<span id="cb755-5"><a href="survival-analysis-and-censored-data.html#cb755-5" aria-hidden="true"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Time in Days&quot;</span></span>
+<span id="cb755-6"><a href="survival-analysis-and-censored-data.html#cb755-6" aria-hidden="true"></a>)</span>
+<span id="cb755-7"><a href="survival-analysis-and-censored-data.html#cb755-7" aria-hidden="true"></a><span class="kw">lines</span>(</span>
+<span id="cb755-8"><a href="survival-analysis-and-censored-data.html#cb755-8" aria-hidden="true"></a>    <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">31</span>, <span class="dv">31</span>, <span class="dv">77</span>, <span class="dv">77</span>, <span class="dv">100</span>),</span>
+<span id="cb755-9"><a href="survival-analysis-and-censored-data.html#cb755-9" aria-hidden="true"></a>    <span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.8</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.22</span>, <span class="fl">0.22</span>)</span>
+<span id="cb755-10"><a href="survival-analysis-and-censored-data.html#cb755-10" aria-hidden="true"></a>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
-<div id="question-6-9" class="section level3 hasAnchor">
+<div id="question-6-9" class="section level3 hasAnchor" number="11.1.6">
 <h3><span class="header-section-number">11.1.6</span> Question 6<a href="survival-analysis-and-censored-data.html#question-6-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This problem makes use of the data displayed in Figure 11.1. In completing
@@ -659,16 +700,16 @@ do not need to use any software to do this—you can sketch it by hand using
 the results obtained in (a).)</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb747-1"><a href="survival-analysis-and-censored-data.html#cb747-1"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, </span>
-<span id="cb747-2"><a href="survival-analysis-and-censored-data.html#cb747-2"></a>    <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">350</span>), </span>
-<span id="cb747-3"><a href="survival-analysis-and-censored-data.html#cb747-3"></a>    <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
-<span id="cb747-4"><a href="survival-analysis-and-censored-data.html#cb747-4"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>, </span>
-<span id="cb747-5"><a href="survival-analysis-and-censored-data.html#cb747-5"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Time in Days&quot;</span></span>
-<span id="cb747-6"><a href="survival-analysis-and-censored-data.html#cb747-6"></a>)</span>
-<span id="cb747-7"><a href="survival-analysis-and-censored-data.html#cb747-7"></a><span class="kw">lines</span>(</span>
-<span id="cb747-8"><a href="survival-analysis-and-censored-data.html#cb747-8"></a>    <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">300</span>, <span class="dv">300</span>, <span class="dv">350</span>),</span>
-<span id="cb747-9"><a href="survival-analysis-and-censored-data.html#cb747-9"></a>    <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.75</span>, <span class="fl">0.75</span>, <span class="fl">0.375</span>, <span class="fl">0.375</span>)</span>
-<span id="cb747-10"><a href="survival-analysis-and-censored-data.html#cb747-10"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="survival-analysis-and-censored-data.html#cb756-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, </span>
+<span id="cb756-2"><a href="survival-analysis-and-censored-data.html#cb756-2" aria-hidden="true"></a>    <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">350</span>), </span>
+<span id="cb756-3"><a href="survival-analysis-and-censored-data.html#cb756-3" aria-hidden="true"></a>    <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb756-4"><a href="survival-analysis-and-censored-data.html#cb756-4" aria-hidden="true"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>, </span>
+<span id="cb756-5"><a href="survival-analysis-and-censored-data.html#cb756-5" aria-hidden="true"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Time in Days&quot;</span></span>
+<span id="cb756-6"><a href="survival-analysis-and-censored-data.html#cb756-6" aria-hidden="true"></a>)</span>
+<span id="cb756-7"><a href="survival-analysis-and-censored-data.html#cb756-7" aria-hidden="true"></a><span class="kw">lines</span>(</span>
+<span id="cb756-8"><a href="survival-analysis-and-censored-data.html#cb756-8" aria-hidden="true"></a>    <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">300</span>, <span class="dv">300</span>, <span class="dv">350</span>),</span>
+<span id="cb756-9"><a href="survival-analysis-and-censored-data.html#cb756-9" aria-hidden="true"></a>    <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.75</span>, <span class="fl">0.75</span>, <span class="fl">0.375</span>, <span class="fl">0.375</span>)</span>
+<span id="cb756-10"><a href="survival-analysis-and-censored-data.html#cb756-10" aria-hidden="true"></a>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>x &lt;- Surv(c(300, 350, 150, 250), c(1, 0, 1, 0))</p>
 <blockquote>
@@ -692,7 +733,7 @@ not occur within 310 days?</li>
 \end{cases}
 \]</span></p>
 </div>
-<div id="question-7-9" class="section level3 hasAnchor">
+<div id="question-7-9" class="section level3 hasAnchor" number="11.1.7">
 <h3><span class="header-section-number">11.1.7</span> Question 7<a href="survival-analysis-and-censored-data.html#question-7-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In this problem, we will derive (11.5) and (11.6), which are needed for the
@@ -726,7 +767,7 @@ r_{1k} \frac{q_k}{r_k} \frac{r_k-q_k}{r_k} \frac{r_k - r_{1k}}{r_k - 1}
 \]</span></p>
 <p>These are equivalent to 11.5 and 11.6.</p>
 </div>
-<div id="question-8-9" class="section level3 hasAnchor">
+<div id="question-8-9" class="section level3 hasAnchor" number="11.1.8">
 <h3><span class="header-section-number">11.1.8</span> Question 8<a href="survival-analysis-and-censored-data.html#question-8-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Recall that the survival function <span class="math inline">\(S(t)\)</span>, the hazard function <span class="math inline">\(h(t)\)</span>, and the
@@ -749,7 +790,7 @@ is its pdf: <span class="math inline">\(f(t) = \frac{d F(t)}{dt}\)</span>.</p>
 From basic calculus, this can be rewritten as <span class="math inline">\(h(t) = -\frac{d}{dt}\log{S(t)}\)</span>.
 Integrating and then exponentiating we get the second identity.</p>
 </div>
-<div id="question-9-8" class="section level3 hasAnchor">
+<div id="question-9-8" class="section level3 hasAnchor" number="11.1.9">
 <h3><span class="header-section-number">11.1.9</span> Question 9<a href="survival-analysis-and-censored-data.html#question-9-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In this exercise, we will explore the consequences of assuming that the
@@ -802,9 +843,9 @@ function (11.13).</li>
 the total observation time over the total number of deaths.</p>
 </div>
 </div>
-<div id="applied-9" class="section level2 hasAnchor">
+<div id="applied-9" class="section level2 hasAnchor" number="11.2">
 <h2><span class="header-section-number">11.2</span> Applied<a href="survival-analysis-and-censored-data.html#applied-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="question-10-7" class="section level3 hasAnchor">
+<div id="question-10-7" class="section level3 hasAnchor" number="11.2.1">
 <h3><span class="header-section-number">11.2.1</span> Question 10<a href="survival-analysis-and-censored-data.html#question-10-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This exercise focuses on the brain tumor data, which is included in the
@@ -814,14 +855,14 @@ the total observation time over the total number of deaths.</p>
 the <code>survfit()</code> function in the <code>survival</code> package.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="survival-analysis-and-censored-data.html#cb748-1"></a><span class="kw">library</span>(ISLR2)</span>
-<span id="cb748-2"><a href="survival-analysis-and-censored-data.html#cb748-2"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(BrainCancer<span class="op">$</span>time, BrainCancer<span class="op">$</span>status)</span>
-<span id="cb748-3"><a href="survival-analysis-and-censored-data.html#cb748-3"></a><span class="kw">plot</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), </span>
-<span id="cb748-4"><a href="survival-analysis-and-censored-data.html#cb748-4"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, </span>
-<span id="cb748-5"><a href="survival-analysis-and-censored-data.html#cb748-5"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>,</span>
-<span id="cb748-6"><a href="survival-analysis-and-censored-data.html#cb748-6"></a>    <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
-<span id="cb748-7"><a href="survival-analysis-and-censored-data.html#cb748-7"></a>    <span class="dt">conf.int =</span> <span class="fl">0.67</span></span>
-<span id="cb748-8"><a href="survival-analysis-and-censored-data.html#cb748-8"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="survival-analysis-and-censored-data.html#cb757-1" aria-hidden="true"></a><span class="kw">library</span>(ISLR2)</span>
+<span id="cb757-2"><a href="survival-analysis-and-censored-data.html#cb757-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">Surv</span>(BrainCancer<span class="op">$</span>time, BrainCancer<span class="op">$</span>status)</span>
+<span id="cb757-3"><a href="survival-analysis-and-censored-data.html#cb757-3" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), </span>
+<span id="cb757-4"><a href="survival-analysis-and-censored-data.html#cb757-4" aria-hidden="true"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, </span>
+<span id="cb757-5"><a href="survival-analysis-and-censored-data.html#cb757-5" aria-hidden="true"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>,</span>
+<span id="cb757-6"><a href="survival-analysis-and-censored-data.html#cb757-6" aria-hidden="true"></a>    <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
+<span id="cb757-7"><a href="survival-analysis-and-censored-data.html#cb757-7" aria-hidden="true"></a>    <span class="dt">conf.int =</span> <span class="fl">0.67</span></span>
+<span id="cb757-8"><a href="survival-analysis-and-censored-data.html#cb757-8" aria-hidden="true"></a>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -832,26 +873,26 @@ standard error of the Kaplan-Meier survival curve at each timepoint. Compare
 this to the standard errors obtained in (a).</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb749-1"><a href="survival-analysis-and-censored-data.html#cb749-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb749-2"><a href="survival-analysis-and-censored-data.html#cb749-2"></a><span class="kw">plot</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), </span>
-<span id="cb749-3"><a href="survival-analysis-and-censored-data.html#cb749-3"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, </span>
-<span id="cb749-4"><a href="survival-analysis-and-censored-data.html#cb749-4"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>,</span>
-<span id="cb749-5"><a href="survival-analysis-and-censored-data.html#cb749-5"></a>    <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
-<span id="cb749-6"><a href="survival-analysis-and-censored-data.html#cb749-6"></a>    <span class="dt">conf.int =</span> <span class="fl">0.67</span></span>
-<span id="cb749-7"><a href="survival-analysis-and-censored-data.html#cb749-7"></a>)</span>
-<span id="cb749-8"><a href="survival-analysis-and-censored-data.html#cb749-8"></a>fit &lt;-<span class="st"> </span><span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb749-9"><a href="survival-analysis-and-censored-data.html#cb749-9"></a>dat &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="dv">0</span>, fit<span class="op">$</span>time))</span>
-<span id="cb749-10"><a href="survival-analysis-and-censored-data.html#cb749-10"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">200</span>) {</span>
-<span id="cb749-11"><a href="survival-analysis-and-censored-data.html#cb749-11"></a>    y &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">sample</span>(x, <span class="dv">88</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb749-12"><a href="survival-analysis-and-censored-data.html#cb749-12"></a>    y &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="dv">0</span>, y<span class="op">$</span>time), <span class="st">&quot;s{i}&quot;</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, y<span class="op">$</span>surv))</span>
-<span id="cb749-13"><a href="survival-analysis-and-censored-data.html#cb749-13"></a>    dat &lt;-<span class="st"> </span><span class="kw">left_join</span>(dat, y, <span class="dt">by =</span> <span class="st">&quot;time&quot;</span>)</span>
-<span id="cb749-14"><a href="survival-analysis-and-censored-data.html#cb749-14"></a>}</span>
-<span id="cb749-15"><a href="survival-analysis-and-censored-data.html#cb749-15"></a>res &lt;-<span class="st"> </span><span class="kw">fill</span>(dat, <span class="kw">starts_with</span>(<span class="st">&quot;s&quot;</span>)) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb749-16"><a href="survival-analysis-and-censored-data.html#cb749-16"></a><span class="st">    </span><span class="kw">rowwise</span>() <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb749-17"><a href="survival-analysis-and-censored-data.html#cb749-17"></a><span class="st">    </span><span class="kw">transmute</span>(<span class="dt">sd =</span> <span class="kw">sd</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;s&quot;</span>))))</span>
-<span id="cb749-18"><a href="survival-analysis-and-censored-data.html#cb749-18"></a>se &lt;-<span class="st"> </span>res<span class="op">$</span>sd[<span class="dv">2</span><span class="op">:</span><span class="kw">nrow</span>(res)]</span>
-<span id="cb749-19"><a href="survival-analysis-and-censored-data.html#cb749-19"></a><span class="kw">lines</span>(fit<span class="op">$</span>time, fit<span class="op">$</span>surv <span class="op">-</span><span class="st"> </span>se, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb749-20"><a href="survival-analysis-and-censored-data.html#cb749-20"></a><span class="kw">lines</span>(fit<span class="op">$</span>time, fit<span class="op">$</span>surv <span class="op">+</span><span class="st"> </span>se, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="survival-analysis-and-censored-data.html#cb758-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb758-2"><a href="survival-analysis-and-censored-data.html#cb758-2" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), </span>
+<span id="cb758-3"><a href="survival-analysis-and-censored-data.html#cb758-3" aria-hidden="true"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, </span>
+<span id="cb758-4"><a href="survival-analysis-and-censored-data.html#cb758-4" aria-hidden="true"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Estimated Probability of Survival&quot;</span>,</span>
+<span id="cb758-5"><a href="survival-analysis-and-censored-data.html#cb758-5" aria-hidden="true"></a>    <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
+<span id="cb758-6"><a href="survival-analysis-and-censored-data.html#cb758-6" aria-hidden="true"></a>    <span class="dt">conf.int =</span> <span class="fl">0.67</span></span>
+<span id="cb758-7"><a href="survival-analysis-and-censored-data.html#cb758-7" aria-hidden="true"></a>)</span>
+<span id="cb758-8"><a href="survival-analysis-and-censored-data.html#cb758-8" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">survfit</span>(x <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb758-9"><a href="survival-analysis-and-censored-data.html#cb758-9" aria-hidden="true"></a>dat &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="dv">0</span>, fit<span class="op">$</span>time))</span>
+<span id="cb758-10"><a href="survival-analysis-and-censored-data.html#cb758-10" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">200</span>) {</span>
+<span id="cb758-11"><a href="survival-analysis-and-censored-data.html#cb758-11" aria-hidden="true"></a>    y &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">sample</span>(x, <span class="dv">88</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb758-12"><a href="survival-analysis-and-censored-data.html#cb758-12" aria-hidden="true"></a>    y &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">c</span>(<span class="dv">0</span>, y<span class="op">$</span>time), <span class="st">&quot;s{i}&quot;</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, y<span class="op">$</span>surv))</span>
+<span id="cb758-13"><a href="survival-analysis-and-censored-data.html#cb758-13" aria-hidden="true"></a>    dat &lt;-<span class="st"> </span><span class="kw">left_join</span>(dat, y, <span class="dt">by =</span> <span class="st">&quot;time&quot;</span>)</span>
+<span id="cb758-14"><a href="survival-analysis-and-censored-data.html#cb758-14" aria-hidden="true"></a>}</span>
+<span id="cb758-15"><a href="survival-analysis-and-censored-data.html#cb758-15" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">fill</span>(dat, <span class="kw">starts_with</span>(<span class="st">&quot;s&quot;</span>)) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb758-16"><a href="survival-analysis-and-censored-data.html#cb758-16" aria-hidden="true"></a><span class="st">    </span><span class="kw">rowwise</span>() <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb758-17"><a href="survival-analysis-and-censored-data.html#cb758-17" aria-hidden="true"></a><span class="st">    </span><span class="kw">transmute</span>(<span class="dt">sd =</span> <span class="kw">sd</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;s&quot;</span>))))</span>
+<span id="cb758-18"><a href="survival-analysis-and-censored-data.html#cb758-18" aria-hidden="true"></a>se &lt;-<span class="st"> </span>res<span class="op">$</span>sd[<span class="dv">2</span><span class="op">:</span><span class="kw">nrow</span>(res)]</span>
+<span id="cb758-19"><a href="survival-analysis-and-censored-data.html#cb758-19" aria-hidden="true"></a><span class="kw">lines</span>(fit<span class="op">$</span>time, fit<span class="op">$</span>surv <span class="op">-</span><span class="st"> </span>se, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb758-20"><a href="survival-analysis-and-censored-data.html#cb758-20" aria-hidden="true"></a><span class="kw">lines</span>(fit<span class="op">$</span>time, fit<span class="op">$</span>surv <span class="op">+</span><span class="st"> </span>se, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -859,8 +900,8 @@ this to the standard errors obtained in (a).</li>
 predict survival. Summarize the main findings.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="survival-analysis-and-censored-data.html#cb750-1"></a>fit &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(time, status) <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>diagnosis <span class="op">+</span><span class="st"> </span>loc <span class="op">+</span><span class="st"> </span>ki <span class="op">+</span><span class="st"> </span>gtv <span class="op">+</span><span class="st"> </span>stereo, <span class="dt">data =</span> BrainCancer)</span>
-<span id="cb750-2"><a href="survival-analysis-and-censored-data.html#cb750-2"></a>fit </span></code></pre></div>
+<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="survival-analysis-and-censored-data.html#cb759-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(time, status) <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>diagnosis <span class="op">+</span><span class="st"> </span>loc <span class="op">+</span><span class="st"> </span>ki <span class="op">+</span><span class="st"> </span>gtv <span class="op">+</span><span class="st"> </span>stereo, <span class="dt">data =</span> BrainCancer)</span>
+<span id="cb759-2"><a href="survival-analysis-and-censored-data.html#cb759-2" aria-hidden="true"></a>fit </span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(time, status) ~ sex + diagnosis + loc + 
 ##     ki + gtv + stereo, data = BrainCancer)
@@ -891,22 +932,22 @@ adjusted for the other predictors.</li>
 and use this model to predict new, artificial, data where we allow <code>ki</code> to
 take each possible value, but set the other predictors to be the mode or mean
 of the other predictors.</p>
-<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="survival-analysis-and-censored-data.html#cb752-1"></a><span class="kw">library</span>(ggfortify)</span>
-<span id="cb752-2"><a href="survival-analysis-and-censored-data.html#cb752-2"></a></span>
-<span id="cb752-3"><a href="survival-analysis-and-censored-data.html#cb752-3"></a>modaldata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb752-4"><a href="survival-analysis-and-censored-data.html#cb752-4"></a>  <span class="dt">sex =</span> <span class="kw">rep</span>(<span class="st">&quot;Female&quot;</span>, <span class="dv">5</span>),</span>
-<span id="cb752-5"><a href="survival-analysis-and-censored-data.html#cb752-5"></a>  <span class="dt">diagnosis =</span> <span class="kw">rep</span>(<span class="st">&quot;Meningioma&quot;</span>, <span class="dv">5</span>),</span>
-<span id="cb752-6"><a href="survival-analysis-and-censored-data.html#cb752-6"></a>  <span class="dt">loc =</span> <span class="kw">rep</span>(<span class="st">&quot;Supratentorial&quot;</span>, <span class="dv">5</span>),</span>
-<span id="cb752-7"><a href="survival-analysis-and-censored-data.html#cb752-7"></a>  <span class="dt">ki =</span> <span class="kw">c</span>(<span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>), </span>
-<span id="cb752-8"><a href="survival-analysis-and-censored-data.html#cb752-8"></a>  <span class="dt">gtv =</span> <span class="kw">rep</span>(<span class="kw">mean</span>(BrainCancer<span class="op">$</span>gtv), <span class="dv">5</span>),</span>
-<span id="cb752-9"><a href="survival-analysis-and-censored-data.html#cb752-9"></a>  <span class="dt">stereo =</span> <span class="kw">rep</span>(<span class="st">&quot;SRT&quot;</span>, <span class="dv">5</span>)</span>
-<span id="cb752-10"><a href="survival-analysis-and-censored-data.html#cb752-10"></a>)</span>
-<span id="cb752-11"><a href="survival-analysis-and-censored-data.html#cb752-11"></a>survplots &lt;-<span class="st"> </span><span class="kw">survfit</span>(fit, <span class="dt">newdata =</span> modaldata)</span>
-<span id="cb752-12"><a href="survival-analysis-and-censored-data.html#cb752-12"></a><span class="kw">plot</span>(survplots, <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Survival Probability&quot;</span>, <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>)</span>
-<span id="cb752-13"><a href="survival-analysis-and-censored-data.html#cb752-13"></a><span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;60&quot;</span>, <span class="st">&quot;70&quot;</span>, <span class="st">&quot;80&quot;</span>, <span class="st">&quot;90&quot;</span>, <span class="st">&quot;100&quot;</span>), <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="survival-analysis-and-censored-data.html#cb761-1" aria-hidden="true"></a><span class="kw">library</span>(ggfortify)</span>
+<span id="cb761-2"><a href="survival-analysis-and-censored-data.html#cb761-2" aria-hidden="true"></a></span>
+<span id="cb761-3"><a href="survival-analysis-and-censored-data.html#cb761-3" aria-hidden="true"></a>modaldata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb761-4"><a href="survival-analysis-and-censored-data.html#cb761-4" aria-hidden="true"></a>  <span class="dt">sex =</span> <span class="kw">rep</span>(<span class="st">&quot;Female&quot;</span>, <span class="dv">5</span>),</span>
+<span id="cb761-5"><a href="survival-analysis-and-censored-data.html#cb761-5" aria-hidden="true"></a>  <span class="dt">diagnosis =</span> <span class="kw">rep</span>(<span class="st">&quot;Meningioma&quot;</span>, <span class="dv">5</span>),</span>
+<span id="cb761-6"><a href="survival-analysis-and-censored-data.html#cb761-6" aria-hidden="true"></a>  <span class="dt">loc =</span> <span class="kw">rep</span>(<span class="st">&quot;Supratentorial&quot;</span>, <span class="dv">5</span>),</span>
+<span id="cb761-7"><a href="survival-analysis-and-censored-data.html#cb761-7" aria-hidden="true"></a>  <span class="dt">ki =</span> <span class="kw">c</span>(<span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>), </span>
+<span id="cb761-8"><a href="survival-analysis-and-censored-data.html#cb761-8" aria-hidden="true"></a>  <span class="dt">gtv =</span> <span class="kw">rep</span>(<span class="kw">mean</span>(BrainCancer<span class="op">$</span>gtv), <span class="dv">5</span>),</span>
+<span id="cb761-9"><a href="survival-analysis-and-censored-data.html#cb761-9" aria-hidden="true"></a>  <span class="dt">stereo =</span> <span class="kw">rep</span>(<span class="st">&quot;SRT&quot;</span>, <span class="dv">5</span>)</span>
+<span id="cb761-10"><a href="survival-analysis-and-censored-data.html#cb761-10" aria-hidden="true"></a>)</span>
+<span id="cb761-11"><a href="survival-analysis-and-censored-data.html#cb761-11" aria-hidden="true"></a>survplots &lt;-<span class="st"> </span><span class="kw">survfit</span>(fit, <span class="dt">newdata =</span> modaldata)</span>
+<span id="cb761-12"><a href="survival-analysis-and-censored-data.html#cb761-12" aria-hidden="true"></a><span class="kw">plot</span>(survplots, <span class="dt">xlab =</span> <span class="st">&quot;Months&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Survival Probability&quot;</span>, <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>)</span>
+<span id="cb761-13"><a href="survival-analysis-and-censored-data.html#cb761-13" aria-hidden="true"></a><span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;60&quot;</span>, <span class="st">&quot;70&quot;</span>, <span class="st">&quot;80&quot;</span>, <span class="st">&quot;90&quot;</span>, <span class="st">&quot;100&quot;</span>), <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
-<div id="question-11-6" class="section level3 hasAnchor">
+<div id="question-11-6" class="section level3 hasAnchor" number="11.2.2">
 <h3><span class="header-section-number">11.2.2</span> Question 11<a href="survival-analysis-and-censored-data.html#question-11-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This example makes use of the data in Table 11.4.</p>
@@ -918,11 +959,11 @@ corresponds to which group. By eye, does there appear to be a difference
 between the two groups’ survival curves?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="survival-analysis-and-censored-data.html#cb753-1"></a>x &lt;-<span class="st"> </span><span class="kw">split</span>(<span class="kw">Surv</span>(table_data<span class="op">$</span>Y, table_data<span class="op">$</span>D), table_data<span class="op">$</span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>)</span>
-<span id="cb753-2"><a href="survival-analysis-and-censored-data.html#cb753-2"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">ylab =</span> <span class="st">&quot;Survival Probability&quot;</span>)</span>
-<span id="cb753-3"><a href="survival-analysis-and-censored-data.html#cb753-3"></a><span class="kw">lines</span>(<span class="kw">survfit</span>(x[[<span class="dv">1</span>]] <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">conf.int=</span><span class="ot">FALSE</span>, <span class="dt">col =</span> <span class="dv">2</span>)</span>
-<span id="cb753-4"><a href="survival-analysis-and-censored-data.html#cb753-4"></a><span class="kw">lines</span>(<span class="kw">survfit</span>(x[[<span class="dv">2</span>]] <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">conf.int=</span><span class="ot">FALSE</span>, <span class="dt">col =</span> <span class="dv">3</span>)</span>
-<span id="cb753-5"><a href="survival-analysis-and-censored-data.html#cb753-5"></a><span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;&gt;= 2&quot;</span>, <span class="st">&quot;&lt;2&quot;</span>), <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="survival-analysis-and-censored-data.html#cb762-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">split</span>(<span class="kw">Surv</span>(table_data<span class="op">$</span>Y, table_data<span class="op">$</span>D), table_data<span class="op">$</span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb762-2"><a href="survival-analysis-and-censored-data.html#cb762-2" aria-hidden="true"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">ylab =</span> <span class="st">&quot;Survival Probability&quot;</span>)</span>
+<span id="cb762-3"><a href="survival-analysis-and-censored-data.html#cb762-3" aria-hidden="true"></a><span class="kw">lines</span>(<span class="kw">survfit</span>(x[[<span class="dv">1</span>]] <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">conf.int=</span><span class="ot">FALSE</span>, <span class="dt">col =</span> <span class="dv">2</span>)</span>
+<span id="cb762-4"><a href="survival-analysis-and-censored-data.html#cb762-4" aria-hidden="true"></a><span class="kw">lines</span>(<span class="kw">survfit</span>(x[[<span class="dv">2</span>]] <span class="op">~</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">conf.int=</span><span class="ot">FALSE</span>, <span class="dt">col =</span> <span class="dv">3</span>)</span>
+<span id="cb762-5"><a href="survival-analysis-and-censored-data.html#cb762-5" aria-hidden="true"></a><span class="kw">legend</span>(<span class="st">&quot;bottomleft&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;&gt;= 2&quot;</span>, <span class="st">&quot;&lt;2&quot;</span>), <span class="dt">col =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>There does not appear to be any difference between the curves.</p>
 <blockquote>
@@ -934,8 +975,8 @@ instantaneous probability of the event. Is there evidence that the true
 coefficient value is non-zero?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="survival-analysis-and-censored-data.html#cb754-1"></a>fit &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(Y, D) <span class="op">~</span><span class="st"> </span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> table_data)</span>
-<span id="cb754-2"><a href="survival-analysis-and-censored-data.html#cb754-2"></a>fit</span></code></pre></div>
+<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="survival-analysis-and-censored-data.html#cb763-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(Y, D) <span class="op">~</span><span class="st"> </span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> table_data)</span>
+<span id="cb763-2"><a href="survival-analysis-and-censored-data.html#cb763-2" aria-hidden="true"></a>fit</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(Y, D) ~ X &lt; 2, data = table_data)
 ## 
@@ -956,10 +997,10 @@ log-rank test statistic compare to the <span class="math inline">\(p\)</span>-va
 the Cox model from (b)?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="survival-analysis-and-censored-data.html#cb756-1"></a><span class="kw">summary</span>(fit)<span class="op">$</span>sctest</span></code></pre></div>
+<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="survival-analysis-and-censored-data.html#cb765-1" aria-hidden="true"></a><span class="kw">summary</span>(fit)<span class="op">$</span>sctest</span></code></pre></div>
 <pre><code>##       test         df     pvalue 
 ## 0.07644306 1.00000000 0.78217683</code></pre>
-<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="survival-analysis-and-censored-data.html#cb758-1"></a><span class="kw">survdiff</span>(<span class="kw">Surv</span>(Y, D) <span class="op">~</span><span class="st"> </span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> table_data)<span class="op">$</span>chisq</span></code></pre></div>
+<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="survival-analysis-and-censored-data.html#cb767-1" aria-hidden="true"></a><span class="kw">survdiff</span>(<span class="kw">Surv</span>(Y, D) <span class="op">~</span><span class="st"> </span>X <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">data =</span> table_data)<span class="op">$</span>chisq</span></code></pre></div>
 <pre><code>## [1] 0.07644306</code></pre>
 <p>They are identical.</p>
 

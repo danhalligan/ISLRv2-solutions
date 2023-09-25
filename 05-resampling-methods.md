@@ -170,7 +170,7 @@ mean(store)
 ```
 
 ```
-## [1] 0.6319
+## [1] 0.6304
 ```
 
 The probability of including $4$ when resampling numbers $1...100$ is close to
@@ -340,10 +340,6 @@ summary(fit)
 ## Call:
 ## glm(formula = default ~ income + balance, family = "binomial", 
 ##     data = Default)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.4725  -0.1444  -0.0574  -0.0211   3.7245  
 ## 
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(>|z|)    

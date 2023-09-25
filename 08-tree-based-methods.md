@@ -513,7 +513,7 @@ bartfit <- gbart(Carseats[train, 2:11], Carseats[train, 1],
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 3s
+## time: 4s
 ## trcnt,tecnt: 1000,1000
 ```
 
@@ -839,7 +839,7 @@ library(glmnet)
 ```
 
 ```
-## Loaded glmnet 4.1-4
+## Loaded glmnet 4.1-8
 ```
 
 ```r
@@ -929,13 +929,13 @@ fit <- gbm(Purchase == "Yes" ~ ., data = Caravan[train, ], n.trees = 1000, shrin
 ```
 
 ```
-## Warning in gbm.fit(x = x, y = y, offset = offset, distribution = distribution, :
-## variable 50: PVRAAUT has no variation.
+## Warning in gbm.fit(x = x, y = y, offset = offset, distribution = distribution,
+## : variable 50: PVRAAUT has no variation.
 ```
 
 ```
-## Warning in gbm.fit(x = x, y = y, offset = offset, distribution = distribution, :
-## variable 71: AVRAAUT has no variation.
+## Warning in gbm.fit(x = x, y = y, offset = offset, distribution = distribution,
+## : variable 71: AVRAAUT has no variation.
 ```
 
 ```r
@@ -1000,7 +1000,7 @@ p <- predict(fit, Caravan[test, ], type = "response")
 
 ```
 ## Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
-## prediction from a rank-deficient fit may be misleading
+## prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
 ```
 
 ```r
@@ -1086,7 +1086,7 @@ library(gam)
 ```
 
 ```
-## Loaded gam 1.20.2
+## Loaded gam 1.22-2
 ```
 
 ```r
@@ -1150,7 +1150,7 @@ bart <- gbart(College[train, pred], College[train, "Outstate"],
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 5s
+## time: 6s
 ## trcnt,tecnt: 1000,1000
 ```
 

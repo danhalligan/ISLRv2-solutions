@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13 Multiple Testing | An Introduction to Statistical Learning</title>
   <meta name="description" content="13 Multiple Testing | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.29.3 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13 Multiple Testing | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -51,28 +51,27 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -92,7 +91,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -125,6 +124,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="islrv2.css" type="text/css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css" />
@@ -144,8 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="statistical-learning.html"><a href="statistical-learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a><ul>
-<li class="chapter" data-level="2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#conceptual"><i class="fa fa-check"></i><b>2.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="2" data-path="statistical-learning.html"><a href="statistical-learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#conceptual"><i class="fa fa-check"></i><b>2.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-1"><i class="fa fa-check"></i><b>2.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="2.1.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-2"><i class="fa fa-check"></i><b>2.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="2.1.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-3"><i class="fa fa-check"></i><b>2.1.3</b> Question 3</a></li>
@@ -154,14 +159,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.6" data-path="statistical-learning.html"><a href="statistical-learning.html#question-6"><i class="fa fa-check"></i><b>2.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="2.1.7" data-path="statistical-learning.html"><a href="statistical-learning.html#question-7"><i class="fa fa-check"></i><b>2.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#applied"><i class="fa fa-check"></i><b>2.2</b> Applied</a><ul>
+<li class="chapter" data-level="2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#applied"><i class="fa fa-check"></i><b>2.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-8"><i class="fa fa-check"></i><b>2.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="2.2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-9"><i class="fa fa-check"></i><b>2.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="2.2.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-10"><i class="fa fa-check"></i><b>2.2.3</b> Question 10</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#conceptual-1"><i class="fa fa-check"></i><b>3.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#conceptual-1"><i class="fa fa-check"></i><b>3.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="linear-regression.html"><a href="linear-regression.html#question-1-1"><i class="fa fa-check"></i><b>3.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="3.1.2" data-path="linear-regression.html"><a href="linear-regression.html#question-2-1"><i class="fa fa-check"></i><b>3.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="3.1.3" data-path="linear-regression.html"><a href="linear-regression.html#question-3-1"><i class="fa fa-check"></i><b>3.1.3</b> Question 3</a></li>
@@ -170,7 +178,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.6" data-path="linear-regression.html"><a href="linear-regression.html#question-6-1"><i class="fa fa-check"></i><b>3.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="3.1.7" data-path="linear-regression.html"><a href="linear-regression.html#question-7-1"><i class="fa fa-check"></i><b>3.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#applied-1"><i class="fa fa-check"></i><b>3.2</b> Applied</a><ul>
+<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#applied-1"><i class="fa fa-check"></i><b>3.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="linear-regression.html"><a href="linear-regression.html#question-8-1"><i class="fa fa-check"></i><b>3.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="3.2.2" data-path="linear-regression.html"><a href="linear-regression.html#question-9-1"><i class="fa fa-check"></i><b>3.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="3.2.3" data-path="linear-regression.html"><a href="linear-regression.html#question-10-1"><i class="fa fa-check"></i><b>3.2.3</b> Question 10</a></li>
@@ -181,8 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.8" data-path="linear-regression.html"><a href="linear-regression.html#question-15"><i class="fa fa-check"></i><b>3.2.8</b> Question 15</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a><ul>
-<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#conceptual-2"><i class="fa fa-check"></i><b>4.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#conceptual-2"><i class="fa fa-check"></i><b>4.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="classification.html"><a href="classification.html#question-1-2"><i class="fa fa-check"></i><b>4.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="4.1.2" data-path="classification.html"><a href="classification.html#question-2-2"><i class="fa fa-check"></i><b>4.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="4.1.3" data-path="classification.html"><a href="classification.html#question-3-2"><i class="fa fa-check"></i><b>4.1.3</b> Question 3</a></li>
@@ -196,21 +207,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.11" data-path="classification.html"><a href="classification.html#question-11-1"><i class="fa fa-check"></i><b>4.1.11</b> Question 11</a></li>
 <li class="chapter" data-level="4.1.12" data-path="classification.html"><a href="classification.html#question-12-1"><i class="fa fa-check"></i><b>4.1.12</b> Question 12</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#applied-2"><i class="fa fa-check"></i><b>4.2</b> Applied</a><ul>
+<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#applied-2"><i class="fa fa-check"></i><b>4.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="classification.html"><a href="classification.html#question-13-1"><i class="fa fa-check"></i><b>4.2.1</b> Question 13</a></li>
 <li class="chapter" data-level="4.2.2" data-path="classification.html"><a href="classification.html#question-14-1"><i class="fa fa-check"></i><b>4.2.2</b> Question 14</a></li>
 <li class="chapter" data-level="4.2.3" data-path="classification.html"><a href="classification.html#question-15-1"><i class="fa fa-check"></i><b>4.2.3</b> Question 15</a></li>
 <li class="chapter" data-level="4.2.4" data-path="classification.html"><a href="classification.html#question-13-2"><i class="fa fa-check"></i><b>4.2.4</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a><ul>
-<li class="chapter" data-level="5.1" data-path="resampling-methods.html"><a href="resampling-methods.html#conceptual-3"><i class="fa fa-check"></i><b>5.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="resampling-methods.html"><a href="resampling-methods.html#conceptual-3"><i class="fa fa-check"></i><b>5.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-1-3"><i class="fa fa-check"></i><b>5.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="5.1.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-2-3"><i class="fa fa-check"></i><b>5.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="5.1.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-3-3"><i class="fa fa-check"></i><b>5.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="5.1.4" data-path="resampling-methods.html"><a href="resampling-methods.html#question-4-3"><i class="fa fa-check"></i><b>5.1.4</b> Question 4</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="resampling-methods.html"><a href="resampling-methods.html#applied-3"><i class="fa fa-check"></i><b>5.2</b> Applied</a><ul>
+<li class="chapter" data-level="5.2" data-path="resampling-methods.html"><a href="resampling-methods.html#applied-3"><i class="fa fa-check"></i><b>5.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-5-3"><i class="fa fa-check"></i><b>5.2.1</b> Question 5</a></li>
 <li class="chapter" data-level="5.2.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-6-3"><i class="fa fa-check"></i><b>5.2.2</b> Question 6</a></li>
 <li class="chapter" data-level="5.2.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-7-3"><i class="fa fa-check"></i><b>5.2.3</b> Question 7</a></li>
@@ -218,8 +233,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.5" data-path="resampling-methods.html"><a href="resampling-methods.html#question-9-3"><i class="fa fa-check"></i><b>5.2.5</b> Question 9</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a><ul>
-<li class="chapter" data-level="6.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#conceptual-4"><i class="fa fa-check"></i><b>6.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#conceptual-4"><i class="fa fa-check"></i><b>6.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-1-4"><i class="fa fa-check"></i><b>6.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="6.1.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-2-4"><i class="fa fa-check"></i><b>6.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="6.1.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-3-4"><i class="fa fa-check"></i><b>6.1.3</b> Question 3</a></li>
@@ -228,22 +245,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-6-4"><i class="fa fa-check"></i><b>6.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="6.1.7" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-7-4"><i class="fa fa-check"></i><b>6.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#applied-4"><i class="fa fa-check"></i><b>6.2</b> Applied</a><ul>
+<li class="chapter" data-level="6.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#applied-4"><i class="fa fa-check"></i><b>6.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-8-4"><i class="fa fa-check"></i><b>6.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="6.2.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-9-4"><i class="fa fa-check"></i><b>6.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="6.2.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-10-3"><i class="fa fa-check"></i><b>6.2.3</b> Question 10</a></li>
 <li class="chapter" data-level="6.2.4" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-11-2"><i class="fa fa-check"></i><b>6.2.4</b> Question 11</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a><ul>
-<li class="chapter" data-level="7.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#conceptual-5"><i class="fa fa-check"></i><b>7.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#conceptual-5"><i class="fa fa-check"></i><b>7.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-1-5"><i class="fa fa-check"></i><b>7.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="7.1.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-2-5"><i class="fa fa-check"></i><b>7.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="7.1.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-3-5"><i class="fa fa-check"></i><b>7.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="7.1.4" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-4-5"><i class="fa fa-check"></i><b>7.1.4</b> Question 4</a></li>
 <li class="chapter" data-level="7.1.5" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-5-5"><i class="fa fa-check"></i><b>7.1.5</b> Question 5</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#applied-5"><i class="fa fa-check"></i><b>7.2</b> Applied</a><ul>
+<li class="chapter" data-level="7.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#applied-5"><i class="fa fa-check"></i><b>7.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-6-5"><i class="fa fa-check"></i><b>7.2.1</b> Question 6</a></li>
 <li class="chapter" data-level="7.2.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-7-5"><i class="fa fa-check"></i><b>7.2.2</b> Question 7</a></li>
 <li class="chapter" data-level="7.2.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-8-5"><i class="fa fa-check"></i><b>7.2.3</b> Question 8</a></li>
@@ -253,8 +274,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-12-2"><i class="fa fa-check"></i><b>7.2.7</b> Question 12</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a><ul>
-<li class="chapter" data-level="8.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#conceptual-6"><i class="fa fa-check"></i><b>8.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#conceptual-6"><i class="fa fa-check"></i><b>8.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-1-6"><i class="fa fa-check"></i><b>8.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="8.1.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-2-6"><i class="fa fa-check"></i><b>8.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="8.1.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-3-6"><i class="fa fa-check"></i><b>8.1.3</b> Question 3</a></li>
@@ -262,7 +285,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.5" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-5-6"><i class="fa fa-check"></i><b>8.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="8.1.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-6-6"><i class="fa fa-check"></i><b>8.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#applied-6"><i class="fa fa-check"></i><b>8.2</b> Applied</a><ul>
+<li class="chapter" data-level="8.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#applied-6"><i class="fa fa-check"></i><b>8.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="8.2.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-7-6"><i class="fa fa-check"></i><b>8.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="8.2.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-8-6"><i class="fa fa-check"></i><b>8.2.2</b> Question 8</a></li>
 <li class="chapter" data-level="8.2.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-9-6"><i class="fa fa-check"></i><b>8.2.3</b> Question 9</a></li>
@@ -271,13 +295,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-12-3"><i class="fa fa-check"></i><b>8.2.6</b> Question 12</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a><ul>
-<li class="chapter" data-level="9.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#conceptual-7"><i class="fa fa-check"></i><b>9.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#conceptual-7"><i class="fa fa-check"></i><b>9.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-1-7"><i class="fa fa-check"></i><b>9.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="9.1.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-2-7"><i class="fa fa-check"></i><b>9.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="9.1.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-3-7"><i class="fa fa-check"></i><b>9.1.3</b> Question 3</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#applied-7"><i class="fa fa-check"></i><b>9.2</b> Applied</a><ul>
+<li class="chapter" data-level="9.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#applied-7"><i class="fa fa-check"></i><b>9.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-4-7"><i class="fa fa-check"></i><b>9.2.1</b> Question 4</a></li>
 <li class="chapter" data-level="9.2.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-5-7"><i class="fa fa-check"></i><b>9.2.2</b> Question 5</a></li>
 <li class="chapter" data-level="9.2.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-6-7"><i class="fa fa-check"></i><b>9.2.3</b> Question 6</a></li>
@@ -285,15 +312,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-8-7"><i class="fa fa-check"></i><b>9.2.5</b> Question 8</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a><ul>
-<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#conceptual-8"><i class="fa fa-check"></i><b>10.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#conceptual-8"><i class="fa fa-check"></i><b>10.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="10.1.1" data-path="deep-learning.html"><a href="deep-learning.html#question-1-8"><i class="fa fa-check"></i><b>10.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="10.1.2" data-path="deep-learning.html"><a href="deep-learning.html#question-2-8"><i class="fa fa-check"></i><b>10.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="10.1.3" data-path="deep-learning.html"><a href="deep-learning.html#question-3-8"><i class="fa fa-check"></i><b>10.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="10.1.4" data-path="deep-learning.html"><a href="deep-learning.html#question-4-8"><i class="fa fa-check"></i><b>10.1.4</b> Question 4</a></li>
 <li class="chapter" data-level="10.1.5" data-path="deep-learning.html"><a href="deep-learning.html#question-5-8"><i class="fa fa-check"></i><b>10.1.5</b> Question 5</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#applied-8"><i class="fa fa-check"></i><b>10.2</b> Applied</a><ul>
+<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#applied-8"><i class="fa fa-check"></i><b>10.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="deep-learning.html"><a href="deep-learning.html#question-6-8"><i class="fa fa-check"></i><b>10.2.1</b> Question 6</a></li>
 <li class="chapter" data-level="10.2.2" data-path="deep-learning.html"><a href="deep-learning.html#question-7-8"><i class="fa fa-check"></i><b>10.2.2</b> Question 7</a></li>
 <li class="chapter" data-level="10.2.3" data-path="deep-learning.html"><a href="deep-learning.html#question-8-8"><i class="fa fa-check"></i><b>10.2.3</b> Question 8</a></li>
@@ -304,8 +334,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.8" data-path="deep-learning.html"><a href="deep-learning.html#question-13-3"><i class="fa fa-check"></i><b>10.2.8</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a><ul>
-<li class="chapter" data-level="11.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#conceptual-9"><i class="fa fa-check"></i><b>11.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#conceptual-9"><i class="fa fa-check"></i><b>11.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-1-9"><i class="fa fa-check"></i><b>11.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="11.1.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-2-9"><i class="fa fa-check"></i><b>11.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="11.1.3" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-3-9"><i class="fa fa-check"></i><b>11.1.3</b> Question 3</a></li>
@@ -316,13 +348,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.8" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-8-9"><i class="fa fa-check"></i><b>11.1.8</b> Question 8</a></li>
 <li class="chapter" data-level="11.1.9" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-9-8"><i class="fa fa-check"></i><b>11.1.9</b> Question 9</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#applied-9"><i class="fa fa-check"></i><b>11.2</b> Applied</a><ul>
+<li class="chapter" data-level="11.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#applied-9"><i class="fa fa-check"></i><b>11.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="11.2.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-10-7"><i class="fa fa-check"></i><b>11.2.1</b> Question 10</a></li>
 <li class="chapter" data-level="11.2.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-11-6"><i class="fa fa-check"></i><b>11.2.2</b> Question 11</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a><ul>
-<li class="chapter" data-level="12.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#conceptual-10"><i class="fa fa-check"></i><b>12.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#conceptual-10"><i class="fa fa-check"></i><b>12.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-1-10"><i class="fa fa-check"></i><b>12.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="12.1.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-2-10"><i class="fa fa-check"></i><b>12.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="12.1.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-3-10"><i class="fa fa-check"></i><b>12.1.3</b> Question 3</a></li>
@@ -330,7 +365,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.5" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-5-10"><i class="fa fa-check"></i><b>12.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="12.1.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-6-10"><i class="fa fa-check"></i><b>12.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#applied-10"><i class="fa fa-check"></i><b>12.2</b> Applied</a><ul>
+<li class="chapter" data-level="12.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#applied-10"><i class="fa fa-check"></i><b>12.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-7-10"><i class="fa fa-check"></i><b>12.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="12.2.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-8-10"><i class="fa fa-check"></i><b>12.2.2</b> Question 8</a></li>
 <li class="chapter" data-level="12.2.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-9-9"><i class="fa fa-check"></i><b>12.2.3</b> Question 9</a></li>
@@ -340,8 +376,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.7" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-13-4"><i class="fa fa-check"></i><b>12.2.7</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a><ul>
-<li class="chapter" data-level="13.1" data-path="multiple-testing.html"><a href="multiple-testing.html#conceptual-11"><i class="fa fa-check"></i><b>13.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="multiple-testing.html"><a href="multiple-testing.html#conceptual-11"><i class="fa fa-check"></i><b>13.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-1-11"><i class="fa fa-check"></i><b>13.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="13.1.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-2-11"><i class="fa fa-check"></i><b>13.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="13.1.3" data-path="multiple-testing.html"><a href="multiple-testing.html#question-3-11"><i class="fa fa-check"></i><b>13.1.3</b> Question 3</a></li>
@@ -349,7 +387,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.1.5" data-path="multiple-testing.html"><a href="multiple-testing.html#question-5-11"><i class="fa fa-check"></i><b>13.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="13.1.6" data-path="multiple-testing.html"><a href="multiple-testing.html#question-6-11"><i class="fa fa-check"></i><b>13.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="multiple-testing.html"><a href="multiple-testing.html#applied-11"><i class="fa fa-check"></i><b>13.2</b> Applied</a><ul>
+<li class="chapter" data-level="13.2" data-path="multiple-testing.html"><a href="multiple-testing.html#applied-11"><i class="fa fa-check"></i><b>13.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-7-11"><i class="fa fa-check"></i><b>13.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="13.2.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-8-11"><i class="fa fa-check"></i><b>13.2.2</b> Question 8</a></li>
 </ul></li>
@@ -374,11 +413,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="multiple-testing" class="section level1 hasAnchor">
+<div id="multiple-testing" class="section level1 hasAnchor" number="13">
 <h1><span class="header-section-number">13</span> Multiple Testing<a href="multiple-testing.html#multiple-testing" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="conceptual-11" class="section level2 hasAnchor">
+<div id="conceptual-11" class="section level2 hasAnchor" number="13.1">
 <h2><span class="header-section-number">13.1</span> Conceptual<a href="multiple-testing.html#conceptual-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="question-1-11" class="section level3 hasAnchor">
+<div id="question-1-11" class="section level3 hasAnchor" number="13.1.1">
 <h3><span class="header-section-number">13.1.1</span> Question 1<a href="multiple-testing.html#question-1-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose we test <span class="math inline">\(m\)</span> null hypotheses, all of which are true. We control the
@@ -425,7 +464,7 @@ tests qualitatively compare to the answer in (b) with <span class="math inline">
 error), which, implies that when negatively correlated we expect the FWER
 to be greater than <span class="math inline">\(2\alpha\)</span>.</p>
 </div>
-<div id="question-2-11" class="section level3 hasAnchor">
+<div id="question-2-11" class="section level3 hasAnchor" number="13.1.2">
 <h3><span class="header-section-number">13.1.2</span> Question 2<a href="multiple-testing.html#question-2-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose that we test <span class="math inline">\(m\)</span> hypotheses, and control the Type I error for each
@@ -452,7 +491,7 @@ make?</li>
 <p>The variance of a Binomial is <span class="math inline">\(npq\)</span>, so for this situation the standard
 deviation would be <span class="math inline">\(\sqrt{m \alpha (1-\alpha)}\)</span>.</p>
 </div>
-<div id="question-3-11" class="section level3 hasAnchor">
+<div id="question-3-11" class="section level3 hasAnchor" number="13.1.3">
 <h3><span class="header-section-number">13.1.3</span> Question 3<a href="multiple-testing.html#question-3-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose we test <span class="math inline">\(m\)</span> null hypotheses, and control the Type I error for the
@@ -466,21 +505,21 @@ positive, <span class="math inline">\(p(A \cup B) &lt; p(A) + p(B)\)</span> (whe
 be no larger than the sum of the probabilities for each individual hypothesis
 (which is <span class="math inline">\(\alpha_j\)</span> for the <span class="math inline">\(j\)</span>th).</p>
 </div>
-<div id="question-4-11" class="section level3 hasAnchor">
+<div id="question-4-11" class="section level3 hasAnchor" number="13.1.4">
 <h3><span class="header-section-number">13.1.4</span> Question 4<a href="multiple-testing.html#question-4-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose we test <span class="math inline">\(m = 10\)</span> hypotheses, and obtain the p-values shown in Table
 13.4.</p>
 </blockquote>
-<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="multiple-testing.html#cb808-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.0011</span>, <span class="fl">0.031</span>, <span class="fl">0.017</span>, <span class="fl">0.32</span>, <span class="fl">0.11</span>, <span class="fl">0.90</span>, <span class="fl">0.07</span>, <span class="fl">0.006</span>, <span class="fl">0.004</span>, <span class="fl">0.0009</span>)</span>
-<span id="cb808-2"><a href="multiple-testing.html#cb808-2"></a><span class="kw">names</span>(pvals) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;H&quot;</span>, <span class="kw">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="multiple-testing.html#cb817-1" aria-hidden="true"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.0011</span>, <span class="fl">0.031</span>, <span class="fl">0.017</span>, <span class="fl">0.32</span>, <span class="fl">0.11</span>, <span class="fl">0.90</span>, <span class="fl">0.07</span>, <span class="fl">0.006</span>, <span class="fl">0.004</span>, <span class="fl">0.0009</span>)</span>
+<span id="cb817-2"><a href="multiple-testing.html#cb817-2" aria-hidden="true"></a><span class="kw">names</span>(pvals) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;H&quot;</span>, <span class="kw">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>))</span></code></pre></div>
 <blockquote>
 <ol style="list-style-type: lower-alpha">
 <li>Suppose that we wish to control the Type I error for each null hypothesis
 at level <span class="math inline">\(\alpha = 0.05\)</span>. Which null hypotheses will we reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="multiple-testing.html#cb809-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb818-1"><a href="multiple-testing.html#cb818-1" aria-hidden="true"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;H01&quot; &quot;H02&quot; &quot;H03&quot; &quot;H08&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
 <p>We reject all NULL hypotheses where <span class="math inline">\(p &lt; 0.05\)</span>.</p>
 <blockquote>
@@ -489,7 +528,7 @@ at level <span class="math inline">\(\alpha = 0.05\)</span>. Which null hypothes
 Which null hypotheses will we reject? Justify your answer.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="multiple-testing.html#cb811-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="multiple-testing.html#cb820-1" aria-hidden="true"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;H01&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
 <p>We reject all NULL hypotheses where <span class="math inline">\(p &lt; 0.005\)</span>.</p>
 <blockquote>
@@ -498,7 +537,7 @@ Which null hypotheses will we reject? Justify your answer.</li>
 hypotheses will we reject? Justify your answer.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb813-1"><a href="multiple-testing.html#cb813-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="multiple-testing.html#cb822-1" aria-hidden="true"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;H01&quot; &quot;H03&quot; &quot;H08&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
 <p>We reject all NULL hypotheses where <span class="math inline">\(q &lt; 0.05\)</span>.</p>
 <blockquote>
@@ -507,7 +546,7 @@ hypotheses will we reject? Justify your answer.</li>
 hypotheses will we reject? Justify your answer.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb815-1"><a href="multiple-testing.html#cb815-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="multiple-testing.html#cb824-1" aria-hidden="true"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;H01&quot; &quot;H02&quot; &quot;H03&quot; &quot;H05&quot; &quot;H07&quot; &quot;H08&quot; &quot;H09&quot; &quot;H10&quot;</code></pre>
 <p>We reject all NULL hypotheses where <span class="math inline">\(q &lt; 0.2\)</span>.</p>
 <blockquote>
@@ -519,7 +558,7 @@ many are false positives? Justify your answer.</li>
 <p>We expect 20% (in this case 2 out of the 8) rejections to be false (false
 positives).</p>
 </div>
-<div id="question-5-11" class="section level3 hasAnchor">
+<div id="question-5-11" class="section level3 hasAnchor" number="13.1.5">
 <h3><span class="header-section-number">13.1.5</span> Question 5<a href="multiple-testing.html#question-5-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>For this problem, you will make up p-values that lead to a certain number of
@@ -534,10 +573,10 @@ when controlling the FWER at level 0.1.</li>
 <p>In this case, for Bonferroni, we need one p-value to be less than <span class="math inline">\(0.1 / 5 = 0.02\)</span>. and the others to be above. For Holm’s method, we need the most
 significant p-value to be below <span class="math inline">\(0.1/(5 + 1 - 1) = 0.02\)</span> also.</p>
 <p>An example would be: 1, 1, 1, 1, 0.001.</p>
-<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="multiple-testing.html#cb817-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
-<span id="cb817-2"><a href="multiple-testing.html#cb817-2"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;bonferroni&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="multiple-testing.html#cb826-1" aria-hidden="true"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
+<span id="cb826-2"><a href="multiple-testing.html#cb826-2" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;bonferroni&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="multiple-testing.html#cb819-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;holm&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="multiple-testing.html#cb828-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;holm&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -547,13 +586,13 @@ null hypothesis and Holm rejects more than one null hypothesis at level 0.1.</li
 </blockquote>
 <p>An example would be: 1, 1, 1, 0.02, 0.001. For Holm’s method we reject two
 because <span class="math inline">\(0.02 &lt; 0.1/(5 + 1 - 2)\)</span>.</p>
-<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb821-1"><a href="multiple-testing.html#cb821-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.02</span>, <span class="fl">0.001</span>)</span>
-<span id="cb821-2"><a href="multiple-testing.html#cb821-2"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;bonferroni&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="multiple-testing.html#cb830-1" aria-hidden="true"></a>pvals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.02</span>, <span class="fl">0.001</span>)</span>
+<span id="cb830-2"><a href="multiple-testing.html#cb830-2" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;bonferroni&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="multiple-testing.html#cb823-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;holm&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb832-1"><a href="multiple-testing.html#cb832-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="dt">method =</span> <span class="st">&quot;holm&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>)</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 </div>
-<div id="question-6-11" class="section level3 hasAnchor">
+<div id="question-6-11" class="section level3 hasAnchor" number="13.1.6">
 <h3><span class="header-section-number">13.1.6</span> Question 6<a href="multiple-testing.html#question-6-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>For each of the three panels in Figure 13.3, answer the following questions:</p>
@@ -690,9 +729,9 @@ Bonferroni procedure to control the FWER at level <span class="math inline">\(\a
 false positives, so the results would not change.</p>
 </div>
 </div>
-<div id="applied-11" class="section level2 hasAnchor">
+<div id="applied-11" class="section level2 hasAnchor" number="13.2">
 <h2><span class="header-section-number">13.2</span> Applied<a href="multiple-testing.html#applied-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="question-7-11" class="section level3 hasAnchor">
+<div id="question-7-11" class="section level3 hasAnchor" number="13.2.1">
 <h3><span class="header-section-number">13.2.1</span> Question 7<a href="multiple-testing.html#question-7-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This problem makes use of the <code>Carseats</code> dataset in the <code>ISLR2</code> package.</p>
@@ -705,19 +744,19 @@ with the coefficient <span class="math inline">\(\beta_1\)</span>. Here, <span c
 represents one of the other quantitative variables.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb825-1"><a href="multiple-testing.html#cb825-1"></a><span class="kw">library</span>(ISLR2)</span>
-<span id="cb825-2"><a href="multiple-testing.html#cb825-2"></a></span>
-<span id="cb825-3"><a href="multiple-testing.html#cb825-3"></a>nm &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;CompPrice&quot;</span>, <span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Advertising&quot;</span>, <span class="st">&quot;Population&quot;</span>, <span class="st">&quot;Price&quot;</span>, <span class="st">&quot;Age&quot;</span>)</span>
-<span id="cb825-4"><a href="multiple-testing.html#cb825-4"></a>pvals &lt;-<span class="st"> </span><span class="kw">sapply</span>(nm, <span class="cf">function</span>(n) {</span>
-<span id="cb825-5"><a href="multiple-testing.html#cb825-5"></a>  <span class="kw">summary</span>(<span class="kw">lm</span>(Carseats[[<span class="st">&quot;Sales&quot;</span>]] <span class="op">~</span><span class="st"> </span>Carseats[[n]]))<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">4</span>]</span>
-<span id="cb825-6"><a href="multiple-testing.html#cb825-6"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb834"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb834-1"><a href="multiple-testing.html#cb834-1" aria-hidden="true"></a><span class="kw">library</span>(ISLR2)</span>
+<span id="cb834-2"><a href="multiple-testing.html#cb834-2" aria-hidden="true"></a></span>
+<span id="cb834-3"><a href="multiple-testing.html#cb834-3" aria-hidden="true"></a>nm &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;CompPrice&quot;</span>, <span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Advertising&quot;</span>, <span class="st">&quot;Population&quot;</span>, <span class="st">&quot;Price&quot;</span>, <span class="st">&quot;Age&quot;</span>)</span>
+<span id="cb834-4"><a href="multiple-testing.html#cb834-4" aria-hidden="true"></a>pvals &lt;-<span class="st"> </span><span class="kw">sapply</span>(nm, <span class="cf">function</span>(n) {</span>
+<span id="cb834-5"><a href="multiple-testing.html#cb834-5" aria-hidden="true"></a>  <span class="kw">summary</span>(<span class="kw">lm</span>(Carseats[[<span class="st">&quot;Sales&quot;</span>]] <span class="op">~</span><span class="st"> </span>Carseats[[n]]))<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">4</span>]</span>
+<span id="cb834-6"><a href="multiple-testing.html#cb834-6" aria-hidden="true"></a>})</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Suppose we control the Type I error at level <span class="math inline">\(\alpha = 0.05\)</span> for the
 p-values obtained in (a). Which null hypotheses do we reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="multiple-testing.html#cb826-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb835"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb835-1"><a href="multiple-testing.html#cb835-1" aria-hidden="true"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;Income&quot;      &quot;Advertising&quot; &quot;Price&quot;       &quot;Age&quot;</code></pre>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -725,7 +764,7 @@ p-values obtained in (a). Which null hypotheses do we reject?</li>
 hypotheses do we reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="multiple-testing.html#cb828-1"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span><span class="op">/</span><span class="kw">length</span>(nm)))</span></code></pre></div>
+<div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb837-1"><a href="multiple-testing.html#cb837-1" aria-hidden="true"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span><span class="op">/</span><span class="kw">length</span>(nm)))</span></code></pre></div>
 <pre><code>## [1] &quot;Income&quot;      &quot;Advertising&quot; &quot;Price&quot;       &quot;Age&quot;</code></pre>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
@@ -733,22 +772,22 @@ hypotheses do we reject?</li>
 null hypotheses do we reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="multiple-testing.html#cb830-1"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb839"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb839-1"><a href="multiple-testing.html#cb839-1" aria-hidden="true"></a><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;Income&quot;      &quot;Advertising&quot; &quot;Price&quot;       &quot;Age&quot;</code></pre>
 </div>
-<div id="question-8-11" class="section level3 hasAnchor">
+<div id="question-8-11" class="section level3 hasAnchor" number="13.2.2">
 <h3><span class="header-section-number">13.2.2</span> Question 8<a href="multiple-testing.html#question-8-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In this problem, we will simulate data from <span class="math inline">\(m = 100\)</span> fund managers.</p>
-<div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb832-1"><a href="multiple-testing.html#cb832-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb832-2"><a href="multiple-testing.html#cb832-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb832-3"><a href="multiple-testing.html#cb832-3"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb832-4"><a href="multiple-testing.html#cb832-4"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
+<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb841-1"><a href="multiple-testing.html#cb841-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb841-2"><a href="multiple-testing.html#cb841-2" aria-hidden="true"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb841-3"><a href="multiple-testing.html#cb841-3" aria-hidden="true"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb841-4"><a href="multiple-testing.html#cb841-4" aria-hidden="true"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
 </blockquote>
-<div class="sourceCode" id="cb833"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb833-1"><a href="multiple-testing.html#cb833-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb833-2"><a href="multiple-testing.html#cb833-2"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb833-3"><a href="multiple-testing.html#cb833-3"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb833-4"><a href="multiple-testing.html#cb833-4"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
+<div class="sourceCode" id="cb842"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb842-1"><a href="multiple-testing.html#cb842-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb842-2"><a href="multiple-testing.html#cb842-2" aria-hidden="true"></a>n &lt;-<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb842-3"><a href="multiple-testing.html#cb842-3" aria-hidden="true"></a>m &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb842-4"><a href="multiple-testing.html#cb842-4" aria-hidden="true"></a>X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(n <span class="op">*</span><span class="st"> </span>m), <span class="dt">ncol =</span> m)</span></code></pre></div>
 <blockquote>
 <p>These data represent each fund manager’s percentage returns for each of <span class="math inline">\(n = 20\)</span> months. We wish to test the null hypothesis that each fund manager’s
 percentage returns have population mean equal to zero. Notice that we
@@ -759,15 +798,15 @@ do have population mean zero; in other words, all <span class="math inline">\(m\
 of the <span class="math inline">\(p\)</span>-values obtained.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb834"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb834-1"><a href="multiple-testing.html#cb834-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">apply</span>(X, <span class="dv">2</span>, <span class="cf">function</span>(p) <span class="kw">t.test</span>(p)<span class="op">$</span>p.value)</span>
-<span id="cb834-2"><a href="multiple-testing.html#cb834-2"></a><span class="kw">hist</span>(pvals, <span class="dt">main =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="multiple-testing.html#cb843-1" aria-hidden="true"></a>pvals &lt;-<span class="st"> </span><span class="kw">apply</span>(X, <span class="dv">2</span>, <span class="cf">function</span>(p) <span class="kw">t.test</span>(p)<span class="op">$</span>p.value)</span>
+<span id="cb843-2"><a href="multiple-testing.html#cb843-2" aria-hidden="true"></a><span class="kw">hist</span>(pvals, <span class="dt">main =</span> <span class="ot">NULL</span>)</span></code></pre></div>
 <p><img src="13-multiple-testing_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>If we control Type I error for each null hypothesis at level <span class="math inline">\(\alpha = 0.05\)</span>, then how many null hypotheses do we reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb835"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb835-1"><a href="multiple-testing.html#cb835-1"></a><span class="kw">sum</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb844"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb844-1"><a href="multiple-testing.html#cb844-1" aria-hidden="true"></a><span class="kw">sum</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -775,7 +814,7 @@ of the <span class="math inline">\(p\)</span>-values obtained.</li>
 reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb837-1"><a href="multiple-testing.html#cb837-1"></a><span class="kw">sum</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(pvals))</span></code></pre></div>
+<div class="sourceCode" id="cb846"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb846-1"><a href="multiple-testing.html#cb846-1" aria-hidden="true"></a><span class="kw">sum</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(pvals))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
@@ -783,7 +822,7 @@ reject?</li>
 reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb839"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb839-1"><a href="multiple-testing.html#cb839-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb848-1"><a href="multiple-testing.html#cb848-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals, <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
@@ -794,10 +833,10 @@ just these 10 fund managers at level 0.05, then how many null hypotheses do we
 reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb841-1"><a href="multiple-testing.html#cb841-1"></a>best &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">apply</span>(X, <span class="dv">2</span>, sum), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span>
-<span id="cb841-2"><a href="multiple-testing.html#cb841-2"></a><span class="kw">sum</span>(pvals[best] <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb850"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb850-1"><a href="multiple-testing.html#cb850-1" aria-hidden="true"></a>best &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">apply</span>(X, <span class="dv">2</span>, sum), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span>
+<span id="cb850-2"><a href="multiple-testing.html#cb850-2" aria-hidden="true"></a><span class="kw">sum</span>(pvals[best] <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="multiple-testing.html#cb843-1"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals[best], <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb852"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb852-1"><a href="multiple-testing.html#cb852-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">p.adjust</span>(pvals[best], <span class="st">&quot;fdr&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">

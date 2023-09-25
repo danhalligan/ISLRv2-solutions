@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Classification | An Introduction to Statistical Learning</title>
   <meta name="description" content="4 Classification | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.29.3 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Classification | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -51,28 +51,27 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -92,7 +91,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -125,6 +124,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="islrv2.css" type="text/css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css" />
@@ -144,8 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="statistical-learning.html"><a href="statistical-learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a><ul>
-<li class="chapter" data-level="2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#conceptual"><i class="fa fa-check"></i><b>2.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="2" data-path="statistical-learning.html"><a href="statistical-learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#conceptual"><i class="fa fa-check"></i><b>2.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-1"><i class="fa fa-check"></i><b>2.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="2.1.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-2"><i class="fa fa-check"></i><b>2.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="2.1.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-3"><i class="fa fa-check"></i><b>2.1.3</b> Question 3</a></li>
@@ -154,14 +159,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.6" data-path="statistical-learning.html"><a href="statistical-learning.html#question-6"><i class="fa fa-check"></i><b>2.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="2.1.7" data-path="statistical-learning.html"><a href="statistical-learning.html#question-7"><i class="fa fa-check"></i><b>2.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#applied"><i class="fa fa-check"></i><b>2.2</b> Applied</a><ul>
+<li class="chapter" data-level="2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#applied"><i class="fa fa-check"></i><b>2.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-8"><i class="fa fa-check"></i><b>2.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="2.2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-9"><i class="fa fa-check"></i><b>2.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="2.2.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-10"><i class="fa fa-check"></i><b>2.2.3</b> Question 10</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#conceptual-1"><i class="fa fa-check"></i><b>3.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#conceptual-1"><i class="fa fa-check"></i><b>3.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="linear-regression.html"><a href="linear-regression.html#question-1-1"><i class="fa fa-check"></i><b>3.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="3.1.2" data-path="linear-regression.html"><a href="linear-regression.html#question-2-1"><i class="fa fa-check"></i><b>3.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="3.1.3" data-path="linear-regression.html"><a href="linear-regression.html#question-3-1"><i class="fa fa-check"></i><b>3.1.3</b> Question 3</a></li>
@@ -170,7 +178,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.6" data-path="linear-regression.html"><a href="linear-regression.html#question-6-1"><i class="fa fa-check"></i><b>3.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="3.1.7" data-path="linear-regression.html"><a href="linear-regression.html#question-7-1"><i class="fa fa-check"></i><b>3.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#applied-1"><i class="fa fa-check"></i><b>3.2</b> Applied</a><ul>
+<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#applied-1"><i class="fa fa-check"></i><b>3.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="linear-regression.html"><a href="linear-regression.html#question-8-1"><i class="fa fa-check"></i><b>3.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="3.2.2" data-path="linear-regression.html"><a href="linear-regression.html#question-9-1"><i class="fa fa-check"></i><b>3.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="3.2.3" data-path="linear-regression.html"><a href="linear-regression.html#question-10-1"><i class="fa fa-check"></i><b>3.2.3</b> Question 10</a></li>
@@ -181,8 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.8" data-path="linear-regression.html"><a href="linear-regression.html#question-15"><i class="fa fa-check"></i><b>3.2.8</b> Question 15</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a><ul>
-<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#conceptual-2"><i class="fa fa-check"></i><b>4.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#conceptual-2"><i class="fa fa-check"></i><b>4.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="classification.html"><a href="classification.html#question-1-2"><i class="fa fa-check"></i><b>4.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="4.1.2" data-path="classification.html"><a href="classification.html#question-2-2"><i class="fa fa-check"></i><b>4.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="4.1.3" data-path="classification.html"><a href="classification.html#question-3-2"><i class="fa fa-check"></i><b>4.1.3</b> Question 3</a></li>
@@ -196,21 +207,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.11" data-path="classification.html"><a href="classification.html#question-11-1"><i class="fa fa-check"></i><b>4.1.11</b> Question 11</a></li>
 <li class="chapter" data-level="4.1.12" data-path="classification.html"><a href="classification.html#question-12-1"><i class="fa fa-check"></i><b>4.1.12</b> Question 12</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#applied-2"><i class="fa fa-check"></i><b>4.2</b> Applied</a><ul>
+<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#applied-2"><i class="fa fa-check"></i><b>4.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="classification.html"><a href="classification.html#question-13-1"><i class="fa fa-check"></i><b>4.2.1</b> Question 13</a></li>
 <li class="chapter" data-level="4.2.2" data-path="classification.html"><a href="classification.html#question-14-1"><i class="fa fa-check"></i><b>4.2.2</b> Question 14</a></li>
 <li class="chapter" data-level="4.2.3" data-path="classification.html"><a href="classification.html#question-15-1"><i class="fa fa-check"></i><b>4.2.3</b> Question 15</a></li>
 <li class="chapter" data-level="4.2.4" data-path="classification.html"><a href="classification.html#question-13-2"><i class="fa fa-check"></i><b>4.2.4</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a><ul>
-<li class="chapter" data-level="5.1" data-path="resampling-methods.html"><a href="resampling-methods.html#conceptual-3"><i class="fa fa-check"></i><b>5.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="resampling-methods.html"><a href="resampling-methods.html#conceptual-3"><i class="fa fa-check"></i><b>5.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-1-3"><i class="fa fa-check"></i><b>5.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="5.1.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-2-3"><i class="fa fa-check"></i><b>5.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="5.1.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-3-3"><i class="fa fa-check"></i><b>5.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="5.1.4" data-path="resampling-methods.html"><a href="resampling-methods.html#question-4-3"><i class="fa fa-check"></i><b>5.1.4</b> Question 4</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="resampling-methods.html"><a href="resampling-methods.html#applied-3"><i class="fa fa-check"></i><b>5.2</b> Applied</a><ul>
+<li class="chapter" data-level="5.2" data-path="resampling-methods.html"><a href="resampling-methods.html#applied-3"><i class="fa fa-check"></i><b>5.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-5-3"><i class="fa fa-check"></i><b>5.2.1</b> Question 5</a></li>
 <li class="chapter" data-level="5.2.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-6-3"><i class="fa fa-check"></i><b>5.2.2</b> Question 6</a></li>
 <li class="chapter" data-level="5.2.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-7-3"><i class="fa fa-check"></i><b>5.2.3</b> Question 7</a></li>
@@ -218,8 +233,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.5" data-path="resampling-methods.html"><a href="resampling-methods.html#question-9-3"><i class="fa fa-check"></i><b>5.2.5</b> Question 9</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a><ul>
-<li class="chapter" data-level="6.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#conceptual-4"><i class="fa fa-check"></i><b>6.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#conceptual-4"><i class="fa fa-check"></i><b>6.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-1-4"><i class="fa fa-check"></i><b>6.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="6.1.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-2-4"><i class="fa fa-check"></i><b>6.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="6.1.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-3-4"><i class="fa fa-check"></i><b>6.1.3</b> Question 3</a></li>
@@ -228,22 +245,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-6-4"><i class="fa fa-check"></i><b>6.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="6.1.7" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-7-4"><i class="fa fa-check"></i><b>6.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#applied-4"><i class="fa fa-check"></i><b>6.2</b> Applied</a><ul>
+<li class="chapter" data-level="6.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#applied-4"><i class="fa fa-check"></i><b>6.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-8-4"><i class="fa fa-check"></i><b>6.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="6.2.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-9-4"><i class="fa fa-check"></i><b>6.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="6.2.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-10-3"><i class="fa fa-check"></i><b>6.2.3</b> Question 10</a></li>
 <li class="chapter" data-level="6.2.4" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-11-2"><i class="fa fa-check"></i><b>6.2.4</b> Question 11</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a><ul>
-<li class="chapter" data-level="7.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#conceptual-5"><i class="fa fa-check"></i><b>7.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#conceptual-5"><i class="fa fa-check"></i><b>7.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-1-5"><i class="fa fa-check"></i><b>7.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="7.1.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-2-5"><i class="fa fa-check"></i><b>7.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="7.1.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-3-5"><i class="fa fa-check"></i><b>7.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="7.1.4" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-4-5"><i class="fa fa-check"></i><b>7.1.4</b> Question 4</a></li>
 <li class="chapter" data-level="7.1.5" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-5-5"><i class="fa fa-check"></i><b>7.1.5</b> Question 5</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#applied-5"><i class="fa fa-check"></i><b>7.2</b> Applied</a><ul>
+<li class="chapter" data-level="7.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#applied-5"><i class="fa fa-check"></i><b>7.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-6-5"><i class="fa fa-check"></i><b>7.2.1</b> Question 6</a></li>
 <li class="chapter" data-level="7.2.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-7-5"><i class="fa fa-check"></i><b>7.2.2</b> Question 7</a></li>
 <li class="chapter" data-level="7.2.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-8-5"><i class="fa fa-check"></i><b>7.2.3</b> Question 8</a></li>
@@ -253,8 +274,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-12-2"><i class="fa fa-check"></i><b>7.2.7</b> Question 12</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a><ul>
-<li class="chapter" data-level="8.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#conceptual-6"><i class="fa fa-check"></i><b>8.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#conceptual-6"><i class="fa fa-check"></i><b>8.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-1-6"><i class="fa fa-check"></i><b>8.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="8.1.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-2-6"><i class="fa fa-check"></i><b>8.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="8.1.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-3-6"><i class="fa fa-check"></i><b>8.1.3</b> Question 3</a></li>
@@ -262,7 +285,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.5" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-5-6"><i class="fa fa-check"></i><b>8.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="8.1.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-6-6"><i class="fa fa-check"></i><b>8.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#applied-6"><i class="fa fa-check"></i><b>8.2</b> Applied</a><ul>
+<li class="chapter" data-level="8.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#applied-6"><i class="fa fa-check"></i><b>8.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="8.2.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-7-6"><i class="fa fa-check"></i><b>8.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="8.2.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-8-6"><i class="fa fa-check"></i><b>8.2.2</b> Question 8</a></li>
 <li class="chapter" data-level="8.2.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-9-6"><i class="fa fa-check"></i><b>8.2.3</b> Question 9</a></li>
@@ -271,13 +295,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-12-3"><i class="fa fa-check"></i><b>8.2.6</b> Question 12</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a><ul>
-<li class="chapter" data-level="9.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#conceptual-7"><i class="fa fa-check"></i><b>9.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#conceptual-7"><i class="fa fa-check"></i><b>9.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-1-7"><i class="fa fa-check"></i><b>9.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="9.1.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-2-7"><i class="fa fa-check"></i><b>9.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="9.1.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-3-7"><i class="fa fa-check"></i><b>9.1.3</b> Question 3</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#applied-7"><i class="fa fa-check"></i><b>9.2</b> Applied</a><ul>
+<li class="chapter" data-level="9.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#applied-7"><i class="fa fa-check"></i><b>9.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-4-7"><i class="fa fa-check"></i><b>9.2.1</b> Question 4</a></li>
 <li class="chapter" data-level="9.2.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-5-7"><i class="fa fa-check"></i><b>9.2.2</b> Question 5</a></li>
 <li class="chapter" data-level="9.2.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-6-7"><i class="fa fa-check"></i><b>9.2.3</b> Question 6</a></li>
@@ -285,15 +312,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-8-7"><i class="fa fa-check"></i><b>9.2.5</b> Question 8</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a><ul>
-<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#conceptual-8"><i class="fa fa-check"></i><b>10.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#conceptual-8"><i class="fa fa-check"></i><b>10.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="10.1.1" data-path="deep-learning.html"><a href="deep-learning.html#question-1-8"><i class="fa fa-check"></i><b>10.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="10.1.2" data-path="deep-learning.html"><a href="deep-learning.html#question-2-8"><i class="fa fa-check"></i><b>10.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="10.1.3" data-path="deep-learning.html"><a href="deep-learning.html#question-3-8"><i class="fa fa-check"></i><b>10.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="10.1.4" data-path="deep-learning.html"><a href="deep-learning.html#question-4-8"><i class="fa fa-check"></i><b>10.1.4</b> Question 4</a></li>
 <li class="chapter" data-level="10.1.5" data-path="deep-learning.html"><a href="deep-learning.html#question-5-8"><i class="fa fa-check"></i><b>10.1.5</b> Question 5</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#applied-8"><i class="fa fa-check"></i><b>10.2</b> Applied</a><ul>
+<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#applied-8"><i class="fa fa-check"></i><b>10.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="deep-learning.html"><a href="deep-learning.html#question-6-8"><i class="fa fa-check"></i><b>10.2.1</b> Question 6</a></li>
 <li class="chapter" data-level="10.2.2" data-path="deep-learning.html"><a href="deep-learning.html#question-7-8"><i class="fa fa-check"></i><b>10.2.2</b> Question 7</a></li>
 <li class="chapter" data-level="10.2.3" data-path="deep-learning.html"><a href="deep-learning.html#question-8-8"><i class="fa fa-check"></i><b>10.2.3</b> Question 8</a></li>
@@ -304,8 +334,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.8" data-path="deep-learning.html"><a href="deep-learning.html#question-13-3"><i class="fa fa-check"></i><b>10.2.8</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a><ul>
-<li class="chapter" data-level="11.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#conceptual-9"><i class="fa fa-check"></i><b>11.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#conceptual-9"><i class="fa fa-check"></i><b>11.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-1-9"><i class="fa fa-check"></i><b>11.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="11.1.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-2-9"><i class="fa fa-check"></i><b>11.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="11.1.3" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-3-9"><i class="fa fa-check"></i><b>11.1.3</b> Question 3</a></li>
@@ -316,13 +348,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.8" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-8-9"><i class="fa fa-check"></i><b>11.1.8</b> Question 8</a></li>
 <li class="chapter" data-level="11.1.9" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-9-8"><i class="fa fa-check"></i><b>11.1.9</b> Question 9</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#applied-9"><i class="fa fa-check"></i><b>11.2</b> Applied</a><ul>
+<li class="chapter" data-level="11.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#applied-9"><i class="fa fa-check"></i><b>11.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="11.2.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-10-7"><i class="fa fa-check"></i><b>11.2.1</b> Question 10</a></li>
 <li class="chapter" data-level="11.2.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-11-6"><i class="fa fa-check"></i><b>11.2.2</b> Question 11</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a><ul>
-<li class="chapter" data-level="12.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#conceptual-10"><i class="fa fa-check"></i><b>12.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#conceptual-10"><i class="fa fa-check"></i><b>12.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-1-10"><i class="fa fa-check"></i><b>12.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="12.1.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-2-10"><i class="fa fa-check"></i><b>12.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="12.1.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-3-10"><i class="fa fa-check"></i><b>12.1.3</b> Question 3</a></li>
@@ -330,7 +365,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.5" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-5-10"><i class="fa fa-check"></i><b>12.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="12.1.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-6-10"><i class="fa fa-check"></i><b>12.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#applied-10"><i class="fa fa-check"></i><b>12.2</b> Applied</a><ul>
+<li class="chapter" data-level="12.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#applied-10"><i class="fa fa-check"></i><b>12.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-7-10"><i class="fa fa-check"></i><b>12.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="12.2.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-8-10"><i class="fa fa-check"></i><b>12.2.2</b> Question 8</a></li>
 <li class="chapter" data-level="12.2.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-9-9"><i class="fa fa-check"></i><b>12.2.3</b> Question 9</a></li>
@@ -340,8 +376,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.7" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-13-4"><i class="fa fa-check"></i><b>12.2.7</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a><ul>
-<li class="chapter" data-level="13.1" data-path="multiple-testing.html"><a href="multiple-testing.html#conceptual-11"><i class="fa fa-check"></i><b>13.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="multiple-testing.html"><a href="multiple-testing.html#conceptual-11"><i class="fa fa-check"></i><b>13.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-1-11"><i class="fa fa-check"></i><b>13.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="13.1.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-2-11"><i class="fa fa-check"></i><b>13.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="13.1.3" data-path="multiple-testing.html"><a href="multiple-testing.html#question-3-11"><i class="fa fa-check"></i><b>13.1.3</b> Question 3</a></li>
@@ -349,7 +387,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.1.5" data-path="multiple-testing.html"><a href="multiple-testing.html#question-5-11"><i class="fa fa-check"></i><b>13.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="13.1.6" data-path="multiple-testing.html"><a href="multiple-testing.html#question-6-11"><i class="fa fa-check"></i><b>13.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="multiple-testing.html"><a href="multiple-testing.html#applied-11"><i class="fa fa-check"></i><b>13.2</b> Applied</a><ul>
+<li class="chapter" data-level="13.2" data-path="multiple-testing.html"><a href="multiple-testing.html#applied-11"><i class="fa fa-check"></i><b>13.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-7-11"><i class="fa fa-check"></i><b>13.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="13.2.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-8-11"><i class="fa fa-check"></i><b>13.2.2</b> Question 8</a></li>
 </ul></li>
@@ -374,11 +413,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="classification" class="section level1 hasAnchor">
+<div id="classification" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">4</span> Classification<a href="classification.html#classification" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="conceptual-2" class="section level2 hasAnchor">
+<div id="conceptual-2" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Conceptual<a href="classification.html#conceptual-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="question-1-2" class="section level3 hasAnchor">
+<div id="question-1-2" class="section level3 hasAnchor" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> Question 1<a href="classification.html#question-1-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Using a little bit of algebra, prove that (4.2) is equivalent to (4.3). In
@@ -402,7 +441,7 @@ p(X) = \frac{e^{\beta_0 + \beta_1X}}{1 + e^{\beta_0 + \beta_1X}}
               &amp;= x
 \end{align}\]</span></p>
 </div>
-<div id="question-2-2" class="section level3 hasAnchor">
+<div id="question-2-2" class="section level3 hasAnchor" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Question 2<a href="classification.html#question-2-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>It was stated in the text that classifying an observation to the class for
@@ -444,7 +483,7 @@ maximize</p>
 \log(\pi_k) + \frac{x\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2}
 \]</span></p>
 </div>
-<div id="question-3-2" class="section level3 hasAnchor">
+<div id="question-3-2" class="section level3 hasAnchor" number="4.1.3">
 <h3><span class="header-section-number">4.1.3</span> Question 3<a href="classification.html#question-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This problem relates to the QDA model, in which the observations within each
@@ -483,7 +522,7 @@ f &amp;= \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi\sigma_k}}\right) - \frac{1}
 we retain the term with <span class="math inline">\(x^2\)</span>, hence <span class="math inline">\(f\)</span>, the Bayes’ classifier, is a
 quadratic function of <span class="math inline">\(x\)</span>.</p>
 </div>
-<div id="question-4-2" class="section level3 hasAnchor">
+<div id="question-4-2" class="section level3 hasAnchor" number="4.1.4">
 <h3><span class="header-section-number">4.1.4</span> Question 4<a href="classification.html#question-4-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>When the number of features <span class="math inline">\(p\)</span> is large, there tends to be a deterioration
@@ -567,7 +606,7 @@ When <span class="math inline">\(p = n\)</span>, <span class="math inline">\(l =
 Therefore, the length of each side of the hypercube rapidly approaches 1
 (or 100%) of the range of each <span class="math inline">\(p\)</span>.</p>
 </div>
-<div id="question-5-2" class="section level3 hasAnchor">
+<div id="question-5-2" class="section level3 hasAnchor" number="4.1.5">
 <h3><span class="header-section-number">4.1.5</span> Question 5<a href="classification.html#question-5-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>We now examine the differences between LDA and QDA.</p>
@@ -606,7 +645,7 @@ boundary. Justify your answer.</li>
 </blockquote>
 <p>False. QDA can overfit leading to poorer test performance.</p>
 </div>
-<div id="question-6-2" class="section level3 hasAnchor">
+<div id="question-6-2" class="section level3 hasAnchor" number="4.1.6">
 <h3><span class="header-section-number">4.1.6</span> Question 6<a href="classification.html#question-6-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose we collect data for a group of students in a statistics class with
@@ -636,7 +675,7 @@ chance of getting an A in the class?</li>
 <p>We would like to solve for <span class="math inline">\(X_1\)</span> where <span class="math inline">\(p(X) = 0.5\)</span>. Taking the first equation
 above, we need to solve <span class="math inline">\(0 = −6 + 0.05X_1 + 3.5\)</span>, so <span class="math inline">\(X_1 = 50\)</span> hours.</p>
 </div>
-<div id="question-7-2" class="section level3 hasAnchor">
+<div id="question-7-2" class="section level3 hasAnchor" number="4.1.7">
 <h3><span class="header-section-number">4.1.7</span> Question 7<a href="classification.html#question-7-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose that we wish to predict whether a given stock will issue a dividend
@@ -670,10 +709,10 @@ p(D|v) &amp;= \frac{p(v|D) p(D)}{p(v|D)p(D) + p(v|N)p(N)} \\
                {0.8 \times e^{-(4-10)^2/(2 \times 36)} + 0.2 \times e^{-(4-0)^2/(2 \times 36)}} \\
        &amp;= \frac{0.8 e^{-1/2}}{0.8 e^{-1/2} + 0.2 e^{-2/9}}
 \end{align}\]</span></p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="classification.html#cb173-1"></a><span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span> <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span><span class="dv">2</span><span class="op">/</span><span class="dv">9</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="classification.html#cb173-1" aria-hidden="true"></a><span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span> <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.8</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span><span class="dv">2</span><span class="op">/</span><span class="dv">9</span>) <span class="op">*</span><span class="st"> </span><span class="fl">0.2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.7518525</code></pre>
 </div>
-<div id="question-8-2" class="section level3 hasAnchor">
+<div id="question-8-2" class="section level3 hasAnchor" number="4.1.8">
 <h3><span class="header-section-number">4.1.8</span> Question 8<a href="classification.html#question-8-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose that we take a data set, divide it into equally-sized training and
@@ -688,7 +727,7 @@ classification of new observations? Why?</p>
 is zero, implying a test error rate of 36%. Logistic regression outperforms
 1-nearest neighbor on the test set and therefore should be preferred.</p>
 </div>
-<div id="question-9-2" class="section level3 hasAnchor">
+<div id="question-9-2" class="section level3 hasAnchor" number="4.1.9">
 <h3><span class="header-section-number">4.1.9</span> Question 9<a href="classification.html#question-9-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This problem has to do with <em>odds</em>.</p>
@@ -709,7 +748,7 @@ card payment. What are the odds that she will default?</li>
 </blockquote>
 <p><span class="math display">\[0.16 / (1 - 0.16)  = 0.19\]</span></p>
 </div>
-<div id="question-10-2" class="section level3 hasAnchor">
+<div id="question-10-2" class="section level3 hasAnchor" number="4.1.10">
 <h3><span class="header-section-number">4.1.10</span> Question 10<a href="classification.html#question-10-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Equation 4.32 derived an expression for <span class="math inline">\(\log(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)})\)</span>
@@ -737,7 +776,7 @@ provide expressions for <span class="math inline">\(a_k\)</span> and <span class
 <p>and</p>
 <p><span class="math display">\[b_k = (\mu_k - \mu_K) / \sigma^2\]</span></p>
 </div>
-<div id="question-11-1" class="section level3 hasAnchor">
+<div id="question-11-1" class="section level3 hasAnchor" number="4.1.11">
 <h3><span class="header-section-number">4.1.11</span> Question 11<a href="classification.html#question-11-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>ToDo</p>
 <blockquote>
@@ -746,7 +785,7 @@ Your answer should involve <span class="math inline">\(\pi_k\)</span>, <span cla
 and <span class="math inline">\(\Sigma_K\)</span>.</p>
 </blockquote>
 </div>
-<div id="question-12-1" class="section level3 hasAnchor">
+<div id="question-12-1" class="section level3 hasAnchor" number="4.1.12">
 <h3><span class="header-section-number">4.1.12</span> Question 12<a href="classification.html#question-12-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose that you wish to classify an observation <span class="math inline">\(X \in \mathbb{R}\)</span> into
@@ -808,9 +847,9 @@ Explain your answer.</li>
 perfectly agree.</p>
 </div>
 </div>
-<div id="applied-2" class="section level2 hasAnchor">
+<div id="applied-2" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Applied<a href="classification.html#applied-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="question-13-1" class="section level3 hasAnchor">
+<div id="question-13-1" class="section level3 hasAnchor" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Question 13<a href="classification.html#question-13-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This question should be answered using the <code>Weekly</code> data set, which is part
@@ -822,13 +861,13 @@ years, from the beginning of 1990 to the end of 2010.</p>
 there appear to be any patterns?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="classification.html#cb175-1"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb175-2"><a href="classification.html#cb175-2"></a><span class="kw">library</span>(class)</span>
-<span id="cb175-3"><a href="classification.html#cb175-3"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb175-4"><a href="classification.html#cb175-4"></a><span class="kw">library</span>(corrplot)</span>
-<span id="cb175-5"><a href="classification.html#cb175-5"></a><span class="kw">library</span>(ISLR2)</span>
-<span id="cb175-6"><a href="classification.html#cb175-6"></a><span class="kw">library</span>(e1071)</span></code></pre></div>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="classification.html#cb176-1"></a><span class="kw">summary</span>(Weekly)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="classification.html#cb175-1" aria-hidden="true"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb175-2"><a href="classification.html#cb175-2" aria-hidden="true"></a><span class="kw">library</span>(class)</span>
+<span id="cb175-3"><a href="classification.html#cb175-3" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb175-4"><a href="classification.html#cb175-4" aria-hidden="true"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb175-5"><a href="classification.html#cb175-5" aria-hidden="true"></a><span class="kw">library</span>(ISLR2)</span>
+<span id="cb175-6"><a href="classification.html#cb175-6" aria-hidden="true"></a><span class="kw">library</span>(e1071)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="classification.html#cb176-1" aria-hidden="true"></a><span class="kw">summary</span>(Weekly)</span></code></pre></div>
 <pre><code>##       Year           Lag1               Lag2               Lag3         
 ##  Min.   :1990   Min.   :-18.1950   Min.   :-18.1950   Min.   :-18.1950  
 ##  1st Qu.:1995   1st Qu.: -1.1540   1st Qu.: -1.1540   1st Qu.: -1.1580  
@@ -850,7 +889,7 @@ there appear to be any patterns?</li>
 ##            
 ##            
 ## </code></pre>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="classification.html#cb178-1"></a><span class="kw">corrplot</span>(<span class="kw">cor</span>(Weekly[, <span class="dv">-9</span>]), <span class="dt">type =</span> <span class="st">&quot;lower&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">method =</span> <span class="st">&quot;ellipse&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="classification.html#cb178-1" aria-hidden="true"></a><span class="kw">corrplot</span>(<span class="kw">cor</span>(Weekly[, <span class="dv">-9</span>]), <span class="dt">type =</span> <span class="st">&quot;lower&quot;</span>, <span class="dt">diag =</span> <span class="ot">FALSE</span>, <span class="dt">method =</span> <span class="st">&quot;ellipse&quot;</span>)</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Volume is strongly positively correlated with Year. Other correlations are
 week, but Lag1 is negatively correlated with Lag2 but positively correlated
@@ -863,20 +902,16 @@ the summary function to print the results. Do any of the predictors appear
 to be statistically significant? If so, which ones?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="classification.html#cb179-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(</span>
-<span id="cb179-2"><a href="classification.html#cb179-2"></a>  Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4 <span class="op">+</span><span class="st"> </span>Lag5 <span class="op">+</span><span class="st"> </span>Volume,</span>
-<span id="cb179-3"><a href="classification.html#cb179-3"></a>  <span class="dt">data =</span> Weekly,</span>
-<span id="cb179-4"><a href="classification.html#cb179-4"></a>  <span class="dt">family =</span> binomial</span>
-<span id="cb179-5"><a href="classification.html#cb179-5"></a>)</span>
-<span id="cb179-6"><a href="classification.html#cb179-6"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="classification.html#cb179-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(</span>
+<span id="cb179-2"><a href="classification.html#cb179-2" aria-hidden="true"></a>  Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4 <span class="op">+</span><span class="st"> </span>Lag5 <span class="op">+</span><span class="st"> </span>Volume,</span>
+<span id="cb179-3"><a href="classification.html#cb179-3" aria-hidden="true"></a>  <span class="dt">data =</span> Weekly,</span>
+<span id="cb179-4"><a href="classification.html#cb179-4" aria-hidden="true"></a>  <span class="dt">family =</span> binomial</span>
+<span id="cb179-5"><a href="classification.html#cb179-5" aria-hidden="true"></a>)</span>
+<span id="cb179-6"><a href="classification.html#cb179-6" aria-hidden="true"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + 
 ##     Volume, family = binomial, data = Weekly)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.6949  -1.2565   0.9913   1.0849   1.4579  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(&gt;|z|)   
@@ -905,17 +940,17 @@ Explain what the confusion matrix is telling you about the types of
 mistakes made by logistic regression.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="classification.html#cb181-1"></a><span class="kw">contrasts</span>(Weekly<span class="op">$</span>Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="classification.html#cb181-1" aria-hidden="true"></a><span class="kw">contrasts</span>(Weekly<span class="op">$</span>Direction)</span></code></pre></div>
 <pre><code>##      Up
 ## Down  0
 ## Up    1</code></pre>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="classification.html#cb183-1"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb183-2"><a href="classification.html#cb183-2"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up (pred)&quot;</span>, <span class="st">&quot;Down (pred)&quot;</span>), Weekly<span class="op">$</span>Direction))</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="classification.html#cb183-1" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb183-2"><a href="classification.html#cb183-2" aria-hidden="true"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up (pred)&quot;</span>, <span class="st">&quot;Down (pred)&quot;</span>), Weekly<span class="op">$</span>Direction))</span></code></pre></div>
 <pre><code>##              
 ##               Down  Up
 ##   Down (pred)   54  48
 ##   Up (pred)    430 557</code></pre>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="classification.html#cb185-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="classification.html#cb185-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
 <pre><code>## [1] 0.5610652</code></pre>
 <p>The overall fraction of correct predictions is 0.56. Although logistic
 regression correctly predicts upwards movements well, it incorrectly predicts
@@ -928,75 +963,75 @@ matrix and the overall fraction of correct predictions for the held out
 data (that is, the data from 2009 and 2010).</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="classification.html#cb187-1"></a>train &lt;-<span class="st"> </span>Weekly<span class="op">$</span>Year <span class="op">&lt;</span><span class="st"> </span><span class="dv">2009</span></span>
-<span id="cb187-2"><a href="classification.html#cb187-2"></a></span>
-<span id="cb187-3"><a href="classification.html#cb187-3"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
-<span id="cb187-4"><a href="classification.html#cb187-4"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb187-5"><a href="classification.html#cb187-5"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up (pred)&quot;</span>, <span class="st">&quot;Down (pred)&quot;</span>), Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="classification.html#cb187-1" aria-hidden="true"></a>train &lt;-<span class="st"> </span>Weekly<span class="op">$</span>Year <span class="op">&lt;</span><span class="st"> </span><span class="dv">2009</span></span>
+<span id="cb187-2"><a href="classification.html#cb187-2" aria-hidden="true"></a></span>
+<span id="cb187-3"><a href="classification.html#cb187-3" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb187-4"><a href="classification.html#cb187-4" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb187-5"><a href="classification.html#cb187-5" aria-hidden="true"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up (pred)&quot;</span>, <span class="st">&quot;Down (pred)&quot;</span>), Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
 <pre><code>##              
 ##               Down Up
 ##   Down (pred)    9  5
 ##   Up (pred)     34 56</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="classification.html#cb189-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="classification.html#cb189-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
 <pre><code>## [1] 0.625</code></pre>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Repeat (d) using LDA.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="classification.html#cb191-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly[train, ])</span>
-<span id="cb191-2"><a href="classification.html#cb191-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
-<span id="cb191-3"><a href="classification.html#cb191-3"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(pred, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="classification.html#cb191-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">lda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly[train, ])</span>
+<span id="cb191-2"><a href="classification.html#cb191-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb191-3"><a href="classification.html#cb191-3" aria-hidden="true"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(pred, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
 <pre><code>##       
 ## pred   Down Up
 ##   Down    9  5
 ##   Up     34 56</code></pre>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="classification.html#cb193-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="classification.html#cb193-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
 <pre><code>## [1] 0.625</code></pre>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">
 <li>Repeat (d) using QDA.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="classification.html#cb195-1"></a>fit &lt;-<span class="st"> </span><span class="kw">qda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly[train, ])</span>
-<span id="cb195-2"><a href="classification.html#cb195-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
-<span id="cb195-3"><a href="classification.html#cb195-3"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(pred, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="classification.html#cb195-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">qda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly[train, ])</span>
+<span id="cb195-2"><a href="classification.html#cb195-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb195-3"><a href="classification.html#cb195-3" aria-hidden="true"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(pred, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
 <pre><code>##       
 ## pred   Down Up
 ##   Down    0  0
 ##   Up     43 61</code></pre>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="classification.html#cb197-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="classification.html#cb197-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
 <pre><code>## [1] 0.5865385</code></pre>
 <blockquote>
 <ol start="7" style="list-style-type: lower-alpha">
 <li>Repeat (d) using KNN with <span class="math inline">\(K = 1\)</span>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="classification.html#cb199-1"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
-<span id="cb199-2"><a href="classification.html#cb199-2"></a>  Weekly[train, <span class="st">&quot;Lag2&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
-<span id="cb199-3"><a href="classification.html#cb199-3"></a>  Weekly[<span class="op">!</span>train, <span class="st">&quot;Lag2&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
-<span id="cb199-4"><a href="classification.html#cb199-4"></a>  Weekly<span class="op">$</span>Direction[train]</span>
-<span id="cb199-5"><a href="classification.html#cb199-5"></a>)</span>
-<span id="cb199-6"><a href="classification.html#cb199-6"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(fit, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="classification.html#cb199-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
+<span id="cb199-2"><a href="classification.html#cb199-2" aria-hidden="true"></a>  Weekly[train, <span class="st">&quot;Lag2&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb199-3"><a href="classification.html#cb199-3" aria-hidden="true"></a>  Weekly[<span class="op">!</span>train, <span class="st">&quot;Lag2&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb199-4"><a href="classification.html#cb199-4" aria-hidden="true"></a>  Weekly<span class="op">$</span>Direction[train]</span>
+<span id="cb199-5"><a href="classification.html#cb199-5" aria-hidden="true"></a>)</span>
+<span id="cb199-6"><a href="classification.html#cb199-6" aria-hidden="true"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(fit, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
 <pre><code>##       
 ## fit    Down Up
 ##   Down   21 29
 ##   Up     22 32</code></pre>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="classification.html#cb201-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="classification.html#cb201-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
 <pre><code>## [1] 0.5096154</code></pre>
 <blockquote>
 <ol start="8" style="list-style-type: lower-alpha">
 <li>Repeat (d) using naive Bayes.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="classification.html#cb203-1"></a>fit &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Smarket, <span class="dt">subset =</span> train)</span>
-<span id="cb203-2"><a href="classification.html#cb203-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb203-3"><a href="classification.html#cb203-3"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(pred, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="classification.html#cb203-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Smarket, <span class="dt">subset =</span> train)</span>
+<span id="cb203-2"><a href="classification.html#cb203-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb203-3"><a href="classification.html#cb203-3" aria-hidden="true"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(pred, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
 <pre><code>##       
 ## pred   Down Up
 ##   Down   27 29
 ##   Up     16 32</code></pre>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="classification.html#cb205-1"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="classification.html#cb205-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
 <pre><code>## [1] 0.5673077</code></pre>
 <blockquote>
 <ol style="list-style-type: lower-roman">
@@ -1013,69 +1048,69 @@ the best results on the held out data. Note that you should also
 experiment with values for <span class="math inline">\(K\)</span> in the KNN classifier.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="classification.html#cb207-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
-<span id="cb207-2"><a href="classification.html#cb207-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb207-3"><a href="classification.html#cb207-3"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="classification.html#cb207-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb207-2"><a href="classification.html#cb207-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb207-3"><a href="classification.html#cb207-3" aria-hidden="true"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
 <pre><code>## [1] 0.5673077</code></pre>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="classification.html#cb209-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag3, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
-<span id="cb209-2"><a href="classification.html#cb209-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb209-3"><a href="classification.html#cb209-3"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="classification.html#cb209-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag3, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb209-2"><a href="classification.html#cb209-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb209-3"><a href="classification.html#cb209-3" aria-hidden="true"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
 <pre><code>## [1] 0.5865385</code></pre>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="classification.html#cb211-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span>Lag4, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
-<span id="cb211-2"><a href="classification.html#cb211-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb211-3"><a href="classification.html#cb211-3"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="classification.html#cb211-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span>Lag4, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb211-2"><a href="classification.html#cb211-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb211-3"><a href="classification.html#cb211-3" aria-hidden="true"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
 <pre><code>## [1] 0.5865385</code></pre>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="classification.html#cb213-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
-<span id="cb213-2"><a href="classification.html#cb213-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb213-3"><a href="classification.html#cb213-3"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="classification.html#cb213-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb213-2"><a href="classification.html#cb213-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb213-3"><a href="classification.html#cb213-3" aria-hidden="true"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
 <pre><code>## [1] 0.5865385</code></pre>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="classification.html#cb215-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">*</span><span class="st"> </span>Lag2 <span class="op">*</span><span class="st"> </span>Lag3 <span class="op">*</span><span class="st"> </span>Lag4, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
-<span id="cb215-2"><a href="classification.html#cb215-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb215-3"><a href="classification.html#cb215-3"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="classification.html#cb215-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">*</span><span class="st"> </span>Lag2 <span class="op">*</span><span class="st"> </span>Lag3 <span class="op">*</span><span class="st"> </span>Lag4, <span class="dt">data =</span> Weekly[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb215-2"><a href="classification.html#cb215-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb215-3"><a href="classification.html#cb215-3" aria-hidden="true"></a><span class="kw">mean</span>(<span class="kw">ifelse</span>(pred, <span class="st">&quot;Up&quot;</span>, <span class="st">&quot;Down&quot;</span>) <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
 <pre><code>## [1] 0.5961538</code></pre>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="classification.html#cb217-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4,<span class="dt">data =</span> Weekly[train, ])</span>
-<span id="cb217-2"><a href="classification.html#cb217-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
-<span id="cb217-3"><a href="classification.html#cb217-3"></a><span class="kw">mean</span>(pred <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="classification.html#cb217-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">lda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4,<span class="dt">data =</span> Weekly[train, ])</span>
+<span id="cb217-2"><a href="classification.html#cb217-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb217-3"><a href="classification.html#cb217-3" aria-hidden="true"></a><span class="kw">mean</span>(pred <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
 <pre><code>## [1] 0.5769231</code></pre>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="classification.html#cb219-1"></a>fit &lt;-<span class="st"> </span><span class="kw">qda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4, <span class="dt">data =</span> Weekly[train, ])</span>
-<span id="cb219-2"><a href="classification.html#cb219-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
-<span id="cb219-3"><a href="classification.html#cb219-3"></a><span class="kw">mean</span>(pred <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="classification.html#cb219-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">qda</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4, <span class="dt">data =</span> Weekly[train, ])</span>
+<span id="cb219-2"><a href="classification.html#cb219-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb219-3"><a href="classification.html#cb219-3" aria-hidden="true"></a><span class="kw">mean</span>(pred <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
 <pre><code>## [1] 0.5192308</code></pre>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="classification.html#cb221-1"></a>fit &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4, <span class="dt">data =</span> Weekly[train, ])</span>
-<span id="cb221-2"><a href="classification.html#cb221-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb221-3"><a href="classification.html#cb221-3"></a><span class="kw">mean</span>(pred <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="classification.html#cb221-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(Direction <span class="op">~</span><span class="st"> </span>Lag1 <span class="op">+</span><span class="st"> </span>Lag2 <span class="op">+</span><span class="st"> </span>Lag3 <span class="op">+</span><span class="st"> </span>Lag4, <span class="dt">data =</span> Weekly[train, ])</span>
+<span id="cb221-2"><a href="classification.html#cb221-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb221-3"><a href="classification.html#cb221-3" aria-hidden="true"></a><span class="kw">mean</span>(pred <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
 <pre><code>## [1] 0.5096154</code></pre>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="classification.html#cb223-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb223-2"><a href="classification.html#cb223-2"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>, <span class="cf">function</span>(k) {</span>
-<span id="cb223-3"><a href="classification.html#cb223-3"></a>  fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
-<span id="cb223-4"><a href="classification.html#cb223-4"></a>    Weekly[train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
-<span id="cb223-5"><a href="classification.html#cb223-5"></a>    Weekly[<span class="op">!</span>train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
-<span id="cb223-6"><a href="classification.html#cb223-6"></a>    Weekly<span class="op">$</span>Direction[train],</span>
-<span id="cb223-7"><a href="classification.html#cb223-7"></a>    <span class="dt">k =</span> k</span>
-<span id="cb223-8"><a href="classification.html#cb223-8"></a>  )</span>
-<span id="cb223-9"><a href="classification.html#cb223-9"></a>  <span class="kw">mean</span>(fit <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span>
-<span id="cb223-10"><a href="classification.html#cb223-10"></a>})</span>
-<span id="cb223-11"><a href="classification.html#cb223-11"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>, res, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;k&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Fraction correct&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="classification.html#cb223-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb223-2"><a href="classification.html#cb223-2" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>, <span class="cf">function</span>(k) {</span>
+<span id="cb223-3"><a href="classification.html#cb223-3" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
+<span id="cb223-4"><a href="classification.html#cb223-4" aria-hidden="true"></a>    Weekly[train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb223-5"><a href="classification.html#cb223-5" aria-hidden="true"></a>    Weekly[<span class="op">!</span>train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb223-6"><a href="classification.html#cb223-6" aria-hidden="true"></a>    Weekly<span class="op">$</span>Direction[train],</span>
+<span id="cb223-7"><a href="classification.html#cb223-7" aria-hidden="true"></a>    <span class="dt">k =</span> k</span>
+<span id="cb223-8"><a href="classification.html#cb223-8" aria-hidden="true"></a>  )</span>
+<span id="cb223-9"><a href="classification.html#cb223-9" aria-hidden="true"></a>  <span class="kw">mean</span>(fit <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span>
+<span id="cb223-10"><a href="classification.html#cb223-10" aria-hidden="true"></a>})</span>
+<span id="cb223-11"><a href="classification.html#cb223-11" aria-hidden="true"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>, res, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;k&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Fraction correct&quot;</span>)</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="classification.html#cb224-1"></a>(k &lt;-<span class="st"> </span><span class="kw">which.max</span>(res))</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="classification.html#cb224-1" aria-hidden="true"></a>(k &lt;-<span class="st"> </span><span class="kw">which.max</span>(res))</span></code></pre></div>
 <pre><code>## [1] 26</code></pre>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="classification.html#cb226-1"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
-<span id="cb226-2"><a href="classification.html#cb226-2"></a>  Weekly[train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
-<span id="cb226-3"><a href="classification.html#cb226-3"></a>  Weekly[<span class="op">!</span>train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
-<span id="cb226-4"><a href="classification.html#cb226-4"></a>  Weekly<span class="op">$</span>Direction[train],</span>
-<span id="cb226-5"><a href="classification.html#cb226-5"></a>  <span class="dt">k =</span> k</span>
-<span id="cb226-6"><a href="classification.html#cb226-6"></a>)</span>
-<span id="cb226-7"><a href="classification.html#cb226-7"></a><span class="kw">table</span>(fit, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="classification.html#cb226-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
+<span id="cb226-2"><a href="classification.html#cb226-2" aria-hidden="true"></a>  Weekly[train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb226-3"><a href="classification.html#cb226-3" aria-hidden="true"></a>  Weekly[<span class="op">!</span>train, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb226-4"><a href="classification.html#cb226-4" aria-hidden="true"></a>  Weekly<span class="op">$</span>Direction[train],</span>
+<span id="cb226-5"><a href="classification.html#cb226-5" aria-hidden="true"></a>  <span class="dt">k =</span> k</span>
+<span id="cb226-6"><a href="classification.html#cb226-6" aria-hidden="true"></a>)</span>
+<span id="cb226-7"><a href="classification.html#cb226-7" aria-hidden="true"></a><span class="kw">table</span>(fit, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
 <pre><code>##       
 ## fit    Down Up
 ##   Down   23 18
 ##   Up     20 43</code></pre>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="classification.html#cb228-1"></a><span class="kw">mean</span>(fit <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="classification.html#cb228-1" aria-hidden="true"></a><span class="kw">mean</span>(fit <span class="op">==</span><span class="st"> </span>Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction)</span></code></pre></div>
 <pre><code>## [1] 0.6346154</code></pre>
 <p>KNN using the first 3 Lag variables performs marginally better than logistic
 regression with <code>Lag2</code> if we tune <span class="math inline">\(k\)</span> to be <span class="math inline">\(k = 26\)</span>.</p>
 </div>
-<div id="question-14-1" class="section level3 hasAnchor">
+<div id="question-14-1" class="section level3 hasAnchor" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Question 14<a href="classification.html#question-14-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In this problem, you will develop a model to predict whether a given car gets
@@ -1088,7 +1123,7 @@ may find it helpful to use the <code>data.frame()</code> function to create a si
 data set containing both <code>mpg01</code> and the other <code>Auto</code> variables.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="classification.html#cb230-1"></a>x &lt;-<span class="st"> </span><span class="kw">cbind</span>(Auto[, <span class="dv">-1</span>], <span class="kw">data.frame</span>(<span class="st">&quot;mpg01&quot;</span> =<span class="st"> </span>Auto<span class="op">$</span>mpg <span class="op">&gt;</span><span class="st"> </span><span class="kw">median</span>(Auto<span class="op">$</span>mpg)))</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="classification.html#cb230-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">cbind</span>(Auto[, <span class="dv">-1</span>], <span class="kw">data.frame</span>(<span class="st">&quot;mpg01&quot;</span> =<span class="st"> </span>Auto<span class="op">$</span>mpg <span class="op">&gt;</span><span class="st"> </span><span class="kw">median</span>(Auto<span class="op">$</span>mpg)))</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Explore the data graphically in order to investigate the association
@@ -1097,14 +1132,14 @@ most likely to be useful in predicting <code>mpg01</code>? Scatterplots and boxp
 may be useful tools to answer this question. Describe your findings.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="classification.html#cb231-1"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>))</span>
-<span id="cb231-2"><a href="classification.html#cb231-2"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>) <span class="kw">hist</span>(x[, i], <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">main =</span> <span class="kw">colnames</span>(x)[i])</span>
-<span id="cb231-3"><a href="classification.html#cb231-3"></a></span>
-<span id="cb231-4"><a href="classification.html#cb231-4"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="classification.html#cb231-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>))</span>
+<span id="cb231-2"><a href="classification.html#cb231-2" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>) <span class="kw">hist</span>(x[, i], <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">main =</span> <span class="kw">colnames</span>(x)[i])</span>
+<span id="cb231-3"><a href="classification.html#cb231-3" aria-hidden="true"></a></span>
+<span id="cb231-4"><a href="classification.html#cb231-4" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>))</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="classification.html#cb232-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>) <span class="kw">boxplot</span>(x[, i] <span class="op">~</span><span class="st"> </span>x<span class="op">$</span>mpg01, <span class="dt">main =</span> <span class="kw">colnames</span>(x)[i])</span>
-<span id="cb232-2"><a href="classification.html#cb232-2"></a></span>
-<span id="cb232-3"><a href="classification.html#cb232-3"></a><span class="kw">pairs</span>(x[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="classification.html#cb232-1" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>) <span class="kw">boxplot</span>(x[, i] <span class="op">~</span><span class="st"> </span>x<span class="op">$</span>mpg01, <span class="dt">main =</span> <span class="kw">colnames</span>(x)[i])</span>
+<span id="cb232-2"><a href="classification.html#cb232-2" aria-hidden="true"></a></span>
+<span id="cb232-3"><a href="classification.html#cb232-3" aria-hidden="true"></a><span class="kw">pairs</span>(x[, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>])</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-13-2.png" width="672" /><img src="04-classification_files/figure-html/unnamed-chunk-13-3.png" width="672" /></p>
 <p>Most variables show an association with <code>mpg01</code> category, and several
 variables are colinear.</p>
@@ -1113,8 +1148,8 @@ variables are colinear.</p>
 <li>Split the data into a training set and a test set.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="classification.html#cb233-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb233-2"><a href="classification.html#cb233-2"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(x)), <span class="kw">nrow</span>(x) <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="classification.html#cb233-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb233-2"><a href="classification.html#cb233-2" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(x)), <span class="kw">nrow</span>(x) <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span></code></pre></div>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Perform LDA on the training data in order to predict <code>mpg01</code> using the
@@ -1122,16 +1157,16 @@ variables that seemed most associated with <code>mpg01</code> in (b). What is th
 test error of the model obtained?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="classification.html#cb234-1"></a><span class="kw">sort</span>(<span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb234-2"><a href="classification.html#cb234-2"></a>  <span class="kw">setNames</span>(<span class="kw">abs</span>(<span class="kw">t.test</span>(x[, i] <span class="op">~</span><span class="st"> </span>x<span class="op">$</span>mpg01)<span class="op">$</span>statistic), <span class="kw">colnames</span>(x)[i])</span>
-<span id="cb234-3"><a href="classification.html#cb234-3"></a>}))</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="classification.html#cb234-1" aria-hidden="true"></a><span class="kw">sort</span>(<span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb234-2"><a href="classification.html#cb234-2" aria-hidden="true"></a>  <span class="kw">setNames</span>(<span class="kw">abs</span>(<span class="kw">t.test</span>(x[, i] <span class="op">~</span><span class="st"> </span>x<span class="op">$</span>mpg01)<span class="op">$</span>statistic), <span class="kw">colnames</span>(x)[i])</span>
+<span id="cb234-3"><a href="classification.html#cb234-3" aria-hidden="true"></a>}))</span></code></pre></div>
 <pre><code>## acceleration         year       origin   horsepower displacement       weight 
 ##     7.302430     9.403221    11.824099    17.681939    22.632004    22.932777 
 ##    cylinders 
 ##    23.035328</code></pre>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="classification.html#cb236-1"></a>fit &lt;-<span class="st"> </span><span class="kw">lda</span>(mpg01 <span class="op">~</span><span class="st"> </span>cylinders <span class="op">+</span><span class="st"> </span>weight <span class="op">+</span><span class="st"> </span>displacement, <span class="dt">data =</span> x[train, ])</span>
-<span id="cb236-2"><a href="classification.html#cb236-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, x[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
-<span id="cb236-3"><a href="classification.html#cb236-3"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="classification.html#cb236-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">lda</span>(mpg01 <span class="op">~</span><span class="st"> </span>cylinders <span class="op">+</span><span class="st"> </span>weight <span class="op">+</span><span class="st"> </span>displacement, <span class="dt">data =</span> x[train, ])</span>
+<span id="cb236-2"><a href="classification.html#cb236-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, x[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb236-3"><a href="classification.html#cb236-3" aria-hidden="true"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span></code></pre></div>
 <pre><code>## [1] 0.1068702</code></pre>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
@@ -1140,9 +1175,9 @@ variables that seemed most associated with <code>mpg01</code> in (b). What is th
 test error of the model obtained?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="classification.html#cb238-1"></a>fit &lt;-<span class="st"> </span><span class="kw">qda</span>(mpg01 <span class="op">~</span><span class="st"> </span>cylinders <span class="op">+</span><span class="st"> </span>weight <span class="op">+</span><span class="st"> </span>displacement, <span class="dt">data =</span> x[train, ])</span>
-<span id="cb238-2"><a href="classification.html#cb238-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, x[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
-<span id="cb238-3"><a href="classification.html#cb238-3"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="classification.html#cb238-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">qda</span>(mpg01 <span class="op">~</span><span class="st"> </span>cylinders <span class="op">+</span><span class="st"> </span>weight <span class="op">+</span><span class="st"> </span>displacement, <span class="dt">data =</span> x[train, ])</span>
+<span id="cb238-2"><a href="classification.html#cb238-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, x[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb238-3"><a href="classification.html#cb238-3" aria-hidden="true"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span></code></pre></div>
 <pre><code>## [1] 0.09923664</code></pre>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">
@@ -1151,9 +1186,9 @@ test error of the model obtained?</li>
 (b). What is the test error of the model obtained?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="classification.html#cb240-1"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(mpg01 <span class="op">~</span><span class="st"> </span>cylinders <span class="op">+</span><span class="st"> </span>weight <span class="op">+</span><span class="st"> </span>displacement, <span class="dt">data =</span> x[train, ], <span class="dt">family =</span> binomial)</span>
-<span id="cb240-2"><a href="classification.html#cb240-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, x[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb240-3"><a href="classification.html#cb240-3"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="classification.html#cb240-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(mpg01 <span class="op">~</span><span class="st"> </span>cylinders <span class="op">+</span><span class="st"> </span>weight <span class="op">+</span><span class="st"> </span>displacement, <span class="dt">data =</span> x[train, ], <span class="dt">family =</span> binomial)</span>
+<span id="cb240-2"><a href="classification.html#cb240-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, x[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb240-3"><a href="classification.html#cb240-3" aria-hidden="true"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span></code></pre></div>
 <pre><code>## [1] 0.1145038</code></pre>
 <blockquote>
 <ol start="7" style="list-style-type: lower-alpha">
@@ -1162,9 +1197,9 @@ the variables that seemed most associated with <code>mpg01</code> in (b). What i
 test error of the model obtained?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="classification.html#cb242-1"></a>fit &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(mpg01 <span class="op">~</span><span class="st"> </span>cylinders <span class="op">+</span><span class="st"> </span>weight <span class="op">+</span><span class="st"> </span>displacement, <span class="dt">data =</span> x[train, ])</span>
-<span id="cb242-2"><a href="classification.html#cb242-2"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, x[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb242-3"><a href="classification.html#cb242-3"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="classification.html#cb242-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(mpg01 <span class="op">~</span><span class="st"> </span>cylinders <span class="op">+</span><span class="st"> </span>weight <span class="op">+</span><span class="st"> </span>displacement, <span class="dt">data =</span> x[train, ])</span>
+<span id="cb242-2"><a href="classification.html#cb242-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, x[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb242-3"><a href="classification.html#cb242-3" aria-hidden="true"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span></code></pre></div>
 <pre><code>## [1] 0.09923664</code></pre>
 <blockquote>
 <ol start="8" style="list-style-type: lower-alpha">
@@ -1174,20 +1209,20 @@ predict <code>mpg01</code>. Use only the variables that seemed most associated w
 to perform the best on this data set?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="classification.html#cb244-1"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, <span class="cf">function</span>(k) {</span>
-<span id="cb244-2"><a href="classification.html#cb244-2"></a>  fit &lt;-<span class="st"> </span><span class="kw">knn</span>(x[train, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>)], x[<span class="op">-</span>train, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>)], x<span class="op">$</span>mpg01[train], <span class="dt">k =</span> k)</span>
-<span id="cb244-3"><a href="classification.html#cb244-3"></a>  <span class="kw">mean</span>(fit <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span>
-<span id="cb244-4"><a href="classification.html#cb244-4"></a>})</span>
-<span id="cb244-5"><a href="classification.html#cb244-5"></a><span class="kw">names</span>(res) &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">50</span></span>
-<span id="cb244-6"><a href="classification.html#cb244-6"></a><span class="kw">plot</span>(res, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="classification.html#cb244-1" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, <span class="cf">function</span>(k) {</span>
+<span id="cb244-2"><a href="classification.html#cb244-2" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">knn</span>(x[train, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>)], x[<span class="op">-</span>train, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>)], x<span class="op">$</span>mpg01[train], <span class="dt">k =</span> k)</span>
+<span id="cb244-3"><a href="classification.html#cb244-3" aria-hidden="true"></a>  <span class="kw">mean</span>(fit <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>mpg01)</span>
+<span id="cb244-4"><a href="classification.html#cb244-4" aria-hidden="true"></a>})</span>
+<span id="cb244-5"><a href="classification.html#cb244-5" aria-hidden="true"></a><span class="kw">names</span>(res) &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">50</span></span>
+<span id="cb244-6"><a href="classification.html#cb244-6" aria-hidden="true"></a><span class="kw">plot</span>(res, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="classification.html#cb245-1"></a>res[<span class="kw">which.min</span>(res)]</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="classification.html#cb245-1" aria-hidden="true"></a>res[<span class="kw">which.min</span>(res)]</span></code></pre></div>
 <pre><code>##         3 
 ## 0.1068702</code></pre>
 <p>For the models tested here, <span class="math inline">\(k = 32\)</span> appears to perform best. QDA has a lower
 error rate overall, performing slightly better than LDA.</p>
 </div>
-<div id="question-15-1" class="section level3 hasAnchor">
+<div id="question-15-1" class="section level3 hasAnchor" number="4.2.3">
 <h3><span class="header-section-number">4.2.3</span> Question 15<a href="classification.html#question-15-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This problem involves writing functions.</p>
@@ -1199,26 +1234,26 @@ print out the results.</p>
 <em>function to output the result.</em></p></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="classification.html#cb247-1"></a>Power &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">print</span>(<span class="dv">2</span><span class="op">^</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="classification.html#cb247-1" aria-hidden="true"></a>Power &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">print</span>(<span class="dv">2</span><span class="op">^</span><span class="dv">3</span>)</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li><p>Create a new function, <code>Power2()</code>, that allows you to pass any two
 numbers, <code>x</code> and <code>a</code>, and prints out the value of <code>x^a</code>. You can do this
 by beginning your function with the line</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="classification.html#cb248-1"></a><span class="op">&gt;</span><span class="st"> </span>Power2=<span class="cf">function</span>(x,a) {</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="classification.html#cb248-1" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span>Power2=<span class="cf">function</span>(x,a) {</span></code></pre></div>
 <p>You should be able to call your function by entering, for instance,</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="classification.html#cb249-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">Power2</span>(<span class="dv">3</span>, <span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="classification.html#cb249-1" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">Power2</span>(<span class="dv">3</span>, <span class="dv">8</span>)</span></code></pre></div>
 <p>on the command line. This should output the value of <span class="math inline">\(3^8\)</span>, namely, 6,561.</p></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="classification.html#cb250-1"></a>Power2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, a) <span class="kw">print</span>(x<span class="op">^</span>a)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="classification.html#cb250-1" aria-hidden="true"></a>Power2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, a) <span class="kw">print</span>(x<span class="op">^</span>a)</span></code></pre></div>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Using the <code>Power2()</code> function that you just wrote, compute <span class="math inline">\(10^3\)</span>,
 <span class="math inline">\(8^{17}\)</span>, and <span class="math inline">\(131^3\)</span>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="classification.html#cb251-1"></a><span class="kw">c</span>(<span class="kw">Power2</span>(<span class="dv">10</span>, <span class="dv">3</span>), <span class="kw">Power2</span>(<span class="dv">8</span>, <span class="dv">17</span>), <span class="kw">Power2</span>(<span class="dv">131</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="classification.html#cb251-1" aria-hidden="true"></a><span class="kw">c</span>(<span class="kw">Power2</span>(<span class="dv">10</span>, <span class="dv">3</span>), <span class="kw">Power2</span>(<span class="dv">8</span>, <span class="dv">17</span>), <span class="kw">Power2</span>(<span class="dv">131</span>, <span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## [1] 1000
 ## [1] 2.2518e+15
 ## [1] 2248091</code></pre>
@@ -1230,15 +1265,15 @@ by beginning your function with the line</p>
 is, if you store the value <code>x^a</code> in an object called result within your
 function, then you can simply <code>return()</code> this result, using the following
 line:</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="classification.html#cb254-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">return</span>(result)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="classification.html#cb254-1" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">return</span>(result)</span></code></pre></div>
 <p>The line above should be the last line in your function, before the <code>}</code>
 symbol.</p></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="classification.html#cb255-1"></a>Power3 &lt;-<span class="st"> </span><span class="cf">function</span>(x, a) {</span>
-<span id="cb255-2"><a href="classification.html#cb255-2"></a>  result &lt;-<span class="st"> </span>x<span class="op">^</span>a</span>
-<span id="cb255-3"><a href="classification.html#cb255-3"></a>  <span class="kw">return</span>(result)</span>
-<span id="cb255-4"><a href="classification.html#cb255-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="classification.html#cb255-1" aria-hidden="true"></a>Power3 &lt;-<span class="st"> </span><span class="cf">function</span>(x, a) {</span>
+<span id="cb255-2"><a href="classification.html#cb255-2" aria-hidden="true"></a>  result &lt;-<span class="st"> </span>x<span class="op">^</span>a</span>
+<span id="cb255-3"><a href="classification.html#cb255-3" aria-hidden="true"></a>  <span class="kw">return</span>(result)</span>
+<span id="cb255-4"><a href="classification.html#cb255-4" aria-hidden="true"></a>}</span></code></pre></div>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Now using the <code>Power3()</code> function, create a plot of <span class="math inline">\(f(x) = x^2\)</span>. The
@@ -1249,34 +1284,34 @@ title for the figure. Consider displaying either the <span class="math inline">\
 <code>log = "y"</code>, or <code>log = "xy"</code> as arguments to the <code>plot()</code> function.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="classification.html#cb256-1"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="kw">Power3</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">2</span>), </span>
-<span id="cb256-2"><a href="classification.html#cb256-2"></a>  <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, </span>
-<span id="cb256-3"><a href="classification.html#cb256-3"></a>  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;x&quot;</span><span class="op">^</span><span class="st">&quot;2&quot;</span>)),</span>
-<span id="cb256-4"><a href="classification.html#cb256-4"></a>  <span class="dt">log =</span> <span class="st">&quot;y&quot;</span></span>
-<span id="cb256-5"><a href="classification.html#cb256-5"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="classification.html#cb256-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="kw">Power3</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">2</span>), </span>
+<span id="cb256-2"><a href="classification.html#cb256-2" aria-hidden="true"></a>  <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, </span>
+<span id="cb256-3"><a href="classification.html#cb256-3" aria-hidden="true"></a>  <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;x&quot;</span><span class="op">^</span><span class="st">&quot;2&quot;</span>)),</span>
+<span id="cb256-4"><a href="classification.html#cb256-4" aria-hidden="true"></a>  <span class="dt">log =</span> <span class="st">&quot;y&quot;</span></span>
+<span id="cb256-5"><a href="classification.html#cb256-5" aria-hidden="true"></a>)</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">
 <li><p>Create a function, <code>PlotPower()</code>, that allows you to create a plot of <code>x</code>
 against <code>x^a</code> for a fixed <code>a</code> and for a range of values of <code>x</code>. For
 instance, if you call</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="classification.html#cb257-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">PlotPower</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="classification.html#cb257-1" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">PlotPower</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">3</span>)</span></code></pre></div>
 <p>then a plot should be created with an <span class="math inline">\(x\)</span>-axis taking on values
 <span class="math inline">\(1,2,...,10\)</span>, and a <span class="math inline">\(y\)</span>-axis taking on values <span class="math inline">\(1^3,2^3,...,10^3\)</span>.</p></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="classification.html#cb258-1"></a>PlotPower &lt;-<span class="st"> </span><span class="cf">function</span>(x, a, <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>) {</span>
-<span id="cb258-2"><a href="classification.html#cb258-2"></a>  <span class="kw">plot</span>(x, <span class="kw">Power3</span>(x, a),</span>
-<span id="cb258-3"><a href="classification.html#cb258-3"></a>    <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, </span>
-<span id="cb258-4"><a href="classification.html#cb258-4"></a>    <span class="dt">ylab =</span> <span class="kw">substitute</span>(<span class="st">&quot;x&quot;</span><span class="op">^</span>a, <span class="kw">list</span>(<span class="dt">a =</span> a)),</span>
-<span id="cb258-5"><a href="classification.html#cb258-5"></a>    <span class="dt">log =</span> log</span>
-<span id="cb258-6"><a href="classification.html#cb258-6"></a>  )</span>
-<span id="cb258-7"><a href="classification.html#cb258-7"></a>}</span>
-<span id="cb258-8"><a href="classification.html#cb258-8"></a></span>
-<span id="cb258-9"><a href="classification.html#cb258-9"></a><span class="kw">PlotPower</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="classification.html#cb258-1" aria-hidden="true"></a>PlotPower &lt;-<span class="st"> </span><span class="cf">function</span>(x, a, <span class="dt">log =</span> <span class="st">&quot;y&quot;</span>) {</span>
+<span id="cb258-2"><a href="classification.html#cb258-2" aria-hidden="true"></a>  <span class="kw">plot</span>(x, <span class="kw">Power3</span>(x, a),</span>
+<span id="cb258-3"><a href="classification.html#cb258-3" aria-hidden="true"></a>    <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, </span>
+<span id="cb258-4"><a href="classification.html#cb258-4" aria-hidden="true"></a>    <span class="dt">ylab =</span> <span class="kw">substitute</span>(<span class="st">&quot;x&quot;</span><span class="op">^</span>a, <span class="kw">list</span>(<span class="dt">a =</span> a)),</span>
+<span id="cb258-5"><a href="classification.html#cb258-5" aria-hidden="true"></a>    <span class="dt">log =</span> log</span>
+<span id="cb258-6"><a href="classification.html#cb258-6" aria-hidden="true"></a>  )</span>
+<span id="cb258-7"><a href="classification.html#cb258-7" aria-hidden="true"></a>}</span>
+<span id="cb258-8"><a href="classification.html#cb258-8" aria-hidden="true"></a></span>
+<span id="cb258-9"><a href="classification.html#cb258-9" aria-hidden="true"></a><span class="kw">PlotPower</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
-<div id="question-13-2" class="section level3 hasAnchor">
+<div id="question-13-2" class="section level3 hasAnchor" number="4.2.4">
 <h3><span class="header-section-number">4.2.4</span> Question 13<a href="classification.html#question-13-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Using the <code>Boston</code> data set, fit classification models in order to predict
@@ -1286,83 +1321,83 @@ sub-sets of the predictors. Describe your findings.</p>
 <p><em>Hint: You will have to create the response variable yourself, using the</em>
 <em>variables that are contained in the <code>Boston</code> data set.</em></p>
 </blockquote>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="classification.html#cb259-1"></a>x &lt;-<span class="st"> </span><span class="kw">cbind</span>(</span>
-<span id="cb259-2"><a href="classification.html#cb259-2"></a>  ISLR2<span class="op">::</span>Boston[, <span class="dv">-1</span>], </span>
-<span id="cb259-3"><a href="classification.html#cb259-3"></a>  <span class="kw">data.frame</span>(<span class="st">&quot;highcrim&quot;</span> =<span class="st"> </span>Boston<span class="op">$</span>crim <span class="op">&gt;</span><span class="st"> </span><span class="kw">median</span>(Boston<span class="op">$</span>crim))</span>
-<span id="cb259-4"><a href="classification.html#cb259-4"></a>)</span>
-<span id="cb259-5"><a href="classification.html#cb259-5"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb259-6"><a href="classification.html#cb259-6"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(x)), <span class="kw">nrow</span>(x) <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="classification.html#cb259-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">cbind</span>(</span>
+<span id="cb259-2"><a href="classification.html#cb259-2" aria-hidden="true"></a>  ISLR2<span class="op">::</span>Boston[, <span class="dv">-1</span>], </span>
+<span id="cb259-3"><a href="classification.html#cb259-3" aria-hidden="true"></a>  <span class="kw">data.frame</span>(<span class="st">&quot;highcrim&quot;</span> =<span class="st"> </span>Boston<span class="op">$</span>crim <span class="op">&gt;</span><span class="st"> </span><span class="kw">median</span>(Boston<span class="op">$</span>crim))</span>
+<span id="cb259-4"><a href="classification.html#cb259-4" aria-hidden="true"></a>)</span>
+<span id="cb259-5"><a href="classification.html#cb259-5" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb259-6"><a href="classification.html#cb259-6" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(x)), <span class="kw">nrow</span>(x) <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span></code></pre></div>
 <p>We can find the most associated variables by performing wilcox tests.</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="classification.html#cb260-1"></a>ord &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb260-2"><a href="classification.html#cb260-2"></a>  p &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(<span class="kw">as.numeric</span>(x[train, i]) <span class="op">~</span><span class="st"> </span>x[train, ]<span class="op">$</span>highcrim)<span class="op">$</span>p.value</span>
-<span id="cb260-3"><a href="classification.html#cb260-3"></a>  <span class="kw">setNames</span>(<span class="kw">log10</span>(p), <span class="kw">colnames</span>(x)[i])</span>
-<span id="cb260-4"><a href="classification.html#cb260-4"></a>}))</span>
-<span id="cb260-5"><a href="classification.html#cb260-5"></a>ord &lt;-<span class="st"> </span><span class="kw">names</span>(x)[ord]</span>
-<span id="cb260-6"><a href="classification.html#cb260-6"></a>ord</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="classification.html#cb260-1" aria-hidden="true"></a>ord &lt;-<span class="st"> </span><span class="kw">order</span>(<span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb260-2"><a href="classification.html#cb260-2" aria-hidden="true"></a>  p &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(<span class="kw">as.numeric</span>(x[train, i]) <span class="op">~</span><span class="st"> </span>x[train, ]<span class="op">$</span>highcrim)<span class="op">$</span>p.value</span>
+<span id="cb260-3"><a href="classification.html#cb260-3" aria-hidden="true"></a>  <span class="kw">setNames</span>(<span class="kw">log10</span>(p), <span class="kw">colnames</span>(x)[i])</span>
+<span id="cb260-4"><a href="classification.html#cb260-4" aria-hidden="true"></a>}))</span>
+<span id="cb260-5"><a href="classification.html#cb260-5" aria-hidden="true"></a>ord &lt;-<span class="st"> </span><span class="kw">names</span>(x)[ord]</span>
+<span id="cb260-6"><a href="classification.html#cb260-6" aria-hidden="true"></a>ord</span></code></pre></div>
 <pre><code>##  [1] &quot;nox&quot;     &quot;dis&quot;     &quot;indus&quot;   &quot;tax&quot;     &quot;age&quot;     &quot;rad&quot;     &quot;zn&quot;     
 ##  [8] &quot;lstat&quot;   &quot;medv&quot;    &quot;ptratio&quot; &quot;rm&quot;      &quot;chas&quot;</code></pre>
 <p>Variables <code>nox</code> (nitrogen oxides concentration) followed by <code>dis</code> (distance to
 employment center) appear to be most associated with high crime.</p>
 <p>Let’s reorder columns by those most associated with highcrim (in the training
 data)</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="classification.html#cb262-1"></a>x &lt;-<span class="st"> </span>x[, <span class="kw">c</span>(ord, <span class="st">&quot;highcrim&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="classification.html#cb262-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span>x[, <span class="kw">c</span>(ord, <span class="st">&quot;highcrim&quot;</span>)]</span></code></pre></div>
 <p>Let’s look at univariate associations with <code>highcrim</code> (in the training data)</p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="classification.html#cb263-1"></a>x[train, ] <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb263-2"><a href="classification.html#cb263-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">!</span>highcrim) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb263-3"><a href="classification.html#cb263-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">name =</span> <span class="kw">factor</span>(name, <span class="dt">levels =</span> ord)) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb263-4"><a href="classification.html#cb263-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(highcrim, value)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb263-5"><a href="classification.html#cb263-5"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb263-6"><a href="classification.html#cb263-6"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>name, <span class="dt">scale =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="classification.html#cb263-1" aria-hidden="true"></a>x[train, ] <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb263-2"><a href="classification.html#cb263-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">!</span>highcrim) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb263-3"><a href="classification.html#cb263-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">name =</span> <span class="kw">factor</span>(name, <span class="dt">levels =</span> ord)) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb263-4"><a href="classification.html#cb263-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(highcrim, value)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb263-5"><a href="classification.html#cb263-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb263-6"><a href="classification.html#cb263-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>name, <span class="dt">scale =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>Fit lda, logistic regression, naive Bayes and KNN models (with k = 1..50) for a
 set of specific predictors and return the error rate. We fit models using
 increasing numbers of predictors: column 1, then columns 1 and 2 etc.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="classification.html#cb264-1"></a>fit_models &lt;-<span class="st"> </span><span class="cf">function</span>(cols, <span class="dt">k_vals =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>) {</span>
-<span id="cb264-2"><a href="classification.html#cb264-2"></a>  dat_train &lt;-<span class="st"> </span>x[train, cols, drop =<span class="st"> </span><span class="ot">FALSE</span>]</span>
-<span id="cb264-3"><a href="classification.html#cb264-3"></a>  dat_test &lt;-<span class="st"> </span>x[<span class="op">-</span>train, cols, drop =<span class="st"> </span><span class="ot">FALSE</span>]</span>
-<span id="cb264-4"><a href="classification.html#cb264-4"></a></span>
-<span id="cb264-5"><a href="classification.html#cb264-5"></a>  fit &lt;-<span class="st"> </span><span class="kw">lda</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train)</span>
-<span id="cb264-6"><a href="classification.html#cb264-6"></a>  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
-<span id="cb264-7"><a href="classification.html#cb264-7"></a>  lda_err &lt;-<span class="st"> </span><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train])</span>
-<span id="cb264-8"><a href="classification.html#cb264-8"></a></span>
-<span id="cb264-9"><a href="classification.html#cb264-9"></a>  fit &lt;-<span class="st"> </span><span class="kw">glm</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train, <span class="dt">family =</span> binomial)</span>
-<span id="cb264-10"><a href="classification.html#cb264-10"></a>  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb264-11"><a href="classification.html#cb264-11"></a>  logreg_err &lt;-<span class="st"> </span><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train])</span>
-<span id="cb264-12"><a href="classification.html#cb264-12"></a></span>
-<span id="cb264-13"><a href="classification.html#cb264-13"></a>  fit &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train)</span>
-<span id="cb264-14"><a href="classification.html#cb264-14"></a>  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb264-15"><a href="classification.html#cb264-15"></a>  nb_err &lt;-<span class="st"> </span><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train])</span>
-<span id="cb264-16"><a href="classification.html#cb264-16"></a></span>
-<span id="cb264-17"><a href="classification.html#cb264-17"></a>  res &lt;-<span class="st"> </span><span class="kw">sapply</span>(k_vals, <span class="cf">function</span>(k) {</span>
-<span id="cb264-18"><a href="classification.html#cb264-18"></a>    fit &lt;-<span class="st"> </span><span class="kw">knn</span>(dat_train, dat_test, x<span class="op">$</span>highcrim[train], <span class="dt">k =</span> k)</span>
-<span id="cb264-19"><a href="classification.html#cb264-19"></a>    <span class="kw">mean</span>(fit <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train])</span>
-<span id="cb264-20"><a href="classification.html#cb264-20"></a>  })</span>
-<span id="cb264-21"><a href="classification.html#cb264-21"></a>  knn_err &lt;-<span class="st"> </span><span class="kw">min</span>(res)</span>
-<span id="cb264-22"><a href="classification.html#cb264-22"></a></span>
-<span id="cb264-23"><a href="classification.html#cb264-23"></a>  <span class="kw">c</span>(<span class="st">&quot;LDA&quot;</span> =<span class="st"> </span>lda_err, <span class="st">&quot;LR&quot;</span> =<span class="st"> </span>logreg_err, <span class="st">&quot;NB&quot;</span> =<span class="st"> </span>nb_err, <span class="st">&quot;KNN&quot;</span> =<span class="st"> </span>knn_err)</span>
-<span id="cb264-24"><a href="classification.html#cb264-24"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="classification.html#cb265-1"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="cf">function</span>(max) <span class="kw">fit_models</span>(<span class="dv">1</span><span class="op">:</span>max))</span>
-<span id="cb265-2"><a href="classification.html#cb265-2"></a>res &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">t</span>(res))</span>
-<span id="cb265-3"><a href="classification.html#cb265-3"></a>res<span class="op">$</span>n_var &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">12</span></span>
-<span id="cb265-4"><a href="classification.html#cb265-4"></a><span class="kw">pivot_longer</span>(res, <span class="dt">cols =</span> <span class="op">!</span>n_var) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb265-5"><a href="classification.html#cb265-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb265-6"><a href="classification.html#cb265-6"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb265-7"><a href="classification.html#cb265-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb265-8"><a href="classification.html#cb265-8"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="classification.html#cb264-1" aria-hidden="true"></a>fit_models &lt;-<span class="st"> </span><span class="cf">function</span>(cols, <span class="dt">k_vals =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>) {</span>
+<span id="cb264-2"><a href="classification.html#cb264-2" aria-hidden="true"></a>  dat_train &lt;-<span class="st"> </span>x[train, cols, drop =<span class="st"> </span><span class="ot">FALSE</span>]</span>
+<span id="cb264-3"><a href="classification.html#cb264-3" aria-hidden="true"></a>  dat_test &lt;-<span class="st"> </span>x[<span class="op">-</span>train, cols, drop =<span class="st"> </span><span class="ot">FALSE</span>]</span>
+<span id="cb264-4"><a href="classification.html#cb264-4" aria-hidden="true"></a></span>
+<span id="cb264-5"><a href="classification.html#cb264-5" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">lda</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train)</span>
+<span id="cb264-6"><a href="classification.html#cb264-6" aria-hidden="true"></a>  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)<span class="op">$</span>class</span>
+<span id="cb264-7"><a href="classification.html#cb264-7" aria-hidden="true"></a>  lda_err &lt;-<span class="st"> </span><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train])</span>
+<span id="cb264-8"><a href="classification.html#cb264-8" aria-hidden="true"></a></span>
+<span id="cb264-9"><a href="classification.html#cb264-9" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">glm</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train, <span class="dt">family =</span> binomial)</span>
+<span id="cb264-10"><a href="classification.html#cb264-10" aria-hidden="true"></a>  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb264-11"><a href="classification.html#cb264-11" aria-hidden="true"></a>  logreg_err &lt;-<span class="st"> </span><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train])</span>
+<span id="cb264-12"><a href="classification.html#cb264-12" aria-hidden="true"></a></span>
+<span id="cb264-13"><a href="classification.html#cb264-13" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train)</span>
+<span id="cb264-14"><a href="classification.html#cb264-14" aria-hidden="true"></a>  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb264-15"><a href="classification.html#cb264-15" aria-hidden="true"></a>  nb_err &lt;-<span class="st"> </span><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train])</span>
+<span id="cb264-16"><a href="classification.html#cb264-16" aria-hidden="true"></a></span>
+<span id="cb264-17"><a href="classification.html#cb264-17" aria-hidden="true"></a>  res &lt;-<span class="st"> </span><span class="kw">sapply</span>(k_vals, <span class="cf">function</span>(k) {</span>
+<span id="cb264-18"><a href="classification.html#cb264-18" aria-hidden="true"></a>    fit &lt;-<span class="st"> </span><span class="kw">knn</span>(dat_train, dat_test, x<span class="op">$</span>highcrim[train], <span class="dt">k =</span> k)</span>
+<span id="cb264-19"><a href="classification.html#cb264-19" aria-hidden="true"></a>    <span class="kw">mean</span>(fit <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train])</span>
+<span id="cb264-20"><a href="classification.html#cb264-20" aria-hidden="true"></a>  })</span>
+<span id="cb264-21"><a href="classification.html#cb264-21" aria-hidden="true"></a>  knn_err &lt;-<span class="st"> </span><span class="kw">min</span>(res)</span>
+<span id="cb264-22"><a href="classification.html#cb264-22" aria-hidden="true"></a></span>
+<span id="cb264-23"><a href="classification.html#cb264-23" aria-hidden="true"></a>  <span class="kw">c</span>(<span class="st">&quot;LDA&quot;</span> =<span class="st"> </span>lda_err, <span class="st">&quot;LR&quot;</span> =<span class="st"> </span>logreg_err, <span class="st">&quot;NB&quot;</span> =<span class="st"> </span>nb_err, <span class="st">&quot;KNN&quot;</span> =<span class="st"> </span>knn_err)</span>
+<span id="cb264-24"><a href="classification.html#cb264-24" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="classification.html#cb265-1" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="cf">function</span>(max) <span class="kw">fit_models</span>(<span class="dv">1</span><span class="op">:</span>max))</span>
+<span id="cb265-2"><a href="classification.html#cb265-2" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">t</span>(res))</span>
+<span id="cb265-3"><a href="classification.html#cb265-3" aria-hidden="true"></a>res<span class="op">$</span>n_var &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">12</span></span>
+<span id="cb265-4"><a href="classification.html#cb265-4" aria-hidden="true"></a><span class="kw">pivot_longer</span>(res, <span class="dt">cols =</span> <span class="op">!</span>n_var) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb265-5"><a href="classification.html#cb265-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb265-6"><a href="classification.html#cb265-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb265-7"><a href="classification.html#cb265-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb265-8"><a href="classification.html#cb265-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>KNN appears to perform better (if we tune <span class="math inline">\(k\)</span>) for all numbers of predictors.</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="classification.html#cb266-1"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
-<span id="cb266-2"><a href="classification.html#cb266-2"></a>  x[train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
-<span id="cb266-3"><a href="classification.html#cb266-3"></a>  x[<span class="op">-</span>train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
-<span id="cb266-4"><a href="classification.html#cb266-4"></a>  x<span class="op">$</span>highcrim[train],</span>
-<span id="cb266-5"><a href="classification.html#cb266-5"></a>  <span class="dt">k =</span> <span class="dv">1</span></span>
-<span id="cb266-6"><a href="classification.html#cb266-6"></a>)</span>
-<span id="cb266-7"><a href="classification.html#cb266-7"></a><span class="kw">table</span>(fit, x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="classification.html#cb266-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(</span>
+<span id="cb266-2"><a href="classification.html#cb266-2" aria-hidden="true"></a>  x[train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb266-3"><a href="classification.html#cb266-3" aria-hidden="true"></a>  x[<span class="op">-</span>train, <span class="st">&quot;nox&quot;</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>],</span>
+<span id="cb266-4"><a href="classification.html#cb266-4" aria-hidden="true"></a>  x<span class="op">$</span>highcrim[train],</span>
+<span id="cb266-5"><a href="classification.html#cb266-5" aria-hidden="true"></a>  <span class="dt">k =</span> <span class="dv">1</span></span>
+<span id="cb266-6"><a href="classification.html#cb266-6" aria-hidden="true"></a>)</span>
+<span id="cb266-7"><a href="classification.html#cb266-7" aria-hidden="true"></a><span class="kw">table</span>(fit, x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim)</span></code></pre></div>
 <pre><code>##        
 ## fit     FALSE TRUE
 ##   FALSE    78    2
 ##   TRUE      3   86</code></pre>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="classification.html#cb268-1"></a><span class="kw">mean</span>(fit <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="classification.html#cb268-1" aria-hidden="true"></a><span class="kw">mean</span>(fit <span class="op">!=</span><span class="st"> </span>x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] 2.95858</code></pre>
 <p>Surprisingly, the best model (with an error rate of &lt;5%) uses <span class="math inline">\(k = 1\)</span> and
 assigns crime rate categories based on the town with the single most similar
@@ -1370,38 +1405,34 @@ nitrogen oxide concentration (<code>nox</code>). This might be, for example, bec
 towns have similar crime rates, and we can obtain good predictions by predicting
 crime rate based on a nearby town.</p>
 <p>But what if we only consider <span class="math inline">\(k = 20\)</span>.</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="classification.html#cb270-1"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="cf">function</span>(max) <span class="kw">fit_models</span>(<span class="dv">1</span><span class="op">:</span>max, <span class="dt">k_vals =</span> <span class="dv">20</span>))</span>
-<span id="cb270-2"><a href="classification.html#cb270-2"></a>res &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">t</span>(res))</span>
-<span id="cb270-3"><a href="classification.html#cb270-3"></a>res<span class="op">$</span>n_var &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">12</span></span>
-<span id="cb270-4"><a href="classification.html#cb270-4"></a><span class="kw">pivot_longer</span>(res, <span class="dt">cols =</span> <span class="op">!</span>n_var) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb270-5"><a href="classification.html#cb270-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span></span>
-<span id="cb270-6"><a href="classification.html#cb270-6"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
-<span id="cb270-7"><a href="classification.html#cb270-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span></span>
-<span id="cb270-8"><a href="classification.html#cb270-8"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="classification.html#cb270-1" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="cf">function</span>(max) <span class="kw">fit_models</span>(<span class="dv">1</span><span class="op">:</span>max, <span class="dt">k_vals =</span> <span class="dv">20</span>))</span>
+<span id="cb270-2"><a href="classification.html#cb270-2" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">t</span>(res))</span>
+<span id="cb270-3"><a href="classification.html#cb270-3" aria-hidden="true"></a>res<span class="op">$</span>n_var &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">12</span></span>
+<span id="cb270-4"><a href="classification.html#cb270-4" aria-hidden="true"></a><span class="kw">pivot_longer</span>(res, <span class="dt">cols =</span> <span class="op">!</span>n_var) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb270-5"><a href="classification.html#cb270-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(n_var, value, <span class="dt">col =</span> name)) <span class="op">+</span></span>
+<span id="cb270-6"><a href="classification.html#cb270-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb270-7"><a href="classification.html#cb270-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="op">+</span></span>
+<span id="cb270-8"><a href="classification.html#cb270-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>KNN still performs best with a single predictor (<code>nox</code>), but logistic regression
 with 12 predictors also performs well and has an error rate of ~12%.</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="classification.html#cb271-1"></a>vars &lt;-<span class="st"> </span><span class="kw">names</span>(x)[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>]</span>
-<span id="cb271-2"><a href="classification.html#cb271-2"></a>dat_train &lt;-<span class="st"> </span>x[train, vars]</span>
-<span id="cb271-3"><a href="classification.html#cb271-3"></a>dat_test &lt;-<span class="st"> </span>x[<span class="op">-</span>train, vars]</span>
-<span id="cb271-4"><a href="classification.html#cb271-4"></a></span>
-<span id="cb271-5"><a href="classification.html#cb271-5"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train, <span class="dt">family =</span> binomial)</span>
-<span id="cb271-6"><a href="classification.html#cb271-6"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb271-7"><a href="classification.html#cb271-7"></a><span class="kw">table</span>(pred, x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="classification.html#cb271-1" aria-hidden="true"></a>vars &lt;-<span class="st"> </span><span class="kw">names</span>(x)[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>]</span>
+<span id="cb271-2"><a href="classification.html#cb271-2" aria-hidden="true"></a>dat_train &lt;-<span class="st"> </span>x[train, vars]</span>
+<span id="cb271-3"><a href="classification.html#cb271-3" aria-hidden="true"></a>dat_test &lt;-<span class="st"> </span>x[<span class="op">-</span>train, vars]</span>
+<span id="cb271-4"><a href="classification.html#cb271-4" aria-hidden="true"></a></span>
+<span id="cb271-5"><a href="classification.html#cb271-5" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(x<span class="op">$</span>highcrim[train] <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat_train, <span class="dt">family =</span> binomial)</span>
+<span id="cb271-6"><a href="classification.html#cb271-6" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat_test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span></span>
+<span id="cb271-7"><a href="classification.html#cb271-7" aria-hidden="true"></a><span class="kw">table</span>(pred, x[<span class="op">-</span>train, ]<span class="op">$</span>highcrim)</span></code></pre></div>
 <pre><code>##        
 ## pred    FALSE TRUE
 ##   FALSE    70    9
 ##   TRUE     11   79</code></pre>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="classification.html#cb273-1"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train]) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="classification.html#cb273-1" aria-hidden="true"></a><span class="kw">mean</span>(pred <span class="op">!=</span><span class="st"> </span>x<span class="op">$</span>highcrim[<span class="op">-</span>train]) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] 11.83432</code></pre>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="classification.html#cb275-1"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="classification.html#cb275-1" aria-hidden="true"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = x$highcrim[train] ~ ., family = binomial, data = dat_train)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.3277  -0.1603  -0.0010   0.0015   3.5339  
 ## 
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(&gt;|z|)    

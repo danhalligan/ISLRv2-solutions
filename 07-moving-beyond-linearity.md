@@ -275,10 +275,6 @@ summary(glm(wage ~ poly(age, 6), data = Wage))
 ## Call:
 ## glm(formula = wage ~ poly(age, 6), data = Wage)
 ## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -98.521  -24.536   -4.848   15.471  202.108  
-## 
 ## Coefficients:
 ##                Estimate Std. Error t value Pr(>|t|)    
 ## (Intercept)    111.7036     0.7286 153.316  < 2e-16 ***
@@ -423,7 +419,7 @@ library(gam)
 ```
 
 ```
-## Loaded gam 1.20.2
+## Loaded gam 1.22-2
 ```
 
 ```r
@@ -484,16 +480,17 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
-## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-## ✔ readr   2.1.3      ✔ forcats 0.5.2 
-## ✔ purrr   0.3.5      
+## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.3     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ lubridate 1.9.2     ✔ tibble    3.2.1
+## ✔ purrr     1.0.2     ✔ tidyr     1.3.0
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ purrr::accumulate() masks foreach::accumulate()
 ## ✖ dplyr::filter()     masks stats::filter()
 ## ✖ dplyr::lag()        masks stats::lag()
 ## ✖ purrr::when()       masks foreach::when()
+## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ```
 
 ```r
@@ -514,11 +511,11 @@ err3 <- cv.glm(Auto, fit3, K = 10)$delta[1]
 ```
 
 ```
-## Warning in bs(horsepower, degree = 3L, knots = c(`50%` = 92), Boundary.knots =
-## c(46L, : some 'x' values beyond boundary knots may cause ill-conditioned bases
+## Warning in bs(horsepower, degree = 3L, knots = 92, Boundary.knots = c(46L, :
+## some 'x' values beyond boundary knots may cause ill-conditioned bases
 
-## Warning in bs(horsepower, degree = 3L, knots = c(`50%` = 92), Boundary.knots =
-## c(46L, : some 'x' values beyond boundary knots may cause ill-conditioned bases
+## Warning in bs(horsepower, degree = 3L, knots = 92, Boundary.knots = c(46L, :
+## some 'x' values beyond boundary knots may cause ill-conditioned bases
 ```
 
 ```r
@@ -610,10 +607,6 @@ summary(fit)
 ## Call:
 ## glm(formula = nox ~ poly(dis, 3), data = Boston)
 ## 
-## Deviance Residuals: 
-##       Min         1Q     Median         3Q        Max  
-## -0.121130  -0.040619  -0.009738   0.023385   0.194904  
-## 
 ## Coefficients:
 ##                Estimate Std. Error t value Pr(>|t|)    
 ## (Intercept)    0.554695   0.002759 201.021  < 2e-16 ***
@@ -703,10 +696,6 @@ summary(fit)
 ## 
 ## Call:
 ## glm(formula = nox ~ bs(dis, df = 4), data = Boston)
-## 
-## Deviance Residuals: 
-##       Min         1Q     Median         3Q        Max  
-## -0.124622  -0.039259  -0.008514   0.020850   0.193891  
 ## 
 ## Coefficients:
 ##                  Estimate Std. Error t value Pr(>|t|)    

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 Unsupervised Learning | An Introduction to Statistical Learning</title>
   <meta name="description" content="12 Unsupervised Learning | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.29.3 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 Unsupervised Learning | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -51,28 +51,27 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -92,7 +91,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -125,6 +124,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="islrv2.css" type="text/css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css" />
@@ -144,8 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="statistical-learning.html"><a href="statistical-learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a><ul>
-<li class="chapter" data-level="2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#conceptual"><i class="fa fa-check"></i><b>2.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="2" data-path="statistical-learning.html"><a href="statistical-learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#conceptual"><i class="fa fa-check"></i><b>2.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-1"><i class="fa fa-check"></i><b>2.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="2.1.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-2"><i class="fa fa-check"></i><b>2.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="2.1.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-3"><i class="fa fa-check"></i><b>2.1.3</b> Question 3</a></li>
@@ -154,14 +159,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.6" data-path="statistical-learning.html"><a href="statistical-learning.html#question-6"><i class="fa fa-check"></i><b>2.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="2.1.7" data-path="statistical-learning.html"><a href="statistical-learning.html#question-7"><i class="fa fa-check"></i><b>2.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#applied"><i class="fa fa-check"></i><b>2.2</b> Applied</a><ul>
+<li class="chapter" data-level="2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#applied"><i class="fa fa-check"></i><b>2.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-8"><i class="fa fa-check"></i><b>2.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="2.2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-9"><i class="fa fa-check"></i><b>2.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="2.2.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-10"><i class="fa fa-check"></i><b>2.2.3</b> Question 10</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#conceptual-1"><i class="fa fa-check"></i><b>3.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#conceptual-1"><i class="fa fa-check"></i><b>3.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="linear-regression.html"><a href="linear-regression.html#question-1-1"><i class="fa fa-check"></i><b>3.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="3.1.2" data-path="linear-regression.html"><a href="linear-regression.html#question-2-1"><i class="fa fa-check"></i><b>3.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="3.1.3" data-path="linear-regression.html"><a href="linear-regression.html#question-3-1"><i class="fa fa-check"></i><b>3.1.3</b> Question 3</a></li>
@@ -170,7 +178,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.6" data-path="linear-regression.html"><a href="linear-regression.html#question-6-1"><i class="fa fa-check"></i><b>3.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="3.1.7" data-path="linear-regression.html"><a href="linear-regression.html#question-7-1"><i class="fa fa-check"></i><b>3.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#applied-1"><i class="fa fa-check"></i><b>3.2</b> Applied</a><ul>
+<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#applied-1"><i class="fa fa-check"></i><b>3.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="linear-regression.html"><a href="linear-regression.html#question-8-1"><i class="fa fa-check"></i><b>3.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="3.2.2" data-path="linear-regression.html"><a href="linear-regression.html#question-9-1"><i class="fa fa-check"></i><b>3.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="3.2.3" data-path="linear-regression.html"><a href="linear-regression.html#question-10-1"><i class="fa fa-check"></i><b>3.2.3</b> Question 10</a></li>
@@ -181,8 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.8" data-path="linear-regression.html"><a href="linear-regression.html#question-15"><i class="fa fa-check"></i><b>3.2.8</b> Question 15</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a><ul>
-<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#conceptual-2"><i class="fa fa-check"></i><b>4.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#conceptual-2"><i class="fa fa-check"></i><b>4.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="classification.html"><a href="classification.html#question-1-2"><i class="fa fa-check"></i><b>4.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="4.1.2" data-path="classification.html"><a href="classification.html#question-2-2"><i class="fa fa-check"></i><b>4.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="4.1.3" data-path="classification.html"><a href="classification.html#question-3-2"><i class="fa fa-check"></i><b>4.1.3</b> Question 3</a></li>
@@ -196,21 +207,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.11" data-path="classification.html"><a href="classification.html#question-11-1"><i class="fa fa-check"></i><b>4.1.11</b> Question 11</a></li>
 <li class="chapter" data-level="4.1.12" data-path="classification.html"><a href="classification.html#question-12-1"><i class="fa fa-check"></i><b>4.1.12</b> Question 12</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#applied-2"><i class="fa fa-check"></i><b>4.2</b> Applied</a><ul>
+<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#applied-2"><i class="fa fa-check"></i><b>4.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="classification.html"><a href="classification.html#question-13-1"><i class="fa fa-check"></i><b>4.2.1</b> Question 13</a></li>
 <li class="chapter" data-level="4.2.2" data-path="classification.html"><a href="classification.html#question-14-1"><i class="fa fa-check"></i><b>4.2.2</b> Question 14</a></li>
 <li class="chapter" data-level="4.2.3" data-path="classification.html"><a href="classification.html#question-15-1"><i class="fa fa-check"></i><b>4.2.3</b> Question 15</a></li>
 <li class="chapter" data-level="4.2.4" data-path="classification.html"><a href="classification.html#question-13-2"><i class="fa fa-check"></i><b>4.2.4</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a><ul>
-<li class="chapter" data-level="5.1" data-path="resampling-methods.html"><a href="resampling-methods.html#conceptual-3"><i class="fa fa-check"></i><b>5.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="resampling-methods.html"><a href="resampling-methods.html#conceptual-3"><i class="fa fa-check"></i><b>5.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-1-3"><i class="fa fa-check"></i><b>5.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="5.1.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-2-3"><i class="fa fa-check"></i><b>5.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="5.1.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-3-3"><i class="fa fa-check"></i><b>5.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="5.1.4" data-path="resampling-methods.html"><a href="resampling-methods.html#question-4-3"><i class="fa fa-check"></i><b>5.1.4</b> Question 4</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="resampling-methods.html"><a href="resampling-methods.html#applied-3"><i class="fa fa-check"></i><b>5.2</b> Applied</a><ul>
+<li class="chapter" data-level="5.2" data-path="resampling-methods.html"><a href="resampling-methods.html#applied-3"><i class="fa fa-check"></i><b>5.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-5-3"><i class="fa fa-check"></i><b>5.2.1</b> Question 5</a></li>
 <li class="chapter" data-level="5.2.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-6-3"><i class="fa fa-check"></i><b>5.2.2</b> Question 6</a></li>
 <li class="chapter" data-level="5.2.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-7-3"><i class="fa fa-check"></i><b>5.2.3</b> Question 7</a></li>
@@ -218,8 +233,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.5" data-path="resampling-methods.html"><a href="resampling-methods.html#question-9-3"><i class="fa fa-check"></i><b>5.2.5</b> Question 9</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a><ul>
-<li class="chapter" data-level="6.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#conceptual-4"><i class="fa fa-check"></i><b>6.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#conceptual-4"><i class="fa fa-check"></i><b>6.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-1-4"><i class="fa fa-check"></i><b>6.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="6.1.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-2-4"><i class="fa fa-check"></i><b>6.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="6.1.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-3-4"><i class="fa fa-check"></i><b>6.1.3</b> Question 3</a></li>
@@ -228,22 +245,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-6-4"><i class="fa fa-check"></i><b>6.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="6.1.7" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-7-4"><i class="fa fa-check"></i><b>6.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#applied-4"><i class="fa fa-check"></i><b>6.2</b> Applied</a><ul>
+<li class="chapter" data-level="6.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#applied-4"><i class="fa fa-check"></i><b>6.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-8-4"><i class="fa fa-check"></i><b>6.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="6.2.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-9-4"><i class="fa fa-check"></i><b>6.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="6.2.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-10-3"><i class="fa fa-check"></i><b>6.2.3</b> Question 10</a></li>
 <li class="chapter" data-level="6.2.4" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-11-2"><i class="fa fa-check"></i><b>6.2.4</b> Question 11</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a><ul>
-<li class="chapter" data-level="7.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#conceptual-5"><i class="fa fa-check"></i><b>7.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#conceptual-5"><i class="fa fa-check"></i><b>7.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-1-5"><i class="fa fa-check"></i><b>7.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="7.1.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-2-5"><i class="fa fa-check"></i><b>7.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="7.1.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-3-5"><i class="fa fa-check"></i><b>7.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="7.1.4" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-4-5"><i class="fa fa-check"></i><b>7.1.4</b> Question 4</a></li>
 <li class="chapter" data-level="7.1.5" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-5-5"><i class="fa fa-check"></i><b>7.1.5</b> Question 5</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#applied-5"><i class="fa fa-check"></i><b>7.2</b> Applied</a><ul>
+<li class="chapter" data-level="7.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#applied-5"><i class="fa fa-check"></i><b>7.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-6-5"><i class="fa fa-check"></i><b>7.2.1</b> Question 6</a></li>
 <li class="chapter" data-level="7.2.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-7-5"><i class="fa fa-check"></i><b>7.2.2</b> Question 7</a></li>
 <li class="chapter" data-level="7.2.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-8-5"><i class="fa fa-check"></i><b>7.2.3</b> Question 8</a></li>
@@ -253,8 +274,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-12-2"><i class="fa fa-check"></i><b>7.2.7</b> Question 12</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a><ul>
-<li class="chapter" data-level="8.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#conceptual-6"><i class="fa fa-check"></i><b>8.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#conceptual-6"><i class="fa fa-check"></i><b>8.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-1-6"><i class="fa fa-check"></i><b>8.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="8.1.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-2-6"><i class="fa fa-check"></i><b>8.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="8.1.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-3-6"><i class="fa fa-check"></i><b>8.1.3</b> Question 3</a></li>
@@ -262,7 +285,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.5" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-5-6"><i class="fa fa-check"></i><b>8.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="8.1.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-6-6"><i class="fa fa-check"></i><b>8.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#applied-6"><i class="fa fa-check"></i><b>8.2</b> Applied</a><ul>
+<li class="chapter" data-level="8.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#applied-6"><i class="fa fa-check"></i><b>8.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="8.2.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-7-6"><i class="fa fa-check"></i><b>8.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="8.2.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-8-6"><i class="fa fa-check"></i><b>8.2.2</b> Question 8</a></li>
 <li class="chapter" data-level="8.2.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-9-6"><i class="fa fa-check"></i><b>8.2.3</b> Question 9</a></li>
@@ -271,13 +295,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-12-3"><i class="fa fa-check"></i><b>8.2.6</b> Question 12</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a><ul>
-<li class="chapter" data-level="9.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#conceptual-7"><i class="fa fa-check"></i><b>9.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#conceptual-7"><i class="fa fa-check"></i><b>9.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-1-7"><i class="fa fa-check"></i><b>9.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="9.1.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-2-7"><i class="fa fa-check"></i><b>9.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="9.1.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-3-7"><i class="fa fa-check"></i><b>9.1.3</b> Question 3</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#applied-7"><i class="fa fa-check"></i><b>9.2</b> Applied</a><ul>
+<li class="chapter" data-level="9.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#applied-7"><i class="fa fa-check"></i><b>9.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-4-7"><i class="fa fa-check"></i><b>9.2.1</b> Question 4</a></li>
 <li class="chapter" data-level="9.2.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-5-7"><i class="fa fa-check"></i><b>9.2.2</b> Question 5</a></li>
 <li class="chapter" data-level="9.2.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-6-7"><i class="fa fa-check"></i><b>9.2.3</b> Question 6</a></li>
@@ -285,15 +312,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-8-7"><i class="fa fa-check"></i><b>9.2.5</b> Question 8</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a><ul>
-<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#conceptual-8"><i class="fa fa-check"></i><b>10.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#conceptual-8"><i class="fa fa-check"></i><b>10.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="10.1.1" data-path="deep-learning.html"><a href="deep-learning.html#question-1-8"><i class="fa fa-check"></i><b>10.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="10.1.2" data-path="deep-learning.html"><a href="deep-learning.html#question-2-8"><i class="fa fa-check"></i><b>10.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="10.1.3" data-path="deep-learning.html"><a href="deep-learning.html#question-3-8"><i class="fa fa-check"></i><b>10.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="10.1.4" data-path="deep-learning.html"><a href="deep-learning.html#question-4-8"><i class="fa fa-check"></i><b>10.1.4</b> Question 4</a></li>
 <li class="chapter" data-level="10.1.5" data-path="deep-learning.html"><a href="deep-learning.html#question-5-8"><i class="fa fa-check"></i><b>10.1.5</b> Question 5</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#applied-8"><i class="fa fa-check"></i><b>10.2</b> Applied</a><ul>
+<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#applied-8"><i class="fa fa-check"></i><b>10.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="deep-learning.html"><a href="deep-learning.html#question-6-8"><i class="fa fa-check"></i><b>10.2.1</b> Question 6</a></li>
 <li class="chapter" data-level="10.2.2" data-path="deep-learning.html"><a href="deep-learning.html#question-7-8"><i class="fa fa-check"></i><b>10.2.2</b> Question 7</a></li>
 <li class="chapter" data-level="10.2.3" data-path="deep-learning.html"><a href="deep-learning.html#question-8-8"><i class="fa fa-check"></i><b>10.2.3</b> Question 8</a></li>
@@ -304,8 +334,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.8" data-path="deep-learning.html"><a href="deep-learning.html#question-13-3"><i class="fa fa-check"></i><b>10.2.8</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a><ul>
-<li class="chapter" data-level="11.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#conceptual-9"><i class="fa fa-check"></i><b>11.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#conceptual-9"><i class="fa fa-check"></i><b>11.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-1-9"><i class="fa fa-check"></i><b>11.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="11.1.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-2-9"><i class="fa fa-check"></i><b>11.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="11.1.3" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-3-9"><i class="fa fa-check"></i><b>11.1.3</b> Question 3</a></li>
@@ -316,13 +348,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.8" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-8-9"><i class="fa fa-check"></i><b>11.1.8</b> Question 8</a></li>
 <li class="chapter" data-level="11.1.9" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-9-8"><i class="fa fa-check"></i><b>11.1.9</b> Question 9</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#applied-9"><i class="fa fa-check"></i><b>11.2</b> Applied</a><ul>
+<li class="chapter" data-level="11.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#applied-9"><i class="fa fa-check"></i><b>11.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="11.2.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-10-7"><i class="fa fa-check"></i><b>11.2.1</b> Question 10</a></li>
 <li class="chapter" data-level="11.2.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-11-6"><i class="fa fa-check"></i><b>11.2.2</b> Question 11</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a><ul>
-<li class="chapter" data-level="12.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#conceptual-10"><i class="fa fa-check"></i><b>12.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#conceptual-10"><i class="fa fa-check"></i><b>12.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-1-10"><i class="fa fa-check"></i><b>12.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="12.1.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-2-10"><i class="fa fa-check"></i><b>12.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="12.1.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-3-10"><i class="fa fa-check"></i><b>12.1.3</b> Question 3</a></li>
@@ -330,7 +365,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.5" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-5-10"><i class="fa fa-check"></i><b>12.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="12.1.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-6-10"><i class="fa fa-check"></i><b>12.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#applied-10"><i class="fa fa-check"></i><b>12.2</b> Applied</a><ul>
+<li class="chapter" data-level="12.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#applied-10"><i class="fa fa-check"></i><b>12.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-7-10"><i class="fa fa-check"></i><b>12.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="12.2.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-8-10"><i class="fa fa-check"></i><b>12.2.2</b> Question 8</a></li>
 <li class="chapter" data-level="12.2.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-9-9"><i class="fa fa-check"></i><b>12.2.3</b> Question 9</a></li>
@@ -340,8 +376,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.7" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-13-4"><i class="fa fa-check"></i><b>12.2.7</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a><ul>
-<li class="chapter" data-level="13.1" data-path="multiple-testing.html"><a href="multiple-testing.html#conceptual-11"><i class="fa fa-check"></i><b>13.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="multiple-testing.html"><a href="multiple-testing.html#conceptual-11"><i class="fa fa-check"></i><b>13.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-1-11"><i class="fa fa-check"></i><b>13.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="13.1.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-2-11"><i class="fa fa-check"></i><b>13.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="13.1.3" data-path="multiple-testing.html"><a href="multiple-testing.html#question-3-11"><i class="fa fa-check"></i><b>13.1.3</b> Question 3</a></li>
@@ -349,7 +387,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.1.5" data-path="multiple-testing.html"><a href="multiple-testing.html#question-5-11"><i class="fa fa-check"></i><b>13.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="13.1.6" data-path="multiple-testing.html"><a href="multiple-testing.html#question-6-11"><i class="fa fa-check"></i><b>13.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="multiple-testing.html"><a href="multiple-testing.html#applied-11"><i class="fa fa-check"></i><b>13.2</b> Applied</a><ul>
+<li class="chapter" data-level="13.2" data-path="multiple-testing.html"><a href="multiple-testing.html#applied-11"><i class="fa fa-check"></i><b>13.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-7-11"><i class="fa fa-check"></i><b>13.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="13.2.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-8-11"><i class="fa fa-check"></i><b>13.2.2</b> Question 8</a></li>
 </ul></li>
@@ -374,11 +413,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="unsupervised-learning" class="section level1 hasAnchor">
+<div id="unsupervised-learning" class="section level1 hasAnchor" number="12">
 <h1><span class="header-section-number">12</span> Unsupervised Learning<a href="unsupervised-learning.html#unsupervised-learning" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="conceptual-10" class="section level2 hasAnchor">
+<div id="conceptual-10" class="section level2 hasAnchor" number="12.1">
 <h2><span class="header-section-number">12.1</span> Conceptual<a href="unsupervised-learning.html#conceptual-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="question-1-10" class="section level3 hasAnchor">
+<div id="question-1-10" class="section level3 hasAnchor" number="12.1.1">
 <h3><span class="header-section-number">12.1.1</span> Question 1<a href="unsupervised-learning.html#question-1-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This problem involves the <span class="math inline">\(K\)</span>-means clustering algorithm.</p>
@@ -433,7 +472,7 @@ pair of samples can be related to the difference from each sample to the mean
 of the cluster. The K-means algorithm works by minimizing the euclidean distance
 to each centroid, thus also minimizes the within-cluster variance.</p>
 </div>
-<div id="question-2-10" class="section level3 hasAnchor">
+<div id="question-2-10" class="section level3 hasAnchor" number="12.1.2">
 <h3><span class="header-section-number">12.1.2</span> Question 2<a href="unsupervised-learning.html#question-2-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose that we have four observations, for which we compute a dissimilarity
@@ -454,17 +493,17 @@ fusion occurs, as well as the observations corresponding to each leaf in
 the dendrogram.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="unsupervised-learning.html#cb760-1"></a>m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.</span>, <span class="fl">0.45</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.45</span>, <span class="dv">0</span>), <span class="dt">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb760-2"><a href="unsupervised-learning.html#cb760-2"></a>c1 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(m), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
-<span id="cb760-3"><a href="unsupervised-learning.html#cb760-3"></a><span class="kw">plot</span>(c1)</span></code></pre></div>
+<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb769-1"><a href="unsupervised-learning.html#cb769-1" aria-hidden="true"></a>m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.</span>, <span class="fl">0.45</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.45</span>, <span class="dv">0</span>), <span class="dt">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb769-2"><a href="unsupervised-learning.html#cb769-2" aria-hidden="true"></a>c1 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(m), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb769-3"><a href="unsupervised-learning.html#cb769-3" aria-hidden="true"></a><span class="kw">plot</span>(c1)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Repeat (a), this time using single linkage clustering.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="unsupervised-learning.html#cb761-1"></a>c2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(m), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</span>
-<span id="cb761-2"><a href="unsupervised-learning.html#cb761-2"></a><span class="kw">plot</span>(c2)</span></code></pre></div>
+<div class="sourceCode" id="cb770"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb770-1"><a href="unsupervised-learning.html#cb770-1" aria-hidden="true"></a>c2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(m), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</span>
+<span id="cb770-2"><a href="unsupervised-learning.html#cb770-2" aria-hidden="true"></a><span class="kw">plot</span>(c2)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -472,7 +511,7 @@ the dendrogram.</li>
 result. Which observations are in each cluster?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="unsupervised-learning.html#cb762-1"></a><span class="kw">table</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">cutree</span>(c1, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb771"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb771-1"><a href="unsupervised-learning.html#cb771-1" aria-hidden="true"></a><span class="kw">table</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">cutree</span>(c1, <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##    
 ##     1 2
 ##   1 1 0
@@ -485,7 +524,7 @@ result. Which observations are in each cluster?</li>
 result. Which observations are in each cluster?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb764-1"><a href="unsupervised-learning.html#cb764-1"></a><span class="kw">table</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">cutree</span>(c2, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb773"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb773-1"><a href="unsupervised-learning.html#cb773-1" aria-hidden="true"></a><span class="kw">table</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">cutree</span>(c2, <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##    
 ##     1 2
 ##   1 1 0
@@ -501,10 +540,10 @@ dendrogram in (a), for which two or more of the leaves are repositioned,
 but for which the meaning of the dendrogram is the same.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="unsupervised-learning.html#cb766-1"></a><span class="kw">plot</span>(c1, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="unsupervised-learning.html#cb775-1" aria-hidden="true"></a><span class="kw">plot</span>(c1, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
-<div id="question-3-10" class="section level3 hasAnchor">
+<div id="question-3-10" class="section level3 hasAnchor" number="12.1.3">
 <h3><span class="header-section-number">12.1.3</span> Question 3<a href="unsupervised-learning.html#question-3-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In this problem, you will perform <span class="math inline">\(K\)</span>-means clustering manually, with <span class="math inline">\(K = 2\)</span>,
@@ -555,12 +594,12 @@ observations are as follows.</p>
 <li>Plot the observations.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="unsupervised-learning.html#cb767-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb767-2"><a href="unsupervised-learning.html#cb767-2"></a>d &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb767-3"><a href="unsupervised-learning.html#cb767-3"></a>  <span class="dt">x1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">4</span>),</span>
-<span id="cb767-4"><a href="unsupervised-learning.html#cb767-4"></a>  <span class="dt">x2 =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>)</span>
-<span id="cb767-5"><a href="unsupervised-learning.html#cb767-5"></a>)</span>
-<span id="cb767-6"><a href="unsupervised-learning.html#cb767-6"></a><span class="kw">ggplot</span>(d, <span class="kw">aes</span>(<span class="dt">x =</span> x1, <span class="dt">y =</span> x2)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="unsupervised-learning.html#cb776-1" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb776-2"><a href="unsupervised-learning.html#cb776-2" aria-hidden="true"></a>d &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb776-3"><a href="unsupervised-learning.html#cb776-3" aria-hidden="true"></a>  <span class="dt">x1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">4</span>),</span>
+<span id="cb776-4"><a href="unsupervised-learning.html#cb776-4" aria-hidden="true"></a>  <span class="dt">x2 =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>)</span>
+<span id="cb776-5"><a href="unsupervised-learning.html#cb776-5" aria-hidden="true"></a>)</span>
+<span id="cb776-6"><a href="unsupervised-learning.html#cb776-6" aria-hidden="true"></a><span class="kw">ggplot</span>(d, <span class="kw">aes</span>(<span class="dt">x =</span> x1, <span class="dt">y =</span> x2)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -569,34 +608,34 @@ observations are as follows.</p>
 observation.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="unsupervised-learning.html#cb768-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb768-2"><a href="unsupervised-learning.html#cb768-2"></a>d<span class="op">$</span>cluster &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">size =</span> <span class="kw">nrow</span>(d), <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="unsupervised-learning.html#cb777-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb777-2"><a href="unsupervised-learning.html#cb777-2" aria-hidden="true"></a>d<span class="op">$</span>cluster &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">size =</span> <span class="kw">nrow</span>(d), <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Compute the centroid for each cluster.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb769-1"><a href="unsupervised-learning.html#cb769-1"></a>centroids &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="cf">function</span>(i) <span class="kw">colMeans</span>(d[d<span class="op">$</span>cluster <span class="op">==</span><span class="st"> </span>i, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="unsupervised-learning.html#cb778-1" aria-hidden="true"></a>centroids &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="cf">function</span>(i) <span class="kw">colMeans</span>(d[d<span class="op">$</span>cluster <span class="op">==</span><span class="st"> </span>i, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]))</span></code></pre></div>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Assign each observation to the centroid to which it is closest, in terms of
 Euclidean distance. Report the cluster labels for each observation.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb770"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb770-1"><a href="unsupervised-learning.html#cb770-1"></a>dist &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb770-2"><a href="unsupervised-learning.html#cb770-2"></a>    <span class="kw">sqrt</span>((d<span class="op">$</span>x1 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">1</span>, i])<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(d<span class="op">$</span>x2 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">2</span>, i])<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb770-3"><a href="unsupervised-learning.html#cb770-3"></a>})</span>
-<span id="cb770-4"><a href="unsupervised-learning.html#cb770-4"></a>d<span class="op">$</span>cluster &lt;-<span class="st"> </span><span class="kw">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="unsupervised-learning.html#cb779-1" aria-hidden="true"></a>dist &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb779-2"><a href="unsupervised-learning.html#cb779-2" aria-hidden="true"></a>    <span class="kw">sqrt</span>((d<span class="op">$</span>x1 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">1</span>, i])<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(d<span class="op">$</span>x2 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">2</span>, i])<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb779-3"><a href="unsupervised-learning.html#cb779-3" aria-hidden="true"></a>})</span>
+<span id="cb779-4"><a href="unsupervised-learning.html#cb779-4" aria-hidden="true"></a>d<span class="op">$</span>cluster &lt;-<span class="st"> </span><span class="kw">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Repeat (c) and (d) until the answers obtained stop changing.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb771"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb771-1"><a href="unsupervised-learning.html#cb771-1"></a>centroids &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="cf">function</span>(i) <span class="kw">colMeans</span>(d[d<span class="op">$</span>cluster <span class="op">==</span><span class="st"> </span>i, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]))</span>
-<span id="cb771-2"><a href="unsupervised-learning.html#cb771-2"></a>dist &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb771-3"><a href="unsupervised-learning.html#cb771-3"></a>    <span class="kw">sqrt</span>((d<span class="op">$</span>x1 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">1</span>, i])<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(d<span class="op">$</span>x2 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">2</span>, i])<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb771-4"><a href="unsupervised-learning.html#cb771-4"></a>})</span>
-<span id="cb771-5"><a href="unsupervised-learning.html#cb771-5"></a>d<span class="op">$</span>cluster &lt;-<span class="st"> </span><span class="kw">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="unsupervised-learning.html#cb780-1" aria-hidden="true"></a>centroids &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="cf">function</span>(i) <span class="kw">colMeans</span>(d[d<span class="op">$</span>cluster <span class="op">==</span><span class="st"> </span>i, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]))</span>
+<span id="cb780-2"><a href="unsupervised-learning.html#cb780-2" aria-hidden="true"></a>dist &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb780-3"><a href="unsupervised-learning.html#cb780-3" aria-hidden="true"></a>    <span class="kw">sqrt</span>((d<span class="op">$</span>x1 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">1</span>, i])<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(d<span class="op">$</span>x2 <span class="op">-</span><span class="st"> </span>centroids[<span class="dv">2</span>, i])<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb780-4"><a href="unsupervised-learning.html#cb780-4" aria-hidden="true"></a>})</span>
+<span id="cb780-5"><a href="unsupervised-learning.html#cb780-5" aria-hidden="true"></a>d<span class="op">$</span>cluster &lt;-<span class="st"> </span><span class="kw">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
 <p>In this case, we get stable labels after the first iteration.</p>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">
@@ -604,10 +643,10 @@ Euclidean distance. Report the cluster labels for each observation.</li>
 labels obtained.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="unsupervised-learning.html#cb772-1"></a><span class="kw">ggplot</span>(d, <span class="kw">aes</span>(<span class="dt">x =</span> x1, <span class="dt">y =</span> x2, <span class="dt">color =</span> <span class="kw">factor</span>(cluster))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb781"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb781-1"><a href="unsupervised-learning.html#cb781-1" aria-hidden="true"></a><span class="kw">ggplot</span>(d, <span class="kw">aes</span>(<span class="dt">x =</span> x1, <span class="dt">y =</span> x2, <span class="dt">color =</span> <span class="kw">factor</span>(cluster))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
-<div id="question-4-10" class="section level3 hasAnchor">
+<div id="question-4-10" class="section level3 hasAnchor" number="12.1.4">
 <h3><span class="header-section-number">12.1.4</span> Question 4<a href="unsupervised-learning.html#question-4-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose that for a particular data set, we perform hierarchical clustering
@@ -636,7 +675,7 @@ tell?</li>
 <p>They will fuse at the same height (the algorithm for calculating distance is
 the same when the clusters are of size 1).</p>
 </div>
-<div id="question-5-10" class="section level3 hasAnchor">
+<div id="question-5-10" class="section level3 hasAnchor" number="12.1.5">
 <h3><span class="header-section-number">12.1.5</span> Question 5<a href="unsupervised-learning.html#question-5-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In words, describe the results that you would expect if you performed
@@ -649,20 +688,20 @@ to whether or not the retainer sold a computer. In the first case (raw numbers
 of items sold), we would expect clusters to represent low vs high numbers of
 sock purchases.</p>
 <p>To test, we can run the analysis in R:</p>
-<div class="sourceCode" id="cb773"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb773-1"><a href="unsupervised-learning.html#cb773-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb773-2"><a href="unsupervised-learning.html#cb773-2"></a>dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb773-3"><a href="unsupervised-learning.html#cb773-3"></a>  <span class="dt">socks =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>),</span>
-<span id="cb773-4"><a href="unsupervised-learning.html#cb773-4"></a>  <span class="dt">computers =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb773-5"><a href="unsupervised-learning.html#cb773-5"></a>)</span>
-<span id="cb773-6"><a href="unsupervised-learning.html#cb773-6"></a><span class="kw">kmeans</span>(dat, <span class="dv">2</span>)<span class="op">$</span>cluster</span></code></pre></div>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="unsupervised-learning.html#cb782-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb782-2"><a href="unsupervised-learning.html#cb782-2" aria-hidden="true"></a>dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb782-3"><a href="unsupervised-learning.html#cb782-3" aria-hidden="true"></a>  <span class="dt">socks =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>),</span>
+<span id="cb782-4"><a href="unsupervised-learning.html#cb782-4" aria-hidden="true"></a>  <span class="dt">computers =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb782-5"><a href="unsupervised-learning.html#cb782-5" aria-hidden="true"></a>)</span>
+<span id="cb782-6"><a href="unsupervised-learning.html#cb782-6" aria-hidden="true"></a><span class="kw">kmeans</span>(dat, <span class="dv">2</span>)<span class="op">$</span>cluster</span></code></pre></div>
 <pre><code>## [1] 1 1 2 2 2 2 2 1</code></pre>
-<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="unsupervised-learning.html#cb775-1"></a><span class="kw">kmeans</span>(<span class="kw">scale</span>(dat), <span class="dv">2</span>)<span class="op">$</span>cluster</span></code></pre></div>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="unsupervised-learning.html#cb784-1" aria-hidden="true"></a><span class="kw">kmeans</span>(<span class="kw">scale</span>(dat), <span class="dv">2</span>)<span class="op">$</span>cluster</span></code></pre></div>
 <pre><code>## [1] 1 1 1 1 2 2 2 2</code></pre>
-<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="unsupervised-learning.html#cb777-1"></a>dat<span class="op">$</span>computers &lt;-<span class="st"> </span>dat<span class="op">$</span>computers <span class="op">*</span><span class="st"> </span><span class="dv">2000</span></span>
-<span id="cb777-2"><a href="unsupervised-learning.html#cb777-2"></a><span class="kw">kmeans</span>(dat, <span class="dv">2</span>)<span class="op">$</span>cluster</span></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="unsupervised-learning.html#cb786-1" aria-hidden="true"></a>dat<span class="op">$</span>computers &lt;-<span class="st"> </span>dat<span class="op">$</span>computers <span class="op">*</span><span class="st"> </span><span class="dv">2000</span></span>
+<span id="cb786-2"><a href="unsupervised-learning.html#cb786-2" aria-hidden="true"></a><span class="kw">kmeans</span>(dat, <span class="dv">2</span>)<span class="op">$</span>cluster</span></code></pre></div>
 <pre><code>## [1] 1 1 1 1 2 2 2 2</code></pre>
 </div>
-<div id="question-6-10" class="section level3 hasAnchor">
+<div id="question-6-10" class="section level3 hasAnchor" number="12.1.6">
 <h3><span class="header-section-number">12.1.6</span> Question 6<a href="unsupervised-learning.html#question-6-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>We saw in Section 12.2.2 that the principal component loading and score
@@ -678,9 +717,9 @@ data matrix is the response.</p>
 </blockquote>
 </div>
 </div>
-<div id="applied-10" class="section level2 hasAnchor">
+<div id="applied-10" class="section level2 hasAnchor" number="12.2">
 <h2><span class="header-section-number">12.2</span> Applied<a href="unsupervised-learning.html#applied-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="question-7-10" class="section level3 hasAnchor">
+<div id="question-7-10" class="section level3 hasAnchor" number="12.2.1">
 <h3><span class="header-section-number">12.2.1</span> Question 7<a href="unsupervised-learning.html#question-7-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In the chapter, we mentioned the use of correlation-based distance and
@@ -694,13 +733,13 @@ Euclidean distance between the ith and jth observations.</p>
 <p><em>Hint: The Euclidean distance can be calculated using the <code>dist()</code> function,</em>
 <em>and correlations can be calculated using the <code>cor()</code> function.</em></p>
 </blockquote>
-<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="unsupervised-learning.html#cb779-1"></a>dat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">scale</span>(<span class="kw">t</span>(USArrests)))</span>
-<span id="cb779-2"><a href="unsupervised-learning.html#cb779-2"></a>d1 &lt;-<span class="st"> </span><span class="kw">dist</span>(dat)<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb779-3"><a href="unsupervised-learning.html#cb779-3"></a>d2 &lt;-<span class="st"> </span><span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(<span class="kw">t</span>(dat)))</span>
-<span id="cb779-4"><a href="unsupervised-learning.html#cb779-4"></a><span class="kw">plot</span>(d1, d2)</span></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="unsupervised-learning.html#cb788-1" aria-hidden="true"></a>dat &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">scale</span>(<span class="kw">t</span>(USArrests)))</span>
+<span id="cb788-2"><a href="unsupervised-learning.html#cb788-2" aria-hidden="true"></a>d1 &lt;-<span class="st"> </span><span class="kw">dist</span>(dat)<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb788-3"><a href="unsupervised-learning.html#cb788-3" aria-hidden="true"></a>d2 &lt;-<span class="st"> </span><span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(<span class="kw">t</span>(dat)))</span>
+<span id="cb788-4"><a href="unsupervised-learning.html#cb788-4" aria-hidden="true"></a><span class="kw">plot</span>(d1, d2)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
-<div id="question-8-10" class="section level3 hasAnchor">
+<div id="question-8-10" class="section level3 hasAnchor" number="12.2.2">
 <h3><span class="header-section-number">12.2.2</span> Question 8<a href="unsupervised-learning.html#question-8-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In Section 12.2.3, a formula for calculating PVE was given in Equation
@@ -712,8 +751,8 @@ Euclidean distance between the ith and jth observations.</p>
 12.2.3.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="unsupervised-learning.html#cb780-1"></a>pr &lt;-<span class="st"> </span><span class="kw">prcomp</span>(USArrests, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb780-2"><a href="unsupervised-learning.html#cb780-2"></a>pr<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(pr<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="unsupervised-learning.html#cb789-1" aria-hidden="true"></a>pr &lt;-<span class="st"> </span><span class="kw">prcomp</span>(USArrests, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb789-2"><a href="unsupervised-learning.html#cb789-2" aria-hidden="true"></a>pr<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(pr<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -723,7 +762,7 @@ Equation 12.10 to obtain the PVE.</li>
 </ol>
 <p>These two approaches should give the same results.</p>
 </blockquote>
-<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="unsupervised-learning.html#cb782-1"></a><span class="kw">colSums</span>(pr<span class="op">$</span>x<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(<span class="kw">scale</span>(USArrests)<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="unsupervised-learning.html#cb791-1" aria-hidden="true"></a><span class="kw">colSums</span>(pr<span class="op">$</span>x<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(<span class="kw">scale</span>(USArrests)<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##        PC1        PC2        PC3        PC4 
 ## 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
 <blockquote>
@@ -733,7 +772,7 @@ Equation 12.10 to obtain the PVE.</li>
 <em>scale the variables before applying Equation 12.10 in (b).</em></p>
 </blockquote>
 </div>
-<div id="question-9-9" class="section level3 hasAnchor">
+<div id="question-9-9" class="section level3 hasAnchor" number="12.2.3">
 <h3><span class="header-section-number">12.2.3</span> Question 9<a href="unsupervised-learning.html#question-9-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Consider the <code>USArrests</code> data. We will now perform hierarchical clustering on
@@ -743,16 +782,16 @@ the states.</p>
 cluster the states.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="unsupervised-learning.html#cb784-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb784-2"><a href="unsupervised-learning.html#cb784-2"></a>hc &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(USArrests), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="unsupervised-learning.html#cb793-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb793-2"><a href="unsupervised-learning.html#cb793-2" aria-hidden="true"></a>hc &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(USArrests), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Cut the dendrogram at a height that results in three distinct clusters.
 Which states belong to which clusters?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb785-1"><a href="unsupervised-learning.html#cb785-1"></a>ct &lt;-<span class="st"> </span><span class="kw">cutree</span>(hc, <span class="dv">3</span>)</span>
-<span id="cb785-2"><a href="unsupervised-learning.html#cb785-2"></a><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="cf">function</span>(i) <span class="kw">names</span>(ct)[ct <span class="op">==</span><span class="st"> </span>i])</span></code></pre></div>
+<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="unsupervised-learning.html#cb794-1" aria-hidden="true"></a>ct &lt;-<span class="st"> </span><span class="kw">cutree</span>(hc, <span class="dv">3</span>)</span>
+<span id="cb794-2"><a href="unsupervised-learning.html#cb794-2" aria-hidden="true"></a><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="cf">function</span>(i) <span class="kw">names</span>(ct)[ct <span class="op">==</span><span class="st"> </span>i])</span></code></pre></div>
 <pre><code>## [[1]]
 ##  [1] &quot;Alabama&quot;        &quot;Alaska&quot;         &quot;Arizona&quot;        &quot;California&quot;    
 ##  [5] &quot;Delaware&quot;       &quot;Florida&quot;        &quot;Illinois&quot;       &quot;Louisiana&quot;     
@@ -777,7 +816,7 @@ Which states belong to which clusters?</li>
 distance, <em>after scaling the variables to have standard deviation one</em>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="unsupervised-learning.html#cb787-1"></a>hc2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(USArrests)), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="unsupervised-learning.html#cb796-1" aria-hidden="true"></a>hc2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">scale</span>(USArrests)), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span></code></pre></div>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>What effect does scaling the variables have on the hierarchical clustering
@@ -786,8 +825,8 @@ inter-observation dissimilarities are computed? Provide a justification for
 your answer.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="unsupervised-learning.html#cb788-1"></a>ct &lt;-<span class="st"> </span><span class="kw">cutree</span>(hc, <span class="dv">3</span>)</span>
-<span id="cb788-2"><a href="unsupervised-learning.html#cb788-2"></a><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="cf">function</span>(i) <span class="kw">names</span>(ct)[ct <span class="op">==</span><span class="st"> </span>i])</span></code></pre></div>
+<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="unsupervised-learning.html#cb797-1" aria-hidden="true"></a>ct &lt;-<span class="st"> </span><span class="kw">cutree</span>(hc, <span class="dv">3</span>)</span>
+<span id="cb797-2"><a href="unsupervised-learning.html#cb797-2" aria-hidden="true"></a><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="cf">function</span>(i) <span class="kw">names</span>(ct)[ct <span class="op">==</span><span class="st"> </span>i])</span></code></pre></div>
 <pre><code>## [[1]]
 ##  [1] &quot;Alabama&quot;        &quot;Alaska&quot;         &quot;Arizona&quot;        &quot;California&quot;    
 ##  [5] &quot;Delaware&quot;       &quot;Florida&quot;        &quot;Illinois&quot;       &quot;Louisiana&quot;     
@@ -821,7 +860,7 @@ somewhat arbitrary (so for example, Murder could be measured per 1 million
 rather than per 100,000) so in this case I would argue the data should be
 scaled.</p>
 </div>
-<div id="question-10-8" class="section level3 hasAnchor">
+<div id="question-10-8" class="section level3 hasAnchor" number="12.2.4">
 <h3><span class="header-section-number">12.2.4</span> Question 10<a href="unsupervised-learning.html#question-10-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In this problem, you will generate simulated data, and then perform PCA and
@@ -835,12 +874,12 @@ scaled.</p>
 <em>there are three distinct classes.</em></p></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="unsupervised-learning.html#cb790-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb790-2"><a href="unsupervised-learning.html#cb790-2"></a>data &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">50</span>), <span class="dt">ncol =</span> <span class="dv">50</span>)</span>
-<span id="cb790-3"><a href="unsupervised-learning.html#cb790-3"></a>classes &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">each =</span> <span class="dv">20</span>)</span>
-<span id="cb790-4"><a href="unsupervised-learning.html#cb790-4"></a><span class="kw">dimnames</span>(data) &lt;-<span class="st"> </span><span class="kw">list</span>(classes, <span class="kw">paste0</span>(<span class="st">&quot;v&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>))</span>
-<span id="cb790-5"><a href="unsupervised-learning.html#cb790-5"></a>data[classes <span class="op">==</span><span class="st"> &quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span>data[classes <span class="op">==</span><span class="st"> &quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] <span class="op">+</span><span class="st"> </span><span class="fl">1.2</span></span>
-<span id="cb790-6"><a href="unsupervised-learning.html#cb790-6"></a>data[classes <span class="op">==</span><span class="st"> &quot;C&quot;</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">30</span>] &lt;-<span class="st"> </span>data[classes <span class="op">==</span><span class="st"> &quot;C&quot;</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">30</span>] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="unsupervised-learning.html#cb799-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb799-2"><a href="unsupervised-learning.html#cb799-2" aria-hidden="true"></a>data &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">60</span> <span class="op">*</span><span class="st"> </span><span class="dv">50</span>), <span class="dt">ncol =</span> <span class="dv">50</span>)</span>
+<span id="cb799-3"><a href="unsupervised-learning.html#cb799-3" aria-hidden="true"></a>classes &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">each =</span> <span class="dv">20</span>)</span>
+<span id="cb799-4"><a href="unsupervised-learning.html#cb799-4" aria-hidden="true"></a><span class="kw">dimnames</span>(data) &lt;-<span class="st"> </span><span class="kw">list</span>(classes, <span class="kw">paste0</span>(<span class="st">&quot;v&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">50</span>))</span>
+<span id="cb799-5"><a href="unsupervised-learning.html#cb799-5" aria-hidden="true"></a>data[classes <span class="op">==</span><span class="st"> &quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span>data[classes <span class="op">==</span><span class="st"> &quot;B&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] <span class="op">+</span><span class="st"> </span><span class="fl">1.2</span></span>
+<span id="cb799-6"><a href="unsupervised-learning.html#cb799-6" aria-hidden="true"></a>data[classes <span class="op">==</span><span class="st"> &quot;C&quot;</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">30</span>] &lt;-<span class="st"> </span>data[classes <span class="op">==</span><span class="st"> &quot;C&quot;</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">30</span>] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Perform PCA on the 60 observations and plot the first two principal
@@ -853,10 +892,10 @@ classes show at least some separation in the first two principal component
 score vectors.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="unsupervised-learning.html#cb791-1"></a>pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(data)</span>
-<span id="cb791-2"><a href="unsupervised-learning.html#cb791-2"></a><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(<span class="dt">Class =</span> classes, <span class="dt">PC1 =</span> pca<span class="op">$</span>x[, <span class="dv">1</span>], <span class="dt">PC2 =</span> pca<span class="op">$</span>x[, <span class="dv">2</span>]),</span>
-<span id="cb791-3"><a href="unsupervised-learning.html#cb791-3"></a>    <span class="kw">aes</span>(<span class="dt">x =</span> PC1, <span class="dt">y =</span> PC2, <span class="dt">col =</span> Class)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb791-4"><a href="unsupervised-learning.html#cb791-4"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="unsupervised-learning.html#cb800-1" aria-hidden="true"></a>pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(data)</span>
+<span id="cb800-2"><a href="unsupervised-learning.html#cb800-2" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(<span class="dt">Class =</span> classes, <span class="dt">PC1 =</span> pca<span class="op">$</span>x[, <span class="dv">1</span>], <span class="dt">PC2 =</span> pca<span class="op">$</span>x[, <span class="dv">2</span>]),</span>
+<span id="cb800-3"><a href="unsupervised-learning.html#cb800-3" aria-hidden="true"></a>    <span class="kw">aes</span>(<span class="dt">x =</span> PC1, <span class="dt">y =</span> PC2, <span class="dt">col =</span> Class)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb800-4"><a href="unsupervised-learning.html#cb800-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -870,8 +909,8 @@ class labels?</p>
 <em>clustering labels are the same.</em></p></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="unsupervised-learning.html#cb792-1"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(data, <span class="dv">3</span>)<span class="op">$</span>cluster</span>
-<span id="cb792-2"><a href="unsupervised-learning.html#cb792-2"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
+<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="unsupervised-learning.html#cb801-1" aria-hidden="true"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(data, <span class="dv">3</span>)<span class="op">$</span>cluster</span>
+<span id="cb801-2"><a href="unsupervised-learning.html#cb801-2" aria-hidden="true"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
 <pre><code>##    
 ## km   A  B  C
 ##   1  1 20  1
@@ -883,8 +922,8 @@ class labels?</p>
 <li>Perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 2\)</span>. Describe your results.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="unsupervised-learning.html#cb794-1"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(data, <span class="dv">2</span>)<span class="op">$</span>cluster</span>
-<span id="cb794-2"><a href="unsupervised-learning.html#cb794-2"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
+<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="unsupervised-learning.html#cb803-1" aria-hidden="true"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(data, <span class="dv">2</span>)<span class="op">$</span>cluster</span>
+<span id="cb803-2"><a href="unsupervised-learning.html#cb803-2" aria-hidden="true"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
 <pre><code>##    
 ## km   A  B  C
 ##   1 18 20  1
@@ -896,8 +935,8 @@ of classes A and B.</p>
 <li>Now perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 4\)</span>, and describe your results.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="unsupervised-learning.html#cb796-1"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(data, <span class="dv">4</span>)<span class="op">$</span>cluster</span>
-<span id="cb796-2"><a href="unsupervised-learning.html#cb796-2"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
+<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="unsupervised-learning.html#cb805-1" aria-hidden="true"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(data, <span class="dv">4</span>)<span class="op">$</span>cluster</span>
+<span id="cb805-2"><a href="unsupervised-learning.html#cb805-2" aria-hidden="true"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
 <pre><code>##    
 ## km   A  B  C
 ##   1  0  7  2
@@ -915,8 +954,8 @@ is the first principal component score vector, and the second column is
 the second principal component score vector. Comment on the results.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb798-1"><a href="unsupervised-learning.html#cb798-1"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(pca<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dv">3</span>)<span class="op">$</span>cluster</span>
-<span id="cb798-2"><a href="unsupervised-learning.html#cb798-2"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
+<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="unsupervised-learning.html#cb807-1" aria-hidden="true"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(pca<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dv">3</span>)<span class="op">$</span>cluster</span>
+<span id="cb807-2"><a href="unsupervised-learning.html#cb807-2" aria-hidden="true"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
 <pre><code>##    
 ## km   A  B  C
 ##   1  0 20  2
@@ -930,8 +969,8 @@ the data <em>after scaling each variable to have standard deviation one</em>. Ho
 do these results compare to those obtained in (b)? Explain.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="unsupervised-learning.html#cb800-1"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(<span class="kw">scale</span>(data), <span class="dv">3</span>)<span class="op">$</span>cluster</span>
-<span id="cb800-2"><a href="unsupervised-learning.html#cb800-2"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
+<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="unsupervised-learning.html#cb809-1" aria-hidden="true"></a>km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(<span class="kw">scale</span>(data), <span class="dv">3</span>)<span class="op">$</span>cluster</span>
+<span id="cb809-2"><a href="unsupervised-learning.html#cb809-2" aria-hidden="true"></a><span class="kw">table</span>(km, <span class="kw">names</span>(km))</span></code></pre></div>
 <pre><code>##    
 ## km   A  B  C
 ##   1  1 20  1
@@ -939,7 +978,7 @@ do these results compare to those obtained in (b)? Explain.</li>
 ##   3  0  0 19</code></pre>
 <p><span class="math inline">\(K\)</span>-means appears to perform less well on the scaled data in this case.</p>
 </div>
-<div id="question-11-7" class="section level3 hasAnchor">
+<div id="question-11-7" class="section level3 hasAnchor" number="12.2.5">
 <h3><span class="header-section-number">12.2.5</span> Question 11<a href="unsupervised-learning.html#question-11-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Write an <code>R</code> function to perform matrix completion as in Algorithm 12.1, and
@@ -957,7 +996,7 @@ observations that are missing, and the value of <span class="math inline">\(M\)<
 repetitions of the experiment.</p>
 </blockquote>
 </div>
-<div id="question-12-5" class="section level3 hasAnchor">
+<div id="question-12-5" class="section level3 hasAnchor" number="12.2.6">
 <h3><span class="header-section-number">12.2.6</span> Question 12<a href="unsupervised-learning.html#question-12-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In Section 12.5.2, Algorithm 12.1 was implemented using the <code>svd()</code> function.
@@ -968,7 +1007,7 @@ algorithm using <code>prcomp()</code>.</p>
 rather than <code>svd()</code>.</p>
 </blockquote>
 </div>
-<div id="question-13-4" class="section level3 hasAnchor">
+<div id="question-13-4" class="section level3 hasAnchor" number="12.2.7">
 <h3><span class="header-section-number">12.2.7</span> Question 13<a href="unsupervised-learning.html#question-13-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>On the book website, <code>www.StatLearning.com</code>, there is a gene expression data
@@ -979,8 +1018,8 @@ second 20 are from a diseased group.</p>
 <li>Load in the data using <code>read.csv()</code>. You will need to select <code>header = F</code>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="unsupervised-learning.html#cb802-1"></a>data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Ch12Ex13.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb802-2"><a href="unsupervised-learning.html#cb802-2"></a><span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;H&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>), <span class="kw">paste0</span>(<span class="st">&quot;D&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="unsupervised-learning.html#cb811-1" aria-hidden="true"></a>data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Ch12Ex13.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb811-2"><a href="unsupervised-learning.html#cb811-2" aria-hidden="true"></a><span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;H&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>), <span class="kw">paste0</span>(<span class="st">&quot;D&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>))</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Apply hierarchical clustering to the samples using correlation-based
@@ -988,14 +1027,14 @@ distance, and plot the dendrogram. Do the genes separate the samples into
 the two groups? Do your results depend on the type of linkage used?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="unsupervised-learning.html#cb803-1"></a>hc.complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(data)), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
-<span id="cb803-2"><a href="unsupervised-learning.html#cb803-2"></a><span class="kw">plot</span>(hc.complete)</span></code></pre></div>
+<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="unsupervised-learning.html#cb812-1" aria-hidden="true"></a>hc.complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(data)), <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb812-2"><a href="unsupervised-learning.html#cb812-2" aria-hidden="true"></a><span class="kw">plot</span>(hc.complete)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
-<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="unsupervised-learning.html#cb804-1"></a>hc.complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(data)), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</span>
-<span id="cb804-2"><a href="unsupervised-learning.html#cb804-2"></a><span class="kw">plot</span>(hc.complete)</span></code></pre></div>
+<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb813-1"><a href="unsupervised-learning.html#cb813-1" aria-hidden="true"></a>hc.complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(data)), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb813-2"><a href="unsupervised-learning.html#cb813-2" aria-hidden="true"></a><span class="kw">plot</span>(hc.complete)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
-<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="unsupervised-learning.html#cb805-1"></a>hc.complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(data)), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</span>
-<span id="cb805-2"><a href="unsupervised-learning.html#cb805-2"></a><span class="kw">plot</span>(hc.complete)</span></code></pre></div>
+<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="unsupervised-learning.html#cb814-1" aria-hidden="true"></a>hc.complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(data)), <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</span>
+<span id="cb814-2"><a href="unsupervised-learning.html#cb814-2" aria-hidden="true"></a><span class="kw">plot</span>(hc.complete)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-3.png" width="672" /></p>
 <p>Yes the samples clearly separate into the two groups, although the results
 depend somewhat on the linkage method used. In the case of average clustering,
@@ -1010,9 +1049,9 @@ groups. Suggest a way to answer this question, and apply it here.</li>
 would be to determine which genes show the most significant differences between
 the groups by applying a t-test to each group. We can then select those with a
 FDR adjusted p-value less than some given threshold (e.g. 0.05).</p>
-<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="unsupervised-learning.html#cb806-1"></a>class &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Healthy&quot;</span>, <span class="st">&quot;Diseased&quot;</span>), <span class="dt">each =</span> <span class="dv">20</span>))</span>
-<span id="cb806-2"><a href="unsupervised-learning.html#cb806-2"></a>pvals &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(<span class="kw">apply</span>(data, <span class="dv">1</span>, <span class="cf">function</span>(v) <span class="kw">t.test</span>(v <span class="op">~</span><span class="st"> </span>class)<span class="op">$</span>p.value))</span>
-<span id="cb806-3"><a href="unsupervised-learning.html#cb806-3"></a><span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb815-1"><a href="unsupervised-learning.html#cb815-1" aria-hidden="true"></a>class &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Healthy&quot;</span>, <span class="st">&quot;Diseased&quot;</span>), <span class="dt">each =</span> <span class="dv">20</span>))</span>
+<span id="cb815-2"><a href="unsupervised-learning.html#cb815-2" aria-hidden="true"></a>pvals &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(<span class="kw">apply</span>(data, <span class="dv">1</span>, <span class="cf">function</span>(v) <span class="kw">t.test</span>(v <span class="op">~</span><span class="st"> </span>class)<span class="op">$</span>p.value))</span>
+<span id="cb815-3"><a href="unsupervised-learning.html#cb815-3" aria-hidden="true"></a><span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>##   [1]  11  12  13  14  15  16  17  18  19  20 501 502 503 504 505 506 507 508
 ##  [19] 509 511 512 513 514 515 516 517 519 520 521 522 523 524 525 526 527 528
 ##  [37] 529 530 531 532 533 534 535 536 537 538 539 540 541 542 543 544 545 546

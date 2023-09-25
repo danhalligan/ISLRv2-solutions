@@ -525,10 +525,6 @@ summary(fit)
 ## glm(formula = Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + 
 ##     Volume, family = binomial, data = Weekly)
 ## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.6949  -1.2565   0.9913   1.0849   1.4579  
-## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(>|z|)   
 ## (Intercept)  0.26686    0.08593   3.106   0.0019 **
@@ -1321,10 +1317,6 @@ summary(fit)
 ## 
 ## Call:
 ## glm(formula = x$highcrim[train] ~ ., family = binomial, data = dat_train)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.3277  -0.1603  -0.0010   0.0015   3.5339  
 ## 
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(>|z|)    

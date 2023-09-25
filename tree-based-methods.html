@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Tree-Based Methods | An Introduction to Statistical Learning</title>
   <meta name="description" content="8 Tree-Based Methods | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.29.3 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Tree-Based Methods | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -51,28 +51,27 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -92,7 +91,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -125,6 +124,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="islrv2.css" type="text/css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css" type="text/css" />
@@ -144,8 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="statistical-learning.html"><a href="statistical-learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a><ul>
-<li class="chapter" data-level="2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#conceptual"><i class="fa fa-check"></i><b>2.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="2" data-path="statistical-learning.html"><a href="statistical-learning.html"><i class="fa fa-check"></i><b>2</b> Statistical Learning</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#conceptual"><i class="fa fa-check"></i><b>2.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-1"><i class="fa fa-check"></i><b>2.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="2.1.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-2"><i class="fa fa-check"></i><b>2.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="2.1.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-3"><i class="fa fa-check"></i><b>2.1.3</b> Question 3</a></li>
@@ -154,14 +159,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.6" data-path="statistical-learning.html"><a href="statistical-learning.html#question-6"><i class="fa fa-check"></i><b>2.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="2.1.7" data-path="statistical-learning.html"><a href="statistical-learning.html#question-7"><i class="fa fa-check"></i><b>2.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#applied"><i class="fa fa-check"></i><b>2.2</b> Applied</a><ul>
+<li class="chapter" data-level="2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#applied"><i class="fa fa-check"></i><b>2.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="statistical-learning.html"><a href="statistical-learning.html#question-8"><i class="fa fa-check"></i><b>2.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="2.2.2" data-path="statistical-learning.html"><a href="statistical-learning.html#question-9"><i class="fa fa-check"></i><b>2.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="2.2.3" data-path="statistical-learning.html"><a href="statistical-learning.html#question-10"><i class="fa fa-check"></i><b>2.2.3</b> Question 10</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#conceptual-1"><i class="fa fa-check"></i><b>3.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="3" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="linear-regression.html"><a href="linear-regression.html#conceptual-1"><i class="fa fa-check"></i><b>3.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="linear-regression.html"><a href="linear-regression.html#question-1-1"><i class="fa fa-check"></i><b>3.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="3.1.2" data-path="linear-regression.html"><a href="linear-regression.html#question-2-1"><i class="fa fa-check"></i><b>3.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="3.1.3" data-path="linear-regression.html"><a href="linear-regression.html#question-3-1"><i class="fa fa-check"></i><b>3.1.3</b> Question 3</a></li>
@@ -170,7 +178,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.6" data-path="linear-regression.html"><a href="linear-regression.html#question-6-1"><i class="fa fa-check"></i><b>3.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="3.1.7" data-path="linear-regression.html"><a href="linear-regression.html#question-7-1"><i class="fa fa-check"></i><b>3.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#applied-1"><i class="fa fa-check"></i><b>3.2</b> Applied</a><ul>
+<li class="chapter" data-level="3.2" data-path="linear-regression.html"><a href="linear-regression.html#applied-1"><i class="fa fa-check"></i><b>3.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="linear-regression.html"><a href="linear-regression.html#question-8-1"><i class="fa fa-check"></i><b>3.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="3.2.2" data-path="linear-regression.html"><a href="linear-regression.html#question-9-1"><i class="fa fa-check"></i><b>3.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="3.2.3" data-path="linear-regression.html"><a href="linear-regression.html#question-10-1"><i class="fa fa-check"></i><b>3.2.3</b> Question 10</a></li>
@@ -181,8 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.8" data-path="linear-regression.html"><a href="linear-regression.html#question-15"><i class="fa fa-check"></i><b>3.2.8</b> Question 15</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a><ul>
-<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#conceptual-2"><i class="fa fa-check"></i><b>4.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="4" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>4</b> Classification</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="classification.html"><a href="classification.html#conceptual-2"><i class="fa fa-check"></i><b>4.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="classification.html"><a href="classification.html#question-1-2"><i class="fa fa-check"></i><b>4.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="4.1.2" data-path="classification.html"><a href="classification.html#question-2-2"><i class="fa fa-check"></i><b>4.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="4.1.3" data-path="classification.html"><a href="classification.html#question-3-2"><i class="fa fa-check"></i><b>4.1.3</b> Question 3</a></li>
@@ -196,21 +207,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.11" data-path="classification.html"><a href="classification.html#question-11-1"><i class="fa fa-check"></i><b>4.1.11</b> Question 11</a></li>
 <li class="chapter" data-level="4.1.12" data-path="classification.html"><a href="classification.html#question-12-1"><i class="fa fa-check"></i><b>4.1.12</b> Question 12</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#applied-2"><i class="fa fa-check"></i><b>4.2</b> Applied</a><ul>
+<li class="chapter" data-level="4.2" data-path="classification.html"><a href="classification.html#applied-2"><i class="fa fa-check"></i><b>4.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="classification.html"><a href="classification.html#question-13-1"><i class="fa fa-check"></i><b>4.2.1</b> Question 13</a></li>
 <li class="chapter" data-level="4.2.2" data-path="classification.html"><a href="classification.html#question-14-1"><i class="fa fa-check"></i><b>4.2.2</b> Question 14</a></li>
 <li class="chapter" data-level="4.2.3" data-path="classification.html"><a href="classification.html#question-15-1"><i class="fa fa-check"></i><b>4.2.3</b> Question 15</a></li>
 <li class="chapter" data-level="4.2.4" data-path="classification.html"><a href="classification.html#question-13-2"><i class="fa fa-check"></i><b>4.2.4</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a><ul>
-<li class="chapter" data-level="5.1" data-path="resampling-methods.html"><a href="resampling-methods.html#conceptual-3"><i class="fa fa-check"></i><b>5.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="resampling-methods.html"><a href="resampling-methods.html#conceptual-3"><i class="fa fa-check"></i><b>5.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-1-3"><i class="fa fa-check"></i><b>5.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="5.1.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-2-3"><i class="fa fa-check"></i><b>5.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="5.1.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-3-3"><i class="fa fa-check"></i><b>5.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="5.1.4" data-path="resampling-methods.html"><a href="resampling-methods.html#question-4-3"><i class="fa fa-check"></i><b>5.1.4</b> Question 4</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="resampling-methods.html"><a href="resampling-methods.html#applied-3"><i class="fa fa-check"></i><b>5.2</b> Applied</a><ul>
+<li class="chapter" data-level="5.2" data-path="resampling-methods.html"><a href="resampling-methods.html#applied-3"><i class="fa fa-check"></i><b>5.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="5.2.1" data-path="resampling-methods.html"><a href="resampling-methods.html#question-5-3"><i class="fa fa-check"></i><b>5.2.1</b> Question 5</a></li>
 <li class="chapter" data-level="5.2.2" data-path="resampling-methods.html"><a href="resampling-methods.html#question-6-3"><i class="fa fa-check"></i><b>5.2.2</b> Question 6</a></li>
 <li class="chapter" data-level="5.2.3" data-path="resampling-methods.html"><a href="resampling-methods.html#question-7-3"><i class="fa fa-check"></i><b>5.2.3</b> Question 7</a></li>
@@ -218,8 +233,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.5" data-path="resampling-methods.html"><a href="resampling-methods.html#question-9-3"><i class="fa fa-check"></i><b>5.2.5</b> Question 9</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a><ul>
-<li class="chapter" data-level="6.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#conceptual-4"><i class="fa fa-check"></i><b>6.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html"><i class="fa fa-check"></i><b>6</b> Linear Model Selection and Regularization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#conceptual-4"><i class="fa fa-check"></i><b>6.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-1-4"><i class="fa fa-check"></i><b>6.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="6.1.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-2-4"><i class="fa fa-check"></i><b>6.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="6.1.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-3-4"><i class="fa fa-check"></i><b>6.1.3</b> Question 3</a></li>
@@ -228,22 +245,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.6" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-6-4"><i class="fa fa-check"></i><b>6.1.6</b> Question 6</a></li>
 <li class="chapter" data-level="6.1.7" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-7-4"><i class="fa fa-check"></i><b>6.1.7</b> Question 7</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#applied-4"><i class="fa fa-check"></i><b>6.2</b> Applied</a><ul>
+<li class="chapter" data-level="6.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#applied-4"><i class="fa fa-check"></i><b>6.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-8-4"><i class="fa fa-check"></i><b>6.2.1</b> Question 8</a></li>
 <li class="chapter" data-level="6.2.2" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-9-4"><i class="fa fa-check"></i><b>6.2.2</b> Question 9</a></li>
 <li class="chapter" data-level="6.2.3" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-10-3"><i class="fa fa-check"></i><b>6.2.3</b> Question 10</a></li>
 <li class="chapter" data-level="6.2.4" data-path="linear-model-selection-and-regularization.html"><a href="linear-model-selection-and-regularization.html#question-11-2"><i class="fa fa-check"></i><b>6.2.4</b> Question 11</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a><ul>
-<li class="chapter" data-level="7.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#conceptual-5"><i class="fa fa-check"></i><b>7.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html"><i class="fa fa-check"></i><b>7</b> Moving Beyond Linearity</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#conceptual-5"><i class="fa fa-check"></i><b>7.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-1-5"><i class="fa fa-check"></i><b>7.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="7.1.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-2-5"><i class="fa fa-check"></i><b>7.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="7.1.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-3-5"><i class="fa fa-check"></i><b>7.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="7.1.4" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-4-5"><i class="fa fa-check"></i><b>7.1.4</b> Question 4</a></li>
 <li class="chapter" data-level="7.1.5" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-5-5"><i class="fa fa-check"></i><b>7.1.5</b> Question 5</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#applied-5"><i class="fa fa-check"></i><b>7.2</b> Applied</a><ul>
+<li class="chapter" data-level="7.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#applied-5"><i class="fa fa-check"></i><b>7.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-6-5"><i class="fa fa-check"></i><b>7.2.1</b> Question 6</a></li>
 <li class="chapter" data-level="7.2.2" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-7-5"><i class="fa fa-check"></i><b>7.2.2</b> Question 7</a></li>
 <li class="chapter" data-level="7.2.3" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-8-5"><i class="fa fa-check"></i><b>7.2.3</b> Question 8</a></li>
@@ -253,8 +274,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.7" data-path="moving-beyond-linearity.html"><a href="moving-beyond-linearity.html#question-12-2"><i class="fa fa-check"></i><b>7.2.7</b> Question 12</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a><ul>
-<li class="chapter" data-level="8.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#conceptual-6"><i class="fa fa-check"></i><b>8.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="8" data-path="tree-based-methods.html"><a href="tree-based-methods.html"><i class="fa fa-check"></i><b>8</b> Tree-Based Methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#conceptual-6"><i class="fa fa-check"></i><b>8.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-1-6"><i class="fa fa-check"></i><b>8.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="8.1.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-2-6"><i class="fa fa-check"></i><b>8.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="8.1.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-3-6"><i class="fa fa-check"></i><b>8.1.3</b> Question 3</a></li>
@@ -262,7 +285,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.5" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-5-6"><i class="fa fa-check"></i><b>8.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="8.1.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-6-6"><i class="fa fa-check"></i><b>8.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#applied-6"><i class="fa fa-check"></i><b>8.2</b> Applied</a><ul>
+<li class="chapter" data-level="8.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#applied-6"><i class="fa fa-check"></i><b>8.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="8.2.1" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-7-6"><i class="fa fa-check"></i><b>8.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="8.2.2" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-8-6"><i class="fa fa-check"></i><b>8.2.2</b> Question 8</a></li>
 <li class="chapter" data-level="8.2.3" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-9-6"><i class="fa fa-check"></i><b>8.2.3</b> Question 9</a></li>
@@ -271,13 +295,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.6" data-path="tree-based-methods.html"><a href="tree-based-methods.html#question-12-3"><i class="fa fa-check"></i><b>8.2.6</b> Question 12</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a><ul>
-<li class="chapter" data-level="9.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#conceptual-7"><i class="fa fa-check"></i><b>9.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="9" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>9</b> Support Vector Machines</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#conceptual-7"><i class="fa fa-check"></i><b>9.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-1-7"><i class="fa fa-check"></i><b>9.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="9.1.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-2-7"><i class="fa fa-check"></i><b>9.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="9.1.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-3-7"><i class="fa fa-check"></i><b>9.1.3</b> Question 3</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#applied-7"><i class="fa fa-check"></i><b>9.2</b> Applied</a><ul>
+<li class="chapter" data-level="9.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#applied-7"><i class="fa fa-check"></i><b>9.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-4-7"><i class="fa fa-check"></i><b>9.2.1</b> Question 4</a></li>
 <li class="chapter" data-level="9.2.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-5-7"><i class="fa fa-check"></i><b>9.2.2</b> Question 5</a></li>
 <li class="chapter" data-level="9.2.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-6-7"><i class="fa fa-check"></i><b>9.2.3</b> Question 6</a></li>
@@ -285,15 +312,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#question-8-7"><i class="fa fa-check"></i><b>9.2.5</b> Question 8</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a><ul>
-<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#conceptual-8"><i class="fa fa-check"></i><b>10.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#conceptual-8"><i class="fa fa-check"></i><b>10.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="10.1.1" data-path="deep-learning.html"><a href="deep-learning.html#question-1-8"><i class="fa fa-check"></i><b>10.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="10.1.2" data-path="deep-learning.html"><a href="deep-learning.html#question-2-8"><i class="fa fa-check"></i><b>10.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="10.1.3" data-path="deep-learning.html"><a href="deep-learning.html#question-3-8"><i class="fa fa-check"></i><b>10.1.3</b> Question 3</a></li>
 <li class="chapter" data-level="10.1.4" data-path="deep-learning.html"><a href="deep-learning.html#question-4-8"><i class="fa fa-check"></i><b>10.1.4</b> Question 4</a></li>
 <li class="chapter" data-level="10.1.5" data-path="deep-learning.html"><a href="deep-learning.html#question-5-8"><i class="fa fa-check"></i><b>10.1.5</b> Question 5</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#applied-8"><i class="fa fa-check"></i><b>10.2</b> Applied</a><ul>
+<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#applied-8"><i class="fa fa-check"></i><b>10.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="deep-learning.html"><a href="deep-learning.html#question-6-8"><i class="fa fa-check"></i><b>10.2.1</b> Question 6</a></li>
 <li class="chapter" data-level="10.2.2" data-path="deep-learning.html"><a href="deep-learning.html#question-7-8"><i class="fa fa-check"></i><b>10.2.2</b> Question 7</a></li>
 <li class="chapter" data-level="10.2.3" data-path="deep-learning.html"><a href="deep-learning.html#question-8-8"><i class="fa fa-check"></i><b>10.2.3</b> Question 8</a></li>
@@ -304,8 +334,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.8" data-path="deep-learning.html"><a href="deep-learning.html#question-13-3"><i class="fa fa-check"></i><b>10.2.8</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a><ul>
-<li class="chapter" data-level="11.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#conceptual-9"><i class="fa fa-check"></i><b>11.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#conceptual-9"><i class="fa fa-check"></i><b>11.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-1-9"><i class="fa fa-check"></i><b>11.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="11.1.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-2-9"><i class="fa fa-check"></i><b>11.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="11.1.3" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-3-9"><i class="fa fa-check"></i><b>11.1.3</b> Question 3</a></li>
@@ -316,13 +348,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.8" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-8-9"><i class="fa fa-check"></i><b>11.1.8</b> Question 8</a></li>
 <li class="chapter" data-level="11.1.9" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-9-8"><i class="fa fa-check"></i><b>11.1.9</b> Question 9</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#applied-9"><i class="fa fa-check"></i><b>11.2</b> Applied</a><ul>
+<li class="chapter" data-level="11.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#applied-9"><i class="fa fa-check"></i><b>11.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="11.2.1" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-10-7"><i class="fa fa-check"></i><b>11.2.1</b> Question 10</a></li>
 <li class="chapter" data-level="11.2.2" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html#question-11-6"><i class="fa fa-check"></i><b>11.2.2</b> Question 11</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a><ul>
-<li class="chapter" data-level="12.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#conceptual-10"><i class="fa fa-check"></i><b>12.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="12" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html"><i class="fa fa-check"></i><b>12</b> Unsupervised Learning</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#conceptual-10"><i class="fa fa-check"></i><b>12.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-1-10"><i class="fa fa-check"></i><b>12.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="12.1.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-2-10"><i class="fa fa-check"></i><b>12.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="12.1.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-3-10"><i class="fa fa-check"></i><b>12.1.3</b> Question 3</a></li>
@@ -330,7 +365,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.5" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-5-10"><i class="fa fa-check"></i><b>12.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="12.1.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-6-10"><i class="fa fa-check"></i><b>12.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#applied-10"><i class="fa fa-check"></i><b>12.2</b> Applied</a><ul>
+<li class="chapter" data-level="12.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#applied-10"><i class="fa fa-check"></i><b>12.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="12.2.1" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-7-10"><i class="fa fa-check"></i><b>12.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="12.2.2" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-8-10"><i class="fa fa-check"></i><b>12.2.2</b> Question 8</a></li>
 <li class="chapter" data-level="12.2.3" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-9-9"><i class="fa fa-check"></i><b>12.2.3</b> Question 9</a></li>
@@ -340,8 +376,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.7" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-13-4"><i class="fa fa-check"></i><b>12.2.7</b> Question 13</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a><ul>
-<li class="chapter" data-level="13.1" data-path="multiple-testing.html"><a href="multiple-testing.html#conceptual-11"><i class="fa fa-check"></i><b>13.1</b> Conceptual</a><ul>
+<li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="multiple-testing.html"><a href="multiple-testing.html#conceptual-11"><i class="fa fa-check"></i><b>13.1</b> Conceptual</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-1-11"><i class="fa fa-check"></i><b>13.1.1</b> Question 1</a></li>
 <li class="chapter" data-level="13.1.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-2-11"><i class="fa fa-check"></i><b>13.1.2</b> Question 2</a></li>
 <li class="chapter" data-level="13.1.3" data-path="multiple-testing.html"><a href="multiple-testing.html#question-3-11"><i class="fa fa-check"></i><b>13.1.3</b> Question 3</a></li>
@@ -349,7 +387,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.1.5" data-path="multiple-testing.html"><a href="multiple-testing.html#question-5-11"><i class="fa fa-check"></i><b>13.1.5</b> Question 5</a></li>
 <li class="chapter" data-level="13.1.6" data-path="multiple-testing.html"><a href="multiple-testing.html#question-6-11"><i class="fa fa-check"></i><b>13.1.6</b> Question 6</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="multiple-testing.html"><a href="multiple-testing.html#applied-11"><i class="fa fa-check"></i><b>13.2</b> Applied</a><ul>
+<li class="chapter" data-level="13.2" data-path="multiple-testing.html"><a href="multiple-testing.html#applied-11"><i class="fa fa-check"></i><b>13.2</b> Applied</a>
+<ul>
 <li class="chapter" data-level="13.2.1" data-path="multiple-testing.html"><a href="multiple-testing.html#question-7-11"><i class="fa fa-check"></i><b>13.2.1</b> Question 7</a></li>
 <li class="chapter" data-level="13.2.2" data-path="multiple-testing.html"><a href="multiple-testing.html#question-8-11"><i class="fa fa-check"></i><b>13.2.2</b> Question 8</a></li>
 </ul></li>
@@ -374,11 +413,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tree-based-methods" class="section level1 hasAnchor">
+<div id="tree-based-methods" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">8</span> Tree-Based Methods<a href="tree-based-methods.html#tree-based-methods" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="conceptual-6" class="section level2 hasAnchor">
+<div id="conceptual-6" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Conceptual<a href="tree-based-methods.html#conceptual-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="question-1-6" class="section level3 hasAnchor">
+<div id="question-1-6" class="section level3 hasAnchor" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> Question 1<a href="tree-based-methods.html#question-1-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Draw an example (of your own invention) of a partition of two-dimensional
@@ -388,34 +427,34 @@ this partition. Be sure to label all aspects of your figures, including the
 regions <span class="math inline">\(R_1, R_2, ...,\)</span> the cutpoints <span class="math inline">\(t_1, t_2, ...,\)</span> and so forth.</p>
 <p><em>Hint: Your result should look something like Figures 8.1 and 8.2.</em></p>
 </blockquote>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="tree-based-methods.html#cb483-1"></a><span class="kw">library</span>(showtext)</span>
-<span id="cb483-2"><a href="tree-based-methods.html#cb483-2"></a>showtext<span class="op">::</span><span class="kw">showtext_auto</span>()</span>
-<span id="cb483-3"><a href="tree-based-methods.html#cb483-3"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb483-4"><a href="tree-based-methods.html#cb483-4"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb483-5"><a href="tree-based-methods.html#cb483-5"></a><span class="kw">library</span>(ggtree)</span></code></pre></div>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="tree-based-methods.html#cb484-1"></a>tree &lt;-<span class="st"> </span>ape<span class="op">::</span><span class="kw">read.tree</span>(<span class="dt">text =</span> <span class="st">&quot;(((R1:1,R2:1)N1:2,R3:4)N2:2,(R4:2,(R5:1,R6:1)R3:2)N4:5)R;&quot;</span>)</span>
-<span id="cb484-2"><a href="tree-based-methods.html#cb484-2"></a>tree<span class="op">$</span>node.label &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Age &lt; 40&quot;</span>, <span class="st">&quot;Weight &lt; 100&quot;</span>, <span class="st">&quot;Weight &lt; 70&quot;</span>, <span class="st">&quot;Age &lt; 60&quot;</span>, <span class="st">&quot;Weight &lt; 80&quot;</span>)</span>
-<span id="cb484-3"><a href="tree-based-methods.html#cb484-3"></a></span>
-<span id="cb484-4"><a href="tree-based-methods.html#cb484-4"></a><span class="kw">ggtree</span>(tree, <span class="dt">ladderize =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_reverse</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span></span>
-<span id="cb484-5"><a href="tree-based-methods.html#cb484-5"></a><span class="st">  </span><span class="kw">geom_tiplab</span>(<span class="dt">vjust =</span> <span class="dv">2</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb484-6"><a href="tree-based-methods.html#cb484-6"></a><span class="st">  </span><span class="kw">geom_text2</span>(<span class="kw">aes</span>(<span class="dt">label=</span>label, <span class="dt">subset=</span><span class="op">!</span>isTip), <span class="dt">hjust =</span> <span class="fl">-0.1</span>, <span class="dt">vjust =</span> <span class="dv">-1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="tree-based-methods.html#cb483-1" aria-hidden="true"></a><span class="kw">library</span>(showtext)</span>
+<span id="cb483-2"><a href="tree-based-methods.html#cb483-2" aria-hidden="true"></a>showtext<span class="op">::</span><span class="kw">showtext_auto</span>()</span>
+<span id="cb483-3"><a href="tree-based-methods.html#cb483-3" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb483-4"><a href="tree-based-methods.html#cb483-4" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb483-5"><a href="tree-based-methods.html#cb483-5" aria-hidden="true"></a><span class="kw">library</span>(ggtree)</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="tree-based-methods.html#cb484-1" aria-hidden="true"></a>tree &lt;-<span class="st"> </span>ape<span class="op">::</span><span class="kw">read.tree</span>(<span class="dt">text =</span> <span class="st">&quot;(((R1:1,R2:1)N1:2,R3:4)N2:2,(R4:2,(R5:1,R6:1)R3:2)N4:5)R;&quot;</span>)</span>
+<span id="cb484-2"><a href="tree-based-methods.html#cb484-2" aria-hidden="true"></a>tree<span class="op">$</span>node.label &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Age &lt; 40&quot;</span>, <span class="st">&quot;Weight &lt; 100&quot;</span>, <span class="st">&quot;Weight &lt; 70&quot;</span>, <span class="st">&quot;Age &lt; 60&quot;</span>, <span class="st">&quot;Weight &lt; 80&quot;</span>)</span>
+<span id="cb484-3"><a href="tree-based-methods.html#cb484-3" aria-hidden="true"></a></span>
+<span id="cb484-4"><a href="tree-based-methods.html#cb484-4" aria-hidden="true"></a><span class="kw">ggtree</span>(tree, <span class="dt">ladderize =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_reverse</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span></span>
+<span id="cb484-5"><a href="tree-based-methods.html#cb484-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_tiplab</span>(<span class="dt">vjust =</span> <span class="dv">2</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb484-6"><a href="tree-based-methods.html#cb484-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_text2</span>(<span class="kw">aes</span>(<span class="dt">label=</span>label, <span class="dt">subset=</span><span class="op">!</span>isTip), <span class="dt">hjust =</span> <span class="fl">-0.1</span>, <span class="dt">vjust =</span> <span class="dv">-1</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="tree-based-methods.html#cb485-1"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;Age (years)&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Weight (kg)&quot;</span>, </span>
-<span id="cb485-2"><a href="tree-based-methods.html#cb485-2"></a>  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">160</span>), <span class="dt">xaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">yaxs =</span> <span class="st">&quot;i&quot;</span>)</span>
-<span id="cb485-3"><a href="tree-based-methods.html#cb485-3"></a><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">40</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb485-4"><a href="tree-based-methods.html#cb485-4"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">40</span>), <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb485-5"><a href="tree-based-methods.html#cb485-5"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">40</span>), <span class="kw">c</span>(<span class="dv">70</span>, <span class="dv">70</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb485-6"><a href="tree-based-methods.html#cb485-6"></a><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">60</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb485-7"><a href="tree-based-methods.html#cb485-7"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">60</span>, <span class="dv">100</span>), <span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">80</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb485-8"><a href="tree-based-methods.html#cb485-8"></a></span>
-<span id="cb485-9"><a href="tree-based-methods.html#cb485-9"></a><span class="kw">text</span>(</span>
-<span id="cb485-10"><a href="tree-based-methods.html#cb485-10"></a>  <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">80</span>, <span class="dv">80</span>), </span>
-<span id="cb485-11"><a href="tree-based-methods.html#cb485-11"></a>  <span class="kw">c</span>(<span class="dv">55</span>, <span class="dv">85</span>, <span class="dv">130</span>, <span class="dv">100</span>, <span class="dv">60</span>, <span class="dv">120</span>), </span>
-<span id="cb485-12"><a href="tree-based-methods.html#cb485-12"></a>  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;R1&quot;</span>, <span class="st">&quot;R2&quot;</span>, <span class="st">&quot;R3&quot;</span>, <span class="st">&quot;R4&quot;</span>, <span class="st">&quot;R5&quot;</span>, <span class="st">&quot;R6&quot;</span>)</span>
-<span id="cb485-13"><a href="tree-based-methods.html#cb485-13"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="tree-based-methods.html#cb485-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;Age (years)&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Weight (kg)&quot;</span>, </span>
+<span id="cb485-2"><a href="tree-based-methods.html#cb485-2" aria-hidden="true"></a>  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">160</span>), <span class="dt">xaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">yaxs =</span> <span class="st">&quot;i&quot;</span>)</span>
+<span id="cb485-3"><a href="tree-based-methods.html#cb485-3" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">40</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb485-4"><a href="tree-based-methods.html#cb485-4" aria-hidden="true"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">40</span>), <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">100</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb485-5"><a href="tree-based-methods.html#cb485-5" aria-hidden="true"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">40</span>), <span class="kw">c</span>(<span class="dv">70</span>, <span class="dv">70</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb485-6"><a href="tree-based-methods.html#cb485-6" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">60</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb485-7"><a href="tree-based-methods.html#cb485-7" aria-hidden="true"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">60</span>, <span class="dv">100</span>), <span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">80</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb485-8"><a href="tree-based-methods.html#cb485-8" aria-hidden="true"></a></span>
+<span id="cb485-9"><a href="tree-based-methods.html#cb485-9" aria-hidden="true"></a><span class="kw">text</span>(</span>
+<span id="cb485-10"><a href="tree-based-methods.html#cb485-10" aria-hidden="true"></a>  <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">50</span>, <span class="dv">80</span>, <span class="dv">80</span>), </span>
+<span id="cb485-11"><a href="tree-based-methods.html#cb485-11" aria-hidden="true"></a>  <span class="kw">c</span>(<span class="dv">55</span>, <span class="dv">85</span>, <span class="dv">130</span>, <span class="dv">100</span>, <span class="dv">60</span>, <span class="dv">120</span>), </span>
+<span id="cb485-12"><a href="tree-based-methods.html#cb485-12" aria-hidden="true"></a>  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;R1&quot;</span>, <span class="st">&quot;R2&quot;</span>, <span class="st">&quot;R3&quot;</span>, <span class="st">&quot;R4&quot;</span>, <span class="st">&quot;R5&quot;</span>, <span class="st">&quot;R6&quot;</span>)</span>
+<span id="cb485-13"><a href="tree-based-methods.html#cb485-13" aria-hidden="true"></a>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
-<div id="question-2-6" class="section level3 hasAnchor">
+<div id="question-2-6" class="section level3 hasAnchor" number="8.1.2">
 <h3><span class="header-section-number">8.1.2</span> Question 2<a href="tree-based-methods.html#question-2-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>It is mentioned in Section 8.2.3 that boosting using depth-one trees (or
@@ -434,7 +473,7 @@ Since 1-depth trees involve only one variable, and the total function for
 <span class="math inline">\(x\)</span> involves adding the outcome for each, this model is an additive. Depth
 2 trees would allow for interactions between two variables.</p>
 </div>
-<div id="question-3-6" class="section level3 hasAnchor">
+<div id="question-3-6" class="section level3 hasAnchor" number="8.1.3">
 <h3><span class="header-section-number">8.1.3</span> Question 3<a href="tree-based-methods.html#question-3-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Consider the Gini index, classification error, and cross-entropy in a simple
@@ -451,21 +490,21 @@ could make this plot by hand, but it will be much easier to make in <code>R</cod
 <p><span class="math display">\[D = -\sum_{k=1}^{K} \hat{p}_{mk}\log(\hat{p}_{mk})\]</span></p>
 <p>The <em>classification error</em> is</p>
 <p><span class="math display">\[E = 1 - \max_k(\hat{p}_{mk})\]</span></p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="tree-based-methods.html#cb486-1"></a><span class="co"># Function definitions are for when there&#39;s two classes only</span></span>
-<span id="cb486-2"><a href="tree-based-methods.html#cb486-2"></a>p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">100</span>)</span>
-<span id="cb486-3"><a href="tree-based-methods.html#cb486-3"></a><span class="kw">data.frame</span>(</span>
-<span id="cb486-4"><a href="tree-based-methods.html#cb486-4"></a>    <span class="dt">x =</span> p,</span>
-<span id="cb486-5"><a href="tree-based-methods.html#cb486-5"></a>    <span class="st">&quot;Gini index&quot;</span> =<span class="st"> </span>p <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p) <span class="op">*</span><span class="st"> </span><span class="dv">2</span>,</span>
-<span id="cb486-6"><a href="tree-based-methods.html#cb486-6"></a>    <span class="st">&quot;Entropy&quot;</span> =<span class="st"> </span><span class="op">-</span>(p <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(p) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p) <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p)),</span>
-<span id="cb486-7"><a href="tree-based-methods.html#cb486-7"></a>    <span class="st">&quot;Classification error&quot;</span> =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pmax</span>(p, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p),</span>
-<span id="cb486-8"><a href="tree-based-methods.html#cb486-8"></a>    <span class="dt">check.names =</span> <span class="ot">FALSE</span></span>
-<span id="cb486-9"><a href="tree-based-methods.html#cb486-9"></a>  ) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb486-10"><a href="tree-based-methods.html#cb486-10"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">!</span>x) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb486-11"><a href="tree-based-methods.html#cb486-11"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> value, <span class="dt">color =</span> name)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb486-12"><a href="tree-based-methods.html#cb486-12"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="tree-based-methods.html#cb486-1" aria-hidden="true"></a><span class="co"># Function definitions are for when there&#39;s two classes only</span></span>
+<span id="cb486-2"><a href="tree-based-methods.html#cb486-2" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb486-3"><a href="tree-based-methods.html#cb486-3" aria-hidden="true"></a><span class="kw">data.frame</span>(</span>
+<span id="cb486-4"><a href="tree-based-methods.html#cb486-4" aria-hidden="true"></a>    <span class="dt">x =</span> p,</span>
+<span id="cb486-5"><a href="tree-based-methods.html#cb486-5" aria-hidden="true"></a>    <span class="st">&quot;Gini index&quot;</span> =<span class="st"> </span>p <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p) <span class="op">*</span><span class="st"> </span><span class="dv">2</span>,</span>
+<span id="cb486-6"><a href="tree-based-methods.html#cb486-6" aria-hidden="true"></a>    <span class="st">&quot;Entropy&quot;</span> =<span class="st"> </span><span class="op">-</span>(p <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(p) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p) <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p)),</span>
+<span id="cb486-7"><a href="tree-based-methods.html#cb486-7" aria-hidden="true"></a>    <span class="st">&quot;Classification error&quot;</span> =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pmax</span>(p, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p),</span>
+<span id="cb486-8"><a href="tree-based-methods.html#cb486-8" aria-hidden="true"></a>    <span class="dt">check.names =</span> <span class="ot">FALSE</span></span>
+<span id="cb486-9"><a href="tree-based-methods.html#cb486-9" aria-hidden="true"></a>  ) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb486-10"><a href="tree-based-methods.html#cb486-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">!</span>x) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb486-11"><a href="tree-based-methods.html#cb486-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> value, <span class="dt">color =</span> name)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb486-12"><a href="tree-based-methods.html#cb486-12" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
-<div id="question-4-6" class="section level3 hasAnchor">
+<div id="question-4-6" class="section level3 hasAnchor" number="8.1.4">
 <h3><span class="header-section-number">8.1.4</span> Question 4<a href="tree-based-methods.html#question-4-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This question relates to the plots in Figure 8.12.</p>
@@ -475,12 +514,12 @@ illustrated in the left-hand panel of Figure 8.12. The numbers inside the
 boxes indicate the mean of <span class="math inline">\(Y\)</span> within each region.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="tree-based-methods.html#cb487-1"></a>tree &lt;-<span class="st"> </span>ape<span class="op">::</span><span class="kw">read.tree</span>(<span class="dt">text =</span> <span class="st">&quot;(((3:1.5,(10:1,0:1)A:1)B:1,15:2)C:1,5:2)D;&quot;</span>)</span>
-<span id="cb487-2"><a href="tree-based-methods.html#cb487-2"></a>tree<span class="op">$</span>node.label &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;X1 &lt; 1&quot;</span>, <span class="st">&quot;X2 &lt; 1&quot;</span>, <span class="st">&quot;X1 &lt; 0&quot;</span>, <span class="st">&quot;X2 &lt; 0&quot;</span>)</span>
-<span id="cb487-3"><a href="tree-based-methods.html#cb487-3"></a></span>
-<span id="cb487-4"><a href="tree-based-methods.html#cb487-4"></a><span class="kw">ggtree</span>(tree, <span class="dt">ladderize =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_reverse</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span></span>
-<span id="cb487-5"><a href="tree-based-methods.html#cb487-5"></a><span class="st">  </span><span class="kw">geom_tiplab</span>(<span class="dt">vjust =</span> <span class="dv">2</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb487-6"><a href="tree-based-methods.html#cb487-6"></a><span class="st">  </span><span class="kw">geom_text2</span>(<span class="kw">aes</span>(<span class="dt">label=</span>label, <span class="dt">subset=</span><span class="op">!</span>isTip), <span class="dt">hjust =</span> <span class="fl">-0.1</span>, <span class="dt">vjust =</span> <span class="dv">-1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="tree-based-methods.html#cb487-1" aria-hidden="true"></a>tree &lt;-<span class="st"> </span>ape<span class="op">::</span><span class="kw">read.tree</span>(<span class="dt">text =</span> <span class="st">&quot;(((3:1.5,(10:1,0:1)A:1)B:1,15:2)C:1,5:2)D;&quot;</span>)</span>
+<span id="cb487-2"><a href="tree-based-methods.html#cb487-2" aria-hidden="true"></a>tree<span class="op">$</span>node.label &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;X1 &lt; 1&quot;</span>, <span class="st">&quot;X2 &lt; 1&quot;</span>, <span class="st">&quot;X1 &lt; 0&quot;</span>, <span class="st">&quot;X2 &lt; 0&quot;</span>)</span>
+<span id="cb487-3"><a href="tree-based-methods.html#cb487-3" aria-hidden="true"></a></span>
+<span id="cb487-4"><a href="tree-based-methods.html#cb487-4" aria-hidden="true"></a><span class="kw">ggtree</span>(tree, <span class="dt">ladderize =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_reverse</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span></span>
+<span id="cb487-5"><a href="tree-based-methods.html#cb487-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_tiplab</span>(<span class="dt">vjust =</span> <span class="dv">2</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb487-6"><a href="tree-based-methods.html#cb487-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_text2</span>(<span class="kw">aes</span>(<span class="dt">label=</span>label, <span class="dt">subset=</span><span class="op">!</span>isTip), <span class="dt">hjust =</span> <span class="fl">-0.1</span>, <span class="dt">vjust =</span> <span class="dv">-1</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -490,19 +529,19 @@ divide up the predictor space into the correct regions, and indicate the
 mean for each region.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="tree-based-methods.html#cb488-1"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;X1&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;X2&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>), <span class="dt">xaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">yaxs =</span> <span class="st">&quot;i&quot;</span>)</span>
-<span id="cb488-2"><a href="tree-based-methods.html#cb488-2"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb488-3"><a href="tree-based-methods.html#cb488-3"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb488-4"><a href="tree-based-methods.html#cb488-4"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb488-5"><a href="tree-based-methods.html#cb488-5"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb488-6"><a href="tree-based-methods.html#cb488-6"></a><span class="kw">text</span>(</span>
-<span id="cb488-7"><a href="tree-based-methods.html#cb488-7"></a>  <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1.5</span>, <span class="fl">-0.5</span>, <span class="dv">1</span>, <span class="fl">0.5</span>), </span>
-<span id="cb488-8"><a href="tree-based-methods.html#cb488-8"></a>  <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>), </span>
-<span id="cb488-9"><a href="tree-based-methods.html#cb488-9"></a>  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;-1.80&quot;</span>, <span class="st">&quot;0.63&quot;</span>, <span class="st">&quot;-1.06&quot;</span>, <span class="st">&quot;0.21&quot;</span>, <span class="st">&quot;2.49&quot;</span>)</span>
-<span id="cb488-10"><a href="tree-based-methods.html#cb488-10"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="tree-based-methods.html#cb488-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="ot">NULL</span>, <span class="dt">xlab=</span><span class="st">&quot;X1&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;X2&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>), <span class="dt">xaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="dt">yaxs =</span> <span class="st">&quot;i&quot;</span>)</span>
+<span id="cb488-2"><a href="tree-based-methods.html#cb488-2" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb488-3"><a href="tree-based-methods.html#cb488-3" aria-hidden="true"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb488-4"><a href="tree-based-methods.html#cb488-4" aria-hidden="true"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb488-5"><a href="tree-based-methods.html#cb488-5" aria-hidden="true"></a><span class="kw">lines</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb488-6"><a href="tree-based-methods.html#cb488-6" aria-hidden="true"></a><span class="kw">text</span>(</span>
+<span id="cb488-7"><a href="tree-based-methods.html#cb488-7" aria-hidden="true"></a>  <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1.5</span>, <span class="fl">-0.5</span>, <span class="dv">1</span>, <span class="fl">0.5</span>), </span>
+<span id="cb488-8"><a href="tree-based-methods.html#cb488-8" aria-hidden="true"></a>  <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>), </span>
+<span id="cb488-9"><a href="tree-based-methods.html#cb488-9" aria-hidden="true"></a>  <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;-1.80&quot;</span>, <span class="st">&quot;0.63&quot;</span>, <span class="st">&quot;-1.06&quot;</span>, <span class="st">&quot;0.21&quot;</span>, <span class="st">&quot;2.49&quot;</span>)</span>
+<span id="cb488-10"><a href="tree-based-methods.html#cb488-10" aria-hidden="true"></a>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
-<div id="question-5-6" class="section level3 hasAnchor">
+<div id="question-5-6" class="section level3 hasAnchor" number="8.1.5">
 <h3><span class="header-section-number">8.1.5</span> Question 5<a href="tree-based-methods.html#question-5-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Suppose we produce ten bootstrapped samples from a data set containing red and
@@ -515,13 +554,13 @@ class prediction. One is the majority vote approach discussed in this chapter.
 The second approach is to classify based on the average probability. In this
 example, what is the final classification under each of these two approaches?</p>
 </blockquote>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="tree-based-methods.html#cb489-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.15</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.55</span>, <span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="fl">0.65</span>, <span class="fl">0.7</span>, <span class="fl">0.75</span>)</span>
-<span id="cb489-2"><a href="tree-based-methods.html#cb489-2"></a><span class="kw">ifelse</span>(<span class="kw">mean</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>), <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>) <span class="co"># majority vote</span></span></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="tree-based-methods.html#cb489-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.1</span>, <span class="fl">0.15</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.55</span>, <span class="fl">0.6</span>, <span class="fl">0.6</span>, <span class="fl">0.65</span>, <span class="fl">0.7</span>, <span class="fl">0.75</span>)</span>
+<span id="cb489-2"><a href="tree-based-methods.html#cb489-2" aria-hidden="true"></a><span class="kw">ifelse</span>(<span class="kw">mean</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>), <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>) <span class="co"># majority vote</span></span></code></pre></div>
 <pre><code>## [1] &quot;red&quot;</code></pre>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="tree-based-methods.html#cb491-1"></a><span class="kw">ifelse</span>(<span class="kw">mean</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>) <span class="co"># average probability</span></span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="tree-based-methods.html#cb491-1" aria-hidden="true"></a><span class="kw">ifelse</span>(<span class="kw">mean</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>) <span class="co"># average probability</span></span></code></pre></div>
 <pre><code>## [1] &quot;green&quot;</code></pre>
 </div>
-<div id="question-6-6" class="section level3 hasAnchor">
+<div id="question-6-6" class="section level3 hasAnchor" number="8.1.6">
 <h3><span class="header-section-number">8.1.6</span> Question 6<a href="tree-based-methods.html#question-6-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Provide a detailed explanation of the algorithm that is used to fit a
@@ -535,9 +574,9 @@ final tree is then calculated using the complete dataset with the selected
 <span class="math inline">\(\alpha\)</span> value.</p>
 </div>
 </div>
-<div id="applied-6" class="section level2 hasAnchor">
+<div id="applied-6" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> Applied<a href="tree-based-methods.html#applied-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="question-7-6" class="section level3 hasAnchor">
+<div id="question-7-6" class="section level3 hasAnchor" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> Question 7<a href="tree-based-methods.html#question-7-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In the lab, we applied random forests to the <code>Boston</code> data using <code>mtry = 6</code>
@@ -546,8 +585,8 @@ error resulting from random forests on this data set for a more comprehensive
 range of values for <code>mtry</code> and <code>ntree</code>. You can model your plot after Figure
 8.10. Describe the results obtained.</p>
 </blockquote>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="tree-based-methods.html#cb493-1"></a><span class="kw">library</span>(ISLR2)</span>
-<span id="cb493-2"><a href="tree-based-methods.html#cb493-2"></a><span class="kw">library</span>(randomForest)</span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="tree-based-methods.html#cb493-1" aria-hidden="true"></a><span class="kw">library</span>(ISLR2)</span>
+<span id="cb493-2"><a href="tree-based-methods.html#cb493-2" aria-hidden="true"></a><span class="kw">library</span>(randomForest)</span></code></pre></div>
 <pre><code>## randomForest 4.7-1.1</code></pre>
 <pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
 <pre><code>## 
@@ -561,34 +600,34 @@ range of values for <code>mtry</code> and <code>ntree</code>. You can model your
 <pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
 ## 
 ##     margin</code></pre>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="tree-based-methods.html#cb500-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb500-2"><a href="tree-based-methods.html#cb500-2"></a></span>
-<span id="cb500-3"><a href="tree-based-methods.html#cb500-3"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="kw">nrow</span>(Boston), <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb500-4"><a href="tree-based-methods.html#cb500-4"></a></span>
-<span id="cb500-5"><a href="tree-based-methods.html#cb500-5"></a>rf_err &lt;-<span class="st"> </span><span class="cf">function</span>(mtry) {</span>
-<span id="cb500-6"><a href="tree-based-methods.html#cb500-6"></a>  <span class="kw">randomForest</span>(</span>
-<span id="cb500-7"><a href="tree-based-methods.html#cb500-7"></a>    Boston[train, <span class="dv">-13</span>], </span>
-<span id="cb500-8"><a href="tree-based-methods.html#cb500-8"></a>    <span class="dt">y =</span> Boston[train, <span class="dv">13</span>], </span>
-<span id="cb500-9"><a href="tree-based-methods.html#cb500-9"></a>    <span class="dt">xtest =</span> Boston[<span class="op">!</span>train, <span class="dv">-13</span>], </span>
-<span id="cb500-10"><a href="tree-based-methods.html#cb500-10"></a>    <span class="dt">ytest =</span> Boston[<span class="op">!</span>train, <span class="dv">13</span>], </span>
-<span id="cb500-11"><a href="tree-based-methods.html#cb500-11"></a>    <span class="dt">mtry =</span> mtry, </span>
-<span id="cb500-12"><a href="tree-based-methods.html#cb500-12"></a>    <span class="dt">ntree =</span> <span class="dv">500</span></span>
-<span id="cb500-13"><a href="tree-based-methods.html#cb500-13"></a>  )<span class="op">$</span>test<span class="op">$</span>mse</span>
-<span id="cb500-14"><a href="tree-based-methods.html#cb500-14"></a>}</span>
-<span id="cb500-15"><a href="tree-based-methods.html#cb500-15"></a>res &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">12</span>), rf_err)</span>
-<span id="cb500-16"><a href="tree-based-methods.html#cb500-16"></a><span class="kw">names</span>(res) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">12</span>)</span>
-<span id="cb500-17"><a href="tree-based-methods.html#cb500-17"></a><span class="kw">data.frame</span>(res, <span class="dt">check.names =</span> <span class="ot">FALSE</span>) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb500-18"><a href="tree-based-methods.html#cb500-18"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">500</span>) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb500-19"><a href="tree-based-methods.html#cb500-19"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">!</span>n) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb500-20"><a href="tree-based-methods.html#cb500-20"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> n, <span class="dt">y =</span> value, <span class="dt">color =</span> name)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb500-21"><a href="tree-based-methods.html#cb500-21"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb500-22"><a href="tree-based-methods.html#cb500-22"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;Number of trees&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb500-23"><a href="tree-based-methods.html#cb500-23"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Error&quot;</span>) <span class="op">+</span></span>
-<span id="cb500-24"><a href="tree-based-methods.html#cb500-24"></a><span class="st">    </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></span>
-<span id="cb500-25"><a href="tree-based-methods.html#cb500-25"></a><span class="st">    </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;No. variables at</span><span class="ch">\n</span><span class="st">each split&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="tree-based-methods.html#cb500-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb500-2"><a href="tree-based-methods.html#cb500-2" aria-hidden="true"></a></span>
+<span id="cb500-3"><a href="tree-based-methods.html#cb500-3" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="kw">nrow</span>(Boston), <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb500-4"><a href="tree-based-methods.html#cb500-4" aria-hidden="true"></a></span>
+<span id="cb500-5"><a href="tree-based-methods.html#cb500-5" aria-hidden="true"></a>rf_err &lt;-<span class="st"> </span><span class="cf">function</span>(mtry) {</span>
+<span id="cb500-6"><a href="tree-based-methods.html#cb500-6" aria-hidden="true"></a>  <span class="kw">randomForest</span>(</span>
+<span id="cb500-7"><a href="tree-based-methods.html#cb500-7" aria-hidden="true"></a>    Boston[train, <span class="dv">-13</span>], </span>
+<span id="cb500-8"><a href="tree-based-methods.html#cb500-8" aria-hidden="true"></a>    <span class="dt">y =</span> Boston[train, <span class="dv">13</span>], </span>
+<span id="cb500-9"><a href="tree-based-methods.html#cb500-9" aria-hidden="true"></a>    <span class="dt">xtest =</span> Boston[<span class="op">!</span>train, <span class="dv">-13</span>], </span>
+<span id="cb500-10"><a href="tree-based-methods.html#cb500-10" aria-hidden="true"></a>    <span class="dt">ytest =</span> Boston[<span class="op">!</span>train, <span class="dv">13</span>], </span>
+<span id="cb500-11"><a href="tree-based-methods.html#cb500-11" aria-hidden="true"></a>    <span class="dt">mtry =</span> mtry, </span>
+<span id="cb500-12"><a href="tree-based-methods.html#cb500-12" aria-hidden="true"></a>    <span class="dt">ntree =</span> <span class="dv">500</span></span>
+<span id="cb500-13"><a href="tree-based-methods.html#cb500-13" aria-hidden="true"></a>  )<span class="op">$</span>test<span class="op">$</span>mse</span>
+<span id="cb500-14"><a href="tree-based-methods.html#cb500-14" aria-hidden="true"></a>}</span>
+<span id="cb500-15"><a href="tree-based-methods.html#cb500-15" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">12</span>), rf_err)</span>
+<span id="cb500-16"><a href="tree-based-methods.html#cb500-16" aria-hidden="true"></a><span class="kw">names</span>(res) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">12</span>)</span>
+<span id="cb500-17"><a href="tree-based-methods.html#cb500-17" aria-hidden="true"></a><span class="kw">data.frame</span>(res, <span class="dt">check.names =</span> <span class="ot">FALSE</span>) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb500-18"><a href="tree-based-methods.html#cb500-18" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">500</span>) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb500-19"><a href="tree-based-methods.html#cb500-19" aria-hidden="true"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">!</span>n) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb500-20"><a href="tree-based-methods.html#cb500-20" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> n, <span class="dt">y =</span> value, <span class="dt">color =</span> name)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb500-21"><a href="tree-based-methods.html#cb500-21" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb500-22"><a href="tree-based-methods.html#cb500-22" aria-hidden="true"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;Number of trees&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb500-23"><a href="tree-based-methods.html#cb500-23" aria-hidden="true"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Error&quot;</span>) <span class="op">+</span></span>
+<span id="cb500-24"><a href="tree-based-methods.html#cb500-24" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></span>
+<span id="cb500-25"><a href="tree-based-methods.html#cb500-25" aria-hidden="true"></a><span class="st">    </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;No. variables at</span><span class="ch">\n</span><span class="st">each split&quot;</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
-<div id="question-8-6" class="section level3 hasAnchor">
+<div id="question-8-6" class="section level3 hasAnchor" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Question 8<a href="tree-based-methods.html#question-8-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>In the lab, a classification tree was applied to the <code>Carseats</code> data set after
@@ -599,17 +638,17 @@ response as a quantitative variable.</p>
 <li>Split the data set into a training set and a test set.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="tree-based-methods.html#cb501-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb501-2"><a href="tree-based-methods.html#cb501-2"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="kw">nrow</span>(Carseats), <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="tree-based-methods.html#cb501-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb501-2"><a href="tree-based-methods.html#cb501-2" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>), <span class="kw">nrow</span>(Carseats), <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Fit a regression tree to the training set. Plot the tree, and interpret the
 results. What test error rate do you obtain?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="tree-based-methods.html#cb502-1"></a><span class="kw">library</span>(tree)</span>
-<span id="cb502-2"><a href="tree-based-methods.html#cb502-2"></a>tr &lt;-<span class="st"> </span><span class="kw">tree</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Carseats[train, ])</span>
-<span id="cb502-3"><a href="tree-based-methods.html#cb502-3"></a><span class="kw">summary</span>(tr)</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="tree-based-methods.html#cb502-1" aria-hidden="true"></a><span class="kw">library</span>(tree)</span>
+<span id="cb502-2"><a href="tree-based-methods.html#cb502-2" aria-hidden="true"></a>tr &lt;-<span class="st"> </span><span class="kw">tree</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Carseats[train, ])</span>
+<span id="cb502-3"><a href="tree-based-methods.html#cb502-3" aria-hidden="true"></a><span class="kw">summary</span>(tr)</span></code></pre></div>
 <pre><code>## 
 ## Regression tree:
 ## tree(formula = Sales ~ ., data = Carseats[train, ])
@@ -621,14 +660,14 @@ results. What test error rate do you obtain?</li>
 ## Distribution of residuals:
 ##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 ## -4.54900 -0.82980  0.03075  0.00000  0.89250  4.83100</code></pre>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="tree-based-methods.html#cb504-1"></a><span class="kw">plot</span>(tr)</span>
-<span id="cb504-2"><a href="tree-based-methods.html#cb504-2"></a><span class="kw">text</span>(tr, <span class="dt">pretty =</span> <span class="dv">0</span>, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="tree-based-methods.html#cb504-1" aria-hidden="true"></a><span class="kw">plot</span>(tr)</span>
+<span id="cb504-2"><a href="tree-based-methods.html#cb504-2" aria-hidden="true"></a><span class="kw">text</span>(tr, <span class="dt">pretty =</span> <span class="dv">0</span>, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="tree-based-methods.html#cb505-1"></a>carseats_mse &lt;-<span class="st"> </span><span class="cf">function</span>(model) {</span>
-<span id="cb505-2"><a href="tree-based-methods.html#cb505-2"></a>  p &lt;-<span class="st"> </span><span class="kw">predict</span>(model, <span class="dt">newdata =</span> Carseats[<span class="op">!</span>train, ])</span>
-<span id="cb505-3"><a href="tree-based-methods.html#cb505-3"></a>  <span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>Carseats[<span class="op">!</span>train, <span class="st">&quot;Sales&quot;</span>])<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb505-4"><a href="tree-based-methods.html#cb505-4"></a>}</span>
-<span id="cb505-5"><a href="tree-based-methods.html#cb505-5"></a><span class="kw">carseats_mse</span>(tr)</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="tree-based-methods.html#cb505-1" aria-hidden="true"></a>carseats_mse &lt;-<span class="st"> </span><span class="cf">function</span>(model) {</span>
+<span id="cb505-2"><a href="tree-based-methods.html#cb505-2" aria-hidden="true"></a>  p &lt;-<span class="st"> </span><span class="kw">predict</span>(model, <span class="dt">newdata =</span> Carseats[<span class="op">!</span>train, ])</span>
+<span id="cb505-3"><a href="tree-based-methods.html#cb505-3" aria-hidden="true"></a>  <span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>Carseats[<span class="op">!</span>train, <span class="st">&quot;Sales&quot;</span>])<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb505-4"><a href="tree-based-methods.html#cb505-4" aria-hidden="true"></a>}</span>
+<span id="cb505-5"><a href="tree-based-methods.html#cb505-5" aria-hidden="true"></a><span class="kw">carseats_mse</span>(tr)</span></code></pre></div>
 <pre><code>## [1] 4.559764</code></pre>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -636,19 +675,19 @@ results. What test error rate do you obtain?</li>
 complexity. Does pruning the tree improve the test error rate?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="tree-based-methods.html#cb507-1"></a>res &lt;-<span class="st"> </span><span class="kw">cv.tree</span>(tr)</span>
-<span id="cb507-2"><a href="tree-based-methods.html#cb507-2"></a><span class="kw">plot</span>(res<span class="op">$</span>size, res<span class="op">$</span>dev, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Tree size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Deviance&quot;</span>)</span>
-<span id="cb507-3"><a href="tree-based-methods.html#cb507-3"></a>min &lt;-<span class="st"> </span><span class="kw">which.min</span>(res<span class="op">$</span>dev)</span>
-<span id="cb507-4"><a href="tree-based-methods.html#cb507-4"></a><span class="kw">abline</span>(<span class="dt">v =</span> res<span class="op">$</span>size[min], <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="tree-based-methods.html#cb507-1" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">cv.tree</span>(tr)</span>
+<span id="cb507-2"><a href="tree-based-methods.html#cb507-2" aria-hidden="true"></a><span class="kw">plot</span>(res<span class="op">$</span>size, res<span class="op">$</span>dev, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Tree size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Deviance&quot;</span>)</span>
+<span id="cb507-3"><a href="tree-based-methods.html#cb507-3" aria-hidden="true"></a>min &lt;-<span class="st"> </span><span class="kw">which.min</span>(res<span class="op">$</span>dev)</span>
+<span id="cb507-4"><a href="tree-based-methods.html#cb507-4" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> res<span class="op">$</span>size[min], <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Pruning improves performance very slightly (though this is not repeatable in
 different rounds of cross-validation). Arguably, a good balance is achieved
 when the tree size is 11.</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="tree-based-methods.html#cb508-1"></a>ptr &lt;-<span class="st"> </span><span class="kw">prune.tree</span>(tr, <span class="dt">best =</span> <span class="dv">11</span>)</span>
-<span id="cb508-2"><a href="tree-based-methods.html#cb508-2"></a><span class="kw">plot</span>(ptr)</span>
-<span id="cb508-3"><a href="tree-based-methods.html#cb508-3"></a><span class="kw">text</span>(ptr, <span class="dt">pretty =</span> <span class="dv">0</span>, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="tree-based-methods.html#cb508-1" aria-hidden="true"></a>ptr &lt;-<span class="st"> </span><span class="kw">prune.tree</span>(tr, <span class="dt">best =</span> <span class="dv">11</span>)</span>
+<span id="cb508-2"><a href="tree-based-methods.html#cb508-2" aria-hidden="true"></a><span class="kw">plot</span>(ptr)</span>
+<span id="cb508-3"><a href="tree-based-methods.html#cb508-3" aria-hidden="true"></a><span class="kw">text</span>(ptr, <span class="dt">pretty =</span> <span class="dv">0</span>, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="tree-based-methods.html#cb509-1"></a><span class="kw">carseats_mse</span>(ptr)</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="tree-based-methods.html#cb509-1" aria-hidden="true"></a><span class="kw">carseats_mse</span>(ptr)</span></code></pre></div>
 <pre><code>## [1] 4.625875</code></pre>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
@@ -657,13 +696,13 @@ rate do you obtain? Use the <code>importance()</code> function to determine whic
 variables are most important.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="tree-based-methods.html#cb511-1"></a><span class="co"># Here we can use random Forest with mtry = 10 = p (the number of predictor</span></span>
-<span id="cb511-2"><a href="tree-based-methods.html#cb511-2"></a><span class="co"># variables) to perform bagging</span></span>
-<span id="cb511-3"><a href="tree-based-methods.html#cb511-3"></a>bagged &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Carseats[train, ], <span class="dt">mtry =</span> <span class="dv">10</span>, </span>
-<span id="cb511-4"><a href="tree-based-methods.html#cb511-4"></a>  <span class="dt">ntree =</span> <span class="dv">200</span>, <span class="dt">importance =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb511-5"><a href="tree-based-methods.html#cb511-5"></a><span class="kw">carseats_mse</span>(bagged)</span></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="tree-based-methods.html#cb511-1" aria-hidden="true"></a><span class="co"># Here we can use random Forest with mtry = 10 = p (the number of predictor</span></span>
+<span id="cb511-2"><a href="tree-based-methods.html#cb511-2" aria-hidden="true"></a><span class="co"># variables) to perform bagging</span></span>
+<span id="cb511-3"><a href="tree-based-methods.html#cb511-3" aria-hidden="true"></a>bagged &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Carseats[train, ], <span class="dt">mtry =</span> <span class="dv">10</span>, </span>
+<span id="cb511-4"><a href="tree-based-methods.html#cb511-4" aria-hidden="true"></a>  <span class="dt">ntree =</span> <span class="dv">200</span>, <span class="dt">importance =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb511-5"><a href="tree-based-methods.html#cb511-5" aria-hidden="true"></a><span class="kw">carseats_mse</span>(bagged)</span></code></pre></div>
 <pre><code>## [1] 2.762861</code></pre>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="tree-based-methods.html#cb513-1"></a><span class="kw">importance</span>(bagged)</span></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="tree-based-methods.html#cb513-1" aria-hidden="true"></a><span class="kw">importance</span>(bagged)</span></code></pre></div>
 <pre><code>##                %IncMSE IncNodePurity
 ## CompPrice   11.2608998    104.474222
 ## Income       5.0953983     73.275066
@@ -685,11 +724,11 @@ most important. Describe the effect of <span class="math inline">\(m\)</span>, t
 considered at each split, on the error rate obtained.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="tree-based-methods.html#cb515-1"></a>rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Carseats[train, ], <span class="dt">mtry =</span> <span class="dv">3</span>, </span>
-<span id="cb515-2"><a href="tree-based-methods.html#cb515-2"></a>  <span class="dt">ntree =</span> <span class="dv">500</span>, <span class="dt">importance =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb515-3"><a href="tree-based-methods.html#cb515-3"></a><span class="kw">carseats_mse</span>(rf)</span></code></pre></div>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="tree-based-methods.html#cb515-1" aria-hidden="true"></a>rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Sales <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Carseats[train, ], <span class="dt">mtry =</span> <span class="dv">3</span>, </span>
+<span id="cb515-2"><a href="tree-based-methods.html#cb515-2" aria-hidden="true"></a>  <span class="dt">ntree =</span> <span class="dv">500</span>, <span class="dt">importance =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb515-3"><a href="tree-based-methods.html#cb515-3" aria-hidden="true"></a><span class="kw">carseats_mse</span>(rf)</span></code></pre></div>
 <pre><code>## [1] 3.439357</code></pre>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="tree-based-methods.html#cb517-1"></a><span class="kw">importance</span>(rf)</span></code></pre></div>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="tree-based-methods.html#cb517-1" aria-hidden="true"></a><span class="kw">importance</span>(rf)</span></code></pre></div>
 <pre><code>##                %IncMSE IncNodePurity
 ## CompPrice    8.5717587     122.75189
 ## Income       2.8955756     116.33951
@@ -708,7 +747,7 @@ regression tree above, although not quite as good as the bagging approach.</p>
 <li>Now analyze the data using BART, and report your results.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="tree-based-methods.html#cb519-1"></a><span class="kw">library</span>(BART)</span></code></pre></div>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="tree-based-methods.html#cb519-1" aria-hidden="true"></a><span class="kw">library</span>(BART)</span></code></pre></div>
 <pre><code>## Loading required package: nlme</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;nlme&#39;</code></pre>
@@ -720,12 +759,12 @@ regression tree above, although not quite as good as the bagging approach.</p>
 ##     collapse</code></pre>
 <pre><code>## Loading required package: nnet</code></pre>
 <pre><code>## Loading required package: survival</code></pre>
-<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="tree-based-methods.html#cb526-1"></a><span class="co"># For ease, we&#39;ll create a fake &quot;predict&quot; method that just returns </span></span>
-<span id="cb526-2"><a href="tree-based-methods.html#cb526-2"></a><span class="co"># yhat.test.mean regardless of provided &quot;newdata&quot;</span></span>
-<span id="cb526-3"><a href="tree-based-methods.html#cb526-3"></a>predict.wbart &lt;-<span class="st"> </span><span class="cf">function</span>(model, ...) model<span class="op">$</span>yhat.test.mean</span>
-<span id="cb526-4"><a href="tree-based-methods.html#cb526-4"></a></span>
-<span id="cb526-5"><a href="tree-based-methods.html#cb526-5"></a>bartfit &lt;-<span class="st"> </span><span class="kw">gbart</span>(Carseats[train, <span class="dv">2</span><span class="op">:</span><span class="dv">11</span>], Carseats[train, <span class="dv">1</span>], </span>
-<span id="cb526-6"><a href="tree-based-methods.html#cb526-6"></a>  <span class="dt">x.test =</span> Carseats[<span class="op">!</span>train, <span class="dv">2</span><span class="op">:</span><span class="dv">11</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="tree-based-methods.html#cb526-1" aria-hidden="true"></a><span class="co"># For ease, we&#39;ll create a fake &quot;predict&quot; method that just returns </span></span>
+<span id="cb526-2"><a href="tree-based-methods.html#cb526-2" aria-hidden="true"></a><span class="co"># yhat.test.mean regardless of provided &quot;newdata&quot;</span></span>
+<span id="cb526-3"><a href="tree-based-methods.html#cb526-3" aria-hidden="true"></a>predict.wbart &lt;-<span class="st"> </span><span class="cf">function</span>(model, ...) model<span class="op">$</span>yhat.test.mean</span>
+<span id="cb526-4"><a href="tree-based-methods.html#cb526-4" aria-hidden="true"></a></span>
+<span id="cb526-5"><a href="tree-based-methods.html#cb526-5" aria-hidden="true"></a>bartfit &lt;-<span class="st"> </span><span class="kw">gbart</span>(Carseats[train, <span class="dv">2</span><span class="op">:</span><span class="dv">11</span>], Carseats[train, <span class="dv">1</span>], </span>
+<span id="cb526-6"><a href="tree-based-methods.html#cb526-6" aria-hidden="true"></a>  <span class="dt">x.test =</span> Carseats[<span class="op">!</span>train, <span class="dv">2</span><span class="op">:</span><span class="dv">11</span>])</span></code></pre></div>
 <pre><code>## *****Calling gbart: type=1
 ## *****Data:
 ## data:n,p,np: 196, 14, 204
@@ -753,14 +792,14 @@ regression tree above, although not quite as good as the bagging approach.</p>
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 3s
+## time: 4s
 ## trcnt,tecnt: 1000,1000</code></pre>
-<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="tree-based-methods.html#cb528-1"></a><span class="kw">carseats_mse</span>(bartfit)</span></code></pre></div>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="tree-based-methods.html#cb528-1" aria-hidden="true"></a><span class="kw">carseats_mse</span>(bartfit)</span></code></pre></div>
 <pre><code>## [1] 1.631285</code></pre>
 <p>The test error rate is ~1.6 which is an improvement over random forest and
 bagging.</p>
 </div>
-<div id="question-9-6" class="section level3 hasAnchor">
+<div id="question-9-6" class="section level3 hasAnchor" number="8.2.3">
 <h3><span class="header-section-number">8.2.3</span> Question 9<a href="tree-based-methods.html#question-9-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This problem involves the <code>OJ</code> data set which is part of the <code>ISLR2</code> package.</p>
@@ -769,9 +808,9 @@ bagging.</p>
 test set containing the remaining observations.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="tree-based-methods.html#cb530-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb530-2"><a href="tree-based-methods.html#cb530-2"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(OJ), <span class="dv">800</span>)</span>
-<span id="cb530-3"><a href="tree-based-methods.html#cb530-3"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(OJ), train)</span></code></pre></div>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="tree-based-methods.html#cb530-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb530-2"><a href="tree-based-methods.html#cb530-2" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(OJ), <span class="dv">800</span>)</span>
+<span id="cb530-3"><a href="tree-based-methods.html#cb530-3" aria-hidden="true"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(OJ), train)</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Fit a tree to the training data, with <code>Purchase</code> as the response and the
@@ -781,8 +820,8 @@ results obtained. What is the training error rate? How many terminal nodes
 does the tree have?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="tree-based-methods.html#cb531-1"></a>tr &lt;-<span class="st"> </span><span class="kw">tree</span>(Purchase <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> OJ[train, ])</span>
-<span id="cb531-2"><a href="tree-based-methods.html#cb531-2"></a><span class="kw">summary</span>(tr)</span></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="tree-based-methods.html#cb531-1" aria-hidden="true"></a>tr &lt;-<span class="st"> </span><span class="kw">tree</span>(Purchase <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> OJ[train, ])</span>
+<span id="cb531-2"><a href="tree-based-methods.html#cb531-2" aria-hidden="true"></a><span class="kw">summary</span>(tr)</span></code></pre></div>
 <pre><code>## 
 ## Classification tree:
 ## tree(formula = Purchase ~ ., data = OJ[train, ])
@@ -797,7 +836,7 @@ does the tree have?</li>
 Pick one of the terminal nodes, and interpret the information displayed.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="tree-based-methods.html#cb533-1"></a>tr</span></code></pre></div>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="tree-based-methods.html#cb533-1" aria-hidden="true"></a>tr</span></code></pre></div>
 <pre><code>## node), split, n, deviance, yval, (yprob)
 ##       * denotes terminal node
 ## 
@@ -821,8 +860,8 @@ Pick one of the terminal nodes, and interpret the information displayed.</li>
 <li>Create a plot of the tree, and interpret the results.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="tree-based-methods.html#cb535-1"></a><span class="kw">plot</span>(tr)</span>
-<span id="cb535-2"><a href="tree-based-methods.html#cb535-2"></a><span class="kw">text</span>(tr, <span class="dt">pretty =</span> <span class="dv">0</span>, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="tree-based-methods.html#cb535-1" aria-hidden="true"></a><span class="kw">plot</span>(tr)</span>
+<span id="cb535-2"><a href="tree-based-methods.html#cb535-2" aria-hidden="true"></a><span class="kw">text</span>(tr, <span class="dt">pretty =</span> <span class="dv">0</span>, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
@@ -831,7 +870,7 @@ comparing the test labels to the predicted test labels. What is the test
 error rate?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="tree-based-methods.html#cb536-1"></a><span class="kw">table</span>(<span class="kw">predict</span>(tr, OJ[test, ], <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>), OJ[test, <span class="st">&quot;Purchase&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="tree-based-methods.html#cb536-1" aria-hidden="true"></a><span class="kw">table</span>(<span class="kw">predict</span>(tr, OJ[test, ], <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>), OJ[test, <span class="st">&quot;Purchase&quot;</span>])</span></code></pre></div>
 <pre><code>##     
 ##       CH  MM
 ##   CH 125  15
@@ -842,17 +881,17 @@ error rate?</li>
 the optimal tree size.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="tree-based-methods.html#cb538-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb538-2"><a href="tree-based-methods.html#cb538-2"></a>res &lt;-<span class="st"> </span><span class="kw">cv.tree</span>(tr)</span></code></pre></div>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="tree-based-methods.html#cb538-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb538-2"><a href="tree-based-methods.html#cb538-2" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">cv.tree</span>(tr)</span></code></pre></div>
 <blockquote>
 <ol start="7" style="list-style-type: lower-alpha">
 <li>Produce a plot with tree size on the <span class="math inline">\(x\)</span>-axis and cross-validated
 classification error rate on the <span class="math inline">\(y\)</span>-axis.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="tree-based-methods.html#cb539-1"></a><span class="kw">plot</span>(res<span class="op">$</span>size, res<span class="op">$</span>dev, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Tree size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Deviance&quot;</span>)</span>
-<span id="cb539-2"><a href="tree-based-methods.html#cb539-2"></a>min &lt;-<span class="st"> </span><span class="kw">which.min</span>(res<span class="op">$</span>dev)</span>
-<span id="cb539-3"><a href="tree-based-methods.html#cb539-3"></a><span class="kw">abline</span>(<span class="dt">v =</span> res<span class="op">$</span>size[min], <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="tree-based-methods.html#cb539-1" aria-hidden="true"></a><span class="kw">plot</span>(res<span class="op">$</span>size, res<span class="op">$</span>dev, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Tree size&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Deviance&quot;</span>)</span>
+<span id="cb539-2"><a href="tree-based-methods.html#cb539-2" aria-hidden="true"></a>min &lt;-<span class="st"> </span><span class="kw">which.min</span>(res<span class="op">$</span>dev)</span>
+<span id="cb539-3"><a href="tree-based-methods.html#cb539-3" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> res<span class="op">$</span>size[min], <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <blockquote>
 <ol start="8" style="list-style-type: lower-alpha">
@@ -860,7 +899,7 @@ classification error rate on the <span class="math inline">\(y\)</span>-axis.</l
 error rate?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="tree-based-methods.html#cb540-1"></a>res<span class="op">$</span>size[min]</span></code></pre></div>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="tree-based-methods.html#cb540-1" aria-hidden="true"></a>res<span class="op">$</span>size[min]</span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <blockquote>
 <ol style="list-style-type: lower-roman">
@@ -869,9 +908,9 @@ cross-validation. If cross-validation does not lead to selection of a
 pruned tree, then create a pruned tree with five terminal nodes.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="tree-based-methods.html#cb542-1"></a>ptr &lt;-<span class="st"> </span><span class="kw">prune.tree</span>(tr, <span class="dt">best =</span> res<span class="op">$</span>size[min])</span>
-<span id="cb542-2"><a href="tree-based-methods.html#cb542-2"></a><span class="kw">plot</span>(ptr)</span>
-<span id="cb542-3"><a href="tree-based-methods.html#cb542-3"></a><span class="kw">text</span>(ptr, <span class="dt">pretty =</span> <span class="dv">0</span>, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="tree-based-methods.html#cb542-1" aria-hidden="true"></a>ptr &lt;-<span class="st"> </span><span class="kw">prune.tree</span>(tr, <span class="dt">best =</span> res<span class="op">$</span>size[min])</span>
+<span id="cb542-2"><a href="tree-based-methods.html#cb542-2" aria-hidden="true"></a><span class="kw">plot</span>(ptr)</span>
+<span id="cb542-3"><a href="tree-based-methods.html#cb542-3" aria-hidden="true"></a><span class="kw">text</span>(ptr, <span class="dt">pretty =</span> <span class="dv">0</span>, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <blockquote>
 <ol start="10" style="list-style-type: lower-alpha">
@@ -879,12 +918,12 @@ pruned tree, then create a pruned tree with five terminal nodes.</li>
 Which is higher?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="tree-based-methods.html#cb543-1"></a>oj_misclass &lt;-<span class="st"> </span><span class="cf">function</span>(model) {</span>
-<span id="cb543-2"><a href="tree-based-methods.html#cb543-2"></a>  <span class="kw">summary</span>(model)<span class="op">$</span>misclass[<span class="dv">1</span>] <span class="op">/</span><span class="st"> </span><span class="kw">summary</span>(model)<span class="op">$</span>misclass[<span class="dv">2</span>]</span>
-<span id="cb543-3"><a href="tree-based-methods.html#cb543-3"></a>}</span>
-<span id="cb543-4"><a href="tree-based-methods.html#cb543-4"></a><span class="kw">oj_misclass</span>(tr)</span></code></pre></div>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="tree-based-methods.html#cb543-1" aria-hidden="true"></a>oj_misclass &lt;-<span class="st"> </span><span class="cf">function</span>(model) {</span>
+<span id="cb543-2"><a href="tree-based-methods.html#cb543-2" aria-hidden="true"></a>  <span class="kw">summary</span>(model)<span class="op">$</span>misclass[<span class="dv">1</span>] <span class="op">/</span><span class="st"> </span><span class="kw">summary</span>(model)<span class="op">$</span>misclass[<span class="dv">2</span>]</span>
+<span id="cb543-3"><a href="tree-based-methods.html#cb543-3" aria-hidden="true"></a>}</span>
+<span id="cb543-4"><a href="tree-based-methods.html#cb543-4" aria-hidden="true"></a><span class="kw">oj_misclass</span>(tr)</span></code></pre></div>
 <pre><code>## [1] 0.16375</code></pre>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="tree-based-methods.html#cb545-1"></a><span class="kw">oj_misclass</span>(ptr)</span></code></pre></div>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="tree-based-methods.html#cb545-1" aria-hidden="true"></a><span class="kw">oj_misclass</span>(ptr)</span></code></pre></div>
 <pre><code>## [1] 0.16375</code></pre>
 <p>The training misclassification error rate is slightly higher for the pruned tree.</p>
 <blockquote>
@@ -893,17 +932,17 @@ Which is higher?</li>
 is higher?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="tree-based-methods.html#cb547-1"></a>oj_err &lt;-<span class="st"> </span><span class="cf">function</span>(model) {</span>
-<span id="cb547-2"><a href="tree-based-methods.html#cb547-2"></a>  p &lt;-<span class="st"> </span><span class="kw">predict</span>(model, <span class="dt">newdata =</span> OJ[test, ], <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb547-3"><a href="tree-based-methods.html#cb547-3"></a>  <span class="kw">mean</span>(p <span class="op">!=</span><span class="st"> </span>OJ[test, <span class="st">&quot;Purchase&quot;</span>])</span>
-<span id="cb547-4"><a href="tree-based-methods.html#cb547-4"></a>}</span>
-<span id="cb547-5"><a href="tree-based-methods.html#cb547-5"></a><span class="kw">oj_err</span>(tr)</span></code></pre></div>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="tree-based-methods.html#cb547-1" aria-hidden="true"></a>oj_err &lt;-<span class="st"> </span><span class="cf">function</span>(model) {</span>
+<span id="cb547-2"><a href="tree-based-methods.html#cb547-2" aria-hidden="true"></a>  p &lt;-<span class="st"> </span><span class="kw">predict</span>(model, <span class="dt">newdata =</span> OJ[test, ], <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb547-3"><a href="tree-based-methods.html#cb547-3" aria-hidden="true"></a>  <span class="kw">mean</span>(p <span class="op">!=</span><span class="st"> </span>OJ[test, <span class="st">&quot;Purchase&quot;</span>])</span>
+<span id="cb547-4"><a href="tree-based-methods.html#cb547-4" aria-hidden="true"></a>}</span>
+<span id="cb547-5"><a href="tree-based-methods.html#cb547-5" aria-hidden="true"></a><span class="kw">oj_err</span>(tr)</span></code></pre></div>
 <pre><code>## [1] 0.1888889</code></pre>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="tree-based-methods.html#cb549-1"></a><span class="kw">oj_err</span>(ptr)</span></code></pre></div>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="tree-based-methods.html#cb549-1" aria-hidden="true"></a><span class="kw">oj_err</span>(ptr)</span></code></pre></div>
 <pre><code>## [1] 0.1888889</code></pre>
 <p>The test misclassification error rate is slightly higher for the pruned tree.</p>
 </div>
-<div id="question-10-5" class="section level3 hasAnchor">
+<div id="question-10-5" class="section level3 hasAnchor" number="8.2.4">
 <h3><span class="header-section-number">8.2.4</span> Question 10<a href="tree-based-methods.html#question-10-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>We now use boosting to predict <code>Salary</code> in the <code>Hitters</code> data set.</p>
@@ -912,17 +951,17 @@ is higher?</li>
 then log-transform the salaries.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="tree-based-methods.html#cb551-1"></a>dat &lt;-<span class="st"> </span>Hitters</span>
-<span id="cb551-2"><a href="tree-based-methods.html#cb551-2"></a>dat &lt;-<span class="st"> </span>dat[<span class="op">!</span><span class="kw">is.na</span>(dat<span class="op">$</span>Salary), ]</span>
-<span id="cb551-3"><a href="tree-based-methods.html#cb551-3"></a>dat<span class="op">$</span>Salary &lt;-<span class="st"> </span><span class="kw">log</span>(dat<span class="op">$</span>Salary)</span></code></pre></div>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="tree-based-methods.html#cb551-1" aria-hidden="true"></a>dat &lt;-<span class="st"> </span>Hitters</span>
+<span id="cb551-2"><a href="tree-based-methods.html#cb551-2" aria-hidden="true"></a>dat &lt;-<span class="st"> </span>dat[<span class="op">!</span><span class="kw">is.na</span>(dat<span class="op">$</span>Salary), ]</span>
+<span id="cb551-3"><a href="tree-based-methods.html#cb551-3" aria-hidden="true"></a>dat<span class="op">$</span>Salary &lt;-<span class="st"> </span><span class="kw">log</span>(dat<span class="op">$</span>Salary)</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Create a training set consisting of the first 200 observations, and a test
 set consisting of the remaining observations.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="tree-based-methods.html#cb552-1"></a>train &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">200</span></span>
-<span id="cb552-2"><a href="tree-based-methods.html#cb552-2"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(dat), train)</span></code></pre></div>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="tree-based-methods.html#cb552-1" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">200</span></span>
+<span id="cb552-2"><a href="tree-based-methods.html#cb552-2" aria-hidden="true"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(dat), train)</span></code></pre></div>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Perform boosting on the training set with 1,000 trees for a range of values
@@ -931,20 +970,20 @@ shrinkage values on the <span class="math inline">\(x\)</span>-axis and the corr
 the <span class="math inline">\(y\)</span>-axis.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="tree-based-methods.html#cb553-1"></a><span class="kw">library</span>(gbm)</span></code></pre></div>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="tree-based-methods.html#cb553-1" aria-hidden="true"></a><span class="kw">library</span>(gbm)</span></code></pre></div>
 <pre><code>## Loaded gbm 2.1.8.1</code></pre>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="tree-based-methods.html#cb555-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb555-2"><a href="tree-based-methods.html#cb555-2"></a>lambdas &lt;-<span class="st"> </span><span class="dv">10</span> <span class="op">^</span><span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">0</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</span>
-<span id="cb555-3"><a href="tree-based-methods.html#cb555-3"></a>fits &lt;-<span class="st"> </span><span class="kw">lapply</span>(lambdas, <span class="cf">function</span>(lam) {</span>
-<span id="cb555-4"><a href="tree-based-methods.html#cb555-4"></a>  <span class="kw">gbm</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat[train, ], <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, </span>
-<span id="cb555-5"><a href="tree-based-methods.html#cb555-5"></a>    <span class="dt">n.trees =</span> <span class="dv">1000</span>, <span class="dt">shrinkage =</span> lam)</span>
-<span id="cb555-6"><a href="tree-based-methods.html#cb555-6"></a>})</span>
-<span id="cb555-7"><a href="tree-based-methods.html#cb555-7"></a>errs &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span class="cf">function</span>(fit) {</span>
-<span id="cb555-8"><a href="tree-based-methods.html#cb555-8"></a>  p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat[train, ], <span class="dt">n.trees =</span> <span class="dv">1000</span>)</span>
-<span id="cb555-9"><a href="tree-based-methods.html#cb555-9"></a>  <span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>dat[train, ]<span class="op">$</span>Salary)<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb555-10"><a href="tree-based-methods.html#cb555-10"></a>})</span>
-<span id="cb555-11"><a href="tree-based-methods.html#cb555-11"></a><span class="kw">plot</span>(lambdas, errs, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Shrinkage values&quot;</span>, </span>
-<span id="cb555-12"><a href="tree-based-methods.html#cb555-12"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Training MSE&quot;</span>, <span class="dt">log =</span> <span class="st">&quot;xy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="tree-based-methods.html#cb555-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb555-2"><a href="tree-based-methods.html#cb555-2" aria-hidden="true"></a>lambdas &lt;-<span class="st"> </span><span class="dv">10</span> <span class="op">^</span><span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">0</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb555-3"><a href="tree-based-methods.html#cb555-3" aria-hidden="true"></a>fits &lt;-<span class="st"> </span><span class="kw">lapply</span>(lambdas, <span class="cf">function</span>(lam) {</span>
+<span id="cb555-4"><a href="tree-based-methods.html#cb555-4" aria-hidden="true"></a>  <span class="kw">gbm</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat[train, ], <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, </span>
+<span id="cb555-5"><a href="tree-based-methods.html#cb555-5" aria-hidden="true"></a>    <span class="dt">n.trees =</span> <span class="dv">1000</span>, <span class="dt">shrinkage =</span> lam)</span>
+<span id="cb555-6"><a href="tree-based-methods.html#cb555-6" aria-hidden="true"></a>})</span>
+<span id="cb555-7"><a href="tree-based-methods.html#cb555-7" aria-hidden="true"></a>errs &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span class="cf">function</span>(fit) {</span>
+<span id="cb555-8"><a href="tree-based-methods.html#cb555-8" aria-hidden="true"></a>  p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat[train, ], <span class="dt">n.trees =</span> <span class="dv">1000</span>)</span>
+<span id="cb555-9"><a href="tree-based-methods.html#cb555-9" aria-hidden="true"></a>  <span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>dat[train, ]<span class="op">$</span>Salary)<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb555-10"><a href="tree-based-methods.html#cb555-10" aria-hidden="true"></a>})</span>
+<span id="cb555-11"><a href="tree-based-methods.html#cb555-11" aria-hidden="true"></a><span class="kw">plot</span>(lambdas, errs, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Shrinkage values&quot;</span>, </span>
+<span id="cb555-12"><a href="tree-based-methods.html#cb555-12" aria-hidden="true"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Training MSE&quot;</span>, <span class="dt">log =</span> <span class="st">&quot;xy&quot;</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
@@ -952,15 +991,15 @@ the <span class="math inline">\(y\)</span>-axis.</li>
 corresponding test set MSE on the <span class="math inline">\(y\)</span>-axis.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="tree-based-methods.html#cb556-1"></a>errs &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span class="cf">function</span>(fit) {</span>
-<span id="cb556-2"><a href="tree-based-methods.html#cb556-2"></a>  p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat[test, ], <span class="dt">n.trees =</span> <span class="dv">1000</span>)</span>
-<span id="cb556-3"><a href="tree-based-methods.html#cb556-3"></a>  <span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>dat[test, ]<span class="op">$</span>Salary)<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb556-4"><a href="tree-based-methods.html#cb556-4"></a>})</span>
-<span id="cb556-5"><a href="tree-based-methods.html#cb556-5"></a><span class="kw">plot</span>(lambdas, errs, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Shrinkage values&quot;</span>, </span>
-<span id="cb556-6"><a href="tree-based-methods.html#cb556-6"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Training MSE&quot;</span>, <span class="dt">log =</span> <span class="st">&quot;xy&quot;</span>)</span>
-<span id="cb556-7"><a href="tree-based-methods.html#cb556-7"></a><span class="kw">min</span>(errs)</span></code></pre></div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="tree-based-methods.html#cb556-1" aria-hidden="true"></a>errs &lt;-<span class="st"> </span><span class="kw">sapply</span>(fits, <span class="cf">function</span>(fit) {</span>
+<span id="cb556-2"><a href="tree-based-methods.html#cb556-2" aria-hidden="true"></a>  p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, dat[test, ], <span class="dt">n.trees =</span> <span class="dv">1000</span>)</span>
+<span id="cb556-3"><a href="tree-based-methods.html#cb556-3" aria-hidden="true"></a>  <span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>dat[test, ]<span class="op">$</span>Salary)<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb556-4"><a href="tree-based-methods.html#cb556-4" aria-hidden="true"></a>})</span>
+<span id="cb556-5"><a href="tree-based-methods.html#cb556-5" aria-hidden="true"></a><span class="kw">plot</span>(lambdas, errs, <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Shrinkage values&quot;</span>, </span>
+<span id="cb556-6"><a href="tree-based-methods.html#cb556-6" aria-hidden="true"></a>  <span class="dt">ylab =</span> <span class="st">&quot;Training MSE&quot;</span>, <span class="dt">log =</span> <span class="st">&quot;xy&quot;</span>)</span>
+<span id="cb556-7"><a href="tree-based-methods.html#cb556-7" aria-hidden="true"></a><span class="kw">min</span>(errs)</span></code></pre></div>
 <pre><code>## [1] 0.249881</code></pre>
-<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="tree-based-methods.html#cb558-1"></a><span class="kw">abline</span>(<span class="dt">v =</span> lambdas[<span class="kw">which.min</span>(errs)], <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="tree-based-methods.html#cb558-1" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> lambdas[<span class="kw">which.min</span>(errs)], <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
@@ -969,11 +1008,11 @@ two of the regression approaches seen in Chapters 3 and 6.</li>
 </ol>
 </blockquote>
 <p>Linear regression</p>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="tree-based-methods.html#cb559-1"></a>fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat[train, ])</span>
-<span id="cb559-2"><a href="tree-based-methods.html#cb559-2"></a><span class="kw">mean</span>((<span class="kw">predict</span>(fit1, dat[test, ]) <span class="op">-</span><span class="st"> </span>dat[test, <span class="st">&quot;Salary&quot;</span>])<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="tree-based-methods.html#cb559-1" aria-hidden="true"></a>fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat[train, ])</span>
+<span id="cb559-2"><a href="tree-based-methods.html#cb559-2" aria-hidden="true"></a><span class="kw">mean</span>((<span class="kw">predict</span>(fit1, dat[test, ]) <span class="op">-</span><span class="st"> </span>dat[test, <span class="st">&quot;Salary&quot;</span>])<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.4917959</code></pre>
 <p>Ridge regression</p>
-<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="tree-based-methods.html#cb561-1"></a><span class="kw">library</span>(glmnet)</span></code></pre></div>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="tree-based-methods.html#cb561-1" aria-hidden="true"></a><span class="kw">library</span>(glmnet)</span></code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;Matrix&#39;</code></pre>
@@ -983,12 +1022,12 @@ two of the regression approaches seen in Chapters 3 and 6.</li>
 <pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
 ## 
 ##     expand, pack, unpack</code></pre>
-<pre><code>## Loaded glmnet 4.1-4</code></pre>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="tree-based-methods.html#cb567-1"></a>x &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat[train, ])</span>
-<span id="cb567-2"><a href="tree-based-methods.html#cb567-2"></a>x.test &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat[test, ])</span>
-<span id="cb567-3"><a href="tree-based-methods.html#cb567-3"></a>y &lt;-<span class="st"> </span>dat[train, <span class="st">&quot;Salary&quot;</span>]</span>
-<span id="cb567-4"><a href="tree-based-methods.html#cb567-4"></a>fit2 &lt;-<span class="st"> </span><span class="kw">glmnet</span>(x, y, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
-<span id="cb567-5"><a href="tree-based-methods.html#cb567-5"></a><span class="kw">mean</span>((<span class="kw">predict</span>(fit2, <span class="dt">s =</span> <span class="fl">0.1</span>, <span class="dt">newx =</span> x.test) <span class="op">-</span><span class="st"> </span>dat[test, <span class="st">&quot;Salary&quot;</span>])<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## Loaded glmnet 4.1-8</code></pre>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="tree-based-methods.html#cb567-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat[train, ])</span>
+<span id="cb567-2"><a href="tree-based-methods.html#cb567-2" aria-hidden="true"></a>x.test &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat[test, ])</span>
+<span id="cb567-3"><a href="tree-based-methods.html#cb567-3" aria-hidden="true"></a>y &lt;-<span class="st"> </span>dat[train, <span class="st">&quot;Salary&quot;</span>]</span>
+<span id="cb567-4"><a href="tree-based-methods.html#cb567-4" aria-hidden="true"></a>fit2 &lt;-<span class="st"> </span><span class="kw">glmnet</span>(x, y, <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb567-5"><a href="tree-based-methods.html#cb567-5" aria-hidden="true"></a><span class="kw">mean</span>((<span class="kw">predict</span>(fit2, <span class="dt">s =</span> <span class="fl">0.1</span>, <span class="dt">newx =</span> x.test) <span class="op">-</span><span class="st"> </span>dat[test, <span class="st">&quot;Salary&quot;</span>])<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.4389054</code></pre>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">
@@ -996,7 +1035,7 @@ two of the regression approaches seen in Chapters 3 and 6.</li>
 model?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="tree-based-methods.html#cb569-1"></a><span class="kw">summary</span>(fits[[<span class="kw">which.min</span>(errs)]])</span></code></pre></div>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="tree-based-methods.html#cb569-1" aria-hidden="true"></a><span class="kw">summary</span>(fits[[<span class="kw">which.min</span>(errs)]])</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <pre><code>##                 var    rel.inf
 ## CAtBat       CAtBat 16.4755242
@@ -1024,12 +1063,12 @@ model?</li>
 approach?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="tree-based-methods.html#cb571-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb571-2"><a href="tree-based-methods.html#cb571-2"></a>bagged &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat[train, ], <span class="dt">mtry =</span> <span class="dv">19</span>, <span class="dt">ntree =</span> <span class="dv">1000</span>)</span>
-<span id="cb571-3"><a href="tree-based-methods.html#cb571-3"></a><span class="kw">mean</span>((<span class="kw">predict</span>(bagged, <span class="dt">newdata =</span> dat[test, ]) <span class="op">-</span><span class="st"> </span>dat[test, <span class="st">&quot;Salary&quot;</span>])<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="tree-based-methods.html#cb571-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb571-2"><a href="tree-based-methods.html#cb571-2" aria-hidden="true"></a>bagged &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Salary <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> dat[train, ], <span class="dt">mtry =</span> <span class="dv">19</span>, <span class="dt">ntree =</span> <span class="dv">1000</span>)</span>
+<span id="cb571-3"><a href="tree-based-methods.html#cb571-3" aria-hidden="true"></a><span class="kw">mean</span>((<span class="kw">predict</span>(bagged, <span class="dt">newdata =</span> dat[test, ]) <span class="op">-</span><span class="st"> </span>dat[test, <span class="st">&quot;Salary&quot;</span>])<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.2278813</code></pre>
 </div>
-<div id="question-11-4" class="section level3 hasAnchor">
+<div id="question-11-4" class="section level3 hasAnchor" number="8.2.5">
 <h3><span class="header-section-number">8.2.5</span> Question 11<a href="tree-based-methods.html#question-11-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>This question uses the <code>Caravan</code> data set.</p>
@@ -1038,8 +1077,8 @@ approach?</li>
 test set consisting of the remaining observations.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="tree-based-methods.html#cb573-1"></a>train &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">1000</span></span>
-<span id="cb573-2"><a href="tree-based-methods.html#cb573-2"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Caravan), train)</span></code></pre></div>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="tree-based-methods.html#cb573-1" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">1000</span></span>
+<span id="cb573-2"><a href="tree-based-methods.html#cb573-2" aria-hidden="true"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Caravan), train)</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Fit a boosting model to the training set with <code>Purchase</code> as the response
@@ -1047,14 +1086,14 @@ and the other variables as predictors. Use 1,000 trees, and a shrinkage
 value of 0.01. Which predictors appear to be the most important?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="tree-based-methods.html#cb574-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb574-2"><a href="tree-based-methods.html#cb574-2"></a>fit &lt;-<span class="st"> </span><span class="kw">gbm</span>(Purchase <span class="op">==</span><span class="st"> &quot;Yes&quot;</span> <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Caravan[train, ], <span class="dt">n.trees =</span> <span class="dv">1000</span>, <span class="dt">shrinkage =</span> <span class="fl">0.01</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="tree-based-methods.html#cb574-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb574-2"><a href="tree-based-methods.html#cb574-2" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">gbm</span>(Purchase <span class="op">==</span><span class="st"> &quot;Yes&quot;</span> <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Caravan[train, ], <span class="dt">n.trees =</span> <span class="dv">1000</span>, <span class="dt">shrinkage =</span> <span class="fl">0.01</span>)</span></code></pre></div>
 <pre><code>## Distribution not specified, assuming bernoulli ...</code></pre>
-<pre><code>## Warning in gbm.fit(x = x, y = y, offset = offset, distribution = distribution, :
-## variable 50: PVRAAUT has no variation.</code></pre>
-<pre><code>## Warning in gbm.fit(x = x, y = y, offset = offset, distribution = distribution, :
-## variable 71: AVRAAUT has no variation.</code></pre>
-<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="tree-based-methods.html#cb578-1"></a><span class="kw">head</span>(<span class="kw">summary</span>(fit))</span></code></pre></div>
+<pre><code>## Warning in gbm.fit(x = x, y = y, offset = offset, distribution = distribution,
+## : variable 50: PVRAAUT has no variation.</code></pre>
+<pre><code>## Warning in gbm.fit(x = x, y = y, offset = offset, distribution = distribution,
+## : variable 71: AVRAAUT has no variation.</code></pre>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="tree-based-methods.html#cb578-1" aria-hidden="true"></a><span class="kw">head</span>(<span class="kw">summary</span>(fit))</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <pre><code>##               var   rel.inf
 ## PPERSAUT PPERSAUT 15.243041
@@ -1073,42 +1112,42 @@ with the results obtained from applying KNN or logistic regression to this
 data set?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="tree-based-methods.html#cb580-1"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Caravan[test, ], <span class="dt">n.trees =</span> <span class="dv">1000</span>, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb580-2"><a href="tree-based-methods.html#cb580-2"></a><span class="kw">table</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span>, Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="tree-based-methods.html#cb580-1" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Caravan[test, ], <span class="dt">n.trees =</span> <span class="dv">1000</span>, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb580-2"><a href="tree-based-methods.html#cb580-2" aria-hidden="true"></a><span class="kw">table</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span>, Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)</span></code></pre></div>
 <pre><code>##        
 ##         FALSE TRUE
 ##   FALSE  4415  257
 ##   TRUE    118   32</code></pre>
-<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="tree-based-methods.html#cb582-1"></a><span class="kw">sum</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span> <span class="op">&amp;</span><span class="st"> </span>Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="tree-based-methods.html#cb582-1" aria-hidden="true"></a><span class="kw">sum</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span> <span class="op">&amp;</span><span class="st"> </span>Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.2133333</code></pre>
 <p>141 (109 + 32) are predicted to purchase. Of these 32 do which is 21%.</p>
-<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="tree-based-methods.html#cb584-1"></a><span class="co"># Logistic regression</span></span>
-<span id="cb584-2"><a href="tree-based-methods.html#cb584-2"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Purchase <span class="op">==</span><span class="st"> &quot;Yes&quot;</span> <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Caravan[train, ], <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="tree-based-methods.html#cb584-1" aria-hidden="true"></a><span class="co"># Logistic regression</span></span>
+<span id="cb584-2"><a href="tree-based-methods.html#cb584-2" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(Purchase <span class="op">==</span><span class="st"> &quot;Yes&quot;</span> <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Caravan[train, ], <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
-<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="tree-based-methods.html#cb586-1"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Caravan[test, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="tree-based-methods.html#cb586-1" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Caravan[test, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning in predict.lm(object, newdata, se.fit, scale = 1, type = if (type == :
-## prediction from a rank-deficient fit may be misleading</code></pre>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="tree-based-methods.html#cb588-1"></a><span class="kw">table</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span>, Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)</span></code></pre></div>
+## prediction from rank-deficient fit; attr(*, &quot;non-estim&quot;) has doubtful cases</code></pre>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="tree-based-methods.html#cb588-1" aria-hidden="true"></a><span class="kw">table</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span>, Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)</span></code></pre></div>
 <pre><code>##        
 ##         FALSE TRUE
 ##   FALSE  4183  231
 ##   TRUE    350   58</code></pre>
-<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="tree-based-methods.html#cb590-1"></a><span class="kw">sum</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span> <span class="op">&amp;</span><span class="st"> </span>Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="tree-based-methods.html#cb590-1" aria-hidden="true"></a><span class="kw">sum</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span> <span class="op">&amp;</span><span class="st"> </span>Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1421569</code></pre>
 <p>For logistic regression we correctly predict 14% of those predicted to purchase.</p>
-<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="tree-based-methods.html#cb592-1"></a><span class="kw">library</span>(class)</span>
-<span id="cb592-2"><a href="tree-based-methods.html#cb592-2"></a><span class="co"># KNN</span></span>
-<span id="cb592-3"><a href="tree-based-methods.html#cb592-3"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(Caravan[train, <span class="dv">-86</span>], Caravan[test, <span class="dv">-86</span>],  Caravan<span class="op">$</span>Purchase[train])</span>
-<span id="cb592-4"><a href="tree-based-methods.html#cb592-4"></a><span class="kw">table</span>(fit, Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="tree-based-methods.html#cb592-1" aria-hidden="true"></a><span class="kw">library</span>(class)</span>
+<span id="cb592-2"><a href="tree-based-methods.html#cb592-2" aria-hidden="true"></a><span class="co"># KNN</span></span>
+<span id="cb592-3"><a href="tree-based-methods.html#cb592-3" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">knn</span>(Caravan[train, <span class="dv">-86</span>], Caravan[test, <span class="dv">-86</span>],  Caravan<span class="op">$</span>Purchase[train])</span>
+<span id="cb592-4"><a href="tree-based-methods.html#cb592-4" aria-hidden="true"></a><span class="kw">table</span>(fit, Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)</span></code></pre></div>
 <pre><code>##      
 ## fit   FALSE TRUE
 ##   No   4260  263
 ##   Yes   273   26</code></pre>
-<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="tree-based-methods.html#cb594-1"></a><span class="kw">sum</span>(fit <span class="op">==</span><span class="st"> &quot;Yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(fit <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="tree-based-methods.html#cb594-1" aria-hidden="true"></a><span class="kw">sum</span>(fit <span class="op">==</span><span class="st"> &quot;Yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>Caravan[test, <span class="st">&quot;Purchase&quot;</span>] <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(fit <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 0.08695652</code></pre>
 <p>For KNN we correctly predict 8.7% of those predicted to purchase.</p>
 </div>
-<div id="question-12-3" class="section level3 hasAnchor">
+<div id="question-12-3" class="section level3 hasAnchor" number="8.2.6">
 <h3><span class="header-section-number">8.2.6</span> Question 12<a href="tree-based-methods.html#question-12-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Apply boosting, bagging, random forests and BART to a data set of your choice.
@@ -1120,7 +1159,7 @@ performance?</p>
 <p>Here I’m going to use the College dataset (used in Question 10 from Chapter 7
 to compare performance with the GAM we previously built). In this model we
 were trying to predict <code>Outstate</code> using the other variables in <code>College</code>.</p>
-<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="tree-based-methods.html#cb596-1"></a><span class="kw">library</span>(gam)</span></code></pre></div>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="tree-based-methods.html#cb596-1" aria-hidden="true"></a><span class="kw">library</span>(gam)</span></code></pre></div>
 <pre><code>## Loading required package: splines</code></pre>
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## 
@@ -1128,31 +1167,31 @@ were trying to predict <code>Outstate</code> using the other variables in <code>
 <pre><code>## The following objects are masked from &#39;package:purrr&#39;:
 ## 
 ##     accumulate, when</code></pre>
-<pre><code>## Loaded gam 1.20.2</code></pre>
-<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="tree-based-methods.html#cb602-1"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb602-2"><a href="tree-based-methods.html#cb602-2"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(College), <span class="dv">400</span>)</span>
-<span id="cb602-3"><a href="tree-based-methods.html#cb602-3"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(College), train)</span>
-<span id="cb602-4"><a href="tree-based-methods.html#cb602-4"></a></span>
-<span id="cb602-5"><a href="tree-based-methods.html#cb602-5"></a><span class="co"># Linear regression</span></span>
-<span id="cb602-6"><a href="tree-based-methods.html#cb602-6"></a>lr &lt;-<span class="st"> </span><span class="kw">gam</span>(Outstate <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ])</span>
-<span id="cb602-7"><a href="tree-based-methods.html#cb602-7"></a></span>
-<span id="cb602-8"><a href="tree-based-methods.html#cb602-8"></a><span class="co"># GAM from chapter 7</span></span>
-<span id="cb602-9"><a href="tree-based-methods.html#cb602-9"></a>gam &lt;-<span class="st"> </span><span class="kw">gam</span>(Outstate <span class="op">~</span><span class="st"> </span>Private <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(Room.Board, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(PhD, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb602-10"><a href="tree-based-methods.html#cb602-10"></a><span class="st">    </span><span class="kw">s</span>(perc.alumni, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(Expend, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(Grad.Rate, <span class="dv">2</span>), <span class="dt">data =</span> College[train, ])</span>
-<span id="cb602-11"><a href="tree-based-methods.html#cb602-11"></a></span>
-<span id="cb602-12"><a href="tree-based-methods.html#cb602-12"></a><span class="co"># Boosting</span></span>
-<span id="cb602-13"><a href="tree-based-methods.html#cb602-13"></a>boosted &lt;-<span class="st"> </span><span class="kw">gbm</span>(Outstate <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ], <span class="dt">n.trees =</span> <span class="dv">1000</span>, <span class="dt">shrinkage =</span> <span class="fl">0.01</span>)</span></code></pre></div>
+<pre><code>## Loaded gam 1.22-2</code></pre>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="tree-based-methods.html#cb602-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb602-2"><a href="tree-based-methods.html#cb602-2" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(College), <span class="dv">400</span>)</span>
+<span id="cb602-3"><a href="tree-based-methods.html#cb602-3" aria-hidden="true"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(College), train)</span>
+<span id="cb602-4"><a href="tree-based-methods.html#cb602-4" aria-hidden="true"></a></span>
+<span id="cb602-5"><a href="tree-based-methods.html#cb602-5" aria-hidden="true"></a><span class="co"># Linear regression</span></span>
+<span id="cb602-6"><a href="tree-based-methods.html#cb602-6" aria-hidden="true"></a>lr &lt;-<span class="st"> </span><span class="kw">gam</span>(Outstate <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ])</span>
+<span id="cb602-7"><a href="tree-based-methods.html#cb602-7" aria-hidden="true"></a></span>
+<span id="cb602-8"><a href="tree-based-methods.html#cb602-8" aria-hidden="true"></a><span class="co"># GAM from chapter 7</span></span>
+<span id="cb602-9"><a href="tree-based-methods.html#cb602-9" aria-hidden="true"></a>gam &lt;-<span class="st"> </span><span class="kw">gam</span>(Outstate <span class="op">~</span><span class="st"> </span>Private <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(Room.Board, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(PhD, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb602-10"><a href="tree-based-methods.html#cb602-10" aria-hidden="true"></a><span class="st">    </span><span class="kw">s</span>(perc.alumni, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(Expend, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(Grad.Rate, <span class="dv">2</span>), <span class="dt">data =</span> College[train, ])</span>
+<span id="cb602-11"><a href="tree-based-methods.html#cb602-11" aria-hidden="true"></a></span>
+<span id="cb602-12"><a href="tree-based-methods.html#cb602-12" aria-hidden="true"></a><span class="co"># Boosting</span></span>
+<span id="cb602-13"><a href="tree-based-methods.html#cb602-13" aria-hidden="true"></a>boosted &lt;-<span class="st"> </span><span class="kw">gbm</span>(Outstate <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ], <span class="dt">n.trees =</span> <span class="dv">1000</span>, <span class="dt">shrinkage =</span> <span class="fl">0.01</span>)</span></code></pre></div>
 <pre><code>## Distribution not specified, assuming gaussian ...</code></pre>
-<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="tree-based-methods.html#cb604-1"></a><span class="co"># Bagging (random forest with mtry = no. predictors)</span></span>
-<span id="cb604-2"><a href="tree-based-methods.html#cb604-2"></a>bagged &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Outstate <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ], <span class="dt">mtry =</span> <span class="dv">17</span>, <span class="dt">ntree =</span> <span class="dv">1000</span>)</span>
-<span id="cb604-3"><a href="tree-based-methods.html#cb604-3"></a></span>
-<span id="cb604-4"><a href="tree-based-methods.html#cb604-4"></a><span class="co"># Random forest with mtry = sqrt(no. predictors)</span></span>
-<span id="cb604-5"><a href="tree-based-methods.html#cb604-5"></a>rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Outstate <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ], <span class="dt">mtry =</span> <span class="dv">4</span>, <span class="dt">ntree =</span> <span class="dv">1000</span>)</span>
-<span id="cb604-6"><a href="tree-based-methods.html#cb604-6"></a></span>
-<span id="cb604-7"><a href="tree-based-methods.html#cb604-7"></a><span class="co"># BART</span></span>
-<span id="cb604-8"><a href="tree-based-methods.html#cb604-8"></a>pred &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="kw">colnames</span>(College), <span class="st">&quot;Outstate&quot;</span>)</span>
-<span id="cb604-9"><a href="tree-based-methods.html#cb604-9"></a>bart &lt;-<span class="st"> </span><span class="kw">gbart</span>(College[train, pred], College[train, <span class="st">&quot;Outstate&quot;</span>], </span>
-<span id="cb604-10"><a href="tree-based-methods.html#cb604-10"></a>  <span class="dt">x.test =</span> College[test, pred])</span></code></pre></div>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="tree-based-methods.html#cb604-1" aria-hidden="true"></a><span class="co"># Bagging (random forest with mtry = no. predictors)</span></span>
+<span id="cb604-2"><a href="tree-based-methods.html#cb604-2" aria-hidden="true"></a>bagged &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Outstate <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ], <span class="dt">mtry =</span> <span class="dv">17</span>, <span class="dt">ntree =</span> <span class="dv">1000</span>)</span>
+<span id="cb604-3"><a href="tree-based-methods.html#cb604-3" aria-hidden="true"></a></span>
+<span id="cb604-4"><a href="tree-based-methods.html#cb604-4" aria-hidden="true"></a><span class="co"># Random forest with mtry = sqrt(no. predictors)</span></span>
+<span id="cb604-5"><a href="tree-based-methods.html#cb604-5" aria-hidden="true"></a>rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Outstate <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ], <span class="dt">mtry =</span> <span class="dv">4</span>, <span class="dt">ntree =</span> <span class="dv">1000</span>)</span>
+<span id="cb604-6"><a href="tree-based-methods.html#cb604-6" aria-hidden="true"></a></span>
+<span id="cb604-7"><a href="tree-based-methods.html#cb604-7" aria-hidden="true"></a><span class="co"># BART</span></span>
+<span id="cb604-8"><a href="tree-based-methods.html#cb604-8" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="kw">colnames</span>(College), <span class="st">&quot;Outstate&quot;</span>)</span>
+<span id="cb604-9"><a href="tree-based-methods.html#cb604-9" aria-hidden="true"></a>bart &lt;-<span class="st"> </span><span class="kw">gbart</span>(College[train, pred], College[train, <span class="st">&quot;Outstate&quot;</span>], </span>
+<span id="cb604-10"><a href="tree-based-methods.html#cb604-10" aria-hidden="true"></a>  <span class="dt">x.test =</span> College[test, pred])</span></code></pre></div>
 <pre><code>## *****Calling gbart: type=1
 ## *****Data:
 ## data:n,p,np: 400, 18, 377
@@ -1180,25 +1219,25 @@ were trying to predict <code>Outstate</code> using the other variables in <code>
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 5s
+## time: 6s
 ## trcnt,tecnt: 1000,1000</code></pre>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="tree-based-methods.html#cb606-1"></a>mse &lt;-<span class="st"> </span><span class="cf">function</span>(model, ...) {</span>
-<span id="cb606-2"><a href="tree-based-methods.html#cb606-2"></a>  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, College[test, ], ...)</span>
-<span id="cb606-3"><a href="tree-based-methods.html#cb606-3"></a>  <span class="kw">mean</span>((College<span class="op">$</span>Outstate[test] <span class="op">-</span><span class="st"> </span>pred)<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb606-4"><a href="tree-based-methods.html#cb606-4"></a>}</span>
-<span id="cb606-5"><a href="tree-based-methods.html#cb606-5"></a></span>
-<span id="cb606-6"><a href="tree-based-methods.html#cb606-6"></a>res &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
-<span id="cb606-7"><a href="tree-based-methods.html#cb606-7"></a>  <span class="st">&quot;Linear regression&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(lr),</span>
-<span id="cb606-8"><a href="tree-based-methods.html#cb606-8"></a>  <span class="st">&quot;GAM&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(gam),</span>
-<span id="cb606-9"><a href="tree-based-methods.html#cb606-9"></a>  <span class="st">&quot;Boosting&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(boosted, <span class="dt">n.trees =</span> <span class="dv">1000</span>),</span>
-<span id="cb606-10"><a href="tree-based-methods.html#cb606-10"></a>  <span class="st">&quot;Bagging&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(bagged),</span>
-<span id="cb606-11"><a href="tree-based-methods.html#cb606-11"></a>  <span class="st">&quot;Random forest&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(rf),</span>
-<span id="cb606-12"><a href="tree-based-methods.html#cb606-12"></a>  <span class="st">&quot;BART&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(bart)</span>
-<span id="cb606-13"><a href="tree-based-methods.html#cb606-13"></a>)</span>
-<span id="cb606-14"><a href="tree-based-methods.html#cb606-14"></a>res &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;MSE&quot;</span> =<span class="st"> </span>res)</span>
-<span id="cb606-15"><a href="tree-based-methods.html#cb606-15"></a>res<span class="op">$</span>Model &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">row.names</span>(res), <span class="dt">levels =</span> <span class="kw">rev</span>(<span class="kw">row.names</span>(res)))</span>
-<span id="cb606-16"><a href="tree-based-methods.html#cb606-16"></a><span class="kw">ggplot</span>(res, <span class="kw">aes</span>(Model, MSE)) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb606-17"><a href="tree-based-methods.html#cb606-17"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;steelblue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="tree-based-methods.html#cb606-1" aria-hidden="true"></a>mse &lt;-<span class="st"> </span><span class="cf">function</span>(model, ...) {</span>
+<span id="cb606-2"><a href="tree-based-methods.html#cb606-2" aria-hidden="true"></a>  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, College[test, ], ...)</span>
+<span id="cb606-3"><a href="tree-based-methods.html#cb606-3" aria-hidden="true"></a>  <span class="kw">mean</span>((College<span class="op">$</span>Outstate[test] <span class="op">-</span><span class="st"> </span>pred)<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb606-4"><a href="tree-based-methods.html#cb606-4" aria-hidden="true"></a>}</span>
+<span id="cb606-5"><a href="tree-based-methods.html#cb606-5" aria-hidden="true"></a></span>
+<span id="cb606-6"><a href="tree-based-methods.html#cb606-6" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb606-7"><a href="tree-based-methods.html#cb606-7" aria-hidden="true"></a>  <span class="st">&quot;Linear regression&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(lr),</span>
+<span id="cb606-8"><a href="tree-based-methods.html#cb606-8" aria-hidden="true"></a>  <span class="st">&quot;GAM&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(gam),</span>
+<span id="cb606-9"><a href="tree-based-methods.html#cb606-9" aria-hidden="true"></a>  <span class="st">&quot;Boosting&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(boosted, <span class="dt">n.trees =</span> <span class="dv">1000</span>),</span>
+<span id="cb606-10"><a href="tree-based-methods.html#cb606-10" aria-hidden="true"></a>  <span class="st">&quot;Bagging&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(bagged),</span>
+<span id="cb606-11"><a href="tree-based-methods.html#cb606-11" aria-hidden="true"></a>  <span class="st">&quot;Random forest&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(rf),</span>
+<span id="cb606-12"><a href="tree-based-methods.html#cb606-12" aria-hidden="true"></a>  <span class="st">&quot;BART&quot;</span> =<span class="st"> </span><span class="kw">mse</span>(bart)</span>
+<span id="cb606-13"><a href="tree-based-methods.html#cb606-13" aria-hidden="true"></a>)</span>
+<span id="cb606-14"><a href="tree-based-methods.html#cb606-14" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;MSE&quot;</span> =<span class="st"> </span>res)</span>
+<span id="cb606-15"><a href="tree-based-methods.html#cb606-15" aria-hidden="true"></a>res<span class="op">$</span>Model &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">row.names</span>(res), <span class="dt">levels =</span> <span class="kw">rev</span>(<span class="kw">row.names</span>(res)))</span>
+<span id="cb606-16"><a href="tree-based-methods.html#cb606-16" aria-hidden="true"></a><span class="kw">ggplot</span>(res, <span class="kw">aes</span>(Model, MSE)) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb606-17"><a href="tree-based-methods.html#cb606-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;steelblue&quot;</span>)</span></code></pre></div>
 <p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <p>In this case, it looks like bagging produces the best performing model in terms
 of test mean square error.</p>
