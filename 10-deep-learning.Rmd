@@ -664,7 +664,7 @@ xfun::cache_rds({
       epochs = 10, 
       batch_size = 128, 
       validation_data = list(x_test, y_test),
-      verbose = 1
+      verbose = 0
     )
 
     predy <- predict(model, x_test) > 0.5
