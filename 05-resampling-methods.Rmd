@@ -295,7 +295,7 @@ $\beta_2$ = 2.3e-4.
 
 ```{r}
 boot.fn <- function(x, i) {
-  fit <- glm(default ~ income + balance, data = Default[i, ], family = "binomial")
+  fit <- glm(default ~ income + balance, data = x[i, ], family = "binomial")
   coef(fit)[-1]
 }
 ```
