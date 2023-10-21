@@ -1,7 +1,5 @@
 # An Introduction to Statistical Learning second edition solutions
 
-* 👀 [View solutions](https://danhalligan.github.io/ISLRv2-solutions/) 👀
-
 ![ISLR cover](images/isl_small.jpg)
 
 This repository provides my solutions for all exercises in the book 
