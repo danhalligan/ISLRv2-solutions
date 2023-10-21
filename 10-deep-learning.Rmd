@@ -10,7 +10,7 @@
 >
 > a. Draw a picture of the network, similar to Figures 10.1 or 10.4.
 
-```{r, echo=FALSE, out.width="80%", fig.cap="A nice image."}
+```{r, echo=FALSE, out.width="80%"}
 knitr::include_graphics("images/nn.png")
 ```
 
@@ -197,7 +197,7 @@ When we take the negative of this, it is equivalent to 10.14 for two classes
 >
 > a. Draw a sketch of the input and first hidden layer similar to Figure 10.8.
 
-```{r, echo=FALSE, out.width="50%", fig.cap="A nice image."}
+```{r, echo=FALSE, out.width="50%"}
 knitr::include_graphics("images/nn2.png")
 ```
 
@@ -664,7 +664,7 @@ xfun::cache_rds({
       epochs = 10, 
       batch_size = 128, 
       validation_data = list(x_test, y_test),
-      verbose = 1
+      verbose = 0
     )
 
     predy <- predict(model, x_test) > 0.5

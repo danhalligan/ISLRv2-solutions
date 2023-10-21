@@ -33,4 +33,7 @@ Imports:
     tree,
     tidyverse,
     xfun
-Remotes: rstudio/bookdown
+Remotes: 
+    rstudio/bookdown,
+    github::YuLab-SMU/ggtree
+    
