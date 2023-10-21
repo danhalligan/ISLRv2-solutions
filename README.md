@@ -14,7 +14,7 @@ If you use these solutions or find them useful, please star this repository!
 ## About these solutions
 
 The solutions are written in [bookdown] format using (my) 
-[ISLRv2 solutions template](https://github.com/danhalliganISLRv2-solutions-template).
+[ISLRv2 solutions template](https://github.com/danhalligan/ISLRv2-solutions-template).
 
 For anyone reading this book, I believe there is great value in deriving 
 the solutions yourself, and the template above can be forked to provide a 
@@ -56,9 +56,7 @@ Rebuild the book with compiled solutions by running:
 bookdown::render_book('index.Rmd', 'bookdown::gitbook')
 ```
 
-
 [bookdown]: https://github.com/rstudio/bookdown
 [GitHub Actions]: https://docs.github.com/en/actions
 [GitHub pages]: https://pages.github.com/
-
 [tensorflow and keras]: https://tensorflow.rstudio.com/install/
