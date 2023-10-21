@@ -749,9 +749,9 @@ linear logistic regression.</p>
 <span id="cb707-19"><a href="deep-learning.html#cb707-19" aria-hidden="true"></a><span class="kw">plot</span>(history, <span class="dt">smooth =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <p><img src="10-deep-learning_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb708-1"><a href="deep-learning.html#cb708-1" aria-hidden="true"></a>npred &lt;-<span class="st"> </span><span class="kw">predict</span>(nn, x[testid, ])</span></code></pre></div>
-<pre><code>## 6/6 - 0s - 68ms/epoch - 11ms/step</code></pre>
+<pre><code>## 6/6 - 0s - 70ms/epoch - 12ms/step</code></pre>
 <div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="deep-learning.html#cb710-1" aria-hidden="true"></a><span class="kw">mean</span>(<span class="kw">abs</span>(y[testid] <span class="op">-</span><span class="st"> </span>npred))</span></code></pre></div>
-<pre><code>## [1] 2.240656</code></pre>
+<pre><code>## [1] 2.337117</code></pre>
 <p>In this case, the neural network outperforms logistic regression having a lower
 absolute error rate on the test data.</p>
 </div>
@@ -778,26 +778,19 @@ each image.</p>
 <pre><code>## Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/resnet/resnet50_weights_tf_dim_ordering_tf_kernels.h5
 ## 
      8192/102967424 [..............................] - ETA: 0s
-    65536/102967424 [..............................] - ETA: 1:19
-   294912/102967424 [..............................] - ETA: 35s 
-  1310720/102967424 [..............................] - ETA: 11s
-  5881856/102967424 [&gt;.............................] - ETA: 3s 
- 12656640/102967424 [==&gt;...........................] - ETA: 1s
- 18391040/102967424 [====&gt;.........................] - ETA: 1s
- 20774912/102967424 [=====&gt;........................] - ETA: 1s
- 27541504/102967424 [=======&gt;......................] - ETA: 1s
- 34185216/102967424 [========&gt;.....................] - ETA: 0s
- 39895040/102967424 [==========&gt;...................] - ETA: 0s
- 44670976/102967424 [============&gt;.................] - ETA: 0s
- 51216384/102967424 [=============&gt;................] - ETA: 0s
- 55214080/102967424 [===============&gt;..............] - ETA: 0s
- 60424192/102967424 [================&gt;.............] - ETA: 0s
+   516096/102967424 [..............................] - ETA: 9s
+  4202496/102967424 [&gt;.............................] - ETA: 3s
+ 12558336/102967424 [==&gt;...........................] - ETA: 1s
+ 16785408/102967424 [===&gt;..........................] - ETA: 1s
+ 25174016/102967424 [======&gt;.......................] - ETA: 1s
+ 33562624/102967424 [========&gt;.....................] - ETA: 1s
+ 41959424/102967424 [===========&gt;..................] - ETA: 0s
+ 50339840/102967424 [=============&gt;................] - ETA: 0s
+ 58728448/102967424 [================&gt;.............] - ETA: 0s
  67117056/102967424 [==================&gt;...........] - ETA: 0s
- 73940992/102967424 [====================&gt;.........] - ETA: 0s
- 78905344/102967424 [=====================&gt;........] - ETA: 0s
- 85721088/102967424 [=======================&gt;......] - ETA: 0s
- 92356608/102967424 [=========================&gt;....] - ETA: 0s
- 99090432/102967424 [===========================&gt;..] - ETA: 0s
+ 75997184/102967424 [=====================&gt;........] - ETA: 0s
+ 83894272/102967424 [=======================&gt;......] - ETA: 0s
+ 97697792/102967424 [===========================&gt;..] - ETA: 0s
 102967424/102967424 [==============================] - 1s 0us/step</code></pre>
 <div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="deep-learning.html#cb714-1" aria-hidden="true"></a>pred &lt;-<span class="st"> </span>model <span class="op">|</span><span class="er">&gt;</span></span>
 <span id="cb714-2"><a href="deep-learning.html#cb714-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">predict</span>(x) <span class="op">|</span><span class="er">&gt;</span></span>
@@ -806,7 +799,7 @@ each image.</p>
 ## Downloading data from https://storage.googleapis.com/download.tensorflow.org/data/imagenet_class_index.json
 ## 
  8192/35363 [=====&gt;........................] - ETA: 0s
-35363/35363 [==============================] - 0s 1us/step</code></pre>
+35363/35363 [==============================] - 0s 0us/step</code></pre>
 <div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb716-1"><a href="deep-learning.html#cb716-1" aria-hidden="true"></a><span class="kw">names</span>(pred) &lt;-<span class="st"> </span>images</span>
 <span id="cb716-2"><a href="deep-learning.html#cb716-2" aria-hidden="true"></a><span class="kw">print</span>(pred)</span></code></pre></div>
 <pre><code>## $bird.jpg
@@ -1014,9 +1007,9 @@ predictors resulting in a linear AR model.</p>
 <span id="cb732-14"><a href="deep-learning.html#cb732-14" aria-hidden="true"></a><span class="kw">plot</span>(history, <span class="dt">smooth =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <p><img src="10-deep-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="deep-learning.html#cb733-1" aria-hidden="true"></a>kpred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, xrnn[<span class="op">!</span>istrain,, ])</span></code></pre></div>
-<pre><code>## 56/56 - 0s - 79ms/epoch - 1ms/step</code></pre>
+<pre><code>## 56/56 - 0s - 77ms/epoch - 1ms/step</code></pre>
 <div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb735-1"><a href="deep-learning.html#cb735-1" aria-hidden="true"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>((kpred <span class="op">-</span><span class="st"> </span>arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>])<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>V0</span></code></pre></div>
-<pre><code>## [1] 0.4141091</code></pre>
+<pre><code>## [1] 0.414054</code></pre>
 <p>Both models estimate the same number of coefficients/weights (16):</p>
 <div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="deep-learning.html#cb737-1" aria-hidden="true"></a><span class="kw">coef</span>(arfit)</span></code></pre></div>
 <pre><code>##       (Intercept)      L1.DJ_return     L1.log_volume L1.log_volatility 
@@ -1035,25 +1028,25 @@ predictors resulting in a linear AR model.</p>
 ##      -0.017206826      -0.037298183       0.008361380</code></pre>
 <div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb739-1"><a href="deep-learning.html#cb739-1" aria-hidden="true"></a>model<span class="op">$</span><span class="kw">get_weights</span>()</span></code></pre></div>
 <pre><code>## [[1]]
-##               [,1]
-##  [1,] -0.029806422
-##  [2,]  0.098347105
-##  [3,]  0.129910275
-##  [4,] -0.007602138
-##  [5,]  0.115426019
-##  [6,]  0.027280092
-##  [7,]  0.039115183
-##  [8,]  0.076036550
-##  [9,]  0.095094629
-## [10,] -0.028172435
-## [11,]  0.030014755
-## [12,] -0.802324593
-## [13,]  0.095608920
-## [14,]  0.507359505
-## [15,]  0.515536666
+##              [,1]
+##  [1,] -0.03165706
+##  [2,]  0.09960276
+##  [3,]  0.11660444
+##  [4,] -0.01008447
+##  [5,]  0.11310078
+##  [6,]  0.02986154
+##  [7,]  0.03607789
+##  [8,]  0.07739141
+##  [9,]  0.10823317
+## [10,] -0.02898158
+## [11,]  0.03514344
+## [12,] -0.80487555
+## [13,]  0.09332187
+## [14,]  0.50403869
+## [15,]  0.50756109
 ## 
 ## [[2]]
-## [1] -0.007723626</code></pre>
+## [1] -0.006989056</code></pre>
 <p>The flattened RNN has a lower <span class="math inline">\(R^2\)</span> on the test data than our <code>lm</code> model
 above. The <code>lm</code> model is quicker to fit and conceptually simpler also
 giving us the ability to inspect the coefficients for different variables.</p>
@@ -1099,8 +1092,8 @@ the short sequences produced for the RNN model.</p>
 <span id="cb741-27"><a href="deep-learning.html#cb741-27" aria-hidden="true"></a>  <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>((kpred <span class="op">-</span><span class="st"> </span>arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>])<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>V0</span>
 <span id="cb741-28"><a href="deep-learning.html#cb741-28" aria-hidden="true"></a></span>
 <span id="cb741-29"><a href="deep-learning.html#cb741-29" aria-hidden="true"></a>})</span></code></pre></div>
-<pre><code>## 56/56 - 0s - 78ms/epoch - 1ms/step</code></pre>
-<pre><code>## [1] 0.4211464</code></pre>
+<pre><code>## 56/56 - 0s - 83ms/epoch - 1ms/step</code></pre>
+<pre><code>## [1] 0.430295</code></pre>
 <p>This approach improves our <span class="math inline">\(R^2\)</span> over the linear model above.</p>
 </div>
 <div id="question-12-4" class="section level3 hasAnchor" number="10.2.7">
@@ -1162,8 +1155,8 @@ in the RNN. Thus, our input for each observation will be 4 x 5 (rather than
 <span id="cb744-47"><a href="deep-learning.html#cb744-47" aria-hidden="true"></a>  <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>((kpred <span class="op">-</span><span class="st"> </span>arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>])<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>V0</span>
 <span id="cb744-48"><a href="deep-learning.html#cb744-48" aria-hidden="true"></a></span>
 <span id="cb744-49"><a href="deep-learning.html#cb744-49" aria-hidden="true"></a>})</span></code></pre></div>
-<pre><code>## 56/56 - 0s - 178ms/epoch - 3ms/step</code></pre>
-<pre><code>## [1] 0.4520556</code></pre>
+<pre><code>## 56/56 - 0s - 170ms/epoch - 3ms/step</code></pre>
+<pre><code>## [1] 0.4528716</code></pre>
 </div>
 <div id="question-13-3" class="section level3 hasAnchor" number="10.2.8">
 <h3><span class="header-section-number">10.2.8</span> Question 13<a href="deep-learning.html#question-13-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1216,16 +1209,13 @@ and 10,000, and compare the results.</p>
 <pre><code>## Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/imdb.npz
 ## 
     8192/17464789 [..............................] - ETA: 0s
-   65536/17464789 [..............................] - ETA: 13s
-  294912/17464789 [..............................] - ETA: 5s 
- 1302528/17464789 [=&gt;............................] - ETA: 1s
- 6012928/17464789 [=========&gt;....................] - ETA: 0s
-12713984/17464789 [====================&gt;.........] - ETA: 0s
+  950272/17464789 [&gt;.............................] - ETA: 0s
+ 8396800/17464789 [=============&gt;................] - ETA: 0s
 17464789/17464789 [==============================] - 0s 0us/step
-## 782/782 - 15s - 15s/epoch - 19ms/step
-## 782/782 - 15s - 15s/epoch - 20ms/step
+## 782/782 - 17s - 17s/epoch - 21ms/step
+## 782/782 - 16s - 16s/epoch - 21ms/step
 ## 782/782 - 16s - 16s/epoch - 20ms/step
-## 782/782 - 16s - 16s/epoch - 20ms/step</code></pre>
+## 782/782 - 17s - 17s/epoch - 21ms/step</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -1236,19 +1226,19 @@ and 10,000, and compare the results.</p>
 <tbody>
 <tr class="odd">
 <td align="right">1000</td>
-<td align="right">0.86300</td>
+<td align="right">0.84944</td>
 </tr>
 <tr class="even">
 <td align="right">3000</td>
-<td align="right">0.85400</td>
+<td align="right">0.87392</td>
 </tr>
 <tr class="odd">
 <td align="right">5000</td>
-<td align="right">0.87152</td>
+<td align="right">0.87880</td>
 </tr>
 <tr class="even">
 <td align="right">10000</td>
-<td align="right">0.86832</td>
+<td align="right">0.86472</td>
 </tr>
 </tbody>
 </table>
