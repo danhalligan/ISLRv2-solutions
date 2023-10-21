@@ -1,5 +1,8 @@
 # An Introduction to Statistical Learning second edition solutions
 
+[![Build and Deploy](https://github.com/danhalligan/ISLRv2-solutions/actions/workflows/github-actions.yml/badge.svg)](https://github.com/danhalligan/ISLRv2-solutions/actions/workflows/github-actions.yml)
+![License](https://img.shields.io/github/license/danhalligan/ISLRv2-solutions)
+
 ![ISLR cover](images/isl_small.jpg)
 
 This repository provides my solutions for all exercises in the book 
