@@ -345,6 +345,17 @@ $S(t)$ is $1 - F(t)$ where $F(t)$ is the cdf. Hence, $S(t) = \exp(−\lambda t)$
 > $Exp(\lambda)$ distribution. Write out an expression for the likelihood
 > function (11.13).
 
+The reference to (11.13) gives us the following formula:
+
+$$
+L &= \prod_{i=1}^{n} f(y_i)^{\delta_i} S(y_i)^{1 - \delta_i}
+
+&= \prod_{i=1}^{n} h(y_i)^{\delta_i} S(y_i)
+$$
+
+Take the first definition. We have an expression for both $f(y_i)$ and $S(y_i)$. Substituting in these values, we can obtain:
+
+
 $$
 \ell = \prod_i \lambda^{d_i}y_i^{-\lambda}
 $$
