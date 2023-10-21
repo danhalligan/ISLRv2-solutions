@@ -170,7 +170,7 @@ mean(store)
 ```
 
 ```
-## [1] 0.6415
+## [1] 0.6354
 ```
 
 The probability of including $4$ when resampling numbers $1...100$ is close to
@@ -369,7 +369,7 @@ $\beta_2$ = 2.3e-4.
 
 ```r
 boot.fn <- function(x, i) {
-  fit <- glm(default ~ income + balance, data = Default[i, ], family = "binomial")
+  fit <- glm(default ~ income + balance, data = x[i, ], family = "binomial")
   coef(fit)[-1]
 }
 ```
