@@ -258,7 +258,7 @@ x <- Surv(c(300, 350, 150, 250), c(1, 0, 1, 0))
 > the event occurs within 200 days? What is the probability that the event does
 > not occur within 310 days?
 
-0.75 and 0.375.
+0.25 and 0.375.
 
 > d. Write out an expression for the estimated survival curve from (b).
 
