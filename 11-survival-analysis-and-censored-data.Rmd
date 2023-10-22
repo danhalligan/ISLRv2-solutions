@@ -392,7 +392,7 @@ $$
 \frac{d \log \ell}{d \lambda} = \frac{\sum_i{\delta_i}}{\lambda} - \sum_i{y_i}
 $$
 
-A maximum is when this is 0, or  when
+This function maximises when its gradient is 0. Solving for this gives a MLE of
 $\hat\lambda = \sum_{i=1}^n \delta_i / \sum_{i=1}^n y_i$.
 
 > d. Use your answer to (c) to derive an estimator of the mean survival time.
