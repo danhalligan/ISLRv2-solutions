@@ -348,16 +348,28 @@ $S(t)$ is $1 - F(t)$ where $F(t)$ is the cdf. Hence, $S(t) = \exp(−\lambda t)$
 The reference to (11.13) gives us the following formula:
 
 $$
-L &= \prod_{i=1}^{n} f(y_i)^{\delta_i} S(y_i)^{1 - \delta_i}
-
-&= \prod_{i=1}^{n} h(y_i)^{\delta_i} S(y_i)
+	L = \prod_{i=1}^{n} h(y_i)^{\delta_i} S(y_i)
 $$
 
-Take the first definition. We have an expression for both $f(y_i)$ and $S(y_i)$. Substituting in these values, we can obtain:
-
+(11.10) also gives us
 
 $$
-\ell = \prod_i \lambda^{d_i}y_i^{-\lambda}
+	h(t) = \frac{f(t)}{S(t)}
+$$
+
+Plugging in the expressions from part (a), we get
+
+$$
+\begin{align*}
+	h(t) &= \frac{\lambda \exp(- \lambda t)}{\exp(- \lambda t)}\\
+	&= \lambda
+\end{align*}
+$$
+
+Using (11.13), we get the following loss expression:
+
+$$
+	\ell = \prod_i \lambda^{\delta_i} e^{- \lambda y_i}
 $$
 
 > c. Show that the maximum likelihood estimator for $\lambda$ is
@@ -365,8 +377,12 @@ $$
 > \hat\lambda = \sum_{i=1}^n \delta_i / \sum_{i=1}^n y_i.
 > $$
 
+Take the log likelihood.
+
 \begin{align*}
-\log \ell &= \sum_i{\delta_i\log\lambda - \lambda y_i} \\
+\log \ell &= \sum_i \log \left( \lambda^{\delta_i} e^{- \lambda y_i} \right) \\
+	  &= \sum_i{\delta_i\log\lambda - \lambda y_i \log e} \\
+	  &= \sum_i{\delta_i\log\lambda - \lambda y_i} \\
           &= \log\lambda\sum_i{\delta_i} - \lambda\sum_i{y_i}
 \end{align*}
 
