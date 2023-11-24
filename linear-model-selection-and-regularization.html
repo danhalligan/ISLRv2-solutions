@@ -741,22 +741,21 @@ there is only one solution, that is when the coefficients are the same.</p>
 solutions to the optimization problem in (c). Describe these solutions.</li>
 </ol>
 </blockquote>
-<p>We will use the alternate form of the lasso optimization problem</p>
+<p>We will consider the alternate form of the lasso optimization problem</p>
 <p><span class="math display">\[
-(y_1 - \hat{\beta_1}x_1 - \hat{\beta_2}x_1)^2 + (y_2 - \hat{\beta_1}x_2 - \hat{\beta_2}x_2)^2 \textrm{subject to} |\hat{\beta_1}| + |\hat{\beta_2}| \le s
+(y_1 - \hat{\beta_1}x_1 - \hat{\beta_2}x_1)^2 + (y_2 - \hat{\beta_1}x_2 - \hat{\beta_2}x_2)^2 \quad \text{subject to} \quad |\hat{\beta_1}| + |\hat{\beta_2}| \le s
 \]</span></p>
-<p>Additionally, since <span class="math inline">\(x_1 + x_2 = 0\)</span> and <span class="math inline">\(y_1 + y_2 = 0\)</span>, we have to minimize the expression</p>
-<p><span class="math display">\[
-2(y_1 - (\hat{\beta_1} + \hat{\beta_2})x_1)^2 \ge 0
-\]</span></p>
-<p>This optimization problem has a solution when <span class="math inline">\(\hat{\beta_1} + \hat{\beta_2} = y_1/x_1\)</span>.</p>
-<p>Geometrically, this is a line parallel to two edges of a set of contraints in
-a diamond shape centered at the origin of the plane
-(<span class="math inline">\(\hat{\beta_1}\)</span>, <span class="math inline">\(\hat{\beta_2}\)</span>) which intersects the axes at a distance <span class="math inline">\(s\)</span>
-from the origin.</p>
-<p>So, all points on the edges of the contraint diamond
-(<span class="math inline">\(\hat{\beta_1} + \hat{\beta_2} = s\)</span> and <span class="math inline">\(\hat{\beta_1} + \hat{\beta_2} = -s\)</span>
-are solutions to the lasso optimization problem.</p>
+<p>Since <span class="math inline">\(x_1 + x_2 = 0\)</span> and <span class="math inline">\(y_1 + y_2 = 0\)</span>, this is equivalent to minimising
+<span class="math inline">\(2(y_1 - (\hat{\beta_1} + \hat{\beta_2})x_1)^2\)</span>
+which has a solution when <span class="math inline">\(\hat{\beta_1} + \hat{\beta_2} = y_1/x_1\)</span>.
+Geometrically, this is a <span class="math inline">\(45^\circ\)</span> backwards sloping line in the
+(<span class="math inline">\(\hat{\beta_1}\)</span>, <span class="math inline">\(\hat{\beta_2}\)</span>) plane.</p>
+<p>The constraints <span class="math inline">\(|\hat{\beta_1}| + |\hat{\beta_2}| \le s\)</span> specify a diamond
+shape in the same place, also with lines that are at <span class="math inline">\(45^\circ\)</span> centered at the
+origin and which intersect the axes at a distance <span class="math inline">\(s\)</span> from the origin.</p>
+<p>Thus, points along two edges of the diamond
+(<span class="math inline">\(\hat{\beta_1} + \hat{\beta_2} = s\)</span> and <span class="math inline">\(\hat{\beta_1} + \hat{\beta_2} = -s\)</span>)
+become solutions to the lasso optimization problem.</p>
 </div>
 <div id="question-6-4" class="section level3 hasAnchor" number="6.1.6">
 <h3><span class="header-section-number">6.1.6</span> Question 6<a href="linear-model-selection-and-regularization.html#question-6-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>

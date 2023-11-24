@@ -260,28 +260,25 @@ $$
 >    $\hat{\beta}_2$ are not unique---in other words, there are many possible
 >    solutions to the optimization problem in (c). Describe these solutions.
 
-We will use the alternate form of the lasso optimization problem
+We will consider the alternate form of the lasso optimization problem
 
 $$
-(y_1 - \hat{\beta_1}x_1 - \hat{\beta_2}x_1)^2 + (y_2 - \hat{\beta_1}x_2 - \hat{\beta_2}x_2)^2 \textrm{subject to} |\hat{\beta_1}| + |\hat{\beta_2}| \le s
+(y_1 - \hat{\beta_1}x_1 - \hat{\beta_2}x_1)^2 + (y_2 - \hat{\beta_1}x_2 - \hat{\beta_2}x_2)^2 \quad \text{subject to} \quad |\hat{\beta_1}| + |\hat{\beta_2}| \le s
 $$
 
-Additionally, since $x_1 + x_2 = 0$ and $y_1 + y_2 = 0$, we have to minimize the expression
+Since $x_1 + x_2 = 0$ and $y_1 + y_2 = 0$, this is equivalent to minimising
+$2(y_1 - (\hat{\beta_1} + \hat{\beta_2})x_1)^2$
+which has a solution when $\hat{\beta_1} + \hat{\beta_2} = y_1/x_1$.
+Geometrically, this is a $45^\circ$ backwards sloping line in the 
+($\hat{\beta_1}$, $\hat{\beta_2}$) plane.
 
-$$
-2(y_1 - (\hat{\beta_1} + \hat{\beta_2})x_1)^2 \ge 0
-$$
+The constraints $|\hat{\beta_1}| + |\hat{\beta_2}| \le s$ specify a diamond 
+shape in the same place, also with lines that are at $45^\circ$ centered at the
+origin and which intersect the axes at a distance $s$ from the origin. 
 
-This optimization problem has a solution when $\hat{\beta_1} + \hat{\beta_2} = y_1/x_1$.
-
-Geometrically, this is a line parallel to two edges of a set of contraints in
-a diamond shape centered at the origin of the plane 
-($\hat{\beta_1}$, $\hat{\beta_2}$) which intersects the axes at a distance $s$
-from the origin. 
-
-So, all points on the edges of the contraint diamond 
-($\hat{\beta_1} + \hat{\beta_2} = s$ and $\hat{\beta_1} + \hat{\beta_2} = -s$ 
-are solutions to the lasso optimization problem.
+Thus, points along two edges of the diamond
+($\hat{\beta_1} + \hat{\beta_2} = s$ and $\hat{\beta_1} + \hat{\beta_2} = -s$) 
+become solutions to the lasso optimization problem.
 
 ### Question 6
 
