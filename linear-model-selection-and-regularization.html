@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Linear Model Selection and Regularization | An Introduction to Statistical Learning</title>
   <meta name="description" content="6 Linear Model Selection and Regularization | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.36.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Linear Model Selection and Regularization | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -51,8 +51,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
@@ -716,7 +716,8 @@ f = &amp; y_1^2 - 2y_1\beta_1x_1 - 2y_1\beta_2x_1 + \beta_1^2x_1^2 + 2\beta_1\be
 \lambda\beta_1 = y_1x_1 + y_2x_2 - \beta_1x_1^2 - \beta_2x_1^2 - \beta_1x_2^2 - \beta_2x_2^2 \\
 \lambda\beta_2 = y_1x_1 + y_2x_2 - \beta_1x_1^2 - \beta_2x_1^2 - \beta_1x_2^2 - \beta_2x_2^2 
 \]</span></p>
-<p>Therefore <span class="math inline">\(\lambda\beta_1 = \lambda\beta_2\)</span></p>
+<p>Therefore <span class="math inline">\(\lambda\beta_1 = \lambda\beta_2\)</span> and <span class="math inline">\(\beta_1 = \beta_2\)</span>, thus
+there is only one solution, that is when the coefficients are the same.</p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Write out the lasso optimization problem in this setting.</li>
@@ -727,7 +728,7 @@ f = &amp; y_1^2 - 2y_1\beta_1x_1 - 2y_1\beta_2x_1 + \beta_1^2x_1^2 + 2\beta_1\be
 \sum_{i=1}^n \left(y_i - \beta_0 - \sum_{j=1}^p\beta_jx_{ij}\right)^2 +
   \lambda\sum_{j=1}^p |\beta_j|
 \]</span></p>
-<p>As above, we simplify to</p>
+<p>As above (and defining <span class="math inline">\(x_1 = x_{11} = x_{12}\)</span> and <span class="math inline">\(x_2 = x_{21} = x_{22}\)</span>) we simplify to</p>
 <p><span class="math display">\[
 (y_1 - \beta_1x_1 - \beta_2x_1)^2 + 
   (y_2 - \beta_1x_2 - \beta_2x_2)^2 + 
@@ -740,21 +741,22 @@ f = &amp; y_1^2 - 2y_1\beta_1x_1 - 2y_1\beta_2x_1 + \beta_1^2x_1^2 + 2\beta_1\be
 solutions to the optimization problem in (c). Describe these solutions.</li>
 </ol>
 </blockquote>
+<p>We will use the alternate form of the lasso optimization problem</p>
 <p><span class="math display">\[
-\frac{\partial}{\partial{\beta_1}} = 
-  - 2y_1x_1 + 2\beta_1x_1^2 + 2\beta_2x_1^2
-  - 2y_2x_2 + 2\beta_1x_2^2 + 2\beta_2x_2^2
-  + \lambda\frac{\beta_1}{|\beta_1|}
+(y_1 - \hat{\beta_1}x_1 - \hat{\beta_2}x_1)^2 + (y_2 - \hat{\beta_1}x_2 - \hat{\beta_2}x_2)^2 \textrm{subject to} |\hat{\beta_1}| + |\hat{\beta_2}| \le s
 \]</span></p>
+<p>Additionally, since <span class="math inline">\(x_1 + x_2 = 0\)</span> and <span class="math inline">\(y_1 + y_2 = 0\)</span>, we have to minimize the expression</p>
 <p><span class="math display">\[
-\frac{\partial}{\partial{\beta_2}} = 
-  - 2y_1x_1 + 2\beta_1x_1^2 + 2\beta_2x_1^2
-  - 2y_2x_2 + 2\beta_1x_2^2 + 2\beta_2x_2^2
-  + \lambda\frac{\beta_2}{|\beta_2|}
+2(y_1 - (\hat{\beta_1} + \hat{\beta_2})x_1)^2 \ge 0
 \]</span></p>
-<p>By the above logic <span class="math inline">\(\frac{|\beta_1|}{\beta_1} = \frac{|\beta_2|}{\beta_2}\)</span></p>
-<p>What does this imply though???</p>
-<p>ToDo</p>
+<p>This optimization problem has a solution when <span class="math inline">\(\hat{\beta_1} + \hat{\beta_2} = y_1/x_1\)</span>.</p>
+<p>Geometrically, this is a line parallel to two edges of a set of contraints in
+a diamond shape centered at the origin of the plane
+(<span class="math inline">\(\hat{\beta_1}\)</span>, <span class="math inline">\(\hat{\beta_2}\)</span>) which intersects the axes at a distance <span class="math inline">\(s\)</span>
+from the origin.</p>
+<p>So, all points on the edges of the contraint diamond
+(<span class="math inline">\(\hat{\beta_1} + \hat{\beta_2} = s\)</span> and <span class="math inline">\(\hat{\beta_1} + \hat{\beta_2} = -s\)</span>
+are solutions to the lasso optimization problem.</p>
 </div>
 <div id="question-6-4" class="section level3 hasAnchor" number="6.1.6">
 <h3><span class="header-section-number">6.1.6</span> Question 6<a href="linear-model-selection-and-regularization.html#question-6-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -778,10 +780,10 @@ plot (6.12) as a function of <span class="math inline">\(\beta_1\)</span>. Your 
 <div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="linear-model-selection-and-regularization.html#cb333-1" aria-hidden="true"></a>lambda &lt;-<span class="st"> </span><span class="fl">0.7</span></span>
 <span id="cb333-2"><a href="linear-model-selection-and-regularization.html#cb333-2" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="fl">1.4</span></span>
 <span id="cb333-3"><a href="linear-model-selection-and-regularization.html#cb333-3" aria-hidden="true"></a>fn &lt;-<span class="st"> </span><span class="cf">function</span>(beta) {</span>
-<span id="cb333-4"><a href="linear-model-selection-and-regularization.html#cb333-4" aria-hidden="true"></a>  (y <span class="op">-</span><span class="st"> </span>beta)<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>lambda<span class="op">*</span>beta<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb333-4"><a href="linear-model-selection-and-regularization.html#cb333-4" aria-hidden="true"></a>  (y <span class="op">-</span><span class="st"> </span>beta)<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>lambda <span class="op">*</span><span class="st"> </span>beta<span class="op">^</span><span class="dv">2</span></span>
 <span id="cb333-5"><a href="linear-model-selection-and-regularization.html#cb333-5" aria-hidden="true"></a>}</span>
 <span id="cb333-6"><a href="linear-model-selection-and-regularization.html#cb333-6" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>), <span class="kw">fn</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;beta&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;6.12&quot;</span>)</span>
-<span id="cb333-7"><a href="linear-model-selection-and-regularization.html#cb333-7" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> y<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>lambda), <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb333-7"><a href="linear-model-selection-and-regularization.html#cb333-7" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> y <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>lambda), <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -806,10 +808,10 @@ plot (6.13) as a function of <span class="math inline">\(\beta_1\)</span>. Your 
 <div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="linear-model-selection-and-regularization.html#cb334-1" aria-hidden="true"></a>lambda &lt;-<span class="st"> </span><span class="fl">0.7</span></span>
 <span id="cb334-2"><a href="linear-model-selection-and-regularization.html#cb334-2" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="fl">1.4</span></span>
 <span id="cb334-3"><a href="linear-model-selection-and-regularization.html#cb334-3" aria-hidden="true"></a>fn &lt;-<span class="st"> </span><span class="cf">function</span>(beta) {</span>
-<span id="cb334-4"><a href="linear-model-selection-and-regularization.html#cb334-4" aria-hidden="true"></a>  (y <span class="op">-</span><span class="st"> </span>beta)<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>lambda<span class="op">*</span><span class="kw">abs</span>(beta)</span>
+<span id="cb334-4"><a href="linear-model-selection-and-regularization.html#cb334-4" aria-hidden="true"></a>  (y <span class="op">-</span><span class="st"> </span>beta)<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>lambda <span class="op">*</span><span class="st"> </span><span class="kw">abs</span>(beta)</span>
 <span id="cb334-5"><a href="linear-model-selection-and-regularization.html#cb334-5" aria-hidden="true"></a>}</span>
 <span id="cb334-6"><a href="linear-model-selection-and-regularization.html#cb334-6" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>), <span class="kw">fn</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;beta&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;6.12&quot;</span>)</span>
-<span id="cb334-7"><a href="linear-model-selection-and-regularization.html#cb334-7" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> y <span class="op">-</span><span class="st">  </span>lambda<span class="op">/</span><span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb334-7"><a href="linear-model-selection-and-regularization.html#cb334-7" aria-hidden="true"></a><span class="kw">abline</span>(<span class="dt">v =</span> y <span class="op">-</span><span class="st"> </span>lambda <span class="op">/</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="question-7-4" class="section level3 hasAnchor" number="6.1.7">
@@ -936,7 +938,7 @@ where <span class="math inline">\(\beta_0, \beta_1, \beta_2,\)</span> and <span 
 choice.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="linear-model-selection-and-regularization.html#cb337-1" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">3</span><span class="op">*</span>x <span class="op">-</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span><span class="op">*</span>x<span class="op">^</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>ep</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="linear-model-selection-and-regularization.html#cb337-1" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>ep</span></code></pre></div>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Use the <code>regsubsets()</code> function to perform best subset selection in order
@@ -1155,7 +1157,7 @@ discuss the results obtained.</li>
 <pre><code>## [1] 0.09804219</code></pre>
 <div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="linear-model-selection-and-regularization.html#cb346-1" aria-hidden="true"></a><span class="kw">plot</span>(res)</span></code></pre></div>
 <p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="linear-model-selection-and-regularization.html#cb347-1" aria-hidden="true"></a>out =<span class="st"> </span><span class="kw">glmnet</span>(<span class="kw">poly</span>(dat<span class="op">$</span>x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), dat<span class="op">$</span>y, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> res<span class="op">$</span>lambda.min)</span>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="linear-model-selection-and-regularization.html#cb347-1" aria-hidden="true"></a>out &lt;-<span class="st"> </span><span class="kw">glmnet</span>(<span class="kw">poly</span>(dat<span class="op">$</span>x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), dat<span class="op">$</span>y, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> res<span class="op">$</span>lambda.min)</span>
 <span id="cb347-2"><a href="linear-model-selection-and-regularization.html#cb347-2" aria-hidden="true"></a><span class="kw">predict</span>(out, <span class="dt">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="dt">s =</span> best)</span></code></pre></div>
 <pre><code>## 11 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                     s1
@@ -1180,7 +1182,7 @@ those used in the simulation.</p>
 and the lasso. Discuss the results obtained.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="linear-model-selection-and-regularization.html#cb349-1" aria-hidden="true"></a>dat<span class="op">$</span>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>x<span class="op">^</span><span class="dv">2</span> <span class="fl">+0.2</span><span class="op">*</span>x<span class="op">^</span><span class="dv">7</span> <span class="op">+</span><span class="st"> </span>ep</span>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="linear-model-selection-and-regularization.html#cb349-1" aria-hidden="true"></a>dat<span class="op">$</span>y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.2</span> <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">7</span> <span class="op">+</span><span class="st"> </span>ep</span>
 <span id="cb349-2"><a href="linear-model-selection-and-regularization.html#cb349-2" aria-hidden="true"></a><span class="kw">summary</span>(<span class="kw">regsubsets</span>(y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), <span class="dt">data =</span> dat))</span></code></pre></div>
 <pre><code>## Subset selection object
 ## Call: regsubsets.formula(y ~ poly(x, 10, raw = TRUE), data = dat)
@@ -1248,7 +1250,7 @@ and the lasso. Discuss the results obtained.</li>
 <pre><code>## [1] 1.126906</code></pre>
 <div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="linear-model-selection-and-regularization.html#cb353-1" aria-hidden="true"></a><span class="kw">plot</span>(res)</span></code></pre></div>
 <p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="linear-model-selection-and-regularization.html#cb354-1" aria-hidden="true"></a>out =<span class="st"> </span><span class="kw">glmnet</span>(<span class="kw">poly</span>(dat<span class="op">$</span>x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), dat<span class="op">$</span>y, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> best)</span>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="linear-model-selection-and-regularization.html#cb354-1" aria-hidden="true"></a>out &lt;-<span class="st"> </span><span class="kw">glmnet</span>(<span class="kw">poly</span>(dat<span class="op">$</span>x, <span class="dv">10</span>, <span class="dt">raw =</span> <span class="ot">TRUE</span>), dat<span class="op">$</span>y, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> best)</span>
 <span id="cb354-2"><a href="linear-model-selection-and-regularization.html#cb354-2" aria-hidden="true"></a><span class="kw">predict</span>(out, <span class="dt">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="dt">s =</span> best)</span></code></pre></div>
 <pre><code>## 11 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                       s1
@@ -1276,7 +1278,7 @@ the other variables in the <code>College</code> data set.</p>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="linear-model-selection-and-regularization.html#cb356-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb356-2"><a href="linear-model-selection-and-regularization.html#cb356-2" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(College), <span class="kw">nrow</span>(College)<span class="op">*</span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span>
+<span id="cb356-2"><a href="linear-model-selection-and-regularization.html#cb356-2" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(College), <span class="kw">nrow</span>(College) <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>)</span>
 <span id="cb356-3"><a href="linear-model-selection-and-regularization.html#cb356-3" aria-hidden="true"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(College)), train)</span>
 <span id="cb356-4"><a href="linear-model-selection-and-regularization.html#cb356-4" aria-hidden="true"></a>mse &lt;-<span class="st"> </span><span class="kw">list</span>()</span></code></pre></div>
 <blockquote>
@@ -1286,7 +1288,7 @@ test error obtained.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="linear-model-selection-and-regularization.html#cb357-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ])</span>
-<span id="cb357-2"><a href="linear-model-selection-and-regularization.html#cb357-2" aria-hidden="true"></a>(mse<span class="op">$</span>lm &lt;-<span class="st"> </span><span class="kw">mean</span>((<span class="kw">predict</span>(fit, College[test, ]) <span class="op">-</span><span class="st"> </span>College<span class="op">$</span>Apps[test]) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</span></code></pre></div>
+<span id="cb357-2"><a href="linear-model-selection-and-regularization.html#cb357-2" aria-hidden="true"></a>(mse<span class="op">$</span>lm &lt;-<span class="st"> </span><span class="kw">mean</span>((<span class="kw">predict</span>(fit, College[test, ]) <span class="op">-</span><span class="st"> </span>College<span class="op">$</span>Apps[test])<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## [1] 1695269</code></pre>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -1297,7 +1299,7 @@ cross-validation. Report the test error obtained.</li>
 <div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="linear-model-selection-and-regularization.html#cb359-1" aria-hidden="true"></a>mm &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ])</span>
 <span id="cb359-2"><a href="linear-model-selection-and-regularization.html#cb359-2" aria-hidden="true"></a>fit2 &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(mm, College<span class="op">$</span>Apps[train], <span class="dt">alpha =</span> <span class="dv">0</span>)</span>
 <span id="cb359-3"><a href="linear-model-selection-and-regularization.html#cb359-3" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit2, <span class="kw">model.matrix</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[test, ]), <span class="dt">s =</span> fit2<span class="op">$</span>lambda.min)</span>
-<span id="cb359-4"><a href="linear-model-selection-and-regularization.html#cb359-4" aria-hidden="true"></a>(mse<span class="op">$</span>ridge &lt;-<span class="st"> </span><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>College<span class="op">$</span>Apps[test]) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</span></code></pre></div>
+<span id="cb359-4"><a href="linear-model-selection-and-regularization.html#cb359-4" aria-hidden="true"></a>(mse<span class="op">$</span>ridge &lt;-<span class="st"> </span><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>College<span class="op">$</span>Apps[test])<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## [1] 2804369</code></pre>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
@@ -1309,7 +1311,7 @@ non-zero coefficient estimates.</li>
 <div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="linear-model-selection-and-regularization.html#cb361-1" aria-hidden="true"></a>mm &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[train, ])</span>
 <span id="cb361-2"><a href="linear-model-selection-and-regularization.html#cb361-2" aria-hidden="true"></a>fit3 &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(mm, College<span class="op">$</span>Apps[train], <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
 <span id="cb361-3"><a href="linear-model-selection-and-regularization.html#cb361-3" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit3, <span class="kw">model.matrix</span>(Apps <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> College[test, ]), <span class="dt">s =</span> fit3<span class="op">$</span>lambda.min)</span>
-<span id="cb361-4"><a href="linear-model-selection-and-regularization.html#cb361-4" aria-hidden="true"></a>(mse<span class="op">$</span>lasso &lt;-<span class="st"> </span><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>College<span class="op">$</span>Apps[test]) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))</span></code></pre></div>
+<span id="cb361-4"><a href="linear-model-selection-and-regularization.html#cb361-4" aria-hidden="true"></a>(mse<span class="op">$</span>lasso &lt;-<span class="st"> </span><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span>College<span class="op">$</span>Apps[test])<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## [1] 1822322</code></pre>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
@@ -1363,7 +1365,7 @@ equal to zero.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="linear-model-selection-and-regularization.html#cb370-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb370-2"><a href="linear-model-selection-and-regularization.html#cb370-2" aria-hidden="true"></a>dat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span><span class="op">*</span><span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>)</span>
+<span id="cb370-2"><a href="linear-model-selection-and-regularization.html#cb370-2" aria-hidden="true"></a>dat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span> <span class="op">*</span><span class="st"> </span><span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>)</span>
 <span id="cb370-3"><a href="linear-model-selection-and-regularization.html#cb370-3" aria-hidden="true"></a><span class="kw">colnames</span>(dat) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</span>
 <span id="cb370-4"><a href="linear-model-selection-and-regularization.html#cb370-4" aria-hidden="true"></a>beta &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">20</span>)</span>
 <span id="cb370-5"><a href="linear-model-selection-and-regularization.html#cb370-5" aria-hidden="true"></a>beta[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">7</span>)</span>
@@ -1461,12 +1463,12 @@ set MSE associated with the best model of each size.</li>
 <li>Plot the test set MSE associated with the best model of each size.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="linear-model-selection-and-regularization.html#cb375-1" aria-hidden="true"></a>predict.regsubsets &lt;-<span class="st"> </span><span class="cf">function</span> (object, newdata, id, ...) {</span>
-<span id="cb375-2"><a href="linear-model-selection-and-regularization.html#cb375-2" aria-hidden="true"></a>  form &lt;-<span class="st"> </span><span class="kw">as.formula</span> (object<span class="op">$</span>call[[<span class="dv">2</span>]])</span>
-<span id="cb375-3"><a href="linear-model-selection-and-regularization.html#cb375-3" aria-hidden="true"></a>  mat &lt;-<span class="st"> </span><span class="kw">model.matrix</span> (form , newdata)</span>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="linear-model-selection-and-regularization.html#cb375-1" aria-hidden="true"></a>predict.regsubsets &lt;-<span class="st"> </span><span class="cf">function</span>(object, newdata, id, ...) {</span>
+<span id="cb375-2"><a href="linear-model-selection-and-regularization.html#cb375-2" aria-hidden="true"></a>  form &lt;-<span class="st"> </span><span class="kw">as.formula</span>(object<span class="op">$</span>call[[<span class="dv">2</span>]])</span>
+<span id="cb375-3"><a href="linear-model-selection-and-regularization.html#cb375-3" aria-hidden="true"></a>  mat &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(form, newdata)</span>
 <span id="cb375-4"><a href="linear-model-selection-and-regularization.html#cb375-4" aria-hidden="true"></a>  coefi &lt;-<span class="st"> </span><span class="kw">coef</span>(object, <span class="dt">id =</span> id)</span>
 <span id="cb375-5"><a href="linear-model-selection-and-regularization.html#cb375-5" aria-hidden="true"></a>  xvars &lt;-<span class="st"> </span><span class="kw">names</span>(coefi)</span>
-<span id="cb375-6"><a href="linear-model-selection-and-regularization.html#cb375-6" aria-hidden="true"></a>  mat[ ,xvars] <span class="op">%*%</span><span class="st"> </span>coefi</span>
+<span id="cb375-6"><a href="linear-model-selection-and-regularization.html#cb375-6" aria-hidden="true"></a>  mat[, xvars] <span class="op">%*%</span><span class="st"> </span>coefi</span>
 <span id="cb375-7"><a href="linear-model-selection-and-regularization.html#cb375-7" aria-hidden="true"></a>}</span>
 <span id="cb375-8"><a href="linear-model-selection-and-regularization.html#cb375-8" aria-hidden="true"></a>mse &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="cf">function</span>(i) <span class="kw">mean</span>((test<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">predict</span>(fit, test, i))<span class="op">^</span><span class="dv">2</span>))</span>
 <span id="cb375-9"><a href="linear-model-selection-and-regularization.html#cb375-9" aria-hidden="true"></a><span class="kw">plot</span>(mse, <span class="dt">ylab =</span> <span class="st">&quot;MSE&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
@@ -1486,7 +1488,7 @@ intermediate model size.</li>
 <p>The min test MSE is found when model size is 4. This corresponds to the
 simulated data which has four non-zero coefficients.</p>
 <div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="linear-model-selection-and-regularization.html#cb378-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb378-2"><a href="linear-model-selection-and-regularization.html#cb378-2" aria-hidden="true"></a>dat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span><span class="op">*</span><span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>)</span>
+<span id="cb378-2"><a href="linear-model-selection-and-regularization.html#cb378-2" aria-hidden="true"></a>dat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span> <span class="op">*</span><span class="st"> </span><span class="dv">20</span>), <span class="dt">nrow =</span> <span class="dv">1000</span>)</span>
 <span id="cb378-3"><a href="linear-model-selection-and-regularization.html#cb378-3" aria-hidden="true"></a><span class="kw">colnames</span>(dat) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;b&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</span>
 <span id="cb378-4"><a href="linear-model-selection-and-regularization.html#cb378-4" aria-hidden="true"></a>beta &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">20</span>)</span>
 <span id="cb378-5"><a href="linear-model-selection-and-regularization.html#cb378-5" aria-hidden="true"></a>beta[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">7</span>, <span class="fl">0.01</span>, <span class="fl">0.001</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>)</span>
@@ -1617,7 +1619,7 @@ discuss results for the approaches that you consider.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="linear-model-selection-and-regularization.html#cb386-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb386-2"><a href="linear-model-selection-and-regularization.html#cb386-2" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Boston), <span class="kw">nrow</span>(Boston)<span class="op">*</span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span>
+<span id="cb386-2"><a href="linear-model-selection-and-regularization.html#cb386-2" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Boston), <span class="kw">nrow</span>(Boston) <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>)</span>
 <span id="cb386-3"><a href="linear-model-selection-and-regularization.html#cb386-3" aria-hidden="true"></a>test &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(Boston)), train)</span>
 <span id="cb386-4"><a href="linear-model-selection-and-regularization.html#cb386-4" aria-hidden="true"></a><span class="kw">hist</span>(<span class="kw">log</span>(Boston<span class="op">$</span>crim))</span></code></pre></div>
 <p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
@@ -1632,17 +1634,17 @@ reasonable alternative, as opposed to using training error.</li>
 <p>We will try to fit models to <code>log(Boston$crim)</code> which is closer to a normal
 distribution.</p>
 <div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="linear-model-selection-and-regularization.html#cb387-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[train, ])</span>
-<span id="cb387-2"><a href="linear-model-selection-and-regularization.html#cb387-2" aria-hidden="true"></a><span class="kw">mean</span>((<span class="kw">predict</span>(fit, Boston[test, ]) <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(Boston<span class="op">$</span>crim[test])) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<span id="cb387-2"><a href="linear-model-selection-and-regularization.html#cb387-2" aria-hidden="true"></a><span class="kw">mean</span>((<span class="kw">predict</span>(fit, Boston[test, ]) <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(Boston<span class="op">$</span>crim[test]))<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.66578</code></pre>
 <div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="linear-model-selection-and-regularization.html#cb389-1" aria-hidden="true"></a>mm &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[train, ])</span>
 <span id="cb389-2"><a href="linear-model-selection-and-regularization.html#cb389-2" aria-hidden="true"></a>fit2 &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(mm, <span class="kw">log</span>(Boston<span class="op">$</span>crim[train]), <span class="dt">alpha =</span> <span class="dv">0</span>)</span>
 <span id="cb389-3"><a href="linear-model-selection-and-regularization.html#cb389-3" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit2, <span class="kw">model.matrix</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[test, ]), <span class="dt">s =</span> fit2<span class="op">$</span>lambda.min)</span>
-<span id="cb389-4"><a href="linear-model-selection-and-regularization.html#cb389-4" aria-hidden="true"></a><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(Boston<span class="op">$</span>crim[test])) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<span id="cb389-4"><a href="linear-model-selection-and-regularization.html#cb389-4" aria-hidden="true"></a><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(Boston<span class="op">$</span>crim[test]))<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.6511807</code></pre>
 <div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="linear-model-selection-and-regularization.html#cb391-1" aria-hidden="true"></a>mm &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[train, ])</span>
 <span id="cb391-2"><a href="linear-model-selection-and-regularization.html#cb391-2" aria-hidden="true"></a>fit3 &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(mm, <span class="kw">log</span>(Boston<span class="op">$</span>crim[train]), <span class="dt">alpha =</span> <span class="dv">1</span>)</span>
 <span id="cb391-3"><a href="linear-model-selection-and-regularization.html#cb391-3" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">predict</span>(fit3, <span class="kw">model.matrix</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[test, ]), <span class="dt">s =</span> fit3<span class="op">$</span>lambda.min)</span>
-<span id="cb391-4"><a href="linear-model-selection-and-regularization.html#cb391-4" aria-hidden="true"></a><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(Boston<span class="op">$</span>crim[test])) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<span id="cb391-4"><a href="linear-model-selection-and-regularization.html#cb391-4" aria-hidden="true"></a><span class="kw">mean</span>((p <span class="op">-</span><span class="st"> </span><span class="kw">log</span>(Boston<span class="op">$</span>crim[test]))<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.6494337</code></pre>
 <div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="linear-model-selection-and-regularization.html#cb393-1" aria-hidden="true"></a>fit4 &lt;-<span class="st"> </span><span class="kw">pcr</span>(<span class="kw">log</span>(crim) <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston[train, ], <span class="dt">scale =</span> <span class="ot">TRUE</span>, <span class="dt">validation =</span> <span class="st">&quot;CV&quot;</span>)</span>
 <span id="cb393-2"><a href="linear-model-selection-and-regularization.html#cb393-2" aria-hidden="true"></a><span class="kw">validationplot</span>(fit4, <span class="dt">val.type =</span> <span class="st">&quot;MSEP&quot;</span>)</span></code></pre></div>

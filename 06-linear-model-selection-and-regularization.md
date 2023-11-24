@@ -236,7 +236,8 @@ $$
 \lambda\beta_2 = y_1x_1 + y_2x_2 - \beta_1x_1^2 - \beta_2x_1^2 - \beta_1x_2^2 - \beta_2x_2^2 
 $$
 
-Therefore $\lambda\beta_1 = \lambda\beta_2$
+Therefore $\lambda\beta_1 = \lambda\beta_2$ and $\beta_1 = \beta_2$, thus
+there is only one solution, that is when the coefficients are the same.
 
 > c. Write out the lasso optimization problem in this setting.
 
@@ -247,7 +248,7 @@ $$
   \lambda\sum_{j=1}^p |\beta_j|
 $$
 
-As above, we simplify to
+As above (and defining $x_1 = x_{11} = x_{12}$ and $x_2 = x_{21} = x_{22}$) we simplify to
 
 $$
 (y_1 - \beta_1x_1 - \beta_2x_1)^2 + 
@@ -259,25 +260,28 @@ $$
 >    $\hat{\beta}_2$ are not unique---in other words, there are many possible
 >    solutions to the optimization problem in (c). Describe these solutions.
 
-$$
-\frac{\partial}{\partial{\beta_1}} = 
-  - 2y_1x_1 + 2\beta_1x_1^2 + 2\beta_2x_1^2
-  - 2y_2x_2 + 2\beta_1x_2^2 + 2\beta_2x_2^2
-  + \lambda\frac{\beta_1}{|\beta_1|}
-$$
+We will use the alternate form of the lasso optimization problem
 
 $$
-\frac{\partial}{\partial{\beta_2}} = 
-  - 2y_1x_1 + 2\beta_1x_1^2 + 2\beta_2x_1^2
-  - 2y_2x_2 + 2\beta_1x_2^2 + 2\beta_2x_2^2
-  + \lambda\frac{\beta_2}{|\beta_2|}
+(y_1 - \hat{\beta_1}x_1 - \hat{\beta_2}x_1)^2 + (y_2 - \hat{\beta_1}x_2 - \hat{\beta_2}x_2)^2 \textrm{subject to} |\hat{\beta_1}| + |\hat{\beta_2}| \le s
 $$
 
-By the above logic $\frac{|\beta_1|}{\beta_1} = \frac{|\beta_2|}{\beta_2}$
+Additionally, since $x_1 + x_2 = 0$ and $y_1 + y_2 = 0$, we have to minimize the expression
 
-What does this imply though???
+$$
+2(y_1 - (\hat{\beta_1} + \hat{\beta_2})x_1)^2 \ge 0
+$$
 
-ToDo
+This optimization problem has a solution when $\hat{\beta_1} + \hat{\beta_2} = y_1/x_1$.
+
+Geometrically, this is a line parallel to two edges of a set of contraints in
+a diamond shape centered at the origin of the plane 
+($\hat{\beta_1}$, $\hat{\beta_2}$) which intersects the axes at a distance $s$
+from the origin. 
+
+So, all points on the edges of the contraint diamond 
+($\hat{\beta_1} + \hat{\beta_2} = s$ and $\hat{\beta_1} + \hat{\beta_2} = -s$ 
+are solutions to the lasso optimization problem.
 
 ### Question 6
 
@@ -306,10 +310,10 @@ where $\hat{\beta}_j^R$ is the ridge regression estimate.
 lambda <- 0.7
 y <- 1.4
 fn <- function(beta) {
-  (y - beta)^2 + lambda*beta^2
+  (y - beta)^2 + lambda * beta^2
 }
 plot(seq(0, 2, 0.01), fn(seq(0, 2, 0.01)), type = "l", xlab = "beta", ylab = "6.12")
-abline(v = y/(1 + lambda), lty = 2)
+abline(v = y / (1 + lambda), lty = 2)
 ```
 
 <img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-1-1.png" width="672" />
@@ -341,10 +345,10 @@ For $\lambda = 0.7$ and $y = 1.4$, the top case applies.
 lambda <- 0.7
 y <- 1.4
 fn <- function(beta) {
-  (y - beta)^2 + lambda*abs(beta)
+  (y - beta)^2 + lambda * abs(beta)
 }
 plot(seq(0, 2, 0.01), fn(seq(0, 2, 0.01)), type = "l", xlab = "beta", ylab = "6.12")
-abline(v = y -  lambda/2, lty = 2)
+abline(v = y - lambda / 2, lty = 2)
 ```
 
 <img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-2-1.png" width="672" />
@@ -479,7 +483,7 @@ ep <- rnorm(100)
 
 
 ```r
-y <- 2 + 3*x - 2*x^2 + 0.5*x^3 + ep
+y <- 2 + 3 * x - 2 * x^2 + 0.5 * x^3 + ep
 ```
 
 > c. Use the `regsubsets()` function to perform best subset selection in order
@@ -723,7 +727,7 @@ plot(res)
 <img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 ```r
-out = glmnet(poly(dat$x, 10, raw = TRUE), dat$y, alpha = 1, lambda = res$lambda.min)
+out <- glmnet(poly(dat$x, 10, raw = TRUE), dat$y, alpha = 1, lambda = res$lambda.min)
 predict(out, type = "coefficients", s = best)
 ```
 
@@ -753,7 +757,7 @@ those used in the simulation.
 
 
 ```r
-dat$y <- 2 - 2*x^2 +0.2*x^7 + ep
+dat$y <- 2 - 2 * x^2 + 0.2 * x^7 + ep
 summary(regsubsets(y ~ poly(x, 10, raw = TRUE), data = dat))
 ```
 
@@ -837,7 +841,7 @@ plot(res)
 <img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 ```r
-out = glmnet(poly(dat$x, 10, raw = TRUE), dat$y, alpha = 1, lambda = best)
+out <- glmnet(poly(dat$x, 10, raw = TRUE), dat$y, alpha = 1, lambda = best)
 predict(out, type = "coefficients", s = best)
 ```
 
@@ -870,7 +874,7 @@ When fitting lasso, the model does not perfectly replicate the simulation
 
 ```r
 set.seed(42)
-train <- sample(nrow(College), nrow(College)*2/3)
+train <- sample(nrow(College), nrow(College) * 2 / 3)
 test <- setdiff(seq_len(nrow(College)), train)
 mse <- list()
 ```
@@ -881,7 +885,7 @@ mse <- list()
 
 ```r
 fit <- lm(Apps ~ ., data = College[train, ])
-(mse$lm <- mean((predict(fit, College[test, ]) - College$Apps[test]) ^ 2))
+(mse$lm <- mean((predict(fit, College[test, ]) - College$Apps[test])^2))
 ```
 
 ```
@@ -896,7 +900,7 @@ fit <- lm(Apps ~ ., data = College[train, ])
 mm <- model.matrix(Apps ~ ., data = College[train, ])
 fit2 <- cv.glmnet(mm, College$Apps[train], alpha = 0)
 p <- predict(fit2, model.matrix(Apps ~ ., data = College[test, ]), s = fit2$lambda.min)
-(mse$ridge <- mean((p - College$Apps[test]) ^ 2))
+(mse$ridge <- mean((p - College$Apps[test])^2))
 ```
 
 ```
@@ -912,7 +916,7 @@ p <- predict(fit2, model.matrix(Apps ~ ., data = College[test, ]), s = fit2$lamb
 mm <- model.matrix(Apps ~ ., data = College[train, ])
 fit3 <- cv.glmnet(mm, College$Apps[train], alpha = 1)
 p <- predict(fit3, model.matrix(Apps ~ ., data = College[test, ]), s = fit3$lambda.min)
-(mse$lasso <- mean((p - College$Apps[test]) ^ 2))
+(mse$lasso <- mean((p - College$Apps[test])^2))
 ```
 
 ```
@@ -990,7 +994,7 @@ the ridge regression model (in this specific case with this specific seed).
 
 ```r
 set.seed(42)
-dat <- matrix(rnorm(1000*20), nrow = 1000)
+dat <- matrix(rnorm(1000 * 20), nrow = 1000)
 colnames(dat) <- paste0("b", 1:20)
 beta <- rep(0, 20)
 beta[1:4] <- c(5, 4, 2, 7)
@@ -1098,12 +1102,12 @@ plot(summary(fit)$rss / 100, ylab = "MSE", type = "o")
 
 
 ```r
-predict.regsubsets <- function (object, newdata, id, ...) {
-  form <- as.formula (object$call[[2]])
-  mat <- model.matrix (form , newdata)
+predict.regsubsets <- function(object, newdata, id, ...) {
+  form <- as.formula(object$call[[2]])
+  mat <- model.matrix(form, newdata)
   coefi <- coef(object, id = id)
   xvars <- names(coefi)
-  mat[ ,xvars] %*% coefi
+  mat[, xvars] %*% coefi
 }
 mse <- sapply(1:20, function(i) mean((test$y - predict(fit, test, i))^2))
 plot(mse, ylab = "MSE", type = "o", pch = 19)
@@ -1133,7 +1137,7 @@ simulated data which has four non-zero coefficients.
 
 ```r
 set.seed(42)
-dat <- matrix(rnorm(1000*20), nrow = 1000)
+dat <- matrix(rnorm(1000 * 20), nrow = 1000)
 colnames(dat) <- paste0("b", 1:20)
 beta <- rep(0, 20)
 beta[1:9] <- c(5, 4, 2, 7, 0.01, 0.001, 0.05, 0.1, 0.5)
@@ -1287,7 +1291,7 @@ corresponds to the point when test MSE was minimized.
 
 ```r
 set.seed(1)
-train <- sample(nrow(Boston), nrow(Boston)*2/3)
+train <- sample(nrow(Boston), nrow(Boston) * 2 / 3)
 test <- setdiff(seq_len(nrow(Boston)), train)
 hist(log(Boston$crim))
 ```
@@ -1305,7 +1309,7 @@ distribution.
 
 ```r
 fit <- lm(log(crim) ~ ., data = Boston[train, ])
-mean((predict(fit, Boston[test, ]) - log(Boston$crim[test])) ^ 2)
+mean((predict(fit, Boston[test, ]) - log(Boston$crim[test]))^2)
 ```
 
 ```
@@ -1316,7 +1320,7 @@ mean((predict(fit, Boston[test, ]) - log(Boston$crim[test])) ^ 2)
 mm <- model.matrix(log(crim) ~ ., data = Boston[train, ])
 fit2 <- cv.glmnet(mm, log(Boston$crim[train]), alpha = 0)
 p <- predict(fit2, model.matrix(log(crim) ~ ., data = Boston[test, ]), s = fit2$lambda.min)
-mean((p - log(Boston$crim[test])) ^ 2)
+mean((p - log(Boston$crim[test]))^2)
 ```
 
 ```
@@ -1327,7 +1331,7 @@ mean((p - log(Boston$crim[test])) ^ 2)
 mm <- model.matrix(log(crim) ~ ., data = Boston[train, ])
 fit3 <- cv.glmnet(mm, log(Boston$crim[train]), alpha = 1)
 p <- predict(fit3, model.matrix(log(crim) ~ ., data = Boston[test, ]), s = fit3$lambda.min)
-mean((p - log(Boston$crim[test])) ^ 2)
+mean((p - log(Boston$crim[test]))^2)
 ```
 
 ```

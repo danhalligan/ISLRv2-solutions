@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Tree-Based Methods | An Introduction to Statistical Learning</title>
   <meta name="description" content="8 Tree-Based Methods | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.36.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Tree-Based Methods | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -51,8 +51,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.2/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
@@ -792,7 +792,7 @@ regression tree above, although not quite as good as the bagging approach.</p>
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 4s
+## time: 2s
 ## trcnt,tecnt: 1000,1000</code></pre>
 <div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="tree-based-methods.html#cb528-1" aria-hidden="true"></a><span class="kw">carseats_mse</span>(bartfit)</span></code></pre></div>
 <pre><code>## [1] 1.631285</code></pre>
@@ -1219,7 +1219,7 @@ were trying to predict <code>Outstate</code> using the other variables in <code>
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 5s
+## time: 4s
 ## trcnt,tecnt: 1000,1000</code></pre>
 <div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="tree-based-methods.html#cb606-1" aria-hidden="true"></a>mse &lt;-<span class="st"> </span><span class="cf">function</span>(model, ...) {</span>
 <span id="cb606-2"><a href="tree-based-methods.html#cb606-2" aria-hidden="true"></a>  pred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, College[test, ], ...)</span>
