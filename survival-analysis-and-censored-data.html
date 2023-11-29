@@ -719,7 +719,7 @@ the event occurs within 200 days? What is the probability that the event does
 not occur within 310 days?</li>
 </ol>
 </blockquote>
-<p>0.75 and 0.375.</p>
+<p>0.25 and 0.375.</p>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Write out an expression for the estimated survival curve from (b).</li>
@@ -810,8 +810,24 @@ relationships provided in Exercise 8, show that <span class="math inline">\(S(t)
 function (11.13).</li>
 </ol>
 </blockquote>
+<p>The reference to (11.13) gives us the following formula:</p>
 <p><span class="math display">\[
-\ell = \prod_i \lambda^{d_i}y_i^{-\lambda}
+    L = \prod_{i=1}^{n} h(y_i)^{\delta_i} S(y_i)
+\]</span></p>
+<p>(11.10) also gives us</p>
+<p><span class="math display">\[
+    h(t) = \frac{f(t)}{S(t)}
+\]</span></p>
+<p>Plugging in the expressions from part (a), we get</p>
+<p><span class="math display">\[
+\begin{align*}
+    h(t) &amp;= \frac{\lambda \exp(- \lambda t)}{\exp(- \lambda t)}\\
+    &amp;= \lambda
+\end{align*}
+\]</span></p>
+<p>Using (11.13), we get the following loss expression:</p>
+<p><span class="math display">\[
+    \ell = \prod_i \lambda^{\delta_i} e^{- \lambda y_i}
 \]</span></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -821,15 +837,18 @@ function (11.13).</li>
 \]</span></li>
 </ol>
 </blockquote>
+<p>Take the log likelihood.</p>
 <p><span class="math display">\[\begin{align*}
-\log \ell &amp;= \sum_i{\delta_i\log\lambda - \lambda y_i} \\
+\log \ell &amp;= \sum_i \log \left( \lambda^{\delta_i} e^{- \lambda y_i} \right) \\
+      &amp;= \sum_i{\delta_i\log\lambda - \lambda y_i \log e} \\
+      &amp;= \sum_i{\delta_i\log\lambda - \lambda y_i} \\
           &amp;= \log\lambda\sum_i{\delta_i} - \lambda\sum_i{y_i}
 \end{align*}\]</span></p>
 <p>Differentiating this expression with respect to λ we get:</p>
 <p><span class="math display">\[
 \frac{d \log \ell}{d \lambda} = \frac{\sum_i{\delta_i}}{\lambda} - \sum_i{y_i}
 \]</span></p>
-<p>A maximum is when this is 0, or when
+<p>This function maximises when its gradient is 0. Solving for this gives a MLE of
 <span class="math inline">\(\hat\lambda = \sum_{i=1}^n \delta_i / \sum_{i=1}^n y_i\)</span>.</p>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
