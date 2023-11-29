@@ -162,22 +162,10 @@ Equivalently, we can use the survival package.
 library(tidyverse)
 ```
 
-```
-## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.4
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-## ✔ purrr     1.0.2     
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
 
 ```r
 table_data <- tribble(
-  ~Y, ~D, ~X, 
+  ~Y, ~D, ~X,
   26.5, 1, 0.1,
   37.2, 1, 11,
   57.3, 1, -0.3,
@@ -241,19 +229,19 @@ plot...
 
 
 ```r
-plot(NULL, 
-    xlim = c(0, 100), 
-    ylim = c(0, 1), 
-    ylab = "Estimated Probability of Survival", 
-    xlab = "Time in Days"
+plot(NULL,
+  xlim = c(0, 100),
+  ylim = c(0, 1),
+  ylab = "Estimated Probability of Survival",
+  xlab = "Time in Days"
 )
 lines(
-    c(0, 31, 31, 77, 77, 100),
-    c(0.8, 0.8, 0.5, 0.5, 0.22, 0.22)
+  c(0, 31, 31, 77, 77, 100),
+  c(0.8, 0.8, 0.5, 0.5, 0.22, 0.22)
 )
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 ### Question 6
 
@@ -278,19 +266,19 @@ lines(
 
 
 ```r
-plot(NULL, 
-    xlim = c(0, 350), 
-    ylim = c(0, 1), 
-    ylab = "Estimated Probability of Survival", 
-    xlab = "Time in Days"
+plot(NULL,
+  xlim = c(0, 350),
+  ylim = c(0, 1),
+  ylab = "Estimated Probability of Survival",
+  xlab = "Time in Days"
 )
 lines(
-    c(0, 150, 150, 300, 300, 350),
-    c(1, 1, 0.75, 0.75, 0.375, 0.375)
+  c(0, 150, 150, 300, 300, 350),
+  c(1, 1, 0.75, 0.75, 0.375, 0.375)
 )
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 x <- Surv(c(300, 350, 150, 250), c(1, 0, 1, 0))
 
@@ -304,8 +292,8 @@ x <- Surv(c(300, 350, 150, 250), c(1, 0, 1, 0))
 
 $$
 \hat{S}(t) = \begin{cases}
-1   & \text{if } t < y_3 \\
-0.75 & \text{if } y_3 \le t < y_1 \\
+1     & \text{if } t < y_3 \\
+0.75  & \text{if } y_3 \le t < y_1 \\
 0.375 & \text{if } y_1 \le t
 \end{cases}
 $$
@@ -376,40 +364,40 @@ Integrating and then exponentiating we get the second identity.
 >
 > a. Suppose that a survival time follows an $Exp(\lambda)$ distribution, so
 > that its density function is $f(t) = \lambda\exp(−\lambda t)$. Using the
-> relationships provided in Exercise 8, show that $S(t) = \exp(−\lambda t)$.
+> relationships provided in Exercise 8, show that $S(t) = \exp(-\lambda t)$.
 
-The cdf of an exponential distribution is $1 - \exp{-\lambda x}$ and 
-$S(t)$ is $1 - F(t)$ where $F(t)$ is the cdf. Hence, $S(t) = \exp(−\lambda t)$.
+The cdf of an exponential distribution is $1 - \exp(-\lambda x)$ and 
+$S(t)$ is $1 - F(t)$ where $F(t)$ is the cdf.
+
+Hence, $S(t) = \exp(-\lambda t)$.
 
 > b. Now suppose that each of $n$ independent survival times follows an
-> $Exp(\lambda)$ distribution. Write out an expression for the likelihood
+> $\exp(\lambda)$ distribution. Write out an expression for the likelihood
 > function (11.13).
 
 The reference to (11.13) gives us the following formula:
 
 $$
-	L = \prod_{i=1}^{n} h(y_i)^{\delta_i} S(y_i)
+L = \prod_{i=1}^{n} h(y_i)^{\delta_i} S(y_i)
 $$
 
 (11.10) also gives us
 
 $$
-	h(t) = \frac{f(t)}{S(t)}
+h(t) = \frac{f(t)}{S(t)}
 $$
 
 Plugging in the expressions from part (a), we get
 
-$$
 \begin{align*}
-	h(t) &= \frac{\lambda \exp(- \lambda t)}{\exp(- \lambda t)}\\
-	&= \lambda
+h(t) &= \frac{\lambda \exp(- \lambda t)}{\exp(- \lambda t)} \\
+     &= \lambda
 \end{align*}
-$$
 
 Using (11.13), we get the following loss expression:
 
 $$
-	\ell = \prod_i \lambda^{\delta_i} e^{- \lambda y_i}
+\ell = \prod_i \lambda^{\delta_i} e^{- \lambda y_i}
 $$
 
 > c. Show that the maximum likelihood estimator for $\lambda$ is
@@ -421,12 +409,12 @@ Take the log likelihood.
 
 \begin{align*}
 \log \ell &= \sum_i \log \left( \lambda^{\delta_i} e^{- \lambda y_i} \right) \\
-	  &= \sum_i{\delta_i\log\lambda - \lambda y_i \log e} \\
-	  &= \sum_i{\delta_i\log\lambda - \lambda y_i} \\
-          &= \log\lambda\sum_i{\delta_i} - \lambda\sum_i{y_i}
+    &= \sum_i{\delta_i\log\lambda - \lambda y_i \log e} \\
+    &= \sum_i{\delta_i\log\lambda - \lambda y_i} \\
+    &= \log\lambda\sum_i{\delta_i} - \lambda\sum_i{y_i}
 \end{align*}
 
-Differentiating this expression with respect to λ we get:
+Differentiating this expression with respect to $\lambda$ we get:
 
 $$
 \frac{d \log \ell}{d \lambda} = \frac{\sum_i{\delta_i}}{\lambda} - \sum_i{y_i}
@@ -458,15 +446,15 @@ the total observation time over the total number of deaths.
 ```r
 library(ISLR2)
 x <- Surv(BrainCancer$time, BrainCancer$status)
-plot(survfit(x ~ 1), 
-    xlab = "Months", 
-    ylab = "Estimated Probability of Survival",
-    col = "steelblue",
-    conf.int = 0.67
+plot(survfit(x ~ 1),
+  xlab = "Months",
+  ylab = "Estimated Probability of Survival",
+  col = "steelblue",
+  conf.int = 0.67
 )
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 > b. Draw a bootstrap sample of size $n = 88$ from the pairs ($y_i$,
 > $\delta_i$), and compute the resulting Kaplan-Meier survival curve. Repeat
@@ -476,29 +464,28 @@ plot(survfit(x ~ 1),
 
 
 ```r
-library(tidyverse)
-plot(survfit(x ~ 1), 
-    xlab = "Months", 
-    ylab = "Estimated Probability of Survival",
-    col = "steelblue",
-    conf.int = 0.67
+plot(survfit(x ~ 1),
+  xlab = "Months",
+  ylab = "Estimated Probability of Survival",
+  col = "steelblue",
+  conf.int = 0.67
 )
 fit <- survfit(x ~ 1)
 dat <- tibble(time = c(0, fit$time))
 for (i in 1:200) {
-    y <- survfit(sample(x, 88, replace = TRUE) ~ 1)
-    y <- tibble(time = c(0, y$time), "s{i}" := c(1, y$surv))
-    dat <- left_join(dat, y, by = "time")
+  y <- survfit(sample(x, 88, replace = TRUE) ~ 1)
+  y <- tibble(time = c(0, y$time), "s{i}" := c(1, y$surv))
+  dat <- left_join(dat, y, by = "time")
 }
 res <- fill(dat, starts_with("s")) |>
-    rowwise() |>
-    transmute(sd = sd(c_across(starts_with("s"))))
+  rowwise() |>
+  transmute(sd = sd(c_across(starts_with("s"))))
 se <- res$sd[2:nrow(res)]
 lines(fit$time, fit$surv - se, lty = 2, col = "red")
 lines(fit$time, fit$surv + se, lty = 2, col = "red")
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 > c. Fit a Cox proportional hazards model that uses all of the predictors to
 > predict survival. Summarize the main findings.
@@ -506,7 +493,7 @@ lines(fit$time, fit$surv + se, lty = 2, col = "red")
 
 ```r
 fit <- coxph(Surv(time, status) ~ sex + diagnosis + loc + ki + gtv + stereo, data = BrainCancer)
-fit 
+fit
 ```
 
 ```
@@ -549,7 +536,7 @@ modaldata <- data.frame(
   sex = rep("Female", 5),
   diagnosis = rep("Meningioma", 5),
   loc = rep("Supratentorial", 5),
-  ki = c(60, 70, 80, 90, 100), 
+  ki = c(60, 70, 80, 90, 100),
   gtv = rep(mean(BrainCancer$gtv), 5),
   stereo = rep("SRT", 5)
 )
@@ -558,7 +545,7 @@ plot(survplots, xlab = "Months", ylab = "Survival Probability", col = 2:6)
 legend("bottomleft", c("60", "70", "80", "90", "100"), col = 2:6, lty = 1)
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 ### Question 11
 
@@ -574,12 +561,12 @@ legend("bottomleft", c("60", "70", "80", "90", "100"), col = 2:6, lty = 1)
 ```r
 x <- split(Surv(table_data$Y, table_data$D), table_data$X < 2)
 plot(NULL, xlim = c(0, 100), ylim = c(0, 1), ylab = "Survival Probability")
-lines(survfit(x[[1]] ~ 1), conf.int=FALSE, col = 2)
-lines(survfit(x[[2]] ~ 1), conf.int=FALSE, col = 3)
+lines(survfit(x[[1]] ~ 1), conf.int = FALSE, col = 2)
+lines(survfit(x[[2]] ~ 1), conf.int = FALSE, col = 3)
 legend("bottomleft", c(">= 2", "<2"), col = 2:3, lty = 1)
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 There does not appear to be any difference between the curves.
 
