@@ -10,14 +10,23 @@
 >
 > a. In total, how many Type I errors do we expect to make?
 
-We expect $\alpha$.
+We expect $m\alpha$.
 
 > b. Suppose that the m tests that we perform are independent. What is the
 >    family-wise error rate associated with these m tests?
 >    
 >    _Hint: If two events A and B are independent, then Pr(A ∩ B) = Pr(A) Pr(B)._
 
-$m\alpha$
+The family-wise error rate (FWER) is defined as the probability of making at 
+least one Type I error. We can think of this as 1 minus the probability of
+no type I errors, which is:
+
+$1 - (1 - \alpha)^m$
+
+Alternatively, for two tests this is: Pr(A ∪ B) = Pr(A) + Pr(B) - Pr(A ∩ B).
+For independent tests this is $\alpha + \alpha - \alpha^2$
+
+
 
 > c. Suppose that $m = 2$, and that the p-values for the two tests are
 >    positively correlated, so that if one is small then the other will tend to
@@ -29,7 +38,11 @@ $m\alpha$
 
 If they were perfectly correlated, we would effectively be performing a single
 test (thus FWER would be $alpha$). In the case when they are positively
-correlated therefore, we can expect the FWER to be less than $2\alpha$.
+correlated therefore, we can expect the FWER to be less than in b.
+
+Alternatively, as above, FWEW = Pr(A ∪ B) = Pr(A) + Pr(B) - Pr(A ∩ B).
+For perfectly positively correlated tests Pr(A ∩ B) = $\alpha$, so the 
+FWEW is $\alpha$ which is smaller than b.
 
 > d. Suppose again that $m = 2$, but that now the p-values for the two tests are
 >    negatively correlated, so that if one is large then the other will tend to
@@ -40,9 +53,9 @@ correlated therefore, we can expect the FWER to be less than $2\alpha$.
 >    _then the other will be greater than $\alpha$. In other words, we can_
 >    _never reject both null hypotheses._
 
-In the case outlined in the hint, we will always have 1 false positive (type 1
-error), which, implies that when negatively correlated we expect the FWER
-to be greater than $2\alpha$.
+Taking the equation above, for two tests,
+FWEW = Pr(A ∪ B) = Pr(A) + Pr(B) - Pr(A ∩ B). In the case considered in the
+hint Pr(A ∩ B) = 0, so Pr(A ∪ B) = $2\alpha$, which is larger than b.
 
 ### Question 2
 
@@ -233,7 +246,7 @@ library(ISLR2)
 
 nm <- c("CompPrice", "Income", "Advertising", "Population", "Price", "Age")
 pvals <- sapply(nm, function(n) {
-  summary(lm(Carseats[["Sales"]] ~ Carseats[[n]]))$coef[2,4]
+  summary(lm(Carseats[["Sales"]] ~ Carseats[[n]]))$coef[2, 4]
 })
 ```
 
@@ -248,7 +261,7 @@ names(which(pvals < 0.05))
 > hypotheses do we reject?
 
 ```{r}
-names(which(pvals < 0.05/length(nm)))
+names(which(pvals < 0.05 / length(nm)))
 ```
 
 > d. Finally, suppose we control the FDR at level 0.2 for the p-values. Which
