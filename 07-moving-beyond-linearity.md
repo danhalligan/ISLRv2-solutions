@@ -419,7 +419,7 @@ library(gam)
 ```
 
 ```
-## Loaded gam 1.22-2
+## Loaded gam 1.22-3
 ```
 
 ```r

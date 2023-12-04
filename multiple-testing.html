@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13 Multiple Testing | An Introduction to Statistical Learning</title>
   <meta name="description" content="13 Multiple Testing | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.36.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13 Multiple Testing | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -54,8 +54,8 @@
 <script src="libs/htmlwidgets-1.6.3/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.10.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
@@ -427,7 +427,7 @@ justify your answer.</p>
 <li>In total, how many Type I errors do we expect to make?</li>
 </ol>
 </blockquote>
-<p>We expect <span class="math inline">\(\alpha\)</span>.</p>
+<p>We expect <span class="math inline">\(m\alpha\)</span>.</p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li><p>Suppose that the m tests that we perform are independent. What is the
@@ -435,7 +435,12 @@ family-wise error rate associated with these m tests?</p>
 <p><em>Hint: If two events A and B are independent, then Pr(A ∩ B) = Pr(A) Pr(B).</em></p></li>
 </ol>
 </blockquote>
-<p><span class="math inline">\(m\alpha\)</span></p>
+<p>The family-wise error rate (FWER) is defined as the probability of making at
+least one Type I error. We can think of this as 1 minus the probability of
+no type I errors, which is:</p>
+<p><span class="math inline">\(1 - (1 - \alpha)^m\)</span></p>
+<p>Alternatively, for two tests this is: Pr(A ∪ B) = Pr(A) + Pr(B) - Pr(A ∩ B).
+For independent tests this is <span class="math inline">\(\alpha + \alpha - \alpha^2\)</span></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li><p>Suppose that <span class="math inline">\(m = 2\)</span>, and that the p-values for the two tests are
@@ -448,7 +453,10 @@ qualitatively compare to the answer in (b) with <span class="math inline">\(m = 
 </blockquote>
 <p>If they were perfectly correlated, we would effectively be performing a single
 test (thus FWER would be <span class="math inline">\(alpha\)</span>). In the case when they are positively
-correlated therefore, we can expect the FWER to be less than <span class="math inline">\(2\alpha\)</span>.</p>
+correlated therefore, we can expect the FWER to be less than in b.</p>
+<p>Alternatively, as above, FWEW = Pr(A ∪ B) = Pr(A) + Pr(B) - Pr(A ∩ B).
+For perfectly positively correlated tests Pr(A ∩ B) = <span class="math inline">\(\alpha\)</span>, so the
+FWEW is <span class="math inline">\(\alpha\)</span> which is smaller than b.</p>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li><p>Suppose again that <span class="math inline">\(m = 2\)</span>, but that now the p-values for the two tests are
@@ -460,9 +468,9 @@ tests qualitatively compare to the answer in (b) with <span class="math inline">
 <em>never reject both null hypotheses.</em></p></li>
 </ol>
 </blockquote>
-<p>In the case outlined in the hint, we will always have 1 false positive (type 1
-error), which, implies that when negatively correlated we expect the FWER
-to be greater than <span class="math inline">\(2\alpha\)</span>.</p>
+<p>Taking the equation above, for two tests,
+FWEW = Pr(A ∪ B) = Pr(A) + Pr(B) - Pr(A ∩ B). In the case considered in the
+hint Pr(A ∩ B) = 0, so Pr(A ∪ B) = <span class="math inline">\(2\alpha\)</span>, which is larger than b.</p>
 </div>
 <div id="question-2-11" class="section level3 hasAnchor" number="13.1.2">
 <h3><span class="header-section-number">13.1.2</span> Question 2<a href="multiple-testing.html#question-2-11" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -748,7 +756,7 @@ represents one of the other quantitative variables.</li>
 <span id="cb833-2"><a href="multiple-testing.html#cb833-2" aria-hidden="true"></a></span>
 <span id="cb833-3"><a href="multiple-testing.html#cb833-3" aria-hidden="true"></a>nm &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;CompPrice&quot;</span>, <span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Advertising&quot;</span>, <span class="st">&quot;Population&quot;</span>, <span class="st">&quot;Price&quot;</span>, <span class="st">&quot;Age&quot;</span>)</span>
 <span id="cb833-4"><a href="multiple-testing.html#cb833-4" aria-hidden="true"></a>pvals &lt;-<span class="st"> </span><span class="kw">sapply</span>(nm, <span class="cf">function</span>(n) {</span>
-<span id="cb833-5"><a href="multiple-testing.html#cb833-5" aria-hidden="true"></a>  <span class="kw">summary</span>(<span class="kw">lm</span>(Carseats[[<span class="st">&quot;Sales&quot;</span>]] <span class="op">~</span><span class="st"> </span>Carseats[[n]]))<span class="op">$</span>coef[<span class="dv">2</span>,<span class="dv">4</span>]</span>
+<span id="cb833-5"><a href="multiple-testing.html#cb833-5" aria-hidden="true"></a>  <span class="kw">summary</span>(<span class="kw">lm</span>(Carseats[[<span class="st">&quot;Sales&quot;</span>]] <span class="op">~</span><span class="st"> </span>Carseats[[n]]))<span class="op">$</span>coef[<span class="dv">2</span>, <span class="dv">4</span>]</span>
 <span id="cb833-6"><a href="multiple-testing.html#cb833-6" aria-hidden="true"></a>})</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -764,7 +772,7 @@ p-values obtained in (a). Which null hypotheses do we reject?</li>
 hypotheses do we reject?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb836"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb836-1"><a href="multiple-testing.html#cb836-1" aria-hidden="true"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span><span class="op">/</span><span class="kw">length</span>(nm)))</span></code></pre></div>
+<div class="sourceCode" id="cb836"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb836-1"><a href="multiple-testing.html#cb836-1" aria-hidden="true"></a><span class="kw">names</span>(<span class="kw">which</span>(pvals <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(nm)))</span></code></pre></div>
 <pre><code>## [1] &quot;Income&quot;      &quot;Advertising&quot; &quot;Price&quot;       &quot;Age&quot;</code></pre>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
