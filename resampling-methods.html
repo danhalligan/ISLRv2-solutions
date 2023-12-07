@@ -51,7 +51,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.10.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
@@ -422,7 +422,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>Using basic statistical properties of the variance, as well as single-
 variable calculus, derive (5.6). In other words, prove that <span class="math inline">\(\alpha\)</span> given by
-(5.6) does indeed minimize <span class="math inline">\(Var(\alpha X + (1 − \alpha)Y)\)</span>.</p>
+(5.6) does indeed minimize <span class="math inline">\(Var(\alpha X + (1 - \alpha)Y)\)</span>.</p>
 </blockquote>
 <p>Equation 5.6 is:</p>
 <p><span class="math display">\[
@@ -431,7 +431,7 @@ variable calculus, derive (5.6). In other words, prove that <span class="math in
 <p>Remember that:</p>
 <p><span class="math display">\[
 Var(aX) = a^2Var(X), \\ 
-\mathrm{Var}(X + Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) + \mathrm{Cov}(X,Y), \\
+\mathrm{Var}(X + Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) + 2\mathrm{Cov}(X,Y), \\
 \mathrm{Cov}(aX, bY) = ab\mathrm{Cov}(X, Y)
 \]</span></p>
 <p>If we define <span class="math inline">\(\sigma^2_X = \mathrm{Var}(X)\)</span>, <span class="math inline">\(\sigma^2_Y = \mathrm{Var}(Y)\)</span> and
@@ -488,7 +488,7 @@ same (<span class="math inline">\(1 - 1/n\)</span>).</p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Argue that the probability that the <span class="math inline">\(j\)</span>th observation is <em>not</em> in the
-bootstrap sample is <span class="math inline">\((1 − 1/n)^n\)</span>.</li>
+bootstrap sample is <span class="math inline">\((1 - 1/n)^n\)</span>.</li>
 </ol>
 </blockquote>
 <p>For the <span class="math inline">\(j\)</span>th observation to not be in the sample, it would have to <em>not</em> be
@@ -501,7 +501,7 @@ bootstrap sample?</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="resampling-methods.html#cb277-1" aria-hidden="true"></a>n &lt;-<span class="st"> </span><span class="dv">5</span></span>
-<span id="cb277-2"><a href="resampling-methods.html#cb277-2" aria-hidden="true"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>n)<span class="op">^</span>n</span></code></pre></div>
+<span id="cb277-2"><a href="resampling-methods.html#cb277-2" aria-hidden="true"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>n)<span class="op">^</span>n</span></code></pre></div>
 <pre><code>## [1] 0.67232</code></pre>
 <p><span class="math inline">\(p = 0.67\)</span></p>
 <blockquote>
@@ -511,7 +511,7 @@ the bootstrap sample?</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="resampling-methods.html#cb279-1" aria-hidden="true"></a>n &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb279-2"><a href="resampling-methods.html#cb279-2" aria-hidden="true"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>n)<span class="op">^</span>n</span></code></pre></div>
+<span id="cb279-2"><a href="resampling-methods.html#cb279-2" aria-hidden="true"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>n)<span class="op">^</span>n</span></code></pre></div>
 <pre><code>## [1] 0.6339677</code></pre>
 <p><span class="math inline">\(p = 0.64\)</span></p>
 <blockquote>
@@ -521,7 +521,7 @@ in the bootstrap sample?</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="resampling-methods.html#cb281-1" aria-hidden="true"></a>n &lt;-<span class="st"> </span><span class="dv">100000</span></span>
-<span id="cb281-2"><a href="resampling-methods.html#cb281-2" aria-hidden="true"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>n)<span class="op">^</span>n</span></code></pre></div>
+<span id="cb281-2"><a href="resampling-methods.html#cb281-2" aria-hidden="true"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>n)<span class="op">^</span>n</span></code></pre></div>
 <pre><code>## [1] 0.6321224</code></pre>
 <p><span class="math inline">\(p = 0.63\)</span></p>
 <blockquote>
@@ -531,7 +531,7 @@ in the bootstrap sample?</li>
 sample. Comment on what you observe.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="resampling-methods.html#cb283-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100000</span>, <span class="cf">function</span>(n) <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>n)<span class="op">^</span>n)</span>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="resampling-methods.html#cb283-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100000</span>, <span class="cf">function</span>(n) <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>n)<span class="op">^</span>n)</span>
 <span id="cb283-2"><a href="resampling-methods.html#cb283-2" aria-hidden="true"></a><span class="kw">plot</span>(x, <span class="dt">log =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;o&quot;</span>)</span></code></pre></div>
 <p><img src="05-resampling-methods_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>The probability rapidly approaches 0.63 with increasing <span class="math inline">\(n\)</span>.</p>
@@ -553,7 +553,7 @@ the fourth observation is contained in the bootstrap sample.</p>
 </blockquote>
 <div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="resampling-methods.html#cb285-1" aria-hidden="true"></a>store &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10000</span>, <span class="kw">sum</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>) <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
 <span id="cb285-2"><a href="resampling-methods.html#cb285-2" aria-hidden="true"></a><span class="kw">mean</span>(store)</span></code></pre></div>
-<pre><code>## [1] 0.6344</code></pre>
+<pre><code>## [1] 0.6364</code></pre>
 <p>The probability of including <span class="math inline">\(4\)</span> when resampling numbers <span class="math inline">\(1...100\)</span> is close to
 <span class="math inline">\(1 - (1 - 1/100)^{100}\)</span>.</p>
 </div>
@@ -643,7 +643,7 @@ the observations in the validation set that are misclassified.</li>
 <div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="resampling-methods.html#cb288-1" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Default), <span class="kw">nrow</span>(Default) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
 <span id="cb288-2"><a href="resampling-methods.html#cb288-2" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">glm</span>(default <span class="op">~</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>balance, <span class="dt">data =</span> Default, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">subset =</span> train)</span>
 <span id="cb288-3"><a href="resampling-methods.html#cb288-3" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">predict</span>(fit, <span class="dt">newdata =</span> Default[<span class="op">-</span>train, ], <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>)</span>
-<span id="cb288-4"><a href="resampling-methods.html#cb288-4" aria-hidden="true"></a><span class="kw">table</span>(pred, Default<span class="op">$</span>default[<span class="op">-</span>train]) </span></code></pre></div>
+<span id="cb288-4"><a href="resampling-methods.html#cb288-4" aria-hidden="true"></a><span class="kw">table</span>(pred, Default<span class="op">$</span>default[<span class="op">-</span>train])</span></code></pre></div>
 <pre><code>##      
 ## pred    No  Yes
 ##   No  4817  110
@@ -997,10 +997,10 @@ interval for the mean of <code>medv</code>. Compare it to the results obtained u
 <code>t.test(Boston$medv)</code>.</li>
 </ol>
 <p><em>Hint: You can approximate a 95% confidence interval using the
-formula <span class="math inline">\([\hat\mu − 2SE(\hat\mu), \hat\mu + 2SE(\hat\mu)].\)</span></em></p>
+formula <span class="math inline">\([\hat\mu - 2SE(\hat\mu), \hat\mu + 2SE(\hat\mu)].\)</span></em></p>
 </blockquote>
 <div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="resampling-methods.html#cb323-1" aria-hidden="true"></a>se &lt;-<span class="st"> </span><span class="kw">sd</span>(bs<span class="op">$</span>t)</span>
-<span id="cb323-2"><a href="resampling-methods.html#cb323-2" aria-hidden="true"></a><span class="kw">c</span>(mu <span class="op">-</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>se, mu <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>se)</span></code></pre></div>
+<span id="cb323-2"><a href="resampling-methods.html#cb323-2" aria-hidden="true"></a><span class="kw">c</span>(mu <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>se, mu <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>se)</span></code></pre></div>
 <pre><code>## [1] 21.72698 23.33863</code></pre>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
