@@ -6,7 +6,7 @@
 
 > Using basic statistical properties of the variance, as well as single-
 > variable calculus, derive (5.6). In other words, prove that $\alpha$ given by
-> (5.6) does indeed minimize $Var(\alpha X + (1 − \alpha)Y)$.
+> (5.6) does indeed minimize $Var(\alpha X + (1 - \alpha)Y)$.
 
 Equation 5.6 is:
 
@@ -18,7 +18,7 @@ Remember that:
 
 $$
 Var(aX) = a^2Var(X), \\ 
-\mathrm{Var}(X + Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) + \mathrm{Cov}(X,Y), \\
+\mathrm{Var}(X + Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) + 2\mathrm{Cov}(X,Y), \\
 \mathrm{Cov}(aX, bY) = ab\mathrm{Cov}(X, Y)
 $$
 
@@ -80,7 +80,7 @@ Since each bootstrap observation is a random sample, this probability is the
 same ($1 - 1/n$).
 
 > c. Argue that the probability that the $j$th observation is _not_ in the
->    bootstrap sample is $(1 − 1/n)^n$.
+>    bootstrap sample is $(1 - 1/n)^n$.
 
 For the $j$th observation to not be in the sample, it would have to _not_ be 
 picked for each of $n$ positions, so not picked for $1, 2, ..., n$, thus
@@ -91,7 +91,7 @@ the probability is $(1 - 1/n)^n$
 
 ```{r}
 n <- 5
-1 - (1 - 1/n)^n
+1 - (1 - 1 / n)^n
 ```
 
 $p = 0.67$
@@ -101,7 +101,7 @@ $p = 0.67$
 
 ```{r}
 n <- 100
-1 - (1 - 1/n)^n
+1 - (1 - 1 / n)^n
 ```
 
 $p = 0.64$
@@ -111,7 +111,7 @@ $p = 0.64$
 
 ```{r}
 n <- 100000
-1 - (1 - 1/n)^n
+1 - (1 - 1 / n)^n
 ```
 
 $p = 0.63$
@@ -121,7 +121,7 @@ $p = 0.63$
 >    sample. Comment on what you observe.
 
 ```{r}
-x <- sapply(1:100000, function(n) 1 - (1 - 1/n)^n)
+x <- sapply(1:100000, function(n) 1 - (1 - 1 / n)^n)
 plot(x, log = "x", type = "o")
 ```
 
@@ -227,7 +227,7 @@ fit <- glm(default ~ income + balance, data = Default, family = "binomial")
 train <- sample(nrow(Default), nrow(Default) / 2)
 fit <- glm(default ~ income + balance, data = Default, family = "binomial", subset = train)
 pred <- ifelse(predict(fit, newdata = Default[-train, ], type = "response") > 0.5, "Yes", "No")
-table(pred, Default$default[-train]) 
+table(pred, Default$default[-train])
 mean(pred != Default$default[-train])
 ```
 
@@ -502,11 +502,11 @@ obtained from the formula above (0.409).
 >    `t.test(Boston$medv)`.
 >
 >    _Hint: You can approximate a 95% confidence interval using the
->    formula $[\hat\mu − 2SE(\hat\mu),  \hat\mu + 2SE(\hat\mu)].$_
+>    formula $[\hat\mu - 2SE(\hat\mu),  \hat\mu + 2SE(\hat\mu)].$_
 
 ```{r}
 se <- sd(bs$t)
-c(mu - 2*se, mu + 2*se)
+c(mu - 2 * se, mu + 2 * se)
 ```
 
 > e.  Based on this data set, provide an estimate, $\hat\mu_{med}$, for the

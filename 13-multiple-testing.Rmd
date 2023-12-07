@@ -26,8 +26,6 @@ $1 - (1 - \alpha)^m$
 Alternatively, for two tests this is: Pr(A ∪ B) = Pr(A) + Pr(B) - Pr(A ∩ B).
 For independent tests this is $\alpha + \alpha - \alpha^2$
 
-
-
 > c. Suppose that $m = 2$, and that the p-values for the two tests are
 >    positively correlated, so that if one is small then the other will tend to
 >    be small as well, and if one is large then the other will tend to be large.
