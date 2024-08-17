@@ -526,7 +526,7 @@ test <- setdiff(1:nrow(Caravan), train)
 
 ```{r}
 set.seed(42)
-fit <- gbm(Purchase == "Yes" ~ ., data = Caravan[train, ], n.trees = 1000, shrinkage = 0.01)
+fit <- gbm(as.numeric(Purchase == "Yes") ~ ., data = Caravan[train, ], n.trees = 1000, shrinkage = 0.01)
 head(summary(fit))
 ```
 
