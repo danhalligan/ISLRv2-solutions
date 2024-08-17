@@ -129,7 +129,7 @@ and 1.
 We can check by using the `survival` package.
 
 
-```r
+``` r
 library(survival)
 x <- Surv(c(1.2, 2, 1.5, 0.2), event = c(1, 0, 0, 1))
 summary(survfit(x ~ 1))
@@ -158,12 +158,12 @@ $4/5 * 3/4 = 0.6$.
 Equivalently, we can use the survival package.
 
 
-```r
+``` r
 library(tidyverse)
 ```
 
 
-```r
+``` r
 table_data <- tribble(
   ~Y, ~D, ~X,
   26.5, 1, 0.1,
@@ -228,7 +228,7 @@ We can draw this plot, or even engineer data that will generate the required
 plot...
 
 
-```r
+``` r
 plot(NULL,
   xlim = c(0, 100),
   ylim = c(0, 1),
@@ -265,7 +265,7 @@ lines(
 > the results obtained in (a).)
 
 
-```r
+``` r
 plot(NULL,
   xlim = c(0, 350),
   ylim = c(0, 1),
@@ -443,7 +443,7 @@ the total observation time over the total number of deaths.
 > the `survfit()` function in the `survival` package.
 
 
-```r
+``` r
 library(ISLR2)
 x <- Surv(BrainCancer$time, BrainCancer$status)
 plot(survfit(x ~ 1),
@@ -463,7 +463,7 @@ plot(survfit(x ~ 1),
 > this to the standard errors obtained in (a).
 
 
-```r
+``` r
 plot(survfit(x ~ 1),
   xlab = "Months",
   ylab = "Estimated Probability of Survival",
@@ -491,7 +491,7 @@ lines(fit$time, fit$surv + se, lty = 2, col = "red")
 > predict survival. Summarize the main findings.
 
 
-```r
+``` r
 fit <- coxph(Surv(time, status) ~ sex + diagnosis + loc + ki + gtv + stereo, data = BrainCancer)
 fit
 ```
@@ -529,7 +529,7 @@ take each possible value, but set the other predictors to be the mode or mean
 of the other predictors.
 
 
-```r
+``` r
 library(ggfortify)
 
 modaldata <- data.frame(
@@ -558,7 +558,7 @@ legend("bottomleft", c("60", "70", "80", "90", "100"), col = 2:6, lty = 1)
 > between the two groups' survival curves?
 
 
-```r
+``` r
 x <- split(Surv(table_data$Y, table_data$D), table_data$X < 2)
 plot(NULL, xlim = c(0, 100), ylim = c(0, 1), ylab = "Survival Probability")
 lines(survfit(x[[1]] ~ 1), conf.int = FALSE, col = 2)
@@ -577,7 +577,7 @@ There does not appear to be any difference between the curves.
 > coefficient value is non-zero?
 
 
-```r
+``` r
 fit <- coxph(Surv(Y, D) ~ X < 2, data = table_data)
 fit
 ```
@@ -604,7 +604,7 @@ $X < 2$ but it is not significantly different to zero (P = 0.8).
 > the Cox model from (b)?
 
 
-```r
+``` r
 summary(fit)$sctest
 ```
 
@@ -613,7 +613,7 @@ summary(fit)$sctest
 ## 0.07644306 1.00000000 0.78217683
 ```
 
-```r
+``` r
 survdiff(Surv(Y, D) ~ X < 2, data = table_data)$chisq
 ```
 

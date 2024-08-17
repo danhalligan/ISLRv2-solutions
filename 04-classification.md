@@ -305,7 +305,7 @@ p(D|v) &= \frac{p(v|D) p(D)}{p(v|D)p(D) + p(v|N)p(N)} \\
 \end{align}
 
 
-```r
+``` r
 exp(-0.5) * 0.8 / (exp(-0.5) * 0.8 + exp(-2/9) * 0.2)
 ```
 
@@ -456,7 +456,7 @@ perfectly agree.
 >    there appear to be any patterns?
 
 
-```r
+``` r
 library(MASS)
 library(class)
 library(tidyverse)
@@ -466,7 +466,7 @@ library(e1071)
 ```
 
 
-```r
+``` r
 summary(Weekly)
 ```
 
@@ -494,7 +494,7 @@ summary(Weekly)
 ## 
 ```
 
-```r
+``` r
 corrplot(cor(Weekly[, -9]), type = "lower", diag = FALSE, method = "ellipse")
 ```
 
@@ -510,7 +510,7 @@ with Lag3.
 >    to be statistically significant? If so, which ones?
 
 
-```r
+``` r
 fit <- glm(
   Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume,
   data = Weekly,
@@ -553,7 +553,7 @@ Lag2 is significant.
 >    mistakes made by logistic regression.
 
 
-```r
+``` r
 contrasts(Weekly$Direction)
 ```
 
@@ -563,7 +563,7 @@ contrasts(Weekly$Direction)
 ## Up    1
 ```
 
-```r
+``` r
 pred <- predict(fit, type = "response") > 0.5
 (t <- table(ifelse(pred, "Up (pred)", "Down (pred)"), Weekly$Direction))
 ```
@@ -575,7 +575,7 @@ pred <- predict(fit, type = "response") > 0.5
 ##   Up (pred)    430 557
 ```
 
-```r
+``` r
 sum(diag(t)) / sum(t)
 ```
 
@@ -593,7 +593,7 @@ most downwards movements as up.
 >    data (that is, the data from 2009 and 2010).
 
 
-```r
+``` r
 train <- Weekly$Year < 2009
 
 fit <- glm(Direction ~ Lag2, data = Weekly[train, ], family = binomial)
@@ -608,7 +608,7 @@ pred <- predict(fit, Weekly[!train, ], type = "response") > 0.5
 ##   Up (pred)     34 56
 ```
 
-```r
+``` r
 sum(diag(t)) / sum(t)
 ```
 
@@ -619,7 +619,7 @@ sum(diag(t)) / sum(t)
 > e. Repeat (d) using LDA.
 
 
-```r
+``` r
 fit <- lda(Direction ~ Lag2, data = Weekly[train, ])
 pred <- predict(fit, Weekly[!train, ], type = "response")$class
 (t <- table(pred, Weekly[!train, ]$Direction))
@@ -632,7 +632,7 @@ pred <- predict(fit, Weekly[!train, ], type = "response")$class
 ##   Up     34 56
 ```
 
-```r
+``` r
 sum(diag(t)) / sum(t)
 ```
 
@@ -643,7 +643,7 @@ sum(diag(t)) / sum(t)
 > f. Repeat (d) using QDA.
 
 
-```r
+``` r
 fit <- qda(Direction ~ Lag2, data = Weekly[train, ])
 pred <- predict(fit, Weekly[!train, ], type = "response")$class
 (t <- table(pred, Weekly[!train, ]$Direction))
@@ -656,7 +656,7 @@ pred <- predict(fit, Weekly[!train, ], type = "response")$class
 ##   Up     43 61
 ```
 
-```r
+``` r
 sum(diag(t)) / sum(t)
 ```
 
@@ -667,7 +667,7 @@ sum(diag(t)) / sum(t)
 > g. Repeat (d) using KNN with $K = 1$.
 
 
-```r
+``` r
 fit <- knn(
   Weekly[train, "Lag2", drop = FALSE],
   Weekly[!train, "Lag2", drop = FALSE],
@@ -683,7 +683,7 @@ fit <- knn(
 ##   Up     22 31
 ```
 
-```r
+``` r
 sum(diag(t)) / sum(t)
 ```
 
@@ -694,7 +694,7 @@ sum(diag(t)) / sum(t)
 > h. Repeat (d) using naive Bayes.
 
 
-```r
+``` r
 fit <- naiveBayes(Direction ~ Lag2, data = Smarket, subset = train)
 pred <- predict(fit, Weekly[!train, ], type = "class")
 (t <- table(pred, Weekly[!train, ]$Direction))
@@ -707,7 +707,7 @@ pred <- predict(fit, Weekly[!train, ], type = "class")
 ##   Up     16 32
 ```
 
-```r
+``` r
 sum(diag(t)) / sum(t)
 ```
 
@@ -726,7 +726,7 @@ Logistic regression and LDA are the best performing.
 >    experiment with values for $K$ in the KNN classifier.
 
 
-```r
+``` r
 fit <- glm(Direction ~ Lag1, data = Weekly[train, ], family = binomial)
 pred <- predict(fit, Weekly[!train, ], type = "response") > 0.5
 mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
@@ -736,7 +736,7 @@ mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
 ## [1] 0.5673077
 ```
 
-```r
+``` r
 fit <- glm(Direction ~ Lag3, data = Weekly[train, ], family = binomial)
 pred <- predict(fit, Weekly[!train, ], type = "response") > 0.5
 mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
@@ -746,7 +746,7 @@ mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
 ## [1] 0.5865385
 ```
 
-```r
+``` r
 fit <- glm(Direction ~Lag4, data = Weekly[train, ], family = binomial)
 pred <- predict(fit, Weekly[!train, ], type = "response") > 0.5
 mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
@@ -756,7 +756,7 @@ mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
 ## [1] 0.5865385
 ```
 
-```r
+``` r
 fit <- glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4, data = Weekly[train, ], family = binomial)
 pred <- predict(fit, Weekly[!train, ], type = "response") > 0.5
 mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
@@ -766,7 +766,7 @@ mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
 ## [1] 0.5865385
 ```
 
-```r
+``` r
 fit <- glm(Direction ~ Lag1 * Lag2 * Lag3 * Lag4, data = Weekly[train, ], family = binomial)
 pred <- predict(fit, Weekly[!train, ], type = "response") > 0.5
 mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
@@ -776,7 +776,7 @@ mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
 ## [1] 0.5961538
 ```
 
-```r
+``` r
 fit <- lda(Direction ~ Lag1 + Lag2 + Lag3 + Lag4,data = Weekly[train, ])
 pred <- predict(fit, Weekly[!train, ], type = "response")$class
 mean(pred == Weekly[!train, ]$Direction)
@@ -786,7 +786,7 @@ mean(pred == Weekly[!train, ]$Direction)
 ## [1] 0.5769231
 ```
 
-```r
+``` r
 fit <- qda(Direction ~ Lag1 + Lag2 + Lag3 + Lag4, data = Weekly[train, ])
 pred <- predict(fit, Weekly[!train, ], type = "response")$class
 mean(pred == Weekly[!train, ]$Direction)
@@ -796,7 +796,7 @@ mean(pred == Weekly[!train, ]$Direction)
 ## [1] 0.5192308
 ```
 
-```r
+``` r
 fit <- naiveBayes(Direction ~ Lag1 + Lag2 + Lag3 + Lag4, data = Weekly[train, ])
 pred <- predict(fit, Weekly[!train, ], type = "class")
 mean(pred == Weekly[!train, ]$Direction)
@@ -806,7 +806,7 @@ mean(pred == Weekly[!train, ]$Direction)
 ## [1] 0.5096154
 ```
 
-```r
+``` r
 set.seed(1)
 res <- sapply(1:30, function(k) {
   fit <- knn(
@@ -822,7 +822,7 @@ plot(1:30, res, type = "o", xlab = "k", ylab = "Fraction correct")
 
 <img src="04-classification_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
-```r
+``` r
 (k <- which.max(res))
 ```
 
@@ -830,7 +830,7 @@ plot(1:30, res, type = "o", xlab = "k", ylab = "Fraction correct")
 ## [1] 26
 ```
 
-```r
+``` r
 fit <- knn(
   Weekly[train, 2:4, drop = FALSE],
   Weekly[!train, 2:4, drop = FALSE],
@@ -847,7 +847,7 @@ table(fit, Weekly[!train, ]$Direction)
 ##   Up     20 43
 ```
 
-```r
+``` r
 mean(fit == Weekly[!train, ]$Direction)
 ```
 
@@ -870,7 +870,7 @@ regression with `Lag2` if we tune $k$ to be $k = 26$.
 >    data set containing both `mpg01` and the other `Auto` variables.
 
 
-```r
+``` r
 x <- cbind(Auto[, -1], data.frame("mpg01" = Auto$mpg > median(Auto$mpg)))
 ```
 
@@ -880,7 +880,7 @@ x <- cbind(Auto[, -1], data.frame("mpg01" = Auto$mpg > median(Auto$mpg)))
 >    may be useful tools to answer this question. Describe your findings.
 
 
-```r
+``` r
 par(mfrow = c(2, 4))
 for (i in 1:7) hist(x[, i], breaks = 20, main = colnames(x)[i])
 
@@ -889,7 +889,7 @@ par(mfrow = c(2, 4))
 
 <img src="04-classification_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
-```r
+``` r
 for (i in 1:7) boxplot(x[, i] ~ x$mpg01, main = colnames(x)[i])
 
 pairs(x[, 1:7])
@@ -903,7 +903,7 @@ variables are colinear.
 > c. Split the data into a training set and a test set.
 
 
-```r
+``` r
 set.seed(1)
 train <- sample(seq_len(nrow(x)), nrow(x) * 2/3)
 ```
@@ -913,7 +913,7 @@ train <- sample(seq_len(nrow(x)), nrow(x) * 2/3)
 >    test error of the model obtained?
 
 
-```r
+``` r
 sort(sapply(1:7, function(i) {
   setNames(abs(t.test(x[, i] ~ x$mpg01)$statistic), colnames(x)[i])
 }))
@@ -926,7 +926,7 @@ sort(sapply(1:7, function(i) {
 ##    23.035328
 ```
 
-```r
+``` r
 fit <- lda(mpg01 ~ cylinders + weight + displacement, data = x[train, ])
 pred <- predict(fit, x[-train, ], type = "response")$class
 mean(pred != x[-train, ]$mpg01)
@@ -941,7 +941,7 @@ mean(pred != x[-train, ]$mpg01)
 >    test error of the model obtained?
 
 
-```r
+``` r
 fit <- qda(mpg01 ~ cylinders + weight + displacement, data = x[train, ])
 pred <- predict(fit, x[-train, ], type = "response")$class
 mean(pred != x[-train, ]$mpg01)
@@ -956,7 +956,7 @@ mean(pred != x[-train, ]$mpg01)
 >    (b). What is the test error of the model obtained?
 
 
-```r
+``` r
 fit <- glm(mpg01 ~ cylinders + weight + displacement, data = x[train, ], family = binomial)
 pred <- predict(fit, x[-train, ], type = "response") > 0.5
 mean(pred != x[-train, ]$mpg01)
@@ -971,7 +971,7 @@ mean(pred != x[-train, ]$mpg01)
 >    test error of the model obtained?
 
 
-```r
+``` r
 fit <- naiveBayes(mpg01 ~ cylinders + weight + displacement, data = x[train, ])
 pred <- predict(fit, x[-train, ], type = "class")
 mean(pred != x[-train, ]$mpg01)
@@ -987,7 +987,7 @@ mean(pred != x[-train, ]$mpg01)
 >    to perform the best on this data set?
 
 
-```r
+``` r
 res <- sapply(1:50, function(k) {
   fit <- knn(x[train, c(1, 4, 2)], x[-train, c(1, 4, 2)], x$mpg01[train], k = k)
   mean(fit != x[-train, ]$mpg01)
@@ -998,7 +998,7 @@ plot(res, type = "o")
 
 <img src="04-classification_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
-```r
+``` r
 res[which.min(res)]
 ```
 
@@ -1022,7 +1022,7 @@ error rate overall, performing slightly better than LDA.
 >    _function to output the result._
 
 
-```r
+``` r
 Power <- function() print(2^3)
 ```
 
@@ -1039,7 +1039,7 @@ Power <- function() print(2^3)
 >    on the command line. This should output the value of $3^8$, namely, 6,561.
 
 
-```r
+``` r
 Power2 <- function(x, a) print(x^a)
 ```
 
@@ -1047,7 +1047,7 @@ Power2 <- function(x, a) print(x^a)
 >    $8^{17}$, and $131^3$.
 
 
-```r
+``` r
 c(Power2(10, 3), Power2(8, 17), Power2(131, 3))
 ```
 
@@ -1073,7 +1073,7 @@ c(Power2(10, 3), Power2(8, 17), Power2(131, 3))
 >    symbol.
 
 
-```r
+``` r
 Power3 <- function(x, a) {
   result <- x^a
   return(result)
@@ -1088,7 +1088,7 @@ Power3 <- function(x, a) {
 >    `log = "y"`, or `log = "xy"` as arguments to the `plot()` function.
 
 
-```r
+``` r
 plot(1:10, Power3(1:10, 2), 
   xlab = "x", 
   ylab = expression(paste("x"^"2")),
@@ -1108,7 +1108,7 @@ plot(1:10, Power3(1:10, 2),
 >    $1,2,...,10$, and a $y$-axis taking on values $1^3,2^3,...,10^3$.
 
 
-```r
+``` r
 PlotPower <- function(x, a, log = "y") {
   plot(x, Power3(x, a),
     xlab = "x", 
@@ -1133,7 +1133,7 @@ PlotPower(1:10, 3)
 > _variables that are contained in the `Boston` data set._
 
 
-```r
+``` r
 x <- cbind(
   ISLR2::Boston[, -1], 
   data.frame("highcrim" = Boston$crim > median(Boston$crim))
@@ -1145,7 +1145,7 @@ train <- sample(seq_len(nrow(x)), nrow(x) * 2/3)
 We can find the most associated variables by performing wilcox tests.
 
 
-```r
+``` r
 ord <- order(sapply(1:12, function(i) {
   p <- wilcox.test(as.numeric(x[train, i]) ~ x[train, ]$highcrim)$p.value
   setNames(log10(p), colnames(x)[i])
@@ -1166,14 +1166,14 @@ Let's reorder columns by those most associated with highcrim (in the training
 data)
 
 
-```r
+``` r
 x <- x[, c(ord, "highcrim")]
 ```
 
 Let's look at univariate associations with `highcrim` (in the training data)
 
 
-```r
+``` r
 x[train, ] |>
   pivot_longer(!highcrim) |>
   mutate(name = factor(name, levels = ord)) |>
@@ -1189,7 +1189,7 @@ set of specific predictors and return the error rate. We fit models using
 increasing numbers of predictors: column 1, then columns 1 and 2 etc.
 
 
-```r
+``` r
 fit_models <- function(cols, k_vals = 1:50) {
   dat_train <- x[train, cols, drop = FALSE]
   dat_test <- x[-train, cols, drop = FALSE]
@@ -1217,7 +1217,7 @@ fit_models <- function(cols, k_vals = 1:50) {
 ```
 
 
-```r
+``` r
 res <- sapply(1:12, function(max) fit_models(1:max))
 res <- as_tibble(t(res))
 res$n_var <- 1:12
@@ -1233,7 +1233,7 @@ pivot_longer(res, cols = !n_var) |>
 KNN appears to perform better (if we tune $k$) for all numbers of predictors.
 
 
-```r
+``` r
 fit <- knn(
   x[train, "nox", drop = FALSE],
   x[-train, "nox", drop = FALSE],
@@ -1250,7 +1250,7 @@ table(fit, x[-train, ]$highcrim)
 ##   TRUE      3   86
 ```
 
-```r
+``` r
 mean(fit != x[-train, ]$highcrim) * 100
 ```
 
@@ -1267,7 +1267,7 @@ crime rate based on a nearby town.
 But what if we only consider $k = 20$.
 
 
-```r
+``` r
 res <- sapply(1:12, function(max) fit_models(1:max, k_vals = 20))
 res <- as_tibble(t(res))
 res$n_var <- 1:12
@@ -1284,7 +1284,7 @@ KNN still performs best with a single predictor (`nox`), but logistic regression
 with 12 predictors also performs well and has an error rate of ~12%.
 
 
-```r
+``` r
 vars <- names(x)[1:12]
 dat_train <- x[train, vars]
 dat_test <- x[-train, vars]
@@ -1301,7 +1301,7 @@ table(pred, x[-train, ]$highcrim)
 ##   TRUE     11   79
 ```
 
-```r
+``` r
 mean(pred != x$highcrim[-train]) * 100
 ```
 
@@ -1309,7 +1309,7 @@ mean(pred != x$highcrim[-train]) * 100
 ## [1] 11.83432
 ```
 
-```r
+``` r
 summary(fit)
 ```
 

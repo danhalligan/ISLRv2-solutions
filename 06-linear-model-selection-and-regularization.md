@@ -303,7 +303,7 @@ $$
 where $\hat{\beta}_j^R$ is the ridge regression estimate.
 
 
-```r
+``` r
 lambda <- 0.7
 y <- 1.4
 fn <- function(beta) {
@@ -338,7 +338,7 @@ $$
 For $\lambda = 0.7$ and $y = 1.4$, the top case applies.
 
 
-```r
+``` r
 lambda <- 0.7
 y <- 1.4
 fn <- function(beta) {
@@ -459,7 +459,7 @@ As above, if $RSS = \sum_i^n \epsilon_i^2$ and if we set $\lambda =
 >    as well as a noise vector $\epsilon$ of length $n = 100$.
 
 
-```r
+``` r
 library(ISLR2)
 library(glmnet)
 library(leaps)
@@ -467,7 +467,7 @@ library(pls)
 ```
 
 
-```r
+``` r
 set.seed(42)
 x <- rnorm(100)
 ep <- rnorm(100)
@@ -479,7 +479,7 @@ ep <- rnorm(100)
 >    choice.
 
 
-```r
+``` r
 y <- 2 + 3 * x - 2 * x^2 + 0.5 * x^3 + ep
 ```
 
@@ -492,7 +492,7 @@ y <- 2 + 3 * x - 2 * x^2 + 0.5 * x^3 + ep
 >    $Y$.
 
 
-```r
+``` r
 dat <- data.frame(x, y)
 summary(regsubsets(y ~ poly(x, 10, raw = TRUE), data = dat))
 ```
@@ -565,7 +565,7 @@ summary(regsubsets(y ~ poly(x, 10, raw = TRUE), data = dat))
 >    stepwise selection. How does your answer compare to the results in (c)?
 
 
-```r
+``` r
 summary(regsubsets(y ~ poly(x, 10, raw = TRUE), data = dat, method = "forward"))
 ```
 
@@ -633,7 +633,7 @@ summary(regsubsets(y ~ poly(x, 10, raw = TRUE), data = dat, method = "forward"))
 ## 8  ( 1 ) "*"                      "*"
 ```
 
-```r
+``` r
 summary(regsubsets(y ~ poly(x, 10, raw = TRUE), data = dat, method = "backward"))
 ```
 
@@ -708,7 +708,7 @@ summary(regsubsets(y ~ poly(x, 10, raw = TRUE), data = dat, method = "backward")
 >    discuss the results obtained.
 
 
-```r
+``` r
 res <- cv.glmnet(poly(dat$x, 10, raw = TRUE), dat$y, alpha = 1)
 (best <- res$lambda.min)
 ```
@@ -717,13 +717,13 @@ res <- cv.glmnet(poly(dat$x, 10, raw = TRUE), dat$y, alpha = 1)
 ## [1] 0.09804219
 ```
 
-```r
+``` r
 plot(res)
 ```
 
 <img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
-```r
+``` r
 out <- glmnet(poly(dat$x, 10, raw = TRUE), dat$y, alpha = 1, lambda = res$lambda.min)
 predict(out, type = "coefficients", s = best)
 ```
@@ -753,7 +753,7 @@ those used in the simulation.
 >    and the lasso. Discuss the results obtained.
 
 
-```r
+``` r
 dat$y <- 2 - 2 * x^2 + 0.2 * x^7 + ep
 summary(regsubsets(y ~ poly(x, 10, raw = TRUE), data = dat))
 ```
@@ -822,7 +822,7 @@ summary(regsubsets(y ~ poly(x, 10, raw = TRUE), data = dat))
 ## 8  ( 1 ) "*"                      "*"
 ```
 
-```r
+``` r
 res <- cv.glmnet(poly(dat$x, 10, raw = TRUE), dat$y, alpha = 1)
 (best <- res$lambda.min)
 ```
@@ -831,13 +831,13 @@ res <- cv.glmnet(poly(dat$x, 10, raw = TRUE), dat$y, alpha = 1)
 ## [1] 1.126906
 ```
 
-```r
+``` r
 plot(res)
 ```
 
 <img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
-```r
+``` r
 out <- glmnet(poly(dat$x, 10, raw = TRUE), dat$y, alpha = 1, lambda = best)
 predict(out, type = "coefficients", s = best)
 ```
@@ -869,7 +869,7 @@ When fitting lasso, the model does not perfectly replicate the simulation
 > a. Split the data set into a training set and a test set.
 
 
-```r
+``` r
 set.seed(42)
 train <- sample(nrow(College), nrow(College) * 2 / 3)
 test <- setdiff(seq_len(nrow(College)), train)
@@ -880,7 +880,7 @@ mse <- list()
 >    test error obtained.
 
 
-```r
+``` r
 fit <- lm(Apps ~ ., data = College[train, ])
 (mse$lm <- mean((predict(fit, College[test, ]) - College$Apps[test])^2))
 ```
@@ -893,7 +893,7 @@ fit <- lm(Apps ~ ., data = College[train, ])
 >    cross-validation. Report the test error obtained.
 
 
-```r
+``` r
 mm <- model.matrix(Apps ~ ., data = College[train, ])
 fit2 <- cv.glmnet(mm, College$Apps[train], alpha = 0)
 p <- predict(fit2, model.matrix(Apps ~ ., data = College[test, ]), s = fit2$lambda.min)
@@ -909,7 +909,7 @@ p <- predict(fit2, model.matrix(Apps ~ ., data = College[test, ]), s = fit2$lamb
 >    non-zero coefficient estimates.
 
 
-```r
+``` r
 mm <- model.matrix(Apps ~ ., data = College[train, ])
 fit3 <- cv.glmnet(mm, College$Apps[train], alpha = 1)
 p <- predict(fit3, model.matrix(Apps ~ ., data = College[test, ]), s = fit3$lambda.min)
@@ -925,14 +925,14 @@ p <- predict(fit3, model.matrix(Apps ~ ., data = College[test, ]), s = fit3$lamb
 >    cross-validation.
 
 
-```r
+``` r
 fit4 <- pcr(Apps ~ ., data = College[train, ], scale = TRUE, validation = "CV")
 validationplot(fit4, val.type = "MSEP")
 ```
 
 <img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
-```r
+``` r
 p <- predict(fit4, College[test, ], ncomp = 17)
 (mse$pcr <- mean((p - College$Apps[test])^2))
 ```
@@ -946,14 +946,14 @@ p <- predict(fit4, College[test, ], ncomp = 17)
 >    cross-validation.
 
 
-```r
+``` r
 fit5 <- plsr(Apps ~ ., data = College[train, ], scale = TRUE, validation = "CV")
 validationplot(fit5, val.type = "MSEP")
 ```
 
 <img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
-```r
+``` r
 p <- predict(fit5, College[test, ], ncomp = 12)
 (mse$pls <- mean((p - College$Apps[test])^2))
 ```
@@ -967,7 +967,7 @@ p <- predict(fit5, College[test, ], ncomp = 12)
 >    errors resulting from these five approaches?
 
 
-```r
+``` r
 barplot(unlist(mse), ylab = "Test MSE", horiz = TRUE)
 ```
 
@@ -989,7 +989,7 @@ the ridge regression model (in this specific case with this specific seed).
 >    equal to zero.
 
 
-```r
+``` r
 set.seed(42)
 dat <- matrix(rnorm(1000 * 20), nrow = 1000)
 colnames(dat) <- paste0("b", 1:20)
@@ -1004,7 +1004,7 @@ dat$y <- y
 >    test set containing 900 observations.
 
 
-```r
+``` r
 train <- dat[1:100, ]
 test <- dat[101:1000, ]
 ```
@@ -1013,7 +1013,7 @@ test <- dat[101:1000, ]
 >    set MSE associated with the best model of each size.
 
 
-```r
+``` r
 fit <- regsubsets(y ~ ., data = train, nvmax = 20)
 summary(fit)
 ```
@@ -1089,7 +1089,7 @@ summary(fit)
 ## 20  ( 1 ) "*" "*" "*"
 ```
 
-```r
+``` r
 plot(summary(fit)$rss / 100, ylab = "MSE", type = "o")
 ```
 
@@ -1098,7 +1098,7 @@ plot(summary(fit)$rss / 100, ylab = "MSE", type = "o")
 > d. Plot the test set MSE associated with the best model of each size.
 
 
-```r
+``` r
 predict.regsubsets <- function(object, newdata, id, ...) {
   form <- as.formula(object$call[[2]])
   mat <- model.matrix(form, newdata)
@@ -1120,7 +1120,7 @@ plot(mse, ylab = "MSE", type = "o", pch = 19)
 >    intermediate model size.
 
 
-```r
+``` r
 which.min(mse)
 ```
 
@@ -1132,7 +1132,7 @@ The min test MSE is found when model size is 4. This corresponds to the
 simulated data which has four non-zero coefficients.
 
 
-```r
+``` r
 set.seed(42)
 dat <- matrix(rnorm(1000 * 20), nrow = 1000)
 colnames(dat) <- paste0("b", 1:20)
@@ -1219,14 +1219,14 @@ summary(fit)
 ## 20  ( 1 ) "*" "*" "*"
 ```
 
-```r
+``` r
 mse <- sapply(1:20, function(i) mean((test$y - predict(fit, test, i))^2))
 plot(mse, ylab = "MSE", type = "o", pch = 19)
 ```
 
 <img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
-```r
+``` r
 which.min(mse)
 ```
 
@@ -1241,7 +1241,7 @@ The min test MSE is found when model size is 5 but there are 9 non-zero
 coefficients.
 
 
-```r
+``` r
 coef(fit, id = 5)
 ```
 
@@ -1259,7 +1259,7 @@ coefficients are dropped.
 >    on what you observe. How does this compare to the test MSE plot from (d)?
 
 
-```r
+``` r
 names(beta) <- paste0("b", 1:20)
 b <- data.frame(id = names(beta), b = beta)
 
@@ -1286,7 +1286,7 @@ corresponds to the point when test MSE was minimized.
 >    discuss results for the approaches that you consider.
 
 
-```r
+``` r
 set.seed(1)
 train <- sample(nrow(Boston), nrow(Boston) * 2 / 3)
 test <- setdiff(seq_len(nrow(Boston)), train)
@@ -1304,7 +1304,7 @@ We will try to fit models to `log(Boston$crim)` which is closer to a normal
 distribution.
 
 
-```r
+``` r
 fit <- lm(log(crim) ~ ., data = Boston[train, ])
 mean((predict(fit, Boston[test, ]) - log(Boston$crim[test]))^2)
 ```
@@ -1313,7 +1313,7 @@ mean((predict(fit, Boston[test, ]) - log(Boston$crim[test]))^2)
 ## [1] 0.66578
 ```
 
-```r
+``` r
 mm <- model.matrix(log(crim) ~ ., data = Boston[train, ])
 fit2 <- cv.glmnet(mm, log(Boston$crim[train]), alpha = 0)
 p <- predict(fit2, model.matrix(log(crim) ~ ., data = Boston[test, ]), s = fit2$lambda.min)
@@ -1324,7 +1324,7 @@ mean((p - log(Boston$crim[test]))^2)
 ## [1] 0.6511807
 ```
 
-```r
+``` r
 mm <- model.matrix(log(crim) ~ ., data = Boston[train, ])
 fit3 <- cv.glmnet(mm, log(Boston$crim[train]), alpha = 1)
 p <- predict(fit3, model.matrix(log(crim) ~ ., data = Boston[test, ]), s = fit3$lambda.min)
@@ -1335,14 +1335,14 @@ mean((p - log(Boston$crim[test]))^2)
 ## [1] 0.6494337
 ```
 
-```r
+``` r
 fit4 <- pcr(log(crim) ~ ., data = Boston[train, ], scale = TRUE, validation = "CV")
 validationplot(fit4, val.type = "MSEP")
 ```
 
 <img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
-```r
+``` r
 p <- predict(fit4, Boston[test, ], ncomp = 8)
 mean((p - log(Boston$crim[test]))^2)
 ```
@@ -1351,14 +1351,14 @@ mean((p - log(Boston$crim[test]))^2)
 ## [1] 0.6561043
 ```
 
-```r
+``` r
 fit5 <- plsr(log(crim) ~ ., data = Boston[train, ], scale = TRUE, validation = "CV")
 validationplot(fit5, val.type = "MSEP")
 ```
 
 <img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-26-2.png" width="672" />
 
-```r
+``` r
 p <- predict(fit5, Boston[test, ], ncomp = 6)
 mean((p - log(Boston$crim[test]))^2)
 ```
@@ -1371,7 +1371,7 @@ In this case lasso (`alpha = 1`) seems to perform very slightly better than
 un-penalized regression. Some coefficients have been dropped:
 
 
-```r
+``` r
 coef(fit3, s = fit3$lambda.min)
 ```
 

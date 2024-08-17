@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Statistical Learning | An Introduction to Statistical Learning</title>
   <meta name="description" content="2 Statistical Learning | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.37.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Statistical Learning | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -51,8 +51,9 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.3/plotly.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
@@ -874,10 +875,10 @@ the <code>range()</code> function.</li>
 </blockquote>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="statistical-learning.html#cb29-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.4
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ## ✔ purrr     1.0.2     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
@@ -1343,7 +1344,8 @@ rooms per dwelling on average, with the statistics for those with fewer.</p>
 <span id="cb56-9"><a href="statistical-learning.html#cb56-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="st">`</span><span class="dt">&gt;8 rooms</span><span class="st">`</span>, value)) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb56-10"><a href="statistical-learning.html#cb56-10" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb56-11"><a href="statistical-learning.html#cb56-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>name, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 372 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<pre><code>## Warning: Removed 372 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).</code></pre>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>Census tracts with big average properties (more than eight rooms per dwelling)
 have higher median value (<code>medv</code>), a lower proportion of non-retail

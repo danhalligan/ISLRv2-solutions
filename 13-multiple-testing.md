@@ -96,7 +96,7 @@ be no larger than the sum of the probabilities for each individual hypothesis
 > 13.4.
 
 
-```r
+``` r
 pvals <- c(0.0011, 0.031, 0.017, 0.32, 0.11, 0.90, 0.07, 0.006, 0.004, 0.0009)
 names(pvals) <- paste0("H", sprintf("%02d", 1:10))
 ```
@@ -105,7 +105,7 @@ names(pvals) <- paste0("H", sprintf("%02d", 1:10))
 > at level $\alpha = 0.05$. Which null hypotheses will we reject?
 
 
-```r
+``` r
 names(which(pvals < 0.05))
 ```
 
@@ -119,7 +119,7 @@ We reject all NULL hypotheses where $p < 0.05$.
 > Which null hypotheses will we reject? Justify your answer.
 
 
-```r
+``` r
 names(which(pvals < 0.05 / 10))
 ```
 
@@ -133,7 +133,7 @@ We reject all NULL hypotheses where $p < 0.005$.
 > hypotheses will we reject? Justify your answer.
 
 
-```r
+``` r
 names(which(p.adjust(pvals, "fdr") < 0.05))
 ```
 
@@ -147,7 +147,7 @@ We reject all NULL hypotheses where $q < 0.05$.
 > hypotheses will we reject? Justify your answer.
 
 
-```r
+``` r
 names(which(p.adjust(pvals, "fdr") < 0.2))
 ```
 
@@ -180,7 +180,7 @@ significant p-value to be below $0.1/(5 + 1 - 1) = 0.02$ also.
 An example would be: 1, 1, 1, 1, 0.001.
 
 
-```r
+``` r
 pvals <- c(1, 1, 1, 1, 0.001)
 sum(p.adjust(pvals, method = "bonferroni") < 0.1)
 ```
@@ -189,7 +189,7 @@ sum(p.adjust(pvals, method = "bonferroni") < 0.1)
 ## [1] 1
 ```
 
-```r
+``` r
 sum(p.adjust(pvals, method = "holm") < 0.1)
 ```
 
@@ -204,7 +204,7 @@ An example would be: 1, 1, 1, 0.02, 0.001. For Holm's method we reject two
 because $0.02 < 0.1/(5 + 1 - 2)$.
 
 
-```r
+``` r
 pvals <- c(1, 1, 1, 0.02, 0.001)
 sum(p.adjust(pvals, method = "bonferroni") < 0.1)
 ```
@@ -213,7 +213,7 @@ sum(p.adjust(pvals, method = "bonferroni") < 0.1)
 ## [1] 1
 ```
 
-```r
+``` r
 sum(p.adjust(pvals, method = "holm") < 0.1)
 ```
 
@@ -285,7 +285,7 @@ false positives, so the results would not change.
 > represents one of the other quantitative variables.
 
 
-```r
+``` r
 library(ISLR2)
 
 nm <- c("CompPrice", "Income", "Advertising", "Population", "Price", "Age")
@@ -298,7 +298,7 @@ pvals <- sapply(nm, function(n) {
 > p-values obtained in (a). Which null hypotheses do we reject?
 
 
-```r
+``` r
 names(which(pvals < 0.05))
 ```
 
@@ -310,7 +310,7 @@ names(which(pvals < 0.05))
 > hypotheses do we reject?
 
 
-```r
+``` r
 names(which(pvals < 0.05 / length(nm)))
 ```
 
@@ -322,7 +322,7 @@ names(which(pvals < 0.05 / length(nm)))
 > null hypotheses do we reject?
 
 
-```r
+``` r
 names(which(p.adjust(pvals, "fdr") < 0.2))
 ```
 
@@ -342,7 +342,7 @@ names(which(p.adjust(pvals, "fdr") < 0.2))
 > ```
 
 
-```r
+``` r
 set.seed(1)
 n <- 20
 m <- 100
@@ -359,7 +359,7 @@ X <- matrix(rnorm(n * m), ncol = m)
 > of the $p$-values obtained.
 
 
-```r
+``` r
 pvals <- apply(X, 2, function(p) t.test(p)$p.value)
 hist(pvals, main = NULL)
 ```
@@ -370,7 +370,7 @@ hist(pvals, main = NULL)
 > 0.05$, then how many null hypotheses do we reject?
 
 
-```r
+``` r
 sum(pvals < 0.05)
 ```
 
@@ -381,7 +381,7 @@ sum(pvals < 0.05)
 > reject?
 
 
-```r
+``` r
 sum(pvals < 0.05 / length(pvals))
 ```
 
@@ -393,7 +393,7 @@ sum(pvals < 0.05 / length(pvals))
 > reject?
 
 
-```r
+``` r
 sum(p.adjust(pvals, "fdr") < 0.05)
 ```
 
@@ -408,7 +408,7 @@ sum(p.adjust(pvals, "fdr") < 0.05)
 > reject?
 
 
-```r
+``` r
 best <- order(apply(X, 2, sum), decreasing = TRUE)[1:10]
 sum(pvals[best] < 0.05 / 10)
 ```
@@ -417,7 +417,7 @@ sum(pvals[best] < 0.05 / 10)
 ## [1] 1
 ```
 
-```r
+``` r
 sum(p.adjust(pvals[best], "fdr") < 0.05)
 ```
 

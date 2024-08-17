@@ -83,7 +83,7 @@ to each centroid, thus also minimizes the within-cluster variance.
 >    the dendrogram.
 
 
-```r
+``` r
 m <- matrix(c(0, 0.3, 0.4, 0.7, 0.3, 0, 0.5, 0.8, 0.4, 0.5, 0., 0.45, 0.7, 0.8, 0.45, 0), ncol = 4)
 c1 <- hclust(as.dist(m), method = "complete")
 plot(c1)
@@ -94,7 +94,7 @@ plot(c1)
 > b. Repeat (a), this time using single linkage clustering.
 
 
-```r
+``` r
 c2 <- hclust(as.dist(m), method = "single")
 plot(c2)
 ```
@@ -105,7 +105,7 @@ plot(c2)
 >    result. Which observations are in each cluster?
 
 
-```r
+``` r
 table(1:4, cutree(c1, 2))
 ```
 
@@ -122,7 +122,7 @@ table(1:4, cutree(c1, 2))
 >    result. Which observations are in each cluster?
 
 
-```r
+``` r
 table(1:4, cutree(c2, 2))
 ```
 
@@ -142,7 +142,7 @@ table(1:4, cutree(c2, 2))
 >    but for which the meaning of the dendrogram is the same.
 
 
-```r
+``` r
 plot(c1, labels = c(2, 1, 3, 4))
 ```
 
@@ -166,7 +166,7 @@ plot(c1, labels = c(2, 1, 3, 4))
 > a. Plot the observations.
 
 
-```r
+``` r
 library(ggplot2)
 d <- data.frame(
   x1 = c(1, 1, 0, 5, 6, 4),
@@ -182,7 +182,7 @@ ggplot(d, aes(x = x1, y = x2)) + geom_point()
 >    observation.
 
 
-```r
+``` r
 set.seed(42)
 d$cluster <- sample(c(1, 2), size = nrow(d), replace = TRUE)
 ```
@@ -190,7 +190,7 @@ d$cluster <- sample(c(1, 2), size = nrow(d), replace = TRUE)
 > c. Compute the centroid for each cluster.
 
 
-```r
+``` r
 centroids <- sapply(c(1,2), function(i) colMeans(d[d$cluster == i, 1:2]))
 ```
 
@@ -198,7 +198,7 @@ centroids <- sapply(c(1,2), function(i) colMeans(d[d$cluster == i, 1:2]))
 >    Euclidean distance. Report the cluster labels for each observation.
 
 
-```r
+``` r
 dist <- sapply(1:2, function(i) {
     sqrt((d$x1 - centroids[1, i])^2 + (d$x2 - centroids[2, i])^2)
 })
@@ -208,7 +208,7 @@ d$cluster <- apply(dist, 1, which.min)
 > e. Repeat (c) and (d) until the answers obtained stop changing.
 
 
-```r
+``` r
 centroids <- sapply(c(1,2), function(i) colMeans(d[d$cluster == i, 1:2]))
 dist <- sapply(1:2, function(i) {
     sqrt((d$x1 - centroids[1, i])^2 + (d$x2 - centroids[2, i])^2)
@@ -222,7 +222,7 @@ In this case, we get stable labels after the first iteration.
 >    labels obtained.
 
 
-```r
+``` r
 ggplot(d, aes(x = x1, y = x2, color = factor(cluster))) + geom_point()
 ```
 
@@ -268,7 +268,7 @@ sock purchases.
 To test, we can run the analysis in R:
 
 
-```r
+``` r
 set.seed(42)
 dat <- data.frame(
   socks = c(8, 11, 7, 6, 5, 6, 7, 8),
@@ -281,7 +281,7 @@ kmeans(dat, 2)$cluster
 ## [1] 1 1 2 2 2 2 2 1
 ```
 
-```r
+``` r
 kmeans(scale(dat), 2)$cluster
 ```
 
@@ -289,7 +289,7 @@ kmeans(scale(dat), 2)$cluster
 ## [1] 1 1 1 1 2 2 2 2
 ```
 
-```r
+``` r
 dat$computers <- dat$computers * 2000
 kmeans(dat, 2)$cluster
 ```
@@ -330,7 +330,7 @@ kmeans(dat, 2)$cluster
 > _and correlations can be calculated using the `cor()` function._
 
 
-```r
+``` r
 dat <- t(scale(t(USArrests)))
 d1 <- dist(dat)^2
 d2 <- as.dist(1 - cor(t(dat)))
@@ -351,7 +351,7 @@ plot(d1, d2)
 >    12.2.3.
 
 
-```r
+``` r
 pr <- prcomp(USArrests, scale = TRUE)
 pr$sdev^2 / sum(pr$sdev^2)
 ```
@@ -367,7 +367,7 @@ pr$sdev^2 / sum(pr$sdev^2)
 > These two approaches should give the same results.
 
 
-```r
+``` r
 colSums(pr$x^2) / sum(colSums(scale(USArrests)^2))
 ```
 
@@ -390,7 +390,7 @@ colSums(pr$x^2) / sum(colSums(scale(USArrests)^2))
 >    cluster the states.
 
 
-```r
+``` r
 set.seed(42)
 hc <- hclust(dist(USArrests), method = "complete")
 ```
@@ -399,7 +399,7 @@ hc <- hclust(dist(USArrests), method = "complete")
 >    Which states belong to which clusters?
 
 
-```r
+``` r
 ct <- cutree(hc, 3)
 sapply(1:3, function(i) names(ct)[ct == i])
 ```
@@ -429,7 +429,7 @@ sapply(1:3, function(i) names(ct)[ct == i])
 >    distance, _after scaling the variables to have standard deviation one_.
 
 
-```r
+``` r
 hc2 <- hclust(dist(scale(USArrests)), method = "complete")
 ```
 
@@ -439,7 +439,7 @@ hc2 <- hclust(dist(scale(USArrests)), method = "complete")
 >    your answer.
 
 
-```r
+``` r
 ct <- cutree(hc, 3)
 sapply(1:3, function(i) names(ct)[ct == i])
 ```
@@ -492,7 +492,7 @@ scaled.
 >    _there are three distinct classes._
 
 
-```r
+``` r
 set.seed(42)
 data <- matrix(rnorm(60 * 50), ncol = 50)
 classes <- rep(c("A", "B", "C"), each = 20)
@@ -511,7 +511,7 @@ data[classes == "C", 5:30] <- data[classes == "C", 5:30] + 1
 >    score vectors.
 
 
-```r
+``` r
 pca <- prcomp(data)
 ggplot(data.frame(Class = classes, PC1 = pca$x[, 1], PC2 = pca$x[, 2]),
     aes(x = PC1, y = PC2, col = Class)) + 
@@ -531,7 +531,7 @@ ggplot(data.frame(Class = classes, PC1 = pca$x[, 1], PC2 = pca$x[, 2]),
 >    _clustering labels are the same._
 
 
-```r
+``` r
 km <- kmeans(data, 3)$cluster
 table(km, names(km))
 ```
@@ -549,7 +549,7 @@ $K$-means separates out the clusters nearly perfectly.
 > d.  Perform $K$-means clustering with $K = 2$. Describe your results.
 
 
-```r
+``` r
 km <- kmeans(data, 2)$cluster
 table(km, names(km))
 ```
@@ -567,7 +567,7 @@ of classes A and B.
 > e.  Now perform $K$-means clustering with $K = 4$, and describe your results.
 
 
-```r
+``` r
 km <- kmeans(data, 4)$cluster
 table(km, names(km))
 ```
@@ -591,7 +591,7 @@ but clusters 3 and 4 are split over class C.
 >     the second principal component score vector. Comment on the results.
 
 
-```r
+``` r
 km <- kmeans(pca$x[, 1:2], 3)$cluster
 table(km, names(km))
 ```
@@ -611,7 +611,7 @@ $K$-means again separates out the clusters nearly perfectly.
 >     do these results compare to those obtained in (b)? Explain.
 
 
-```r
+``` r
 km <- kmeans(scale(data), 3)$cluster
 table(km, names(km))
 ```
@@ -664,7 +664,7 @@ $K$-means appears to perform less well on the scaled data in this case.
 > a. Load in the data using `read.csv()`. You will need to select `header = F`.
 
 
-```r
+``` r
 data <- read.csv("data/Ch12Ex13.csv", header = FALSE)
 colnames(data) <- c(paste0("H", 1:20), paste0("D", 1:20))
 ```
@@ -674,21 +674,21 @@ colnames(data) <- c(paste0("H", 1:20), paste0("D", 1:20))
 >    the two groups? Do your results depend on the type of linkage used?
 
 
-```r
+``` r
 hc.complete <- hclust(as.dist(1 - cor(data)), method = "complete")
 plot(hc.complete)
 ```
 
 <img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
-```r
+``` r
 hc.complete <- hclust(as.dist(1 - cor(data)), method = "average")
 plot(hc.complete)
 ```
 
 <img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-2.png" width="672" />
 
-```r
+``` r
 hc.complete <- hclust(as.dist(1 - cor(data)), method = "single")
 plot(hc.complete)
 ```
@@ -708,7 +708,7 @@ the groups by applying a t-test to each group. We can then select those with a
 FDR adjusted p-value less than some given threshold (e.g. 0.05).
 
 
-```r
+``` r
 class <- factor(rep(c("Healthy", "Diseased"), each = 20))
 pvals <- p.adjust(apply(data, 1, function(v) t.test(v ~ class)$p.value))
 which(pvals < 0.05)

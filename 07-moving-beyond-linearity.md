@@ -155,7 +155,7 @@ there is no penalty. As a result, the curve is able to interpolate all points.
 > slopes, and other relevant information.
 
 
-```r
+``` r
 x <- seq(-2, 2, length.out = 1000)
 f <- function(x) 1 + x + -2 * (x - 1)^2 * I(x >= 1)
 plot(x, f(x), type = "l")
@@ -177,7 +177,7 @@ grid()
 > slopes, and other relevant information.
 
 
-```r
+``` r
 x <- seq(-2, 6, length.out = 1000)
 b1 <- function(x) I(0 <= x & x <= 2) - (x - 1) * I(1 <= x &  x <= 2)
 b2 <- function(x) (x - 3) * I(3 <= x  & x <= 4) + I(4 < x & x <= 5)
@@ -235,7 +235,7 @@ result: perfect interpolation of the training data. Thus training RSS will be
 >    testing using ANOVA? Make a plot of the resulting polynomial fit to the data.
 
 
-```r
+``` r
 library(ISLR2)
 library(boot)
 library(ggplot2)
@@ -251,14 +251,14 @@ which.min(res)
 ## [1] 6
 ```
 
-```r
+``` r
 plot(1:6, res, xlab = "Degree", ylab = "Test MSE", type = "l")
 abline(v = which.min(res), col = "red", lty = 2)
 ```
 
 <img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
-```r
+``` r
 fit <- glm(wage ~ poly(age, which.min(res)), data = Wage)
 plot(Wage$age, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 points(1:100, predict(fit, data.frame(age = 1:100)), type = "l", col = "red")
@@ -266,7 +266,7 @@ points(1:100, predict(fit, data.frame(age = 1:100)), type = "l", col = "red")
 
 <img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-3-2.png" width="672" />
 
-```r
+``` r
 summary(glm(wage ~ poly(age, 6), data = Wage))
 ```
 
@@ -296,7 +296,7 @@ summary(glm(wage ~ poly(age, 6), data = Wage))
 ## Number of Fisher Scoring iterations: 2
 ```
 
-```r
+``` r
 fit1 <- lm(wage ~ poly(age, 1), data = Wage)
 fit2 <- lm(wage ~ poly(age, 2), data = Wage)
 fit3 <- lm(wage ~ poly(age, 3), data = Wage)
@@ -331,7 +331,7 @@ significant and 4 is marginal.
 >    obtained.
 
 
-```r
+``` r
 set.seed(42)
 res <- sapply(2:10, function(i) {
   Wage$cats <- cut(Wage$age, i)
@@ -348,13 +348,13 @@ which.min(res)
 ## 7
 ```
 
-```r
+``` r
 abline(v = names(which.min(res)), col = "red", lty = 2)
 ```
 
 <img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
-```r
+``` r
 fit <- glm(wage ~ cut(age, 8), data = Wage)
 plot(Wage$age, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 points(18:80, predict(fit, data.frame(age = 18:80)), type = "l", col = "red")
@@ -371,31 +371,31 @@ points(18:80, predict(fit, data.frame(age = 18:80)), type = "l", col = "red")
 > Create plots of the results obtained, and write a summary of your findings.
 
 
-```r
+``` r
 plot(Wage$year, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 ```
 
 <img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
-```r
+``` r
 plot(Wage$age, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 ```
 
 <img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-2.png" width="672" />
 
-```r
+``` r
 plot(Wage$maritl, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 ```
 
 <img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-3.png" width="672" />
 
-```r
+``` r
 plot(Wage$jobclass, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 ```
 
 <img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-4.png" width="672" />
 
-```r
+``` r
 plot(Wage$education, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 ```
 
@@ -406,7 +406,7 @@ incorporate non-linear aspects of the continuous variables. A GAM is a good
 choice to model this situation.
 
 
-```r
+``` r
 library(gam)
 ```
 
@@ -419,10 +419,10 @@ library(gam)
 ```
 
 ```
-## Loaded gam 1.22-3
+## Loaded gam 1.22-4
 ```
 
-```r
+``` r
 fit0 <- gam(wage ~ s(year, 4) + s(age, 5) + education, data = Wage)
 fit2 <- gam(wage ~ s(year, 4) + s(age, 5) + education + maritl, data = Wage)
 fit1 <- gam(wage ~ s(year, 4) + s(age, 5) + education + jobclass, data = Wage)
@@ -446,7 +446,7 @@ anova(fit0, fit1, fit2, fit3)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-```r
+``` r
 par(mfrow = c(2, 3))
 plot(fit3, se = TRUE, col = "blue")
 ```
@@ -463,7 +463,7 @@ Here we want to explore a range of non-linear models. First let's look at the
 relationships between the variables in the data.
 
 
-```r
+``` r
 pairs(Auto, cex = 0.4, pch = 19)
 ```
 
@@ -475,16 +475,16 @@ mpg and try the range of models discussed in this chapter. We will measure
 test MSE through cross-validation to compare the models.
 
 
-```r
+``` r
 library(tidyverse)
 ```
 
 ```
 ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.4
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
-## ✔ purrr     1.0.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.2     ✔ tidyr     1.3.1
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ purrr::accumulate() masks foreach::accumulate()
 ## ✖ dplyr::filter()     masks stats::filter()
@@ -493,7 +493,7 @@ library(tidyverse)
 ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ```
 
-```r
+``` r
 set.seed(42)
 fit <- glm(mpg ~ horsepower, data = Auto)
 err <- cv.glm(Auto, fit, K = 10)$delta[1]
@@ -513,12 +513,11 @@ err3 <- cv.glm(Auto, fit3, K = 10)$delta[1]
 ```
 ## Warning in bs(horsepower, degree = 3L, knots = 92, Boundary.knots = c(46L, :
 ## some 'x' values beyond boundary knots may cause ill-conditioned bases
-
 ## Warning in bs(horsepower, degree = 3L, knots = 92, Boundary.knots = c(46L, :
 ## some 'x' values beyond boundary knots may cause ill-conditioned bases
 ```
 
-```r
+``` r
 fit4 <- glm(mpg ~ ns(horsepower, 4), data = Auto)
 err4 <- cv.glm(Auto, fit4, K = 10)$delta[1]
 
@@ -542,7 +541,7 @@ c(err, err1, err2, err3, err4, err5)
 ## [1] 24.38418 19.94222 20.37940 18.92802 19.33556 19.02999
 ```
 
-```r
+``` r
 anova(fit, fit1, fit2, fit3, fit4, fit5)
 ```
 
@@ -555,16 +554,18 @@ anova(fit, fit1, fit2, fit3, fit4, fit5)
 ## Model 4: mpg ~ bs(horsepower, df = 4)
 ## Model 5: mpg ~ ns(horsepower, 4)
 ## Model 6: mpg ~ s(horsepower, df = 4)
-##   Resid. Df Resid. Dev          Df Deviance
-## 1       390     9385.9                     
-## 2       387     7399.5  3.00000000  1986.39
-## 3       388     7805.4 -1.00000000  -405.92
-## 4       387     7276.5  1.00000000   528.94
-## 5       387     7248.6  0.00000000    27.91
-## 6       387     7267.7  0.00013612   -19.10
+##   Resid. Df Resid. Dev          Df Deviance      F    Pr(>F)    
+## 1       390     9385.9                                          
+## 2       387     7399.5  3.00000000  1986.39 35.258 < 2.2e-16 ***
+## 3       388     7805.4 -1.00000000  -405.92 21.615 4.578e-06 ***
+## 4       387     7276.5  1.00000000   528.94 28.166 1.880e-07 ***
+## 5       387     7248.6  0.00000000    27.91                     
+## 6       387     7267.7  0.00013612   -19.10                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-```r
+``` r
 x <- seq(min(Auto$horsepower), max(Auto$horsepower), length.out=1000)
 pred <- data.frame(
   x = x,
@@ -597,7 +598,7 @@ ggplot(Auto, aes(horsepower, mpg)) +
 >    and polynomial fits.
 
 
-```r
+``` r
 fit <- glm(nox ~ poly(dis, 3), data = Boston)
 summary(fit)
 ```
@@ -625,7 +626,7 @@ summary(fit)
 ## Number of Fisher Scoring iterations: 2
 ```
 
-```r
+``` r
 plot(nox ~ dis, data = Boston, col = alpha("steelblue", 0.4), pch = 19)
 x <- seq(min(Boston$dis), max(Boston$dis), length.out = 1000)
 lines(x, predict(fit, data.frame(dis = x)), col = "red", lty = 2)
@@ -637,7 +638,7 @@ lines(x, predict(fit, data.frame(dis = x)), col = "red", lty = 2)
 >    from 1 to 10), and report the associated residual sum of squares.
 
 
-```r
+``` r
 fits <- lapply(1:10, function(i) glm(nox ~ poly(dis, i), data = Boston))
 
 x <- seq(min(Boston$dis), max(Boston$dis), length.out=1000)
@@ -653,7 +654,7 @@ ggplot(Boston, aes(dis, nox)) +
 
 <img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
-```r
+``` r
 # residual sum of squares
 do.call(anova, fits)[, 2]
 ```
@@ -667,7 +668,7 @@ do.call(anova, fits)[, 2]
 >    for the polynomial, and explain your results.
 
 
-```r
+``` r
 res <- sapply(1:10, function(i) {
   fit <- glm(nox ~ poly(dis, i), data = Boston)
   cv.glm(Boston, fit, K = 10)$delta[1]
@@ -687,7 +688,7 @@ lead to overfitting.
 >    you choose the knots? Plot the resulting fit.
 
 
-```r
+``` r
 fit <- glm(nox ~ bs(dis, df = 4), data = Boston)
 summary(fit)
 ```
@@ -716,7 +717,7 @@ summary(fit)
 ## Number of Fisher Scoring iterations: 2
 ```
 
-```r
+``` r
 plot(nox ~ dis, data = Boston, col = alpha("steelblue", 0.4), pch = 19)
 x <- seq(min(Boston$dis), max(Boston$dis), length.out = 1000)
 lines(x, predict(fit, data.frame(dis = x)), col = "red", lty = 2)
@@ -730,7 +731,7 @@ Knots are chosen based on quantiles of the data.
 >    resulting fits and report the resulting RSS. Describe the results obtained.
 
 
-```r
+``` r
 fits <- lapply(3:10, function(i) {
   glm(nox ~ bs(dis, df = i), data = Boston)
 })
@@ -756,7 +757,7 @@ at extreme ends of the distribution of the predictor variable).
 >    results.
 
 
-```r
+``` r
 set.seed(42)
 err <- sapply(3:10, function(i) {
   fit <- glm(nox ~ bs(dis, df = i), data = Boston)
@@ -781,7 +782,7 @@ This approach would select 4 degrees of freedom for the spline.
 >    model that uses just a subset of the predictors.
 
 
-```r
+``` r
 library(leaps)
 
 # helper function to predict from a regsubsets model
@@ -803,7 +804,7 @@ plot(summary(fit)$bic, type = "b")
 
 <img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
-```r
+``` r
 which.min(summary(fit)$bic)
 ```
 
@@ -811,7 +812,7 @@ which.min(summary(fit)$bic)
 ## [1] 11
 ```
 
-```r
+``` r
 # or via cross-validation
 err <- sapply(1:17, function(i) {
   x <- coef(fit, id = i)
@@ -824,7 +825,7 @@ which.min(err)
 ## [1] 16
 ```
 
-```r
+``` r
 min(summary(fit)$bic)
 ```
 
@@ -835,7 +836,7 @@ min(summary(fit)$bic)
 For the sake of simplicity we'll choose 6
 
 
-```r
+``` r
 coef(fit, id = 6)
 ```
 
@@ -851,7 +852,7 @@ coef(fit, id = 6)
 >    results, and explain your findings.
 
 
-```r
+``` r
 fit <- gam(Outstate ~ Private + s(Room.Board, 2) + s(PhD, 2) + s(perc.alumni, 2) +
   s(Expend, 2) + s(Grad.Rate, 2), data = College[train, ])
 ```
@@ -860,7 +861,7 @@ fit <- gam(Outstate ~ Private + s(Room.Board, 2) + s(PhD, 2) + s(perc.alumni, 2)
 >    obtained.
 
 
-```r
+``` r
 pred <- predict(fit, College[!train, ])
 err_gam <- mean((College$Outstate[!train] - pred)^2)
 plot(err, ylim = c(min(err_gam, err), max(err)), type = "b")
@@ -869,7 +870,7 @@ abline(h = err_gam, col = "red", lty = 2)
 
 <img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
-```r
+``` r
 # r-squared
 1 - err_gam / mean((College$Outstate[!train] - mean(College$Outstate[!train]))^2)
 ```
@@ -882,7 +883,7 @@ abline(h = err_gam, col = "red", lty = 2)
 >    with the response?
 
 
-```r
+``` r
 summary(fit)
 ```
 
@@ -949,7 +950,7 @@ Non-linear relationships are significant for Expend and PhD.
 > a. Generate a response $Y$ and two predictors $X_1$ and $X_2$, with $n = 100$.
 
 
-```r
+``` r
 set.seed(42)
 x1 <- rnorm(100)
 x2 <- rnorm(100)
@@ -960,7 +961,7 @@ y <- 2 + 0.2 * x1 + 4 * x2 + rnorm(100)
 >    matter 1 what value you choose.
 
 
-```r
+``` r
 beta1 <- 20
 ```
 
@@ -974,7 +975,7 @@ beta1 <- 20
 >    ```
 
 
-```r
+``` r
 a <- y - beta1*x1
 beta2 <- lm(a ~ x2)$coef[2]
 ```
@@ -989,7 +990,7 @@ beta2 <- lm(a ~ x2)$coef[2]
 >     ```
 
 
-```r
+``` r
 a <- y - beta2 * x2
 beta1 <- lm(a ~ x1)$coef[2]
 ```
@@ -1001,7 +1002,7 @@ beta1 <- lm(a ~ x1)$coef[2]
 >    color.
 
 
-```r
+``` r
 res <- matrix(NA, nrow = 1000, ncol = 3)
 colnames(res) <- c("beta0", "beta1", "beta2")
 beta1 <- 20
@@ -1029,7 +1030,7 @@ p
 >    the plot obtained in (e).
 
 
-```r
+``` r
 fit <- lm(y ~ x1 + x2)
 coef(fit)
 ```
@@ -1039,7 +1040,7 @@ coef(fit)
 ##  2.00176627  0.05629075  4.08529318
 ```
 
-```r
+``` r
 p + geom_hline(yintercept = coef(fit), lty = 2)
 ```
 
@@ -1061,7 +1062,7 @@ In this case, good estimates were obtained after 3 iterations.
 > Create a plot to justify your answer.
 
 
-```r
+``` r
 set.seed(42)
 
 p <- 100
@@ -1113,7 +1114,7 @@ coef(fit)
 ##  -5.7287292  -7.3148812   0.3454408   3.2830658
 ```
 
-```r
+``` r
 # backfitting
 backfit <- function(x, y, iter = 20) {
   beta <- matrix(0, ncol = ncol(x), nrow = iter + 1)
@@ -1132,7 +1133,7 @@ plot(error, log = "x", type = "b")
 
 <img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
-```r
+``` r
 # backfitting error
 error[length(error)]
 ```
@@ -1141,7 +1142,7 @@ error[length(error)]
 ## [1] 0.001142494
 ```
 
-```r
+``` r
 # lm error
 mean((coef(fit) - betas)^2)
 ```

@@ -154,7 +154,7 @@ of observations may be needed to obtain accurate estimates.
 >    point, $X_1 = X_2 = X_3 = 0$.
 
 
-```r
+``` r
 dat <- data.frame(
   "x1" = c(0, 2, 0, 0, -1, 1),
   "x2" = c(3, 0, 1, 1, 0, 1),
@@ -174,7 +174,7 @@ signif(dist, 3)
 > b. What is our prediction with $K = 1$? Why?
 
 
-```r
+``` r
 knn <- function(k) {
   names(which.max(table(dat[["y"]][order(dist)[1:k]])))
 }
@@ -190,7 +190,7 @@ Green (based on data point 5 only)
 > c. What is our prediction with $K = 3$? Why?
 
 
-```r
+``` r
 knn(3)
 ```
 
@@ -240,7 +240,7 @@ Small (high $k$ leads to linear boundaries due to averaging)
 >    location for the data.
 
 
-```r
+``` r
 college <- read.csv("data/College.csv")
 ```
 
@@ -271,7 +271,7 @@ college <- read.csv("data/College.csv")
 >    each row.
 
 
-```r
+``` r
 rownames(college) <- college[, 1]
 college <- college[, -1]
 ```
@@ -309,7 +309,7 @@ college <- college[, -1]
 >          discover.
 
 
-```r
+``` r
 summary(college)
 ```
 
@@ -351,20 +351,20 @@ summary(college)
 ##  Max.   :56233   Max.   :118.00
 ```
 
-```r
+``` r
 college$Private <- college$Private == "Yes"
 pairs(college[, 1:10], cex = 0.2)
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
-```r
+``` r
 plot(college$Outstate ~ factor(college$Private), xlab = "Private", ylab = "Outstate")
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-2.png" width="672" />
 
-```r
+``` r
 college$Elite <- factor(ifelse(college$Top10perc > 50, "Yes", "No"))
 summary(college$Elite)
 ```
@@ -374,13 +374,13 @@ summary(college$Elite)
 ## 699  78
 ```
 
-```r
+``` r
 plot(college$Outstate ~ college$Elite, xlab = "Elite", ylab = "Outstate")
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-3.png" width="672" />
 
-```r
+``` r
 par(mfrow = c(2,2))
 for (n in c(5, 10, 20, 50)) {
   hist(college$Enroll, breaks = n, main = paste("n =", n), xlab = "Enroll")
@@ -389,7 +389,7 @@ for (n in c(5, 10, 20, 50)) {
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-4.png" width="672" />
 
-```r
+``` r
 chisq.test(college$Private, college$Elite)
 ```
 
@@ -409,7 +409,7 @@ Whether a college is Private and Elite is not random!
 > that the missing values have been removed from the data.
 
 
-```r
+``` r
 x <- read.table("data/Auto.data", header = TRUE, na.strings = "?")
 x <- na.omit(x)
 ```
@@ -417,7 +417,7 @@ x <- na.omit(x)
 > a. Which of the predictors are quantitative, and which are qualitative?
 
 
-```r
+``` r
 sapply(x, class)
 ```
 
@@ -428,7 +428,7 @@ sapply(x, class)
 ##    "integer"    "integer"  "character"
 ```
 
-```r
+``` r
 numeric <- which(sapply(x, class) == "numeric")
 names(numeric)
 ```
@@ -441,7 +441,7 @@ names(numeric)
 >    the `range()` function.
 
 
-```r
+``` r
 sapply(x[, numeric], function(x) diff(range(x)))
 ```
 
@@ -453,16 +453,16 @@ sapply(x[, numeric], function(x) diff(range(x)))
 > c. What is the mean and standard deviation of each quantitative predictor?
 
 
-```r
+``` r
 library(tidyverse)
 ```
 
 ```
 ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.4
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ## ✔ purrr     1.0.2     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
@@ -470,7 +470,7 @@ library(tidyverse)
 ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ```
 
-```r
+``` r
 library(knitr)
 
 x[, numeric] |>
@@ -498,7 +498,7 @@ x[, numeric] |>
 >    remains?
 
 
-```r
+``` r
 x[-(10:85), numeric] |>
   pivot_longer(everything()) |>
   group_by(name) |>
@@ -525,13 +525,13 @@ x[-(10:85), numeric] |>
 >    the relationships among the predictors. Comment on your findings.
 
 
-```r
+``` r
 pairs(x[, numeric], cex = 0.2) 
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
-```r
+``` r
 cor(x[, numeric]) |>
   kable()
 ```
@@ -546,7 +546,7 @@ cor(x[, numeric]) |>
 |weight       | -0.8322442|    0.9329944|  0.8645377|  1.0000000|   -0.4168392|
 |acceleration |  0.4233285|   -0.5438005| -0.6891955| -0.4168392|    1.0000000|
 
-```r
+``` r
 heatmap(cor(x[, numeric]), cexRow = 1.1, cexCol = 1.1, margins = c(8, 8))
 ```
 
@@ -583,7 +583,7 @@ displacement are highly related.
 >    columns represent?
 
 
-```r
+``` r
 library(ISLR2)
 dim(Boston)
 ```
@@ -596,25 +596,25 @@ dim(Boston)
 >    set. Describe your findings.
 
 
-```r
+``` r
 library(ggplot2)
 library(tidyverse)
 ```
 
 
-```r
+``` r
 ggplot(Boston, aes(nox, rm)) + geom_point()
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
-```r
+``` r
 ggplot(Boston, aes(ptratio, rm)) + geom_point()
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-2.png" width="672" />
 
-```r
+``` r
 heatmap(cor(Boston, method = "spearman"), cexRow = 1.1, cexCol = 1.1)
 ```
 
@@ -630,7 +630,7 @@ Yes
 >    predictor.
 
 
-```r
+``` r
 Boston |> 
   pivot_longer(cols = 1:13) |> 
   filter(name %in% c("crim", "tax", "ptratio")) |> 
@@ -646,7 +646,7 @@ Yes, particularly crime and tax rates.
 > e. How many of the census tracts in this data set bound the Charles river?
 
 
-```r
+``` r
 sum(Boston$chas)
 ```
 
@@ -657,7 +657,7 @@ sum(Boston$chas)
 > f. What is the median pupil-teacher ratio among the towns in this data set?
 
 
-```r
+``` r
 median(Boston$ptratio)
 ```
 
@@ -671,7 +671,7 @@ median(Boston$ptratio)
 >    Comment on your findings.
 
 
-```r
+``` r
 Boston[Boston$medv == min(Boston$medv), ] |>
   kable()
 ```
@@ -683,7 +683,7 @@ Boston[Boston$medv == min(Boston$medv), ] |>
 |399 | 38.3518|  0|  18.1|    0| 0.693| 5.453| 100| 1.4896|  24| 666|    20.2| 30.59|    5|
 |406 | 67.9208|  0|  18.1|    0| 0.693| 5.683| 100| 1.4254|  24| 666|    20.2| 22.98|    5|
 
-```r
+``` r
 sapply(Boston, quantile) |>
   kable()
 ```
@@ -703,7 +703,7 @@ sapply(Boston, quantile) |>
 >    census tracts that average more than eight rooms per dwelling.
 
 
-```r
+``` r
 sum(Boston$rm > 7)
 ```
 
@@ -711,7 +711,7 @@ sum(Boston$rm > 7)
 ## [1] 64
 ```
 
-```r
+``` r
 sum(Boston$rm > 8)
 ```
 
@@ -723,7 +723,7 @@ Let's compare median statistics for those census tracts with more than eight
 rooms per dwelling on average, with the statistics for those with fewer.
 
 
-```r
+``` r
 Boston |>
   mutate(
     `log(crim)` = log(crim),
@@ -738,7 +738,8 @@ Boston |>
 ```
 
 ```
-## Warning: Removed 372 rows containing non-finite values (`stat_boxplot()`).
+## Warning: Removed 372 rows containing non-finite outside the scale range
+## (`stat_boxplot()`).
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" />

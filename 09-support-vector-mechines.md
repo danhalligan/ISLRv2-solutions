@@ -11,7 +11,7 @@
 >    $1 + 3X_1 − X_2 < 0$.
 
 
-```r
+``` r
 library(ggplot2)
 xlim <- c(-10, 10)
 ylim <- c(-30, 30)
@@ -33,7 +33,7 @@ p + geom_point(aes(color = 1 + 3*X1 - X2 > 0), size = 0.1) +
 >    for which $−2 + X_1 + 2X_2 < 0$.
 
 
-```r
+``` r
 p + geom_abline(intercept = 1, slope = -1/2) +  # X2 = 1 - X1/2
   geom_point(
     aes(color = interaction(1 + 3*X1 - X2 > 0, -2 + X1 + 2*X2 > 0)), 
@@ -53,7 +53,7 @@ p + geom_abline(intercept = 1, slope = -1/2) +  # X2 = 1 - X1/2
 > a. Sketch the curve $$(1+X_1)^2 +(2−X_2)^2 = 4$$.
 
 
-```r
+``` r
 points <- expand.grid(
   X1 = seq(-4, 2, length.out = 100), 
   X2 = seq(-1, 5, length.out = 100)
@@ -71,7 +71,7 @@ p
 >    $$(1 + X_1)^2 + (2 − X_2)^2 \leq 4.$$
 
 
-```r
+``` r
 p + geom_point(aes(color = (1 + X1)^2 + (2 - X2)^2 - 4 > 0), size = 0.1)
 ```
 
@@ -82,7 +82,7 @@ p + geom_point(aes(color = (1 + X1)^2 + (2 - X2)^2 - 4 > 0), size = 0.1)
 >    is the observation $(0, 0)$ classified? $(−1, 1)$? $(2, 2)$? $(3, 8)$?
 
 
-```r
+``` r
 points <- data.frame(
   X1 = c(0, -1, 2, 3),
   X2 = c(0, 1, 2, 8)
@@ -123,7 +123,7 @@ which is linear in terms of $X_1$, $X_1^2$, $X_2$, $X_2^2$.
 >    Sketch the observations.
 
 
-```r
+``` r
 data <- data.frame(
   X1 = c(3, 2, 4, 1, 2, 4, 4),
   X2 = c(4, 2, 4, 4, 1, 3, 1),
@@ -142,7 +142,7 @@ p
 >    hyperplane (of the form (9.1)).
 
 
-```r
+``` r
 library(e1071)
 
 fit <- svm(as.factor(Y) ~ ., data = data, kernel = "linear", cost = 10, scale = FALSE)
@@ -171,7 +171,7 @@ $\beta_2 = 2$.
 > d. On your sketch, indicate the margin for the maximal margin hyperplane.
 
 
-```r
+``` r
 p <- p + geom_ribbon(
   aes(x = x, ymin = ymin, ymax = ymax),
   data = data.frame(x = c(0, 5), ymin = c(-1, 4), ymax = c(0, 5)),
@@ -186,7 +186,7 @@ p
 > e. Indicate the support vectors for the maximal margin classifier.
 
 
-```r
+``` r
 p <- p + geom_point(data = data[fit$index, ], size = 4)
 p
 ```
@@ -200,7 +200,7 @@ there's another support vector, since four points exactly touch the margin.
 >    the maximal margin hyperplane.
 
 
-```r
+``` r
 p + geom_point(data = data[7, , drop = FALSE], size = 4, color = "purple")
 ```
 
@@ -219,7 +219,7 @@ X1 = 4, X2 = 3. This gives line $y = x/2 + 1$  or, when  $\beta_0 = -1$,
 $\beta_1 = -1/2$, $\beta_2 = 1$.
 
 
-```r
+``` r
 p + geom_abline(intercept = 1, slope = 0.5, lty = 2, col = "red")
 ```
 
@@ -229,7 +229,7 @@ p + geom_abline(intercept = 1, slope = 0.5, lty = 2, col = "red")
 >    longer separable by a hyperplane.
 
 
-```r
+``` r
 p + geom_point(data = data.frame(X1 = 1, X2 = 3, Y  = "Blue"), shape = 15, size = 4)
 ```
 
@@ -248,7 +248,7 @@ p + geom_point(data = data.frame(X1 = 1, X2 = 3, Y  = "Blue"), shape = 15, size 
 > back up your assertions.
 
 
-```r
+``` r
 set.seed(10)
 data <- data.frame(
   x = runif(100),
@@ -264,7 +264,7 @@ p
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
-```r
+``` r
 train <- 1:50
 test <- 51:100
 
@@ -283,19 +283,19 @@ plot(fits[[1]], data)
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-13-2.png" width="672" />
 
-```r
+``` r
 plot(fits[[2]], data)
 ```
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-13-3.png" width="672" />
 
-```r
+``` r
 plot(fits[[3]], data)
 ```
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-13-4.png" width="672" />
 
-```r
+``` r
 sapply(fits, err, data = data[train, ])
 ```
 
@@ -304,7 +304,7 @@ sapply(fits, err, data = data[train, ])
 ##       0.04       0.30       0.10
 ```
 
-```r
+``` r
 sapply(fits, err, data = data[test, ])
 ```
 
@@ -335,7 +335,7 @@ same for the training and test data sets.
 >    ```
 
 
-```r
+``` r
 set.seed(42)
 train <- data.frame(
   x1 = runif(500) - 0.5,
@@ -348,7 +348,7 @@ train$y <- factor(as.numeric((train$x1^2 - train$x2^2 > 0)))
 >    should display $X_1$ on the $x$-axis, and $X_2$ on the $y$-axis.
 
 
-```r
+``` r
 p <- ggplot(train, aes(x = x1, y = x2, color = y)) + 
   geom_point(size = 2)
 p
@@ -360,7 +360,7 @@ p
 >    predictors.
 
 
-```r
+``` r
 fit1 <- glm(y ~ ., data = train, family = "binomial")
 ```
 
@@ -370,7 +370,7 @@ fit1 <- glm(y ~ ., data = train, family = "binomial")
 >    linear.
 
 
-```r
+``` r
 plot_model <- function(fit) {
   if (inherits(fit, "svm")) {
     train$p <- predict(fit)
@@ -391,7 +391,7 @@ plot_model(fit1)
 >    and so forth).
 
 
-```r
+``` r
 fit2 <- glm(y ~ poly(x1, 2) + poly(x2, 2), data = train, family = "binomial")
 ```
 
@@ -411,7 +411,7 @@ fit2 <- glm(y ~ poly(x1, 2) + poly(x2, 2), data = train, family = "binomial")
 >    non-linear.
 
 
-```r
+``` r
 plot_model(fit2)
 ```
 
@@ -422,7 +422,7 @@ plot_model(fit2)
 >    the observations, colored according to the _predicted class labels_.
 
 
-```r
+``` r
 fit3 <- svm(y ~ x1 + x2, data = train, kernel = "linear")
 plot_model(fit3)
 ```
@@ -434,7 +434,7 @@ plot_model(fit3)
 >    the _predicted class labels_.
 
 
-```r
+``` r
 fit4 <- svm(y ~ x1 + x2, data = train, kernel = "polynomial", degree = 2)
 plot_model(fit4)
 ```
@@ -459,7 +459,7 @@ kernel both produce much better (and similar fits) than standard linear methods.
 >    just barely linearly separable.
 
 
-```r
+``` r
 set.seed(2)
 
 # Simulate data that is separable by a line at y = 2.5
@@ -498,7 +498,7 @@ p
 How many training errors are misclassified for each value of cost?
 
 
-```r
+``` r
 costs <- 10^seq(-3, 5)
 
 sapply(costs, function(cost) {
@@ -515,7 +515,7 @@ sapply(costs, function(cost) {
 Cross-validation errors
 
 
-```r
+``` r
 out <- tune(svm, as.factor(class) ~ ., data = data, kernel = "linear", ranges = list(cost = costs))
 summary(out)
 ```
@@ -545,7 +545,7 @@ summary(out)
 ## 9 1e+05 0.010 0.02108185
 ```
 
-```r
+``` r
 data.frame(
   cost = out$performances$cost, 
   misclass = out$performances$error * nrow(data)
@@ -572,7 +572,7 @@ data.frame(
 >    cross-validation errors?
 
 
-```r
+``` r
 set.seed(2)
 test <- data.frame(
   x = rnorm(200),
@@ -584,7 +584,7 @@ p + geom_point(data = test, pch = 21)
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
-```r
+``` r
 (errs <- sapply(costs, function(cost) {
     fit <- svm(as.factor(class) ~ ., data = data, kernel = "linear", cost = cost)
     pred <- predict(fit, test)
@@ -596,7 +596,7 @@ p + geom_point(data = test, pch = 21)
 ## [1] 95  2  3  9 16 16 19 19 19
 ```
 
-```r
+``` r
 (cost <- costs[which.min(errs)])
 ```
 
@@ -604,7 +604,7 @@ p + geom_point(data = test, pch = 21)
 ## [1] 0.01
 ```
 
-```r
+``` r
 (fit <- svm(as.factor(class) ~ ., data = data, kernel = "linear", cost = cost))
 ```
 
@@ -623,7 +623,7 @@ p + geom_point(data = test, pch = 21)
 ## Number of Support Vectors:  135
 ```
 
-```r
+``` r
 test$prediction <- predict(fit, test)
 p <- ggplot(test, aes(x = x, y = y, color = class, shape = prediction == class)) + 
   geom_point(size = 2) + 
@@ -648,7 +648,7 @@ leads to improved prediction in the test data.
 >    the median, and a 0 for cars with gas mileage below the median.
 
 
-```r
+``` r
 library(ISLR2)
 data <- Auto
 data$high_mpg <- as.factor(as.numeric(data$mpg > median(data$mpg)))
@@ -661,7 +661,7 @@ data$high_mpg <- as.factor(as.numeric(data$mpg > median(data$mpg)))
 >    the gas mileage variable to produce sensible results.
 
 
-```r
+``` r
 set.seed(42)
 costs <- 10^seq(-4, 3, by = 0.5)
 results <- list()
@@ -707,7 +707,7 @@ summary(results$linear)
 >    on your results.
 
 
-```r
+``` r
 results$polynomial <- tune(svm, f, data = data, kernel = "polynomial", 
   ranges = list(cost = costs, degree = 1:3))
 summary(results$polynomial)
@@ -774,7 +774,7 @@ summary(results$polynomial)
 ## 45 1.000000e+03      3 0.1322436 0.06764841
 ```
 
-```r
+``` r
 results$radial <- tune(svm, f, data = data, kernel = "radial", 
   ranges = list(cost = costs, gamma = 10^(-2:1)))
 summary(results$radial)
@@ -856,7 +856,7 @@ summary(results$radial)
 ## 60 1.000000e+03 10.00 0.14044872 0.04251917
 ```
 
-```r
+``` r
 sapply(results, function(x) x$best.performance)
 ```
 
@@ -865,7 +865,7 @@ sapply(results, function(x) x$best.performance)
 ## 0.10192308 0.10185897 0.08179487
 ```
 
-```r
+``` r
 sapply(results, function(x) x$best.parameters)
 ```
 
@@ -906,7 +906,7 @@ sapply(results, function(x) x$best.parameters)
 >    type `?plot.svm`._
 
 
-```r
+``` r
 table(predict(results$radial$best.model, data), data$high_mpg)
 ```
 
@@ -917,19 +917,19 @@ table(predict(results$radial$best.model, data), data$high_mpg)
 ##   1  20 191
 ```
 
-```r
+``` r
 plot(results$radial$best.model, data, horsepower~displacement)
 ```
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
-```r
+``` r
 plot(results$radial$best.model, data, horsepower~weight)
 ```
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-29-2.png" width="672" />
 
-```r
+``` r
 plot(results$radial$best.model, data, displacement~weight)
 ```
 
@@ -943,7 +943,7 @@ plot(results$radial$best.model, data, displacement~weight)
 >    test set containing the remaining observations.
 
 
-```r
+``` r
 set.seed(42)
 train <- sample(seq_len(nrow(OJ)), 800)
 test <- setdiff(seq_len(nrow(OJ)), train)
@@ -955,7 +955,7 @@ test <- setdiff(seq_len(nrow(OJ)), train)
 >    results obtained.
 
 
-```r
+``` r
 fit <- svm(Purchase ~ ., data = OJ[train, ], kernel = "linear", cost = 0.01)
 summary(fit)
 ```
@@ -986,7 +986,7 @@ summary(fit)
 > c. What are the training and test error rates?
 
 
-```r
+``` r
 err <- function(model, data) {
   t <- table(predict(model, data), data[["Purchase"]])
   1 - sum(diag(t)) / sum(t)
@@ -1006,7 +1006,7 @@ errs(fit)
 >    range 0.01 to 10.
 
 
-```r
+``` r
 tuned <- tune(svm, Purchase ~ ., data = OJ[train, ], kernel = "linear", 
   ranges = list(cost = 10^seq(-2, 1, length.out = 10)))
 tuned$best.parameters
@@ -1017,7 +1017,7 @@ tuned$best.parameters
 ## 7    1
 ```
 
-```r
+``` r
 summary(tuned)
 ```
 
@@ -1050,7 +1050,7 @@ summary(tuned)
 > e. Compute the training and test error rates using this new value for `cost`.
 
 
-```r
+``` r
 errs(tuned$best.model)
 ```
 
@@ -1063,7 +1063,7 @@ errs(tuned$best.model)
 >    kernel. Use the default value for `gamma`.
 
 
-```r
+``` r
 tuned2 <- tune(svm, Purchase ~ ., data = OJ[train, ], kernel = "radial", 
   ranges = list(cost = 10^seq(-2, 1, length.out = 10)))
 tuned2$best.parameters
@@ -1074,7 +1074,7 @@ tuned2$best.parameters
 ## 6 0.4641589
 ```
 
-```r
+``` r
 errs(tuned2$best.model)
 ```
 
@@ -1087,7 +1087,7 @@ errs(tuned2$best.model)
 >    polynomial kernel. Set `degree = 2`.
 
 
-```r
+``` r
 tuned3 <- tune(svm, Purchase ~ ., data = OJ[train, ], kernel = "polynomial", 
   ranges = list(cost = 10^seq(-2, 1, length.out = 10)), degree = 2)
 tuned3$best.parameters
@@ -1098,7 +1098,7 @@ tuned3$best.parameters
 ## 9 4.641589
 ```
 
-```r
+``` r
 errs(tuned3$best.model)
 ```
 

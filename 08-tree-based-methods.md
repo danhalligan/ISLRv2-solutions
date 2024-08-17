@@ -13,7 +13,7 @@
 > _Hint: Your result should look something like Figures 8.1 and 8.2._
 
 
-```r
+``` r
 library(showtext)
 showtext::showtext_auto()
 library(ggplot2)
@@ -22,7 +22,7 @@ library(ggtree)
 ```
 
 
-```r
+``` r
 tree <- ape::read.tree(text = "(((R1:1,R2:1)N1:2,R3:4)N2:2,(R4:2,(R5:1,R6:1)R3:2)N4:5)R;")
 tree$node.label <- c("Age < 40", "Weight < 100", "Weight < 70", "Age < 60", "Weight < 80")
 
@@ -34,7 +34,7 @@ ggtree(tree, ladderize = FALSE) + scale_x_reverse() + coord_flip() +
 <img src="08-tree-based-methods_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 
-```r
+``` r
 plot(NULL, xlab="Age (years)", ylab="Weight (kg)", 
   xlim = c(0, 100), ylim = c(40, 160), xaxs = "i", yaxs = "i")
 abline(v = 40, col = "red", lty = 2)
@@ -96,7 +96,7 @@ The *classification error* is
 $$E = 1 - \max_k(\hat{p}_{mk})$$
 
 
-```r
+``` r
 # Function definitions are for when there's two classes only
 p <- seq(0, 1, length.out = 100)
 data.frame(
@@ -122,7 +122,7 @@ data.frame(
 >    boxes indicate the mean of $Y$ within each region.
 
 
-```r
+``` r
 tree <- ape::read.tree(text = "(((3:1.5,(10:1,0:1)A:1)B:1,15:2)C:1,5:2)D;")
 tree$node.label <- c("X1 < 1", "X2 < 1", "X1 < 0", "X2 < 0")
 
@@ -139,7 +139,7 @@ ggtree(tree, ladderize = FALSE) + scale_x_reverse() + coord_flip() +
 >    mean for each region.
 
 
-```r
+``` r
 plot(NULL, xlab="X1", ylab="X2", xlim = c(-1, 2), ylim = c(0, 3), xaxs = "i", yaxs = "i")
 abline(h = 1, col = "red", lty = 2)
 lines(c(1, 1), c(0, 1), col = "blue", lty = 2)
@@ -167,7 +167,7 @@ text(
 > example, what is the final classification under each of these two approaches?
 
 
-```r
+``` r
 x <- c(0.1, 0.15, 0.2, 0.2, 0.55, 0.6, 0.6, 0.65, 0.7, 0.75)
 ifelse(mean(x > 0.5), "red", "green") # majority vote
 ```
@@ -176,7 +176,7 @@ ifelse(mean(x > 0.5), "red", "green") # majority vote
 ## [1] "red"
 ```
 
-```r
+``` r
 ifelse(mean(x) > 0.5, "red", "green") # average probability
 ```
 
@@ -207,7 +207,7 @@ $\alpha$ value.
 > 8.10. Describe the results obtained.
 
 
-```r
+``` r
 library(ISLR2)
 library(randomForest)
 ```
@@ -243,7 +243,7 @@ library(randomForest)
 ##     margin
 ```
 
-```r
+``` r
 set.seed(42)
 
 train <- sample(c(TRUE, FALSE), nrow(Boston), replace = TRUE)
@@ -283,7 +283,7 @@ data.frame(res, check.names = FALSE) |>
 > a. Split the data set into a training set and a test set.
 
 
-```r
+``` r
 set.seed(42)
 train <- sample(c(TRUE, FALSE), nrow(Carseats), replace = TRUE)
 ```
@@ -292,7 +292,7 @@ train <- sample(c(TRUE, FALSE), nrow(Carseats), replace = TRUE)
 >    results. What test error rate do you obtain?
 
 
-```r
+``` r
 library(tree)
 tr <- tree(Sales ~ ., data = Carseats[train, ])
 summary(tr)
@@ -312,14 +312,14 @@ summary(tr)
 ## -4.54900 -0.82980  0.03075  0.00000  0.89250  4.83100
 ```
 
-```r
+``` r
 plot(tr)
 text(tr, pretty = 0, digits = 2, cex = 0.8)
 ```
 
 <img src="08-tree-based-methods_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
-```r
+``` r
 carseats_mse <- function(model) {
   p <- predict(model, newdata = Carseats[!train, ])
   mean((p - Carseats[!train, "Sales"])^2)
@@ -335,7 +335,7 @@ carseats_mse(tr)
 >    complexity. Does pruning the tree improve the test error rate?
 
 
-```r
+``` r
 res <- cv.tree(tr)
 plot(res$size, res$dev, type = "b", xlab = "Tree size", ylab = "Deviance")
 min <- which.min(res$dev)
@@ -349,7 +349,7 @@ different rounds of cross-validation). Arguably, a good balance is achieved
 when the tree size is 11.
 
 
-```r
+``` r
 ptr <- prune.tree(tr, best = 11)
 plot(ptr)
 text(ptr, pretty = 0, digits = 2, cex = 0.8)
@@ -357,7 +357,7 @@ text(ptr, pretty = 0, digits = 2, cex = 0.8)
 
 <img src="08-tree-based-methods_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
-```r
+``` r
 carseats_mse(ptr)
 ```
 
@@ -370,7 +370,7 @@ carseats_mse(ptr)
 >    variables are most important.
 
 
-```r
+``` r
 # Here we can use random Forest with mtry = 10 = p (the number of predictor
 # variables) to perform bagging
 bagged <- randomForest(Sales ~ ., data = Carseats[train, ], mtry = 10, 
@@ -382,7 +382,7 @@ carseats_mse(bagged)
 ## [1] 2.762861
 ```
 
-```r
+``` r
 importance(bagged)
 ```
 
@@ -409,7 +409,7 @@ regression tree above.
 >    considered at each split, on the error rate obtained.
 
 
-```r
+``` r
 rf <- randomForest(Sales ~ ., data = Carseats[train, ], mtry = 3, 
   ntree = 500, importance = TRUE)
 carseats_mse(rf)
@@ -419,7 +419,7 @@ carseats_mse(rf)
 ## [1] 3.439357
 ```
 
-```r
+``` r
 importance(rf)
 ```
 
@@ -443,7 +443,7 @@ regression tree above, although not quite as good as the bagging approach.
 > f. Now analyze the data using BART, and report your results.
 
 
-```r
+``` r
 library(BART)
 ```
 
@@ -469,14 +469,10 @@ library(BART)
 ```
 
 ```
-## Loading required package: nnet
-```
-
-```
 ## Loading required package: survival
 ```
 
-```r
+``` r
 # For ease, we'll create a fake "predict" method that just returns 
 # yhat.test.mean regardless of provided "newdata"
 predict.wbart <- function(model, ...) model$yhat.test.mean
@@ -513,11 +509,11 @@ bartfit <- gbart(Carseats[train, 2:11], Carseats[train, 1],
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 3s
+## time: 2s
 ## trcnt,tecnt: 1000,1000
 ```
 
-```r
+``` r
 carseats_mse(bartfit)
 ```
 
@@ -536,7 +532,7 @@ bagging.
 >    test set containing the remaining observations.
 
 
-```r
+``` r
 set.seed(42)
 train <- sample(1:nrow(OJ), 800)
 test <- setdiff(1:nrow(OJ), train)
@@ -549,7 +545,7 @@ test <- setdiff(1:nrow(OJ), train)
 >    does the tree have?
 
 
-```r
+``` r
 tr <- tree(Purchase ~ ., data = OJ[train, ])
 summary(tr)
 ```
@@ -569,7 +565,7 @@ summary(tr)
 >    Pick one of the terminal nodes, and interpret the information displayed.
 
 
-```r
+``` r
 tr
 ```
 
@@ -597,7 +593,7 @@ tr
 > d. Create a plot of the tree, and interpret the results.
 
 
-```r
+``` r
 plot(tr)
 text(tr, pretty = 0, digits = 2, cex = 0.8)
 ```
@@ -609,7 +605,7 @@ text(tr, pretty = 0, digits = 2, cex = 0.8)
 >    error rate?
 
 
-```r
+``` r
 table(predict(tr, OJ[test, ], type = "class"), OJ[test, "Purchase"])
 ```
 
@@ -624,7 +620,7 @@ table(predict(tr, OJ[test, ], type = "class"), OJ[test, "Purchase"])
 >    the optimal tree size.
 
 
-```r
+``` r
 set.seed(42)
 res <- cv.tree(tr)
 ```
@@ -633,7 +629,7 @@ res <- cv.tree(tr)
 >    classification error rate on the $y$-axis.
 
 
-```r
+``` r
 plot(res$size, res$dev, type = "b", xlab = "Tree size", ylab = "Deviance")
 min <- which.min(res$dev)
 abline(v = res$size[min], lty = 2, col = "red")
@@ -645,7 +641,7 @@ abline(v = res$size[min], lty = 2, col = "red")
 >    error rate?
 
 
-```r
+``` r
 res$size[min]
 ```
 
@@ -658,7 +654,7 @@ res$size[min]
 >    pruned tree, then create a pruned tree with five terminal nodes.
 
 
-```r
+``` r
 ptr <- prune.tree(tr, best = res$size[min])
 plot(ptr)
 text(ptr, pretty = 0, digits = 2, cex = 0.8)
@@ -670,7 +666,7 @@ text(ptr, pretty = 0, digits = 2, cex = 0.8)
 >    Which is higher?
 
 
-```r
+``` r
 oj_misclass <- function(model) {
   summary(model)$misclass[1] / summary(model)$misclass[2]
 }
@@ -681,7 +677,7 @@ oj_misclass(tr)
 ## [1] 0.16375
 ```
 
-```r
+``` r
 oj_misclass(ptr)
 ```
 
@@ -695,7 +691,7 @@ The training misclassification error rate is slightly higher for the pruned tree
 >    is higher?
 
 
-```r
+``` r
 oj_err <- function(model) {
   p <- predict(model, newdata = OJ[test, ], type = "class")
   mean(p != OJ[test, "Purchase"])
@@ -707,7 +703,7 @@ oj_err(tr)
 ## [1] 0.1888889
 ```
 
-```r
+``` r
 oj_err(ptr)
 ```
 
@@ -725,7 +721,7 @@ The test misclassification error rate is slightly higher for the pruned tree.
 >    then log-transform the salaries.
 
 
-```r
+``` r
 dat <- Hitters
 dat <- dat[!is.na(dat$Salary), ]
 dat$Salary <- log(dat$Salary)
@@ -735,7 +731,7 @@ dat$Salary <- log(dat$Salary)
 >    set consisting of the remaining observations.
 
 
-```r
+``` r
 train <- 1:200
 test <- setdiff(1:nrow(dat), train)
 ```
@@ -746,15 +742,19 @@ test <- setdiff(1:nrow(dat), train)
 >    the $y$-axis.
 
 
-```r
+``` r
 library(gbm)
 ```
 
 ```
-## Loaded gbm 2.1.8.1
+## Loaded gbm 2.2.2
 ```
 
-```r
+```
+## This version of gbm is no longer under development. Consider transitioning to gbm3, https://github.com/gbm-developers/gbm3
+```
+
+``` r
 set.seed(42)
 lambdas <- 10 ^ seq(-3, 0, by = 0.1)
 fits <- lapply(lambdas, function(lam) {
@@ -775,7 +775,7 @@ plot(lambdas, errs, type = "b", xlab = "Shrinkage values",
 >    corresponding test set MSE on the $y$-axis.
 
 
-```r
+``` r
 errs <- sapply(fits, function(fit) {
   p <- predict(fit, dat[test, ], n.trees = 1000)
   mean((p - dat[test, ]$Salary)^2)
@@ -789,7 +789,7 @@ min(errs)
 ## [1] 0.249881
 ```
 
-```r
+``` r
 abline(v = lambdas[which.min(errs)], lty = 2, col = "red")
 ```
 
@@ -801,7 +801,7 @@ abline(v = lambdas[which.min(errs)], lty = 2, col = "red")
 Linear regression
 
 
-```r
+``` r
 fit1 <- lm(Salary ~ ., data = dat[train, ])
 mean((predict(fit1, dat[test, ]) - dat[test, "Salary"])^2)
 ```
@@ -813,7 +813,7 @@ mean((predict(fit1, dat[test, ]) - dat[test, "Salary"])^2)
 Ridge regression
 
 
-```r
+``` r
 library(glmnet)
 ```
 
@@ -842,7 +842,7 @@ library(glmnet)
 ## Loaded glmnet 4.1-8
 ```
 
-```r
+``` r
 x <- model.matrix(Salary ~ ., data = dat[train, ])
 x.test <- model.matrix(Salary ~ ., data = dat[test, ])
 y <- dat[train, "Salary"]
@@ -858,7 +858,7 @@ mean((predict(fit2, s = 0.1, newx = x.test) - dat[test, "Salary"])^2)
 >    model?
 
 
-```r
+``` r
 summary(fits[[which.min(errs)]])
 ```
 
@@ -891,7 +891,7 @@ summary(fits[[which.min(errs)]])
 >    approach?
 
 
-```r
+``` r
 set.seed(42)
 bagged <- randomForest(Salary ~ ., data = dat[train, ], mtry = 19, ntree = 1000)
 mean((predict(bagged, newdata = dat[test, ]) - dat[test, "Salary"])^2)
@@ -909,7 +909,7 @@ mean((predict(bagged, newdata = dat[test, ]) - dat[test, "Salary"])^2)
 >    test set consisting of the remaining observations.
 
 
-```r
+``` r
 train <- 1:1000
 test <- setdiff(1:nrow(Caravan), train)
 ```
@@ -919,9 +919,9 @@ test <- setdiff(1:nrow(Caravan), train)
 >    value of 0.01. Which predictors appear to be the most important?
 
 
-```r
+``` r
 set.seed(42)
-fit <- gbm(Purchase == "Yes" ~ ., data = Caravan[train, ], n.trees = 1000, shrinkage = 0.01)
+fit <- gbm(as.numeric(Purchase == "Yes") ~ ., data = Caravan[train, ], n.trees = 1000, shrinkage = 0.01)
 ```
 
 ```
@@ -938,7 +938,7 @@ fit <- gbm(Purchase == "Yes" ~ ., data = Caravan[train, ], n.trees = 1000, shrin
 ## : variable 71: AVRAAUT has no variation.
 ```
 
-```r
+``` r
 head(summary(fit))
 ```
 
@@ -962,7 +962,7 @@ head(summary(fit))
 >    data set?
 
 
-```r
+``` r
 p <- predict(fit, Caravan[test, ], n.trees = 1000, type = "response")
 table(p > 0.2, Caravan[test, "Purchase"] == "Yes")
 ```
@@ -974,7 +974,7 @@ table(p > 0.2, Caravan[test, "Purchase"] == "Yes")
 ##   TRUE    118   32
 ```
 
-```r
+``` r
 sum(p > 0.2 & Caravan[test, "Purchase"] == "Yes") / sum(p > 0.2)
 ```
 
@@ -985,7 +985,7 @@ sum(p > 0.2 & Caravan[test, "Purchase"] == "Yes") / sum(p > 0.2)
 141 (109 + 32) are predicted to purchase. Of these 32 do which is 21%.
 
 
-```r
+``` r
 # Logistic regression
 fit <- glm(Purchase == "Yes" ~ ., data = Caravan[train, ], family = "binomial")
 ```
@@ -994,7 +994,7 @@ fit <- glm(Purchase == "Yes" ~ ., data = Caravan[train, ], family = "binomial")
 ## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 ```
 
-```r
+``` r
 p <- predict(fit, Caravan[test, ], type = "response")
 ```
 
@@ -1003,7 +1003,7 @@ p <- predict(fit, Caravan[test, ], type = "response")
 ## prediction from rank-deficient fit; attr(*, "non-estim") has doubtful cases
 ```
 
-```r
+``` r
 table(p > 0.2, Caravan[test, "Purchase"] == "Yes")
 ```
 
@@ -1014,7 +1014,7 @@ table(p > 0.2, Caravan[test, "Purchase"] == "Yes")
 ##   TRUE    350   58
 ```
 
-```r
+``` r
 sum(p > 0.2 & Caravan[test, "Purchase"] == "Yes") / sum(p > 0.2)
 ```
 
@@ -1025,7 +1025,7 @@ sum(p > 0.2 & Caravan[test, "Purchase"] == "Yes") / sum(p > 0.2)
 For logistic regression we correctly predict 14% of those predicted to purchase.
 
 
-```r
+``` r
 library(class)
 # KNN
 fit <- knn(Caravan[train, -86], Caravan[test, -86],  Caravan$Purchase[train])
@@ -1039,7 +1039,7 @@ table(fit, Caravan[test, "Purchase"] == "Yes")
 ##   Yes   273   26
 ```
 
-```r
+``` r
 sum(fit == "Yes" & Caravan[test, "Purchase"] == "Yes") / sum(fit == "Yes")
 ```
 
@@ -1062,7 +1062,7 @@ to compare performance with the GAM we previously built). In this model we
 were trying to predict `Outstate` using the other variables in `College`.
 
 
-```r
+``` r
 library(gam)
 ```
 
@@ -1086,10 +1086,10 @@ library(gam)
 ```
 
 ```
-## Loaded gam 1.22-3
+## Loaded gam 1.22-4
 ```
 
-```r
+``` r
 set.seed(42)
 train <- sample(1:nrow(College), 400)
 test <- setdiff(1:nrow(College), train)
@@ -1109,7 +1109,7 @@ boosted <- gbm(Outstate ~ ., data = College[train, ], n.trees = 1000, shrinkage 
 ## Distribution not specified, assuming gaussian ...
 ```
 
-```r
+``` r
 # Bagging (random forest with mtry = no. predictors)
 bagged <- randomForest(Outstate ~ ., data = College[train, ], mtry = 17, ntree = 1000)
 
@@ -1150,11 +1150,11 @@ bart <- gbart(College[train, pred], College[train, "Outstate"],
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 4s
+## time: 3s
 ## trcnt,tecnt: 1000,1000
 ```
 
-```r
+``` r
 mse <- function(model, ...) {
   pred <- predict(model, College[test, ], ...)
   mean((College$Outstate[test] - pred)^2)

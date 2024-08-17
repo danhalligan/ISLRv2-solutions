@@ -90,7 +90,7 @@ the probability is $(1 - 1/n)^n$
 >    bootstrap sample?
 
 
-```r
+``` r
 n <- 5
 1 - (1 - 1 / n)^n
 ```
@@ -105,7 +105,7 @@ $p = 0.67$
 >    the bootstrap sample?
 
 
-```r
+``` r
 n <- 100
 1 - (1 - 1 / n)^n
 ```
@@ -120,7 +120,7 @@ $p = 0.64$
 >    in the bootstrap sample?
 
 
-```r
+``` r
 n <- 100000
 1 - (1 - 1 / n)^n
 ```
@@ -136,7 +136,7 @@ $p = 0.63$
 >    sample. Comment on what you observe.
 
 
-```r
+``` r
 x <- sapply(1:100000, function(n) 1 - (1 - 1 / n)^n)
 plot(x, log = "x", type = "o")
 ```
@@ -164,13 +164,13 @@ can see that our limit is $1 - e^{-1} = 1 - 1/e$.
 >    Comment on the results obtained.
 
 
-```r
+``` r
 store <- replicate(10000, sum(sample(1:100, replace = TRUE) == 4) > 0)
 mean(store)
 ```
 
 ```
-## [1] 0.6364
+## [1] 0.6349
 ```
 
 The probability of including $4$ when resampling numbers $1...100$ is close to
@@ -228,7 +228,7 @@ over bootstrapped samples.
 >    `default`.
 
 
-```r
+``` r
 library(ISLR2)
 set.seed(42)
 fit <- glm(default ~ income + balance, data = Default, family = "binomial")
@@ -248,7 +248,7 @@ fit <- glm(default ~ income + balance, data = Default, family = "binomial")
 >    the observations in the validation set that are misclassified.
 
 
-```r
+``` r
 train <- sample(nrow(Default), nrow(Default) / 2)
 fit <- glm(default ~ income + balance, data = Default, family = "binomial", subset = train)
 pred <- ifelse(predict(fit, newdata = Default[-train, ], type = "response") > 0.5, "Yes", "No")
@@ -262,7 +262,7 @@ table(pred, Default$default[-train])
 ##   Yes   20   53
 ```
 
-```r
+``` r
 mean(pred != Default$default[-train])
 ```
 
@@ -275,7 +275,7 @@ mean(pred != Default$default[-train])
 >    results obtained.
 
 
-```r
+``` r
 replicate(3, {
   train <- sample(nrow(Default), nrow(Default) / 2)
   fit <- glm(default ~ income + balance, data = Default, family = "binomial", subset = train)
@@ -298,7 +298,7 @@ training vs. test.
 >    a reduction in the test error rate.
 
 
-```r
+``` r
 replicate(3, {
   train <- sample(nrow(Default), nrow(Default) / 2)
   fit <- glm(default ~ income + balance + student, data = Default, family = "binomial", subset = train)
@@ -330,7 +330,7 @@ test error.
 >    predictors.
 
 
-```r
+``` r
 fit <- glm(default ~ income + balance, data = Default, family = "binomial")
 summary(fit)
 ```
@@ -367,7 +367,7 @@ $\beta_2$ = 2.3e-4.
 >    model.
 
 
-```r
+``` r
 boot.fn <- function(x, i) {
   fit <- glm(default ~ income + balance, data = x[i, ], family = "binomial")
   coef(fit)[-1]
@@ -379,7 +379,7 @@ boot.fn <- function(x, i) {
 >    income and balance.
 
 
-```r
+``` r
 library(boot)
 set.seed(42)
 boot(Default, boot.fn, R = 1000)
@@ -420,7 +420,7 @@ by `glm`.
 >    `Lag2`.
 
 
-```r
+``` r
 fit <- glm(Direction ~ Lag1 + Lag2, data = Weekly, family = "binomial")
 ```
 
@@ -428,7 +428,7 @@ fit <- glm(Direction ~ Lag1 + Lag2, data = Weekly, family = "binomial")
 >    `Lag2` _using all but the first observation_.
 
 
-```r
+``` r
 fit <- glm(Direction ~ Lag1 + Lag2, data = Weekly[-1, ], family = "binomial")
 ```
 
@@ -438,7 +438,7 @@ fit <- glm(Direction ~ Lag1 + Lag2, data = Weekly[-1, ], family = "binomial")
 >    correctly classified?
 
 
-```r
+``` r
 predict(fit, newdata = Weekly[1, , drop = FALSE], type = "response") > 0.5
 ```
 
@@ -462,7 +462,7 @@ Yes the observation was correctly classified.
 >         indicate this as a 1, and otherwise indicate it as a 0.
 
 
-```r
+``` r
 error <- numeric(nrow(Weekly))
 for (i in 1:nrow(Weekly)) {
   fit <- glm(Direction ~ Lag1 + Lag2, data = Weekly[-i, ], family = "binomial")
@@ -475,7 +475,7 @@ for (i in 1:nrow(Weekly)) {
 >    LOOCV estimate for the test error. Comment on the results.
 
 
-```r
+``` r
 mean(error)
 ```
 
@@ -500,7 +500,7 @@ marginally more often correct than not.
 >    used to generate the data in equation form.
 
 
-```r
+``` r
 set.seed(1)
 x <- rnorm(100)
 y <- x - 2 * x^2 + rnorm(100)
@@ -512,7 +512,7 @@ a single variable $x$). The model equation is: $$y = -2x^2 + x + \epsilon$$.
 > b. Create a scatterplot of $X$ against $Y$. Comment on what you find.
 
 
-```r
+``` r
 plot(x, y)
 ```
 
@@ -531,7 +531,7 @@ $y$ has a (negative) quadratic relationship with $x$.
 >    to create a single data set containing both $X$ and $Y$.
 
 
-```r
+``` r
 library(boot)
 set.seed(42)
 dat <- data.frame(x, y)
@@ -546,7 +546,7 @@ sapply(1:4, function(i) cv.glm(dat, glm(y ~ poly(x, i)))$delta[1])
 >    Are your results the same as what you got in (c)? Why?
 
 
-```r
+``` r
 set.seed(43)
 dat <- data.frame(x, y)
 sapply(1:4, function(i) cv.glm(dat, glm(y ~ poly(x, i)))$delta[1])
@@ -573,7 +573,7 @@ than training) error rate to evaluate performance.
 >    cross-validation results?
 
 
-```r
+``` r
 for (i in 1:4) printCoefmat(coef(summary(glm(y ~ poly(x, i), data = dat))))
 ```
 
@@ -620,7 +620,7 @@ results agree with those from cross-validation.
 >    `medv`. Call this estimate $\hat\mu$.
 
 
-```r
+``` r
 (mu <- mean(Boston$medv))
 ```
 
@@ -636,7 +636,7 @@ results agree with those from cross-validation.
 >    observations._
 
 
-```r
+``` r
 sd(Boston$medv) / sqrt(length(Boston$medv))
 ```
 
@@ -648,7 +648,7 @@ sd(Boston$medv) / sqrt(length(Boston$medv))
 >    this compare to your answer from (b)?
 
 
-```r
+``` r
 set.seed(42)
 (bs <- boot(Boston$medv, function(v, i) mean(v[i]), 10000))
 ```
@@ -679,7 +679,7 @@ obtained from the formula above (0.409).
 >    formula $[\hat\mu - 2SE(\hat\mu),  \hat\mu + 2SE(\hat\mu)].$_
 
 
-```r
+``` r
 se <- sd(bs$t)
 c(mu - 2 * se, mu + 2 * se)
 ```
@@ -692,7 +692,7 @@ c(mu - 2 * se, mu + 2 * se)
 >    median value of `medv` in the population.
 
 
-```r
+``` r
 median(Boston$medv)
 ```
 
@@ -706,7 +706,7 @@ median(Boston$medv)
 >    the bootstrap. Comment on your findings.
 
 
-```r
+``` r
 set.seed(42)
 boot(Boston$medv, function(v, i) median(v[i]), 10000)
 ```
@@ -734,7 +734,7 @@ standard error of the mean.
 >    can use the `quantile()` function.)
 
 
-```r
+``` r
 quantile(Boston$medv, 0.1)
 ```
 
@@ -747,7 +747,7 @@ quantile(Boston$medv, 0.1)
 >    Comment on your findings.
 
 
-```r
+``` r
 set.seed(42)
 boot(Boston$medv, function(v, i) quantile(v[i], 0.1), 10000)
 ```
