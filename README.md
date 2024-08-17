@@ -1,12 +1,13 @@
-# An Introduction to Statistical Learning second edition solutions
+# An Introduction to Statistical Learning with Applications in R second edition solutions
 
 [![Build and Deploy](https://github.com/danhalligan/ISLRv2-solutions/actions/workflows/github-actions.yml/badge.svg)](https://github.com/danhalligan/ISLRv2-solutions/actions/workflows/github-actions.yml)
 ![License](https://img.shields.io/github/license/danhalligan/ISLRv2-solutions)
 
-![ISLR cover](images/isl_small.jpg)
+![ISLR v2 cover](images/isl_small.png)
 
-This repository provides my solutions for all exercises in the book 
-["An Introduction to Statistical Learning"](https://www.statlearning.com/) 
+This repository provides my solutions for all exercises in the book
+["An Introduction to Statistical Learning with Applications in R"](https://www.statlearning.com/),
+second edition,
 by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani.
 
 If you use these solutions or find them useful, please star this repository!
