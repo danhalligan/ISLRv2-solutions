@@ -2,6 +2,8 @@
 title: An Introduction to Statistical Learning
 subtitle: Exercise solutions in R
 site: bookdown::bookdown_site
+github-repo: danhalligan/ISLRv2-solutions
+url: 'https\://danhalligan.github.io/ISLRv2-solutions/'
 ---
 
 # Introduction
