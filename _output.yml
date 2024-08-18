@@ -13,3 +13,6 @@ bookdown::gitbook:
       twitter: no
       github: yes
       all: []
+    github-repo: danhalligan/ISLRv2-solutions
+    url: https://danhalligan.github.io/ISLRv2-solutions/
+  
