@@ -4,3 +4,4 @@ language:
     chapter_name: ""
 delete_merged_file: true
 new_session: yes
+repo: https://github.com/danhalligan/ISLRv2-solutions/
