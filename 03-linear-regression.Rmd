@@ -48,6 +48,18 @@ the $K$ nearest neighbors.
 >         average than high school graduates provided that the GPA is high 
 >         enough.
 
+The model is:
+
+$y = \beta_0 + \beta_1 \text{GPA} + \beta_2 \text{IQ} + \beta_3 \text{Level} + \beta_4 \text{GPA} \text{IQ} + \beta_5 \text{GPA} \text{Level}$
+
+Fixing IQ and GPA, changing Level from 0 to 1 will change the outcome by:
+
+$\Delta y = \beta_3 + \beta_5 \text{GPA}$
+
+$\Delta y > 0 \Rightarrow \beta_3 + \beta_5 \text{GPA} > 0 \Rightarrow \text{GPA} > \dfrac{-\beta3}{\beta_5} = - \dfrac{35}{-10} = 3.5$
+
+From a graphical standpoint:
+
 ```{r, message = FALSE, warning = FALSE}
 library(plotly)
 ```
