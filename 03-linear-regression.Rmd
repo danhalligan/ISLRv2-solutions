@@ -50,13 +50,13 @@ the $K$ nearest neighbors.
 
 The model is:
 
-$y = \beta_0 + \beta_1 \text{GPA} + \beta_2 \text{IQ} + \beta_3 \text{Level} + \beta_4 \text{GPA} \text{IQ} + \beta_5 \text{GPA} \text{Level}$
+$y = \beta_0 + \beta_1 \cdot \text{GPA} + \beta_2 \cdot \text{IQ} + \beta_3 \cdot \text{Level} + \beta_4 \cdot \text{GPA} \cdot \text{IQ} + \beta_5 \cdot \text{GPA} \cdot \text{Level}$
 
 Fixing IQ and GPA, changing Level from 0 to 1 will change the outcome by:
 
-$\Delta y = \beta_3 + \beta_5 \text{GPA}$
+$\Delta y = \beta_3 + \beta_5 \cdot \text{GPA}$
 
-$\Delta y > 0 \Rightarrow \beta_3 + \beta_5 \text{GPA} > 0 \Rightarrow \text{GPA} > \dfrac{-\beta3}{\beta_5} = - \dfrac{35}{-10} = 3.5$
+$\Delta y > 0 \Rightarrow \beta_3 + \beta_5 \cdot \text{GPA} > 0 \Rightarrow \text{GPA} < \dfrac{-\beta_3}{\beta_5} = \dfrac{-35}{-10} = 3.5$
 
 From a graphical standpoint:
 
