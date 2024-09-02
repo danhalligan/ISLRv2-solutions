@@ -1025,15 +1025,15 @@ data (that is, the data from 2009 and 2010).</li>
 <li>Repeat (d) using naive Bayes.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="classification.html#cb203-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Smarket, <span class="dt">subset =</span> train)</span>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="classification.html#cb203-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">naiveBayes</span>(Direction <span class="op">~</span><span class="st"> </span>Lag2, <span class="dt">data =</span> Weekly, <span class="dt">subset =</span> train)</span>
 <span id="cb203-2"><a href="classification.html#cb203-2" aria-hidden="true"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, Weekly[<span class="op">!</span>train, ], <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)</span>
 <span id="cb203-3"><a href="classification.html#cb203-3" aria-hidden="true"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(pred, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
 <pre><code>##       
 ## pred   Down Up
-##   Down   27 29
-##   Up     16 32</code></pre>
+##   Down    0  0
+##   Up     43 61</code></pre>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="classification.html#cb205-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
-<pre><code>## [1] 0.5673077</code></pre>
+<pre><code>## [1] 0.5865385</code></pre>
 <blockquote>
 <ol style="list-style-type: lower-roman">
 <li>Which of these methods appears to provide the best results on this data?</li>

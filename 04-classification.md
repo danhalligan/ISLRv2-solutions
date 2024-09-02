@@ -695,7 +695,7 @@ sum(diag(t)) / sum(t)
 
 
 ``` r
-fit <- naiveBayes(Direction ~ Lag2, data = Smarket, subset = train)
+fit <- naiveBayes(Direction ~ Lag2, data = Weekly, subset = train)
 pred <- predict(fit, Weekly[!train, ], type = "class")
 (t <- table(pred, Weekly[!train, ]$Direction))
 ```
@@ -703,8 +703,8 @@ pred <- predict(fit, Weekly[!train, ], type = "class")
 ```
 ##       
 ## pred   Down Up
-##   Down   27 29
-##   Up     16 32
+##   Down    0  0
+##   Up     43 61
 ```
 
 ``` r
@@ -712,7 +712,7 @@ sum(diag(t)) / sum(t)
 ```
 
 ```
-## [1] 0.5673077
+## [1] 0.5865385
 ```
 
 > i. Which of these methods appears to provide the best results on this data?
