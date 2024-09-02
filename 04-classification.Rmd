@@ -546,7 +546,7 @@ sum(diag(t)) / sum(t)
 > h. Repeat (d) using naive Bayes.
 
 ```{r}
-fit <- naiveBayes(Direction ~ Lag2, data = Smarket, subset = train)
+fit <- naiveBayes(Direction ~ Lag2, data = Weekly, subset = train)
 pred <- predict(fit, Weekly[!train, ], type = "class")
 (t <- table(pred, Weekly[!train, ]$Direction))
 sum(diag(t)) / sum(t)
