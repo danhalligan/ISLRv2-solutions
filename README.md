@@ -44,11 +44,16 @@ You can view these solutions hosted from GitHub at the following location:
 
 ## Building the solutions
 
-You will need to install [tensorflow and keras]. The dependencies are provided
-in the `DESCRIPTION` file and you can install them by running:
+The R dependencies are provided in the `DESCRIPTION` file and you can install them by running:
 
 ```r
 devtools::install()
+```
+
+Other than that you need the Python packages tensorflow and keras installed in the Python environment you are using to run the examples:
+
+```{bash}
+pip3 install tensorflow keras
 ```
 
 Rebuild the book with compiled solutions by running:
