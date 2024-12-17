@@ -50,21 +50,21 @@ The R dependencies are provided in the `DESCRIPTION` file and you can install th
 devtools::install()
 ```
 
-Other than that you need the Python packages tensorflow and keras installed in the Python environment you are using to run the examples:
+Other than that you need the Python packages [tensorflow and keras] installed in the Python environment you are using to run the examples:
 
-```{bash}
+```bash
 pip3 install tensorflow keras
 ```
 
 Rebuild the book with compiled solutions by running:
 
-```{r}
+```r
 bookdown::render_book('index.Rmd', 'bookdown::gitbook')
 ```
 
 To render only one file/chapter (e.g. solutions for chapter 2), use:
 
-```{r}
+```r
 rmarkdown::render(input="02-statistical-learning.Rmd", output_format=bookdown::pdf_document2())
 ```
 
