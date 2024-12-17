@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Classification | An Introduction to Statistical Learning</title>
   <meta name="description" content="4 Classification | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.40.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Classification | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -1016,10 +1016,10 @@ data (that is, the data from 2009 and 2010).</li>
 <span id="cb199-6"><a href="classification.html#cb199-6" aria-hidden="true"></a>(t &lt;-<span class="st"> </span><span class="kw">table</span>(fit, Weekly[<span class="op">!</span>train, ]<span class="op">$</span>Direction))</span></code></pre></div>
 <pre><code>##       
 ## fit    Down Up
-##   Down   21 30
-##   Up     22 31</code></pre>
+##   Down   21 29
+##   Up     22 32</code></pre>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="classification.html#cb201-1" aria-hidden="true"></a><span class="kw">sum</span>(<span class="kw">diag</span>(t)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(t)</span></code></pre></div>
-<pre><code>## [1] 0.5</code></pre>
+<pre><code>## [1] 0.5096154</code></pre>
 <blockquote>
 <ol start="8" style="list-style-type: lower-alpha">
 <li>Repeat (d) using naive Bayes.</li>

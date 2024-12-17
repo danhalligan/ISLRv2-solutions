@@ -213,7 +213,7 @@ library(randomForest)
 ```
 
 ```
-## randomForest 4.7-1.1
+## randomForest 4.7-1.2
 ```
 
 ```
@@ -509,7 +509,7 @@ bartfit <- gbart(Carseats[train, 2:11], Carseats[train, 1],
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 3s
+## time: 2s
 ## trcnt,tecnt: 1000,1000
 ```
 
@@ -1086,7 +1086,7 @@ library(gam)
 ```
 
 ```
-## Loaded gam 1.22-4
+## Loaded gam 1.22-5
 ```
 
 ``` r
@@ -1150,7 +1150,7 @@ bart <- gbart(College[train, pred], College[train, "Outstate"],
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 3s
+## time: 4s
 ## trcnt,tecnt: 1000,1000
 ```
 
