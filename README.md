@@ -57,7 +57,8 @@ Rebuild the book with compiled solutions by running:
 bookdown::render_book('index.Rmd', 'bookdown::gitbook')
 ```
 
-To render only one file, use:
+To render only one file/chapter (e.g. solutions for chapter 2), use:
+
 ```{r}
 rmarkdown::render(input="02-statistical-learning.Rmd", output_format=bookdown::pdf_document2())
 ```
