@@ -209,16 +209,15 @@ sum(p.adjust(pvals, method = "holm") < 0.1)
 > c. What is the false discovery rate associated with using the Bonferroni
 > procedure to control the FWER at level $\alpha = 0.05$?
 
-False discovery rate is the expected ratio of false positives to total
-positives. There are never any false positives (black points below the line).
-There are always the same number of total positives (8).
+False discovery rate is the expected ratio of false positives (FP) to total
+positive (FP + TP).
 
-For panels 1, 2, 3 this would be 0/8, 0/8 and 0/8 respectively.
+For panels 1, 2, 3 this would be 0/7, 0/7 and 0/3 respectively.
 
 > d. What is the false discovery rate associated with using the Holm procedure
 > to control the FWER at level $\alpha = 0.05$?
 
-For panels 1, 2, 3 this would be 0/8, 0/8 and 0/8 respectively.
+For panels 1, 2, 3 this would be 0/7, 0/8 and 0/8 respectively.
 
 > e. How would the answers to (a) and (c) change if we instead used the
 > Bonferroni procedure to control the FWER at level $\alpha = 0.001$?
