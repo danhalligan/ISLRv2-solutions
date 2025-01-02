@@ -45,12 +45,12 @@ library(ISLR2)
 library(neuralnet)
 library(sigmoid)
 set.seed(5)
-train <- sample(seq_len(nrow(ISLR2::Boston)), nrow(ISLR2::Boston) * 2/3)
+train <- sample(seq_len(nrow(ISLR2::Boston)), nrow(ISLR2::Boston) * 2 / 3)
 
 net <- neuralnet(crim ~ lstat + medv + ptratio + rm,
-    data = ISLR2::Boston[train, ],
-    act.fct = relu,
-    hidden = c(2, 3)
+  data = ISLR2::Boston[train, ],
+  act.fct = relu,
+  hidden = c(2, 3)
 )
 plot(net)
 ```
@@ -215,10 +215,13 @@ When we take the negative of this, it is equivalent to 10.14 for two classes
 
 <img src="images/nn2.png" width="50%" />
 
+Note that, because there is no boundary padding, each convolution layer will
+consist of a 28x28 array.
+
 > b. How many parameters are in this model?
 
-There are 5 convolution matrices each with 5x5 weights (plus 5 bias terms) to
-estimate, therefore 130 parameters 
+There are 3 convolution matrices each with 5x5 weights (plus 3 bias terms) to
+estimate, therefore $3 \times 5 \times 5 + 3 = 78$ parameters 
 
 > c. Explain how this model can be thought of as an ordinary feed-forward
 > neural network with the individual pixels as inputs, and with constraints on
@@ -236,9 +239,11 @@ connections to all other output nodes.
 > d. If there were no constraints, then how many weights would there be in the
 > ordinary feed-forward neural network in (c)?
 
-With no constraints, we would connect each output pixel in our 5x32x32
-convolution layer to each node in the 32x32 original image (plus 5 bias terms),
-giving a total of 5,242,885 weights to estimate.
+With no constraints, we would connect each input pixel in our original 32x32 
+image to each output pixel in each of our convolution layers, with an bias 
+term for each original pixel. So each output pixel would require 32x32 weights 
++ 1 bias term. This would give a total of (32×32+1)×28×28×3 = 2,410,800 
+parameters.
 
 ### Question 5
 
@@ -261,7 +266,7 @@ absolute error.
 
 
 ``` r
-r <- function(x) sin(x) + x/10
+r <- function(x) sin(x) + x / 10
 x <- seq(-6, 6, 0.1)
 plot(x, r(x), type = "l")
 ```
@@ -288,11 +293,11 @@ $$
 
 
 ``` r
-iter <- function(x, rho) x - rho*(cos(x) + 1/10)
+iter <- function(x, rho) x - rho * (cos(x) + 1 / 10)
 gd <- function(start, rho = 0.1) {
   b <- start
   v <- b
-  while(abs(b - iter(b, 0.1)) > 1e-8) {
+  while (abs(b - iter(b, 0.1)) > 1e-8) {
     b <- iter(b, 0.1)
     v <- c(v, b)
   }
@@ -339,7 +344,7 @@ points(res, r(res), col = "red", pch = 19)
 ### Question 7
 
 > Fit a neural network to the `Default` data. Use a single hidden layer with 10
-> units, and dropout regularization. Have a look at Labs 10.9.1–-10.9.2 for
+> units, and dropout regularization. Have a look at Labs 10.9.1--10.9.2 for
 > guidance. Compare the classification performance of your model with that of
 > linear logistic regression.
 
@@ -371,15 +376,16 @@ nn <- keras_model_sequential() |>
   layer_dropout(rate = 0.4) |>
   layer_dense(units = 1)
 
-compile(nn, loss = "mse", 
-  optimizer = optimizer_rmsprop(), 
-  metrics = list("mean_absolute_error") 
+compile(nn,
+  loss = "mse",
+  optimizer = optimizer_rmsprop(),
+  metrics = list("mean_absolute_error")
 )
 
 history <- fit(nn,
-  x[-testid, ], y[-testid], 
-  epochs = 100, 
-  batch_size = 26, 
+  x[-testid, ], y[-testid],
+  epochs = 100,
+  batch_size = 26,
   validation_data = list(x[testid, ], y[testid]),
   verbose = 0
 )
@@ -393,7 +399,7 @@ npred <- predict(nn, x[testid, ])
 ```
 
 ```
-## 6/6 - 0s - 56ms/epoch - 9ms/step
+## 6/6 - 0s - 53ms/epoch - 9ms/step
 ```
 
 ``` r
@@ -401,7 +407,7 @@ mean(abs(y[testid] - npred))
 ```
 
 ```
-## [1] 2.325418
+## [1] 2.311414
 ```
 
 In this case, the neural network outperforms logistic regression having a lower
@@ -425,7 +431,7 @@ images <- list.files("images/animals")
 x <- array(dim = c(length(images), 224, 224, 3))
 for (i in seq_len(length(images))) {
   img <- image_load(paste0("images/animals/", images[i]), target_size = c(224, 224))
-  x[i,,,] <- image_to_array(img)
+  x[i, , , ] <- image_to_array(img)
 }
 
 model <- application_resnet50(weights = "imagenet")
@@ -433,7 +439,7 @@ model <- application_resnet50(weights = "imagenet")
 
 ```
 ## Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/resnet/resnet50_weights_tf_dim_ordering_tf_kernels.h5
-##      8192/102967424 [..............................] - ETA: 0s  4202496/102967424 [>.............................] - ETA: 2s 16105472/102967424 [===>..........................] - ETA: 0s 26288128/102967424 [======>.......................] - ETA: 0s 44417024/102967424 [===========>..................] - ETA: 0s 50339840/102967424 [=============>................] - ETA: 0s 67362816/102967424 [==================>...........] - ETA: 0s 82952192/102967424 [=======================>......] - ETA: 0s 98697216/102967424 [===========================>..] - ETA: 0s102967424/102967424 [==============================] - 0s 0us/step
+##      8192/102967424 [..............................] - ETA: 0s  8396800/102967424 [=>............................] - ETA: 1s 25174016/102967424 [======>.......................] - ETA: 0s 43646976/102967424 [===========>..................] - ETA: 0s 58728448/102967424 [================>.............] - ETA: 0s 75505664/102967424 [====================>.........] - ETA: 0s 92323840/102967424 [=========================>....] - ETA: 0s102967424/102967424 [==============================] - 0s 0us/step
 ```
 
 ``` r
@@ -564,7 +570,7 @@ library(tidyverse)
 
 ``` r
 library(ISLR2)
-xdata <- data.matrix(NYSE[, c("DJ_return", "log_volume","log_volatility")])
+xdata <- data.matrix(NYSE[, c("DJ_return", "log_volume", "log_volatility")])
 istrain <- NYSE[, "train"]
 xdata <- scale(xdata)
 
@@ -575,8 +581,8 @@ lagm <- function(x, k = 1) {
 }
 
 arframe <- data.frame(
-  log_volume = xdata[, "log_volume"], 
-  L1 = lagm(xdata, 1), 
+  log_volume = xdata[, "log_volume"],
+  L1 = lagm(xdata, 1),
   L2 = lagm(xdata, 2),
   L3 = lagm(xdata, 3),
   L4 = lagm(xdata, 4),
@@ -600,7 +606,7 @@ Now we add month (and work with tidyverse).
 
 
 ``` r
-arframe$month = as.factor(str_match(NYSE$date, "-(\\d+)-")[,2])[-(1:5)]
+arframe$month <- as.factor(str_match(NYSE$date, "-(\\d+)-")[, 2])[-(1:5)]
 arfit2 <- lm(log_volume ~ ., data = arframe[istrain, ])
 arpred2 <- predict(arfit2, arframe[!istrain, ])
 V0 <- var(arframe[!istrain, "log_volume"])
@@ -703,11 +709,11 @@ model |>
 
 history <- model |>
   fit(
-    xrnn[istrain,, ],
+    xrnn[istrain, , ],
     arframe[istrain, "log_volume"],
     batch_size = 64,
     epochs = 200,
-    validation_data = list(xrnn[!istrain,, ], arframe[!istrain, "log_volume"]),
+    validation_data = list(xrnn[!istrain, , ], arframe[!istrain, "log_volume"]),
     verbose = 0
   )
 
@@ -717,11 +723,11 @@ plot(history, smooth = FALSE)
 <img src="10-deep-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 ``` r
-kpred <- predict(model, xrnn[!istrain,, ])
+kpred <- predict(model, xrnn[!istrain, , ])
 ```
 
 ```
-## 56/56 - 0s - 60ms/epoch - 1ms/step
+## 56/56 - 0s - 58ms/epoch - 1ms/step
 ```
 
 ``` r
@@ -729,7 +735,7 @@ kpred <- predict(model, xrnn[!istrain,, ])
 ```
 
 ```
-## [1] 0.4125977
+## [1] 0.4126904
 ```
 
 Both models estimate the same number of coefficients/weights (16):
@@ -763,24 +769,24 @@ model$get_weights()
 ```
 ## [[1]]
 ##               [,1]
-##  [1,] -0.030072149
-##  [2,]  0.103142686
-##  [3,]  0.116178870
-##  [4,] -0.005419406
-##  [5,]  0.114804864
-##  [6,]  0.045855314
-##  [7,]  0.034410942
-##  [8,]  0.080092825
-##  [9,]  0.128782347
-## [10,] -0.026454575
-## [11,]  0.038643800
-## [12,] -0.844997764
-## [13,]  0.094781205
-## [14,]  0.508407116
-## [15,]  0.540943623
+##  [1,] -0.033090770
+##  [2,]  0.098615587
+##  [3,]  0.145146161
+##  [4,] -0.004817145
+##  [5,]  0.117938116
+##  [6,]  0.027998660
+##  [7,]  0.039439727
+##  [8,]  0.079821616
+##  [9,]  0.055596001
+## [10,] -0.028553789
+## [11,]  0.031420395
+## [12,] -0.727792382
+## [13,]  0.098358713
+## [14,]  0.507786036
+## [15,]  0.481008917
 ## 
 ## [[2]]
-## [1] -0.00510039
+## [1] -0.005989118
 ```
 
 The flattened RNN has a lower $R^2$ on the test data than our `lm` model
@@ -802,42 +808,40 @@ From the book:
 
 ``` r
 xfun::cache_rds({
-
-  model <- keras_model_sequential() |> 
+  model <- keras_model_sequential() |>
     layer_flatten(input_shape = c(5, 3)) |>
     layer_dense(units = 32, activation = "relu") |>
-    layer_dropout(rate = 0.4) |> 
+    layer_dropout(rate = 0.4) |>
     layer_dense(units = 1)
 
   model |> compile(
-    loss = "mse", 
-    optimizer = optimizer_rmsprop(), 
+    loss = "mse",
+    optimizer = optimizer_rmsprop(),
     metrics = "mse"
   )
 
   history <- model |>
     fit(
-      xrnn[istrain,, ],
+      xrnn[istrain, , ],
       arframe[istrain, "log_volume"],
       batch_size = 64,
       epochs = 200,
-      validation_data = list(xrnn[!istrain,, ], arframe[!istrain, "log_volume"]),
+      validation_data = list(xrnn[!istrain, , ], arframe[!istrain, "log_volume"]),
       verbose = 0
     )
 
   plot(history, smooth = FALSE, metrics = "mse")
-  kpred <- predict(model, xrnn[!istrain,, ])
+  kpred <- predict(model, xrnn[!istrain, , ])
   1 - mean((kpred - arframe[!istrain, "log_volume"])^2) / V0
-
 })
 ```
 
 ```
-## 56/56 - 0s - 66ms/epoch - 1ms/step
+## 56/56 - 0s - 65ms/epoch - 1ms/step
 ```
 
 ```
-## [1] 0.421833
+## [1] 0.4263934
 ```
 
 This approach improves our $R^2$ over the linear model above.
@@ -856,16 +860,16 @@ in the RNN. Thus, our input for each observation will be 4 x 5 (rather than
 ``` r
 xfun::cache_rds({
   xdata <- data.matrix(
-    NYSE[, c("day_of_week", "DJ_return", "log_volume","log_volatility")] 
+    NYSE[, c("day_of_week", "DJ_return", "log_volume", "log_volatility")]
   )
   istrain <- NYSE[, "train"]
   xdata <- scale(xdata)
 
   arframe <- data.frame(
-    log_volume = xdata[, "log_volume"], 
+    log_volume = xdata[, "log_volume"],
     L1 = lagm(xdata, 1),
     L2 = lagm(xdata, 2),
-    L3 = lagm(xdata, 3), 
+    L3 = lagm(xdata, 3),
     L4 = lagm(xdata, 4),
     L5 = lagm(xdata, 5)
   )
@@ -875,42 +879,42 @@ xfun::cache_rds({
   n <- nrow(arframe)
   xrnn <- data.matrix(arframe[, -1])
   xrnn <- array(xrnn, c(n, 4, 5))
-  xrnn <- xrnn[,, 5:1]
+  xrnn <- xrnn[, , 5:1]
   xrnn <- aperm(xrnn, c(1, 3, 2))
   dim(xrnn)
 
   model <- keras_model_sequential() |>
-      layer_simple_rnn(units = 12,
+    layer_simple_rnn(
+      units = 12,
       input_shape = list(5, 4),
-      dropout = 0.1, 
+      dropout = 0.1,
       recurrent_dropout = 0.1
     ) |>
     layer_dense(units = 1)
 
   model |> compile(optimizer = optimizer_rmsprop(), loss = "mse")
 
-  history <- model |> 
+  history <- model |>
     fit(
-      xrnn[istrain,, ],
+      xrnn[istrain, , ],
       arframe[istrain, "log_volume"],
       batch_size = 64,
       epochs = 200,
-      validation_data = list(xrnn[!istrain,, ], arframe[!istrain, "log_volume"]),
+      validation_data = list(xrnn[!istrain, , ], arframe[!istrain, "log_volume"]),
       verbose = 0
-  )
+    )
 
-  kpred <- predict(model, xrnn[!istrain,, ])
+  kpred <- predict(model, xrnn[!istrain, , ])
   1 - mean((kpred - arframe[!istrain, "log_volume"])^2) / V0
-
 })
 ```
 
 ```
-## 56/56 - 0s - 144ms/epoch - 3ms/step
+## 56/56 - 0s - 136ms/epoch - 2ms/step
 ```
 
 ```
-## [1] 0.4480395
+## [1] 0.4529525
 ```
 
 ### Question 13
@@ -925,7 +929,7 @@ xfun::cache_rds({
 xfun::cache_rds({
   library(knitr)
   accuracy <- c()
-  for(max_features in c(1000, 3000, 5000, 10000)) {
+  for (max_features in c(1000, 3000, 5000, 10000)) {
     imdb <- dataset_imdb(num_words = max_features)
     c(c(x_train, y_train), c(x_test, y_test)) %<-% imdb
 
@@ -940,13 +944,13 @@ xfun::cache_rds({
 
     model |> compile(
       optimizer = "rmsprop",
-      loss = "binary_crossentropy", 
+      loss = "binary_crossentropy",
       metrics = "acc"
     )
 
-    history <- fit(model, x_train, y_train, 
-      epochs = 10, 
-      batch_size = 128, 
+    history <- fit(model, x_train, y_train,
+      epochs = 10,
+      batch_size = 128,
       validation_data = list(x_test, y_test),
       verbose = 0
     )
@@ -960,27 +964,26 @@ xfun::cache_rds({
     "Accuracy" = accuracy
   ) |>
     kable()
-
 })
 ```
 
 ```
 ## Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/imdb.npz
-##     8192/17464789 [..............................] - ETA: 0s 4202496/17464789 [======>.......................] - ETA: 0s15351808/17464789 [=========================>....] - ETA: 0s17464789/17464789 [==============================] - 0s 0us/step
+##     8192/17464789 [..............................] - ETA: 0s10059776/17464789 [================>.............] - ETA: 0s17464789/17464789 [==============================] - 0s 0us/step
 ## 782/782 - 15s - 15s/epoch - 20ms/step
 ## 782/782 - 15s - 15s/epoch - 20ms/step
-## 782/782 - 16s - 16s/epoch - 20ms/step
-## 782/782 - 16s - 16s/epoch - 20ms/step
+## 782/782 - 15s - 15s/epoch - 20ms/step
+## 782/782 - 15s - 15s/epoch - 20ms/step
 ```
 
 
 
 | Max Features| Accuracy|
 |------------:|--------:|
-|         1000|  0.86564|
-|         3000|  0.87444|
-|         5000|  0.83992|
-|        10000|  0.87460|
+|         1000|  0.85728|
+|         3000|  0.86944|
+|         5000|  0.87700|
+|        10000|  0.86936|
 
 Varying the dictionary size does not make a substantial impact on our estimates
 of accuracy. However, the models do take a substantial amount of time to fit and

@@ -461,12 +461,12 @@ in the plot shown here, we also include the “bias” or intercept terms.</p>
 <span id="cb691-2"><a href="deep-learning.html#cb691-2" aria-hidden="true"></a><span class="kw">library</span>(neuralnet)</span>
 <span id="cb691-3"><a href="deep-learning.html#cb691-3" aria-hidden="true"></a><span class="kw">library</span>(sigmoid)</span>
 <span id="cb691-4"><a href="deep-learning.html#cb691-4" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">5</span>)</span>
-<span id="cb691-5"><a href="deep-learning.html#cb691-5" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(ISLR2<span class="op">::</span>Boston)), <span class="kw">nrow</span>(ISLR2<span class="op">::</span>Boston) <span class="op">*</span><span class="st"> </span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span>)</span>
+<span id="cb691-5"><a href="deep-learning.html#cb691-5" aria-hidden="true"></a>train &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(ISLR2<span class="op">::</span>Boston)), <span class="kw">nrow</span>(ISLR2<span class="op">::</span>Boston) <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>)</span>
 <span id="cb691-6"><a href="deep-learning.html#cb691-6" aria-hidden="true"></a></span>
 <span id="cb691-7"><a href="deep-learning.html#cb691-7" aria-hidden="true"></a>net &lt;-<span class="st"> </span><span class="kw">neuralnet</span>(crim <span class="op">~</span><span class="st"> </span>lstat <span class="op">+</span><span class="st"> </span>medv <span class="op">+</span><span class="st"> </span>ptratio <span class="op">+</span><span class="st"> </span>rm,</span>
-<span id="cb691-8"><a href="deep-learning.html#cb691-8" aria-hidden="true"></a>    <span class="dt">data =</span> ISLR2<span class="op">::</span>Boston[train, ],</span>
-<span id="cb691-9"><a href="deep-learning.html#cb691-9" aria-hidden="true"></a>    <span class="dt">act.fct =</span> relu,</span>
-<span id="cb691-10"><a href="deep-learning.html#cb691-10" aria-hidden="true"></a>    <span class="dt">hidden =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb691-8"><a href="deep-learning.html#cb691-8" aria-hidden="true"></a>  <span class="dt">data =</span> ISLR2<span class="op">::</span>Boston[train, ],</span>
+<span id="cb691-9"><a href="deep-learning.html#cb691-9" aria-hidden="true"></a>  <span class="dt">act.fct =</span> relu,</span>
+<span id="cb691-10"><a href="deep-learning.html#cb691-10" aria-hidden="true"></a>  <span class="dt">hidden =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb691-11"><a href="deep-learning.html#cb691-11" aria-hidden="true"></a>)</span>
 <span id="cb691-12"><a href="deep-learning.html#cb691-12" aria-hidden="true"></a><span class="kw">plot</span>(net)</span></code></pre></div>
 <p>We can make a prediction for a given observation using this object.</p>
@@ -599,13 +599,15 @@ boundary padding).</p>
 </ol>
 </blockquote>
 <p><img src="images/nn2.png" width="50%" /></p>
+<p>Note that, because there is no boundary padding, each convolution layer will
+consist of a 28x28 array.</p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>How many parameters are in this model?</li>
 </ol>
 </blockquote>
-<p>There are 5 convolution matrices each with 5x5 weights (plus 5 bias terms) to
-estimate, therefore 130 parameters</p>
+<p>There are 3 convolution matrices each with 5x5 weights (plus 3 bias terms) to
+estimate, therefore <span class="math inline">\(3 \times 5 \times 5 + 3 = 78\)</span> parameters</p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Explain how this model can be thought of as an ordinary feed-forward
@@ -626,9 +628,11 @@ connections to all other output nodes.</p>
 ordinary feed-forward neural network in (c)?</li>
 </ol>
 </blockquote>
-<p>With no constraints, we would connect each output pixel in our 5x32x32
-convolution layer to each node in the 32x32 original image (plus 5 bias terms),
-giving a total of 5,242,885 weights to estimate.</p>
+<p>With no constraints, we would connect each input pixel in our original 32x32
+image to each output pixel in each of our convolution layers, with an bias
+term for each original pixel. So each output pixel would require 32x32 weights
++ 1 bias term. This would give a total of (32×32+1)×28×28×3 = 2,410,800
+parameters.</p>
 </div>
 <div id="question-5-8" class="section level3 hasAnchor" number="10.1.5">
 <h3><span class="header-section-number">10.1.5</span> Question 5<a href="deep-learning.html#question-5-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -653,7 +657,7 @@ absolute error.</p>
 <li>Draw a graph of this function over the range <span class="math inline">\(\beta \in [−6, 6]\)</span>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="deep-learning.html#cb698-1" aria-hidden="true"></a>r &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">sin</span>(x) <span class="op">+</span><span class="st"> </span>x<span class="op">/</span><span class="dv">10</span></span>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="deep-learning.html#cb698-1" aria-hidden="true"></a>r &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">sin</span>(x) <span class="op">+</span><span class="st"> </span>x <span class="op">/</span><span class="st"> </span><span class="dv">10</span></span>
 <span id="cb698-2"><a href="deep-learning.html#cb698-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="fl">0.1</span>)</span>
 <span id="cb698-3"><a href="deep-learning.html#cb698-3" aria-hidden="true"></a><span class="kw">plot</span>(x, <span class="kw">r</span>(x), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
 <p><img src="10-deep-learning_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
@@ -678,11 +682,11 @@ direction, for some learning rate <span class="math inline">\(\rho = 0.1\)</span
 <p><span class="math display">\[
 x^{m+1} = x^m - \rho (cos(x^m) + 1/10)
 \]</span></p>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="deep-learning.html#cb699-1" aria-hidden="true"></a>iter &lt;-<span class="st"> </span><span class="cf">function</span>(x, rho) x <span class="op">-</span><span class="st"> </span>rho<span class="op">*</span>(<span class="kw">cos</span>(x) <span class="op">+</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">10</span>)</span>
+<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="deep-learning.html#cb699-1" aria-hidden="true"></a>iter &lt;-<span class="st"> </span><span class="cf">function</span>(x, rho) x <span class="op">-</span><span class="st"> </span>rho <span class="op">*</span><span class="st"> </span>(<span class="kw">cos</span>(x) <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span>)</span>
 <span id="cb699-2"><a href="deep-learning.html#cb699-2" aria-hidden="true"></a>gd &lt;-<span class="st"> </span><span class="cf">function</span>(start, <span class="dt">rho =</span> <span class="fl">0.1</span>) {</span>
 <span id="cb699-3"><a href="deep-learning.html#cb699-3" aria-hidden="true"></a>  b &lt;-<span class="st"> </span>start</span>
 <span id="cb699-4"><a href="deep-learning.html#cb699-4" aria-hidden="true"></a>  v &lt;-<span class="st"> </span>b</span>
-<span id="cb699-5"><a href="deep-learning.html#cb699-5" aria-hidden="true"></a>  <span class="cf">while</span>(<span class="kw">abs</span>(b <span class="op">-</span><span class="st"> </span><span class="kw">iter</span>(b, <span class="fl">0.1</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="fl">1e-8</span>) {</span>
+<span id="cb699-5"><a href="deep-learning.html#cb699-5" aria-hidden="true"></a>  <span class="cf">while</span> (<span class="kw">abs</span>(b <span class="op">-</span><span class="st"> </span><span class="kw">iter</span>(b, <span class="fl">0.1</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="fl">1e-8</span>) {</span>
 <span id="cb699-6"><a href="deep-learning.html#cb699-6" aria-hidden="true"></a>    b &lt;-<span class="st"> </span><span class="kw">iter</span>(b, <span class="fl">0.1</span>)</span>
 <span id="cb699-7"><a href="deep-learning.html#cb699-7" aria-hidden="true"></a>    v &lt;-<span class="st"> </span><span class="kw">c</span>(v, b)</span>
 <span id="cb699-8"><a href="deep-learning.html#cb699-8" aria-hidden="true"></a>  }</span>
@@ -711,7 +715,7 @@ x^{m+1} = x^m - \rho (cos(x^m) + 1/10)
 <h3><span class="header-section-number">10.2.2</span> Question 7<a href="deep-learning.html#question-7-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <blockquote>
 <p>Fit a neural network to the <code>Default</code> data. Use a single hidden layer with 10
-units, and dropout regularization. Have a look at Labs 10.9.1–-10.9.2 for
+units, and dropout regularization. Have a look at Labs 10.9.1–10.9.2 for
 guidance. Compare the classification performance of your model with that of
 linear logistic regression.</p>
 </blockquote>
@@ -735,24 +739,25 @@ linear logistic regression.</p>
 <span id="cb707-4"><a href="deep-learning.html#cb707-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.4</span>) <span class="op">|</span><span class="er">&gt;</span></span>
 <span id="cb707-5"><a href="deep-learning.html#cb707-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">1</span>)</span>
 <span id="cb707-6"><a href="deep-learning.html#cb707-6" aria-hidden="true"></a></span>
-<span id="cb707-7"><a href="deep-learning.html#cb707-7" aria-hidden="true"></a><span class="kw">compile</span>(nn, <span class="dt">loss =</span> <span class="st">&quot;mse&quot;</span>, </span>
-<span id="cb707-8"><a href="deep-learning.html#cb707-8" aria-hidden="true"></a>  <span class="dt">optimizer =</span> <span class="kw">optimizer_rmsprop</span>(), </span>
-<span id="cb707-9"><a href="deep-learning.html#cb707-9" aria-hidden="true"></a>  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">&quot;mean_absolute_error&quot;</span>) </span>
-<span id="cb707-10"><a href="deep-learning.html#cb707-10" aria-hidden="true"></a>)</span>
-<span id="cb707-11"><a href="deep-learning.html#cb707-11" aria-hidden="true"></a></span>
-<span id="cb707-12"><a href="deep-learning.html#cb707-12" aria-hidden="true"></a>history &lt;-<span class="st"> </span><span class="kw">fit</span>(nn,</span>
-<span id="cb707-13"><a href="deep-learning.html#cb707-13" aria-hidden="true"></a>  x[<span class="op">-</span>testid, ], y[<span class="op">-</span>testid], </span>
-<span id="cb707-14"><a href="deep-learning.html#cb707-14" aria-hidden="true"></a>  <span class="dt">epochs =</span> <span class="dv">100</span>, </span>
-<span id="cb707-15"><a href="deep-learning.html#cb707-15" aria-hidden="true"></a>  <span class="dt">batch_size =</span> <span class="dv">26</span>, </span>
-<span id="cb707-16"><a href="deep-learning.html#cb707-16" aria-hidden="true"></a>  <span class="dt">validation_data =</span> <span class="kw">list</span>(x[testid, ], y[testid]),</span>
-<span id="cb707-17"><a href="deep-learning.html#cb707-17" aria-hidden="true"></a>  <span class="dt">verbose =</span> <span class="dv">0</span></span>
-<span id="cb707-18"><a href="deep-learning.html#cb707-18" aria-hidden="true"></a>)</span>
-<span id="cb707-19"><a href="deep-learning.html#cb707-19" aria-hidden="true"></a><span class="kw">plot</span>(history, <span class="dt">smooth =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<span id="cb707-7"><a href="deep-learning.html#cb707-7" aria-hidden="true"></a><span class="kw">compile</span>(nn,</span>
+<span id="cb707-8"><a href="deep-learning.html#cb707-8" aria-hidden="true"></a>  <span class="dt">loss =</span> <span class="st">&quot;mse&quot;</span>,</span>
+<span id="cb707-9"><a href="deep-learning.html#cb707-9" aria-hidden="true"></a>  <span class="dt">optimizer =</span> <span class="kw">optimizer_rmsprop</span>(),</span>
+<span id="cb707-10"><a href="deep-learning.html#cb707-10" aria-hidden="true"></a>  <span class="dt">metrics =</span> <span class="kw">list</span>(<span class="st">&quot;mean_absolute_error&quot;</span>)</span>
+<span id="cb707-11"><a href="deep-learning.html#cb707-11" aria-hidden="true"></a>)</span>
+<span id="cb707-12"><a href="deep-learning.html#cb707-12" aria-hidden="true"></a></span>
+<span id="cb707-13"><a href="deep-learning.html#cb707-13" aria-hidden="true"></a>history &lt;-<span class="st"> </span><span class="kw">fit</span>(nn,</span>
+<span id="cb707-14"><a href="deep-learning.html#cb707-14" aria-hidden="true"></a>  x[<span class="op">-</span>testid, ], y[<span class="op">-</span>testid],</span>
+<span id="cb707-15"><a href="deep-learning.html#cb707-15" aria-hidden="true"></a>  <span class="dt">epochs =</span> <span class="dv">100</span>,</span>
+<span id="cb707-16"><a href="deep-learning.html#cb707-16" aria-hidden="true"></a>  <span class="dt">batch_size =</span> <span class="dv">26</span>,</span>
+<span id="cb707-17"><a href="deep-learning.html#cb707-17" aria-hidden="true"></a>  <span class="dt">validation_data =</span> <span class="kw">list</span>(x[testid, ], y[testid]),</span>
+<span id="cb707-18"><a href="deep-learning.html#cb707-18" aria-hidden="true"></a>  <span class="dt">verbose =</span> <span class="dv">0</span></span>
+<span id="cb707-19"><a href="deep-learning.html#cb707-19" aria-hidden="true"></a>)</span>
+<span id="cb707-20"><a href="deep-learning.html#cb707-20" aria-hidden="true"></a><span class="kw">plot</span>(history, <span class="dt">smooth =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <p><img src="10-deep-learning_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb708-1"><a href="deep-learning.html#cb708-1" aria-hidden="true"></a>npred &lt;-<span class="st"> </span><span class="kw">predict</span>(nn, x[testid, ])</span></code></pre></div>
-<pre><code>## 6/6 - 0s - 56ms/epoch - 9ms/step</code></pre>
+<pre><code>## 6/6 - 0s - 53ms/epoch - 9ms/step</code></pre>
 <div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="deep-learning.html#cb710-1" aria-hidden="true"></a><span class="kw">mean</span>(<span class="kw">abs</span>(y[testid] <span class="op">-</span><span class="st"> </span>npred))</span></code></pre></div>
-<pre><code>## [1] 2.325418</code></pre>
+<pre><code>## [1] 2.311414</code></pre>
 <p>In this case, the neural network outperforms logistic regression having a lower
 absolute error rate on the test data.</p>
 </div>
@@ -772,21 +777,19 @@ each image.</p>
 <span id="cb712-3"><a href="deep-learning.html#cb712-3" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dt">dim =</span> <span class="kw">c</span>(<span class="kw">length</span>(images), <span class="dv">224</span>, <span class="dv">224</span>, <span class="dv">3</span>))</span>
 <span id="cb712-4"><a href="deep-learning.html#cb712-4" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">length</span>(images))) {</span>
 <span id="cb712-5"><a href="deep-learning.html#cb712-5" aria-hidden="true"></a>  img &lt;-<span class="st"> </span><span class="kw">image_load</span>(<span class="kw">paste0</span>(<span class="st">&quot;images/animals/&quot;</span>, images[i]), <span class="dt">target_size =</span> <span class="kw">c</span>(<span class="dv">224</span>, <span class="dv">224</span>))</span>
-<span id="cb712-6"><a href="deep-learning.html#cb712-6" aria-hidden="true"></a>  x[i,,,] &lt;-<span class="st"> </span><span class="kw">image_to_array</span>(img)</span>
+<span id="cb712-6"><a href="deep-learning.html#cb712-6" aria-hidden="true"></a>  x[i, , , ] &lt;-<span class="st"> </span><span class="kw">image_to_array</span>(img)</span>
 <span id="cb712-7"><a href="deep-learning.html#cb712-7" aria-hidden="true"></a>}</span>
 <span id="cb712-8"><a href="deep-learning.html#cb712-8" aria-hidden="true"></a></span>
 <span id="cb712-9"><a href="deep-learning.html#cb712-9" aria-hidden="true"></a>model &lt;-<span class="st"> </span><span class="kw">application_resnet50</span>(<span class="dt">weights =</span> <span class="st">&quot;imagenet&quot;</span>)</span></code></pre></div>
 <pre><code>## Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/resnet/resnet50_weights_tf_dim_ordering_tf_kernels.h5
 ## 
      8192/102967424 [..............................] - ETA: 0s
-  4202496/102967424 [&gt;.............................] - ETA: 2s
- 16105472/102967424 [===&gt;..........................] - ETA: 0s
- 26288128/102967424 [======&gt;.......................] - ETA: 0s
- 44417024/102967424 [===========&gt;..................] - ETA: 0s
- 50339840/102967424 [=============&gt;................] - ETA: 0s
- 67362816/102967424 [==================&gt;...........] - ETA: 0s
- 82952192/102967424 [=======================&gt;......] - ETA: 0s
- 98697216/102967424 [===========================&gt;..] - ETA: 0s
+  8396800/102967424 [=&gt;............................] - ETA: 1s
+ 25174016/102967424 [======&gt;.......................] - ETA: 0s
+ 43646976/102967424 [===========&gt;..................] - ETA: 0s
+ 58728448/102967424 [================&gt;.............] - ETA: 0s
+ 75505664/102967424 [====================&gt;.........] - ETA: 0s
+ 92323840/102967424 [=========================&gt;....] - ETA: 0s
 102967424/102967424 [==============================] - 0s 0us/step</code></pre>
 <div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="deep-learning.html#cb714-1" aria-hidden="true"></a>pred &lt;-<span class="st"> </span>model <span class="op">|</span><span class="er">&gt;</span></span>
 <span id="cb714-2"><a href="deep-learning.html#cb714-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">predict</span>(x) <span class="op">|</span><span class="er">&gt;</span></span>
@@ -899,7 +902,7 @@ month. Does this factor improve the performance of the model?</p>
 ## ✖ dplyr::lag()     masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb720-1"><a href="deep-learning.html#cb720-1" aria-hidden="true"></a><span class="kw">library</span>(ISLR2)</span>
-<span id="cb720-2"><a href="deep-learning.html#cb720-2" aria-hidden="true"></a>xdata &lt;-<span class="st"> </span><span class="kw">data.matrix</span>(NYSE[, <span class="kw">c</span>(<span class="st">&quot;DJ_return&quot;</span>, <span class="st">&quot;log_volume&quot;</span>,<span class="st">&quot;log_volatility&quot;</span>)])</span>
+<span id="cb720-2"><a href="deep-learning.html#cb720-2" aria-hidden="true"></a>xdata &lt;-<span class="st"> </span><span class="kw">data.matrix</span>(NYSE[, <span class="kw">c</span>(<span class="st">&quot;DJ_return&quot;</span>, <span class="st">&quot;log_volume&quot;</span>, <span class="st">&quot;log_volatility&quot;</span>)])</span>
 <span id="cb720-3"><a href="deep-learning.html#cb720-3" aria-hidden="true"></a>istrain &lt;-<span class="st"> </span>NYSE[, <span class="st">&quot;train&quot;</span>]</span>
 <span id="cb720-4"><a href="deep-learning.html#cb720-4" aria-hidden="true"></a>xdata &lt;-<span class="st"> </span><span class="kw">scale</span>(xdata)</span>
 <span id="cb720-5"><a href="deep-learning.html#cb720-5" aria-hidden="true"></a></span>
@@ -910,8 +913,8 @@ month. Does this factor improve the performance of the model?</p>
 <span id="cb720-10"><a href="deep-learning.html#cb720-10" aria-hidden="true"></a>}</span>
 <span id="cb720-11"><a href="deep-learning.html#cb720-11" aria-hidden="true"></a></span>
 <span id="cb720-12"><a href="deep-learning.html#cb720-12" aria-hidden="true"></a>arframe &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb720-13"><a href="deep-learning.html#cb720-13" aria-hidden="true"></a>  <span class="dt">log_volume =</span> xdata[, <span class="st">&quot;log_volume&quot;</span>], </span>
-<span id="cb720-14"><a href="deep-learning.html#cb720-14" aria-hidden="true"></a>  <span class="dt">L1 =</span> <span class="kw">lagm</span>(xdata, <span class="dv">1</span>), </span>
+<span id="cb720-13"><a href="deep-learning.html#cb720-13" aria-hidden="true"></a>  <span class="dt">log_volume =</span> xdata[, <span class="st">&quot;log_volume&quot;</span>],</span>
+<span id="cb720-14"><a href="deep-learning.html#cb720-14" aria-hidden="true"></a>  <span class="dt">L1 =</span> <span class="kw">lagm</span>(xdata, <span class="dv">1</span>),</span>
 <span id="cb720-15"><a href="deep-learning.html#cb720-15" aria-hidden="true"></a>  <span class="dt">L2 =</span> <span class="kw">lagm</span>(xdata, <span class="dv">2</span>),</span>
 <span id="cb720-16"><a href="deep-learning.html#cb720-16" aria-hidden="true"></a>  <span class="dt">L3 =</span> <span class="kw">lagm</span>(xdata, <span class="dv">3</span>),</span>
 <span id="cb720-17"><a href="deep-learning.html#cb720-17" aria-hidden="true"></a>  <span class="dt">L4 =</span> <span class="kw">lagm</span>(xdata, <span class="dv">4</span>),</span>
@@ -927,7 +930,7 @@ month. Does this factor improve the performance of the model?</p>
 <span id="cb720-27"><a href="deep-learning.html#cb720-27" aria-hidden="true"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>((arpred <span class="op">-</span><span class="st"> </span>arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>])<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>V0</span></code></pre></div>
 <pre><code>## [1] 0.413223</code></pre>
 <p>Now we add month (and work with tidyverse).</p>
-<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="deep-learning.html#cb722-1" aria-hidden="true"></a>arframe<span class="op">$</span>month =<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">str_match</span>(NYSE<span class="op">$</span>date, <span class="st">&quot;-(</span><span class="ch">\\</span><span class="st">d+)-&quot;</span>)[,<span class="dv">2</span>])[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)]</span>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="deep-learning.html#cb722-1" aria-hidden="true"></a>arframe<span class="op">$</span>month &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">str_match</span>(NYSE<span class="op">$</span>date, <span class="st">&quot;-(</span><span class="ch">\\</span><span class="st">d+)-&quot;</span>)[, <span class="dv">2</span>])[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)]</span>
 <span id="cb722-2"><a href="deep-learning.html#cb722-2" aria-hidden="true"></a>arfit2 &lt;-<span class="st"> </span><span class="kw">lm</span>(log_volume <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> arframe[istrain, ])</span>
 <span id="cb722-3"><a href="deep-learning.html#cb722-3" aria-hidden="true"></a>arpred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(arfit2, arframe[<span class="op">!</span>istrain, ])</span>
 <span id="cb722-4"><a href="deep-learning.html#cb722-4" aria-hidden="true"></a>V0 &lt;-<span class="st"> </span><span class="kw">var</span>(arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>])</span>
@@ -992,20 +995,20 @@ predictors resulting in a linear AR model.</p>
 <span id="cb732-3"><a href="deep-learning.html#cb732-3" aria-hidden="true"></a></span>
 <span id="cb732-4"><a href="deep-learning.html#cb732-4" aria-hidden="true"></a>history &lt;-<span class="st"> </span>model <span class="op">|</span><span class="er">&gt;</span></span>
 <span id="cb732-5"><a href="deep-learning.html#cb732-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">fit</span>(</span>
-<span id="cb732-6"><a href="deep-learning.html#cb732-6" aria-hidden="true"></a>    xrnn[istrain,, ],</span>
+<span id="cb732-6"><a href="deep-learning.html#cb732-6" aria-hidden="true"></a>    xrnn[istrain, , ],</span>
 <span id="cb732-7"><a href="deep-learning.html#cb732-7" aria-hidden="true"></a>    arframe[istrain, <span class="st">&quot;log_volume&quot;</span>],</span>
 <span id="cb732-8"><a href="deep-learning.html#cb732-8" aria-hidden="true"></a>    <span class="dt">batch_size =</span> <span class="dv">64</span>,</span>
 <span id="cb732-9"><a href="deep-learning.html#cb732-9" aria-hidden="true"></a>    <span class="dt">epochs =</span> <span class="dv">200</span>,</span>
-<span id="cb732-10"><a href="deep-learning.html#cb732-10" aria-hidden="true"></a>    <span class="dt">validation_data =</span> <span class="kw">list</span>(xrnn[<span class="op">!</span>istrain,, ], arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>]),</span>
+<span id="cb732-10"><a href="deep-learning.html#cb732-10" aria-hidden="true"></a>    <span class="dt">validation_data =</span> <span class="kw">list</span>(xrnn[<span class="op">!</span>istrain, , ], arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>]),</span>
 <span id="cb732-11"><a href="deep-learning.html#cb732-11" aria-hidden="true"></a>    <span class="dt">verbose =</span> <span class="dv">0</span></span>
 <span id="cb732-12"><a href="deep-learning.html#cb732-12" aria-hidden="true"></a>  )</span>
 <span id="cb732-13"><a href="deep-learning.html#cb732-13" aria-hidden="true"></a></span>
 <span id="cb732-14"><a href="deep-learning.html#cb732-14" aria-hidden="true"></a><span class="kw">plot</span>(history, <span class="dt">smooth =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <p><img src="10-deep-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="deep-learning.html#cb733-1" aria-hidden="true"></a>kpred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, xrnn[<span class="op">!</span>istrain,, ])</span></code></pre></div>
-<pre><code>## 56/56 - 0s - 60ms/epoch - 1ms/step</code></pre>
+<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="deep-learning.html#cb733-1" aria-hidden="true"></a>kpred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, xrnn[<span class="op">!</span>istrain, , ])</span></code></pre></div>
+<pre><code>## 56/56 - 0s - 58ms/epoch - 1ms/step</code></pre>
 <div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb735-1"><a href="deep-learning.html#cb735-1" aria-hidden="true"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>((kpred <span class="op">-</span><span class="st"> </span>arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>])<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>V0</span></code></pre></div>
-<pre><code>## [1] 0.4125977</code></pre>
+<pre><code>## [1] 0.4126904</code></pre>
 <p>Both models estimate the same number of coefficients/weights (16):</p>
 <div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="deep-learning.html#cb737-1" aria-hidden="true"></a><span class="kw">coef</span>(arfit)</span></code></pre></div>
 <pre><code>##       (Intercept)      L1.DJ_return     L1.log_volume L1.log_volatility 
@@ -1025,24 +1028,24 @@ predictors resulting in a linear AR model.</p>
 <div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb739-1"><a href="deep-learning.html#cb739-1" aria-hidden="true"></a>model<span class="op">$</span><span class="kw">get_weights</span>()</span></code></pre></div>
 <pre><code>## [[1]]
 ##               [,1]
-##  [1,] -0.030072149
-##  [2,]  0.103142686
-##  [3,]  0.116178870
-##  [4,] -0.005419406
-##  [5,]  0.114804864
-##  [6,]  0.045855314
-##  [7,]  0.034410942
-##  [8,]  0.080092825
-##  [9,]  0.128782347
-## [10,] -0.026454575
-## [11,]  0.038643800
-## [12,] -0.844997764
-## [13,]  0.094781205
-## [14,]  0.508407116
-## [15,]  0.540943623
+##  [1,] -0.033090770
+##  [2,]  0.098615587
+##  [3,]  0.145146161
+##  [4,] -0.004817145
+##  [5,]  0.117938116
+##  [6,]  0.027998660
+##  [7,]  0.039439727
+##  [8,]  0.079821616
+##  [9,]  0.055596001
+## [10,] -0.028553789
+## [11,]  0.031420395
+## [12,] -0.727792382
+## [13,]  0.098358713
+## [14,]  0.507786036
+## [15,]  0.481008917
 ## 
 ## [[2]]
-## [1] -0.00510039</code></pre>
+## [1] -0.005989118</code></pre>
 <p>The flattened RNN has a lower <span class="math inline">\(R^2\)</span> on the test data than our <code>lm</code> model
 above. The <code>lm</code> model is quicker to fit and conceptually simpler also
 giving us the ability to inspect the coefficients for different variables.</p>
@@ -1060,36 +1063,34 @@ the short sequences produced for the RNN model.</p>
 <p>To fit a nonlinear AR model, we could add in a hidden layer.</p>
 </blockquote>
 <div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb741-1"><a href="deep-learning.html#cb741-1" aria-hidden="true"></a>xfun<span class="op">::</span><span class="kw">cache_rds</span>({</span>
-<span id="cb741-2"><a href="deep-learning.html#cb741-2" aria-hidden="true"></a></span>
-<span id="cb741-3"><a href="deep-learning.html#cb741-3" aria-hidden="true"></a>  model &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>() <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span></span>
-<span id="cb741-4"><a href="deep-learning.html#cb741-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">layer_flatten</span>(<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>)) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb741-5"><a href="deep-learning.html#cb741-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb741-6"><a href="deep-learning.html#cb741-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.4</span>) <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span></span>
-<span id="cb741-7"><a href="deep-learning.html#cb741-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">1</span>)</span>
-<span id="cb741-8"><a href="deep-learning.html#cb741-8" aria-hidden="true"></a></span>
-<span id="cb741-9"><a href="deep-learning.html#cb741-9" aria-hidden="true"></a>  model <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span><span class="kw">compile</span>(</span>
-<span id="cb741-10"><a href="deep-learning.html#cb741-10" aria-hidden="true"></a>    <span class="dt">loss =</span> <span class="st">&quot;mse&quot;</span>, </span>
-<span id="cb741-11"><a href="deep-learning.html#cb741-11" aria-hidden="true"></a>    <span class="dt">optimizer =</span> <span class="kw">optimizer_rmsprop</span>(), </span>
-<span id="cb741-12"><a href="deep-learning.html#cb741-12" aria-hidden="true"></a>    <span class="dt">metrics =</span> <span class="st">&quot;mse&quot;</span></span>
-<span id="cb741-13"><a href="deep-learning.html#cb741-13" aria-hidden="true"></a>  )</span>
-<span id="cb741-14"><a href="deep-learning.html#cb741-14" aria-hidden="true"></a></span>
-<span id="cb741-15"><a href="deep-learning.html#cb741-15" aria-hidden="true"></a>  history &lt;-<span class="st"> </span>model <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb741-16"><a href="deep-learning.html#cb741-16" aria-hidden="true"></a><span class="st">    </span><span class="kw">fit</span>(</span>
-<span id="cb741-17"><a href="deep-learning.html#cb741-17" aria-hidden="true"></a>      xrnn[istrain,, ],</span>
-<span id="cb741-18"><a href="deep-learning.html#cb741-18" aria-hidden="true"></a>      arframe[istrain, <span class="st">&quot;log_volume&quot;</span>],</span>
-<span id="cb741-19"><a href="deep-learning.html#cb741-19" aria-hidden="true"></a>      <span class="dt">batch_size =</span> <span class="dv">64</span>,</span>
-<span id="cb741-20"><a href="deep-learning.html#cb741-20" aria-hidden="true"></a>      <span class="dt">epochs =</span> <span class="dv">200</span>,</span>
-<span id="cb741-21"><a href="deep-learning.html#cb741-21" aria-hidden="true"></a>      <span class="dt">validation_data =</span> <span class="kw">list</span>(xrnn[<span class="op">!</span>istrain,, ], arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>]),</span>
-<span id="cb741-22"><a href="deep-learning.html#cb741-22" aria-hidden="true"></a>      <span class="dt">verbose =</span> <span class="dv">0</span></span>
-<span id="cb741-23"><a href="deep-learning.html#cb741-23" aria-hidden="true"></a>    )</span>
-<span id="cb741-24"><a href="deep-learning.html#cb741-24" aria-hidden="true"></a></span>
-<span id="cb741-25"><a href="deep-learning.html#cb741-25" aria-hidden="true"></a>  <span class="kw">plot</span>(history, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">metrics =</span> <span class="st">&quot;mse&quot;</span>)</span>
-<span id="cb741-26"><a href="deep-learning.html#cb741-26" aria-hidden="true"></a>  kpred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, xrnn[<span class="op">!</span>istrain,, ])</span>
-<span id="cb741-27"><a href="deep-learning.html#cb741-27" aria-hidden="true"></a>  <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>((kpred <span class="op">-</span><span class="st"> </span>arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>])<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>V0</span>
-<span id="cb741-28"><a href="deep-learning.html#cb741-28" aria-hidden="true"></a></span>
-<span id="cb741-29"><a href="deep-learning.html#cb741-29" aria-hidden="true"></a>})</span></code></pre></div>
-<pre><code>## 56/56 - 0s - 66ms/epoch - 1ms/step</code></pre>
-<pre><code>## [1] 0.421833</code></pre>
+<span id="cb741-2"><a href="deep-learning.html#cb741-2" aria-hidden="true"></a>  model &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>() <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb741-3"><a href="deep-learning.html#cb741-3" aria-hidden="true"></a><span class="st">    </span><span class="kw">layer_flatten</span>(<span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>)) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb741-4"><a href="deep-learning.html#cb741-4" aria-hidden="true"></a><span class="st">    </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">32</span>, <span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb741-5"><a href="deep-learning.html#cb741-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.4</span>) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb741-6"><a href="deep-learning.html#cb741-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">1</span>)</span>
+<span id="cb741-7"><a href="deep-learning.html#cb741-7" aria-hidden="true"></a></span>
+<span id="cb741-8"><a href="deep-learning.html#cb741-8" aria-hidden="true"></a>  model <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span><span class="kw">compile</span>(</span>
+<span id="cb741-9"><a href="deep-learning.html#cb741-9" aria-hidden="true"></a>    <span class="dt">loss =</span> <span class="st">&quot;mse&quot;</span>,</span>
+<span id="cb741-10"><a href="deep-learning.html#cb741-10" aria-hidden="true"></a>    <span class="dt">optimizer =</span> <span class="kw">optimizer_rmsprop</span>(),</span>
+<span id="cb741-11"><a href="deep-learning.html#cb741-11" aria-hidden="true"></a>    <span class="dt">metrics =</span> <span class="st">&quot;mse&quot;</span></span>
+<span id="cb741-12"><a href="deep-learning.html#cb741-12" aria-hidden="true"></a>  )</span>
+<span id="cb741-13"><a href="deep-learning.html#cb741-13" aria-hidden="true"></a></span>
+<span id="cb741-14"><a href="deep-learning.html#cb741-14" aria-hidden="true"></a>  history &lt;-<span class="st"> </span>model <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb741-15"><a href="deep-learning.html#cb741-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">fit</span>(</span>
+<span id="cb741-16"><a href="deep-learning.html#cb741-16" aria-hidden="true"></a>      xrnn[istrain, , ],</span>
+<span id="cb741-17"><a href="deep-learning.html#cb741-17" aria-hidden="true"></a>      arframe[istrain, <span class="st">&quot;log_volume&quot;</span>],</span>
+<span id="cb741-18"><a href="deep-learning.html#cb741-18" aria-hidden="true"></a>      <span class="dt">batch_size =</span> <span class="dv">64</span>,</span>
+<span id="cb741-19"><a href="deep-learning.html#cb741-19" aria-hidden="true"></a>      <span class="dt">epochs =</span> <span class="dv">200</span>,</span>
+<span id="cb741-20"><a href="deep-learning.html#cb741-20" aria-hidden="true"></a>      <span class="dt">validation_data =</span> <span class="kw">list</span>(xrnn[<span class="op">!</span>istrain, , ], arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>]),</span>
+<span id="cb741-21"><a href="deep-learning.html#cb741-21" aria-hidden="true"></a>      <span class="dt">verbose =</span> <span class="dv">0</span></span>
+<span id="cb741-22"><a href="deep-learning.html#cb741-22" aria-hidden="true"></a>    )</span>
+<span id="cb741-23"><a href="deep-learning.html#cb741-23" aria-hidden="true"></a></span>
+<span id="cb741-24"><a href="deep-learning.html#cb741-24" aria-hidden="true"></a>  <span class="kw">plot</span>(history, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">metrics =</span> <span class="st">&quot;mse&quot;</span>)</span>
+<span id="cb741-25"><a href="deep-learning.html#cb741-25" aria-hidden="true"></a>  kpred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, xrnn[<span class="op">!</span>istrain, , ])</span>
+<span id="cb741-26"><a href="deep-learning.html#cb741-26" aria-hidden="true"></a>  <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>((kpred <span class="op">-</span><span class="st"> </span>arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>])<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>V0</span>
+<span id="cb741-27"><a href="deep-learning.html#cb741-27" aria-hidden="true"></a>})</span></code></pre></div>
+<pre><code>## 56/56 - 0s - 65ms/epoch - 1ms/step</code></pre>
+<pre><code>## [1] 0.4263934</code></pre>
 <p>This approach improves our <span class="math inline">\(R^2\)</span> over the linear model above.</p>
 </div>
 <div id="question-12-4" class="section level3 hasAnchor" number="10.2.7">
@@ -1104,16 +1105,16 @@ in the RNN. Thus, our input for each observation will be 4 x 5 (rather than
 3 x 5).</p>
 <div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb744-1"><a href="deep-learning.html#cb744-1" aria-hidden="true"></a>xfun<span class="op">::</span><span class="kw">cache_rds</span>({</span>
 <span id="cb744-2"><a href="deep-learning.html#cb744-2" aria-hidden="true"></a>  xdata &lt;-<span class="st"> </span><span class="kw">data.matrix</span>(</span>
-<span id="cb744-3"><a href="deep-learning.html#cb744-3" aria-hidden="true"></a>    NYSE[, <span class="kw">c</span>(<span class="st">&quot;day_of_week&quot;</span>, <span class="st">&quot;DJ_return&quot;</span>, <span class="st">&quot;log_volume&quot;</span>,<span class="st">&quot;log_volatility&quot;</span>)] </span>
+<span id="cb744-3"><a href="deep-learning.html#cb744-3" aria-hidden="true"></a>    NYSE[, <span class="kw">c</span>(<span class="st">&quot;day_of_week&quot;</span>, <span class="st">&quot;DJ_return&quot;</span>, <span class="st">&quot;log_volume&quot;</span>, <span class="st">&quot;log_volatility&quot;</span>)]</span>
 <span id="cb744-4"><a href="deep-learning.html#cb744-4" aria-hidden="true"></a>  )</span>
 <span id="cb744-5"><a href="deep-learning.html#cb744-5" aria-hidden="true"></a>  istrain &lt;-<span class="st"> </span>NYSE[, <span class="st">&quot;train&quot;</span>]</span>
 <span id="cb744-6"><a href="deep-learning.html#cb744-6" aria-hidden="true"></a>  xdata &lt;-<span class="st"> </span><span class="kw">scale</span>(xdata)</span>
 <span id="cb744-7"><a href="deep-learning.html#cb744-7" aria-hidden="true"></a></span>
 <span id="cb744-8"><a href="deep-learning.html#cb744-8" aria-hidden="true"></a>  arframe &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb744-9"><a href="deep-learning.html#cb744-9" aria-hidden="true"></a>    <span class="dt">log_volume =</span> xdata[, <span class="st">&quot;log_volume&quot;</span>], </span>
+<span id="cb744-9"><a href="deep-learning.html#cb744-9" aria-hidden="true"></a>    <span class="dt">log_volume =</span> xdata[, <span class="st">&quot;log_volume&quot;</span>],</span>
 <span id="cb744-10"><a href="deep-learning.html#cb744-10" aria-hidden="true"></a>    <span class="dt">L1 =</span> <span class="kw">lagm</span>(xdata, <span class="dv">1</span>),</span>
 <span id="cb744-11"><a href="deep-learning.html#cb744-11" aria-hidden="true"></a>    <span class="dt">L2 =</span> <span class="kw">lagm</span>(xdata, <span class="dv">2</span>),</span>
-<span id="cb744-12"><a href="deep-learning.html#cb744-12" aria-hidden="true"></a>    <span class="dt">L3 =</span> <span class="kw">lagm</span>(xdata, <span class="dv">3</span>), </span>
+<span id="cb744-12"><a href="deep-learning.html#cb744-12" aria-hidden="true"></a>    <span class="dt">L3 =</span> <span class="kw">lagm</span>(xdata, <span class="dv">3</span>),</span>
 <span id="cb744-13"><a href="deep-learning.html#cb744-13" aria-hidden="true"></a>    <span class="dt">L4 =</span> <span class="kw">lagm</span>(xdata, <span class="dv">4</span>),</span>
 <span id="cb744-14"><a href="deep-learning.html#cb744-14" aria-hidden="true"></a>    <span class="dt">L5 =</span> <span class="kw">lagm</span>(xdata, <span class="dv">5</span>)</span>
 <span id="cb744-15"><a href="deep-learning.html#cb744-15" aria-hidden="true"></a>  )</span>
@@ -1123,36 +1124,36 @@ in the RNN. Thus, our input for each observation will be 4 x 5 (rather than
 <span id="cb744-19"><a href="deep-learning.html#cb744-19" aria-hidden="true"></a>  n &lt;-<span class="st"> </span><span class="kw">nrow</span>(arframe)</span>
 <span id="cb744-20"><a href="deep-learning.html#cb744-20" aria-hidden="true"></a>  xrnn &lt;-<span class="st"> </span><span class="kw">data.matrix</span>(arframe[, <span class="dv">-1</span>])</span>
 <span id="cb744-21"><a href="deep-learning.html#cb744-21" aria-hidden="true"></a>  xrnn &lt;-<span class="st"> </span><span class="kw">array</span>(xrnn, <span class="kw">c</span>(n, <span class="dv">4</span>, <span class="dv">5</span>))</span>
-<span id="cb744-22"><a href="deep-learning.html#cb744-22" aria-hidden="true"></a>  xrnn &lt;-<span class="st"> </span>xrnn[,, <span class="dv">5</span><span class="op">:</span><span class="dv">1</span>]</span>
+<span id="cb744-22"><a href="deep-learning.html#cb744-22" aria-hidden="true"></a>  xrnn &lt;-<span class="st"> </span>xrnn[, , <span class="dv">5</span><span class="op">:</span><span class="dv">1</span>]</span>
 <span id="cb744-23"><a href="deep-learning.html#cb744-23" aria-hidden="true"></a>  xrnn &lt;-<span class="st"> </span><span class="kw">aperm</span>(xrnn, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>))</span>
 <span id="cb744-24"><a href="deep-learning.html#cb744-24" aria-hidden="true"></a>  <span class="kw">dim</span>(xrnn)</span>
 <span id="cb744-25"><a href="deep-learning.html#cb744-25" aria-hidden="true"></a></span>
 <span id="cb744-26"><a href="deep-learning.html#cb744-26" aria-hidden="true"></a>  model &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>() <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb744-27"><a href="deep-learning.html#cb744-27" aria-hidden="true"></a><span class="st">      </span><span class="kw">layer_simple_rnn</span>(<span class="dt">units =</span> <span class="dv">12</span>,</span>
-<span id="cb744-28"><a href="deep-learning.html#cb744-28" aria-hidden="true"></a>      <span class="dt">input_shape =</span> <span class="kw">list</span>(<span class="dv">5</span>, <span class="dv">4</span>),</span>
-<span id="cb744-29"><a href="deep-learning.html#cb744-29" aria-hidden="true"></a>      <span class="dt">dropout =</span> <span class="fl">0.1</span>, </span>
-<span id="cb744-30"><a href="deep-learning.html#cb744-30" aria-hidden="true"></a>      <span class="dt">recurrent_dropout =</span> <span class="fl">0.1</span></span>
-<span id="cb744-31"><a href="deep-learning.html#cb744-31" aria-hidden="true"></a>    ) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb744-32"><a href="deep-learning.html#cb744-32" aria-hidden="true"></a><span class="st">    </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">1</span>)</span>
-<span id="cb744-33"><a href="deep-learning.html#cb744-33" aria-hidden="true"></a></span>
-<span id="cb744-34"><a href="deep-learning.html#cb744-34" aria-hidden="true"></a>  model <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span><span class="kw">compile</span>(<span class="dt">optimizer =</span> <span class="kw">optimizer_rmsprop</span>(), <span class="dt">loss =</span> <span class="st">&quot;mse&quot;</span>)</span>
-<span id="cb744-35"><a href="deep-learning.html#cb744-35" aria-hidden="true"></a></span>
-<span id="cb744-36"><a href="deep-learning.html#cb744-36" aria-hidden="true"></a>  history &lt;-<span class="st"> </span>model <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span></span>
-<span id="cb744-37"><a href="deep-learning.html#cb744-37" aria-hidden="true"></a><span class="st">    </span><span class="kw">fit</span>(</span>
-<span id="cb744-38"><a href="deep-learning.html#cb744-38" aria-hidden="true"></a>      xrnn[istrain,, ],</span>
-<span id="cb744-39"><a href="deep-learning.html#cb744-39" aria-hidden="true"></a>      arframe[istrain, <span class="st">&quot;log_volume&quot;</span>],</span>
-<span id="cb744-40"><a href="deep-learning.html#cb744-40" aria-hidden="true"></a>      <span class="dt">batch_size =</span> <span class="dv">64</span>,</span>
-<span id="cb744-41"><a href="deep-learning.html#cb744-41" aria-hidden="true"></a>      <span class="dt">epochs =</span> <span class="dv">200</span>,</span>
-<span id="cb744-42"><a href="deep-learning.html#cb744-42" aria-hidden="true"></a>      <span class="dt">validation_data =</span> <span class="kw">list</span>(xrnn[<span class="op">!</span>istrain,, ], arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>]),</span>
-<span id="cb744-43"><a href="deep-learning.html#cb744-43" aria-hidden="true"></a>      <span class="dt">verbose =</span> <span class="dv">0</span></span>
-<span id="cb744-44"><a href="deep-learning.html#cb744-44" aria-hidden="true"></a>  )</span>
-<span id="cb744-45"><a href="deep-learning.html#cb744-45" aria-hidden="true"></a></span>
-<span id="cb744-46"><a href="deep-learning.html#cb744-46" aria-hidden="true"></a>  kpred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, xrnn[<span class="op">!</span>istrain,, ])</span>
-<span id="cb744-47"><a href="deep-learning.html#cb744-47" aria-hidden="true"></a>  <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>((kpred <span class="op">-</span><span class="st"> </span>arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>])<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>V0</span>
-<span id="cb744-48"><a href="deep-learning.html#cb744-48" aria-hidden="true"></a></span>
+<span id="cb744-27"><a href="deep-learning.html#cb744-27" aria-hidden="true"></a><span class="st">    </span><span class="kw">layer_simple_rnn</span>(</span>
+<span id="cb744-28"><a href="deep-learning.html#cb744-28" aria-hidden="true"></a>      <span class="dt">units =</span> <span class="dv">12</span>,</span>
+<span id="cb744-29"><a href="deep-learning.html#cb744-29" aria-hidden="true"></a>      <span class="dt">input_shape =</span> <span class="kw">list</span>(<span class="dv">5</span>, <span class="dv">4</span>),</span>
+<span id="cb744-30"><a href="deep-learning.html#cb744-30" aria-hidden="true"></a>      <span class="dt">dropout =</span> <span class="fl">0.1</span>,</span>
+<span id="cb744-31"><a href="deep-learning.html#cb744-31" aria-hidden="true"></a>      <span class="dt">recurrent_dropout =</span> <span class="fl">0.1</span></span>
+<span id="cb744-32"><a href="deep-learning.html#cb744-32" aria-hidden="true"></a>    ) <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb744-33"><a href="deep-learning.html#cb744-33" aria-hidden="true"></a><span class="st">    </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">1</span>)</span>
+<span id="cb744-34"><a href="deep-learning.html#cb744-34" aria-hidden="true"></a></span>
+<span id="cb744-35"><a href="deep-learning.html#cb744-35" aria-hidden="true"></a>  model <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span><span class="kw">compile</span>(<span class="dt">optimizer =</span> <span class="kw">optimizer_rmsprop</span>(), <span class="dt">loss =</span> <span class="st">&quot;mse&quot;</span>)</span>
+<span id="cb744-36"><a href="deep-learning.html#cb744-36" aria-hidden="true"></a></span>
+<span id="cb744-37"><a href="deep-learning.html#cb744-37" aria-hidden="true"></a>  history &lt;-<span class="st"> </span>model <span class="op">|</span><span class="er">&gt;</span></span>
+<span id="cb744-38"><a href="deep-learning.html#cb744-38" aria-hidden="true"></a><span class="st">    </span><span class="kw">fit</span>(</span>
+<span id="cb744-39"><a href="deep-learning.html#cb744-39" aria-hidden="true"></a>      xrnn[istrain, , ],</span>
+<span id="cb744-40"><a href="deep-learning.html#cb744-40" aria-hidden="true"></a>      arframe[istrain, <span class="st">&quot;log_volume&quot;</span>],</span>
+<span id="cb744-41"><a href="deep-learning.html#cb744-41" aria-hidden="true"></a>      <span class="dt">batch_size =</span> <span class="dv">64</span>,</span>
+<span id="cb744-42"><a href="deep-learning.html#cb744-42" aria-hidden="true"></a>      <span class="dt">epochs =</span> <span class="dv">200</span>,</span>
+<span id="cb744-43"><a href="deep-learning.html#cb744-43" aria-hidden="true"></a>      <span class="dt">validation_data =</span> <span class="kw">list</span>(xrnn[<span class="op">!</span>istrain, , ], arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>]),</span>
+<span id="cb744-44"><a href="deep-learning.html#cb744-44" aria-hidden="true"></a>      <span class="dt">verbose =</span> <span class="dv">0</span></span>
+<span id="cb744-45"><a href="deep-learning.html#cb744-45" aria-hidden="true"></a>    )</span>
+<span id="cb744-46"><a href="deep-learning.html#cb744-46" aria-hidden="true"></a></span>
+<span id="cb744-47"><a href="deep-learning.html#cb744-47" aria-hidden="true"></a>  kpred &lt;-<span class="st"> </span><span class="kw">predict</span>(model, xrnn[<span class="op">!</span>istrain, , ])</span>
+<span id="cb744-48"><a href="deep-learning.html#cb744-48" aria-hidden="true"></a>  <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>((kpred <span class="op">-</span><span class="st"> </span>arframe[<span class="op">!</span>istrain, <span class="st">&quot;log_volume&quot;</span>])<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>V0</span>
 <span id="cb744-49"><a href="deep-learning.html#cb744-49" aria-hidden="true"></a>})</span></code></pre></div>
-<pre><code>## 56/56 - 0s - 144ms/epoch - 3ms/step</code></pre>
-<pre><code>## [1] 0.4480395</code></pre>
+<pre><code>## 56/56 - 0s - 136ms/epoch - 2ms/step</code></pre>
+<pre><code>## [1] 0.4529525</code></pre>
 </div>
 <div id="question-13-3" class="section level3 hasAnchor" number="10.2.8">
 <h3><span class="header-section-number">10.2.8</span> Question 13<a href="deep-learning.html#question-13-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1165,7 +1166,7 @@ and 10,000, and compare the results.</p>
 <div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb747-1"><a href="deep-learning.html#cb747-1" aria-hidden="true"></a>xfun<span class="op">::</span><span class="kw">cache_rds</span>({</span>
 <span id="cb747-2"><a href="deep-learning.html#cb747-2" aria-hidden="true"></a>  <span class="kw">library</span>(knitr)</span>
 <span id="cb747-3"><a href="deep-learning.html#cb747-3" aria-hidden="true"></a>  accuracy &lt;-<span class="st"> </span><span class="kw">c</span>()</span>
-<span id="cb747-4"><a href="deep-learning.html#cb747-4" aria-hidden="true"></a>  <span class="cf">for</span>(max_features <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">3000</span>, <span class="dv">5000</span>, <span class="dv">10000</span>)) {</span>
+<span id="cb747-4"><a href="deep-learning.html#cb747-4" aria-hidden="true"></a>  <span class="cf">for</span> (max_features <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">3000</span>, <span class="dv">5000</span>, <span class="dv">10000</span>)) {</span>
 <span id="cb747-5"><a href="deep-learning.html#cb747-5" aria-hidden="true"></a>    imdb &lt;-<span class="st"> </span><span class="kw">dataset_imdb</span>(<span class="dt">num_words =</span> max_features)</span>
 <span id="cb747-6"><a href="deep-learning.html#cb747-6" aria-hidden="true"></a>    <span class="kw">c</span>(<span class="kw">c</span>(x_train, y_train), <span class="kw">c</span>(x_test, y_test)) <span class="op">%&lt;-%</span><span class="st"> </span>imdb</span>
 <span id="cb747-7"><a href="deep-learning.html#cb747-7" aria-hidden="true"></a></span>
@@ -1180,13 +1181,13 @@ and 10,000, and compare the results.</p>
 <span id="cb747-16"><a href="deep-learning.html#cb747-16" aria-hidden="true"></a></span>
 <span id="cb747-17"><a href="deep-learning.html#cb747-17" aria-hidden="true"></a>    model <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span><span class="kw">compile</span>(</span>
 <span id="cb747-18"><a href="deep-learning.html#cb747-18" aria-hidden="true"></a>      <span class="dt">optimizer =</span> <span class="st">&quot;rmsprop&quot;</span>,</span>
-<span id="cb747-19"><a href="deep-learning.html#cb747-19" aria-hidden="true"></a>      <span class="dt">loss =</span> <span class="st">&quot;binary_crossentropy&quot;</span>, </span>
+<span id="cb747-19"><a href="deep-learning.html#cb747-19" aria-hidden="true"></a>      <span class="dt">loss =</span> <span class="st">&quot;binary_crossentropy&quot;</span>,</span>
 <span id="cb747-20"><a href="deep-learning.html#cb747-20" aria-hidden="true"></a>      <span class="dt">metrics =</span> <span class="st">&quot;acc&quot;</span></span>
 <span id="cb747-21"><a href="deep-learning.html#cb747-21" aria-hidden="true"></a>    )</span>
 <span id="cb747-22"><a href="deep-learning.html#cb747-22" aria-hidden="true"></a></span>
-<span id="cb747-23"><a href="deep-learning.html#cb747-23" aria-hidden="true"></a>    history &lt;-<span class="st"> </span><span class="kw">fit</span>(model, x_train, y_train, </span>
-<span id="cb747-24"><a href="deep-learning.html#cb747-24" aria-hidden="true"></a>      <span class="dt">epochs =</span> <span class="dv">10</span>, </span>
-<span id="cb747-25"><a href="deep-learning.html#cb747-25" aria-hidden="true"></a>      <span class="dt">batch_size =</span> <span class="dv">128</span>, </span>
+<span id="cb747-23"><a href="deep-learning.html#cb747-23" aria-hidden="true"></a>    history &lt;-<span class="st"> </span><span class="kw">fit</span>(model, x_train, y_train,</span>
+<span id="cb747-24"><a href="deep-learning.html#cb747-24" aria-hidden="true"></a>      <span class="dt">epochs =</span> <span class="dv">10</span>,</span>
+<span id="cb747-25"><a href="deep-learning.html#cb747-25" aria-hidden="true"></a>      <span class="dt">batch_size =</span> <span class="dv">128</span>,</span>
 <span id="cb747-26"><a href="deep-learning.html#cb747-26" aria-hidden="true"></a>      <span class="dt">validation_data =</span> <span class="kw">list</span>(x_test, y_test),</span>
 <span id="cb747-27"><a href="deep-learning.html#cb747-27" aria-hidden="true"></a>      <span class="dt">verbose =</span> <span class="dv">0</span></span>
 <span id="cb747-28"><a href="deep-learning.html#cb747-28" aria-hidden="true"></a>    )</span>
@@ -1200,18 +1201,16 @@ and 10,000, and compare the results.</p>
 <span id="cb747-36"><a href="deep-learning.html#cb747-36" aria-hidden="true"></a>    <span class="st">&quot;Accuracy&quot;</span> =<span class="st"> </span>accuracy</span>
 <span id="cb747-37"><a href="deep-learning.html#cb747-37" aria-hidden="true"></a>  ) <span class="op">|</span><span class="er">&gt;</span></span>
 <span id="cb747-38"><a href="deep-learning.html#cb747-38" aria-hidden="true"></a><span class="st">    </span><span class="kw">kable</span>()</span>
-<span id="cb747-39"><a href="deep-learning.html#cb747-39" aria-hidden="true"></a></span>
-<span id="cb747-40"><a href="deep-learning.html#cb747-40" aria-hidden="true"></a>})</span></code></pre></div>
+<span id="cb747-39"><a href="deep-learning.html#cb747-39" aria-hidden="true"></a>})</span></code></pre></div>
 <pre><code>## Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/imdb.npz
 ## 
     8192/17464789 [..............................] - ETA: 0s
- 4202496/17464789 [======&gt;.......................] - ETA: 0s
-15351808/17464789 [=========================&gt;....] - ETA: 0s
+10059776/17464789 [================&gt;.............] - ETA: 0s
 17464789/17464789 [==============================] - 0s 0us/step
 ## 782/782 - 15s - 15s/epoch - 20ms/step
 ## 782/782 - 15s - 15s/epoch - 20ms/step
-## 782/782 - 16s - 16s/epoch - 20ms/step
-## 782/782 - 16s - 16s/epoch - 20ms/step</code></pre>
+## 782/782 - 15s - 15s/epoch - 20ms/step
+## 782/782 - 15s - 15s/epoch - 20ms/step</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -1222,19 +1221,19 @@ and 10,000, and compare the results.</p>
 <tbody>
 <tr class="odd">
 <td align="right">1000</td>
-<td align="right">0.86564</td>
+<td align="right">0.85728</td>
 </tr>
 <tr class="even">
 <td align="right">3000</td>
-<td align="right">0.87444</td>
+<td align="right">0.86944</td>
 </tr>
 <tr class="odd">
 <td align="right">5000</td>
-<td align="right">0.83992</td>
+<td align="right">0.87700</td>
 </tr>
 <tr class="even">
 <td align="right">10000</td>
-<td align="right">0.87460</td>
+<td align="right">0.86936</td>
 </tr>
 </tbody>
 </table>
