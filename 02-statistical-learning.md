@@ -381,7 +381,7 @@ plot(college$Outstate ~ college$Elite, xlab = "Elite", ylab = "Outstate")
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-3.png" width="672" />
 
 ``` r
-par(mfrow = c(2,2))
+par(mfrow = c(2, 2))
 for (n in c(5, 10, 20, 50)) {
   hist(college$Enroll, breaks = n, main = paste("n =", n), xlab = "Enroll")
 }
@@ -526,7 +526,7 @@ x[-(10:85), numeric] |>
 
 
 ``` r
-pairs(x[, numeric], cex = 0.2) 
+pairs(x[, numeric], cex = 0.2)
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-1.png" width="672" />
@@ -603,13 +603,15 @@ library(tidyverse)
 
 
 ``` r
-ggplot(Boston, aes(nox, rm)) + geom_point()
+ggplot(Boston, aes(nox, rm)) +
+  geom_point()
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 ``` r
-ggplot(Boston, aes(ptratio, rm)) + geom_point()
+ggplot(Boston, aes(ptratio, rm)) +
+  geom_point()
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-2.png" width="672" />
@@ -631,12 +633,12 @@ Yes
 
 
 ``` r
-Boston |> 
-  pivot_longer(cols = 1:13) |> 
-  filter(name %in% c("crim", "tax", "ptratio")) |> 
-  ggplot(aes(value)) + 
-    geom_histogram(bins = 20) + 
-    facet_wrap(~name, scales="free", ncol= 1)
+Boston |>
+  pivot_longer(cols = 1:13) |>
+  filter(name %in% c("crim", "tax", "ptratio")) |>
+  ggplot(aes(value)) +
+  geom_histogram(bins = 20) +
+  facet_wrap(~name, scales = "free", ncol = 1)
 ```
 
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-16-1.png" width="672" />
@@ -732,9 +734,9 @@ Boston |>
   select(-c(crim, zn)) |>
   pivot_longer(!rm) |>
   mutate(">8 rooms" = rm > 8) |>
-  ggplot(aes(`>8 rooms`, value)) + 
-    geom_boxplot() + 
-    facet_wrap(~name, scales = "free")
+  ggplot(aes(`>8 rooms`, value)) +
+  geom_boxplot() +
+  facet_wrap(~name, scales = "free")
 ```
 
 ```

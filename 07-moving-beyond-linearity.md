@@ -179,9 +179,9 @@ grid()
 
 ``` r
 x <- seq(-2, 6, length.out = 1000)
-b1 <- function(x) I(0 <= x & x <= 2) - (x - 1) * I(1 <= x &  x <= 2)
-b2 <- function(x) (x - 3) * I(3 <= x  & x <= 4) + I(4 < x & x <= 5)
-f <- function(x) 1 + 1*b1(x) + 3*b2(x)
+b1 <- function(x) I(0 <= x & x <= 2) - (x - 1) * I(1 <= x & x <= 2)
+b2 <- function(x) (x - 3) * I(3 <= x & x <= 4) + I(4 < x & x <= 5)
+f <- function(x) 1 + 1 * b1(x) + 3 * b2(x)
 plot(x, f(x), type = "l")
 grid()
 ```
@@ -566,7 +566,7 @@ anova(fit, fit1, fit2, fit3, fit4, fit5)
 ```
 
 ``` r
-x <- seq(min(Auto$horsepower), max(Auto$horsepower), length.out=1000)
+x <- seq(min(Auto$horsepower), max(Auto$horsepower), length.out = 1000)
 pred <- data.frame(
   x = x,
   "Linear" = predict(fit, data.frame(horsepower = x)),
@@ -641,7 +641,7 @@ lines(x, predict(fit, data.frame(dis = x)), col = "red", lty = 2)
 ``` r
 fits <- lapply(1:10, function(i) glm(nox ~ poly(dis, i), data = Boston))
 
-x <- seq(min(Boston$dis), max(Boston$dis), length.out=1000)
+x <- seq(min(Boston$dis), max(Boston$dis), length.out = 1000)
 pred <- data.frame(lapply(fits, function(fit) predict(fit, data.frame(dis = x))))
 colnames(pred) <- 1:10
 pred$x <- x
@@ -976,7 +976,7 @@ beta1 <- 20
 
 
 ``` r
-a <- y - beta1*x1
+a <- y - beta1 * x1
 beta2 <- lm(a ~ x2)$coef[2]
 ```
 
@@ -1007,15 +1007,15 @@ res <- matrix(NA, nrow = 1000, ncol = 3)
 colnames(res) <- c("beta0", "beta1", "beta2")
 beta1 <- 20
 for (i in 1:1000) {
-  beta2 <- lm(y - beta1*x1 ~ x2)$coef[2]
-  beta1 <- lm(y - beta2*x2 ~ x1)$coef[2]
-  beta0 <- lm(y - beta2*x2 ~ x1)$coef[1]
+  beta2 <- lm(y - beta1 * x1 ~ x2)$coef[2]
+  beta1 <- lm(y - beta2 * x2 ~ x1)$coef[2]
+  beta0 <- lm(y - beta2 * x2 ~ x1)$coef[1]
   res[i, ] <- c(beta0, beta1, beta2)
 }
 res <- as.data.frame(res)
 res$Iteration <- 1:1000
 res <- pivot_longer(res, !Iteration)
-p <- ggplot(res, aes(x=Iteration, y=value, color=name)) +
+p <- ggplot(res, aes(x = Iteration, y = value, color = name)) +
   geom_line() +
   geom_point() +
   scale_x_continuous(trans = "log10")
@@ -1070,7 +1070,7 @@ n <- 1000
 
 betas <- rnorm(p) * 5
 x <- matrix(rnorm(n * p), ncol = p, nrow = n)
-y <- (x %*% betas) + rnorm(n)  # ignore beta0 for simplicity
+y <- (x %*% betas) + rnorm(n) # ignore beta0 for simplicity
 
 # multiple regression
 fit <- lm(y ~ x - 1)

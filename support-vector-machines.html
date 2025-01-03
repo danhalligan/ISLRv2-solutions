@@ -423,37 +423,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>This problem involves hyperplanes in two dimensions.</p>
 <ol style="list-style-type: lower-alpha">
-<li>Sketch the hyperplane <span class="math inline">\(1 + 3X_1 − X_2 = 0\)</span>. Indicate the set of points for
-which <span class="math inline">\(1 + 3X_1 − X_2 &gt; 0\)</span>, as well as the set of points for which
-<span class="math inline">\(1 + 3X_1 − X_2 &lt; 0\)</span>.</li>
+<li>Sketch the hyperplane <span class="math inline">\(1 + 3X_1 - X_2 = 0\)</span>. Indicate the set of points for
+which <span class="math inline">\(1 + 3X_1 - X_2 &gt; 0\)</span>, as well as the set of points for which
+<span class="math inline">\(1 + 3X_1 - X_2 &lt; 0\)</span>.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="support-vector-machines.html#cb607-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb607-2"><a href="support-vector-machines.html#cb607-2" tabindex="-1"></a>xlim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>)</span>
 <span id="cb607-3"><a href="support-vector-machines.html#cb607-3" tabindex="-1"></a>ylim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>)</span>
 <span id="cb607-4"><a href="support-vector-machines.html#cb607-4" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb607-5"><a href="support-vector-machines.html#cb607-5" tabindex="-1"></a>  <span class="at">X1 =</span> <span class="fu">seq</span>(xlim[<span class="dv">1</span>], xlim[<span class="dv">2</span>], <span class="at">length.out =</span> <span class="dv">50</span>), </span>
+<span id="cb607-5"><a href="support-vector-machines.html#cb607-5" tabindex="-1"></a>  <span class="at">X1 =</span> <span class="fu">seq</span>(xlim[<span class="dv">1</span>], xlim[<span class="dv">2</span>], <span class="at">length.out =</span> <span class="dv">50</span>),</span>
 <span id="cb607-6"><a href="support-vector-machines.html#cb607-6" tabindex="-1"></a>  <span class="at">X2 =</span> <span class="fu">seq</span>(ylim[<span class="dv">1</span>], ylim[<span class="dv">2</span>], <span class="at">length.out =</span> <span class="dv">50</span>)</span>
 <span id="cb607-7"><a href="support-vector-machines.html#cb607-7" tabindex="-1"></a>)</span>
-<span id="cb607-8"><a href="support-vector-machines.html#cb607-8" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(points, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span> </span>
-<span id="cb607-9"><a href="support-vector-machines.html#cb607-9" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">1</span>, <span class="at">slope =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="co"># X2 = 1 + 3X1 </span></span>
+<span id="cb607-8"><a href="support-vector-machines.html#cb607-8" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(points, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span></span>
+<span id="cb607-9"><a href="support-vector-machines.html#cb607-9" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">1</span>, <span class="at">slope =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="co"># X2 = 1 + 3X1</span></span>
 <span id="cb607-10"><a href="support-vector-machines.html#cb607-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb607-11"><a href="support-vector-machines.html#cb607-11" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>X1 <span class="sc">-</span> X2 <span class="sc">&gt;</span> <span class="dv">0</span>), <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
-<span id="cb607-12"><a href="support-vector-machines.html#cb607-12" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;1 + 3X1 − X2 &gt; 0&quot;</span>)</span></code></pre></div>
+<span id="cb607-11"><a href="support-vector-machines.html#cb607-11" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> X1 <span class="sc">-</span> X2 <span class="sc">&gt;</span> <span class="dv">0</span>), <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb607-12"><a href="support-vector-machines.html#cb607-12" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;1 + 3X1 - X2 &gt; 0&quot;</span>)</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
-<li>On the same plot, sketch the hyperplane <span class="math inline">\(−2 + X_1 + 2X_2 = 0\)</span>. Indicate the
-set of points for which <span class="math inline">\(−2 + X_1 + 2X_2 &gt; 0\)</span>, as well as the set of points
-for which <span class="math inline">\(−2 + X_1 + 2X_2 &lt; 0\)</span>.</li>
+<li>On the same plot, sketch the hyperplane <span class="math inline">\(-2 + X_1 + 2X_2 = 0\)</span>. Indicate the
+set of points for which <span class="math inline">\(-2 + X_1 + 2X_2 &gt; 0\)</span>, as well as the set of points
+for which <span class="math inline">\(-2 + X_1 + 2X_2 &lt; 0\)</span>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="support-vector-machines.html#cb608-1" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">1</span>, <span class="at">slope =</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">+</span>  <span class="co"># X2 = 1 - X1/2</span></span>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="support-vector-machines.html#cb608-1" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">1</span>, <span class="at">slope =</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="co"># X2 = 1 - X1/2</span></span>
 <span id="cb608-2"><a href="support-vector-machines.html#cb608-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb608-3"><a href="support-vector-machines.html#cb608-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">interaction</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>X1 <span class="sc">-</span> X2 <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span> <span class="sc">+</span> X1 <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>X2 <span class="sc">&gt;</span> <span class="dv">0</span>)), </span>
+<span id="cb608-3"><a href="support-vector-machines.html#cb608-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">interaction</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> X1 <span class="sc">-</span> X2 <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span> <span class="sc">+</span> X1 <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> X2 <span class="sc">&gt;</span> <span class="dv">0</span>)),</span>
 <span id="cb608-4"><a href="support-vector-machines.html#cb608-4" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.5</span></span>
-<span id="cb608-5"><a href="support-vector-machines.html#cb608-5" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb608-6"><a href="support-vector-machines.html#cb608-6" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;(1 + 3X1 − X2 &gt; 0).(−2 + X1 + 2X2 &gt; 0)&quot;</span>)</span></code></pre></div>
+<span id="cb608-5"><a href="support-vector-machines.html#cb608-5" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb608-6"><a href="support-vector-machines.html#cb608-6" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;(1 + 3X1 - X2 &gt; 0).(-2 + X1 + 2X2 &gt; 0)&quot;</span>)</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="question-2-7" class="section level3 hasAnchor" number="9.1.2">
@@ -463,23 +463,23 @@ for which <span class="math inline">\(−2 + X_1 + 2X_2 &lt; 0\)</span>.</li>
 form <span class="math inline">\(\beta_0 + \beta_1X_1 + \beta_2X_2 = 0\)</span>. We now investigate a non-linear
 decision boundary.</p>
 <ol style="list-style-type: lower-alpha">
-<li>Sketch the curve <span class="math display">\[(1+X_1)^2 +(2−X_2)^2 = 4\]</span>.</li>
+<li>Sketch the curve <span class="math display">\[(1+X_1)^2 +(2-X_2)^2 = 4\]</span>.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="support-vector-machines.html#cb609-1" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb609-2"><a href="support-vector-machines.html#cb609-2" tabindex="-1"></a>  <span class="at">X1 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">100</span>), </span>
+<span id="cb609-2"><a href="support-vector-machines.html#cb609-2" tabindex="-1"></a>  <span class="at">X1 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">100</span>),</span>
 <span id="cb609-3"><a href="support-vector-machines.html#cb609-3" tabindex="-1"></a>  <span class="at">X2 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">5</span>, <span class="at">length.out =</span> <span class="dv">100</span>)</span>
 <span id="cb609-4"><a href="support-vector-machines.html#cb609-4" tabindex="-1"></a>)</span>
-<span id="cb609-5"><a href="support-vector-machines.html#cb609-5" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(points, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2, <span class="at">z =</span> (<span class="dv">1</span> <span class="sc">+</span> X1)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">2</span> <span class="sc">-</span> X2)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">4</span>)) <span class="sc">+</span> </span>
-<span id="cb609-6"><a href="support-vector-machines.html#cb609-6" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">breaks =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb609-5"><a href="support-vector-machines.html#cb609-5" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(points, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2, <span class="at">z =</span> (<span class="dv">1</span> <span class="sc">+</span> X1)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">2</span> <span class="sc">-</span> X2)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">4</span>)) <span class="sc">+</span></span>
+<span id="cb609-6"><a href="support-vector-machines.html#cb609-6" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">breaks =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb609-7"><a href="support-vector-machines.html#cb609-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
 <span id="cb609-8"><a href="support-vector-machines.html#cb609-8" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>On your sketch, indicate the set of points for which
-<span class="math display">\[(1 + X_1)^2 + (2 − X_2)^2 &gt; 4,\]</span> as well as the set of points for which
-<span class="math display">\[(1 + X_1)^2 + (2 − X_2)^2 \leq 4.\]</span></li>
+<span class="math display">\[(1 + X_1)^2 + (2 - X_2)^2 &gt; 4,\]</span> as well as the set of points for which
+<span class="math display">\[(1 + X_1)^2 + (2 - X_2)^2 \leq 4.\]</span></li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="support-vector-machines.html#cb610-1" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> (<span class="dv">1</span> <span class="sc">+</span> X1)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">2</span> <span class="sc">-</span> X2)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">4</span> <span class="sc">&gt;</span> <span class="dv">0</span>), <span class="at">size =</span> <span class="fl">0.1</span>)</span></code></pre></div>
@@ -487,8 +487,8 @@ decision boundary.</p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Suppose that a classifier assigns an observation to the blue class if <span class="math display">\[(1
-+ X_1)^2 + (2 − X_2)^2 &gt; 4,\]</span> and to the red class otherwise. To what class
-is the observation <span class="math inline">\((0, 0)\)</span> classified? <span class="math inline">\((−1, 1)\)</span>? <span class="math inline">\((2, 2)\)</span>? <span class="math inline">\((3, 8)\)</span>?</li>
++ X_1)^2 + (2 - X_2)^2 &gt; 4,\]</span> and to the red class otherwise. To what class
+is the observation <span class="math inline">\((0, 0)\)</span> classified? <span class="math inline">\((-1, 1)\)</span>? <span class="math inline">\((2, 2)\)</span>? <span class="math inline">\((3, 8)\)</span>?</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="support-vector-machines.html#cb611-1" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -504,9 +504,9 @@ is the observation <span class="math inline">\((0, 0)\)</span> classified? <span
 <span class="math inline">\(X_2^2\)</span>.</li>
 </ol>
 </blockquote>
-<p>The decision boundary is <span class="math display">\[(1 + X_1)^2 + (2 − X_2)^2 -4 = 0\]</span> which we can expand
+<p>The decision boundary is <span class="math display">\[(1 + X_1)^2 + (2 - X_2)^2 -4 = 0\]</span> which we can expand
 to:
-<span class="math display">\[1 + 2X_1 + X_1^2 + 4 − 4X_2 + X_2^2 - 4 = 0\]</span>
+<span class="math display">\[1 + 2X_1 + X_1^2 + 4 - 4X_2 + X_2^2 - 4 = 0\]</span>
 which is linear in terms of <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_1^2\)</span>, <span class="math inline">\(X_2\)</span>, <span class="math inline">\(X_2^2\)</span>.</p>
 </div>
 <div id="question-3-7" class="section level3 hasAnchor" number="9.1.3">
@@ -578,8 +578,8 @@ observation, there is an associated class label.</p>
 <span id="cb613-3"><a href="support-vector-machines.html#cb613-3" tabindex="-1"></a>  <span class="at">X2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>),</span>
 <span id="cb613-4"><a href="support-vector-machines.html#cb613-4" tabindex="-1"></a>  <span class="at">Y  =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Red&quot;</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="st">&quot;Blue&quot;</span>, <span class="dv">3</span>))</span>
 <span id="cb613-5"><a href="support-vector-machines.html#cb613-5" tabindex="-1"></a>)</span>
-<span id="cb613-6"><a href="support-vector-machines.html#cb613-6" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2, <span class="at">color =</span> Y)) <span class="sc">+</span> </span>
-<span id="cb613-7"><a href="support-vector-machines.html#cb613-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb613-6"><a href="support-vector-machines.html#cb613-6" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2, <span class="at">color =</span> Y)) <span class="sc">+</span></span>
+<span id="cb613-7"><a href="support-vector-machines.html#cb613-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb613-8"><a href="support-vector-machines.html#cb613-8" tabindex="-1"></a>  <span class="fu">scale_colour_identity</span>() <span class="sc">+</span></span>
 <span id="cb613-9"><a href="support-vector-machines.html#cb613-9" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">4.5</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">4.5</span>))</span>
 <span id="cb613-10"><a href="support-vector-machines.html#cb613-10" tabindex="-1"></a>p</span></code></pre></div>
@@ -665,7 +665,7 @@ X1 = 4, X2 = 3. This gives line <span class="math inline">\(y = x/2 + 1\)</span>
 longer separable by a hyperplane.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="support-vector-machines.html#cb619-1" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">X1 =</span> <span class="dv">1</span>, <span class="at">X2 =</span> <span class="dv">3</span>, <span class="at">Y  =</span> <span class="st">&quot;Blue&quot;</span>), <span class="at">shape =</span> <span class="dv">15</span>, <span class="at">size =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="support-vector-machines.html#cb619-1" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">X1 =</span> <span class="dv">1</span>, <span class="at">X2 =</span> <span class="dv">3</span>, <span class="at">Y =</span> <span class="st">&quot;Blue&quot;</span>), <span class="at">shape =</span> <span class="dv">15</span>, <span class="at">size =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 </div>
@@ -687,12 +687,13 @@ back up your assertions.</p>
 <span id="cb620-3"><a href="support-vector-machines.html#cb620-3" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">100</span>),</span>
 <span id="cb620-4"><a href="support-vector-machines.html#cb620-4" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">100</span>)</span>
 <span id="cb620-5"><a href="support-vector-machines.html#cb620-5" tabindex="-1"></a>)</span>
-<span id="cb620-6"><a href="support-vector-machines.html#cb620-6" tabindex="-1"></a>score <span class="ot">&lt;-</span> (<span class="dv">2</span><span class="sc">*</span>data<span class="sc">$</span>x<span class="fl">-0.5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (data<span class="sc">$</span>y)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="fl">0.5</span></span>
+<span id="cb620-6"><a href="support-vector-machines.html#cb620-6" tabindex="-1"></a>score <span class="ot">&lt;-</span> (<span class="dv">2</span> <span class="sc">*</span> data<span class="sc">$</span>x <span class="sc">-</span> <span class="fl">0.5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (data<span class="sc">$</span>y)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="fl">0.5</span></span>
 <span id="cb620-7"><a href="support-vector-machines.html#cb620-7" tabindex="-1"></a>data<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(score <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>))</span>
 <span id="cb620-8"><a href="support-vector-machines.html#cb620-8" tabindex="-1"></a></span>
-<span id="cb620-9"><a href="support-vector-machines.html#cb620-9" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> class)) <span class="sc">+</span> </span>
-<span id="cb620-10"><a href="support-vector-machines.html#cb620-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">scale_colour_identity</span>()</span>
-<span id="cb620-11"><a href="support-vector-machines.html#cb620-11" tabindex="-1"></a>p</span></code></pre></div>
+<span id="cb620-9"><a href="support-vector-machines.html#cb620-9" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb620-10"><a href="support-vector-machines.html#cb620-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb620-11"><a href="support-vector-machines.html#cb620-11" tabindex="-1"></a>  <span class="fu">scale_colour_identity</span>()</span>
+<span id="cb620-12"><a href="support-vector-machines.html#cb620-12" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="support-vector-machines.html#cb621-1" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span></span>
 <span id="cb621-2"><a href="support-vector-machines.html#cb621-2" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="dv">51</span><span class="sc">:</span><span class="dv">100</span></span>
@@ -751,7 +752,7 @@ instance, you can do this as follows:</p>
 should display <span class="math inline">\(X_1\)</span> on the <span class="math inline">\(x\)</span>-axis, and <span class="math inline">\(X_2\)</span> on the <span class="math inline">\(y\)</span>-axis.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="support-vector-machines.html#cb630-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(train, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2, <span class="at">color =</span> y)) <span class="sc">+</span> </span>
+<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="support-vector-machines.html#cb630-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(train, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2, <span class="at">color =</span> y)) <span class="sc">+</span></span>
 <span id="cb630-2"><a href="support-vector-machines.html#cb630-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>)</span>
 <span id="cb630-3"><a href="support-vector-machines.html#cb630-3" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
@@ -776,7 +777,7 @@ linear.</li>
 <span id="cb632-4"><a href="support-vector-machines.html#cb632-4" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
 <span id="cb632-5"><a href="support-vector-machines.html#cb632-5" tabindex="-1"></a>    train<span class="sc">$</span>p <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">as.numeric</span>(<span class="fu">predict</span>(fit) <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
 <span id="cb632-6"><a href="support-vector-machines.html#cb632-6" tabindex="-1"></a>  }</span>
-<span id="cb632-7"><a href="support-vector-machines.html#cb632-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(train, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2, <span class="at">color =</span> p)) <span class="sc">+</span> </span>
+<span id="cb632-7"><a href="support-vector-machines.html#cb632-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(train, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2, <span class="at">color =</span> p)) <span class="sc">+</span></span>
 <span id="cb632-8"><a href="support-vector-machines.html#cb632-8" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>)</span>
 <span id="cb632-9"><a href="support-vector-machines.html#cb632-9" tabindex="-1"></a>}</span>
 <span id="cb632-10"><a href="support-vector-machines.html#cb632-10" tabindex="-1"></a></span>
@@ -857,21 +858,22 @@ just barely linearly separable.</li>
 <span id="cb639-9"><a href="support-vector-machines.html#cb639-9" tabindex="-1"></a></span>
 <span id="cb639-10"><a href="support-vector-machines.html#cb639-10" tabindex="-1"></a><span class="co"># Add barley separable points (these are simulated &quot;noise&quot; values)</span></span>
 <span id="cb639-11"><a href="support-vector-machines.html#cb639-11" tabindex="-1"></a>newdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>))</span>
-<span id="cb639-12"><a href="support-vector-machines.html#cb639-12" tabindex="-1"></a>newdata<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fl">1.5</span><span class="sc">*</span>newdata<span class="sc">$</span>x <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb639-13"><a href="support-vector-machines.html#cb639-13" tabindex="-1"></a>newdata<span class="sc">$</span>class <span class="ot">=</span> <span class="fu">ifelse</span>((<span class="fl">1.5</span><span class="sc">*</span>newdata<span class="sc">$</span>x <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">-</span> newdata<span class="sc">$</span>y <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb639-12"><a href="support-vector-machines.html#cb639-12" tabindex="-1"></a>newdata<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fl">1.5</span> <span class="sc">*</span> newdata<span class="sc">$</span>x <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb639-13"><a href="support-vector-machines.html#cb639-13" tabindex="-1"></a>newdata<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((<span class="fl">1.5</span> <span class="sc">*</span> newdata<span class="sc">$</span>x <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">-</span> newdata<span class="sc">$</span>y <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
 <span id="cb639-14"><a href="support-vector-machines.html#cb639-14" tabindex="-1"></a></span>
 <span id="cb639-15"><a href="support-vector-machines.html#cb639-15" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data, newdata)</span>
 <span id="cb639-16"><a href="support-vector-machines.html#cb639-16" tabindex="-1"></a></span>
 <span id="cb639-17"><a href="support-vector-machines.html#cb639-17" tabindex="-1"></a><span class="co"># remove any that cause misclassification leaving data that is barley linearly</span></span>
 <span id="cb639-18"><a href="support-vector-machines.html#cb639-18" tabindex="-1"></a><span class="co"># separable, but along an axis that is not y = 2.5 (which would be correct</span></span>
 <span id="cb639-19"><a href="support-vector-machines.html#cb639-19" tabindex="-1"></a><span class="co"># for the &quot;true&quot; data.</span></span>
-<span id="cb639-20"><a href="support-vector-machines.html#cb639-20" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="sc">!</span>(data<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&quot;red&quot;</span>) <span class="sc">==</span> ((<span class="fl">1.5</span><span class="sc">*</span>data<span class="sc">$</span>x <span class="sc">+</span> <span class="dv">3</span> <span class="sc">-</span> data<span class="sc">$</span>y) <span class="sc">&gt;</span> <span class="dv">0</span>), ]</span>
+<span id="cb639-20"><a href="support-vector-machines.html#cb639-20" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="sc">!</span>(data<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&quot;red&quot;</span>) <span class="sc">==</span> ((<span class="fl">1.5</span> <span class="sc">*</span> data<span class="sc">$</span>x <span class="sc">+</span> <span class="dv">3</span> <span class="sc">-</span> data<span class="sc">$</span>y) <span class="sc">&gt;</span> <span class="dv">0</span>), ]</span>
 <span id="cb639-21"><a href="support-vector-machines.html#cb639-21" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="fu">sample</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(data)), <span class="dv">200</span>), ]</span>
 <span id="cb639-22"><a href="support-vector-machines.html#cb639-22" tabindex="-1"></a></span>
-<span id="cb639-23"><a href="support-vector-machines.html#cb639-23" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> class)) <span class="sc">+</span> </span>
-<span id="cb639-24"><a href="support-vector-machines.html#cb639-24" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">scale_colour_identity</span>() <span class="sc">+</span> </span>
-<span id="cb639-25"><a href="support-vector-machines.html#cb639-25" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">3</span>, <span class="at">slope =</span> <span class="fl">1.5</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb639-26"><a href="support-vector-machines.html#cb639-26" tabindex="-1"></a>p</span></code></pre></div>
+<span id="cb639-23"><a href="support-vector-machines.html#cb639-23" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb639-24"><a href="support-vector-machines.html#cb639-24" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb639-25"><a href="support-vector-machines.html#cb639-25" tabindex="-1"></a>  <span class="fu">scale_colour_identity</span>() <span class="sc">+</span></span>
+<span id="cb639-26"><a href="support-vector-machines.html#cb639-26" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">3</span>, <span class="at">slope =</span> <span class="fl">1.5</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb639-27"><a href="support-vector-machines.html#cb639-27" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -885,9 +887,9 @@ cross-validation errors obtained?</li>
 <div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="support-vector-machines.html#cb640-1" tabindex="-1"></a>costs <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">5</span>)</span>
 <span id="cb640-2"><a href="support-vector-machines.html#cb640-2" tabindex="-1"></a></span>
 <span id="cb640-3"><a href="support-vector-machines.html#cb640-3" tabindex="-1"></a><span class="fu">sapply</span>(costs, <span class="cf">function</span>(cost) {</span>
-<span id="cb640-4"><a href="support-vector-machines.html#cb640-4" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">svm</span>(<span class="fu">as.factor</span>(class) <span class="sc">~</span> ., <span class="at">data =</span> data, <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>, <span class="at">cost =</span> cost)</span>
-<span id="cb640-5"><a href="support-vector-machines.html#cb640-5" tabindex="-1"></a>    pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, data)</span>
-<span id="cb640-6"><a href="support-vector-machines.html#cb640-6" tabindex="-1"></a>    <span class="fu">sum</span>(pred <span class="sc">!=</span> data<span class="sc">$</span>class)</span>
+<span id="cb640-4"><a href="support-vector-machines.html#cb640-4" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">svm</span>(<span class="fu">as.factor</span>(class) <span class="sc">~</span> ., <span class="at">data =</span> data, <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>, <span class="at">cost =</span> cost)</span>
+<span id="cb640-5"><a href="support-vector-machines.html#cb640-5" tabindex="-1"></a>  pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, data)</span>
+<span id="cb640-6"><a href="support-vector-machines.html#cb640-6" tabindex="-1"></a>  <span class="fu">sum</span>(pred <span class="sc">!=</span> data<span class="sc">$</span>class)</span>
 <span id="cb640-7"><a href="support-vector-machines.html#cb640-7" tabindex="-1"></a>})</span></code></pre></div>
 <pre><code>## [1] 98  8  9  4  1  1  0  0  0</code></pre>
 <p>Cross-validation errors</p>
@@ -916,7 +918,7 @@ cross-validation errors obtained?</li>
 ## 8 1e+04 0.010 0.02108185
 ## 9 1e+05 0.010 0.02108185</code></pre>
 <div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb644-1"><a href="support-vector-machines.html#cb644-1" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
-<span id="cb644-2"><a href="support-vector-machines.html#cb644-2" tabindex="-1"></a>  <span class="at">cost =</span> out<span class="sc">$</span>performances<span class="sc">$</span>cost, </span>
+<span id="cb644-2"><a href="support-vector-machines.html#cb644-2" tabindex="-1"></a>  <span class="at">cost =</span> out<span class="sc">$</span>performances<span class="sc">$</span>cost,</span>
 <span id="cb644-3"><a href="support-vector-machines.html#cb644-3" tabindex="-1"></a>  <span class="at">misclass =</span> out<span class="sc">$</span>performances<span class="sc">$</span>error <span class="sc">*</span> <span class="fu">nrow</span>(data)</span>
 <span id="cb644-4"><a href="support-vector-machines.html#cb644-4" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##    cost misclass
@@ -947,9 +949,9 @@ cross-validation errors?</li>
 <span id="cb646-7"><a href="support-vector-machines.html#cb646-7" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">data =</span> test, <span class="at">pch =</span> <span class="dv">21</span>)</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="support-vector-machines.html#cb647-1" tabindex="-1"></a>(errs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(costs, <span class="cf">function</span>(cost) {</span>
-<span id="cb647-2"><a href="support-vector-machines.html#cb647-2" tabindex="-1"></a>    fit <span class="ot">&lt;-</span> <span class="fu">svm</span>(<span class="fu">as.factor</span>(class) <span class="sc">~</span> ., <span class="at">data =</span> data, <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>, <span class="at">cost =</span> cost)</span>
-<span id="cb647-3"><a href="support-vector-machines.html#cb647-3" tabindex="-1"></a>    pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, test)</span>
-<span id="cb647-4"><a href="support-vector-machines.html#cb647-4" tabindex="-1"></a>    <span class="fu">sum</span>(pred <span class="sc">!=</span> test<span class="sc">$</span>class)</span>
+<span id="cb647-2"><a href="support-vector-machines.html#cb647-2" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">svm</span>(<span class="fu">as.factor</span>(class) <span class="sc">~</span> ., <span class="at">data =</span> data, <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>, <span class="at">cost =</span> cost)</span>
+<span id="cb647-3"><a href="support-vector-machines.html#cb647-3" tabindex="-1"></a>  pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, test)</span>
+<span id="cb647-4"><a href="support-vector-machines.html#cb647-4" tabindex="-1"></a>  <span class="fu">sum</span>(pred <span class="sc">!=</span> test<span class="sc">$</span>class)</span>
 <span id="cb647-5"><a href="support-vector-machines.html#cb647-5" tabindex="-1"></a>}))</span></code></pre></div>
 <pre><code>## [1] 95  2  3  9 16 16 19 19 19</code></pre>
 <div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="support-vector-machines.html#cb649-1" tabindex="-1"></a>(cost <span class="ot">&lt;-</span> costs[<span class="fu">which.min</span>(errs)])</span></code></pre></div>
@@ -968,9 +970,9 @@ cross-validation errors?</li>
 ## 
 ## Number of Support Vectors:  135</code></pre>
 <div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="support-vector-machines.html#cb653-1" tabindex="-1"></a>test<span class="sc">$</span>prediction <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, test)</span>
-<span id="cb653-2"><a href="support-vector-machines.html#cb653-2" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(test, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> class, <span class="at">shape =</span> prediction <span class="sc">==</span> class)) <span class="sc">+</span> </span>
-<span id="cb653-3"><a href="support-vector-machines.html#cb653-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb653-4"><a href="support-vector-machines.html#cb653-4" tabindex="-1"></a>  <span class="fu">scale_colour_identity</span>() </span>
+<span id="cb653-2"><a href="support-vector-machines.html#cb653-2" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(test, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> class, <span class="at">shape =</span> prediction <span class="sc">==</span> class)) <span class="sc">+</span></span>
+<span id="cb653-3"><a href="support-vector-machines.html#cb653-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb653-4"><a href="support-vector-machines.html#cb653-4" tabindex="-1"></a>  <span class="fu">scale_colour_identity</span>()</span>
 <span id="cb653-5"><a href="support-vector-machines.html#cb653-5" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-25-2.png" width="672" /></p>
 <blockquote>
@@ -1008,9 +1010,11 @@ the gas mileage variable to produce sensible results.</li>
 <span id="cb655-2"><a href="support-vector-machines.html#cb655-2" tabindex="-1"></a>costs <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.5</span>)</span>
 <span id="cb655-3"><a href="support-vector-machines.html#cb655-3" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
 <span id="cb655-4"><a href="support-vector-machines.html#cb655-4" tabindex="-1"></a>f <span class="ot">&lt;-</span> high_mpg <span class="sc">~</span> displacement <span class="sc">+</span> horsepower <span class="sc">+</span> weight</span>
-<span id="cb655-5"><a href="support-vector-machines.html#cb655-5" tabindex="-1"></a>results<span class="sc">$</span>linear <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, f, <span class="at">data =</span> data, <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>, </span>
-<span id="cb655-6"><a href="support-vector-machines.html#cb655-6" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> costs))</span>
-<span id="cb655-7"><a href="support-vector-machines.html#cb655-7" tabindex="-1"></a><span class="fu">summary</span>(results<span class="sc">$</span>linear)</span></code></pre></div>
+<span id="cb655-5"><a href="support-vector-machines.html#cb655-5" tabindex="-1"></a>results<span class="sc">$</span>linear <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, f,</span>
+<span id="cb655-6"><a href="support-vector-machines.html#cb655-6" tabindex="-1"></a>  <span class="at">data =</span> data, <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>,</span>
+<span id="cb655-7"><a href="support-vector-machines.html#cb655-7" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> costs)</span>
+<span id="cb655-8"><a href="support-vector-machines.html#cb655-8" tabindex="-1"></a>)</span>
+<span id="cb655-9"><a href="support-vector-machines.html#cb655-9" tabindex="-1"></a><span class="fu">summary</span>(results<span class="sc">$</span>linear)</span></code></pre></div>
 <pre><code>## 
 ## Parameter tuning of &#39;svm&#39;:
 ## 
@@ -1046,9 +1050,11 @@ kernels, with different values of <code>gamma</code> and <code>degree</code> and
 on your results.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="support-vector-machines.html#cb657-1" tabindex="-1"></a>results<span class="sc">$</span>polynomial <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, f, <span class="at">data =</span> data, <span class="at">kernel =</span> <span class="st">&quot;polynomial&quot;</span>, </span>
-<span id="cb657-2"><a href="support-vector-machines.html#cb657-2" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> costs, <span class="at">degree =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span>
-<span id="cb657-3"><a href="support-vector-machines.html#cb657-3" tabindex="-1"></a><span class="fu">summary</span>(results<span class="sc">$</span>polynomial)</span></code></pre></div>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="support-vector-machines.html#cb657-1" tabindex="-1"></a>results<span class="sc">$</span>polynomial <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, f,</span>
+<span id="cb657-2"><a href="support-vector-machines.html#cb657-2" tabindex="-1"></a>  <span class="at">data =</span> data, <span class="at">kernel =</span> <span class="st">&quot;polynomial&quot;</span>,</span>
+<span id="cb657-3"><a href="support-vector-machines.html#cb657-3" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> costs, <span class="at">degree =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb657-4"><a href="support-vector-machines.html#cb657-4" tabindex="-1"></a>)</span>
+<span id="cb657-5"><a href="support-vector-machines.html#cb657-5" tabindex="-1"></a><span class="fu">summary</span>(results<span class="sc">$</span>polynomial)</span></code></pre></div>
 <pre><code>## 
 ## Parameter tuning of &#39;svm&#39;:
 ## 
@@ -1107,9 +1113,11 @@ on your results.</li>
 ## 43 1.000000e+02      3 0.1373718 0.05772558
 ## 44 3.162278e+02      3 0.1271795 0.06484766
 ## 45 1.000000e+03      3 0.1322436 0.06764841</code></pre>
-<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="support-vector-machines.html#cb659-1" tabindex="-1"></a>results<span class="sc">$</span>radial <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, f, <span class="at">data =</span> data, <span class="at">kernel =</span> <span class="st">&quot;radial&quot;</span>, </span>
-<span id="cb659-2"><a href="support-vector-machines.html#cb659-2" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> costs, <span class="at">gamma =</span> <span class="dv">10</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>)))</span>
-<span id="cb659-3"><a href="support-vector-machines.html#cb659-3" tabindex="-1"></a><span class="fu">summary</span>(results<span class="sc">$</span>radial)</span></code></pre></div>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="support-vector-machines.html#cb659-1" tabindex="-1"></a>results<span class="sc">$</span>radial <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, f,</span>
+<span id="cb659-2"><a href="support-vector-machines.html#cb659-2" tabindex="-1"></a>  <span class="at">data =</span> data, <span class="at">kernel =</span> <span class="st">&quot;radial&quot;</span>,</span>
+<span id="cb659-3"><a href="support-vector-machines.html#cb659-3" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> costs, <span class="at">gamma =</span> <span class="dv">10</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>))</span>
+<span id="cb659-4"><a href="support-vector-machines.html#cb659-4" tabindex="-1"></a>)</span>
+<span id="cb659-5"><a href="support-vector-machines.html#cb659-5" tabindex="-1"></a><span class="fu">summary</span>(results<span class="sc">$</span>radial)</span></code></pre></div>
 <pre><code>## 
 ## Parameter tuning of &#39;svm&#39;:
 ## 
@@ -1219,11 +1227,11 @@ type <code>?plot.svm</code>.</em></p></li>
 ##       0   1
 ##   0 176   5
 ##   1  20 191</code></pre>
-<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="support-vector-machines.html#cb669-1" tabindex="-1"></a><span class="fu">plot</span>(results<span class="sc">$</span>radial<span class="sc">$</span>best.model, data, horsepower<span class="sc">~</span>displacement)</span></code></pre></div>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="support-vector-machines.html#cb669-1" tabindex="-1"></a><span class="fu">plot</span>(results<span class="sc">$</span>radial<span class="sc">$</span>best.model, data, horsepower <span class="sc">~</span> displacement)</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
-<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="support-vector-machines.html#cb670-1" tabindex="-1"></a><span class="fu">plot</span>(results<span class="sc">$</span>radial<span class="sc">$</span>best.model, data, horsepower<span class="sc">~</span>weight)</span></code></pre></div>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="support-vector-machines.html#cb670-1" tabindex="-1"></a><span class="fu">plot</span>(results<span class="sc">$</span>radial<span class="sc">$</span>best.model, data, horsepower <span class="sc">~</span> weight)</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-29-2.png" width="672" /></p>
-<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="support-vector-machines.html#cb671-1" tabindex="-1"></a><span class="fu">plot</span>(results<span class="sc">$</span>radial<span class="sc">$</span>best.model, data, displacement<span class="sc">~</span>weight)</span></code></pre></div>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="support-vector-machines.html#cb671-1" tabindex="-1"></a><span class="fu">plot</span>(results<span class="sc">$</span>radial<span class="sc">$</span>best.model, data, displacement <span class="sc">~</span> weight)</span></code></pre></div>
 <p><img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-29-3.png" width="672" /></p>
 </div>
 <div id="question-8-7" class="section level3 hasAnchor" number="9.2.5">
@@ -1289,9 +1297,11 @@ results obtained.</li>
 range 0.01 to 10.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="support-vector-machines.html#cb677-1" tabindex="-1"></a>tuned <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, Purchase <span class="sc">~</span> ., <span class="at">data =</span> OJ[train, ], <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>, </span>
-<span id="cb677-2"><a href="support-vector-machines.html#cb677-2" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">10</span>)))</span>
-<span id="cb677-3"><a href="support-vector-machines.html#cb677-3" tabindex="-1"></a>tuned<span class="sc">$</span>best.parameters</span></code></pre></div>
+<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="support-vector-machines.html#cb677-1" tabindex="-1"></a>tuned <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, Purchase <span class="sc">~</span> .,</span>
+<span id="cb677-2"><a href="support-vector-machines.html#cb677-2" tabindex="-1"></a>  <span class="at">data =</span> OJ[train, ], <span class="at">kernel =</span> <span class="st">&quot;linear&quot;</span>,</span>
+<span id="cb677-3"><a href="support-vector-machines.html#cb677-3" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">10</span>))</span>
+<span id="cb677-4"><a href="support-vector-machines.html#cb677-4" tabindex="-1"></a>)</span>
+<span id="cb677-5"><a href="support-vector-machines.html#cb677-5" tabindex="-1"></a>tuned<span class="sc">$</span>best.parameters</span></code></pre></div>
 <pre><code>##   cost
 ## 7    1</code></pre>
 <div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="support-vector-machines.html#cb679-1" tabindex="-1"></a><span class="fu">summary</span>(tuned)</span></code></pre></div>
@@ -1332,9 +1342,11 @@ range 0.01 to 10.</li>
 kernel. Use the default value for <code>gamma</code>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="support-vector-machines.html#cb683-1" tabindex="-1"></a>tuned2 <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, Purchase <span class="sc">~</span> ., <span class="at">data =</span> OJ[train, ], <span class="at">kernel =</span> <span class="st">&quot;radial&quot;</span>, </span>
-<span id="cb683-2"><a href="support-vector-machines.html#cb683-2" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">10</span>)))</span>
-<span id="cb683-3"><a href="support-vector-machines.html#cb683-3" tabindex="-1"></a>tuned2<span class="sc">$</span>best.parameters</span></code></pre></div>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="support-vector-machines.html#cb683-1" tabindex="-1"></a>tuned2 <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, Purchase <span class="sc">~</span> .,</span>
+<span id="cb683-2"><a href="support-vector-machines.html#cb683-2" tabindex="-1"></a>  <span class="at">data =</span> OJ[train, ], <span class="at">kernel =</span> <span class="st">&quot;radial&quot;</span>,</span>
+<span id="cb683-3"><a href="support-vector-machines.html#cb683-3" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">10</span>))</span>
+<span id="cb683-4"><a href="support-vector-machines.html#cb683-4" tabindex="-1"></a>)</span>
+<span id="cb683-5"><a href="support-vector-machines.html#cb683-5" tabindex="-1"></a>tuned2<span class="sc">$</span>best.parameters</span></code></pre></div>
 <pre><code>##        cost
 ## 6 0.4641589</code></pre>
 <div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb685-1"><a href="support-vector-machines.html#cb685-1" tabindex="-1"></a><span class="fu">errs</span>(tuned2<span class="sc">$</span>best.model)</span></code></pre></div>
@@ -1346,9 +1358,11 @@ kernel. Use the default value for <code>gamma</code>.</li>
 polynomial kernel. Set <code>degree = 2</code>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb687-1"><a href="support-vector-machines.html#cb687-1" tabindex="-1"></a>tuned3 <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, Purchase <span class="sc">~</span> ., <span class="at">data =</span> OJ[train, ], <span class="at">kernel =</span> <span class="st">&quot;polynomial&quot;</span>, </span>
-<span id="cb687-2"><a href="support-vector-machines.html#cb687-2" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">10</span>)), <span class="at">degree =</span> <span class="dv">2</span>)</span>
-<span id="cb687-3"><a href="support-vector-machines.html#cb687-3" tabindex="-1"></a>tuned3<span class="sc">$</span>best.parameters</span></code></pre></div>
+<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb687-1"><a href="support-vector-machines.html#cb687-1" tabindex="-1"></a>tuned3 <span class="ot">&lt;-</span> <span class="fu">tune</span>(svm, Purchase <span class="sc">~</span> .,</span>
+<span id="cb687-2"><a href="support-vector-machines.html#cb687-2" tabindex="-1"></a>  <span class="at">data =</span> OJ[train, ], <span class="at">kernel =</span> <span class="st">&quot;polynomial&quot;</span>,</span>
+<span id="cb687-3"><a href="support-vector-machines.html#cb687-3" tabindex="-1"></a>  <span class="at">ranges =</span> <span class="fu">list</span>(<span class="at">cost =</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">10</span>)), <span class="at">degree =</span> <span class="dv">2</span></span>
+<span id="cb687-4"><a href="support-vector-machines.html#cb687-4" tabindex="-1"></a>)</span>
+<span id="cb687-5"><a href="support-vector-machines.html#cb687-5" tabindex="-1"></a>tuned3<span class="sc">$</span>best.parameters</span></code></pre></div>
 <pre><code>##       cost
 ## 9 4.641589</code></pre>
 <div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb689-1"><a href="support-vector-machines.html#cb689-1" tabindex="-1"></a><span class="fu">errs</span>(tuned3<span class="sc">$</span>best.model)</span></code></pre></div>

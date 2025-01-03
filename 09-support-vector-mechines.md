@@ -6,9 +6,9 @@
 
 > This problem involves hyperplanes in two dimensions.
 >
-> a. Sketch the hyperplane $1 + 3X_1 − X_2 = 0$. Indicate the set of points for
->    which $1 + 3X_1 − X_2 > 0$, as well as the set of points for which
->    $1 + 3X_1 − X_2 < 0$.
+> a. Sketch the hyperplane $1 + 3X_1 - X_2 = 0$. Indicate the set of points for
+>    which $1 + 3X_1 - X_2 > 0$, as well as the set of points for which
+>    $1 + 3X_1 - X_2 < 0$.
 
 
 ``` r
@@ -16,30 +16,30 @@ library(ggplot2)
 xlim <- c(-10, 10)
 ylim <- c(-30, 30)
 points <- expand.grid(
-  X1 = seq(xlim[1], xlim[2], length.out = 50), 
+  X1 = seq(xlim[1], xlim[2], length.out = 50),
   X2 = seq(ylim[1], ylim[2], length.out = 50)
 )
-p <- ggplot(points, aes(x = X1, y = X2)) + 
-  geom_abline(intercept = 1, slope = 3) +  # X2 = 1 + 3X1 
+p <- ggplot(points, aes(x = X1, y = X2)) +
+  geom_abline(intercept = 1, slope = 3) + # X2 = 1 + 3X1
   theme_bw()
-p + geom_point(aes(color = 1 + 3*X1 - X2 > 0), size = 0.1) + 
-  scale_color_discrete(name = "1 + 3X1 − X2 > 0")
+p + geom_point(aes(color = 1 + 3 * X1 - X2 > 0), size = 0.1) +
+  scale_color_discrete(name = "1 + 3X1 - X2 > 0")
 ```
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-1-1.png" width="672" />
 
-> b. On the same plot, sketch the hyperplane $−2 + X_1 + 2X_2 = 0$. Indicate the
->    set of points for which $−2 + X_1 + 2X_2 > 0$, as well as the set of points
->    for which $−2 + X_1 + 2X_2 < 0$.
+> b. On the same plot, sketch the hyperplane $-2 + X_1 + 2X_2 = 0$. Indicate the
+>    set of points for which $-2 + X_1 + 2X_2 > 0$, as well as the set of points
+>    for which $-2 + X_1 + 2X_2 < 0$.
 
 
 ``` r
-p + geom_abline(intercept = 1, slope = -1/2) +  # X2 = 1 - X1/2
+p + geom_abline(intercept = 1, slope = -1 / 2) + # X2 = 1 - X1/2
   geom_point(
-    aes(color = interaction(1 + 3*X1 - X2 > 0, -2 + X1 + 2*X2 > 0)), 
+    aes(color = interaction(1 + 3 * X1 - X2 > 0, -2 + X1 + 2 * X2 > 0)),
     size = 0.5
-  ) + 
-  scale_color_discrete(name = "(1 + 3X1 − X2 > 0).(−2 + X1 + 2X2 > 0)")
+  ) +
+  scale_color_discrete(name = "(1 + 3X1 - X2 > 0).(-2 + X1 + 2X2 > 0)")
 ```
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-2-1.png" width="672" />
@@ -50,16 +50,16 @@ p + geom_abline(intercept = 1, slope = -1/2) +  # X2 = 1 - X1/2
 > form $\beta_0 + \beta_1X_1 + \beta_2X_2 = 0$. We now investigate a non-linear
 > decision boundary.
 >
-> a. Sketch the curve $$(1+X_1)^2 +(2−X_2)^2 = 4$$.
+> a. Sketch the curve $$(1+X_1)^2 +(2-X_2)^2 = 4$$.
 
 
 ``` r
 points <- expand.grid(
-  X1 = seq(-4, 2, length.out = 100), 
+  X1 = seq(-4, 2, length.out = 100),
   X2 = seq(-1, 5, length.out = 100)
 )
-p <- ggplot(points, aes(x = X1, y = X2, z = (1 + X1)^2 + (2 - X2)^2 - 4)) + 
-  geom_contour(breaks = 0, colour = "black") + 
+p <- ggplot(points, aes(x = X1, y = X2, z = (1 + X1)^2 + (2 - X2)^2 - 4)) +
+  geom_contour(breaks = 0, colour = "black") +
   theme_bw()
 p
 ```
@@ -67,8 +67,8 @@ p
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 > b. On your sketch, indicate the set of points for which
->    $$(1 + X_1)^2 + (2 − X_2)^2 > 4,$$ as well as the set of points for which
->    $$(1 + X_1)^2 + (2 − X_2)^2 \leq 4.$$
+>    $$(1 + X_1)^2 + (2 - X_2)^2 > 4,$$ as well as the set of points for which
+>    $$(1 + X_1)^2 + (2 - X_2)^2 \leq 4.$$
 
 
 ``` r
@@ -78,8 +78,8 @@ p + geom_point(aes(color = (1 + X1)^2 + (2 - X2)^2 - 4 > 0), size = 0.1)
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 > c. Suppose that a classifier assigns an observation to the blue class if $$(1
->    + X_1)^2 + (2 − X_2)^2 > 4,$$ and to the red class otherwise. To what class
->    is the observation $(0, 0)$ classified? $(−1, 1)$? $(2, 2)$? $(3, 8)$?
+>    + X_1)^2 + (2 - X_2)^2 > 4,$$ and to the red class otherwise. To what class
+>    is the observation $(0, 0)$ classified? $(-1, 1)$? $(2, 2)$? $(3, 8)$?
 
 
 ``` r
@@ -98,9 +98,9 @@ ifelse((1 + points$X1)^2 + (2 - points$X2)^2 > 4, "blue", "red")
 >    $X_1$ and $X_2$, it is linear in terms of $X_1$, $X_1^2$, $X_2$, and
 >    $X_2^2$.
 
-The decision boundary is $$(1 + X_1)^2 + (2 − X_2)^2 -4 = 0$$ which we can expand 
+The decision boundary is $$(1 + X_1)^2 + (2 - X_2)^2 -4 = 0$$ which we can expand 
 to:
-$$1 + 2X_1 + X_1^2 + 4 − 4X_2 + X_2^2 - 4 = 0$$
+$$1 + 2X_1 + X_1^2 + 4 - 4X_2 + X_2^2 - 4 = 0$$
 which is linear in terms of $X_1$, $X_1^2$, $X_2$, $X_2^2$.
 
 ### Question 3
@@ -129,8 +129,8 @@ data <- data.frame(
   X2 = c(4, 2, 4, 4, 1, 3, 1),
   Y  = c(rep("Red", 4), rep("Blue", 3))
 )
-p <- ggplot(data, aes(x = X1, y = X2, color = Y)) + 
-  geom_point(size = 2) + 
+p <- ggplot(data, aes(x = X1, y = X2, color = Y)) +
+  geom_point(size = 2) +
   scale_colour_identity() +
   coord_cartesian(xlim = c(0.5, 4.5), ylim = c(0.5, 4.5))
 p
@@ -230,7 +230,7 @@ p + geom_abline(intercept = 1, slope = 0.5, lty = 2, col = "red")
 
 
 ``` r
-p + geom_point(data = data.frame(X1 = 1, X2 = 3, Y  = "Blue"), shape = 15, size = 4)
+p + geom_point(data = data.frame(X1 = 1, X2 = 3, Y = "Blue"), shape = 15, size = 4)
 ```
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-12-1.png" width="672" />
@@ -254,11 +254,12 @@ data <- data.frame(
   x = runif(100),
   y = runif(100)
 )
-score <- (2*data$x-0.5)^2 + (data$y)^2 - 0.5
+score <- (2 * data$x - 0.5)^2 + (data$y)^2 - 0.5
 data$class <- factor(ifelse(score > 0, "red", "blue"))
 
-p <- ggplot(data, aes(x = x, y = y, color = class)) + 
-  geom_point(size = 2) + scale_colour_identity()
+p <- ggplot(data, aes(x = x, y = y, color = class)) +
+  geom_point(size = 2) +
+  scale_colour_identity()
 p
 ```
 
@@ -349,7 +350,7 @@ train$y <- factor(as.numeric((train$x1^2 - train$x2^2 > 0)))
 
 
 ``` r
-p <- ggplot(train, aes(x = x1, y = x2, color = y)) + 
+p <- ggplot(train, aes(x = x1, y = x2, color = y)) +
   geom_point(size = 2)
 p
 ```
@@ -377,7 +378,7 @@ plot_model <- function(fit) {
   } else {
     train$p <- factor(as.numeric(predict(fit) > 0))
   }
-  ggplot(train, aes(x = x1, y = x2, color = p)) + 
+  ggplot(train, aes(x = x1, y = x2, color = p)) +
     geom_point(size = 2)
 }
 
@@ -471,19 +472,20 @@ data$y <- (data$class == "red") * 5 + rnorm(200)
 
 # Add barley separable points (these are simulated "noise" values)
 newdata <- data.frame(x = rnorm(30))
-newdata$y <- 1.5*newdata$x + 3 + rnorm(30, 0, 1)
-newdata$class = ifelse((1.5*newdata$x + 3) - newdata$y > 0, "blue", "red")
+newdata$y <- 1.5 * newdata$x + 3 + rnorm(30, 0, 1)
+newdata$class <- ifelse((1.5 * newdata$x + 3) - newdata$y > 0, "blue", "red")
 
 data <- rbind(data, newdata)
 
 # remove any that cause misclassification leaving data that is barley linearly
 # separable, but along an axis that is not y = 2.5 (which would be correct
 # for the "true" data.
-data <- data[!(data$class == "red") == ((1.5*data$x + 3 - data$y) > 0), ]
+data <- data[!(data$class == "red") == ((1.5 * data$x + 3 - data$y) > 0), ]
 data <- data[sample(seq_len(nrow(data)), 200), ]
 
-p <- ggplot(data, aes(x = x, y = y, color = class)) + 
-  geom_point(size = 2) + scale_colour_identity() + 
+p <- ggplot(data, aes(x = x, y = y, color = class)) +
+  geom_point(size = 2) +
+  scale_colour_identity() +
   geom_abline(intercept = 3, slope = 1.5, lty = 2)
 p
 ```
@@ -502,9 +504,9 @@ How many training errors are misclassified for each value of cost?
 costs <- 10^seq(-3, 5)
 
 sapply(costs, function(cost) {
-    fit <- svm(as.factor(class) ~ ., data = data, kernel = "linear", cost = cost)
-    pred <- predict(fit, data)
-    sum(pred != data$class)
+  fit <- svm(as.factor(class) ~ ., data = data, kernel = "linear", cost = cost)
+  pred <- predict(fit, data)
+  sum(pred != data$class)
 })
 ```
 
@@ -547,7 +549,7 @@ summary(out)
 
 ``` r
 data.frame(
-  cost = out$performances$cost, 
+  cost = out$performances$cost,
   misclass = out$performances$error * nrow(data)
 )
 ```
@@ -586,9 +588,9 @@ p + geom_point(data = test, pch = 21)
 
 ``` r
 (errs <- sapply(costs, function(cost) {
-    fit <- svm(as.factor(class) ~ ., data = data, kernel = "linear", cost = cost)
-    pred <- predict(fit, test)
-    sum(pred != test$class)
+  fit <- svm(as.factor(class) ~ ., data = data, kernel = "linear", cost = cost)
+  pred <- predict(fit, test)
+  sum(pred != test$class)
 }))
 ```
 
@@ -625,9 +627,9 @@ p + geom_point(data = test, pch = 21)
 
 ``` r
 test$prediction <- predict(fit, test)
-p <- ggplot(test, aes(x = x, y = y, color = class, shape = prediction == class)) + 
-  geom_point(size = 2) + 
-  scale_colour_identity() 
+p <- ggplot(test, aes(x = x, y = y, color = class, shape = prediction == class)) +
+  geom_point(size = 2) +
+  scale_colour_identity()
 p
 ```
 
@@ -666,8 +668,10 @@ set.seed(42)
 costs <- 10^seq(-4, 3, by = 0.5)
 results <- list()
 f <- high_mpg ~ displacement + horsepower + weight
-results$linear <- tune(svm, f, data = data, kernel = "linear", 
-  ranges = list(cost = costs))
+results$linear <- tune(svm, f,
+  data = data, kernel = "linear",
+  ranges = list(cost = costs)
+)
 summary(results$linear)
 ```
 
@@ -708,8 +712,10 @@ summary(results$linear)
 
 
 ``` r
-results$polynomial <- tune(svm, f, data = data, kernel = "polynomial", 
-  ranges = list(cost = costs, degree = 1:3))
+results$polynomial <- tune(svm, f,
+  data = data, kernel = "polynomial",
+  ranges = list(cost = costs, degree = 1:3)
+)
 summary(results$polynomial)
 ```
 
@@ -775,8 +781,10 @@ summary(results$polynomial)
 ```
 
 ``` r
-results$radial <- tune(svm, f, data = data, kernel = "radial", 
-  ranges = list(cost = costs, gamma = 10^(-2:1)))
+results$radial <- tune(svm, f,
+  data = data, kernel = "radial",
+  ranges = list(cost = costs, gamma = 10^(-2:1))
+)
 summary(results$radial)
 ```
 
@@ -918,19 +926,19 @@ table(predict(results$radial$best.model, data), data$high_mpg)
 ```
 
 ``` r
-plot(results$radial$best.model, data, horsepower~displacement)
+plot(results$radial$best.model, data, horsepower ~ displacement)
 ```
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 ``` r
-plot(results$radial$best.model, data, horsepower~weight)
+plot(results$radial$best.model, data, horsepower ~ weight)
 ```
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-29-2.png" width="672" />
 
 ``` r
-plot(results$radial$best.model, data, displacement~weight)
+plot(results$radial$best.model, data, displacement ~ weight)
 ```
 
 <img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-29-3.png" width="672" />
@@ -1007,8 +1015,10 @@ errs(fit)
 
 
 ``` r
-tuned <- tune(svm, Purchase ~ ., data = OJ[train, ], kernel = "linear", 
-  ranges = list(cost = 10^seq(-2, 1, length.out = 10)))
+tuned <- tune(svm, Purchase ~ .,
+  data = OJ[train, ], kernel = "linear",
+  ranges = list(cost = 10^seq(-2, 1, length.out = 10))
+)
 tuned$best.parameters
 ```
 
@@ -1064,8 +1074,10 @@ errs(tuned$best.model)
 
 
 ``` r
-tuned2 <- tune(svm, Purchase ~ ., data = OJ[train, ], kernel = "radial", 
-  ranges = list(cost = 10^seq(-2, 1, length.out = 10)))
+tuned2 <- tune(svm, Purchase ~ .,
+  data = OJ[train, ], kernel = "radial",
+  ranges = list(cost = 10^seq(-2, 1, length.out = 10))
+)
 tuned2$best.parameters
 ```
 
@@ -1088,8 +1100,10 @@ errs(tuned2$best.model)
 
 
 ``` r
-tuned3 <- tune(svm, Purchase ~ ., data = OJ[train, ], kernel = "polynomial", 
-  ranges = list(cost = 10^seq(-2, 1, length.out = 10)), degree = 2)
+tuned3 <- tune(svm, Purchase ~ .,
+  data = OJ[train, ], kernel = "polynomial",
+  ranges = list(cost = 10^seq(-2, 1, length.out = 10)), degree = 2
+)
 tuned3$best.parameters
 ```
 

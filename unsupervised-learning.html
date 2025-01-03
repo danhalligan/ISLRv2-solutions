@@ -600,7 +600,8 @@ observations are as follows.</p>
 <span id="cb775-3"><a href="unsupervised-learning.html#cb775-3" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">4</span>),</span>
 <span id="cb775-4"><a href="unsupervised-learning.html#cb775-4" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>)</span>
 <span id="cb775-5"><a href="unsupervised-learning.html#cb775-5" tabindex="-1"></a>)</span>
-<span id="cb775-6"><a href="unsupervised-learning.html#cb775-6" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<span id="cb775-6"><a href="unsupervised-learning.html#cb775-6" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2)) <span class="sc">+</span></span>
+<span id="cb775-7"><a href="unsupervised-learning.html#cb775-7" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -616,7 +617,7 @@ observation.</li>
 <li>Compute the centroid for each cluster.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="unsupervised-learning.html#cb777-1" tabindex="-1"></a>centroids <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="cf">function</span>(i) <span class="fu">colMeans</span>(d[d<span class="sc">$</span>cluster <span class="sc">==</span> i, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="unsupervised-learning.html#cb777-1" tabindex="-1"></a>centroids <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(i) <span class="fu">colMeans</span>(d[d<span class="sc">$</span>cluster <span class="sc">==</span> i, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span></code></pre></div>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Assign each observation to the centroid to which it is closest, in terms of
@@ -624,7 +625,7 @@ Euclidean distance. Report the cluster labels for each observation.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="unsupervised-learning.html#cb778-1" tabindex="-1"></a>dist <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb778-2"><a href="unsupervised-learning.html#cb778-2" tabindex="-1"></a>    <span class="fu">sqrt</span>((d<span class="sc">$</span>x1 <span class="sc">-</span> centroids[<span class="dv">1</span>, i])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (d<span class="sc">$</span>x2 <span class="sc">-</span> centroids[<span class="dv">2</span>, i])<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb778-2"><a href="unsupervised-learning.html#cb778-2" tabindex="-1"></a>  <span class="fu">sqrt</span>((d<span class="sc">$</span>x1 <span class="sc">-</span> centroids[<span class="dv">1</span>, i])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (d<span class="sc">$</span>x2 <span class="sc">-</span> centroids[<span class="dv">2</span>, i])<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb778-3"><a href="unsupervised-learning.html#cb778-3" tabindex="-1"></a>})</span>
 <span id="cb778-4"><a href="unsupervised-learning.html#cb778-4" tabindex="-1"></a>d<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
 <blockquote>
@@ -632,9 +633,9 @@ Euclidean distance. Report the cluster labels for each observation.</li>
 <li>Repeat (c) and (d) until the answers obtained stop changing.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="unsupervised-learning.html#cb779-1" tabindex="-1"></a>centroids <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="cf">function</span>(i) <span class="fu">colMeans</span>(d[d<span class="sc">$</span>cluster <span class="sc">==</span> i, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="unsupervised-learning.html#cb779-1" tabindex="-1"></a>centroids <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(i) <span class="fu">colMeans</span>(d[d<span class="sc">$</span>cluster <span class="sc">==</span> i, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span>
 <span id="cb779-2"><a href="unsupervised-learning.html#cb779-2" tabindex="-1"></a>dist <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb779-3"><a href="unsupervised-learning.html#cb779-3" tabindex="-1"></a>    <span class="fu">sqrt</span>((d<span class="sc">$</span>x1 <span class="sc">-</span> centroids[<span class="dv">1</span>, i])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (d<span class="sc">$</span>x2 <span class="sc">-</span> centroids[<span class="dv">2</span>, i])<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb779-3"><a href="unsupervised-learning.html#cb779-3" tabindex="-1"></a>  <span class="fu">sqrt</span>((d<span class="sc">$</span>x1 <span class="sc">-</span> centroids[<span class="dv">1</span>, i])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (d<span class="sc">$</span>x2 <span class="sc">-</span> centroids[<span class="dv">2</span>, i])<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb779-4"><a href="unsupervised-learning.html#cb779-4" tabindex="-1"></a>})</span>
 <span id="cb779-5"><a href="unsupervised-learning.html#cb779-5" tabindex="-1"></a>d<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
 <p>In this case, we get stable labels after the first iteration.</p>
@@ -644,7 +645,8 @@ Euclidean distance. Report the cluster labels for each observation.</li>
 labels obtained.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="unsupervised-learning.html#cb780-1" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2, <span class="at">color =</span> <span class="fu">factor</span>(cluster))) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="unsupervised-learning.html#cb780-1" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2, <span class="at">color =</span> <span class="fu">factor</span>(cluster))) <span class="sc">+</span></span>
+<span id="cb780-2"><a href="unsupervised-learning.html#cb780-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="question-4-10" class="section level3 hasAnchor" number="12.1.4">
@@ -728,7 +730,7 @@ Euclidean distance as dissimilarity measures for hierarchical clustering.
 It turns out that these two measures are almost equivalent: if each
 observation has been centered to have mean zero and standard deviation one,
 and if we let <span class="math inline">\(r_{ij}\)</span> denote the correlation between the <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th
-observations, then the quantity <span class="math inline">\(1 − r_{ij}\)</span> is proportional to the squared
+observations, then the quantity <span class="math inline">\(1 - r_{ij}\)</span> is proportional to the squared
 Euclidean distance between the ith and jth observations.</p>
 <p>On the <code>USArrests</code> data, show that this proportionality holds.</p>
 <p><em>Hint: The Euclidean distance can be calculated using the <code>dist()</code> function,</em>
@@ -894,9 +896,11 @@ score vectors.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="unsupervised-learning.html#cb799-1" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(data)</span>
-<span id="cb799-2"><a href="unsupervised-learning.html#cb799-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">Class =</span> classes, <span class="at">PC1 =</span> pca<span class="sc">$</span>x[, <span class="dv">1</span>], <span class="at">PC2 =</span> pca<span class="sc">$</span>x[, <span class="dv">2</span>]),</span>
-<span id="cb799-3"><a href="unsupervised-learning.html#cb799-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">col =</span> Class)) <span class="sc">+</span> </span>
-<span id="cb799-4"><a href="unsupervised-learning.html#cb799-4" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<span id="cb799-2"><a href="unsupervised-learning.html#cb799-2" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb799-3"><a href="unsupervised-learning.html#cb799-3" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Class =</span> classes, <span class="at">PC1 =</span> pca<span class="sc">$</span>x[, <span class="dv">1</span>], <span class="at">PC2 =</span> pca<span class="sc">$</span>x[, <span class="dv">2</span>]),</span>
+<span id="cb799-4"><a href="unsupervised-learning.html#cb799-4" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">col =</span> Class)</span>
+<span id="cb799-5"><a href="unsupervised-learning.html#cb799-5" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb799-6"><a href="unsupervised-learning.html#cb799-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">

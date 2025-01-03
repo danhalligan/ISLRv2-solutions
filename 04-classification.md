@@ -23,11 +23,10 @@ $$
 Letting $x = e^{\beta_0 + \beta_1X}$
 
 \begin{align}
-\frac{P(X)}{1-p(X)} &= \frac{\frac{x}{1 + x}}
-                            {1 - \frac{x}{1 + x}} \\
-              &= \frac{\frac{x}{1 + x}}
-                      {\frac{1}{1 + x}} \\
-              &= x
+\frac{P(X)}{1-p(X)} 
+  &= \frac{\frac{x}{1 + x}} {1 - \frac{x}{1 + x}} \\
+  &= \frac{\frac{x}{1 + x}} {\frac{1}{1 + x}} \\
+  &= x
 \end{align}
 
 ### Question 2
@@ -65,7 +64,7 @@ therefore, we can consider maximizing $\log(p_K(X))$
 
 $$
 \log(p_k(x)) = \log(\pi_k) - \frac{1}{2\sigma^2}(x - \mu_k)^2 -
-              \log\left(\sum_{l=1}^k \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)\right)
+               \log\left(\sum_{l=1}^k \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)\right)
 $$
 
 Remember that we are maximizing over $k$, and since the last term does not
@@ -265,7 +264,7 @@ when $X_1 = 40$ and $X_2 = 3.5$, $p(X) = 0.38$
 >    chance of getting an A in the class?
 
 We would like to solve for $X_1$ where $p(X) = 0.5$. Taking the first equation
-above, we need to solve $0 = −6 + 0.05X_1 + 3.5$, so $X_1 = 50$ hours.
+above, we need to solve $0 = -6 + 0.05X_1 + 3.5$, so $X_1 = 50$ hours.
 
 ### Question 7
 
@@ -306,7 +305,7 @@ p(D|v) &= \frac{p(v|D) p(D)}{p(v|D)p(D) + p(v|N)p(N)} \\
 
 
 ``` r
-exp(-0.5) * 0.8 / (exp(-0.5) * 0.8 + exp(-2/9) * 0.2)
+exp(-0.5) * 0.8 / (exp(-0.5) * 0.8 + exp(-2 / 9) * 0.2)
 ```
 
 ```
@@ -417,7 +416,7 @@ $$
 (\hat\alpha_{orange0} - \hat\alpha_{apple0}) + (\hat\alpha_{orange1} - \hat\alpha_{apple1})x
 $$
 
-> c. Suppose that in your model, $\hat\beta_0 = 2$ and $\hat\beta = −1$. What
+> c. Suppose that in your model, $\hat\beta_0 = 2$ and $\hat\beta = -1$. What
 >    are the coefficient estimates in your friend's model? Be as specific as
 >    possible.
 
@@ -428,7 +427,7 @@ We are unable to know the specific value of each parameter however.
 
 > d. Now suppose that you and your friend fit the same two models on a different
 >    data set. This time, your friend gets the coefficient estimates 
->    $\hat\alpha_{orange0} = 1.2$, $\hat\alpha_{orange1} = −2$, 
+>    $\hat\alpha_{orange0} = 1.2$, $\hat\alpha_{orange1} = -2$, 
 >    $\hat\alpha_{apple0} = 3$, $\hat\alpha_{apple1} = 0.6$. What are the 
 >    coefficient estimates in your model?
 
@@ -679,8 +678,8 @@ fit <- knn(
 ```
 ##       
 ## fit    Down Up
-##   Down   21 30
-##   Up     22 31
+##   Down   21 29
+##   Up     22 32
 ```
 
 ``` r
@@ -688,7 +687,7 @@ sum(diag(t)) / sum(t)
 ```
 
 ```
-## [1] 0.5
+## [1] 0.5096154
 ```
 
 > h. Repeat (d) using naive Bayes.
@@ -747,7 +746,7 @@ mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
 ```
 
 ``` r
-fit <- glm(Direction ~Lag4, data = Weekly[train, ], family = binomial)
+fit <- glm(Direction ~ Lag4, data = Weekly[train, ], family = binomial)
 pred <- predict(fit, Weekly[!train, ], type = "response") > 0.5
 mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
 ```
@@ -777,7 +776,7 @@ mean(ifelse(pred, "Up", "Down") == Weekly[!train, ]$Direction)
 ```
 
 ``` r
-fit <- lda(Direction ~ Lag1 + Lag2 + Lag3 + Lag4,data = Weekly[train, ])
+fit <- lda(Direction ~ Lag1 + Lag2 + Lag3 + Lag4, data = Weekly[train, ])
 pred <- predict(fit, Weekly[!train, ], type = "response")$class
 mean(pred == Weekly[!train, ]$Direction)
 ```
@@ -905,7 +904,7 @@ variables are colinear.
 
 ``` r
 set.seed(1)
-train <- sample(seq_len(nrow(x)), nrow(x) * 2/3)
+train <- sample(seq_len(nrow(x)), nrow(x) * 2 / 3)
 ```
 
 > d. Perform LDA on the training data in order to predict `mpg01` using the
@@ -1089,8 +1088,8 @@ Power3 <- function(x, a) {
 
 
 ``` r
-plot(1:10, Power3(1:10, 2), 
-  xlab = "x", 
+plot(1:10, Power3(1:10, 2),
+  xlab = "x",
   ylab = expression(paste("x"^"2")),
   log = "y"
 )
@@ -1111,7 +1110,7 @@ plot(1:10, Power3(1:10, 2),
 ``` r
 PlotPower <- function(x, a, log = "y") {
   plot(x, Power3(x, a),
-    xlab = "x", 
+    xlab = "x",
     ylab = substitute("x"^a, list(a = a)),
     log = log
   )
@@ -1135,11 +1134,11 @@ PlotPower(1:10, 3)
 
 ``` r
 x <- cbind(
-  ISLR2::Boston[, -1], 
+  ISLR2::Boston[, -1],
   data.frame("highcrim" = Boston$crim > median(Boston$crim))
 )
 set.seed(1)
-train <- sample(seq_len(nrow(x)), nrow(x) * 2/3)
+train <- sample(seq_len(nrow(x)), nrow(x) * 2 / 3)
 ```
 
 We can find the most associated variables by performing wilcox tests.
@@ -1177,8 +1176,8 @@ Let's look at univariate associations with `highcrim` (in the training data)
 x[train, ] |>
   pivot_longer(!highcrim) |>
   mutate(name = factor(name, levels = ord)) |>
-  ggplot(aes(highcrim, value)) + 
-  geom_boxplot() + 
+  ggplot(aes(highcrim, value)) +
+  geom_boxplot() +
   facet_wrap(~name, scale = "free")
 ```
 
@@ -1222,9 +1221,9 @@ res <- sapply(1:12, function(max) fit_models(1:max))
 res <- as_tibble(t(res))
 res$n_var <- 1:12
 pivot_longer(res, cols = !n_var) |>
-  ggplot(aes(n_var, value, col = name)) + 
-  geom_line() + 
-  xlab("Number of predictors") + 
+  ggplot(aes(n_var, value, col = name)) +
+  geom_line() +
+  xlab("Number of predictors") +
   ylab("Error rate")
 ```
 

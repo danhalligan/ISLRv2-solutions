@@ -172,7 +172,8 @@ d <- data.frame(
   x1 = c(1, 1, 0, 5, 6, 4),
   x2 = c(4, 3, 4, 1, 2, 0)
 )
-ggplot(d, aes(x = x1, y = x2)) + geom_point()
+ggplot(d, aes(x = x1, y = x2)) +
+  geom_point()
 ```
 
 <img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-6-1.png" width="672" />
@@ -191,7 +192,7 @@ d$cluster <- sample(c(1, 2), size = nrow(d), replace = TRUE)
 
 
 ``` r
-centroids <- sapply(c(1,2), function(i) colMeans(d[d$cluster == i, 1:2]))
+centroids <- sapply(c(1, 2), function(i) colMeans(d[d$cluster == i, 1:2]))
 ```
 
 > d. Assign each observation to the centroid to which it is closest, in terms of
@@ -200,7 +201,7 @@ centroids <- sapply(c(1,2), function(i) colMeans(d[d$cluster == i, 1:2]))
 
 ``` r
 dist <- sapply(1:2, function(i) {
-    sqrt((d$x1 - centroids[1, i])^2 + (d$x2 - centroids[2, i])^2)
+  sqrt((d$x1 - centroids[1, i])^2 + (d$x2 - centroids[2, i])^2)
 })
 d$cluster <- apply(dist, 1, which.min)
 ```
@@ -209,9 +210,9 @@ d$cluster <- apply(dist, 1, which.min)
 
 
 ``` r
-centroids <- sapply(c(1,2), function(i) colMeans(d[d$cluster == i, 1:2]))
+centroids <- sapply(c(1, 2), function(i) colMeans(d[d$cluster == i, 1:2]))
 dist <- sapply(1:2, function(i) {
-    sqrt((d$x1 - centroids[1, i])^2 + (d$x2 - centroids[2, i])^2)
+  sqrt((d$x1 - centroids[1, i])^2 + (d$x2 - centroids[2, i])^2)
 })
 d$cluster <- apply(dist, 1, which.min)
 ```
@@ -223,7 +224,8 @@ In this case, we get stable labels after the first iteration.
 
 
 ``` r
-ggplot(d, aes(x = x1, y = x2, color = factor(cluster))) + geom_point()
+ggplot(d, aes(x = x1, y = x2, color = factor(cluster))) +
+  geom_point()
 ```
 
 <img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-11-1.png" width="672" />
@@ -321,7 +323,7 @@ kmeans(dat, 2)$cluster
 > It turns out that these two measures are almost equivalent: if each
 > observation has been centered to have mean zero and standard deviation one,
 > and if we let $r_{ij}$ denote the correlation between the $i$th and $j$th
-> observations, then the quantity $1 − r_{ij}$ is proportional to the squared
+> observations, then the quantity $1 - r_{ij}$ is proportional to the squared
 > Euclidean distance between the ith and jth observations.
 >
 > On the `USArrests` data, show that this proportionality holds.
@@ -513,8 +515,10 @@ data[classes == "C", 5:30] <- data[classes == "C", 5:30] + 1
 
 ``` r
 pca <- prcomp(data)
-ggplot(data.frame(Class = classes, PC1 = pca$x[, 1], PC2 = pca$x[, 2]),
-    aes(x = PC1, y = PC2, col = Class)) + 
+ggplot(
+  data.frame(Class = classes, PC1 = pca$x[, 1], PC2 = pca$x[, 2]),
+  aes(x = PC1, y = PC2, col = Class)
+) +
   geom_point()
 ```
 
