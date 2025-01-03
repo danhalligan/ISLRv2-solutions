@@ -248,7 +248,7 @@ absolute error.
 
 > Consider the simple function $R(\beta) = sin(\beta) + \beta/10$.
 >
-> a. Draw a graph of this function over the range $\beta \in [−6, 6]$.
+> a. Draw a graph of this function over the range $\beta \in [-6, 6]$.
 
 ```{r}
 r <- function(x) sin(x) + x / 10

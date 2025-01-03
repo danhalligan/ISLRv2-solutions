@@ -302,7 +302,7 @@ college$Elite <- factor(ifelse(college$Top10perc > 50, "Yes", "No"))
 summary(college$Elite)
 plot(college$Outstate ~ college$Elite, xlab = "Elite", ylab = "Outstate")
 
-par(mfrow = c(2,2))
+par(mfrow = c(2, 2))
 for (n in c(5, 10, 20, 50)) {
   hist(college$Enroll, breaks = n, main = paste("n =", n), xlab = "Enroll")
 }
@@ -374,7 +374,7 @@ x[-(10:85), numeric] |>
 >    the relationships among the predictors. Comment on your findings.
 
 ```{r}
-pairs(x[, numeric], cex = 0.2) 
+pairs(x[, numeric], cex = 0.2)
 cor(x[, numeric]) |>
   kable()
 
@@ -425,8 +425,10 @@ library(tidyverse)
 ```
 
 ```{r}
-ggplot(Boston, aes(nox, rm)) + geom_point()
-ggplot(Boston, aes(ptratio, rm)) + geom_point()
+ggplot(Boston, aes(nox, rm)) +
+  geom_point()
+ggplot(Boston, aes(ptratio, rm)) +
+  geom_point()
 heatmap(cor(Boston, method = "spearman"), cexRow = 1.1, cexCol = 1.1)
 ```
 
@@ -440,12 +442,12 @@ Yes
 >    predictor.
 
 ```{r}
-Boston |> 
-  pivot_longer(cols = 1:13) |> 
-  filter(name %in% c("crim", "tax", "ptratio")) |> 
-  ggplot(aes(value)) + 
-    geom_histogram(bins = 20) + 
-    facet_wrap(~name, scales="free", ncol= 1)
+Boston |>
+  pivot_longer(cols = 1:13) |>
+  filter(name %in% c("crim", "tax", "ptratio")) |>
+  ggplot(aes(value)) +
+  geom_histogram(bins = 20) +
+  facet_wrap(~name, scales = "free", ncol = 1)
 ```
 
 Yes, particularly crime and tax rates.
@@ -496,9 +498,9 @@ Boston |>
   select(-c(crim, zn)) |>
   pivot_longer(!rm) |>
   mutate(">8 rooms" = rm > 8) |>
-  ggplot(aes(`>8 rooms`, value)) + 
-    geom_boxplot() + 
-    facet_wrap(~name, scales = "free")
+  ggplot(aes(`>8 rooms`, value)) +
+  geom_boxplot() +
+  facet_wrap(~name, scales = "free")
 ```
 
 Census tracts with big average properties (more than eight rooms per dwelling)
