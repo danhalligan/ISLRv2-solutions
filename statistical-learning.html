@@ -47,7 +47,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -63,8 +62,9 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -647,26 +647,26 @@ three predictors, and one qualitative response variable.</p>
 point, <span class="math inline">\(X_1 = X_2 = X_3 = 0\)</span>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="statistical-learning.html#cb1-1" aria-hidden="true"></a>dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb1-2"><a href="statistical-learning.html#cb1-2" aria-hidden="true"></a>  <span class="st">&quot;x1&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">-1</span>, <span class="dv">1</span>),</span>
-<span id="cb1-3"><a href="statistical-learning.html#cb1-3" aria-hidden="true"></a>  <span class="st">&quot;x2&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb1-4"><a href="statistical-learning.html#cb1-4" aria-hidden="true"></a>  <span class="st">&quot;x3&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb1-5"><a href="statistical-learning.html#cb1-5" aria-hidden="true"></a>  <span class="st">&quot;y&quot;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Red&quot;</span>)</span>
-<span id="cb1-6"><a href="statistical-learning.html#cb1-6" aria-hidden="true"></a>)</span>
-<span id="cb1-7"><a href="statistical-learning.html#cb1-7" aria-hidden="true"></a></span>
-<span id="cb1-8"><a href="statistical-learning.html#cb1-8" aria-hidden="true"></a><span class="co"># Euclidean distance between points and c(0, 0, 0)</span></span>
-<span id="cb1-9"><a href="statistical-learning.html#cb1-9" aria-hidden="true"></a>dist &lt;-<span class="st"> </span><span class="kw">sqrt</span>(dat[[<span class="st">&quot;x1&quot;</span>]]<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>dat[[<span class="st">&quot;x2&quot;</span>]]<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>dat[[<span class="st">&quot;x3&quot;</span>]]<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb1-10"><a href="statistical-learning.html#cb1-10" aria-hidden="true"></a><span class="kw">signif</span>(dist, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="statistical-learning.html#cb1-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-2"><a href="statistical-learning.html#cb1-2" tabindex="-1"></a>  <span class="st">&quot;x1&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb1-3"><a href="statistical-learning.html#cb1-3" tabindex="-1"></a>  <span class="st">&quot;x2&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb1-4"><a href="statistical-learning.html#cb1-4" tabindex="-1"></a>  <span class="st">&quot;x3&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb1-5"><a href="statistical-learning.html#cb1-5" tabindex="-1"></a>  <span class="st">&quot;y&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Red&quot;</span>, <span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Green&quot;</span>, <span class="st">&quot;Red&quot;</span>)</span>
+<span id="cb1-6"><a href="statistical-learning.html#cb1-6" tabindex="-1"></a>)</span>
+<span id="cb1-7"><a href="statistical-learning.html#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="statistical-learning.html#cb1-8" tabindex="-1"></a><span class="co"># Euclidean distance between points and c(0, 0, 0)</span></span>
+<span id="cb1-9"><a href="statistical-learning.html#cb1-9" tabindex="-1"></a>dist <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(dat[[<span class="st">&quot;x1&quot;</span>]]<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> dat[[<span class="st">&quot;x2&quot;</span>]]<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> dat[[<span class="st">&quot;x3&quot;</span>]]<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb1-10"><a href="statistical-learning.html#cb1-10" tabindex="-1"></a><span class="fu">signif</span>(dist, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 3.00 2.00 3.16 2.24 1.41 1.73</code></pre>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>What is our prediction with <span class="math inline">\(K = 1\)</span>? Why?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="statistical-learning.html#cb3-1" aria-hidden="true"></a>knn &lt;-<span class="st"> </span><span class="cf">function</span>(k) {</span>
-<span id="cb3-2"><a href="statistical-learning.html#cb3-2" aria-hidden="true"></a>  <span class="kw">names</span>(<span class="kw">which.max</span>(<span class="kw">table</span>(dat[[<span class="st">&quot;y&quot;</span>]][<span class="kw">order</span>(dist)[<span class="dv">1</span><span class="op">:</span>k]])))</span>
-<span id="cb3-3"><a href="statistical-learning.html#cb3-3" aria-hidden="true"></a>}</span>
-<span id="cb3-4"><a href="statistical-learning.html#cb3-4" aria-hidden="true"></a><span class="kw">knn</span>(<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="statistical-learning.html#cb3-1" tabindex="-1"></a>knn <span class="ot">&lt;-</span> <span class="cf">function</span>(k) {</span>
+<span id="cb3-2"><a href="statistical-learning.html#cb3-2" tabindex="-1"></a>  <span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(dat[[<span class="st">&quot;y&quot;</span>]][<span class="fu">order</span>(dist)[<span class="dv">1</span><span class="sc">:</span>k]])))</span>
+<span id="cb3-3"><a href="statistical-learning.html#cb3-3" tabindex="-1"></a>}</span>
+<span id="cb3-4"><a href="statistical-learning.html#cb3-4" tabindex="-1"></a><span class="fu">knn</span>(<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Green&quot;</code></pre>
 <p>Green (based on data point 5 only)</p>
 <blockquote>
@@ -674,7 +674,7 @@ point, <span class="math inline">\(X_1 = X_2 = X_3 = 0\)</span>.</li>
 <li>What is our prediction with <span class="math inline">\(K = 3\)</span>? Why?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="statistical-learning.html#cb5-1" aria-hidden="true"></a><span class="kw">knn</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="statistical-learning.html#cb5-1" tabindex="-1"></a><span class="fu">knn</span>(<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Red&quot;</code></pre>
 <p>Red (based on data points 2, 5, 6)</p>
 <blockquote>
@@ -722,30 +722,30 @@ data <code>college</code>. Make sure that you have the directory set to the corr
 location for the data.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="statistical-learning.html#cb7-1" aria-hidden="true"></a>college &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/College.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="statistical-learning.html#cb7-1" tabindex="-1"></a>college <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/College.csv&quot;</span>)</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li><p>Look at the data using the <code>View()</code> function. You should notice that the
 first column is just the name of each university. We don’t really want <code>R</code>
 to treat this as data. However, it may be handy to have these names for
 later. Try the following commands:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="statistical-learning.html#cb8-1" aria-hidden="true"></a><span class="kw">rownames</span>(college) &lt;-<span class="st"> </span>college[, <span class="dv">1</span>]</span>
-<span id="cb8-2"><a href="statistical-learning.html#cb8-2" aria-hidden="true"></a><span class="kw">View</span>(college)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="statistical-learning.html#cb8-1" tabindex="-1"></a><span class="fu">rownames</span>(college) <span class="ot">&lt;-</span> college[, <span class="dv">1</span>]</span>
+<span id="cb8-2"><a href="statistical-learning.html#cb8-2" tabindex="-1"></a><span class="fu">View</span>(college)</span></code></pre></div>
 <p>You should see that there is now a <code>row.names</code> column with the name of
 each university recorded. This means that R has given each row a name
 corresponding to the appropriate university. <code>R</code> will not try to perform
 calculations on the row names. However, we still need to eliminate the
 first column in the data where the names are stored. Try</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="statistical-learning.html#cb9-1" aria-hidden="true"></a>college &lt;-<span class="st"> </span>college [, <span class="dv">-1</span>]</span>
-<span id="cb9-2"><a href="statistical-learning.html#cb9-2" aria-hidden="true"></a><span class="kw">View</span>(college)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="statistical-learning.html#cb9-1" tabindex="-1"></a>college <span class="ot">&lt;-</span> college [, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb9-2"><a href="statistical-learning.html#cb9-2" tabindex="-1"></a><span class="fu">View</span>(college)</span></code></pre></div>
 <p>Now you should see that the first data column is <code>Private</code>. Note that
 another column labeled <code>row.names</code> now appears before the <code>Private</code> column.
 However, this is not a data column but rather the name that R is giving to
 each row.</p></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="statistical-learning.html#cb10-1" aria-hidden="true"></a><span class="kw">rownames</span>(college) &lt;-<span class="st"> </span>college[, <span class="dv">1</span>]</span>
-<span id="cb10-2"><a href="statistical-learning.html#cb10-2" aria-hidden="true"></a>college &lt;-<span class="st"> </span>college[, <span class="dv">-1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="statistical-learning.html#cb10-1" tabindex="-1"></a><span class="fu">rownames</span>(college) <span class="ot">&lt;-</span> college[, <span class="dv">1</span>]</span>
+<span id="cb10-2"><a href="statistical-learning.html#cb10-2" tabindex="-1"></a>college <span class="ot">&lt;-</span> college[, <span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li><ol style="list-style-type: lower-roman">
@@ -760,10 +760,10 @@ reference the first ten columns of a matrix A using <code>A[,1:10]</code>.</p></
 <code>Top10perc</code> variable. We are going to divide universities into two
 groups based on whether or not the proportion of students coming from
 the top 10% of their high school classes exceeds 50%.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="statistical-learning.html#cb11-1" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span>Elite &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;No&quot;</span>, <span class="kw">nrow</span>(college))</span>
-<span id="cb11-2"><a href="statistical-learning.html#cb11-2" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span>Elite[college<span class="op">$</span>Top10perc <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span>] &lt;-<span class="st"> &quot;Yes&quot;</span></span>
-<span id="cb11-3"><a href="statistical-learning.html#cb11-3" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span>Elite &lt;-<span class="st"> </span><span class="kw">as.factor</span>(Elite)</span>
-<span id="cb11-4"><a href="statistical-learning.html#cb11-4" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span>college &lt;-<span class="st"> </span><span class="kw">data.frame</span>(college, Elite)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="statistical-learning.html#cb11-1" tabindex="-1"></a><span class="sc">&gt;</span> Elite <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;No&quot;</span>, <span class="fu">nrow</span>(college))</span>
+<span id="cb11-2"><a href="statistical-learning.html#cb11-2" tabindex="-1"></a><span class="sc">&gt;</span> Elite[college<span class="sc">$</span>Top10perc <span class="sc">&gt;</span> <span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Yes&quot;</span></span>
+<span id="cb11-3"><a href="statistical-learning.html#cb11-3" tabindex="-1"></a><span class="sc">&gt;</span> Elite <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(Elite)</span>
+<span id="cb11-4"><a href="statistical-learning.html#cb11-4" tabindex="-1"></a><span class="sc">&gt;</span> college <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(college, Elite)</span></code></pre></div>
 <p>Use the <code>summary()</code> function to see how many elite universities there
 are. Now use the <code>plot()</code> function to produce side-by-side boxplots of
 <code>Outstate</code> versus <code>Elite</code>.</p></li>
@@ -778,7 +778,7 @@ discover.</p></li>
 </ol></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="statistical-learning.html#cb12-1" aria-hidden="true"></a><span class="kw">summary</span>(college)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="statistical-learning.html#cb12-1" tabindex="-1"></a><span class="fu">summary</span>(college)</span></code></pre></div>
 <pre><code>##    Private               Apps           Accept          Enroll    
 ##  Length:777         Min.   :   81   Min.   :   72   Min.   :  35  
 ##  Class :character   1st Qu.:  776   1st Qu.:  604   1st Qu.: 242  
@@ -814,23 +814,23 @@ discover.</p></li>
 ##  Mean   : 9660   Mean   : 65.46  
 ##  3rd Qu.:10830   3rd Qu.: 78.00  
 ##  Max.   :56233   Max.   :118.00</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="statistical-learning.html#cb14-1" aria-hidden="true"></a>college<span class="op">$</span>Private &lt;-<span class="st"> </span>college<span class="op">$</span>Private <span class="op">==</span><span class="st"> &quot;Yes&quot;</span></span>
-<span id="cb14-2"><a href="statistical-learning.html#cb14-2" aria-hidden="true"></a><span class="kw">pairs</span>(college[, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="statistical-learning.html#cb14-1" tabindex="-1"></a>college<span class="sc">$</span>Private <span class="ot">&lt;-</span> college<span class="sc">$</span>Private <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span></span>
+<span id="cb14-2"><a href="statistical-learning.html#cb14-2" tabindex="-1"></a><span class="fu">pairs</span>(college[, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">cex =</span> <span class="fl">0.2</span>)</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="statistical-learning.html#cb15-1" aria-hidden="true"></a><span class="kw">plot</span>(college<span class="op">$</span>Outstate <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(college<span class="op">$</span>Private), <span class="dt">xlab =</span> <span class="st">&quot;Private&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Outstate&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="statistical-learning.html#cb15-1" tabindex="-1"></a><span class="fu">plot</span>(college<span class="sc">$</span>Outstate <span class="sc">~</span> <span class="fu">factor</span>(college<span class="sc">$</span>Private), <span class="at">xlab =</span> <span class="st">&quot;Private&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Outstate&quot;</span>)</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="statistical-learning.html#cb16-1" aria-hidden="true"></a>college<span class="op">$</span>Elite &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">ifelse</span>(college<span class="op">$</span>Top10perc <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
-<span id="cb16-2"><a href="statistical-learning.html#cb16-2" aria-hidden="true"></a><span class="kw">summary</span>(college<span class="op">$</span>Elite)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="statistical-learning.html#cb16-1" tabindex="-1"></a>college<span class="sc">$</span>Elite <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(college<span class="sc">$</span>Top10perc <span class="sc">&gt;</span> <span class="dv">50</span>, <span class="st">&quot;Yes&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb16-2"><a href="statistical-learning.html#cb16-2" tabindex="-1"></a><span class="fu">summary</span>(college<span class="sc">$</span>Elite)</span></code></pre></div>
 <pre><code>##  No Yes 
 ## 699  78</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="statistical-learning.html#cb18-1" aria-hidden="true"></a><span class="kw">plot</span>(college<span class="op">$</span>Outstate <span class="op">~</span><span class="st"> </span>college<span class="op">$</span>Elite, <span class="dt">xlab =</span> <span class="st">&quot;Elite&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Outstate&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="statistical-learning.html#cb18-1" tabindex="-1"></a><span class="fu">plot</span>(college<span class="sc">$</span>Outstate <span class="sc">~</span> college<span class="sc">$</span>Elite, <span class="at">xlab =</span> <span class="st">&quot;Elite&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Outstate&quot;</span>)</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="statistical-learning.html#cb19-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb19-2"><a href="statistical-learning.html#cb19-2" aria-hidden="true"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">50</span>)) {</span>
-<span id="cb19-3"><a href="statistical-learning.html#cb19-3" aria-hidden="true"></a>  <span class="kw">hist</span>(college<span class="op">$</span>Enroll, <span class="dt">breaks =</span> n, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;n =&quot;</span>, n), <span class="dt">xlab =</span> <span class="st">&quot;Enroll&quot;</span>)</span>
-<span id="cb19-4"><a href="statistical-learning.html#cb19-4" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="statistical-learning.html#cb19-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb19-2"><a href="statistical-learning.html#cb19-2" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">50</span>)) {</span>
+<span id="cb19-3"><a href="statistical-learning.html#cb19-3" tabindex="-1"></a>  <span class="fu">hist</span>(college<span class="sc">$</span>Enroll, <span class="at">breaks =</span> n, <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">&quot;n =&quot;</span>, n), <span class="at">xlab =</span> <span class="st">&quot;Enroll&quot;</span>)</span>
+<span id="cb19-4"><a href="statistical-learning.html#cb19-4" tabindex="-1"></a>}</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-4.png" width="672" /></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="statistical-learning.html#cb20-1" aria-hidden="true"></a><span class="kw">chisq.test</span>(college<span class="op">$</span>Private, college<span class="op">$</span>Elite)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="statistical-learning.html#cb20-1" tabindex="-1"></a><span class="fu">chisq.test</span>(college<span class="sc">$</span>Private, college<span class="sc">$</span>Elite)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
 ## 
@@ -844,20 +844,20 @@ discover.</p></li>
 <p>This exercise involves the Auto data set studied in the lab. Make sure
 that the missing values have been removed from the data.</p>
 </blockquote>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="statistical-learning.html#cb22-1" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/Auto.data&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">na.strings =</span> <span class="st">&quot;?&quot;</span>)</span>
-<span id="cb22-2"><a href="statistical-learning.html#cb22-2" aria-hidden="true"></a>x &lt;-<span class="st"> </span><span class="kw">na.omit</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="statistical-learning.html#cb22-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;data/Auto.data&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">na.strings =</span> <span class="st">&quot;?&quot;</span>)</span>
+<span id="cb22-2"><a href="statistical-learning.html#cb22-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(x)</span></code></pre></div>
 <blockquote>
 <ol style="list-style-type: lower-alpha">
 <li>Which of the predictors are quantitative, and which are qualitative?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="statistical-learning.html#cb23-1" aria-hidden="true"></a><span class="kw">sapply</span>(x, class)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="statistical-learning.html#cb23-1" tabindex="-1"></a><span class="fu">sapply</span>(x, class)</span></code></pre></div>
 <pre><code>##          mpg    cylinders displacement   horsepower       weight acceleration 
 ##    &quot;numeric&quot;    &quot;integer&quot;    &quot;numeric&quot;    &quot;numeric&quot;    &quot;numeric&quot;    &quot;numeric&quot; 
 ##         year       origin         name 
 ##    &quot;integer&quot;    &quot;integer&quot;  &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="statistical-learning.html#cb25-1" aria-hidden="true"></a>numeric &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">sapply</span>(x, class) <span class="op">==</span><span class="st"> &quot;numeric&quot;</span>)</span>
-<span id="cb25-2"><a href="statistical-learning.html#cb25-2" aria-hidden="true"></a><span class="kw">names</span>(numeric)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="statistical-learning.html#cb25-1" tabindex="-1"></a>numeric <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">sapply</span>(x, class) <span class="sc">==</span> <span class="st">&quot;numeric&quot;</span>)</span>
+<span id="cb25-2"><a href="statistical-learning.html#cb25-2" tabindex="-1"></a><span class="fu">names</span>(numeric)</span></code></pre></div>
 <pre><code>## [1] &quot;mpg&quot;          &quot;displacement&quot; &quot;horsepower&quot;   &quot;weight&quot;       &quot;acceleration&quot;</code></pre>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -865,7 +865,7 @@ that the missing values have been removed from the data.</p>
 the <code>range()</code> function.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="statistical-learning.html#cb27-1" aria-hidden="true"></a><span class="kw">sapply</span>(x[, numeric], <span class="cf">function</span>(x) <span class="kw">diff</span>(<span class="kw">range</span>(x)))</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="statistical-learning.html#cb27-1" tabindex="-1"></a><span class="fu">sapply</span>(x[, numeric], <span class="cf">function</span>(x) <span class="fu">diff</span>(<span class="fu">range</span>(x)))</span></code></pre></div>
 <pre><code>##          mpg displacement   horsepower       weight acceleration 
 ##         37.6        387.0        184.0       3527.0         16.8</code></pre>
 <blockquote>
@@ -873,7 +873,7 @@ the <code>range()</code> function.</li>
 <li>What is the mean and standard deviation of each quantitative predictor?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="statistical-learning.html#cb29-1" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="statistical-learning.html#cb29-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
@@ -884,16 +884,16 @@ the <code>range()</code> function.</li>
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="statistical-learning.html#cb31-1" aria-hidden="true"></a><span class="kw">library</span>(knitr)</span>
-<span id="cb31-2"><a href="statistical-learning.html#cb31-2" aria-hidden="true"></a></span>
-<span id="cb31-3"><a href="statistical-learning.html#cb31-3" aria-hidden="true"></a>x[, numeric] <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb31-4"><a href="statistical-learning.html#cb31-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">everything</span>()) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb31-5"><a href="statistical-learning.html#cb31-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(name) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb31-6"><a href="statistical-learning.html#cb31-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">summarise</span>(</span>
-<span id="cb31-7"><a href="statistical-learning.html#cb31-7" aria-hidden="true"></a>    <span class="dt">Mean =</span> <span class="kw">mean</span>(value),</span>
-<span id="cb31-8"><a href="statistical-learning.html#cb31-8" aria-hidden="true"></a>    <span class="dt">SD =</span> <span class="kw">sd</span>(value)</span>
-<span id="cb31-9"><a href="statistical-learning.html#cb31-9" aria-hidden="true"></a>  ) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb31-10"><a href="statistical-learning.html#cb31-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="statistical-learning.html#cb31-1" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb31-2"><a href="statistical-learning.html#cb31-2" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="statistical-learning.html#cb31-3" tabindex="-1"></a>x[, numeric] <span class="sc">|&gt;</span></span>
+<span id="cb31-4"><a href="statistical-learning.html#cb31-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb31-5"><a href="statistical-learning.html#cb31-5" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">|&gt;</span></span>
+<span id="cb31-6"><a href="statistical-learning.html#cb31-6" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb31-7"><a href="statistical-learning.html#cb31-7" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb31-8"><a href="statistical-learning.html#cb31-8" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(value)</span>
+<span id="cb31-9"><a href="statistical-learning.html#cb31-9" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb31-10"><a href="statistical-learning.html#cb31-10" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -937,15 +937,15 @@ standard deviation of each predictor in the subset of the data that
 remains?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="statistical-learning.html#cb32-1" aria-hidden="true"></a>x[<span class="op">-</span>(<span class="dv">10</span><span class="op">:</span><span class="dv">85</span>), numeric] <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb32-2"><a href="statistical-learning.html#cb32-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="kw">everything</span>()) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb32-3"><a href="statistical-learning.html#cb32-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">group_by</span>(name) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb32-4"><a href="statistical-learning.html#cb32-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">summarise</span>(</span>
-<span id="cb32-5"><a href="statistical-learning.html#cb32-5" aria-hidden="true"></a>    <span class="dt">Range =</span> <span class="kw">diff</span>(<span class="kw">range</span>(value)),</span>
-<span id="cb32-6"><a href="statistical-learning.html#cb32-6" aria-hidden="true"></a>    <span class="dt">Mean =</span> <span class="kw">mean</span>(value),</span>
-<span id="cb32-7"><a href="statistical-learning.html#cb32-7" aria-hidden="true"></a>    <span class="dt">SD =</span> <span class="kw">sd</span>(value)</span>
-<span id="cb32-8"><a href="statistical-learning.html#cb32-8" aria-hidden="true"></a>  ) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb32-9"><a href="statistical-learning.html#cb32-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="statistical-learning.html#cb32-1" tabindex="-1"></a>x[<span class="sc">-</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">85</span>), numeric] <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="statistical-learning.html#cb32-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="statistical-learning.html#cb32-3" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">|&gt;</span></span>
+<span id="cb32-4"><a href="statistical-learning.html#cb32-4" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb32-5"><a href="statistical-learning.html#cb32-5" tabindex="-1"></a>    <span class="at">Range =</span> <span class="fu">diff</span>(<span class="fu">range</span>(value)),</span>
+<span id="cb32-6"><a href="statistical-learning.html#cb32-6" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb32-7"><a href="statistical-learning.html#cb32-7" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(value)</span>
+<span id="cb32-8"><a href="statistical-learning.html#cb32-8" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb32-9"><a href="statistical-learning.html#cb32-9" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -995,11 +995,19 @@ scatterplots or other tools of your choice. Create some plots highlighting
 the relationships among the predictors. Comment on your findings.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="statistical-learning.html#cb33-1" aria-hidden="true"></a><span class="kw">pairs</span>(x[, numeric], <span class="dt">cex =</span> <span class="fl">0.2</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="statistical-learning.html#cb33-1" tabindex="-1"></a><span class="fu">pairs</span>(x[, numeric], <span class="at">cex =</span> <span class="fl">0.2</span>) </span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="statistical-learning.html#cb34-1" aria-hidden="true"></a><span class="kw">cor</span>(x[, numeric]) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb34-2"><a href="statistical-learning.html#cb34-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="statistical-learning.html#cb34-1" tabindex="-1"></a><span class="fu">cor</span>(x[, numeric]) <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="statistical-learning.html#cb34-2" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
+<colgroup>
+<col width="18%" />
+<col width="15%" />
+<col width="18%" />
+<col width="15%" />
+<col width="15%" />
+<col width="18%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -1053,7 +1061,7 @@ the relationships among the predictors. Comment on your findings.</li>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="statistical-learning.html#cb35-1" aria-hidden="true"></a><span class="kw">heatmap</span>(<span class="kw">cor</span>(x[, numeric]), <span class="dt">cexRow =</span> <span class="fl">1.1</span>, <span class="dt">cexCol =</span> <span class="fl">1.1</span>, <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="statistical-learning.html#cb35-1" tabindex="-1"></a><span class="fu">heatmap</span>(<span class="fu">cor</span>(x[, numeric]), <span class="at">cexRow =</span> <span class="fl">1.1</span>, <span class="at">cexCol =</span> <span class="fl">1.1</span>, <span class="at">margins =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
 <p>Many of the variables appear to be highly (positively or negatively) correlated
 with some relationships being non-linear.</p>
@@ -1074,17 +1082,17 @@ displacement are highly related.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>To begin, load in the <code>Boston</code> data set. The <code>Boston</code> data set is part of
 the <code>ISLR2</code> library in R.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="statistical-learning.html#cb36-1" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(ISLR2)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="statistical-learning.html#cb36-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">library</span>(ISLR2)</span></code></pre></div>
 <p>Now the data set is contained in the object <code>Boston</code>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="statistical-learning.html#cb37-1" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span>Boston</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="statistical-learning.html#cb37-1" tabindex="-1"></a><span class="sc">&gt;</span> Boston</span></code></pre></div>
 <p>Read about the data set:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="statistical-learning.html#cb38-1" aria-hidden="true"></a><span class="op">&gt;</span><span class="st"> </span>?Boston</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="statistical-learning.html#cb38-1" tabindex="-1"></a><span class="sc">&gt;</span> ?Boston</span></code></pre></div>
 <p>How many rows are in this data set? How many columns? What do the rows and
 columns represent?</p></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="statistical-learning.html#cb39-1" aria-hidden="true"></a><span class="kw">library</span>(ISLR2)</span>
-<span id="cb39-2"><a href="statistical-learning.html#cb39-2" aria-hidden="true"></a><span class="kw">dim</span>(Boston)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="statistical-learning.html#cb39-1" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb39-2"><a href="statistical-learning.html#cb39-2" tabindex="-1"></a><span class="fu">dim</span>(Boston)</span></code></pre></div>
 <pre><code>## [1] 506  13</code></pre>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -1092,13 +1100,13 @@ columns represent?</p></li>
 set. Describe your findings.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="statistical-learning.html#cb41-1" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb41-2"><a href="statistical-learning.html#cb41-2" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="statistical-learning.html#cb42-1" aria-hidden="true"></a><span class="kw">ggplot</span>(Boston, <span class="kw">aes</span>(nox, rm)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="statistical-learning.html#cb41-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb41-2"><a href="statistical-learning.html#cb41-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="statistical-learning.html#cb42-1" tabindex="-1"></a><span class="fu">ggplot</span>(Boston, <span class="fu">aes</span>(nox, rm)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="statistical-learning.html#cb43-1" aria-hidden="true"></a><span class="kw">ggplot</span>(Boston, <span class="kw">aes</span>(ptratio, rm)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="statistical-learning.html#cb43-1" tabindex="-1"></a><span class="fu">ggplot</span>(Boston, <span class="fu">aes</span>(ptratio, rm)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="statistical-learning.html#cb44-1" aria-hidden="true"></a><span class="kw">heatmap</span>(<span class="kw">cor</span>(Boston, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>), <span class="dt">cexRow =</span> <span class="fl">1.1</span>, <span class="dt">cexCol =</span> <span class="fl">1.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="statistical-learning.html#cb44-1" tabindex="-1"></a><span class="fu">heatmap</span>(<span class="fu">cor</span>(Boston, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>), <span class="at">cexRow =</span> <span class="fl">1.1</span>, <span class="at">cexCol =</span> <span class="fl">1.1</span>)</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-3.png" width="672" /></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -1114,12 +1122,12 @@ crime rates? Tax rates? Pupil-teacher ratios? Comment on the range of each
 predictor.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="statistical-learning.html#cb45-1" aria-hidden="true"></a>Boston <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span></span>
-<span id="cb45-2"><a href="statistical-learning.html#cb45-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">13</span>) <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span></span>
-<span id="cb45-3"><a href="statistical-learning.html#cb45-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">filter</span>(name <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;crim&quot;</span>, <span class="st">&quot;tax&quot;</span>, <span class="st">&quot;ptratio&quot;</span>)) <span class="op">|</span><span class="er">&gt;</span><span class="st"> </span></span>
-<span id="cb45-4"><a href="statistical-learning.html#cb45-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(value)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb45-5"><a href="statistical-learning.html#cb45-5" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">20</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb45-6"><a href="statistical-learning.html#cb45-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>name, <span class="dt">scales=</span><span class="st">&quot;free&quot;</span>, <span class="dt">ncol=</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="statistical-learning.html#cb45-1" tabindex="-1"></a>Boston <span class="sc">|&gt;</span> </span>
+<span id="cb45-2"><a href="statistical-learning.html#cb45-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">13</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb45-3"><a href="statistical-learning.html#cb45-3" tabindex="-1"></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;crim&quot;</span>, <span class="st">&quot;tax&quot;</span>, <span class="st">&quot;ptratio&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb45-4"><a href="statistical-learning.html#cb45-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value)) <span class="sc">+</span> </span>
+<span id="cb45-5"><a href="statistical-learning.html#cb45-5" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span> </span>
+<span id="cb45-6"><a href="statistical-learning.html#cb45-6" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>name, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>, <span class="at">ncol=</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Yes, particularly crime and tax rates.</p>
 <blockquote>
@@ -1127,14 +1135,14 @@ predictor.</li>
 <li>How many of the census tracts in this data set bound the Charles river?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="statistical-learning.html#cb46-1" aria-hidden="true"></a><span class="kw">sum</span>(Boston<span class="op">$</span>chas)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="statistical-learning.html#cb46-1" tabindex="-1"></a><span class="fu">sum</span>(Boston<span class="sc">$</span>chas)</span></code></pre></div>
 <pre><code>## [1] 35</code></pre>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">
 <li>What is the median pupil-teacher ratio among the towns in this data set?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="statistical-learning.html#cb48-1" aria-hidden="true"></a><span class="kw">median</span>(Boston<span class="op">$</span>ptratio)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="statistical-learning.html#cb48-1" tabindex="-1"></a><span class="fu">median</span>(Boston<span class="sc">$</span>ptratio)</span></code></pre></div>
 <pre><code>## [1] 19.05</code></pre>
 <blockquote>
 <ol start="7" style="list-style-type: lower-alpha">
@@ -1144,9 +1152,25 @@ and how do those values compare to the overall ranges for those predictors?
 Comment on your findings.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="statistical-learning.html#cb50-1" aria-hidden="true"></a>Boston[Boston<span class="op">$</span>medv <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(Boston<span class="op">$</span>medv), ] <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb50-2"><a href="statistical-learning.html#cb50-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">kable</span>()</span></code></pre></div>
-<table>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="statistical-learning.html#cb50-1" tabindex="-1"></a>Boston[Boston<span class="sc">$</span>medv <span class="sc">==</span> <span class="fu">min</span>(Boston<span class="sc">$</span>medv), ] <span class="sc">|&gt;</span></span>
+<span id="cb50-2"><a href="statistical-learning.html#cb50-2" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="5%" />
+<col width="10%" />
+<col width="3%" />
+<col width="7%" />
+<col width="6%" />
+<col width="7%" />
+<col width="7%" />
+<col width="5%" />
+<col width="9%" />
+<col width="5%" />
+<col width="5%" />
+<col width="10%" />
+<col width="7%" />
+<col width="6%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -1200,8 +1224,8 @@ Comment on your findings.</li>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="statistical-learning.html#cb51-1" aria-hidden="true"></a><span class="kw">sapply</span>(Boston, quantile) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb51-2"><a href="statistical-learning.html#cb51-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="statistical-learning.html#cb51-1" tabindex="-1"></a><span class="fu">sapply</span>(Boston, quantile) <span class="sc">|&gt;</span></span>
+<span id="cb51-2"><a href="statistical-learning.html#cb51-2" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <colgroup>
 <col width="5%" />
@@ -1327,23 +1351,23 @@ rooms per dwelling? More than eight rooms per dwelling? Comment on the
 census tracts that average more than eight rooms per dwelling.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="statistical-learning.html#cb52-1" aria-hidden="true"></a><span class="kw">sum</span>(Boston<span class="op">$</span>rm <span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="statistical-learning.html#cb52-1" tabindex="-1"></a><span class="fu">sum</span>(Boston<span class="sc">$</span>rm <span class="sc">&gt;</span> <span class="dv">7</span>)</span></code></pre></div>
 <pre><code>## [1] 64</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="statistical-learning.html#cb54-1" aria-hidden="true"></a><span class="kw">sum</span>(Boston<span class="op">$</span>rm <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="statistical-learning.html#cb54-1" tabindex="-1"></a><span class="fu">sum</span>(Boston<span class="sc">$</span>rm <span class="sc">&gt;</span> <span class="dv">8</span>)</span></code></pre></div>
 <pre><code>## [1] 13</code></pre>
 <p>Let’s compare median statistics for those census tracts with more than eight
 rooms per dwelling on average, with the statistics for those with fewer.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="statistical-learning.html#cb56-1" aria-hidden="true"></a>Boston <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb56-2"><a href="statistical-learning.html#cb56-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
-<span id="cb56-3"><a href="statistical-learning.html#cb56-3" aria-hidden="true"></a>    <span class="st">`</span><span class="dt">log(crim)</span><span class="st">`</span> =<span class="st"> </span><span class="kw">log</span>(crim),</span>
-<span id="cb56-4"><a href="statistical-learning.html#cb56-4" aria-hidden="true"></a>    <span class="st">`</span><span class="dt">log(zn)</span><span class="st">`</span> =<span class="st"> </span><span class="kw">log</span>(zn)</span>
-<span id="cb56-5"><a href="statistical-learning.html#cb56-5" aria-hidden="true"></a>  ) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb56-6"><a href="statistical-learning.html#cb56-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(crim, zn)) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb56-7"><a href="statistical-learning.html#cb56-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="op">!</span>rm) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb56-8"><a href="statistical-learning.html#cb56-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">&quot;&gt;8 rooms&quot;</span> =<span class="st"> </span>rm <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>) <span class="op">|</span><span class="er">&gt;</span></span>
-<span id="cb56-9"><a href="statistical-learning.html#cb56-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="st">`</span><span class="dt">&gt;8 rooms</span><span class="st">`</span>, value)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb56-10"><a href="statistical-learning.html#cb56-10" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb56-11"><a href="statistical-learning.html#cb56-11" aria-hidden="true"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>name, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="statistical-learning.html#cb56-1" tabindex="-1"></a>Boston <span class="sc">|&gt;</span></span>
+<span id="cb56-2"><a href="statistical-learning.html#cb56-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb56-3"><a href="statistical-learning.html#cb56-3" tabindex="-1"></a>    <span class="st">`</span><span class="at">log(crim)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">log</span>(crim),</span>
+<span id="cb56-4"><a href="statistical-learning.html#cb56-4" tabindex="-1"></a>    <span class="st">`</span><span class="at">log(zn)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">log</span>(zn)</span>
+<span id="cb56-5"><a href="statistical-learning.html#cb56-5" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb56-6"><a href="statistical-learning.html#cb56-6" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(crim, zn)) <span class="sc">|&gt;</span></span>
+<span id="cb56-7"><a href="statistical-learning.html#cb56-7" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>rm) <span class="sc">|&gt;</span></span>
+<span id="cb56-8"><a href="statistical-learning.html#cb56-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;&gt;8 rooms&quot;</span> <span class="ot">=</span> rm <span class="sc">&gt;</span> <span class="dv">8</span>) <span class="sc">|&gt;</span></span>
+<span id="cb56-9"><a href="statistical-learning.html#cb56-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="st">`</span><span class="at">&gt;8 rooms</span><span class="st">`</span>, value)) <span class="sc">+</span> </span>
+<span id="cb56-10"><a href="statistical-learning.html#cb56-10" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb56-11"><a href="statistical-learning.html#cb56-11" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>name, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: Removed 372 rows containing non-finite outside the scale range
 ## (`stat_boxplot()`).</code></pre>
 <p><img src="02-statistical-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
