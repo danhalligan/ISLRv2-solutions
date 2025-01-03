@@ -25,13 +25,15 @@ tree <- ape::read.tree(text = "(((R1:1,R2:1)N1:2,R3:4)N2:2,(R4:2,(R5:1,R6:1)R3:2
 tree$node.label <- c("Age < 40", "Weight < 100", "Weight < 70", "Age < 60", "Weight < 80")
 
 ggtree(tree, ladderize = FALSE) + scale_x_reverse() + coord_flip() +
-  geom_tiplab(vjust = 2, hjust = 0.5) + 
-  geom_text2(aes(label=label, subset=!isTip), hjust = -0.1, vjust = -1)
+  geom_tiplab(vjust = 2, hjust = 0.5) +
+  geom_text2(aes(label = label, subset = !isTip), hjust = -0.1, vjust = -1)
 ```
 
 ```{r}
-plot(NULL, xlab="Age (years)", ylab="Weight (kg)", 
-  xlim = c(0, 100), ylim = c(40, 160), xaxs = "i", yaxs = "i")
+plot(NULL,
+  xlab = "Age (years)", ylab = "Weight (kg)",
+  xlim = c(0, 100), ylim = c(40, 160), xaxs = "i", yaxs = "i"
+)
 abline(v = 40, col = "red", lty = 2)
 lines(c(0, 40), c(100, 100), col = "blue", lty = 2)
 lines(c(0, 40), c(70, 70), col = "blue", lty = 2)
@@ -39,8 +41,8 @@ abline(v = 60, col = "red", lty = 2)
 lines(c(60, 100), c(80, 80), col = "blue", lty = 2)
 
 text(
-  c(20, 20, 20, 50, 80, 80), 
-  c(55, 85, 130, 100, 60, 120), 
+  c(20, 20, 20, 50, 80, 80),
+  c(55, 85, 130, 100, 60, 120),
   labels = c("R1", "R2", "R3", "R4", "R5", "R6")
 )
 ```
@@ -92,15 +94,15 @@ $$E = 1 - \max_k(\hat{p}_{mk})$$
 # Function definitions are for when there's two classes only
 p <- seq(0, 1, length.out = 100)
 data.frame(
-    x = p,
-    "Gini index" = p * (1 - p) * 2,
-    "Entropy" = -(p * log(p) + (1 - p) * log(1 - p)),
-    "Classification error" = 1 - pmax(p, 1 - p),
-    check.names = FALSE
-  ) |>
+  x = p,
+  "Gini index" = p * (1 - p) * 2,
+  "Entropy" = -(p * log(p) + (1 - p) * log(1 - p)),
+  "Classification error" = 1 - pmax(p, 1 - p),
+  check.names = FALSE
+) |>
   pivot_longer(!x) |>
-  ggplot(aes(x = x, y = value, color = name)) + 
-    geom_line(na.rm = TRUE)
+  ggplot(aes(x = x, y = value, color = name)) +
+  geom_line(na.rm = TRUE)
 ```
 
 ### Question 4
@@ -116,8 +118,8 @@ tree <- ape::read.tree(text = "(((3:1.5,(10:1,0:1)A:1)B:1,15:2)C:1,5:2)D;")
 tree$node.label <- c("X1 < 1", "X2 < 1", "X1 < 0", "X2 < 0")
 
 ggtree(tree, ladderize = FALSE) + scale_x_reverse() + coord_flip() +
-  geom_tiplab(vjust = 2, hjust = 0.5) + 
-  geom_text2(aes(label=label, subset=!isTip), hjust = -0.1, vjust = -1)
+  geom_tiplab(vjust = 2, hjust = 0.5) +
+  geom_text2(aes(label = label, subset = !isTip), hjust = -0.1, vjust = -1)
 ```
 
 > b. Create a diagram similar to the left-hand panel of Figure 8.12, using the
@@ -126,14 +128,14 @@ ggtree(tree, ladderize = FALSE) + scale_x_reverse() + coord_flip() +
 >    mean for each region.
 
 ```{r}
-plot(NULL, xlab="X1", ylab="X2", xlim = c(-1, 2), ylim = c(0, 3), xaxs = "i", yaxs = "i")
+plot(NULL, xlab = "X1", ylab = "X2", xlim = c(-1, 2), ylim = c(0, 3), xaxs = "i", yaxs = "i")
 abline(h = 1, col = "red", lty = 2)
 lines(c(1, 1), c(0, 1), col = "blue", lty = 2)
 lines(c(-1, 2), c(2, 2), col = "red", lty = 2)
 lines(c(0, 0), c(1, 2), col = "blue", lty = 2)
 text(
-  c(0, 1.5, -0.5, 1, 0.5), 
-  c(0.5, 0.5, 1.5, 1.5, 2.5), 
+  c(0, 1.5, -0.5, 1, 0.5),
+  c(0.5, 0.5, 1.5, 1.5, 2.5),
   labels = c("-1.80", "0.63", "-1.06", "0.21", "2.49")
 )
 ```
@@ -187,11 +189,11 @@ train <- sample(c(TRUE, FALSE), nrow(Boston), replace = TRUE)
 
 rf_err <- function(mtry) {
   randomForest(
-    Boston[train, -13], 
-    y = Boston[train, 13], 
-    xtest = Boston[!train, -13], 
-    ytest = Boston[!train, 13], 
-    mtry = mtry, 
+    Boston[train, -13],
+    y = Boston[train, 13],
+    xtest = Boston[!train, -13],
+    ytest = Boston[!train, 13],
+    mtry = mtry,
     ntree = 500
   )$test$mse
 }
@@ -200,12 +202,12 @@ names(res) <- c(1, 2, 3, 5, 7, 10, 12)
 data.frame(res, check.names = FALSE) |>
   mutate(n = 1:500) |>
   pivot_longer(!n) |>
-  ggplot(aes(x = n, y = value, color = name)) + 
-    geom_line(na.rm = TRUE) + 
-    xlab("Number of trees") + 
-    ylab("Error") +
-    scale_y_log10() +
-    scale_color_discrete(name = "No. variables at\neach split")
+  ggplot(aes(x = n, y = value, color = name)) +
+  geom_line(na.rm = TRUE) +
+  xlab("Number of trees") +
+  ylab("Error") +
+  scale_y_log10() +
+  scale_color_discrete(name = "No. variables at\neach split")
 ```
 
 ### Question 8
@@ -267,8 +269,10 @@ carseats_mse(ptr)
 ```{r}
 # Here we can use random Forest with mtry = 10 = p (the number of predictor
 # variables) to perform bagging
-bagged <- randomForest(Sales ~ ., data = Carseats[train, ], mtry = 10, 
-  ntree = 200, importance = TRUE)
+bagged <- randomForest(Sales ~ .,
+  data = Carseats[train, ], mtry = 10,
+  ntree = 200, importance = TRUE
+)
 carseats_mse(bagged)
 importance(bagged)
 ```
@@ -282,8 +286,10 @@ regression tree above.
 >    considered at each split, on the error rate obtained.
 
 ```{r}
-rf <- randomForest(Sales ~ ., data = Carseats[train, ], mtry = 3, 
-  ntree = 500, importance = TRUE)
+rf <- randomForest(Sales ~ .,
+  data = Carseats[train, ], mtry = 3,
+  ntree = 500, importance = TRUE
+)
 carseats_mse(rf)
 importance(rf)
 ```
@@ -296,12 +302,13 @@ regression tree above, although not quite as good as the bagging approach.
 ```{r}
 library(BART)
 
-# For ease, we'll create a fake "predict" method that just returns 
+# For ease, we'll create a fake "predict" method that just returns
 # yhat.test.mean regardless of provided "newdata"
 predict.wbart <- function(model, ...) model$yhat.test.mean
 
-bartfit <- gbart(Carseats[train, 2:11], Carseats[train, 1], 
-  x.test = Carseats[!train, 2:11])
+bartfit <- gbart(Carseats[train, 2:11], Carseats[train, 1],
+  x.test = Carseats[!train, 2:11]
+)
 carseats_mse(bartfit)
 ```
 
@@ -444,17 +451,21 @@ test <- setdiff(1:nrow(dat), train)
 ```{r}
 library(gbm)
 set.seed(42)
-lambdas <- 10 ^ seq(-3, 0, by = 0.1)
+lambdas <- 10^seq(-3, 0, by = 0.1)
 fits <- lapply(lambdas, function(lam) {
-  gbm(Salary ~ ., data = dat[train, ], distribution = "gaussian", 
-    n.trees = 1000, shrinkage = lam)
+  gbm(Salary ~ .,
+    data = dat[train, ], distribution = "gaussian",
+    n.trees = 1000, shrinkage = lam
+  )
 })
 errs <- sapply(fits, function(fit) {
   p <- predict(fit, dat[train, ], n.trees = 1000)
   mean((p - dat[train, ]$Salary)^2)
 })
-plot(lambdas, errs, type = "b", xlab = "Shrinkage values", 
-  ylab = "Training MSE", log = "xy")
+plot(lambdas, errs,
+  type = "b", xlab = "Shrinkage values",
+  ylab = "Training MSE", log = "xy"
+)
 ```
 
 > d. Produce a plot with different shrinkage values on the $x$-axis and the
@@ -465,8 +476,10 @@ errs <- sapply(fits, function(fit) {
   p <- predict(fit, dat[test, ], n.trees = 1000)
   mean((p - dat[test, ]$Salary)^2)
 })
-plot(lambdas, errs, type = "b", xlab = "Shrinkage values", 
-  ylab = "Training MSE", log = "xy")
+plot(lambdas, errs,
+  type = "b", xlab = "Shrinkage values",
+  ylab = "Training MSE", log = "xy"
+)
 min(errs)
 abline(v = lambdas[which.min(errs)], lty = 2, col = "red")
 ```
@@ -558,7 +571,7 @@ For logistic regression we correctly predict 14% of those predicted to purchase.
 ```{r}
 library(class)
 # KNN
-fit <- knn(Caravan[train, -86], Caravan[test, -86],  Caravan$Purchase[train])
+fit <- knn(Caravan[train, -86], Caravan[test, -86], Caravan$Purchase[train])
 table(fit, Caravan[test, "Purchase"] == "Yes")
 sum(fit == "Yes" & Caravan[test, "Purchase"] == "Yes") / sum(fit == "Yes")
 ```
@@ -587,8 +600,8 @@ test <- setdiff(1:nrow(College), train)
 lr <- gam(Outstate ~ ., data = College[train, ])
 
 # GAM from chapter 7
-gam <- gam(Outstate ~ Private + s(Room.Board, 2) + s(PhD, 2) + 
-    s(perc.alumni, 2) + s(Expend, 2) + s(Grad.Rate, 2), data = College[train, ])
+gam <- gam(Outstate ~ Private + s(Room.Board, 2) + s(PhD, 2) +
+  s(perc.alumni, 2) + s(Expend, 2) + s(Grad.Rate, 2), data = College[train, ])
 
 # Boosting
 boosted <- gbm(Outstate ~ ., data = College[train, ], n.trees = 1000, shrinkage = 0.01)
@@ -601,8 +614,9 @@ rf <- randomForest(Outstate ~ ., data = College[train, ], mtry = 4, ntree = 1000
 
 # BART
 pred <- setdiff(colnames(College), "Outstate")
-bart <- gbart(College[train, pred], College[train, "Outstate"], 
-  x.test = College[test, pred])
+bart <- gbart(College[train, pred], College[train, "Outstate"],
+  x.test = College[test, pred]
+)
 
 mse <- function(model, ...) {
   pred <- predict(model, College[test, ], ...)
@@ -619,7 +633,8 @@ res <- c(
 )
 res <- data.frame("MSE" = res)
 res$Model <- factor(row.names(res), levels = rev(row.names(res)))
-ggplot(res, aes(Model, MSE)) + coord_flip() + 
+ggplot(res, aes(Model, MSE)) +
+  coord_flip() +
   geom_bar(stat = "identity", fill = "steelblue")
 ```
 

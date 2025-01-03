@@ -310,7 +310,7 @@ These are equivalent to 11.5 and 11.6.
 
 > Recall that the survival function $S(t)$, the hazard function $h(t)$, and the
 > density function $f(t)$ are defined in (11.2), (11.9), and (11.11),
-> respectively. Furthermore, define $F(t) = 1 − S(t)$. Show that the following
+> respectively. Furthermore, define $F(t) = 1 - S(t)$. Show that the following
 > relationships hold:
 >
 > $$
@@ -337,7 +337,7 @@ Integrating and then exponentiating we get the second identity.
 > survival times follow an exponential distribution.
 >
 > a. Suppose that a survival time follows an $Exp(\lambda)$ distribution, so
-> that its density function is $f(t) = \lambda\exp(−\lambda t)$. Using the
+> that its density function is $f(t) = \lambda\exp(-\lambda t)$. Using the
 > relationships provided in Exercise 8, show that $S(t) = \exp(-\lambda t)$.
 
 The cdf of an exponential distribution is $1 - \exp(-\lambda x)$ and 

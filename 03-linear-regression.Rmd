@@ -67,11 +67,11 @@ library(plotly)
 ```{r}
 model <- function(gpa, iq, level) {
   50 +
-  gpa * 20 +
-  iq * 0.07 +
-  level * 35 +
-  gpa * iq * 0.01 +
-  gpa * level * -10
+    gpa * 20 +
+    iq * 0.07 +
+    level * 35 +
+    gpa * iq * 0.01 +
+    gpa * level * -10
 }
 x <- seq(1, 5, length = 10)
 y <- seq(1, 200, length = 20)
@@ -82,15 +82,18 @@ plot_ly(x = x, y = y) |>
   add_surface(
     z = ~college,
     colorscale = list(c(0, 1), c("rgb(107,184,214)", "rgb(0,90,124)")),
-    colorbar = list(title = "College")) |>
+    colorbar = list(title = "College")
+  ) |>
   add_surface(
     z = ~high_school,
     colorscale = list(c(0, 1), c("rgb(255,112,184)", "rgb(128,0,64)")),
-    colorbar = list(title = "High school")) |>
+    colorbar = list(title = "High school")
+  ) |>
   layout(scene = list(
     xaxis = list(title = "GPA"),
     yaxis = list(title = "IQ"),
-    zaxis = list(title = "Salary")))
+    zaxis = list(title = "Salary")
+  ))
 ```
 
 Option iii correct.
@@ -366,7 +369,7 @@ par(mfrow = c(2, 2))
 plot(Auto$horsepower, Auto$mpg, cex = 0.2)
 plot(log(Auto$horsepower), Auto$mpg, cex = 0.2)
 plot(sqrt(Auto$horsepower), Auto$mpg, cex = 0.2)
-plot(Auto$horsepower ^ 2, Auto$mpg, cex = 0.2)
+plot(Auto$horsepower^2, Auto$mpg, cex = 0.2)
 
 x <- subset(Auto, select = -name)
 x$horsepower <- log(x$horsepower)
@@ -553,7 +556,7 @@ We can show this numerically in R by computing $t$ using the above equation.
 
 ```{r}
 n <- length(x)
-sqrt(n - 1) * sum(x * y) / sqrt(sum(x ^ 2) * sum(y ^ 2) - sum(x * y) ^ 2)
+sqrt(n - 1) * sum(x * y) / sqrt(sum(x^2) * sum(y^2) - sum(x * y)^2)
 ```
 
 > e. Using the results from (d), argue that the _t_-statistic for the
@@ -846,9 +849,9 @@ contributions.
 >    answers.
 
 ```{r}
-x1 <- c(x1 , 0.1)
-x2 <- c(x2 , 0.8)
-y <- c(y ,6)
+x1 <- c(x1, 0.1)
+x2 <- c(x2, 0.8)
+y <- c(y, 6)
 summary(lm(y ~ x1 + x2))
 summary(lm(y ~ x1))
 summary(lm(y ~ x2))
@@ -929,9 +932,10 @@ The results from (b) show reduced significance compared to the models fit in
 (a). 
 
 ```{r}
-plot(sapply(fits, function(x) coef(x)[2]), coef(mfit)[-1], 
-  xlab = "Univariate regression", 
-  ylab = "multiple regression")
+plot(sapply(fits, function(x) coef(x)[2]), coef(mfit)[-1],
+  xlab = "Univariate regression",
+  ylab = "multiple regression"
+)
 ```
 
 The estimated coefficients differ (in particular the estimated coefficient for
