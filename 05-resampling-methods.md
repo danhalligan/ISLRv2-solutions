@@ -170,7 +170,7 @@ mean(store)
 ```
 
 ```
-## [1] 0.633
+## [1] 0.6332
 ```
 
 The probability of including $4$ when resampling numbers $1...100$ is close to

@@ -554,7 +554,7 @@ the fourth observation is contained in the bootstrap sample.</p>
 </blockquote>
 <div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="resampling-methods.html#cb285-1" tabindex="-1"></a>store <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, <span class="fu">sum</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
 <span id="cb285-2"><a href="resampling-methods.html#cb285-2" tabindex="-1"></a><span class="fu">mean</span>(store)</span></code></pre></div>
-<pre><code>## [1] 0.633</code></pre>
+<pre><code>## [1] 0.6332</code></pre>
 <p>The probability of including <span class="math inline">\(4\)</span> when resampling numbers <span class="math inline">\(1...100\)</span> is close to
 <span class="math inline">\(1 - (1 - 1/100)^{100}\)</span>.</p>
 </div>

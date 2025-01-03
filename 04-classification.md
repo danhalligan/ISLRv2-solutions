@@ -678,8 +678,8 @@ fit <- knn(
 ```
 ##       
 ## fit    Down Up
-##   Down   21 29
-##   Up     22 32
+##   Down   21 30
+##   Up     22 31
 ```
 
 ``` r
@@ -687,7 +687,7 @@ sum(diag(t)) / sum(t)
 ```
 
 ```
-## [1] 0.5096154
+## [1] 0.5
 ```
 
 > h. Repeat (d) using naive Bayes.
