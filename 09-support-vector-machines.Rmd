@@ -52,7 +52,7 @@ points <- expand.grid(
   X2 = seq(-1, 5, length.out = 100)
 )
 p <- ggplot(points, aes(x = X1, y = X2, z = (1 + X1)^2 + (2 - X2)^2 - 4)) +
-  geom_contour(breaks = 0, colour = "black") +
+  geom_contour(breaks = 0, color = "black") +
   theme_bw()
 p
 ```
@@ -181,7 +181,7 @@ current calculated margin.
 > g. Sketch a hyperplane that is _not_ the optimal separating hyperplane, and
 >    provide the equation for this hyperplane.
 
-A non-optimal hyperline that still separates the blue and red points would 
+A non-optimal hyperplane that still separates the blue and red points would 
 be one that touches the (red) point at X1 = 2, X2 = 2 and the (blue) point at
 X1 = 4, X2 = 3. This gives line $y = x/2 + 1$  or, when  $\beta_0 = -1$, 
 $\beta_1 = -1/2$, $\beta_2 = 1$.

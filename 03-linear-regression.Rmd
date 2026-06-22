@@ -939,7 +939,7 @@ plot(sapply(fits, function(x) coef(x)[2]), coef(mfit)[-1],
 ```
 
 The estimated coefficients differ (in particular the estimated coefficient for
-`nox` is dramatically different) between the two modelling strategies.
+`nox` is dramatically different) between the two modeling strategies.
 
 > d. Is there evidence of non-linear association between any of the predictors
 >    and the response? To answer this question, for each predictor X, fit a

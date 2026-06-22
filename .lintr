@@ -1,0 +1,9 @@
+linters: linters_with_defaults(
+    line_length_linter = NULL,
+    object_name_linter = NULL,
+    object_usage_linter = NULL,
+    indentation_linter = NULL,
+    commented_code_linter = NULL,
+    return_linter = NULL
+  )
+exclusions: list("_book", "_bookdown_files", "renv")

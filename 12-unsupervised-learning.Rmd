@@ -485,7 +485,7 @@ not change the relative geometry much.
 > observations that are missing, and the value of $M$, averaged over 10
 > repetitions of the experiment.
 
-We follow Algorithm 12.1: missing entries are initialised to the column mean,
+We follow Algorithm 12.1: missing entries are initialized to the column mean,
 then on each iteration we replace them with the entries from the rank-$M$ SVD
 approximation of the current matrix. Convergence is tracked via the relative
 reduction in mean squared error on the _observed_ entries.
@@ -576,17 +576,17 @@ round(mean_err, 3)
 df <- as.data.frame.table(mean_err, responseName = "MSE")
 df$frac <- as.numeric(as.character(df$frac))
 df$M <- as.integer(as.character(df$M))
-ggplot(df, aes(frac, MSE, colour = factor(M), group = M)) +
+ggplot(df, aes(frac, MSE, color = factor(M), group = M)) +
   geom_line() +
   geom_point() +
   labs(
     x = "Fraction of entries missing", y = "Mean squared error",
-    colour = "M"
+    color = "M"
   )
 ```
 
 A small number of components ($M \le 3$) gives by far the best imputations
-on standardised `Boston`. Beyond that the rank-$M$ approximation starts to
+on standardized `Boston`. Beyond that the rank-$M$ approximation starts to
 overfit the imputed values themselves, and the error roughly doubles. As
 expected, the error also grows gradually with the fraction of missing
 entries.

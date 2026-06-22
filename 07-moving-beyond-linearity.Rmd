@@ -206,7 +206,7 @@ so will have a smaller training RSS.
 > b. As $\lambda \to \infty$, will $\hat{g}_1$ or $\hat{g}_2$ have the smaller
 >    test RSS?
 
-We cannot tell which function will produce a smaller test RSS, but there is
+We cannot tell which function will produce a smaller test RSS, but there is a
 chance that $\hat{g}_1$ will if $\hat{g}_2$ overfits the data.
 
 > c. For $\lambda = 0$, will $\hat{g}_1$ or $\hat{g}_2$ have the smaller training
@@ -510,7 +510,7 @@ predict.regsubsets <- function(object, newdata, id, ...) {
 
 set.seed(42)
 train <- rep(TRUE, nrow(College))
-train[sample(1:nrow(College), nrow(College) * 1 / 3)] <- FALSE
+train[sample(seq_len(nrow(College)), nrow(College) * 1 / 3)] <- FALSE
 fit <- regsubsets(Outstate ~ ., data = College[train, ], nvmax = 17, method = "forward")
 
 plot(summary(fit)$bic, type = "b")
@@ -692,7 +692,7 @@ coef(fit)
 backfit <- function(x, y, iter = 20) {
   beta <- matrix(0, ncol = ncol(x), nrow = iter + 1)
   for (i in 1:iter) {
-    for (k in 1:ncol(x)) {
+    for (k in seq_len(ncol(x))) {
       residual <- y - (x[, -k] %*% beta[i, -k])
       beta[i + 1, k] <- lm(residual ~ x[, k])$coef[2]
     }

@@ -1,0 +1,40 @@
+name: PR Checks
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  spelling:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - name: Cache R packages
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: pr-spelling-${{ runner.os }}-r1
+      - name: Install spelling
+        run: Rscript -e 'if (!requireNamespace("spelling", quietly = TRUE)) install.packages("spelling")'
+      - name: Spell check
+        run: Rscript .github/scripts/spellcheck.R
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - name: Cache R packages
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: pr-lint-${{ runner.os }}-r1
+      - name: Install lintr
+        run: Rscript -e 'if (!requireNamespace("lintr", quietly = TRUE)) install.packages("lintr")'
+      - name: Lint
+        run: Rscript .github/scripts/lint.R
