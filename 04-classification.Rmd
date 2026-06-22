@@ -48,7 +48,7 @@ $$
 and the discriminant function is
 
 $$
-\delta_k(x) = x.\frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma_2} + \log(\pi_k)
+\delta_k(x) = x \cdot \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log(\pi_k)
 $$
 
 
@@ -374,11 +374,63 @@ $$b_k = (\mu_k - \mu_K) / \sigma^2$$
 
 ### Question 11
 
-ToDo
-
 > Work out the detailed forms of $a_k$, $b_{kj}$, and $b_{kjl}$ in (4.33).
 > Your answer should involve $\pi_k$, $\pi_K$, $\mu_k$, $\mu_K$, $\Sigma_k$, 
 > and $\Sigma_K$.
+
+Equation 4.33 expresses the log-odds between class $k$ and the baseline class
+$K$ under QDA as
+
+$$
+\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right) =
+  a_k + \sum_{j=1}^p b_{kj} x_j + \sum_{j=1}^p \sum_{l=1}^p b_{kjl} x_j x_l.
+$$
+
+Under QDA, the class-conditional density is
+
+$$
+f_k(x) = \frac{1}{(2\pi)^{p/2}|\Sigma_k|^{1/2}}
+         \exp\left(-\tfrac{1}{2}(x - \mu_k)^T \Sigma_k^{-1} (x - \mu_k)\right),
+$$
+
+so the log-odds becomes
+
+\begin{align*}
+\log\frac{\pi_k f_k(x)}{\pi_K f_K(x)}
+ &= \log\frac{\pi_k}{\pi_K}
+    - \tfrac{1}{2}\log\frac{|\Sigma_k|}{|\Sigma_K|}
+    - \tfrac{1}{2}(x - \mu_k)^T \Sigma_k^{-1} (x - \mu_k) \\
+ &\quad + \tfrac{1}{2}(x - \mu_K)^T \Sigma_K^{-1} (x - \mu_K).
+\end{align*}
+
+Expanding the quadratic forms
+$(x - \mu)^T \Sigma^{-1} (x - \mu) = x^T \Sigma^{-1} x - 2 \mu^T \Sigma^{-1} x +
+\mu^T \Sigma^{-1} \mu$ and collecting the constant, linear and quadratic
+terms in $x$ gives:
+
+The constant term:
+$$
+a_k = \log\left(\frac{\pi_k}{\pi_K}\right)
+      - \tfrac{1}{2}\log\left(\frac{|\Sigma_k|}{|\Sigma_K|}\right)
+      - \tfrac{1}{2}\mu_k^T \Sigma_k^{-1} \mu_k
+      + \tfrac{1}{2}\mu_K^T \Sigma_K^{-1} \mu_K.
+$$
+
+The linear coefficient of $x_j$ (the $j$th entry of
+$\Sigma_k^{-1}\mu_k - \Sigma_K^{-1}\mu_K$):
+$$
+b_{kj} = \sum_{l=1}^p \left[(\Sigma_k^{-1})_{jl}\mu_{kl}
+                            - (\Sigma_K^{-1})_{jl}\mu_{Kl}\right].
+$$
+
+The quadratic coefficient of $x_j x_l$ (from
+$-\tfrac{1}{2}x^T(\Sigma_k^{-1} - \Sigma_K^{-1})x$):
+$$
+b_{kjl} = -\tfrac{1}{2}\left[(\Sigma_k^{-1})_{jl} - (\Sigma_K^{-1})_{jl}\right].
+$$
+
+When $\Sigma_k = \Sigma_K$ the quadratic term vanishes ($b_{kjl} = 0$) and we
+recover the LDA log-odds, which is linear in $x$.
 
 ### Question 12
 
