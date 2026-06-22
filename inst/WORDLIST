@@ -1,3 +1,5 @@
+Bigl
+Bigr
 Bonferroni
 Bonferroni's
 Cov
@@ -35,6 +37,7 @@ arg
 argmin
 bY
 bmatrix
+boldsymbol
 bookdown
 cdf
 cdot
@@ -62,6 +65,7 @@ infty
 interpretable
 ith
 iy
+jM
 jl
 jm
 jth
@@ -71,6 +75,7 @@ kj
 kjl
 kp
 lda
+ldots
 le
 leq
 lim
@@ -79,6 +84,7 @@ loadings
 lp
 lt
 mathbb
+mathbf
 mathcal
 mathrm
 mbox
@@ -112,4 +118,3 @@ timepoint
 un
 unpruned
 wilcox
-zim

@@ -249,12 +249,58 @@ kmeans(dat, 2)$cluster
 > Specifically, the principal component score and loading vectors solve the
 > optimization problem given in (12.6).
 >
-> Now, suppose that the M principal component score vectors zim, $m = 1,...,M$,
+> Now, suppose that the $M$ principal component score vectors $z_{im}$,
+> $m = 1,...,M$,
 > are known. Using (12.6), explain that the first $M$ principal component
 > loading vectors $\phi_{jm}$, $m = 1,...,M$, can be obtaining by performing $M$
 > separate least squares linear regressions. In each regression, the principal
 > component score vectors are the predictors, and one of the features of the
 > data matrix is the response.
+
+Equation (12.6) is
+
+$$
+\min_{\{z_{im}\},\,\{\phi_{jm}\}}
+  \sum_{j=1}^p \sum_{i=1}^n
+  \Bigl(x_{ij} - \sum_{m=1}^M z_{im}\,\phi_{jm}\Bigr)^2.
+$$
+
+With the scores $z_{im}$ held fixed, this objective is separable over $j$: the
+term contributed by feature $j$ is
+
+$$
+\sum_{i=1}^n \Bigl(x_{ij} - \sum_{m=1}^M z_{im}\,\phi_{jm}\Bigr)^2,
+$$
+
+which is exactly the residual sum of squares for an OLS regression of the
+$j$-th column of $\mathbf{X}$ on the $M$ score vectors $z_1, \ldots, z_M$ (no
+intercept, since the columns of $\mathbf{X}$ are centered), with regression
+coefficients $\phi_{j1}, \ldots, \phi_{jM}$. Minimizing in
+$\phi_{j1}, \ldots, \phi_{jM}$ for each of the $p$ features therefore recovers
+all entries of the loading matrix.
+
+In matrix form, with $\mathbf{Z} \in \mathbb{R}^{n \times M}$ collecting the
+score vectors and $\boldsymbol\Phi \in \mathbb{R}^{p \times M}$ the loadings,
+the OLS solution is
+
+$$
+\hat{\boldsymbol\Phi} \;=\; \mathbf{X}^\top \mathbf{Z}\,
+  (\mathbf{Z}^\top \mathbf{Z})^{-1}.
+$$
+
+Because PCA produces orthogonal score vectors, $\mathbf{Z}^\top \mathbf{Z}$ is
+diagonal and the $M$ predictors decouple. Equivalently then, the $m$-th
+loading vector $\phi_m \in \mathbb{R}^p$ is obtained by regressing each column
+of $\mathbf{X}$ on just $z_m$, giving
+
+$$
+\hat\phi_{jm} \;=\;
+  \frac{\sum_{i=1}^n x_{ij}\, z_{im}}{\sum_{i=1}^n z_{im}^2},
+$$
+
+so the loadings can also be read as $M$ separate regressions, one per score
+vector, each producing a full loading vector.
+
 
 ## Applied
 
