@@ -317,45 +317,49 @@ points(res, r(res), col = "red", pch = 19)
 
 ```{r, cache = TRUE}
 library(keras)
+set.seed(42)
 
-dat <- ISLR2::Boston
-x <- scale(model.matrix(crim ~ . - 1, data = dat))
+dat <- ISLR2::Default
+dat$default <- as.numeric(dat$default == "Yes")
+x <- scale(model.matrix(default ~ . - 1, data = dat))
+y <- dat$default
 n <- nrow(dat)
 ntest <- trunc(n / 3)
-testid <- sample(1:n, ntest)
-y <- dat$crim
+testid <- sample(seq_len(n), ntest)
 
 # logistic regression
-lfit <- lm(crim ~ ., data = dat[-testid, ])
-lpred <- predict(lfit, dat[testid, ])
-with(dat[testid, ], mean(abs(lpred - crim)))
+lfit <- glm(default ~ ., data = dat[-testid, ], family = "binomial")
+lpred <- predict(lfit, dat[testid, ], type = "response") > 0.5
+mean(lpred != y[testid])
 
 # keras
 nn <- keras_model_sequential() |>
   layer_dense(units = 10, activation = "relu", input_shape = ncol(x)) |>
   layer_dropout(rate = 0.4) |>
-  layer_dense(units = 1)
+  layer_dense(units = 1, activation = "sigmoid")
 
 compile(nn,
-  loss = "mse",
+  loss = "binary_crossentropy",
   optimizer = optimizer_rmsprop(),
-  metrics = list("mean_absolute_error")
+  metrics = "accuracy"
 )
 
 history <- fit(nn,
   x[-testid, ], y[-testid],
-  epochs = 100,
-  batch_size = 26,
+  epochs = 30,
+  batch_size = 128,
   validation_data = list(x[testid, ], y[testid]),
   verbose = 0
 )
 plot(history, smooth = FALSE)
-npred <- predict(nn, x[testid, ])
-mean(abs(y[testid] - npred))
+npred <- predict(nn, x[testid, ]) > 0.5
+mean(npred != y[testid])
 ```
 
-In this case, the neural network outperforms logistic regression having a lower
-absolute error rate on the test data.
+In this case, logistic regression and the neural network achieve comparable
+test-set classification error on the `Default` data. The classes are highly
+imbalanced (only ~3% defaults), so both models are close to the naive baseline
+of always predicting "No".
 
 ### Question 8
 
