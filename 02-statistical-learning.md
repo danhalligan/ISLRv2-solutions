@@ -70,6 +70,33 @@ $n=52$, $p=3$, regression, prediction.
 > b. Explain why each of the five curves has the shape displayed in
 >    part (a).
 
+
+``` r
+library(ggplot2)
+library(tidyr)
+
+flex <- seq(0, 1, length.out = 200)
+curves <- data.frame(
+  flex,
+  `(squared) bias` = 4 * (1 - flex)^2 + 0.2,
+  variance = 0.2 + 4 * flex^3,
+  `training error` = 4.5 * (1 - flex) + 0.3,
+  `Bayes error` = 1,
+  check.names = FALSE
+)
+curves$`test error` <-
+  curves$`(squared) bias` + curves$variance + curves$`Bayes error`
+
+ggplot(
+  pivot_longer(curves, -flex, names_to = "curve", values_to = "value"),
+  aes(flex, value, color = curve)
+) +
+  geom_line(linewidth = 1) +
+  labs(x = "Flexibility", y = "Error", color = NULL)
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-1-1.png" alt="" width="672" />
+
 * (squared) bias: Decreases with increasing flexibility (Generally, more
   flexible methods result in less bias).
 * variance: Increases with increasing flexibility (In general, more flexible
@@ -356,13 +383,13 @@ college$Private <- college$Private == "Yes"
 pairs(college[, 1:10], cex = 0.2)
 ```
 
-<img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672" />
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" />
 
 ``` r
 plot(college$Outstate ~ factor(college$Private), xlab = "Private", ylab = "Outstate")
 ```
 
-<img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-2.png" alt="" width="672" />
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-7-2.png" alt="" width="672" />
 
 ``` r
 college$Elite <- factor(ifelse(college$Top10perc > 50, "Yes", "No"))
@@ -378,7 +405,7 @@ summary(college$Elite)
 plot(college$Outstate ~ college$Elite, xlab = "Elite", ylab = "Outstate")
 ```
 
-<img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-3.png" alt="" width="672" />
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-7-3.png" alt="" width="672" />
 
 ``` r
 par(mfrow = c(2, 2))
@@ -387,7 +414,7 @@ for (n in c(5, 10, 20, 50)) {
 }
 ```
 
-<img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-4.png" alt="" width="672" />
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-7-4.png" alt="" width="672" />
 
 ``` r
 chisq.test(college$Private, college$Elite)
@@ -461,8 +488,7 @@ library(tidyverse)
 ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.2.1     ✔ readr     2.2.0
 ## ✔ forcats   1.0.1     ✔ stringr   1.6.0
-## ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
-## ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+## ✔ lubridate 1.9.5     ✔ tibble    3.3.1
 ## ✔ purrr     1.2.2     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
@@ -529,7 +555,7 @@ x[-(10:85), numeric] |>
 pairs(x[, numeric], cex = 0.2)
 ```
 
-<img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-1.png" alt="" width="672" />
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" />
 
 ``` r
 cor(x[, numeric]) |>
@@ -550,7 +576,7 @@ cor(x[, numeric]) |>
 heatmap(cor(x[, numeric]), cexRow = 1.1, cexCol = 1.1, margins = c(8, 8))
 ```
 
-<img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-2.png" alt="" width="672" />
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-13-2.png" alt="" width="672" />
 
 Many of the variables appear to be highly (positively or negatively) correlated
 with some relationships being non-linear.
@@ -607,25 +633,48 @@ ggplot(Boston, aes(nox, rm)) +
   geom_point()
 ```
 
-<img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-1.png" alt="" width="672" />
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-16-1.png" alt="" width="672" />
 
 ``` r
 ggplot(Boston, aes(ptratio, rm)) +
   geom_point()
 ```
 
-<img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-2.png" alt="" width="672" />
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-16-2.png" alt="" width="672" />
 
 ``` r
 heatmap(cor(Boston, method = "spearman"), cexRow = 1.1, cexCol = 1.1)
 ```
 
-<img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-3.png" alt="" width="672" />
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-16-3.png" alt="" width="672" />
 
 > c. Are any of the predictors associated with per capita crime rate? If so,
 >    explain the relationship.
 
-Yes
+Yes. Inspecting the Spearman correlations with `crim`:
+
+
+``` r
+sort(cor(Boston, method = "spearman")["crim", ])
+```
+
+```
+##         dis          zn        medv          rm        chas     ptratio 
+## -0.74498614 -0.57166021 -0.55889095 -0.30911647  0.04153689  0.46528319 
+##       lstat         age         rad         tax       indus         nox 
+##  0.63476026  0.70413998  0.72780697  0.72904490  0.73552374  0.82146466 
+##        crim 
+##  1.00000000
+```
+
+Crime rate rises strongly with `nox` (air pollution), `indus` (proportion of
+non-retail business), `tax`, `rad` (highway accessibility), `age` (proportion
+of old housing) and `lstat` ("lower-status" population) -- i.e. with the
+features that mark dense, industrial, lower-income tracts. It falls with
+`dis` (distance to employment centers), `zn` (large-lot residential zoning),
+and `medv` (median home value) -- the features that mark wealthier, more
+suburban areas. `chas` (bordering the Charles river) shows essentially no
+association.
 
 > d. Do any of the census tracts of Boston appear to have particularly high 
 >    crime rates? Tax rates? Pupil-teacher ratios? Comment on the range of each
@@ -641,7 +690,7 @@ Boston |>
   facet_wrap(~name, scales = "free", ncol = 1)
 ```
 
-<img src="02-statistical-learning_files/figure-html/unnamed-chunk-16-1.png" alt="" width="672" />
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-18-1.png" alt="" width="672" />
 
 Yes, particularly crime and tax rates.
 
@@ -744,7 +793,7 @@ Boston |>
 ## (`stat_boxplot()`).
 ```
 
-<img src="02-statistical-learning_files/figure-html/unnamed-chunk-21-1.png" alt="" width="672" />
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-23-1.png" alt="" width="672" />
 
 Census tracts with big average properties (more than eight rooms per dwelling)
 have higher median value (`medv`), a lower proportion of non-retail

@@ -170,7 +170,7 @@ mean(store)
 ```
 
 ```
-## [1] 0.6303
+## [1] 0.6379
 ```
 
 The probability of including $4$ when resampling numbers $1...100$ is close to
@@ -467,7 +467,8 @@ error <- numeric(nrow(Weekly))
 for (i in seq_len(nrow(Weekly))) {
   fit <- glm(Direction ~ Lag1 + Lag2, data = Weekly[-i, ], family = "binomial")
   p <- predict(fit, newdata = Weekly[i, , drop = FALSE], type = "response") > 0.5
-  error[i] <- ifelse(p, "Down", "Up") == Weekly$Direction[i]
+  pred <- ifelse(p, "Up", "Down")
+  error[i] <- pred != Weekly$Direction[i]
 }
 ```
 

@@ -495,17 +495,17 @@ fusion occurs, as well as the observations corresponding to each leaf in
 the dendrogram.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="unsupervised-learning.html#cb772-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.</span>, <span class="fl">0.45</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.45</span>, <span class="dv">0</span>), <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb772-2"><a href="unsupervised-learning.html#cb772-2" tabindex="-1"></a>c1 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">as.dist</span>(m), <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
-<span id="cb772-3"><a href="unsupervised-learning.html#cb772-3" tabindex="-1"></a><span class="fu">plot</span>(c1)</span></code></pre></div>
+<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="unsupervised-learning.html#cb775-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.7</span>, <span class="fl">0.3</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.</span>, <span class="fl">0.45</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.45</span>, <span class="dv">0</span>), <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb775-2"><a href="unsupervised-learning.html#cb775-2" tabindex="-1"></a>c1 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">as.dist</span>(m), <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb775-3"><a href="unsupervised-learning.html#cb775-3" tabindex="-1"></a><span class="fu">plot</span>(c1)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-1-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Repeat (a), this time using single linkage clustering.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb773"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb773-1"><a href="unsupervised-learning.html#cb773-1" tabindex="-1"></a>c2 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">as.dist</span>(m), <span class="at">method =</span> <span class="st">&quot;single&quot;</span>)</span>
-<span id="cb773-2"><a href="unsupervised-learning.html#cb773-2" tabindex="-1"></a><span class="fu">plot</span>(c2)</span></code></pre></div>
+<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="unsupervised-learning.html#cb776-1" tabindex="-1"></a>c2 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">as.dist</span>(m), <span class="at">method =</span> <span class="st">&quot;single&quot;</span>)</span>
+<span id="cb776-2"><a href="unsupervised-learning.html#cb776-2" tabindex="-1"></a><span class="fu">plot</span>(c2)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-2-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -513,7 +513,7 @@ the dendrogram.</li>
 result. Which observations are in each cluster?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="unsupervised-learning.html#cb774-1" tabindex="-1"></a><span class="fu">table</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="fu">cutree</span>(c1, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb777-1"><a href="unsupervised-learning.html#cb777-1" tabindex="-1"></a><span class="fu">table</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="fu">cutree</span>(c1, <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##    
 ##     1 2
 ##   1 1 0
@@ -526,7 +526,7 @@ result. Which observations are in each cluster?</li>
 result. Which observations are in each cluster?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="unsupervised-learning.html#cb776-1" tabindex="-1"></a><span class="fu">table</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="fu">cutree</span>(c2, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="unsupervised-learning.html#cb779-1" tabindex="-1"></a><span class="fu">table</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="fu">cutree</span>(c2, <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##    
 ##     1 2
 ##   1 1 0
@@ -542,7 +542,7 @@ dendrogram in (a), for which two or more of the leaves are repositioned,
 but for which the meaning of the dendrogram is the same.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="unsupervised-learning.html#cb778-1" tabindex="-1"></a><span class="fu">plot</span>(c1, <span class="at">labels =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb781"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb781-1"><a href="unsupervised-learning.html#cb781-1" tabindex="-1"></a><span class="fu">plot</span>(c1, <span class="at">labels =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-5-1.png" alt="" width="672" /></p>
 </div>
 <div id="question-3-10" class="section level3 hasAnchor" number="12.1.3">
@@ -596,13 +596,13 @@ observations are as follows.</p>
 <li>Plot the observations.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="unsupervised-learning.html#cb779-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb779-2"><a href="unsupervised-learning.html#cb779-2" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb779-3"><a href="unsupervised-learning.html#cb779-3" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">4</span>),</span>
-<span id="cb779-4"><a href="unsupervised-learning.html#cb779-4" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>)</span>
-<span id="cb779-5"><a href="unsupervised-learning.html#cb779-5" tabindex="-1"></a>)</span>
-<span id="cb779-6"><a href="unsupervised-learning.html#cb779-6" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2)) <span class="sc">+</span></span>
-<span id="cb779-7"><a href="unsupervised-learning.html#cb779-7" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="unsupervised-learning.html#cb782-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb782-2"><a href="unsupervised-learning.html#cb782-2" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb782-3"><a href="unsupervised-learning.html#cb782-3" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">4</span>),</span>
+<span id="cb782-4"><a href="unsupervised-learning.html#cb782-4" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>)</span>
+<span id="cb782-5"><a href="unsupervised-learning.html#cb782-5" tabindex="-1"></a>)</span>
+<span id="cb782-6"><a href="unsupervised-learning.html#cb782-6" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2)) <span class="sc">+</span></span>
+<span id="cb782-7"><a href="unsupervised-learning.html#cb782-7" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -611,34 +611,34 @@ observations are as follows.</p>
 observation.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="unsupervised-learning.html#cb780-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb780-2"><a href="unsupervised-learning.html#cb780-2" tabindex="-1"></a>d<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">size =</span> <span class="fu">nrow</span>(d), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb783-1"><a href="unsupervised-learning.html#cb783-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb783-2"><a href="unsupervised-learning.html#cb783-2" tabindex="-1"></a>d<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">size =</span> <span class="fu">nrow</span>(d), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Compute the centroid for each cluster.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb781"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb781-1"><a href="unsupervised-learning.html#cb781-1" tabindex="-1"></a>centroids <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(i) <span class="fu">colMeans</span>(d[d<span class="sc">$</span>cluster <span class="sc">==</span> i, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span></code></pre></div>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="unsupervised-learning.html#cb784-1" tabindex="-1"></a>centroids <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(i) <span class="fu">colMeans</span>(d[d<span class="sc">$</span>cluster <span class="sc">==</span> i, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span></code></pre></div>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Assign each observation to the centroid to which it is closest, in terms of
 Euclidean distance. Report the cluster labels for each observation.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="unsupervised-learning.html#cb782-1" tabindex="-1"></a>dist <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb782-2"><a href="unsupervised-learning.html#cb782-2" tabindex="-1"></a>  <span class="fu">sqrt</span>((d<span class="sc">$</span>x1 <span class="sc">-</span> centroids[<span class="dv">1</span>, i])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (d<span class="sc">$</span>x2 <span class="sc">-</span> centroids[<span class="dv">2</span>, i])<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb782-3"><a href="unsupervised-learning.html#cb782-3" tabindex="-1"></a>})</span>
-<span id="cb782-4"><a href="unsupervised-learning.html#cb782-4" tabindex="-1"></a>d<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
+<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb785-1"><a href="unsupervised-learning.html#cb785-1" tabindex="-1"></a>dist <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb785-2"><a href="unsupervised-learning.html#cb785-2" tabindex="-1"></a>  <span class="fu">sqrt</span>((d<span class="sc">$</span>x1 <span class="sc">-</span> centroids[<span class="dv">1</span>, i])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (d<span class="sc">$</span>x2 <span class="sc">-</span> centroids[<span class="dv">2</span>, i])<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb785-3"><a href="unsupervised-learning.html#cb785-3" tabindex="-1"></a>})</span>
+<span id="cb785-4"><a href="unsupervised-learning.html#cb785-4" tabindex="-1"></a>d<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Repeat (c) and (d) until the answers obtained stop changing.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb783-1"><a href="unsupervised-learning.html#cb783-1" tabindex="-1"></a>centroids <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(i) <span class="fu">colMeans</span>(d[d<span class="sc">$</span>cluster <span class="sc">==</span> i, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span>
-<span id="cb783-2"><a href="unsupervised-learning.html#cb783-2" tabindex="-1"></a>dist <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb783-3"><a href="unsupervised-learning.html#cb783-3" tabindex="-1"></a>  <span class="fu">sqrt</span>((d<span class="sc">$</span>x1 <span class="sc">-</span> centroids[<span class="dv">1</span>, i])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (d<span class="sc">$</span>x2 <span class="sc">-</span> centroids[<span class="dv">2</span>, i])<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb783-4"><a href="unsupervised-learning.html#cb783-4" tabindex="-1"></a>})</span>
-<span id="cb783-5"><a href="unsupervised-learning.html#cb783-5" tabindex="-1"></a>d<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="unsupervised-learning.html#cb786-1" tabindex="-1"></a>centroids <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(i) <span class="fu">colMeans</span>(d[d<span class="sc">$</span>cluster <span class="sc">==</span> i, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span>
+<span id="cb786-2"><a href="unsupervised-learning.html#cb786-2" tabindex="-1"></a>dist <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb786-3"><a href="unsupervised-learning.html#cb786-3" tabindex="-1"></a>  <span class="fu">sqrt</span>((d<span class="sc">$</span>x1 <span class="sc">-</span> centroids[<span class="dv">1</span>, i])<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (d<span class="sc">$</span>x2 <span class="sc">-</span> centroids[<span class="dv">2</span>, i])<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb786-4"><a href="unsupervised-learning.html#cb786-4" tabindex="-1"></a>})</span>
+<span id="cb786-5"><a href="unsupervised-learning.html#cb786-5" tabindex="-1"></a>d<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">apply</span>(dist, <span class="dv">1</span>, which.min)</span></code></pre></div>
 <p>In this case, we get stable labels after the first iteration.</p>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">
@@ -646,8 +646,8 @@ Euclidean distance. Report the cluster labels for each observation.</li>
 labels obtained.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="unsupervised-learning.html#cb784-1" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2, <span class="at">color =</span> <span class="fu">factor</span>(cluster))) <span class="sc">+</span></span>
-<span id="cb784-2"><a href="unsupervised-learning.html#cb784-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="unsupervised-learning.html#cb787-1" tabindex="-1"></a><span class="fu">ggplot</span>(d, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2, <span class="at">color =</span> <span class="fu">factor</span>(cluster))) <span class="sc">+</span></span>
+<span id="cb787-2"><a href="unsupervised-learning.html#cb787-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" /></p>
 </div>
 <div id="question-4-10" class="section level3 hasAnchor" number="12.1.4">
@@ -692,17 +692,17 @@ to whether or not the retainer sold a computer. In the first case (raw numbers
 of items sold), we would expect clusters to represent low vs high numbers of
 sock purchases.</p>
 <p>To test, we can run the analysis in R:</p>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb785-1"><a href="unsupervised-learning.html#cb785-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb785-2"><a href="unsupervised-learning.html#cb785-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb785-3"><a href="unsupervised-learning.html#cb785-3" tabindex="-1"></a>  <span class="at">socks =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>),</span>
-<span id="cb785-4"><a href="unsupervised-learning.html#cb785-4" tabindex="-1"></a>  <span class="at">computers =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb785-5"><a href="unsupervised-learning.html#cb785-5" tabindex="-1"></a>)</span>
-<span id="cb785-6"><a href="unsupervised-learning.html#cb785-6" tabindex="-1"></a><span class="fu">kmeans</span>(dat, <span class="dv">2</span>)<span class="sc">$</span>cluster</span></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="unsupervised-learning.html#cb788-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb788-2"><a href="unsupervised-learning.html#cb788-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb788-3"><a href="unsupervised-learning.html#cb788-3" tabindex="-1"></a>  <span class="at">socks =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>),</span>
+<span id="cb788-4"><a href="unsupervised-learning.html#cb788-4" tabindex="-1"></a>  <span class="at">computers =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb788-5"><a href="unsupervised-learning.html#cb788-5" tabindex="-1"></a>)</span>
+<span id="cb788-6"><a href="unsupervised-learning.html#cb788-6" tabindex="-1"></a><span class="fu">kmeans</span>(dat, <span class="dv">2</span>)<span class="sc">$</span>cluster</span></code></pre></div>
 <pre><code>## [1] 1 1 2 2 2 2 2 1</code></pre>
-<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="unsupervised-learning.html#cb787-1" tabindex="-1"></a><span class="fu">kmeans</span>(<span class="fu">scale</span>(dat), <span class="dv">2</span>)<span class="sc">$</span>cluster</span></code></pre></div>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="unsupervised-learning.html#cb790-1" tabindex="-1"></a><span class="fu">kmeans</span>(<span class="fu">scale</span>(dat), <span class="dv">2</span>)<span class="sc">$</span>cluster</span></code></pre></div>
 <pre><code>## [1] 1 1 1 1 2 2 2 2</code></pre>
-<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="unsupervised-learning.html#cb789-1" tabindex="-1"></a>dat<span class="sc">$</span>computers <span class="ot">&lt;-</span> dat<span class="sc">$</span>computers <span class="sc">*</span> <span class="dv">2000</span></span>
-<span id="cb789-2"><a href="unsupervised-learning.html#cb789-2" tabindex="-1"></a><span class="fu">kmeans</span>(dat, <span class="dv">2</span>)<span class="sc">$</span>cluster</span></code></pre></div>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="unsupervised-learning.html#cb792-1" tabindex="-1"></a>dat<span class="sc">$</span>computers <span class="ot">&lt;-</span> dat<span class="sc">$</span>computers <span class="sc">*</span> <span class="dv">2000</span></span>
+<span id="cb792-2"><a href="unsupervised-learning.html#cb792-2" tabindex="-1"></a><span class="fu">kmeans</span>(dat, <span class="dv">2</span>)<span class="sc">$</span>cluster</span></code></pre></div>
 <pre><code>## [1] 1 1 1 1 2 2 2 2</code></pre>
 </div>
 <div id="question-6-10" class="section level3 hasAnchor" number="12.1.6">
@@ -772,10 +772,10 @@ Euclidean distance between the ith and jth observations.</p>
 <p><em>Hint: The Euclidean distance can be calculated using the <code>dist()</code> function,</em>
 <em>and correlations can be calculated using the <code>cor()</code> function.</em></p>
 </blockquote>
-<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="unsupervised-learning.html#cb791-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(USArrests)))</span>
-<span id="cb791-2"><a href="unsupervised-learning.html#cb791-2" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">dist</span>(dat)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb791-3"><a href="unsupervised-learning.html#cb791-3" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">cor</span>(<span class="fu">t</span>(dat)))</span>
-<span id="cb791-4"><a href="unsupervised-learning.html#cb791-4" tabindex="-1"></a><span class="fu">plot</span>(d1, d2)</span></code></pre></div>
+<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="unsupervised-learning.html#cb794-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(USArrests)))</span>
+<span id="cb794-2"><a href="unsupervised-learning.html#cb794-2" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">dist</span>(dat)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb794-3"><a href="unsupervised-learning.html#cb794-3" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">cor</span>(<span class="fu">t</span>(dat)))</span>
+<span id="cb794-4"><a href="unsupervised-learning.html#cb794-4" tabindex="-1"></a><span class="fu">plot</span>(d1, d2)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" /></p>
 </div>
 <div id="question-8-10" class="section level3 hasAnchor" number="12.2.2">
@@ -790,8 +790,8 @@ Euclidean distance between the ith and jth observations.</p>
 12.2.3.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="unsupervised-learning.html#cb792-1" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(USArrests, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb792-2"><a href="unsupervised-learning.html#cb792-2" tabindex="-1"></a>pr<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(pr<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb795-1"><a href="unsupervised-learning.html#cb795-1" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(USArrests, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb795-2"><a href="unsupervised-learning.html#cb795-2" tabindex="-1"></a>pr<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">sum</span>(pr<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -801,7 +801,7 @@ Equation 12.10 to obtain the PVE.</li>
 </ol>
 <p>These two approaches should give the same results.</p>
 </blockquote>
-<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="unsupervised-learning.html#cb794-1" tabindex="-1"></a><span class="fu">colSums</span>(pr<span class="sc">$</span>x<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">colSums</span>(<span class="fu">scale</span>(USArrests)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="unsupervised-learning.html#cb797-1" tabindex="-1"></a><span class="fu">colSums</span>(pr<span class="sc">$</span>x<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">colSums</span>(<span class="fu">scale</span>(USArrests)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##        PC1        PC2        PC3        PC4 
 ## 0.62006039 0.24744129 0.08914080 0.04335752</code></pre>
 <blockquote>
@@ -821,16 +821,16 @@ the states.</p>
 cluster the states.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="unsupervised-learning.html#cb796-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb796-2"><a href="unsupervised-learning.html#cb796-2" tabindex="-1"></a>hc <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(USArrests), <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="unsupervised-learning.html#cb799-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb799-2"><a href="unsupervised-learning.html#cb799-2" tabindex="-1"></a>hc <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(USArrests), <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Cut the dendrogram at a height that results in three distinct clusters.
 Which states belong to which clusters?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="unsupervised-learning.html#cb797-1" tabindex="-1"></a>ct <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hc, <span class="dv">3</span>)</span>
-<span id="cb797-2"><a href="unsupervised-learning.html#cb797-2" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="cf">function</span>(i) <span class="fu">names</span>(ct)[ct <span class="sc">==</span> i])</span></code></pre></div>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="unsupervised-learning.html#cb800-1" tabindex="-1"></a>ct <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hc, <span class="dv">3</span>)</span>
+<span id="cb800-2"><a href="unsupervised-learning.html#cb800-2" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="cf">function</span>(i) <span class="fu">names</span>(ct)[ct <span class="sc">==</span> i])</span></code></pre></div>
 <pre><code>## [[1]]
 ##  [1] &quot;Alabama&quot;        &quot;Alaska&quot;         &quot;Arizona&quot;        &quot;California&quot;    
 ##  [5] &quot;Delaware&quot;       &quot;Florida&quot;        &quot;Illinois&quot;       &quot;Louisiana&quot;     
@@ -855,7 +855,7 @@ Which states belong to which clusters?</li>
 distance, <em>after scaling the variables to have standard deviation one</em>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="unsupervised-learning.html#cb799-1" tabindex="-1"></a>hc2 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(<span class="fu">scale</span>(USArrests)), <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="unsupervised-learning.html#cb802-1" tabindex="-1"></a>hc2 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(<span class="fu">scale</span>(USArrests)), <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span></code></pre></div>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>What effect does scaling the variables have on the hierarchical clustering
@@ -864,8 +864,8 @@ inter-observation dissimilarities are computed? Provide a justification for
 your answer.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="unsupervised-learning.html#cb800-1" tabindex="-1"></a>ct <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hc2, <span class="dv">3</span>)</span>
-<span id="cb800-2"><a href="unsupervised-learning.html#cb800-2" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="cf">function</span>(i) <span class="fu">names</span>(ct)[ct <span class="sc">==</span> i])</span></code></pre></div>
+<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="unsupervised-learning.html#cb803-1" tabindex="-1"></a>ct <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hc2, <span class="dv">3</span>)</span>
+<span id="cb803-2"><a href="unsupervised-learning.html#cb803-2" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="cf">function</span>(i) <span class="fu">names</span>(ct)[ct <span class="sc">==</span> i])</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;Alabama&quot;        &quot;Alaska&quot;         &quot;Georgia&quot;        &quot;Louisiana&quot;     
 ## [5] &quot;Mississippi&quot;    &quot;North Carolina&quot; &quot;South Carolina&quot; &quot;Tennessee&quot;     
@@ -913,12 +913,12 @@ scaled.</p>
 <em>there are three distinct classes.</em></p></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="unsupervised-learning.html#cb802-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb802-2"><a href="unsupervised-learning.html#cb802-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">60</span> <span class="sc">*</span> <span class="dv">50</span>), <span class="at">ncol =</span> <span class="dv">50</span>)</span>
-<span id="cb802-3"><a href="unsupervised-learning.html#cb802-3" tabindex="-1"></a>classes <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="at">each =</span> <span class="dv">20</span>)</span>
-<span id="cb802-4"><a href="unsupervised-learning.html#cb802-4" tabindex="-1"></a><span class="fu">dimnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">list</span>(classes, <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>))</span>
-<span id="cb802-5"><a href="unsupervised-learning.html#cb802-5" tabindex="-1"></a>data[classes <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> data[classes <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="sc">+</span> <span class="fl">1.2</span></span>
-<span id="cb802-6"><a href="unsupervised-learning.html#cb802-6" tabindex="-1"></a>data[classes <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, <span class="dv">5</span><span class="sc">:</span><span class="dv">30</span>] <span class="ot">&lt;-</span> data[classes <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, <span class="dv">5</span><span class="sc">:</span><span class="dv">30</span>] <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="unsupervised-learning.html#cb805-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb805-2"><a href="unsupervised-learning.html#cb805-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">60</span> <span class="sc">*</span> <span class="dv">50</span>), <span class="at">ncol =</span> <span class="dv">50</span>)</span>
+<span id="cb805-3"><a href="unsupervised-learning.html#cb805-3" tabindex="-1"></a>classes <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="at">each =</span> <span class="dv">20</span>)</span>
+<span id="cb805-4"><a href="unsupervised-learning.html#cb805-4" tabindex="-1"></a><span class="fu">dimnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">list</span>(classes, <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>))</span>
+<span id="cb805-5"><a href="unsupervised-learning.html#cb805-5" tabindex="-1"></a>data[classes <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> data[classes <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="sc">+</span> <span class="fl">1.2</span></span>
+<span id="cb805-6"><a href="unsupervised-learning.html#cb805-6" tabindex="-1"></a>data[classes <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, <span class="dv">5</span><span class="sc">:</span><span class="dv">30</span>] <span class="ot">&lt;-</span> data[classes <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, <span class="dv">5</span><span class="sc">:</span><span class="dv">30</span>] <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Perform PCA on the 60 observations and plot the first two principal
@@ -931,12 +931,12 @@ classes show at least some separation in the first two principal component
 score vectors.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="unsupervised-learning.html#cb803-1" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(data)</span>
-<span id="cb803-2"><a href="unsupervised-learning.html#cb803-2" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb803-3"><a href="unsupervised-learning.html#cb803-3" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Class =</span> classes, <span class="at">PC1 =</span> pca<span class="sc">$</span>x[, <span class="dv">1</span>], <span class="at">PC2 =</span> pca<span class="sc">$</span>x[, <span class="dv">2</span>]),</span>
-<span id="cb803-4"><a href="unsupervised-learning.html#cb803-4" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">col =</span> Class)</span>
-<span id="cb803-5"><a href="unsupervised-learning.html#cb803-5" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb803-6"><a href="unsupervised-learning.html#cb803-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="unsupervised-learning.html#cb806-1" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(data)</span>
+<span id="cb806-2"><a href="unsupervised-learning.html#cb806-2" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb806-3"><a href="unsupervised-learning.html#cb806-3" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Class =</span> classes, <span class="at">PC1 =</span> pca<span class="sc">$</span>x[, <span class="dv">1</span>], <span class="at">PC2 =</span> pca<span class="sc">$</span>x[, <span class="dv">2</span>]),</span>
+<span id="cb806-4"><a href="unsupervised-learning.html#cb806-4" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">col =</span> Class)</span>
+<span id="cb806-5"><a href="unsupervised-learning.html#cb806-5" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb806-6"><a href="unsupervised-learning.html#cb806-6" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-21-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -950,8 +950,8 @@ class labels?</p>
 <em>clustering labels are the same.</em></p></li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="unsupervised-learning.html#cb804-1" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data, <span class="dv">3</span>)<span class="sc">$</span>cluster</span>
-<span id="cb804-2"><a href="unsupervised-learning.html#cb804-2" tabindex="-1"></a><span class="fu">table</span>(km, <span class="fu">names</span>(km))</span></code></pre></div>
+<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="unsupervised-learning.html#cb807-1" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data, <span class="dv">3</span>)<span class="sc">$</span>cluster</span>
+<span id="cb807-2"><a href="unsupervised-learning.html#cb807-2" tabindex="-1"></a><span class="fu">table</span>(km, <span class="fu">names</span>(km))</span></code></pre></div>
 <pre><code>##    
 ## km   A  B  C
 ##   1  1 20  1
@@ -963,8 +963,8 @@ class labels?</p>
 <li>Perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 2\)</span>. Describe your results.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="unsupervised-learning.html#cb806-1" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data, <span class="dv">2</span>)<span class="sc">$</span>cluster</span>
-<span id="cb806-2"><a href="unsupervised-learning.html#cb806-2" tabindex="-1"></a><span class="fu">table</span>(km, <span class="fu">names</span>(km))</span></code></pre></div>
+<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="unsupervised-learning.html#cb809-1" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data, <span class="dv">2</span>)<span class="sc">$</span>cluster</span>
+<span id="cb809-2"><a href="unsupervised-learning.html#cb809-2" tabindex="-1"></a><span class="fu">table</span>(km, <span class="fu">names</span>(km))</span></code></pre></div>
 <pre><code>##    
 ## km   A  B  C
 ##   1 18 20  1
@@ -977,8 +977,8 @@ most of class A.</p>
 <li>Now perform <span class="math inline">\(K\)</span>-means clustering with <span class="math inline">\(K = 4\)</span>, and describe your results.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="unsupervised-learning.html#cb808-1" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data, <span class="dv">4</span>)<span class="sc">$</span>cluster</span>
-<span id="cb808-2"><a href="unsupervised-learning.html#cb808-2" tabindex="-1"></a><span class="fu">table</span>(km, <span class="fu">names</span>(km))</span></code></pre></div>
+<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="unsupervised-learning.html#cb811-1" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data, <span class="dv">4</span>)<span class="sc">$</span>cluster</span>
+<span id="cb811-2"><a href="unsupervised-learning.html#cb811-2" tabindex="-1"></a><span class="fu">table</span>(km, <span class="fu">names</span>(km))</span></code></pre></div>
 <pre><code>##    
 ## km   A  B  C
 ##   1  0  7  2
@@ -996,8 +996,8 @@ is the first principal component score vector, and the second column is
 the second principal component score vector. Comment on the results.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="unsupervised-learning.html#cb810-1" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(pca<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="dv">3</span>)<span class="sc">$</span>cluster</span>
-<span id="cb810-2"><a href="unsupervised-learning.html#cb810-2" tabindex="-1"></a><span class="fu">table</span>(km, <span class="fu">names</span>(km))</span></code></pre></div>
+<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb813-1"><a href="unsupervised-learning.html#cb813-1" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(pca<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="dv">3</span>)<span class="sc">$</span>cluster</span>
+<span id="cb813-2"><a href="unsupervised-learning.html#cb813-2" tabindex="-1"></a><span class="fu">table</span>(km, <span class="fu">names</span>(km))</span></code></pre></div>
 <pre><code>##    
 ## km   A  B  C
 ##   1  0 20  2
@@ -1011,8 +1011,8 @@ the data <em>after scaling each variable to have standard deviation one</em>. Ho
 do these results compare to those obtained in (b)? Explain.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="unsupervised-learning.html#cb812-1" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(<span class="fu">scale</span>(data), <span class="dv">3</span>)<span class="sc">$</span>cluster</span>
-<span id="cb812-2"><a href="unsupervised-learning.html#cb812-2" tabindex="-1"></a><span class="fu">table</span>(km, <span class="fu">names</span>(km))</span></code></pre></div>
+<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb815-1"><a href="unsupervised-learning.html#cb815-1" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(<span class="fu">scale</span>(data), <span class="dv">3</span>)<span class="sc">$</span>cluster</span>
+<span id="cb815-2"><a href="unsupervised-learning.html#cb815-2" tabindex="-1"></a><span class="fu">table</span>(km, <span class="fu">names</span>(km))</span></code></pre></div>
 <pre><code>##    
 ## km   A  B  C
 ##   1  1 20  1
@@ -1045,47 +1045,47 @@ repetitions of the experiment.</p>
 then on each iteration we replace them with the entries from the rank-<span class="math inline">\(M\)</span> SVD
 approximation of the current matrix. Convergence is tracked via the relative
 reduction in mean squared error on the <em>observed</em> entries.</p>
-<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="unsupervised-learning.html#cb814-1" tabindex="-1"></a>fit_svd <span class="ot">&lt;-</span> <span class="cf">function</span>(X, M) {</span>
-<span id="cb814-2"><a href="unsupervised-learning.html#cb814-2" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">svd</span>(X)</span>
-<span id="cb814-3"><a href="unsupervised-learning.html#cb814-3" tabindex="-1"></a>  s<span class="sc">$</span>u[, <span class="dv">1</span><span class="sc">:</span>M, drop <span class="ot">=</span> <span class="cn">FALSE</span>] <span class="sc">%*%</span> (s<span class="sc">$</span>d[<span class="dv">1</span><span class="sc">:</span>M] <span class="sc">*</span> <span class="fu">t</span>(s<span class="sc">$</span>v[, <span class="dv">1</span><span class="sc">:</span>M, <span class="at">drop =</span> <span class="cn">FALSE</span>]))</span>
-<span id="cb814-4"><a href="unsupervised-learning.html#cb814-4" tabindex="-1"></a>}</span>
-<span id="cb814-5"><a href="unsupervised-learning.html#cb814-5" tabindex="-1"></a></span>
-<span id="cb814-6"><a href="unsupervised-learning.html#cb814-6" tabindex="-1"></a>matrix_completion <span class="ot">&lt;-</span> <span class="cf">function</span>(X, <span class="at">M =</span> <span class="dv">1</span>, <span class="at">max_iter =</span> <span class="dv">100</span>, <span class="at">tol =</span> <span class="fl">1e-7</span>,</span>
-<span id="cb814-7"><a href="unsupervised-learning.html#cb814-7" tabindex="-1"></a>                              <span class="at">verbose =</span> <span class="cn">FALSE</span>, <span class="at">fit =</span> fit_svd) {</span>
-<span id="cb814-8"><a href="unsupervised-learning.html#cb814-8" tabindex="-1"></a>  obs <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(X)</span>
-<span id="cb814-9"><a href="unsupervised-learning.html#cb814-9" tabindex="-1"></a>  Xhat <span class="ot">&lt;-</span> X</span>
-<span id="cb814-10"><a href="unsupervised-learning.html#cb814-10" tabindex="-1"></a>  cm <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(X, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb814-11"><a href="unsupervised-learning.html#cb814-11" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">ncol</span>(X))) Xhat[<span class="sc">!</span>obs[, j], j] <span class="ot">&lt;-</span> cm[j]</span>
-<span id="cb814-12"><a href="unsupervised-learning.html#cb814-12" tabindex="-1"></a></span>
-<span id="cb814-13"><a href="unsupervised-learning.html#cb814-13" tabindex="-1"></a>  mss0 <span class="ot">&lt;-</span> <span class="fu">mean</span>(X[obs]<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb814-14"><a href="unsupervised-learning.html#cb814-14" tabindex="-1"></a>  mss_old <span class="ot">&lt;-</span> mss0</span>
-<span id="cb814-15"><a href="unsupervised-learning.html#cb814-15" tabindex="-1"></a>  rel_err <span class="ot">&lt;-</span> <span class="cn">Inf</span></span>
-<span id="cb814-16"><a href="unsupervised-learning.html#cb814-16" tabindex="-1"></a>  iter <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb814-17"><a href="unsupervised-learning.html#cb814-17" tabindex="-1"></a>  <span class="cf">while</span> (iter <span class="sc">&lt;</span> max_iter <span class="sc">&amp;&amp;</span> rel_err <span class="sc">&gt;</span> tol) {</span>
-<span id="cb814-18"><a href="unsupervised-learning.html#cb814-18" tabindex="-1"></a>    iter <span class="ot">&lt;-</span> iter <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb814-19"><a href="unsupervised-learning.html#cb814-19" tabindex="-1"></a>    Xapp <span class="ot">&lt;-</span> <span class="fu">fit</span>(Xhat, M)</span>
-<span id="cb814-20"><a href="unsupervised-learning.html#cb814-20" tabindex="-1"></a>    Xhat[<span class="sc">!</span>obs] <span class="ot">&lt;-</span> Xapp[<span class="sc">!</span>obs]</span>
-<span id="cb814-21"><a href="unsupervised-learning.html#cb814-21" tabindex="-1"></a>    mss <span class="ot">&lt;-</span> <span class="fu">mean</span>((X[obs] <span class="sc">-</span> Xapp[obs])<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb814-22"><a href="unsupervised-learning.html#cb814-22" tabindex="-1"></a>    rel_err <span class="ot">&lt;-</span> (mss_old <span class="sc">-</span> mss) <span class="sc">/</span> mss0</span>
-<span id="cb814-23"><a href="unsupervised-learning.html#cb814-23" tabindex="-1"></a>    mss_old <span class="ot">&lt;-</span> mss</span>
-<span id="cb814-24"><a href="unsupervised-learning.html#cb814-24" tabindex="-1"></a>    <span class="cf">if</span> (verbose) {</span>
-<span id="cb814-25"><a href="unsupervised-learning.html#cb814-25" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="fu">sprintf</span>(</span>
-<span id="cb814-26"><a href="unsupervised-learning.html#cb814-26" tabindex="-1"></a>        <span class="st">&quot;Iter %3d  MSS=%.6g  rel.err=%.3g</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb814-27"><a href="unsupervised-learning.html#cb814-27" tabindex="-1"></a>        iter, mss, rel_err</span>
-<span id="cb814-28"><a href="unsupervised-learning.html#cb814-28" tabindex="-1"></a>      ))</span>
-<span id="cb814-29"><a href="unsupervised-learning.html#cb814-29" tabindex="-1"></a>    }</span>
-<span id="cb814-30"><a href="unsupervised-learning.html#cb814-30" tabindex="-1"></a>  }</span>
-<span id="cb814-31"><a href="unsupervised-learning.html#cb814-31" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">Xhat =</span> Xhat, <span class="at">iter =</span> iter, <span class="at">mss =</span> mss)</span>
-<span id="cb814-32"><a href="unsupervised-learning.html#cb814-32" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="unsupervised-learning.html#cb817-1" tabindex="-1"></a>fit_svd <span class="ot">&lt;-</span> <span class="cf">function</span>(X, M) {</span>
+<span id="cb817-2"><a href="unsupervised-learning.html#cb817-2" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">svd</span>(X)</span>
+<span id="cb817-3"><a href="unsupervised-learning.html#cb817-3" tabindex="-1"></a>  s<span class="sc">$</span>u[, <span class="dv">1</span><span class="sc">:</span>M, drop <span class="ot">=</span> <span class="cn">FALSE</span>] <span class="sc">%*%</span> (s<span class="sc">$</span>d[<span class="dv">1</span><span class="sc">:</span>M] <span class="sc">*</span> <span class="fu">t</span>(s<span class="sc">$</span>v[, <span class="dv">1</span><span class="sc">:</span>M, <span class="at">drop =</span> <span class="cn">FALSE</span>]))</span>
+<span id="cb817-4"><a href="unsupervised-learning.html#cb817-4" tabindex="-1"></a>}</span>
+<span id="cb817-5"><a href="unsupervised-learning.html#cb817-5" tabindex="-1"></a></span>
+<span id="cb817-6"><a href="unsupervised-learning.html#cb817-6" tabindex="-1"></a>matrix_completion <span class="ot">&lt;-</span> <span class="cf">function</span>(X, <span class="at">M =</span> <span class="dv">1</span>, <span class="at">max_iter =</span> <span class="dv">100</span>, <span class="at">tol =</span> <span class="fl">1e-7</span>,</span>
+<span id="cb817-7"><a href="unsupervised-learning.html#cb817-7" tabindex="-1"></a>                              <span class="at">verbose =</span> <span class="cn">FALSE</span>, <span class="at">fit =</span> fit_svd) {</span>
+<span id="cb817-8"><a href="unsupervised-learning.html#cb817-8" tabindex="-1"></a>  obs <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(X)</span>
+<span id="cb817-9"><a href="unsupervised-learning.html#cb817-9" tabindex="-1"></a>  Xhat <span class="ot">&lt;-</span> X</span>
+<span id="cb817-10"><a href="unsupervised-learning.html#cb817-10" tabindex="-1"></a>  cm <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(X, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb817-11"><a href="unsupervised-learning.html#cb817-11" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">ncol</span>(X))) Xhat[<span class="sc">!</span>obs[, j], j] <span class="ot">&lt;-</span> cm[j]</span>
+<span id="cb817-12"><a href="unsupervised-learning.html#cb817-12" tabindex="-1"></a></span>
+<span id="cb817-13"><a href="unsupervised-learning.html#cb817-13" tabindex="-1"></a>  mss0 <span class="ot">&lt;-</span> <span class="fu">mean</span>(X[obs]<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb817-14"><a href="unsupervised-learning.html#cb817-14" tabindex="-1"></a>  mss_old <span class="ot">&lt;-</span> mss0</span>
+<span id="cb817-15"><a href="unsupervised-learning.html#cb817-15" tabindex="-1"></a>  rel_err <span class="ot">&lt;-</span> <span class="cn">Inf</span></span>
+<span id="cb817-16"><a href="unsupervised-learning.html#cb817-16" tabindex="-1"></a>  iter <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb817-17"><a href="unsupervised-learning.html#cb817-17" tabindex="-1"></a>  <span class="cf">while</span> (iter <span class="sc">&lt;</span> max_iter <span class="sc">&amp;&amp;</span> rel_err <span class="sc">&gt;</span> tol) {</span>
+<span id="cb817-18"><a href="unsupervised-learning.html#cb817-18" tabindex="-1"></a>    iter <span class="ot">&lt;-</span> iter <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb817-19"><a href="unsupervised-learning.html#cb817-19" tabindex="-1"></a>    Xapp <span class="ot">&lt;-</span> <span class="fu">fit</span>(Xhat, M)</span>
+<span id="cb817-20"><a href="unsupervised-learning.html#cb817-20" tabindex="-1"></a>    Xhat[<span class="sc">!</span>obs] <span class="ot">&lt;-</span> Xapp[<span class="sc">!</span>obs]</span>
+<span id="cb817-21"><a href="unsupervised-learning.html#cb817-21" tabindex="-1"></a>    mss <span class="ot">&lt;-</span> <span class="fu">mean</span>((X[obs] <span class="sc">-</span> Xapp[obs])<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb817-22"><a href="unsupervised-learning.html#cb817-22" tabindex="-1"></a>    rel_err <span class="ot">&lt;-</span> (mss_old <span class="sc">-</span> mss) <span class="sc">/</span> mss0</span>
+<span id="cb817-23"><a href="unsupervised-learning.html#cb817-23" tabindex="-1"></a>    mss_old <span class="ot">&lt;-</span> mss</span>
+<span id="cb817-24"><a href="unsupervised-learning.html#cb817-24" tabindex="-1"></a>    <span class="cf">if</span> (verbose) {</span>
+<span id="cb817-25"><a href="unsupervised-learning.html#cb817-25" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="fu">sprintf</span>(</span>
+<span id="cb817-26"><a href="unsupervised-learning.html#cb817-26" tabindex="-1"></a>        <span class="st">&quot;Iter %3d  MSS=%.6g  rel.err=%.3g</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb817-27"><a href="unsupervised-learning.html#cb817-27" tabindex="-1"></a>        iter, mss, rel_err</span>
+<span id="cb817-28"><a href="unsupervised-learning.html#cb817-28" tabindex="-1"></a>      ))</span>
+<span id="cb817-29"><a href="unsupervised-learning.html#cb817-29" tabindex="-1"></a>    }</span>
+<span id="cb817-30"><a href="unsupervised-learning.html#cb817-30" tabindex="-1"></a>  }</span>
+<span id="cb817-31"><a href="unsupervised-learning.html#cb817-31" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">Xhat =</span> Xhat, <span class="at">iter =</span> iter, <span class="at">mss =</span> mss)</span>
+<span id="cb817-32"><a href="unsupervised-learning.html#cb817-32" tabindex="-1"></a>}</span></code></pre></div>
 <p>A short demonstration on <code>Boston</code> with 10% of entries missing and <span class="math inline">\(M = 4\)</span>
 (showing the first few iterations only):</p>
-<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb815-1"><a href="unsupervised-learning.html#cb815-1" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
-<span id="cb815-2"><a href="unsupervised-learning.html#cb815-2" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">scale</span>(Boston)</span>
-<span id="cb815-3"><a href="unsupervised-learning.html#cb815-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb815-4"><a href="unsupervised-learning.html#cb815-4" tabindex="-1"></a>miss <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">length</span>(X), <span class="fl">0.1</span> <span class="sc">*</span> <span class="fu">length</span>(X))</span>
-<span id="cb815-5"><a href="unsupervised-learning.html#cb815-5" tabindex="-1"></a>Xm <span class="ot">&lt;-</span> X</span>
-<span id="cb815-6"><a href="unsupervised-learning.html#cb815-6" tabindex="-1"></a>Xm[miss] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb815-7"><a href="unsupervised-learning.html#cb815-7" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> <span class="dv">4</span>, <span class="at">max_iter =</span> <span class="dv">5</span>, <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb818-1"><a href="unsupervised-learning.html#cb818-1" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
+<span id="cb818-2"><a href="unsupervised-learning.html#cb818-2" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">scale</span>(Boston)</span>
+<span id="cb818-3"><a href="unsupervised-learning.html#cb818-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb818-4"><a href="unsupervised-learning.html#cb818-4" tabindex="-1"></a>miss <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">length</span>(X), <span class="fl">0.1</span> <span class="sc">*</span> <span class="fu">length</span>(X))</span>
+<span id="cb818-5"><a href="unsupervised-learning.html#cb818-5" tabindex="-1"></a>Xm <span class="ot">&lt;-</span> X</span>
+<span id="cb818-6"><a href="unsupervised-learning.html#cb818-6" tabindex="-1"></a>Xm[miss] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb818-7"><a href="unsupervised-learning.html#cb818-7" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> <span class="dv">4</span>, <span class="at">max_iter =</span> <span class="dv">5</span>, <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## Iter   1  MSS=0.228531  rel.err=0.773
 ## Iter   2  MSS=0.213812  rel.err=0.0146
 ## Iter   3  MSS=0.211212  rel.err=0.00258
@@ -1095,32 +1095,32 @@ reduction in mean squared error on the <em>observed</em> entries.</p>
 contains the 25% set, which contains the 20% set, and so on. This isolates the
 effect of the missingness fraction (and <span class="math inline">\(M\)</span>) from the effect of which
 particular cells happened to be hidden.</p>
-<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="unsupervised-learning.html#cb817-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb817-2"><a href="unsupervised-learning.html#cb817-2" tabindex="-1"></a>fracs <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.05</span>, <span class="fl">0.30</span>, <span class="at">by =</span> <span class="fl">0.05</span>)</span>
-<span id="cb817-3"><a href="unsupervised-learning.html#cb817-3" tabindex="-1"></a>Ms <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
-<span id="cb817-4"><a href="unsupervised-learning.html#cb817-4" tabindex="-1"></a>reps <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb817-5"><a href="unsupervised-learning.html#cb817-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(X)</span>
-<span id="cb817-6"><a href="unsupervised-learning.html#cb817-6" tabindex="-1"></a></span>
-<span id="cb817-7"><a href="unsupervised-learning.html#cb817-7" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NA_real_</span>,</span>
-<span id="cb817-8"><a href="unsupervised-learning.html#cb817-8" tabindex="-1"></a>  <span class="at">dim =</span> <span class="fu">c</span>(<span class="fu">length</span>(fracs), <span class="fu">length</span>(Ms), reps),</span>
-<span id="cb817-9"><a href="unsupervised-learning.html#cb817-9" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="at">frac =</span> fracs, <span class="at">M =</span> Ms, <span class="at">rep =</span> <span class="dv">1</span><span class="sc">:</span>reps)</span>
-<span id="cb817-10"><a href="unsupervised-learning.html#cb817-10" tabindex="-1"></a>)</span>
-<span id="cb817-11"><a href="unsupervised-learning.html#cb817-11" tabindex="-1"></a></span>
-<span id="cb817-12"><a href="unsupervised-learning.html#cb817-12" tabindex="-1"></a><span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>reps) {</span>
-<span id="cb817-13"><a href="unsupervised-learning.html#cb817-13" tabindex="-1"></a>  shuf <span class="ot">&lt;-</span> <span class="fu">sample</span>(n)</span>
-<span id="cb817-14"><a href="unsupervised-learning.html#cb817-14" tabindex="-1"></a>  <span class="cf">for</span> (fi <span class="cf">in</span> <span class="fu">seq_along</span>(fracs)) {</span>
-<span id="cb817-15"><a href="unsupervised-learning.html#cb817-15" tabindex="-1"></a>    miss <span class="ot">&lt;-</span> shuf[<span class="dv">1</span><span class="sc">:</span><span class="fu">round</span>(fracs[fi] <span class="sc">*</span> n)]</span>
-<span id="cb817-16"><a href="unsupervised-learning.html#cb817-16" tabindex="-1"></a>    Xm <span class="ot">&lt;-</span> X</span>
-<span id="cb817-17"><a href="unsupervised-learning.html#cb817-17" tabindex="-1"></a>    Xm[miss] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb817-18"><a href="unsupervised-learning.html#cb817-18" tabindex="-1"></a>    <span class="cf">for</span> (mi <span class="cf">in</span> <span class="fu">seq_along</span>(Ms)) {</span>
-<span id="cb817-19"><a href="unsupervised-learning.html#cb817-19" tabindex="-1"></a>      res <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> Ms[mi], <span class="at">max_iter =</span> <span class="dv">50</span>)</span>
-<span id="cb817-20"><a href="unsupervised-learning.html#cb817-20" tabindex="-1"></a>      results[fi, mi, r] <span class="ot">&lt;-</span> <span class="fu">mean</span>((X[miss] <span class="sc">-</span> res<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb817-21"><a href="unsupervised-learning.html#cb817-21" tabindex="-1"></a>    }</span>
-<span id="cb817-22"><a href="unsupervised-learning.html#cb817-22" tabindex="-1"></a>  }</span>
-<span id="cb817-23"><a href="unsupervised-learning.html#cb817-23" tabindex="-1"></a>}</span>
-<span id="cb817-24"><a href="unsupervised-learning.html#cb817-24" tabindex="-1"></a></span>
-<span id="cb817-25"><a href="unsupervised-learning.html#cb817-25" tabindex="-1"></a>mean_err <span class="ot">&lt;-</span> <span class="fu">apply</span>(results, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), mean)</span>
-<span id="cb817-26"><a href="unsupervised-learning.html#cb817-26" tabindex="-1"></a><span class="fu">round</span>(mean_err, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="unsupervised-learning.html#cb820-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb820-2"><a href="unsupervised-learning.html#cb820-2" tabindex="-1"></a>fracs <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.05</span>, <span class="fl">0.30</span>, <span class="at">by =</span> <span class="fl">0.05</span>)</span>
+<span id="cb820-3"><a href="unsupervised-learning.html#cb820-3" tabindex="-1"></a>Ms <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb820-4"><a href="unsupervised-learning.html#cb820-4" tabindex="-1"></a>reps <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb820-5"><a href="unsupervised-learning.html#cb820-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(X)</span>
+<span id="cb820-6"><a href="unsupervised-learning.html#cb820-6" tabindex="-1"></a></span>
+<span id="cb820-7"><a href="unsupervised-learning.html#cb820-7" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NA_real_</span>,</span>
+<span id="cb820-8"><a href="unsupervised-learning.html#cb820-8" tabindex="-1"></a>  <span class="at">dim =</span> <span class="fu">c</span>(<span class="fu">length</span>(fracs), <span class="fu">length</span>(Ms), reps),</span>
+<span id="cb820-9"><a href="unsupervised-learning.html#cb820-9" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="at">frac =</span> fracs, <span class="at">M =</span> Ms, <span class="at">rep =</span> <span class="dv">1</span><span class="sc">:</span>reps)</span>
+<span id="cb820-10"><a href="unsupervised-learning.html#cb820-10" tabindex="-1"></a>)</span>
+<span id="cb820-11"><a href="unsupervised-learning.html#cb820-11" tabindex="-1"></a></span>
+<span id="cb820-12"><a href="unsupervised-learning.html#cb820-12" tabindex="-1"></a><span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>reps) {</span>
+<span id="cb820-13"><a href="unsupervised-learning.html#cb820-13" tabindex="-1"></a>  shuf <span class="ot">&lt;-</span> <span class="fu">sample</span>(n)</span>
+<span id="cb820-14"><a href="unsupervised-learning.html#cb820-14" tabindex="-1"></a>  <span class="cf">for</span> (fi <span class="cf">in</span> <span class="fu">seq_along</span>(fracs)) {</span>
+<span id="cb820-15"><a href="unsupervised-learning.html#cb820-15" tabindex="-1"></a>    miss <span class="ot">&lt;-</span> shuf[<span class="dv">1</span><span class="sc">:</span><span class="fu">round</span>(fracs[fi] <span class="sc">*</span> n)]</span>
+<span id="cb820-16"><a href="unsupervised-learning.html#cb820-16" tabindex="-1"></a>    Xm <span class="ot">&lt;-</span> X</span>
+<span id="cb820-17"><a href="unsupervised-learning.html#cb820-17" tabindex="-1"></a>    Xm[miss] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb820-18"><a href="unsupervised-learning.html#cb820-18" tabindex="-1"></a>    <span class="cf">for</span> (mi <span class="cf">in</span> <span class="fu">seq_along</span>(Ms)) {</span>
+<span id="cb820-19"><a href="unsupervised-learning.html#cb820-19" tabindex="-1"></a>      res <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> Ms[mi], <span class="at">max_iter =</span> <span class="dv">50</span>)</span>
+<span id="cb820-20"><a href="unsupervised-learning.html#cb820-20" tabindex="-1"></a>      results[fi, mi, r] <span class="ot">&lt;-</span> <span class="fu">mean</span>((X[miss] <span class="sc">-</span> res<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb820-21"><a href="unsupervised-learning.html#cb820-21" tabindex="-1"></a>    }</span>
+<span id="cb820-22"><a href="unsupervised-learning.html#cb820-22" tabindex="-1"></a>  }</span>
+<span id="cb820-23"><a href="unsupervised-learning.html#cb820-23" tabindex="-1"></a>}</span>
+<span id="cb820-24"><a href="unsupervised-learning.html#cb820-24" tabindex="-1"></a></span>
+<span id="cb820-25"><a href="unsupervised-learning.html#cb820-25" tabindex="-1"></a>mean_err <span class="ot">&lt;-</span> <span class="fu">apply</span>(results, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), mean)</span>
+<span id="cb820-26"><a href="unsupervised-learning.html#cb820-26" tabindex="-1"></a><span class="fu">round</span>(mean_err, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##       M
 ## frac       1     2     3     4     5     6     7     8
 ##   0.05 0.588 0.559 0.518 1.289 1.476 1.194 1.091 1.280
@@ -1129,16 +1129,16 @@ particular cells happened to be hidden.</p>
 ##   0.2  0.610 0.604 0.608 1.066 1.195 1.191 1.224 1.270
 ##   0.25 0.623 0.621 0.700 1.060 1.168 1.232 1.192 1.278
 ##   0.3  0.621 0.659 0.759 1.103 1.248 1.193 1.223 1.249</code></pre>
-<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="unsupervised-learning.html#cb819-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame.table</span>(mean_err, <span class="at">responseName =</span> <span class="st">&quot;MSE&quot;</span>)</span>
-<span id="cb819-2"><a href="unsupervised-learning.html#cb819-2" tabindex="-1"></a>df<span class="sc">$</span>frac <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(df<span class="sc">$</span>frac))</span>
-<span id="cb819-3"><a href="unsupervised-learning.html#cb819-3" tabindex="-1"></a>df<span class="sc">$</span>M <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">as.character</span>(df<span class="sc">$</span>M))</span>
-<span id="cb819-4"><a href="unsupervised-learning.html#cb819-4" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(frac, MSE, <span class="at">color =</span> <span class="fu">factor</span>(M), <span class="at">group =</span> M)) <span class="sc">+</span></span>
-<span id="cb819-5"><a href="unsupervised-learning.html#cb819-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb819-6"><a href="unsupervised-learning.html#cb819-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb819-7"><a href="unsupervised-learning.html#cb819-7" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb819-8"><a href="unsupervised-learning.html#cb819-8" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fraction of entries missing&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Mean squared error&quot;</span>,</span>
-<span id="cb819-9"><a href="unsupervised-learning.html#cb819-9" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;M&quot;</span></span>
-<span id="cb819-10"><a href="unsupervised-learning.html#cb819-10" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="unsupervised-learning.html#cb822-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame.table</span>(mean_err, <span class="at">responseName =</span> <span class="st">&quot;MSE&quot;</span>)</span>
+<span id="cb822-2"><a href="unsupervised-learning.html#cb822-2" tabindex="-1"></a>df<span class="sc">$</span>frac <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(df<span class="sc">$</span>frac))</span>
+<span id="cb822-3"><a href="unsupervised-learning.html#cb822-3" tabindex="-1"></a>df<span class="sc">$</span>M <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">as.character</span>(df<span class="sc">$</span>M))</span>
+<span id="cb822-4"><a href="unsupervised-learning.html#cb822-4" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(frac, MSE, <span class="at">color =</span> <span class="fu">factor</span>(M), <span class="at">group =</span> M)) <span class="sc">+</span></span>
+<span id="cb822-5"><a href="unsupervised-learning.html#cb822-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb822-6"><a href="unsupervised-learning.html#cb822-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb822-7"><a href="unsupervised-learning.html#cb822-7" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb822-8"><a href="unsupervised-learning.html#cb822-8" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fraction of entries missing&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Mean squared error&quot;</span>,</span>
+<span id="cb822-9"><a href="unsupervised-learning.html#cb822-9" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;M&quot;</span></span>
+<span id="cb822-10"><a href="unsupervised-learning.html#cb822-10" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-29-1.png" alt="" width="672" /></p>
 <p>A small number of components (<span class="math inline">\(M \le 3\)</span>) gives by far the best imputations
 on standardized <code>Boston</code>. Beyond that the rank-<span class="math inline">\(M\)</span> approximation starts to
@@ -1160,28 +1160,28 @@ rather than <code>svd()</code>.</p>
 rank-<span class="math inline">\(M\)</span> approximation is <code>x[, 1:M] %*% t(rotation[, 1:M])</code> — with the column
 means added back if we center. We can plug this into the matrix completion
 function from Q11 by passing a different <code>fit</code> argument:</p>
-<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="unsupervised-learning.html#cb820-1" tabindex="-1"></a>fit_prcomp <span class="ot">&lt;-</span> <span class="cf">function</span>(X, M) {</span>
-<span id="cb820-2"><a href="unsupervised-learning.html#cb820-2" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(X, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb820-3"><a href="unsupervised-learning.html#cb820-3" tabindex="-1"></a>  approx <span class="ot">&lt;-</span> p<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span>M, drop <span class="ot">=</span> <span class="cn">FALSE</span>] <span class="sc">%*%</span> <span class="fu">t</span>(p<span class="sc">$</span>rotation[, <span class="dv">1</span><span class="sc">:</span>M, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb820-4"><a href="unsupervised-learning.html#cb820-4" tabindex="-1"></a>  <span class="fu">sweep</span>(approx, <span class="dv">2</span>, p<span class="sc">$</span>center, <span class="at">FUN =</span> <span class="st">&quot;+&quot;</span>)</span>
-<span id="cb820-5"><a href="unsupervised-learning.html#cb820-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="unsupervised-learning.html#cb823-1" tabindex="-1"></a>fit_prcomp <span class="ot">&lt;-</span> <span class="cf">function</span>(X, M) {</span>
+<span id="cb823-2"><a href="unsupervised-learning.html#cb823-2" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(X, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb823-3"><a href="unsupervised-learning.html#cb823-3" tabindex="-1"></a>  approx <span class="ot">&lt;-</span> p<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span>M, drop <span class="ot">=</span> <span class="cn">FALSE</span>] <span class="sc">%*%</span> <span class="fu">t</span>(p<span class="sc">$</span>rotation[, <span class="dv">1</span><span class="sc">:</span>M, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb823-4"><a href="unsupervised-learning.html#cb823-4" tabindex="-1"></a>  <span class="fu">sweep</span>(approx, <span class="dv">2</span>, p<span class="sc">$</span>center, <span class="at">FUN =</span> <span class="st">&quot;+&quot;</span>)</span>
+<span id="cb823-5"><a href="unsupervised-learning.html#cb823-5" tabindex="-1"></a>}</span></code></pre></div>
 <p>The two implementations give essentially identical imputations (any
 differences are at the level of numerical precision):</p>
-<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb821-1"><a href="unsupervised-learning.html#cb821-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb821-2"><a href="unsupervised-learning.html#cb821-2" tabindex="-1"></a>miss <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">length</span>(X), <span class="fl">0.1</span> <span class="sc">*</span> <span class="fu">length</span>(X))</span>
-<span id="cb821-3"><a href="unsupervised-learning.html#cb821-3" tabindex="-1"></a>Xm <span class="ot">&lt;-</span> X</span>
-<span id="cb821-4"><a href="unsupervised-learning.html#cb821-4" tabindex="-1"></a>Xm[miss] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb821-5"><a href="unsupervised-learning.html#cb821-5" tabindex="-1"></a>r_svd <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> <span class="dv">4</span>, <span class="at">fit =</span> fit_svd, <span class="at">max_iter =</span> <span class="dv">50</span>)</span>
-<span id="cb821-6"><a href="unsupervised-learning.html#cb821-6" tabindex="-1"></a>r_pca <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> <span class="dv">4</span>, <span class="at">fit =</span> fit_prcomp, <span class="at">max_iter =</span> <span class="dv">50</span>)</span>
-<span id="cb821-7"><a href="unsupervised-learning.html#cb821-7" tabindex="-1"></a><span class="fu">cat</span>(</span>
-<span id="cb821-8"><a href="unsupervised-learning.html#cb821-8" tabindex="-1"></a>  <span class="st">&quot;MSE on held-out entries (svd):   &quot;</span>,</span>
-<span id="cb821-9"><a href="unsupervised-learning.html#cb821-9" tabindex="-1"></a>  <span class="fu">mean</span>((X[miss] <span class="sc">-</span> r_svd<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span></span>
-<span id="cb821-10"><a href="unsupervised-learning.html#cb821-10" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="unsupervised-learning.html#cb824-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb824-2"><a href="unsupervised-learning.html#cb824-2" tabindex="-1"></a>miss <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">length</span>(X), <span class="fl">0.1</span> <span class="sc">*</span> <span class="fu">length</span>(X))</span>
+<span id="cb824-3"><a href="unsupervised-learning.html#cb824-3" tabindex="-1"></a>Xm <span class="ot">&lt;-</span> X</span>
+<span id="cb824-4"><a href="unsupervised-learning.html#cb824-4" tabindex="-1"></a>Xm[miss] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb824-5"><a href="unsupervised-learning.html#cb824-5" tabindex="-1"></a>r_svd <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> <span class="dv">4</span>, <span class="at">fit =</span> fit_svd, <span class="at">max_iter =</span> <span class="dv">50</span>)</span>
+<span id="cb824-6"><a href="unsupervised-learning.html#cb824-6" tabindex="-1"></a>r_pca <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> <span class="dv">4</span>, <span class="at">fit =</span> fit_prcomp, <span class="at">max_iter =</span> <span class="dv">50</span>)</span>
+<span id="cb824-7"><a href="unsupervised-learning.html#cb824-7" tabindex="-1"></a><span class="fu">cat</span>(</span>
+<span id="cb824-8"><a href="unsupervised-learning.html#cb824-8" tabindex="-1"></a>  <span class="st">&quot;MSE on held-out entries (svd):   &quot;</span>,</span>
+<span id="cb824-9"><a href="unsupervised-learning.html#cb824-9" tabindex="-1"></a>  <span class="fu">mean</span>((X[miss] <span class="sc">-</span> r_svd<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb824-10"><a href="unsupervised-learning.html#cb824-10" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## MSE on held-out entries (svd):    1.048215</code></pre>
-<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="unsupervised-learning.html#cb823-1" tabindex="-1"></a><span class="fu">cat</span>(</span>
-<span id="cb823-2"><a href="unsupervised-learning.html#cb823-2" tabindex="-1"></a>  <span class="st">&quot;MSE on held-out entries (prcomp):&quot;</span>,</span>
-<span id="cb823-3"><a href="unsupervised-learning.html#cb823-3" tabindex="-1"></a>  <span class="fu">mean</span>((X[miss] <span class="sc">-</span> r_pca<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span></span>
-<span id="cb823-4"><a href="unsupervised-learning.html#cb823-4" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="unsupervised-learning.html#cb826-1" tabindex="-1"></a><span class="fu">cat</span>(</span>
+<span id="cb826-2"><a href="unsupervised-learning.html#cb826-2" tabindex="-1"></a>  <span class="st">&quot;MSE on held-out entries (prcomp):&quot;</span>,</span>
+<span id="cb826-3"><a href="unsupervised-learning.html#cb826-3" tabindex="-1"></a>  <span class="fu">mean</span>((X[miss] <span class="sc">-</span> r_pca<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb826-4"><a href="unsupervised-learning.html#cb826-4" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## MSE on held-out entries (prcomp): 1.050214</code></pre>
 </div>
 <div id="question-13-3" class="section level3 hasAnchor" number="12.2.7">
@@ -1195,8 +1195,8 @@ second 20 are from a diseased group.</p>
 <li>Load in the data using <code>read.csv()</code>. You will need to select <code>header = F</code>.</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb825-1"><a href="unsupervised-learning.html#cb825-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Ch12Ex13.csv&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb825-2"><a href="unsupervised-learning.html#cb825-2" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">&quot;H&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>), <span class="fu">paste0</span>(<span class="st">&quot;D&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="unsupervised-learning.html#cb828-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Ch12Ex13.csv&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb828-2"><a href="unsupervised-learning.html#cb828-2" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">&quot;H&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>), <span class="fu">paste0</span>(<span class="st">&quot;D&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>))</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Apply hierarchical clustering to the samples using correlation-based
@@ -1204,15 +1204,15 @@ distance, and plot the dendrogram. Do the genes separate the samples into
 the two groups? Do your results depend on the type of linkage used?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="unsupervised-learning.html#cb826-1" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">cor</span>(data))</span>
-<span id="cb826-2"><a href="unsupervised-learning.html#cb826-2" tabindex="-1"></a>hc.complete <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dd, <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
-<span id="cb826-3"><a href="unsupervised-learning.html#cb826-3" tabindex="-1"></a><span class="fu">plot</span>(hc.complete)</span></code></pre></div>
+<div class="sourceCode" id="cb829"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb829-1"><a href="unsupervised-learning.html#cb829-1" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">cor</span>(data))</span>
+<span id="cb829-2"><a href="unsupervised-learning.html#cb829-2" tabindex="-1"></a>hc.complete <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dd, <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb829-3"><a href="unsupervised-learning.html#cb829-3" tabindex="-1"></a><span class="fu">plot</span>(hc.complete)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-33-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb827-1"><a href="unsupervised-learning.html#cb827-1" tabindex="-1"></a>hc.average <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dd, <span class="at">method =</span> <span class="st">&quot;average&quot;</span>)</span>
-<span id="cb827-2"><a href="unsupervised-learning.html#cb827-2" tabindex="-1"></a><span class="fu">plot</span>(hc.average)</span></code></pre></div>
+<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="unsupervised-learning.html#cb830-1" tabindex="-1"></a>hc.average <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dd, <span class="at">method =</span> <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb830-2"><a href="unsupervised-learning.html#cb830-2" tabindex="-1"></a><span class="fu">plot</span>(hc.average)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-33-2.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="unsupervised-learning.html#cb828-1" tabindex="-1"></a>hc.single <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dd, <span class="at">method =</span> <span class="st">&quot;single&quot;</span>)</span>
-<span id="cb828-2"><a href="unsupervised-learning.html#cb828-2" tabindex="-1"></a><span class="fu">plot</span>(hc.single)</span></code></pre></div>
+<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="unsupervised-learning.html#cb831-1" tabindex="-1"></a>hc.single <span class="ot">&lt;-</span> <span class="fu">hclust</span>(dd, <span class="at">method =</span> <span class="st">&quot;single&quot;</span>)</span>
+<span id="cb831-2"><a href="unsupervised-learning.html#cb831-2" tabindex="-1"></a><span class="fu">plot</span>(hc.single)</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-33-3.png" alt="" width="672" /></p>
 <p>Yes the samples clearly separate into the two groups, although the results
 depend somewhat on the linkage method used. In the case of average clustering,
@@ -1227,9 +1227,9 @@ groups. Suggest a way to answer this question, and apply it here.</li>
 would be to determine which genes show the most significant differences between
 the groups by applying a t-test to each group. We can then select those with a
 FDR adjusted p-value less than some given threshold (e.g. 0.05).</p>
-<div class="sourceCode" id="cb829"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb829-1"><a href="unsupervised-learning.html#cb829-1" tabindex="-1"></a>class <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Healthy&quot;</span>, <span class="st">&quot;Diseased&quot;</span>), <span class="at">each =</span> <span class="dv">20</span>))</span>
-<span id="cb829-2"><a href="unsupervised-learning.html#cb829-2" tabindex="-1"></a>pvals <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(<span class="fu">apply</span>(data, <span class="dv">1</span>, <span class="cf">function</span>(v) <span class="fu">t.test</span>(v <span class="sc">~</span> class)<span class="sc">$</span>p.value), <span class="at">method =</span> <span class="st">&quot;fdr&quot;</span>)</span>
-<span id="cb829-3"><a href="unsupervised-learning.html#cb829-3" tabindex="-1"></a><span class="fu">which</span>(pvals <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb832-1"><a href="unsupervised-learning.html#cb832-1" tabindex="-1"></a>class <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Healthy&quot;</span>, <span class="st">&quot;Diseased&quot;</span>), <span class="at">each =</span> <span class="dv">20</span>))</span>
+<span id="cb832-2"><a href="unsupervised-learning.html#cb832-2" tabindex="-1"></a>pvals <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(<span class="fu">apply</span>(data, <span class="dv">1</span>, <span class="cf">function</span>(v) <span class="fu">t.test</span>(v <span class="sc">~</span> class)<span class="sc">$</span>p.value), <span class="at">method =</span> <span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb832-3"><a href="unsupervised-learning.html#cb832-3" tabindex="-1"></a><span class="fu">which</span>(pvals <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>##   [1]  11  12  13  14  15  16  17  18  19  20 135 156 172 448 501 502 503 504
 ##  [19] 505 506 507 508 509 510 511 512 513 514 515 516 517 518 519 520 521 522
 ##  [37] 523 524 525 526 527 528 529 530 531 532 533 534 535 536 537 538 539 540
