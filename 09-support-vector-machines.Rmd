@@ -372,14 +372,14 @@ data <- data.frame(
 )
 data$y <- (data$class == "red") * 5 + rnorm(200)
 
-# Add barley separable points (these are simulated "noise" values)
+# Add barely separable points (these are simulated "noise" values)
 newdata <- data.frame(x = rnorm(30))
 newdata$y <- 1.5 * newdata$x + 3 + rnorm(30, 0, 1)
 newdata$class <- ifelse((1.5 * newdata$x + 3) - newdata$y > 0, "blue", "red")
 
 data <- rbind(data, newdata)
 
-# remove any that cause misclassification leaving data that is barley linearly
+# remove any that cause misclassification leaving data that is barely linearly
 # separable, but along an axis that is not y = 2.5 (which would be correct
 # for the "true" data.
 data <- data[!(data$class == "red") == ((1.5 * data$x + 3 - data$y) > 0), ]
@@ -525,7 +525,7 @@ sapply(results, function(x) x$best.parameters)
 >    containing your data, you can type_
 >    
 >    ```r
->    > plot(svmfit, dat, x1 ∼ x4)
+>    > plot(svmfit, dat, x1 ~ x4)
 >    ``` 
 >    
 >    _in order to plot just the first and fourth variables. However, you must 

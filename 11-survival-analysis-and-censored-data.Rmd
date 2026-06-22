@@ -285,7 +285,7 @@ $$
 > follows a hypergeometric distribution. Write the parameters of this
 > distribution in terms of $r_{1k}$, $r_k$, and $q_k$.
 
-A hypergeometric distributions models sampling without replacement from a finite
+A hypergeometric distribution models sampling without replacement from a finite
 pool where each sample is a success or failure. This fits the situation here,
 where with have a finite number of samples in the risk set.
 

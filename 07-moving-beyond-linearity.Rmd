@@ -114,12 +114,12 @@ f_2''(\xi) & = 2\beta_2 - 6\beta_4\xi + 6\beta_3\xi + 6\beta_4\xi \\
 >
 > a. $\lambda=\infty, m=0$.
 
-Here we penalize the $g$ and a infinite $\lambda$ means that this penalty
+Here we penalize the $g$ and an infinite $\lambda$ means that this penalty
 dominates. This means that the $\hat{g}$ will be 0.
 
 > b. $\lambda=\infty, m=1$.
 
-Here we penalize the first derivative (the slope) of $g$ and a infinite
+Here we penalize the first derivative (the slope) of $g$ and an infinite
 $\lambda$ means that this penalty dominates. Thus the slope will be 0
 (and otherwise best fitting $x$, i.e. at the mean of $x$).
 
@@ -132,7 +132,7 @@ straight (and otherwise best fitting $x$).
 > d. $\lambda=\infty, m=3$.
 
 Here we penalize the third derivative (the change of the change of slope) of $g$
-and a infinite $\lambda$ means that this penalty dominates. In other words,
+and an infinite $\lambda$ means that this penalty dominates. In other words,
 the curve will have a consistent rate of change (e.g. a quadratic
 function or similar).
 

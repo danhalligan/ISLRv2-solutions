@@ -108,7 +108,7 @@ p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi}\sigma_k} \exp(-\frac{1}{2\sigma_k^2}(x 
               {\sum_{l=1}^K \pi_l\frac{1}{\sqrt{2\pi}\sigma_l} \exp(-\frac{1}{2\sigma_l^2}(x - \mu_l)^2)}
 $$
 
-Now lets derive the Bayes classifier, without assuming 
+Now let's derive the Bayes classifier, without assuming 
 $\sigma_1^2 = ... = \sigma_K^2$
 
 Maximizing $p_k(x)$ also maximizes any monotonic function of $p_k(x)$, and
@@ -123,12 +123,12 @@ Remember that we are maximizing over $k$, and since the last term does not
 vary with $k$ it can be ignored. So we just need to maximize
 
 \begin{align}
-f &= \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi\sigma_k}}\right) - \frac{1}{2\sigma_k^2}(x - \mu_k)^2 \\
-  &= \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi\sigma_k}}\right) - \frac{x^2}{2\sigma_k^2} + \frac{x\mu_k}{\sigma_k^2} - \frac{\mu_k^2}{2\sigma_k^2}  \\
+f &= \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi}\sigma_k}\right) - \frac{1}{2\sigma_k^2}(x - \mu_k)^2 \\
+  &= \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi}\sigma_k}\right) - \frac{x^2}{2\sigma_k^2} + \frac{x\mu_k}{\sigma_k^2} - \frac{\mu_k^2}{2\sigma_k^2}  \\
 \end{align}
 
 However, unlike in Q2, $\frac{x^2}{2\sigma_k^2}$ is not independent of $k$, so
-we retain the term with $x^2$, hence $f$, the Bayes’ classifier, is a
+we retain the term with $x^2$, hence $f$, the Bayes' classifier, is a
 quadratic function of $x$.
 
 ### Question 4
@@ -288,7 +288,7 @@ Value $v$ for companies (N) not issuing a dividend = $v_N \sim \mathcal{N}(0, 36
 and $p(D) = 0.8$.
 
 We want to find $p(D|v)$ and we can calculate $p(v|D)$ from the Gaussian
-density function. Note that since $e^2$ is equal between both classes, the
+density function. Note that since $\sigma^2$ is equal between both classes, the
 term $\frac{1}{\sqrt{2\pi\sigma^2}}$ cancels.
 
 \begin{align}

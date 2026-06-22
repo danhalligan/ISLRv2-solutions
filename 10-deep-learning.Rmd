@@ -116,8 +116,8 @@ which is just equation 10.13.
 
 $$
 Pr(Y=k|X=x) = \frac
-{e^{\beta_{K0} + \beta_{K1}x_1 + ... + \beta_{Kp}x_p}}
-{\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x1 + ... + \beta_{lp}x_p}}
+{e^{\beta_{k0} + \beta_{k1}x_1 + ... + \beta_{kp}x_p}}
+{\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x_1 + ... + \beta_{lp}x_p}}
 $$
 
 adding constants $c_j$ to the coefficients $\beta_{kj}$ for every class $k$
@@ -170,7 +170,7 @@ So, $\log(\ell)$ is:
 \begin{align*}
 \log(\ell) 
  &= \log \left( \prod_{i:y_i=1}p(x_i) \prod_{i':y_i'=0}(1-p(x_i')) \right ) \\
- &= \sum_{i:y_1=1}\log(p(x_i)) + \sum_{i':y_i'=0}\log(1-p(x_i')) \\
+ &= \sum_{i:y_i=1}\log(p(x_i)) + \sum_{i':y_i'=0}\log(1-p(x_i')) \\
 \end{align*}
 
 If we set $y_i$ to be an indicator variable such that $y_{i1}$ and $y_{i0}$ are
@@ -178,14 +178,14 @@ If we set $y_i$ to be an indicator variable such that $y_{i1}$ and $y_{i0}$ are
 we can write:
 
 $$
-\log(\ell) = \sum_{i}y_{i1}\log(p(x_i)) + \sum_{i}y_{i0}\log(1-p(x_i'))
+\log(\ell) = \sum_{i}y_{i1}\log(p(x_i)) + \sum_{i}y_{i0}\log(1-p(x_i))
 $$
 
 If we also let $f_1(x) = p(x)$ and $f_0(x) = 1 - p(x)$ then:
 
 \begin{align*}
 \log(\ell) 
- &= \sum_i y_{i1}\log(f_1(x_i)) + \sum_{i}y_{i0}\log(f_0(x_i')) \\
+ &= \sum_i y_{i1}\log(f_1(x_i)) + \sum_{i}y_{i0}\log(f_0(x_i)) \\
  &= \sum_i \sum_{m=0}^1 y_{im}\log(f_m(x_i)) \\
 \end{align*}
 
@@ -228,9 +228,9 @@ connections to all other output nodes.
 > d. If there were no constraints, then how many weights would there be in the
 > ordinary feed-forward neural network in (c)?
 
-With no constraints, we would connect each input pixel in our original 32x32 
-image to each output pixel in each of our convolution layers, with an bias 
-term for each original pixel. So each output pixel would require 32x32 weights 
+With no constraints, we would connect each input pixel in our original 32x32
+image to each output pixel in each of our convolution layers, with a bias
+term for each output pixel. So each output pixel would require 32x32 weights 
 + 1 bias term. This would give a total of (32×32+1)×28×28×3 = 2,410,800 
 parameters.
 
@@ -242,7 +242,7 @@ parameters.
 
 Mean absolute error considers _absolute_ differences between predictions and 
 observed values, whereas $R^2$ considers the (normalized) sum of _squared_
-differences, thus larger errors contribute relatively ore to $R^2$ than mean
+differences, thus larger errors contribute relatively more to $R^2$ than mean
 absolute error.
 
 ## Applied
