@@ -712,13 +712,48 @@ sock purchases.</p>
 vectors provide an approximation to a matrix, in the sense of (12.5).
 Specifically, the principal component score and loading vectors solve the
 optimization problem given in (12.6).</p>
-<p>Now, suppose that the M principal component score vectors zim, <span class="math inline">\(m = 1,...,M\)</span>,
+<p>Now, suppose that the <span class="math inline">\(M\)</span> principal component score vectors <span class="math inline">\(z_{im}\)</span>,
+<span class="math inline">\(m = 1,...,M\)</span>,
 are known. Using (12.6), explain that the first <span class="math inline">\(M\)</span> principal component
 loading vectors <span class="math inline">\(\phi_{jm}\)</span>, <span class="math inline">\(m = 1,...,M\)</span>, can be obtaining by performing <span class="math inline">\(M\)</span>
 separate least squares linear regressions. In each regression, the principal
 component score vectors are the predictors, and one of the features of the
 data matrix is the response.</p>
 </blockquote>
+<p>Equation (12.6) is</p>
+<p><span class="math display">\[
+\min_{\{z_{im}\},\,\{\phi_{jm}\}}
+  \sum_{j=1}^p \sum_{i=1}^n
+  \Bigl(x_{ij} - \sum_{m=1}^M z_{im}\,\phi_{jm}\Bigr)^2.
+\]</span></p>
+<p>With the scores <span class="math inline">\(z_{im}\)</span> held fixed, this objective is separable over <span class="math inline">\(j\)</span>: the
+term contributed by feature <span class="math inline">\(j\)</span> is</p>
+<p><span class="math display">\[
+\sum_{i=1}^n \Bigl(x_{ij} - \sum_{m=1}^M z_{im}\,\phi_{jm}\Bigr)^2,
+\]</span></p>
+<p>which is exactly the residual sum of squares for an OLS regression of the
+<span class="math inline">\(j\)</span>-th column of <span class="math inline">\(\mathbf{X}\)</span> on the <span class="math inline">\(M\)</span> score vectors <span class="math inline">\(z_1, \ldots, z_M\)</span> (no
+intercept, since the columns of <span class="math inline">\(\mathbf{X}\)</span> are centered), with regression
+coefficients <span class="math inline">\(\phi_{j1}, \ldots, \phi_{jM}\)</span>. Minimizing in
+<span class="math inline">\(\phi_{j1}, \ldots, \phi_{jM}\)</span> for each of the <span class="math inline">\(p\)</span> features therefore recovers
+all entries of the loading matrix.</p>
+<p>In matrix form, with <span class="math inline">\(\mathbf{Z} \in \mathbb{R}^{n \times M}\)</span> collecting the
+score vectors and <span class="math inline">\(\boldsymbol\Phi \in \mathbb{R}^{p \times M}\)</span> the loadings,
+the OLS solution is</p>
+<p><span class="math display">\[
+\hat{\boldsymbol\Phi} \;=\; \mathbf{X}^\top \mathbf{Z}\,
+  (\mathbf{Z}^\top \mathbf{Z})^{-1}.
+\]</span></p>
+<p>Because PCA produces orthogonal score vectors, <span class="math inline">\(\mathbf{Z}^\top \mathbf{Z}\)</span> is
+diagonal and the <span class="math inline">\(M\)</span> predictors decouple. Equivalently then, the <span class="math inline">\(m\)</span>-th
+loading vector <span class="math inline">\(\phi_m \in \mathbb{R}^p\)</span> is obtained by regressing each column
+of <span class="math inline">\(\mathbf{X}\)</span> on just <span class="math inline">\(z_m\)</span>, giving</p>
+<p><span class="math display">\[
+\hat\phi_{jm} \;=\;
+  \frac{\sum_{i=1}^n x_{ij}\, z_{im}}{\sum_{i=1}^n z_{im}^2},
+\]</span></p>
+<p>so the loadings can also be read as <span class="math inline">\(M\)</span> separate regressions, one per score
+vector, each producing a full loading vector.</p>
 </div>
 </div>
 <div id="applied-10" class="section level2 hasAnchor" number="12.2">
