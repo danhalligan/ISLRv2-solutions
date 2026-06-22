@@ -426,8 +426,9 @@ km <- kmeans(data, 2)$cluster
 table(km, names(km))
 ```
 
-$K$-means effectively defines cluster 2 to be class B, but cluster 1 is a mix
-of classes A and B. 
+$K$-means effectively defines cluster 2 to be class C (capturing 19 of 20
+class-C observations), while cluster 1 absorbs all of class B together with
+most of class A.
 
 > e.  Now perform $K$-means clustering with $K = 4$, and describe your results.
 
@@ -436,8 +437,8 @@ km <- kmeans(data, 4)$cluster
 table(km, names(km))
 ```
 
-$K$-means effectively defines cluster 1 to be class B, cluster 2 to be class A
-but clusters 3 and 4 are split over class C.
+$K$-means effectively defines cluster 2 to be class A and cluster 3 to be
+class C, while clusters 1 and 4 split class B between them.
 
 > f.  Now perform $K$-means clustering with $K = 3$ on the first two principal
 >     component score vectors, rather than on the raw data. That is, perform
@@ -461,7 +462,10 @@ km <- kmeans(scale(data), 3)$cluster
 table(km, names(km))
 ```
 
-$K$-means appears to perform less well on the scaled data in this case.
+$K$-means performs about as well on the scaled data as on the raw data (in
+this case the same two observations are misclassified). Because the variables
+were simulated on a common scale, scaling each variable to unit variance does
+not change the relative geometry much.
 
 ### Question 11
 
@@ -481,6 +485,106 @@ $K$-means appears to perform less well on the scaled data in this case.
 > observations that are missing, and the value of $M$, averaged over 10
 > repetitions of the experiment.
 
+We follow Algorithm 12.1: missing entries are initialised to the column mean,
+then on each iteration we replace them with the entries from the rank-$M$ SVD
+approximation of the current matrix. Convergence is tracked via the relative
+reduction in mean squared error on the _observed_ entries.
+
+```{r}
+fit_svd <- function(X, M) {
+  s <- svd(X)
+  s$u[, 1:M, drop = FALSE] %*% (s$d[1:M] * t(s$v[, 1:M, drop = FALSE]))
+}
+
+matrix_completion <- function(X, M = 1, max_iter = 100, tol = 1e-7,
+                              verbose = FALSE, fit = fit_svd) {
+  obs <- !is.na(X)
+  Xhat <- X
+  cm <- colMeans(X, na.rm = TRUE)
+  for (j in seq_len(ncol(X))) Xhat[!obs[, j], j] <- cm[j]
+
+  mss0    <- mean(X[obs]^2)
+  mss_old <- mss0
+  rel_err <- Inf
+  iter    <- 0
+  while (iter < max_iter && rel_err > tol) {
+    iter <- iter + 1
+    Xapp <- fit(Xhat, M)
+    Xhat[!obs] <- Xapp[!obs]
+    mss     <- mean((X[obs] - Xapp[obs])^2)
+    rel_err <- (mss_old - mss) / mss0
+    mss_old <- mss
+    if (verbose) {
+      cat(sprintf("Iter %3d  MSS=%.6g  rel.err=%.3g\n",
+                  iter, mss, rel_err))
+    }
+  }
+  list(Xhat = Xhat, iter = iter, mss = mss)
+}
+```
+
+A short demonstration on `Boston` with 10% of entries missing and $M = 4$
+(showing the first few iterations only):
+
+```{r, message = FALSE, warning = FALSE}
+library(ISLR2)
+X <- scale(Boston)
+set.seed(1)
+miss <- sample(length(X), 0.1 * length(X))
+Xm <- X
+Xm[miss] <- NA
+res <- matrix_completion(Xm, M = 4, max_iter = 5, verbose = TRUE)
+```
+
+For the experiment we use a _nested_ missing-data design: the 30% missing set
+contains the 25% set, which contains the 20% set, and so on. This isolates the
+effect of the missingness fraction (and $M$) from the effect of which
+particular cells happened to be hidden.
+
+```{r q11-experiment, cache = TRUE}
+set.seed(1)
+fracs <- seq(0.05, 0.30, by = 0.05)
+Ms    <- 1:8
+reps  <- 10
+n     <- length(X)
+
+results <- array(NA_real_,
+  dim = c(length(fracs), length(Ms), reps),
+  dimnames = list(frac = fracs, M = Ms, rep = 1:reps))
+
+for (r in 1:reps) {
+  shuf <- sample(n)
+  for (fi in seq_along(fracs)) {
+    miss <- shuf[1:round(fracs[fi] * n)]
+    Xm <- X
+    Xm[miss] <- NA
+    for (mi in seq_along(Ms)) {
+      res <- matrix_completion(Xm, M = Ms[mi], max_iter = 50)
+      results[fi, mi, r] <- mean((X[miss] - res$Xhat[miss])^2)
+    }
+  }
+}
+
+mean_err <- apply(results, c(1, 2), mean)
+round(mean_err, 3)
+```
+
+```{r}
+df <- as.data.frame.table(mean_err, responseName = "MSE")
+df$frac <- as.numeric(as.character(df$frac))
+df$M    <- as.integer(as.character(df$M))
+ggplot(df, aes(frac, MSE, colour = factor(M), group = M)) +
+  geom_line() + geom_point() +
+  labs(x = "Fraction of entries missing", y = "Mean squared error",
+       colour = "M")
+```
+
+A small number of components ($M \le 3$) gives by far the best imputations
+on standardised `Boston`. Beyond that the rank-$M$ approximation starts to
+overfit the imputed values themselves, and the error roughly doubles. As
+expected, the error also grows gradually with the fraction of missing
+entries.
+
 ### Question 12
 
 > In Section 12.5.2, Algorithm 12.1 was implemented using the `svd()` function.
@@ -490,6 +594,35 @@ $K$-means appears to perform less well on the scaled data in this case.
 >
 > Write a function to implement Algorithm 12.1 that makes use of `prcomp()`
 > rather than `svd()`.
+
+`prcomp()` returns scores $UD$ in `$x` and loadings $V$ in `$rotation`, so the
+rank-$M$ approximation is `x[, 1:M] %*% t(rotation[, 1:M])` — with the column
+means added back if we center. We can plug this into the matrix completion
+function from Q11 by passing a different `fit` argument:
+
+```{r}
+fit_prcomp <- function(X, M) {
+  p <- prcomp(X, center = TRUE, scale. = FALSE)
+  approx <- p$x[, 1:M, drop = FALSE] %*% t(p$rotation[, 1:M, drop = FALSE])
+  sweep(approx, 2, p$center, FUN = "+")
+}
+```
+
+The two implementations give essentially identical imputations (any
+differences are at the level of numerical precision):
+
+```{r}
+set.seed(1)
+miss <- sample(length(X), 0.1 * length(X))
+Xm <- X
+Xm[miss] <- NA
+r_svd <- matrix_completion(Xm, M = 4, fit = fit_svd,    max_iter = 50)
+r_pca <- matrix_completion(Xm, M = 4, fit = fit_prcomp, max_iter = 50)
+cat("MSE on held-out entries (svd):   ",
+    mean((X[miss] - r_svd$Xhat[miss])^2), "\n")
+cat("MSE on held-out entries (prcomp):",
+    mean((X[miss] - r_pca$Xhat[miss])^2), "\n")
+```
 
 ### Question 13
 
@@ -510,14 +643,15 @@ colnames(data) <- c(paste0("H", 1:20), paste0("D", 1:20))
 >    the two groups? Do your results depend on the type of linkage used?
 
 ```{r}
-hc.complete <- hclust(as.dist(1 - cor(data)), method = "complete")
+dd <- as.dist(1 - cor(data))
+hc.complete <- hclust(dd, method = "complete")
 plot(hc.complete)
 
-hc.complete <- hclust(as.dist(1 - cor(data)), method = "average")
-plot(hc.complete)
+hc.average <- hclust(dd, method = "average")
+plot(hc.average)
 
-hc.complete <- hclust(as.dist(1 - cor(data)), method = "single")
-plot(hc.complete)
+hc.single <- hclust(dd, method = "single")
+plot(hc.single)
 ```
 
 Yes the samples clearly separate into the two groups, although the results 
