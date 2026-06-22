@@ -145,7 +145,7 @@ plot(x, log = "x", type = "o")
 
 The probability rapidly approaches 0.63 with increasing $n$.
 
-Note that $$e^x = \lim_{x \to \inf} \left(1 + \frac{x}{n}\right)^n,$$ so with $x = -1$, we
+Note that $$e^x = \lim_{x \to \infty} \left(1 + \frac{x}{n}\right)^n,$$ so with $x = -1$, we
 can see that our limit is $1 - e^{-1} = 1 - 1/e$.
 
 > h. We will now investigate numerically the probability that a bootstrap
@@ -170,7 +170,7 @@ mean(store)
 ```
 
 ```
-## [1] 0.6282
+## [1] 0.6335
 ```
 
 The probability of including $4$ when resampling numbers $1...100$ is close to
@@ -563,7 +563,7 @@ stochasticity involved.
 > e. Which of the models in (c) had the smallest LOOCV error? Is this what you
 >    expected? Explain your answer.
 
-The second model had the smallest LOOCV. This what would be expected since the
+The second model had the smallest LOOCV. This is what would be expected since the
 model to generate the data was quadratic and we are measuring the test (rather
 than training) error rate to evaluate performance.
 

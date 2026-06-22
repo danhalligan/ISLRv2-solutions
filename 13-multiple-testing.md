@@ -171,7 +171,7 @@ positives).
 >
 > a. Give an example of five p-values (i.e. five numbers between 0 and 1 which,
 > for the purpose of this problem, we will interpret as p-values) for which
-> both Bonferroni’s method and Holm’s method reject exactly one null hypothesis
+> both Bonferroni's method and Holm's method reject exactly one null hypothesis
 > when controlling the FWER at level 0.1.
 
 In this case, for Bonferroni, we need one p-value to be less than $0.1 / 5 =
@@ -349,10 +349,10 @@ m <- 100
 X <- matrix(rnorm(n * m), ncol = m)
 ```
 
-> These data represent each fund manager’s percentage returns for each of $n =
-> 20$ months. We wish to test the null hypothesis that each fund manager’s
+> These data represent each fund manager's percentage returns for each of $n =
+> 20$ months. We wish to test the null hypothesis that each fund manager's
 > percentage returns have population mean equal to zero. Notice that we
-> simulated the data in such a way that each fund manager’s percentage returns
+> simulated the data in such a way that each fund manager's percentage returns
 > do have population mean zero; in other words, all $m$ null hypotheses are true.
 >
 > a. Conduct a one-sample $t$-test for each fund manager, and plot a histogram
@@ -433,5 +433,5 @@ sum(p.adjust(pvals[best], "fdr") < 0.05)
 > cherry-pick?_
 
 This is misleading because we are not correctly accounting for all tests
-performed. Cherry picking the similar to repeating a test until by chance we
+performed. Cherry picking is similar to repeating a test until by chance we
 find a significant result.

@@ -71,7 +71,7 @@ $$
 
 where $\hat{f}^b(x)$ represents the $b$th tree with (in this case) 1 split.
 Since 1-depth trees involve only one variable, and the total function for
-$x$ involves adding the outcome for each, this model is an additive. Depth
+$x$ involves adding the outcome for each, this model is additive. Depth
 2 trees would allow for interactions between two variables.
 
 ### Question 3
@@ -516,7 +516,7 @@ bartfit <- gbart(Carseats[train, 2:11], Carseats[train, 1],
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 2s
+## time: 3s
 ## trcnt,tecnt: 1000,1000
 ```
 
@@ -1164,7 +1164,7 @@ bart <- gbart(College[train, pred], College[train, "Outstate"],
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 3s
+## time: 4s
 ## trcnt,tecnt: 1000,1000
 ```
 

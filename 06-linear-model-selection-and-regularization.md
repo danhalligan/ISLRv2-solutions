@@ -344,7 +344,7 @@ y <- 1.4
 fn <- function(beta) {
   (y - beta)^2 + lambda * abs(beta)
 }
-plot(seq(0, 2, 0.01), fn(seq(0, 2, 0.01)), type = "l", xlab = "beta", ylab = "6.12")
+plot(seq(0, 2, 0.01), fn(seq(0, 2, 0.01)), type = "l", xlab = "beta", ylab = "6.13")
 abline(v = y - lambda / 2, lty = 2)
 ```
 
@@ -378,8 +378,8 @@ The posterior can be calculated by multiplying the prior and likelihood
 
 \begin{align*}
 p(\beta|X,Y) 
-  &\propto \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right) \prod_j^p\frac{1}{2b}\exp\left(-\frac{|\beta_j|}{b}\right)  \\
-  &\propto \frac{1}{2b} \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 -\sum_j^p\frac{|\beta_j|}{b}\right)
+  &\propto \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right) \prod_j^p\frac{1}{2b}\exp\left(-\frac{|\beta_j|}{b}\right)  \\
+  &\propto \frac{1}{2b} \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 -\sum_j^p\frac{|\beta_j|}{b}\right)
 \end{align*}
 
 > c. Argue that the lasso estimate is the _mode_ for $\beta$ under this
@@ -389,7 +389,7 @@ Let us find the maximum of the posterior distribution (the mode). Maximizing
 the posterior probability is equivalent to maximizing its log which is:
 
 $$
-\log(p(\beta|X,Y)) \propto  \log\left[ \frac{1}{2b} \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \right ] - \left(\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \sum_j^p\frac{|\beta_j|}{b}\right)
+\log(p(\beta|X,Y)) \propto  \log\left[ \frac{1}{2b} \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \right ] - \left(\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \sum_j^p\frac{|\beta_j|}{b}\right)
 $$
 
 Since, the first term is independent of $\beta$, our solution will be when
@@ -417,9 +417,9 @@ The posterior is now:
 
 \begin{align*}
 p(\beta|X,Y) 
-  &\propto \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right) \prod_j^p\frac{1}{\sqrt{2\pi c}}\exp\left(-\frac{\beta_j^2}{2c}\right)  \\
+  &\propto \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right) \prod_j^p\frac{1}{\sqrt{2\pi c}}\exp\left(-\frac{\beta_j^2}{2c}\right)  \\
   &\propto 
-   \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n 
+   \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n 
    \left(\frac{1}{\sqrt{2\pi c}}\right)^p
 \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 - \frac{1}{2c}\sum_j^p\beta_j^2\right)
 \end{align*}
@@ -433,7 +433,7 @@ maximizing the log of the posterior. The log is
 $$
 \log{p(\beta|X,Y)}
   \propto 
-   \log{\left[\left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \left(\frac{1}{\sqrt{2\pi c}}\right)^p \right ]}
+   \log{\left[\left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \left(\frac{1}{\sqrt{2\pi c}}\right)^p \right ]}
 - \left(\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \frac{1}{2c}\sum_j^p\beta_j^2 \right)
 $$
 

@@ -21,7 +21,7 @@ On the left hand side we compute the difference between each observation
 (indexed by $i$ and $i'$). In the second we compute the difference between
 each observation and the mean. Intuitively this identity is clear (the factor
 of 2 is present because we calculate the difference between each pair twice).
-However, to prove.
+A formal proof follows.
 
 Note first that,
 \begin{align}
@@ -671,20 +671,22 @@ matrix_completion <- function(X, M = 1, max_iter = 100, tol = 1e-7,
   cm <- colMeans(X, na.rm = TRUE)
   for (j in seq_len(ncol(X))) Xhat[!obs[, j], j] <- cm[j]
 
-  mss0    <- mean(X[obs]^2)
+  mss0 <- mean(X[obs]^2)
   mss_old <- mss0
   rel_err <- Inf
-  iter    <- 0
+  iter <- 0
   while (iter < max_iter && rel_err > tol) {
     iter <- iter + 1
     Xapp <- fit(Xhat, M)
     Xhat[!obs] <- Xapp[!obs]
-    mss     <- mean((X[obs] - Xapp[obs])^2)
+    mss <- mean((X[obs] - Xapp[obs])^2)
     rel_err <- (mss_old - mss) / mss0
     mss_old <- mss
     if (verbose) {
-      cat(sprintf("Iter %3d  MSS=%.6g  rel.err=%.3g\n",
-                  iter, mss, rel_err))
+      cat(sprintf(
+        "Iter %3d  MSS=%.6g  rel.err=%.3g\n",
+        iter, mss, rel_err
+      ))
     }
   }
   list(Xhat = Xhat, iter = iter, mss = mss)
@@ -722,13 +724,14 @@ particular cells happened to be hidden.
 ``` r
 set.seed(1)
 fracs <- seq(0.05, 0.30, by = 0.05)
-Ms    <- 1:8
-reps  <- 10
-n     <- length(X)
+Ms <- 1:8
+reps <- 10
+n <- length(X)
 
 results <- array(NA_real_,
   dim = c(length(fracs), length(Ms), reps),
-  dimnames = list(frac = fracs, M = Ms, rep = 1:reps))
+  dimnames = list(frac = fracs, M = Ms, rep = 1:reps)
+)
 
 for (r in 1:reps) {
   shuf <- sample(n)
@@ -762,11 +765,14 @@ round(mean_err, 3)
 ``` r
 df <- as.data.frame.table(mean_err, responseName = "MSE")
 df$frac <- as.numeric(as.character(df$frac))
-df$M    <- as.integer(as.character(df$M))
+df$M <- as.integer(as.character(df$M))
 ggplot(df, aes(frac, MSE, colour = factor(M), group = M)) +
-  geom_line() + geom_point() +
-  labs(x = "Fraction of entries missing", y = "Mean squared error",
-       colour = "M")
+  geom_line() +
+  geom_point() +
+  labs(
+    x = "Fraction of entries missing", y = "Mean squared error",
+    colour = "M"
+  )
 ```
 
 <img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-29-1.png" alt="" width="672" />
@@ -810,10 +816,12 @@ set.seed(1)
 miss <- sample(length(X), 0.1 * length(X))
 Xm <- X
 Xm[miss] <- NA
-r_svd <- matrix_completion(Xm, M = 4, fit = fit_svd,    max_iter = 50)
+r_svd <- matrix_completion(Xm, M = 4, fit = fit_svd, max_iter = 50)
 r_pca <- matrix_completion(Xm, M = 4, fit = fit_prcomp, max_iter = 50)
-cat("MSE on held-out entries (svd):   ",
-    mean((X[miss] - r_svd$Xhat[miss])^2), "\n")
+cat(
+  "MSE on held-out entries (svd):   ",
+  mean((X[miss] - r_svd$Xhat[miss])^2), "\n"
+)
 ```
 
 ```
@@ -821,8 +829,10 @@ cat("MSE on held-out entries (svd):   ",
 ```
 
 ``` r
-cat("MSE on held-out entries (prcomp):",
-    mean((X[miss] - r_pca$Xhat[miss])^2), "\n")
+cat(
+  "MSE on held-out entries (prcomp):",
+  mean((X[miss] - r_pca$Xhat[miss])^2), "\n"
+)
 ```
 
 ```

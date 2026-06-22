@@ -474,7 +474,7 @@ f(x) = \sum_{b=1}^B(\lambda \hat{f}^b(x)
 \]</span></p>
 <p>where <span class="math inline">\(\hat{f}^b(x)\)</span> represents the <span class="math inline">\(b\)</span>th tree with (in this case) 1 split.
 Since 1-depth trees involve only one variable, and the total function for
-<span class="math inline">\(x\)</span> involves adding the outcome for each, this model is an additive. Depth
+<span class="math inline">\(x\)</span> involves adding the outcome for each, this model is additive. Depth
 2 trees would allow for interactions between two variables.</p>
 </div>
 <div id="question-3-6" class="section level3 hasAnchor" number="8.1.3">
@@ -800,7 +800,7 @@ regression tree above, although not quite as good as the bagging approach.</p>
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 2s
+## time: 3s
 ## trcnt,tecnt: 1000,1000</code></pre>
 <div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="tree-based-methods.html#cb527-1" tabindex="-1"></a><span class="fu">carseats_mse</span>(bartfit)</span></code></pre></div>
 <pre><code>## [1] 1.631285</code></pre>
@@ -1235,7 +1235,7 @@ were trying to predict <code>Outstate</code> using the other variables in <code>
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 3s
+## time: 4s
 ## trcnt,tecnt: 1000,1000</code></pre>
 <div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="tree-based-methods.html#cb606-1" tabindex="-1"></a>mse <span class="ot">&lt;-</span> <span class="cf">function</span>(model, ...) {</span>
 <span id="cb606-2"><a href="tree-based-methods.html#cb606-2" tabindex="-1"></a>  pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, College[test, ], ...)</span>

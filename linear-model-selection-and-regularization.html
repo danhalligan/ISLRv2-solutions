@@ -811,7 +811,7 @@ plot (6.13) as a function of <span class="math inline">\(\beta_1\)</span>. Your 
 <span id="cb334-3"><a href="linear-model-selection-and-regularization.html#cb334-3" tabindex="-1"></a>fn <span class="ot">&lt;-</span> <span class="cf">function</span>(beta) {</span>
 <span id="cb334-4"><a href="linear-model-selection-and-regularization.html#cb334-4" tabindex="-1"></a>  (y <span class="sc">-</span> beta)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> lambda <span class="sc">*</span> <span class="fu">abs</span>(beta)</span>
 <span id="cb334-5"><a href="linear-model-selection-and-regularization.html#cb334-5" tabindex="-1"></a>}</span>
-<span id="cb334-6"><a href="linear-model-selection-and-regularization.html#cb334-6" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>), <span class="fu">fn</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;beta&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;6.12&quot;</span>)</span>
+<span id="cb334-6"><a href="linear-model-selection-and-regularization.html#cb334-6" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>), <span class="fu">fn</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;beta&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;6.13&quot;</span>)</span>
 <span id="cb334-7"><a href="linear-model-selection-and-regularization.html#cb334-7" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> y <span class="sc">-</span> lambda <span class="sc">/</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-2-1.png" alt="" width="672" /></p>
 </div>
@@ -846,8 +846,8 @@ distribution with mean 0 and common scale parameter b: i.e.
 (up to a proportionality constant).</p>
 <p><span class="math display">\[\begin{align*}
 p(\beta|X,Y)
-  &amp;\propto \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right) \prod_j^p\frac{1}{2b}\exp\left(-\frac{|\beta_j|}{b}\right)  \\
-  &amp;\propto \frac{1}{2b} \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 -\sum_j^p\frac{|\beta_j|}{b}\right)
+  &amp;\propto \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right) \prod_j^p\frac{1}{2b}\exp\left(-\frac{|\beta_j|}{b}\right)  \\
+  &amp;\propto \frac{1}{2b} \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 -\sum_j^p\frac{|\beta_j|}{b}\right)
 \end{align*}\]</span></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -858,7 +858,7 @@ posterior distribution.</li>
 <p>Let us find the maximum of the posterior distribution (the mode). Maximizing
 the posterior probability is equivalent to maximizing its log which is:</p>
 <p><span class="math display">\[
-\log(p(\beta|X,Y)) \propto  \log\left[ \frac{1}{2b} \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \right ] - \left(\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \sum_j^p\frac{|\beta_j|}{b}\right)
+\log(p(\beta|X,Y)) \propto  \log\left[ \frac{1}{2b} \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \right ] - \left(\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \sum_j^p\frac{|\beta_j|}{b}\right)
 \]</span></p>
 <p>Since, the first term is independent of <span class="math inline">\(\beta\)</span>, our solution will be when
 we minimize the second term.</p>
@@ -884,9 +884,9 @@ this setting.</li>
 <p>The posterior is now:</p>
 <p><span class="math display">\[\begin{align*}
 p(\beta|X,Y)
-  &amp;\propto \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right) \prod_j^p\frac{1}{\sqrt{2\pi c}}\exp\left(-\frac{\beta_j^2}{2c}\right)  \\
+  &amp;\propto \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right) \prod_j^p\frac{1}{\sqrt{2\pi c}}\exp\left(-\frac{\beta_j^2}{2c}\right)  \\
   &amp;\propto
-   \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n
+   \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n
    \left(\frac{1}{\sqrt{2\pi c}}\right)^p
 \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 - \frac{1}{2c}\sum_j^p\beta_j^2\right)
 \end{align*}\]</span></p>
@@ -901,7 +901,7 @@ maximizing the log of the posterior. The log is</p>
 <p><span class="math display">\[
 \log{p(\beta|X,Y)}
   \propto
-   \log{\left[\left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \left(\frac{1}{\sqrt{2\pi c}}\right)^p \right ]}
+   \log{\left[\left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \left(\frac{1}{\sqrt{2\pi c}}\right)^p \right ]}
 - \left(\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \frac{1}{2c}\sum_j^p\beta_j^2 \right)
 \]</span></p>
 <p>We can maximize (wrt <span class="math inline">\(\beta\)</span>) by ignoring the first term and minimizing the

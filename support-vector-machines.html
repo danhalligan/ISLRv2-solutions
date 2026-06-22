@@ -862,14 +862,14 @@ just barely linearly separable.</li>
 <span id="cb642-7"><a href="support-vector-machines.html#cb642-7" tabindex="-1"></a>)</span>
 <span id="cb642-8"><a href="support-vector-machines.html#cb642-8" tabindex="-1"></a>data<span class="sc">$</span>y <span class="ot">&lt;-</span> (data<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&quot;red&quot;</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
 <span id="cb642-9"><a href="support-vector-machines.html#cb642-9" tabindex="-1"></a></span>
-<span id="cb642-10"><a href="support-vector-machines.html#cb642-10" tabindex="-1"></a><span class="co"># Add barley separable points (these are simulated &quot;noise&quot; values)</span></span>
+<span id="cb642-10"><a href="support-vector-machines.html#cb642-10" tabindex="-1"></a><span class="co"># Add barely separable points (these are simulated &quot;noise&quot; values)</span></span>
 <span id="cb642-11"><a href="support-vector-machines.html#cb642-11" tabindex="-1"></a>newdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>))</span>
 <span id="cb642-12"><a href="support-vector-machines.html#cb642-12" tabindex="-1"></a>newdata<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fl">1.5</span> <span class="sc">*</span> newdata<span class="sc">$</span>x <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb642-13"><a href="support-vector-machines.html#cb642-13" tabindex="-1"></a>newdata<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((<span class="fl">1.5</span> <span class="sc">*</span> newdata<span class="sc">$</span>x <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">-</span> newdata<span class="sc">$</span>y <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
 <span id="cb642-14"><a href="support-vector-machines.html#cb642-14" tabindex="-1"></a></span>
 <span id="cb642-15"><a href="support-vector-machines.html#cb642-15" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data, newdata)</span>
 <span id="cb642-16"><a href="support-vector-machines.html#cb642-16" tabindex="-1"></a></span>
-<span id="cb642-17"><a href="support-vector-machines.html#cb642-17" tabindex="-1"></a><span class="co"># remove any that cause misclassification leaving data that is barley linearly</span></span>
+<span id="cb642-17"><a href="support-vector-machines.html#cb642-17" tabindex="-1"></a><span class="co"># remove any that cause misclassification leaving data that is barely linearly</span></span>
 <span id="cb642-18"><a href="support-vector-machines.html#cb642-18" tabindex="-1"></a><span class="co"># separable, but along an axis that is not y = 2.5 (which would be correct</span></span>
 <span id="cb642-19"><a href="support-vector-machines.html#cb642-19" tabindex="-1"></a><span class="co"># for the &quot;true&quot; data.</span></span>
 <span id="cb642-20"><a href="support-vector-machines.html#cb642-20" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="sc">!</span>(data<span class="sc">$</span>class <span class="sc">==</span> <span class="st">&quot;red&quot;</span>) <span class="sc">==</span> ((<span class="fl">1.5</span> <span class="sc">*</span> data<span class="sc">$</span>x <span class="sc">+</span> <span class="dv">3</span> <span class="sc">-</span> data<span class="sc">$</span>y) <span class="sc">&gt;</span> <span class="dv">0</span>), ]</span>
@@ -1222,7 +1222,7 @@ of typing</em></p>
 <div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="support-vector-machines.html#cb668-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">plot</span>(svmfit, dat)</span></code></pre></div>
 <p><em>where <code>svmfit</code> contains your fitted model and dat is a data frame
 containing your data, you can type</em></p>
-<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="support-vector-machines.html#cb669-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">plot</span>(svmfit, dat, x1 ∼ x4)</span></code></pre></div>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="support-vector-machines.html#cb669-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">plot</span>(svmfit, dat, x1 <span class="sc">~</span> x4)</span></code></pre></div>
 <p><em>in order to plot just the first and fourth variables. However, you must
 replace <code>x1</code> and <code>x4</code> with the correct variable names. To find out more,
 type <code>?plot.svm</code>.</em></p></li>

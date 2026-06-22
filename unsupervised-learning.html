@@ -437,7 +437,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 (indexed by <span class="math inline">\(i\)</span> and <span class="math inline">\(i&#39;\)</span>). In the second we compute the difference between
 each observation and the mean. Intuitively this identity is clear (the factor
 of 2 is present because we calculate the difference between each pair twice).
-However, to prove.</p>
+A formal proof follows.</p>
 <p>Note first that,
 <span class="math display">\[\begin{align}
 (x_{ij} - x_{i&#39;j})^2
@@ -1022,24 +1022,26 @@ reduction in mean squared error on the <em>observed</em> entries.</p>
 <span id="cb814-10"><a href="unsupervised-learning.html#cb814-10" tabindex="-1"></a>  cm <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(X, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb814-11"><a href="unsupervised-learning.html#cb814-11" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">ncol</span>(X))) Xhat[<span class="sc">!</span>obs[, j], j] <span class="ot">&lt;-</span> cm[j]</span>
 <span id="cb814-12"><a href="unsupervised-learning.html#cb814-12" tabindex="-1"></a></span>
-<span id="cb814-13"><a href="unsupervised-learning.html#cb814-13" tabindex="-1"></a>  mss0    <span class="ot">&lt;-</span> <span class="fu">mean</span>(X[obs]<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb814-13"><a href="unsupervised-learning.html#cb814-13" tabindex="-1"></a>  mss0 <span class="ot">&lt;-</span> <span class="fu">mean</span>(X[obs]<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb814-14"><a href="unsupervised-learning.html#cb814-14" tabindex="-1"></a>  mss_old <span class="ot">&lt;-</span> mss0</span>
 <span id="cb814-15"><a href="unsupervised-learning.html#cb814-15" tabindex="-1"></a>  rel_err <span class="ot">&lt;-</span> <span class="cn">Inf</span></span>
-<span id="cb814-16"><a href="unsupervised-learning.html#cb814-16" tabindex="-1"></a>  iter    <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb814-16"><a href="unsupervised-learning.html#cb814-16" tabindex="-1"></a>  iter <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb814-17"><a href="unsupervised-learning.html#cb814-17" tabindex="-1"></a>  <span class="cf">while</span> (iter <span class="sc">&lt;</span> max_iter <span class="sc">&amp;&amp;</span> rel_err <span class="sc">&gt;</span> tol) {</span>
 <span id="cb814-18"><a href="unsupervised-learning.html#cb814-18" tabindex="-1"></a>    iter <span class="ot">&lt;-</span> iter <span class="sc">+</span> <span class="dv">1</span></span>
 <span id="cb814-19"><a href="unsupervised-learning.html#cb814-19" tabindex="-1"></a>    Xapp <span class="ot">&lt;-</span> <span class="fu">fit</span>(Xhat, M)</span>
 <span id="cb814-20"><a href="unsupervised-learning.html#cb814-20" tabindex="-1"></a>    Xhat[<span class="sc">!</span>obs] <span class="ot">&lt;-</span> Xapp[<span class="sc">!</span>obs]</span>
-<span id="cb814-21"><a href="unsupervised-learning.html#cb814-21" tabindex="-1"></a>    mss     <span class="ot">&lt;-</span> <span class="fu">mean</span>((X[obs] <span class="sc">-</span> Xapp[obs])<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb814-21"><a href="unsupervised-learning.html#cb814-21" tabindex="-1"></a>    mss <span class="ot">&lt;-</span> <span class="fu">mean</span>((X[obs] <span class="sc">-</span> Xapp[obs])<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb814-22"><a href="unsupervised-learning.html#cb814-22" tabindex="-1"></a>    rel_err <span class="ot">&lt;-</span> (mss_old <span class="sc">-</span> mss) <span class="sc">/</span> mss0</span>
 <span id="cb814-23"><a href="unsupervised-learning.html#cb814-23" tabindex="-1"></a>    mss_old <span class="ot">&lt;-</span> mss</span>
 <span id="cb814-24"><a href="unsupervised-learning.html#cb814-24" tabindex="-1"></a>    <span class="cf">if</span> (verbose) {</span>
-<span id="cb814-25"><a href="unsupervised-learning.html#cb814-25" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Iter %3d  MSS=%.6g  rel.err=%.3g</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb814-26"><a href="unsupervised-learning.html#cb814-26" tabindex="-1"></a>                  iter, mss, rel_err))</span>
-<span id="cb814-27"><a href="unsupervised-learning.html#cb814-27" tabindex="-1"></a>    }</span>
-<span id="cb814-28"><a href="unsupervised-learning.html#cb814-28" tabindex="-1"></a>  }</span>
-<span id="cb814-29"><a href="unsupervised-learning.html#cb814-29" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">Xhat =</span> Xhat, <span class="at">iter =</span> iter, <span class="at">mss =</span> mss)</span>
-<span id="cb814-30"><a href="unsupervised-learning.html#cb814-30" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb814-25"><a href="unsupervised-learning.html#cb814-25" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="fu">sprintf</span>(</span>
+<span id="cb814-26"><a href="unsupervised-learning.html#cb814-26" tabindex="-1"></a>        <span class="st">&quot;Iter %3d  MSS=%.6g  rel.err=%.3g</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb814-27"><a href="unsupervised-learning.html#cb814-27" tabindex="-1"></a>        iter, mss, rel_err</span>
+<span id="cb814-28"><a href="unsupervised-learning.html#cb814-28" tabindex="-1"></a>      ))</span>
+<span id="cb814-29"><a href="unsupervised-learning.html#cb814-29" tabindex="-1"></a>    }</span>
+<span id="cb814-30"><a href="unsupervised-learning.html#cb814-30" tabindex="-1"></a>  }</span>
+<span id="cb814-31"><a href="unsupervised-learning.html#cb814-31" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">Xhat =</span> Xhat, <span class="at">iter =</span> iter, <span class="at">mss =</span> mss)</span>
+<span id="cb814-32"><a href="unsupervised-learning.html#cb814-32" tabindex="-1"></a>}</span></code></pre></div>
 <p>A short demonstration on <code>Boston</code> with 10% of entries missing and <span class="math inline">\(M = 4\)</span>
 (showing the first few iterations only):</p>
 <div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb815-1"><a href="unsupervised-learning.html#cb815-1" tabindex="-1"></a><span class="fu">library</span>(ISLR2)</span>
@@ -1060,29 +1062,30 @@ effect of the missingness fraction (and <span class="math inline">\(M\)</span>) 
 particular cells happened to be hidden.</p>
 <div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="unsupervised-learning.html#cb817-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb817-2"><a href="unsupervised-learning.html#cb817-2" tabindex="-1"></a>fracs <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.05</span>, <span class="fl">0.30</span>, <span class="at">by =</span> <span class="fl">0.05</span>)</span>
-<span id="cb817-3"><a href="unsupervised-learning.html#cb817-3" tabindex="-1"></a>Ms    <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
-<span id="cb817-4"><a href="unsupervised-learning.html#cb817-4" tabindex="-1"></a>reps  <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb817-5"><a href="unsupervised-learning.html#cb817-5" tabindex="-1"></a>n     <span class="ot">&lt;-</span> <span class="fu">length</span>(X)</span>
+<span id="cb817-3"><a href="unsupervised-learning.html#cb817-3" tabindex="-1"></a>Ms <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb817-4"><a href="unsupervised-learning.html#cb817-4" tabindex="-1"></a>reps <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb817-5"><a href="unsupervised-learning.html#cb817-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(X)</span>
 <span id="cb817-6"><a href="unsupervised-learning.html#cb817-6" tabindex="-1"></a></span>
 <span id="cb817-7"><a href="unsupervised-learning.html#cb817-7" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NA_real_</span>,</span>
 <span id="cb817-8"><a href="unsupervised-learning.html#cb817-8" tabindex="-1"></a>  <span class="at">dim =</span> <span class="fu">c</span>(<span class="fu">length</span>(fracs), <span class="fu">length</span>(Ms), reps),</span>
-<span id="cb817-9"><a href="unsupervised-learning.html#cb817-9" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="at">frac =</span> fracs, <span class="at">M =</span> Ms, <span class="at">rep =</span> <span class="dv">1</span><span class="sc">:</span>reps))</span>
-<span id="cb817-10"><a href="unsupervised-learning.html#cb817-10" tabindex="-1"></a></span>
-<span id="cb817-11"><a href="unsupervised-learning.html#cb817-11" tabindex="-1"></a><span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>reps) {</span>
-<span id="cb817-12"><a href="unsupervised-learning.html#cb817-12" tabindex="-1"></a>  shuf <span class="ot">&lt;-</span> <span class="fu">sample</span>(n)</span>
-<span id="cb817-13"><a href="unsupervised-learning.html#cb817-13" tabindex="-1"></a>  <span class="cf">for</span> (fi <span class="cf">in</span> <span class="fu">seq_along</span>(fracs)) {</span>
-<span id="cb817-14"><a href="unsupervised-learning.html#cb817-14" tabindex="-1"></a>    miss <span class="ot">&lt;-</span> shuf[<span class="dv">1</span><span class="sc">:</span><span class="fu">round</span>(fracs[fi] <span class="sc">*</span> n)]</span>
-<span id="cb817-15"><a href="unsupervised-learning.html#cb817-15" tabindex="-1"></a>    Xm <span class="ot">&lt;-</span> X</span>
-<span id="cb817-16"><a href="unsupervised-learning.html#cb817-16" tabindex="-1"></a>    Xm[miss] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb817-17"><a href="unsupervised-learning.html#cb817-17" tabindex="-1"></a>    <span class="cf">for</span> (mi <span class="cf">in</span> <span class="fu">seq_along</span>(Ms)) {</span>
-<span id="cb817-18"><a href="unsupervised-learning.html#cb817-18" tabindex="-1"></a>      res <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> Ms[mi], <span class="at">max_iter =</span> <span class="dv">50</span>)</span>
-<span id="cb817-19"><a href="unsupervised-learning.html#cb817-19" tabindex="-1"></a>      results[fi, mi, r] <span class="ot">&lt;-</span> <span class="fu">mean</span>((X[miss] <span class="sc">-</span> res<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb817-20"><a href="unsupervised-learning.html#cb817-20" tabindex="-1"></a>    }</span>
-<span id="cb817-21"><a href="unsupervised-learning.html#cb817-21" tabindex="-1"></a>  }</span>
-<span id="cb817-22"><a href="unsupervised-learning.html#cb817-22" tabindex="-1"></a>}</span>
-<span id="cb817-23"><a href="unsupervised-learning.html#cb817-23" tabindex="-1"></a></span>
-<span id="cb817-24"><a href="unsupervised-learning.html#cb817-24" tabindex="-1"></a>mean_err <span class="ot">&lt;-</span> <span class="fu">apply</span>(results, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), mean)</span>
-<span id="cb817-25"><a href="unsupervised-learning.html#cb817-25" tabindex="-1"></a><span class="fu">round</span>(mean_err, <span class="dv">3</span>)</span></code></pre></div>
+<span id="cb817-9"><a href="unsupervised-learning.html#cb817-9" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="at">frac =</span> fracs, <span class="at">M =</span> Ms, <span class="at">rep =</span> <span class="dv">1</span><span class="sc">:</span>reps)</span>
+<span id="cb817-10"><a href="unsupervised-learning.html#cb817-10" tabindex="-1"></a>)</span>
+<span id="cb817-11"><a href="unsupervised-learning.html#cb817-11" tabindex="-1"></a></span>
+<span id="cb817-12"><a href="unsupervised-learning.html#cb817-12" tabindex="-1"></a><span class="cf">for</span> (r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>reps) {</span>
+<span id="cb817-13"><a href="unsupervised-learning.html#cb817-13" tabindex="-1"></a>  shuf <span class="ot">&lt;-</span> <span class="fu">sample</span>(n)</span>
+<span id="cb817-14"><a href="unsupervised-learning.html#cb817-14" tabindex="-1"></a>  <span class="cf">for</span> (fi <span class="cf">in</span> <span class="fu">seq_along</span>(fracs)) {</span>
+<span id="cb817-15"><a href="unsupervised-learning.html#cb817-15" tabindex="-1"></a>    miss <span class="ot">&lt;-</span> shuf[<span class="dv">1</span><span class="sc">:</span><span class="fu">round</span>(fracs[fi] <span class="sc">*</span> n)]</span>
+<span id="cb817-16"><a href="unsupervised-learning.html#cb817-16" tabindex="-1"></a>    Xm <span class="ot">&lt;-</span> X</span>
+<span id="cb817-17"><a href="unsupervised-learning.html#cb817-17" tabindex="-1"></a>    Xm[miss] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb817-18"><a href="unsupervised-learning.html#cb817-18" tabindex="-1"></a>    <span class="cf">for</span> (mi <span class="cf">in</span> <span class="fu">seq_along</span>(Ms)) {</span>
+<span id="cb817-19"><a href="unsupervised-learning.html#cb817-19" tabindex="-1"></a>      res <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> Ms[mi], <span class="at">max_iter =</span> <span class="dv">50</span>)</span>
+<span id="cb817-20"><a href="unsupervised-learning.html#cb817-20" tabindex="-1"></a>      results[fi, mi, r] <span class="ot">&lt;-</span> <span class="fu">mean</span>((X[miss] <span class="sc">-</span> res<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb817-21"><a href="unsupervised-learning.html#cb817-21" tabindex="-1"></a>    }</span>
+<span id="cb817-22"><a href="unsupervised-learning.html#cb817-22" tabindex="-1"></a>  }</span>
+<span id="cb817-23"><a href="unsupervised-learning.html#cb817-23" tabindex="-1"></a>}</span>
+<span id="cb817-24"><a href="unsupervised-learning.html#cb817-24" tabindex="-1"></a></span>
+<span id="cb817-25"><a href="unsupervised-learning.html#cb817-25" tabindex="-1"></a>mean_err <span class="ot">&lt;-</span> <span class="fu">apply</span>(results, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), mean)</span>
+<span id="cb817-26"><a href="unsupervised-learning.html#cb817-26" tabindex="-1"></a><span class="fu">round</span>(mean_err, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##       M
 ## frac       1     2     3     4     5     6     7     8
 ##   0.05 0.588 0.559 0.518 1.289 1.476 1.194 1.091 1.280
@@ -1093,11 +1096,14 @@ particular cells happened to be hidden.</p>
 ##   0.3  0.621 0.659 0.759 1.103 1.248 1.193 1.223 1.249</code></pre>
 <div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="unsupervised-learning.html#cb819-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame.table</span>(mean_err, <span class="at">responseName =</span> <span class="st">&quot;MSE&quot;</span>)</span>
 <span id="cb819-2"><a href="unsupervised-learning.html#cb819-2" tabindex="-1"></a>df<span class="sc">$</span>frac <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(df<span class="sc">$</span>frac))</span>
-<span id="cb819-3"><a href="unsupervised-learning.html#cb819-3" tabindex="-1"></a>df<span class="sc">$</span>M    <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">as.character</span>(df<span class="sc">$</span>M))</span>
+<span id="cb819-3"><a href="unsupervised-learning.html#cb819-3" tabindex="-1"></a>df<span class="sc">$</span>M <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">as.character</span>(df<span class="sc">$</span>M))</span>
 <span id="cb819-4"><a href="unsupervised-learning.html#cb819-4" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(frac, MSE, <span class="at">colour =</span> <span class="fu">factor</span>(M), <span class="at">group =</span> M)) <span class="sc">+</span></span>
-<span id="cb819-5"><a href="unsupervised-learning.html#cb819-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb819-6"><a href="unsupervised-learning.html#cb819-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Fraction of entries missing&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Mean squared error&quot;</span>,</span>
-<span id="cb819-7"><a href="unsupervised-learning.html#cb819-7" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">&quot;M&quot;</span>)</span></code></pre></div>
+<span id="cb819-5"><a href="unsupervised-learning.html#cb819-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb819-6"><a href="unsupervised-learning.html#cb819-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb819-7"><a href="unsupervised-learning.html#cb819-7" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb819-8"><a href="unsupervised-learning.html#cb819-8" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fraction of entries missing&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Mean squared error&quot;</span>,</span>
+<span id="cb819-9"><a href="unsupervised-learning.html#cb819-9" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;M&quot;</span></span>
+<span id="cb819-10"><a href="unsupervised-learning.html#cb819-10" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-29-1.png" alt="" width="672" /></p>
 <p>A small number of components (<span class="math inline">\(M \le 3\)</span>) gives by far the best imputations
 on standardised <code>Boston</code>. Beyond that the rank-<span class="math inline">\(M\)</span> approximation starts to
@@ -1130,13 +1136,17 @@ differences are at the level of numerical precision):</p>
 <span id="cb821-2"><a href="unsupervised-learning.html#cb821-2" tabindex="-1"></a>miss <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">length</span>(X), <span class="fl">0.1</span> <span class="sc">*</span> <span class="fu">length</span>(X))</span>
 <span id="cb821-3"><a href="unsupervised-learning.html#cb821-3" tabindex="-1"></a>Xm <span class="ot">&lt;-</span> X</span>
 <span id="cb821-4"><a href="unsupervised-learning.html#cb821-4" tabindex="-1"></a>Xm[miss] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb821-5"><a href="unsupervised-learning.html#cb821-5" tabindex="-1"></a>r_svd <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> <span class="dv">4</span>, <span class="at">fit =</span> fit_svd,    <span class="at">max_iter =</span> <span class="dv">50</span>)</span>
+<span id="cb821-5"><a href="unsupervised-learning.html#cb821-5" tabindex="-1"></a>r_svd <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> <span class="dv">4</span>, <span class="at">fit =</span> fit_svd, <span class="at">max_iter =</span> <span class="dv">50</span>)</span>
 <span id="cb821-6"><a href="unsupervised-learning.html#cb821-6" tabindex="-1"></a>r_pca <span class="ot">&lt;-</span> <span class="fu">matrix_completion</span>(Xm, <span class="at">M =</span> <span class="dv">4</span>, <span class="at">fit =</span> fit_prcomp, <span class="at">max_iter =</span> <span class="dv">50</span>)</span>
-<span id="cb821-7"><a href="unsupervised-learning.html#cb821-7" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;MSE on held-out entries (svd):   &quot;</span>,</span>
-<span id="cb821-8"><a href="unsupervised-learning.html#cb821-8" tabindex="-1"></a>    <span class="fu">mean</span>((X[miss] <span class="sc">-</span> r_svd<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<span id="cb821-7"><a href="unsupervised-learning.html#cb821-7" tabindex="-1"></a><span class="fu">cat</span>(</span>
+<span id="cb821-8"><a href="unsupervised-learning.html#cb821-8" tabindex="-1"></a>  <span class="st">&quot;MSE on held-out entries (svd):   &quot;</span>,</span>
+<span id="cb821-9"><a href="unsupervised-learning.html#cb821-9" tabindex="-1"></a>  <span class="fu">mean</span>((X[miss] <span class="sc">-</span> r_svd<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb821-10"><a href="unsupervised-learning.html#cb821-10" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## MSE on held-out entries (svd):    1.048215</code></pre>
-<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="unsupervised-learning.html#cb823-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;MSE on held-out entries (prcomp):&quot;</span>,</span>
-<span id="cb823-2"><a href="unsupervised-learning.html#cb823-2" tabindex="-1"></a>    <span class="fu">mean</span>((X[miss] <span class="sc">-</span> r_pca<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="unsupervised-learning.html#cb823-1" tabindex="-1"></a><span class="fu">cat</span>(</span>
+<span id="cb823-2"><a href="unsupervised-learning.html#cb823-2" tabindex="-1"></a>  <span class="st">&quot;MSE on held-out entries (prcomp):&quot;</span>,</span>
+<span id="cb823-3"><a href="unsupervised-learning.html#cb823-3" tabindex="-1"></a>  <span class="fu">mean</span>((X[miss] <span class="sc">-</span> r_pca<span class="sc">$</span>Xhat[miss])<span class="sc">^</span><span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb823-4"><a href="unsupervised-learning.html#cb823-4" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## MSE on held-out entries (prcomp): 1.050214</code></pre>
 </div>
 <div id="question-13-3" class="section level3 hasAnchor" number="12.2.7">

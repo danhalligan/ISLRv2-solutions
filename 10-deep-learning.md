@@ -132,8 +132,8 @@ which is just equation 10.13.
 
 $$
 Pr(Y=k|X=x) = \frac
-{e^{\beta_{K0} + \beta_{K1}x_1 + ... + \beta_{Kp}x_p}}
-{\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x1 + ... + \beta_{lp}x_p}}
+{e^{\beta_{k0} + \beta_{k1}x_1 + ... + \beta_{kp}x_p}}
+{\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x_1 + ... + \beta_{lp}x_p}}
 $$
 
 adding constants $c_j$ to the coefficients $\beta_{kj}$ for every class $k$
@@ -186,7 +186,7 @@ So, $\log(\ell)$ is:
 \begin{align*}
 \log(\ell) 
  &= \log \left( \prod_{i:y_i=1}p(x_i) \prod_{i':y_i'=0}(1-p(x_i')) \right ) \\
- &= \sum_{i:y_1=1}\log(p(x_i)) + \sum_{i':y_i'=0}\log(1-p(x_i')) \\
+ &= \sum_{i:y_i=1}\log(p(x_i)) + \sum_{i':y_i'=0}\log(1-p(x_i')) \\
 \end{align*}
 
 If we set $y_i$ to be an indicator variable such that $y_{i1}$ and $y_{i0}$ are
@@ -194,14 +194,14 @@ If we set $y_i$ to be an indicator variable such that $y_{i1}$ and $y_{i0}$ are
 we can write:
 
 $$
-\log(\ell) = \sum_{i}y_{i1}\log(p(x_i)) + \sum_{i}y_{i0}\log(1-p(x_i'))
+\log(\ell) = \sum_{i}y_{i1}\log(p(x_i)) + \sum_{i}y_{i0}\log(1-p(x_i))
 $$
 
 If we also let $f_1(x) = p(x)$ and $f_0(x) = 1 - p(x)$ then:
 
 \begin{align*}
 \log(\ell) 
- &= \sum_i y_{i1}\log(f_1(x_i)) + \sum_{i}y_{i0}\log(f_0(x_i')) \\
+ &= \sum_i y_{i1}\log(f_1(x_i)) + \sum_{i}y_{i0}\log(f_0(x_i)) \\
  &= \sum_i \sum_{m=0}^1 y_{im}\log(f_m(x_i)) \\
 \end{align*}
 
@@ -242,9 +242,9 @@ connections to all other output nodes.
 > d. If there were no constraints, then how many weights would there be in the
 > ordinary feed-forward neural network in (c)?
 
-With no constraints, we would connect each input pixel in our original 32x32 
-image to each output pixel in each of our convolution layers, with an bias 
-term for each original pixel. So each output pixel would require 32x32 weights 
+With no constraints, we would connect each input pixel in our original 32x32
+image to each output pixel in each of our convolution layers, with a bias
+term for each output pixel. So each output pixel would require 32x32 weights 
 + 1 bias term. This would give a total of (32×32+1)×28×28×3 = 2,410,800 
 parameters.
 
@@ -256,7 +256,7 @@ parameters.
 
 Mean absolute error considers _absolute_ differences between predictions and 
 observed values, whereas $R^2$ considers the (normalized) sum of _squared_
-differences, thus larger errors contribute relatively ore to $R^2$ than mean
+differences, thus larger errors contribute relatively more to $R^2$ than mean
 absolute error.
 
 ## Applied
@@ -462,7 +462,7 @@ model <- application_resnet50(weights = "imagenet")
 
 ```
 ## Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/resnet/resnet50_weights_tf_dim_ordering_tf_kernels.h5
-##      8192/102967424 [..............................] - ETA: 0s  3416064/102967424 [..............................] - ETA: 2s 12009472/102967424 [==>...........................] - ETA: 0s 24387584/102967424 [======>.......................] - ETA: 0s 34873344/102967424 [=========>....................] - ETA: 0s 45850624/102967424 [============>.................] - ETA: 0s 57942016/102967424 [===============>..............] - ETA: 0s 69844992/102967424 [===================>..........] - ETA: 0s 78913536/102967424 [=====================>........] - ETA: 0s 90570752/102967424 [=========================>....] - ETA: 0s 93593600/102967424 [==========================>...] - ETA: 0s102967424/102967424 [==============================] - 1s 0us/step
+##      8192/102967424 [..............................] - ETA: 0s  3842048/102967424 [>.............................] - ETA: 1s  8478720/102967424 [=>............................] - ETA: 1s 21118976/102967424 [=====>........................] - ETA: 0s 33603584/102967424 [========>.....................] - ETA: 0s 44171264/102967424 [===========>..................] - ETA: 0s 54493184/102967424 [==============>...............] - ETA: 0s 67149824/102967424 [==================>...........] - ETA: 0s 76169216/102967424 [=====================>........] - ETA: 0s 87965696/102967424 [========================>.....] - ETA: 0s100229120/102967424 [============================>.] - ETA: 0s102967424/102967424 [==============================] - 1s 0us/step
 ```
 
 ``` r
@@ -472,7 +472,7 @@ pred <- model |>
 ```
 
 ```
-## 1/1 - 12s - 12s/epoch - 12s/step
+## 1/1 - 11s - 11s/epoch - 11s/step
 ## Downloading data from https://storage.googleapis.com/download.tensorflow.org/data/imagenet_class_index.json
 ##  8192/35363 [=====>........................] - ETA: 0s35363/35363 [==============================] - 0s 0us/step
 ```
@@ -485,83 +485,83 @@ print(pred)
 ```
 ## $bird.jpg
 ##   class_name        class_description      score
-## 1  n01819313 sulphur-crested_cockatoo 0.33546305
-## 2  n01580077                      jay 0.18020906
-## 3  n02441942                   weasel 0.08320859
-## 4  n02058221                albatross 0.07002056
-## 5  n01855672                    goose 0.05195721
+## 1  n01819313 sulphur-crested_cockatoo 0.33546284
+## 2  n01580077                      jay 0.18020947
+## 3  n02441942                   weasel 0.08320838
+## 4  n02058221                albatross 0.07002078
+## 5  n01855672                    goose 0.05195722
 ## 
 ## $bird2.jpg
 ##   class_name        class_description       score
-## 1  n02006656                spoonbill 0.840428233
-## 2  n02012849                    crane 0.016258685
-## 3  n01819313 sulphur-crested_cockatoo 0.009740722
-## 4  n02007558                 flamingo 0.007816141
-## 5  n01667778                 terrapin 0.007497459
+## 1  n02006656                spoonbill 0.840428114
+## 2  n02012849                    crane 0.016258713
+## 3  n01819313 sulphur-crested_cockatoo 0.009740712
+## 4  n02007558                 flamingo 0.007816177
+## 5  n01667778                 terrapin 0.007497442
 ## 
 ## $bird3.jpg
-##   class_name class_description        score
-## 1  n01833805       hummingbird 0.9767877460
-## 2  n02033041         dowitcher 0.0111253690
-## 3  n02028035          redshank 0.0042764111
-## 4  n02009229 little_blue_heron 0.0012727526
-## 5  n02002724       black_stork 0.0008971311
+##   class_name class_description       score
+## 1  n01833805       hummingbird 0.976787806
+## 2  n02033041         dowitcher 0.011125583
+## 3  n02028035          redshank 0.004276489
+## 4  n02009229 little_blue_heron 0.001272773
+## 5  n02002724       black_stork 0.000897144
 ## 
 ## $bug.jpg
 ##   class_name  class_description      score
-## 1  n02190166                fly 0.67558461
-## 2  n02167151      ground_beetle 0.10097048
-## 3  n02172182        dung_beetle 0.05490885
-## 4  n02169497        leaf_beetle 0.03541914
-## 5  n02168699 long-horned_beetle 0.03515299
+## 1  n02190166                fly 0.67558581
+## 2  n02167151      ground_beetle 0.10096999
+## 3  n02172182        dung_beetle 0.05490853
+## 4  n02169497        leaf_beetle 0.03541910
+## 5  n02168699 long-horned_beetle 0.03515285
 ## 
 ## $butterfly.jpg
 ##   class_name class_description      score
-## 1  n02951585        can_opener 0.20600465
-## 2  n03476684        hair_slide 0.09360629
-## 3  n04074963    remote_control 0.06316858
-## 4  n02110185    Siberian_husky 0.05178998
-## 5  n02123597       Siamese_cat 0.03785341
+## 1  n02951585        can_opener 0.20600405
+## 2  n03476684        hair_slide 0.09360628
+## 3  n04074963    remote_control 0.06316894
+## 4  n02110185    Siberian_husky 0.05178944
+## 5  n02123597       Siamese_cat 0.03785329
 ## 
 ## $butterfly2.jpg
 ##   class_name class_description        score
-## 1  n02276258           admiral 9.999689e-01
-## 2  n01580077               jay 1.388074e-05
-## 3  n02277742           ringlet 1.235042e-05
-## 4  n02279972           monarch 3.037859e-06
-## 5  n02281787          lycaenid 1.261888e-06
+## 1  n02276258           admiral 9.999690e-01
+## 2  n01580077               jay 1.388066e-05
+## 3  n02277742           ringlet 1.235032e-05
+## 4  n02279972           monarch 3.037847e-06
+## 5  n02281787          lycaenid 1.261879e-06
 ## 
 ## $elba.jpg
 ##   class_name class_description      score
-## 1  n02085620         Chihuahua 0.29892012
-## 2  n02091032 Italian_greyhound 0.20332782
-## 3  n02109961        Eskimo_dog 0.08477225
-## 4  n02086910          papillon 0.05140305
-## 5  n02110185    Siberian_husky 0.05064517
+## 1  n02085620         Chihuahua 0.29892027
+## 2  n02091032 Italian_greyhound 0.20332775
+## 3  n02109961        Eskimo_dog 0.08477212
+## 4  n02086910          papillon 0.05140312
+## 5  n02110185    Siberian_husky 0.05064506
 ## 
 ## $hamish.jpg
 ##   class_name   class_description        score
-## 1  n02097209  standard_schnauzer 0.6361451149
-## 2  n02097047 miniature_schnauzer 0.3450845778
-## 3  n02097130     giant_schnauzer 0.0164217781
-## 4  n02097298      Scotch_terrier 0.0019116047
-## 5  n02096177               cairn 0.0002054328
+## 1  n02097209  standard_schnauzer 0.6361452341
+## 2  n02097047 miniature_schnauzer 0.3450846374
+## 3  n02097130     giant_schnauzer 0.0164217800
+## 4  n02097298      Scotch_terrier 0.0019116015
+## 5  n02096177               cairn 0.0002054315
 ## 
 ## $poodle.jpg
 ##   class_name   class_description       score
-## 1  n02113799     standard_poodle 0.829670966
-## 2  n02088094        Afghan_hound 0.074567914
-## 3  n02113712    miniature_poodle 0.032005571
-## 4  n02102973 Irish_water_spaniel 0.018583152
-## 5  n02102318      cocker_spaniel 0.008629788
+## 1  n02113799     standard_poodle 0.829670548
+## 2  n02088094        Afghan_hound 0.074568093
+## 3  n02113712    miniature_poodle 0.032005642
+## 4  n02102973 Irish_water_spaniel 0.018583197
+## 5  n02102318      cocker_spaniel 0.008629751
 ## 
 ## $tortoise.jpg
 ##   class_name class_description      score
-## 1  n04033995             quilt 0.28395897
-## 2  n02110958               pug 0.15959552
-## 3  n03188531            diaper 0.14018111
-## 4  n02108915    French_bulldog 0.09364161
-## 5  n04235860      sleeping_bag 0.02608401
+## 1  n04033995             quilt 0.28395954
+## 2  n02110958               pug 0.15959522
+## 3  n03188531            diaper 0.14018101
+## 4  n02108915    French_bulldog 0.09364153
+## 5  n04235860      sleeping_bag 0.02608391
 ```
 
 ### Question 9
@@ -750,7 +750,7 @@ kpred <- predict(model, xrnn[!istrain, , ])
 ```
 
 ```
-## 56/56 - 0s - 114ms/epoch - 2ms/step
+## 56/56 - 0s - 110ms/epoch - 2ms/step
 ```
 
 ``` r
@@ -758,7 +758,7 @@ kpred <- predict(model, xrnn[!istrain, , ])
 ```
 
 ```
-## [1] 0.4118028
+## [1] 0.4104141
 ```
 
 Both models estimate the same number of coefficients/weights (16):
@@ -792,24 +792,24 @@ model$get_weights()
 ```
 ## [[1]]
 ##               [,1]
-##  [1,] -0.028941836
-##  [2,]  0.098807015
-##  [3,]  0.130533293
-##  [4,] -0.005577242
-##  [5,]  0.114474848
-##  [6,]  0.042175774
-##  [7,]  0.041261338
-##  [8,]  0.086441144
-##  [9,]  0.065920815
-## [10,] -0.031015957
-## [11,]  0.035943639
-## [12,] -0.762030602
-## [13,]  0.094379015
-## [14,]  0.508830011
-## [15,]  0.502979696
+##  [1,] -0.028553415
+##  [2,]  0.099494688
+##  [3,]  0.161052659
+##  [4,] -0.004804593
+##  [5,]  0.121096551
+##  [6,] -0.028401205
+##  [7,]  0.038102575
+##  [8,]  0.083269477
+##  [9,]  0.160179600
+## [10,] -0.028694041
+## [11,]  0.040468145
+## [12,] -0.817839026
+## [13,]  0.094464689
+## [14,]  0.514620125
+## [15,]  0.518470287
 ## 
 ## [[2]]
-## [1] -0.003794394
+## [1] -0.005370542
 ```
 
 The flattened RNN has a lower $R^2$ on the test data than our `lm` model
