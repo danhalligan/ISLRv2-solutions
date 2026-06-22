@@ -400,6 +400,17 @@ fit <- lm(Sales ~ Price + Urban + US, data = Carseats)
 summary(fit)
 ```
 
+The coefficients are interpreted with the other predictors held fixed:
+
+* `(Intercept)` $\approx 13.04$: expected `Sales` (thousands of units) for a
+  non-urban, non-US store with `Price` of 0.
+* `Price` $\approx -0.054$: each one-dollar increase in `Price` is associated
+  with about 54 fewer units sold. Strongly significant.
+* `UrbanYes` $\approx -0.022$: urban stores sell about 22 fewer units than
+  non-urban stores. Not significant.
+* `USYes` $\approx 1.20$: US stores sell about 1200 more units than non-US
+  stores. Strongly significant.
+
 > c. Write out the model in equation form, being careful to handle the
 >    qualitative variables properly.
 
