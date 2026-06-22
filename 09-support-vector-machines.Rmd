@@ -525,7 +525,7 @@ sapply(results, function(x) x$best.parameters)
 >    containing your data, you can type_
 >    
 >    ```r
->    > plot(svmfit, dat, x1 ∼ x4)
+>    > plot(svmfit, dat, x1 ~ x4)
 >    ``` 
 >    
 >    _in order to plot just the first and fourth variables. However, you must 

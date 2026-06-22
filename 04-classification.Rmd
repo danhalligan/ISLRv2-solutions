@@ -128,7 +128,7 @@ f &= \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi}\sigma_k}\right) - \frac{1}{2\s
 \end{align}
 
 However, unlike in Q2, $\frac{x^2}{2\sigma_k^2}$ is not independent of $k$, so
-we retain the term with $x^2$, hence $f$, the Bayes’ classifier, is a
+we retain the term with $x^2$, hence $f$, the Bayes' classifier, is a
 quadratic function of $x$.
 
 ### Question 4
