@@ -83,8 +83,9 @@ deviation would be $\sqrt{m \alpha (1-\alpha)}$.
 > family-wise error rate is no greater than $\sum_{j=1}^m \alpha_j$.
 
 $p(A \cup B) = p(A) + p(B)$ if $A$ and $B$ are independent or 
-$p(A) + p(B) - p(A \cap B)$ when they are not. Since $p(A \cap B)$ must be 
-positive, $p(A \cup B) < p(A) + p(B)$ (whether independent or not).
+$p(A) + p(B) - p(A \cap B)$ when they are not. Since $p(A \cap B) \ge 0$,
+$p(A \cup B) \le p(A) + p(B)$ (whether independent or not). By induction (or
+equivalently, Boole's inequality) this generalises to $m$ events.
 
 Therefore, the probability of a type I error in _any_ of $m$ hypotheses can
 be no larger than the sum of the probabilities for each individual hypothesis

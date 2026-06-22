@@ -77,7 +77,7 @@ $n=52$, $p=3$, regression, prediction.
 * training error: Decreases with model flexibility (More complex models will
   better fit the training data).
 * test error: Decreases initially, then increases due to overfitting (less
-  bias but more training error).
+  bias but more variance).
 * Bayes (irreducible) error: fixed (does not change with model).
 
 ### Question 4

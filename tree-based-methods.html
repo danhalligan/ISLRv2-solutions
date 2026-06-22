@@ -214,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.1" data-path="classification.html"><a href="classification.html#question-13-1"><i class="fa fa-check"></i><b>4.2.1</b> Question 13</a></li>
 <li class="chapter" data-level="4.2.2" data-path="classification.html"><a href="classification.html#question-14-1"><i class="fa fa-check"></i><b>4.2.2</b> Question 14</a></li>
 <li class="chapter" data-level="4.2.3" data-path="classification.html"><a href="classification.html#question-15-1"><i class="fa fa-check"></i><b>4.2.3</b> Question 15</a></li>
-<li class="chapter" data-level="4.2.4" data-path="classification.html"><a href="classification.html#question-13-2"><i class="fa fa-check"></i><b>4.2.4</b> Question 13</a></li>
+<li class="chapter" data-level="4.2.4" data-path="classification.html"><a href="classification.html#question-16"><i class="fa fa-check"></i><b>4.2.4</b> Question 16</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a>
@@ -333,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.5" data-path="deep-learning.html"><a href="deep-learning.html#question-10-6"><i class="fa fa-check"></i><b>10.2.5</b> Question 10</a></li>
 <li class="chapter" data-level="10.2.6" data-path="deep-learning.html"><a href="deep-learning.html#question-11-5"><i class="fa fa-check"></i><b>10.2.6</b> Question 11</a></li>
 <li class="chapter" data-level="10.2.7" data-path="deep-learning.html"><a href="deep-learning.html#question-12-4"><i class="fa fa-check"></i><b>10.2.7</b> Question 12</a></li>
-<li class="chapter" data-level="10.2.8" data-path="deep-learning.html"><a href="deep-learning.html#question-13-3"><i class="fa fa-check"></i><b>10.2.8</b> Question 13</a></li>
+<li class="chapter" data-level="10.2.8" data-path="deep-learning.html"><a href="deep-learning.html#question-13-2"><i class="fa fa-check"></i><b>10.2.8</b> Question 13</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a>
@@ -375,7 +375,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.4" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-10-8"><i class="fa fa-check"></i><b>12.2.4</b> Question 10</a></li>
 <li class="chapter" data-level="12.2.5" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-11-7"><i class="fa fa-check"></i><b>12.2.5</b> Question 11</a></li>
 <li class="chapter" data-level="12.2.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-12-5"><i class="fa fa-check"></i><b>12.2.6</b> Question 12</a></li>
-<li class="chapter" data-level="12.2.7" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-13-4"><i class="fa fa-check"></i><b>12.2.7</b> Question 13</a></li>
+<li class="chapter" data-level="12.2.7" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-13-3"><i class="fa fa-check"></i><b>12.2.7</b> Question 13</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
@@ -468,7 +468,7 @@ f(X) = \sum_{j=1}^p f_j(X_j).
 \]</span>
 Explain why this is the case. You can begin with (8.12) in Algorithm 8.2.</p>
 </blockquote>
-<p>Equation 8.1 is:</p>
+<p>Equation 8.12 is:</p>
 <p><span class="math display">\[
 f(x) = \sum_{b=1}^B(\lambda \hat{f}^b(x)
 \]</span></p>
@@ -800,7 +800,7 @@ regression tree above, although not quite as good as the bagging approach.</p>
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 3s
+## time: 2s
 ## trcnt,tecnt: 1000,1000</code></pre>
 <div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="tree-based-methods.html#cb527-1" tabindex="-1"></a><span class="fu">carseats_mse</span>(bartfit)</span></code></pre></div>
 <pre><code>## [1] 1.631285</code></pre>
@@ -1235,7 +1235,7 @@ were trying to predict <code>Outstate</code> using the other variables in <code>
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 4s
+## time: 3s
 ## trcnt,tecnt: 1000,1000</code></pre>
 <div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="tree-based-methods.html#cb606-1" tabindex="-1"></a>mse <span class="ot">&lt;-</span> <span class="cf">function</span>(model, ...) {</span>
 <span id="cb606-2"><a href="tree-based-methods.html#cb606-2" tabindex="-1"></a>  pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, College[test, ], ...)</span>

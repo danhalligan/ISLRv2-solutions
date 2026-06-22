@@ -63,7 +63,7 @@ text(
 > $$
 > Explain why this is the case. You can begin with (8.12) in Algorithm 8.2.
 
-Equation 8.1 is:
+Equation 8.12 is:
 
 $$
 f(x) = \sum_{b=1}^B(\lambda \hat{f}^b(x)
@@ -516,7 +516,7 @@ bartfit <- gbart(Carseats[train, 2:11], Carseats[train, 1],
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 3s
+## time: 2s
 ## trcnt,tecnt: 1000,1000
 ```
 
@@ -1164,7 +1164,7 @@ bart <- gbart(College[train, pred], College[train, "Outstate"],
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 4s
+## time: 3s
 ## trcnt,tecnt: 1000,1000
 ```
 

@@ -35,7 +35,7 @@ Note first that,
 Note that the first term is independent of $i'$ and the last is independent of
 $i$.
 
-Therefore, 10.12 can be written as:
+Therefore, 12.18 can be written as:
 
 \begin{align}
 \frac{1}{|C_k|}\sum_{i,i' \in C_k} \sum_{j=1}^p (x_{ij} - x_{i'j})^2
@@ -56,7 +56,7 @@ over combinations of $i$ and $i'$ for a given $j$.
 >    algorithm (Algorithm 12.2) decreases the objective (12.17) at each
 >    iteration.
 
-Equation 10.12 demonstrates that the euclidean distance between each possible
+Equation 12.18 demonstrates that the euclidean distance between each possible
 pair of samples can be related to the difference from each sample to the mean
 of the cluster. The K-means algorithm works by minimizing the euclidean distance
 to each centroid, thus also minimizes the within-cluster variance.
@@ -442,29 +442,29 @@ hc2 <- hclust(dist(scale(USArrests)), method = "complete")
 
 
 ``` r
-ct <- cutree(hc, 3)
+ct <- cutree(hc2, 3)
 sapply(1:3, function(i) names(ct)[ct == i])
 ```
 
 ```
 ## [[1]]
-##  [1] "Alabama"        "Alaska"         "Arizona"        "California"    
-##  [5] "Delaware"       "Florida"        "Illinois"       "Louisiana"     
-##  [9] "Maryland"       "Michigan"       "Mississippi"    "Nevada"        
-## [13] "New Mexico"     "New York"       "North Carolina" "South Carolina"
+## [1] "Alabama"        "Alaska"         "Georgia"        "Louisiana"     
+## [5] "Mississippi"    "North Carolina" "South Carolina" "Tennessee"     
 ## 
 ## [[2]]
-##  [1] "Arkansas"      "Colorado"      "Georgia"       "Massachusetts"
-##  [5] "Missouri"      "New Jersey"    "Oklahoma"      "Oregon"       
-##  [9] "Rhode Island"  "Tennessee"     "Texas"         "Virginia"     
-## [13] "Washington"    "Wyoming"      
+##  [1] "Arizona"    "California" "Colorado"   "Florida"    "Illinois"  
+##  [6] "Maryland"   "Michigan"   "Nevada"     "New Mexico" "New York"  
+## [11] "Texas"     
 ## 
 ## [[3]]
-##  [1] "Connecticut"   "Hawaii"        "Idaho"         "Indiana"      
-##  [5] "Iowa"          "Kansas"        "Kentucky"      "Maine"        
-##  [9] "Minnesota"     "Montana"       "Nebraska"      "New Hampshire"
-## [13] "North Dakota"  "Ohio"          "Pennsylvania"  "South Dakota" 
-## [17] "Utah"          "Vermont"       "West Virginia" "Wisconsin"
+##  [1] "Arkansas"      "Connecticut"   "Delaware"      "Hawaii"       
+##  [5] "Idaho"         "Indiana"       "Iowa"          "Kansas"       
+##  [9] "Kentucky"      "Maine"         "Massachusetts" "Minnesota"    
+## [13] "Missouri"      "Montana"       "Nebraska"      "New Hampshire"
+## [17] "New Jersey"    "North Dakota"  "Ohio"          "Oklahoma"     
+## [21] "Oregon"        "Pennsylvania"  "Rhode Island"  "South Dakota" 
+## [25] "Utah"          "Vermont"       "Virginia"      "Washington"   
+## [29] "West Virginia" "Wisconsin"     "Wyoming"
 ```
 
 Scaling results in different clusters and the choice of whether to scale or 
@@ -565,8 +565,9 @@ table(km, names(km))
 ##   2  2  0 19
 ```
 
-$K$-means effectively defines cluster 2 to be class B, but cluster 1 is a mix
-of classes A and B. 
+$K$-means effectively defines cluster 2 to be class C (capturing 19 of 20
+class-C observations), while cluster 1 absorbs all of class B together with
+most of class A.
 
 > e.  Now perform $K$-means clustering with $K = 4$, and describe your results.
 
@@ -585,8 +586,8 @@ table(km, names(km))
 ##   4  2 12  0
 ```
 
-$K$-means effectively defines cluster 1 to be class B, cluster 2 to be class A
-but clusters 3 and 4 are split over class C.
+$K$-means effectively defines cluster 2 to be class A and cluster 3 to be
+class C, while clusters 1 and 4 split class B between them.
 
 > f.  Now perform $K$-means clustering with $K = 3$ on the first two principal
 >     component score vectors, rather than on the raw data. That is, perform
@@ -628,7 +629,10 @@ table(km, names(km))
 ##   3  0  0 19
 ```
 
-$K$-means appears to perform less well on the scaled data in this case.
+$K$-means performs about as well on the scaled data as on the raw data (in
+this case the same two observations are misclassified). Because the variables
+were simulated on a common scale, scaling each variable to unit variance does
+not change the relative geometry much.
 
 ### Question 11
 
@@ -648,6 +652,131 @@ $K$-means appears to perform less well on the scaled data in this case.
 > observations that are missing, and the value of $M$, averaged over 10
 > repetitions of the experiment.
 
+We follow Algorithm 12.1: missing entries are initialised to the column mean,
+then on each iteration we replace them with the entries from the rank-$M$ SVD
+approximation of the current matrix. Convergence is tracked via the relative
+reduction in mean squared error on the _observed_ entries.
+
+
+``` r
+fit_svd <- function(X, M) {
+  s <- svd(X)
+  s$u[, 1:M, drop = FALSE] %*% (s$d[1:M] * t(s$v[, 1:M, drop = FALSE]))
+}
+
+matrix_completion <- function(X, M = 1, max_iter = 100, tol = 1e-7,
+                              verbose = FALSE, fit = fit_svd) {
+  obs <- !is.na(X)
+  Xhat <- X
+  cm <- colMeans(X, na.rm = TRUE)
+  for (j in seq_len(ncol(X))) Xhat[!obs[, j], j] <- cm[j]
+
+  mss0    <- mean(X[obs]^2)
+  mss_old <- mss0
+  rel_err <- Inf
+  iter    <- 0
+  while (iter < max_iter && rel_err > tol) {
+    iter <- iter + 1
+    Xapp <- fit(Xhat, M)
+    Xhat[!obs] <- Xapp[!obs]
+    mss     <- mean((X[obs] - Xapp[obs])^2)
+    rel_err <- (mss_old - mss) / mss0
+    mss_old <- mss
+    if (verbose) {
+      cat(sprintf("Iter %3d  MSS=%.6g  rel.err=%.3g\n",
+                  iter, mss, rel_err))
+    }
+  }
+  list(Xhat = Xhat, iter = iter, mss = mss)
+}
+```
+
+A short demonstration on `Boston` with 10% of entries missing and $M = 4$
+(showing the first few iterations only):
+
+
+``` r
+library(ISLR2)
+X <- scale(Boston)
+set.seed(1)
+miss <- sample(length(X), 0.1 * length(X))
+Xm <- X
+Xm[miss] <- NA
+res <- matrix_completion(Xm, M = 4, max_iter = 5, verbose = TRUE)
+```
+
+```
+## Iter   1  MSS=0.228531  rel.err=0.773
+## Iter   2  MSS=0.213812  rel.err=0.0146
+## Iter   3  MSS=0.211212  rel.err=0.00258
+## Iter   4  MSS=0.21012  rel.err=0.00108
+## Iter   5  MSS=0.209379  rel.err=0.000735
+```
+
+For the experiment we use a _nested_ missing-data design: the 30% missing set
+contains the 25% set, which contains the 20% set, and so on. This isolates the
+effect of the missingness fraction (and $M$) from the effect of which
+particular cells happened to be hidden.
+
+
+``` r
+set.seed(1)
+fracs <- seq(0.05, 0.30, by = 0.05)
+Ms    <- 1:8
+reps  <- 10
+n     <- length(X)
+
+results <- array(NA_real_,
+  dim = c(length(fracs), length(Ms), reps),
+  dimnames = list(frac = fracs, M = Ms, rep = 1:reps))
+
+for (r in 1:reps) {
+  shuf <- sample(n)
+  for (fi in seq_along(fracs)) {
+    miss <- shuf[1:round(fracs[fi] * n)]
+    Xm <- X
+    Xm[miss] <- NA
+    for (mi in seq_along(Ms)) {
+      res <- matrix_completion(Xm, M = Ms[mi], max_iter = 50)
+      results[fi, mi, r] <- mean((X[miss] - res$Xhat[miss])^2)
+    }
+  }
+}
+
+mean_err <- apply(results, c(1, 2), mean)
+round(mean_err, 3)
+```
+
+```
+##       M
+## frac       1     2     3     4     5     6     7     8
+##   0.05 0.588 0.559 0.518 1.289 1.476 1.194 1.091 1.280
+##   0.1  0.610 0.580 0.556 1.058 1.495 1.322 1.271 1.390
+##   0.15 0.606 0.591 0.577 1.005 1.280 1.274 1.228 1.341
+##   0.2  0.610 0.604 0.608 1.066 1.195 1.191 1.224 1.270
+##   0.25 0.623 0.621 0.700 1.060 1.168 1.232 1.192 1.278
+##   0.3  0.621 0.659 0.759 1.103 1.248 1.193 1.223 1.249
+```
+
+
+``` r
+df <- as.data.frame.table(mean_err, responseName = "MSE")
+df$frac <- as.numeric(as.character(df$frac))
+df$M    <- as.integer(as.character(df$M))
+ggplot(df, aes(frac, MSE, colour = factor(M), group = M)) +
+  geom_line() + geom_point() +
+  labs(x = "Fraction of entries missing", y = "Mean squared error",
+       colour = "M")
+```
+
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-29-1.png" alt="" width="672" />
+
+A small number of components ($M \le 3$) gives by far the best imputations
+on standardised `Boston`. Beyond that the rank-$M$ approximation starts to
+overfit the imputed values themselves, and the error roughly doubles. As
+expected, the error also grows gradually with the fraction of missing
+entries.
+
 ### Question 12
 
 > In Section 12.5.2, Algorithm 12.1 was implemented using the `svd()` function.
@@ -657,6 +786,48 @@ $K$-means appears to perform less well on the scaled data in this case.
 >
 > Write a function to implement Algorithm 12.1 that makes use of `prcomp()`
 > rather than `svd()`.
+
+`prcomp()` returns scores $UD$ in `$x` and loadings $V$ in `$rotation`, so the
+rank-$M$ approximation is `x[, 1:M] %*% t(rotation[, 1:M])` — with the column
+means added back if we center. We can plug this into the matrix completion
+function from Q11 by passing a different `fit` argument:
+
+
+``` r
+fit_prcomp <- function(X, M) {
+  p <- prcomp(X, center = TRUE, scale. = FALSE)
+  approx <- p$x[, 1:M, drop = FALSE] %*% t(p$rotation[, 1:M, drop = FALSE])
+  sweep(approx, 2, p$center, FUN = "+")
+}
+```
+
+The two implementations give essentially identical imputations (any
+differences are at the level of numerical precision):
+
+
+``` r
+set.seed(1)
+miss <- sample(length(X), 0.1 * length(X))
+Xm <- X
+Xm[miss] <- NA
+r_svd <- matrix_completion(Xm, M = 4, fit = fit_svd,    max_iter = 50)
+r_pca <- matrix_completion(Xm, M = 4, fit = fit_prcomp, max_iter = 50)
+cat("MSE on held-out entries (svd):   ",
+    mean((X[miss] - r_svd$Xhat[miss])^2), "\n")
+```
+
+```
+## MSE on held-out entries (svd):    1.048215
+```
+
+``` r
+cat("MSE on held-out entries (prcomp):",
+    mean((X[miss] - r_pca$Xhat[miss])^2), "\n")
+```
+
+```
+## MSE on held-out entries (prcomp): 1.050214
+```
 
 ### Question 13
 
@@ -679,25 +850,26 @@ colnames(data) <- c(paste0("H", 1:20), paste0("D", 1:20))
 
 
 ``` r
-hc.complete <- hclust(as.dist(1 - cor(data)), method = "complete")
+dd <- as.dist(1 - cor(data))
+hc.complete <- hclust(dd, method = "complete")
 plot(hc.complete)
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-1.png" alt="" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-33-1.png" alt="" width="672" />
 
 ``` r
-hc.complete <- hclust(as.dist(1 - cor(data)), method = "average")
-plot(hc.complete)
+hc.average <- hclust(dd, method = "average")
+plot(hc.average)
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-2.png" alt="" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-33-2.png" alt="" width="672" />
 
 ``` r
-hc.complete <- hclust(as.dist(1 - cor(data)), method = "single")
-plot(hc.complete)
+hc.single <- hclust(dd, method = "single")
+plot(hc.single)
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-3.png" alt="" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-33-3.png" alt="" width="672" />
 
 Yes the samples clearly separate into the two groups, although the results 
 depend somewhat on the linkage method used. In the case of average clustering,
@@ -714,15 +886,16 @@ FDR adjusted p-value less than some given threshold (e.g. 0.05).
 
 ``` r
 class <- factor(rep(c("Healthy", "Diseased"), each = 20))
-pvals <- p.adjust(apply(data, 1, function(v) t.test(v ~ class)$p.value))
+pvals <- p.adjust(apply(data, 1, function(v) t.test(v ~ class)$p.value), method = "fdr")
 which(pvals < 0.05)
 ```
 
 ```
-##   [1]  11  12  13  14  15  16  17  18  19  20 501 502 503 504 505 506 507 508
-##  [19] 509 511 512 513 514 515 516 517 519 520 521 522 523 524 525 526 527 528
-##  [37] 529 530 531 532 533 534 535 536 537 538 539 540 541 542 543 544 545 546
-##  [55] 547 548 549 550 551 552 553 554 555 556 557 558 559 560 561 562 563 564
-##  [73] 565 566 567 568 569 570 571 572 574 575 576 577 578 579 580 581 582 583
-##  [91] 584 586 587 588 589 590 591 592 593 595 596 597 598 599 600
+##   [1]  11  12  13  14  15  16  17  18  19  20 135 156 172 448 501 502 503 504
+##  [19] 505 506 507 508 509 510 511 512 513 514 515 516 517 518 519 520 521 522
+##  [37] 523 524 525 526 527 528 529 530 531 532 533 534 535 536 537 538 539 540
+##  [55] 541 542 543 544 545 546 547 548 549 550 551 552 553 554 555 556 557 558
+##  [73] 559 560 561 562 563 564 565 566 567 568 569 570 571 572 573 574 575 576
+##  [91] 577 578 579 580 581 582 583 584 585 586 587 588 589 590 591 592 593 594
+## [109] 595 596 597 598 599 600 615 853 967
 ```

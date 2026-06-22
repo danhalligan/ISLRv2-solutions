@@ -553,7 +553,7 @@ corrplot(cor(Weekly[, -9]), type = "lower", diag = FALSE, method = "ellipse")
 <img src="04-classification_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" />
 
 Volume is strongly positively correlated with Year. Other correlations are
-week, but Lag1 is negatively correlated with Lag2 but positively correlated
+weak, but Lag1 is negatively correlated with Lag2 but positively correlated
 with Lag3.
 
 > b. Use the full data set to perform a logistic regression with `Direction` as
@@ -731,8 +731,8 @@ fit <- knn(
 ```
 ##       
 ## fit    Down Up
-##   Down   21 29
-##   Up     22 32
+##   Down   21 30
+##   Up     22 31
 ```
 
 ``` r
@@ -740,7 +740,7 @@ sum(diag(t)) / sum(t)
 ```
 
 ```
-## [1] 0.5096154
+## [1] 0.5
 ```
 
 > h. Repeat (d) using naive Bayes.
@@ -1174,7 +1174,7 @@ PlotPower(1:10, 3)
 
 <img src="04-classification_files/figure-html/unnamed-chunk-25-1.png" alt="" width="672" />
 
-### Question 13
+### Question 16
 
 > Using the `Boston` data set, fit classification models in order to predict
 > whether a given census tract has a crime rate above or below the median.

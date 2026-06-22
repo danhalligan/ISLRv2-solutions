@@ -48,7 +48,7 @@ applied-2
 question-13-1
 question-14-1
 question-15-1
-question-13-2
+question-16
 resampling-methods
 conceptual-3
 question-1-3
@@ -131,7 +131,7 @@ question-9-7
 question-10-6
 question-11-5
 question-12-4
-question-13-3
+question-13-2
 survival-analysis-and-censored-data
 conceptual-9
 question-1-9
@@ -161,7 +161,7 @@ question-9-9
 question-10-8
 question-11-7
 question-12-5
-question-13-4
+question-13-3
 multiple-testing
 conceptual-11
 question-1-11

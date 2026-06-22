@@ -170,7 +170,7 @@ mean(store)
 ```
 
 ```
-## [1] 0.6314
+## [1] 0.6282
 ```
 
 The probability of including $4$ when resampling numbers $1...100$ is close to
@@ -358,7 +358,7 @@ summary(fit)
 ## Number of Fisher Scoring iterations: 8
 ```
 
-The standard errors obtained by bootstrapping are $\beta_1$ = 5.0e-6 and 
+The standard errors estimated by `glm()` are $\beta_1$ = 5.0e-6 and 
 $\beta_2$ = 2.3e-4.
 
 > b. Write a function, `boot.fn()`, that takes as input the `Default` data set

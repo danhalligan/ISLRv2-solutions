@@ -214,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.1" data-path="classification.html"><a href="classification.html#question-13-1"><i class="fa fa-check"></i><b>4.2.1</b> Question 13</a></li>
 <li class="chapter" data-level="4.2.2" data-path="classification.html"><a href="classification.html#question-14-1"><i class="fa fa-check"></i><b>4.2.2</b> Question 14</a></li>
 <li class="chapter" data-level="4.2.3" data-path="classification.html"><a href="classification.html#question-15-1"><i class="fa fa-check"></i><b>4.2.3</b> Question 15</a></li>
-<li class="chapter" data-level="4.2.4" data-path="classification.html"><a href="classification.html#question-13-2"><i class="fa fa-check"></i><b>4.2.4</b> Question 13</a></li>
+<li class="chapter" data-level="4.2.4" data-path="classification.html"><a href="classification.html#question-16"><i class="fa fa-check"></i><b>4.2.4</b> Question 16</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="resampling-methods.html"><a href="resampling-methods.html"><i class="fa fa-check"></i><b>5</b> Resampling Methods</a>
@@ -333,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.5" data-path="deep-learning.html"><a href="deep-learning.html#question-10-6"><i class="fa fa-check"></i><b>10.2.5</b> Question 10</a></li>
 <li class="chapter" data-level="10.2.6" data-path="deep-learning.html"><a href="deep-learning.html#question-11-5"><i class="fa fa-check"></i><b>10.2.6</b> Question 11</a></li>
 <li class="chapter" data-level="10.2.7" data-path="deep-learning.html"><a href="deep-learning.html#question-12-4"><i class="fa fa-check"></i><b>10.2.7</b> Question 12</a></li>
-<li class="chapter" data-level="10.2.8" data-path="deep-learning.html"><a href="deep-learning.html#question-13-3"><i class="fa fa-check"></i><b>10.2.8</b> Question 13</a></li>
+<li class="chapter" data-level="10.2.8" data-path="deep-learning.html"><a href="deep-learning.html#question-13-2"><i class="fa fa-check"></i><b>10.2.8</b> Question 13</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="survival-analysis-and-censored-data.html"><a href="survival-analysis-and-censored-data.html"><i class="fa fa-check"></i><b>11</b> Survival Analysis and Censored Data</a>
@@ -375,7 +375,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2.4" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-10-8"><i class="fa fa-check"></i><b>12.2.4</b> Question 10</a></li>
 <li class="chapter" data-level="12.2.5" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-11-7"><i class="fa fa-check"></i><b>12.2.5</b> Question 11</a></li>
 <li class="chapter" data-level="12.2.6" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-12-5"><i class="fa fa-check"></i><b>12.2.6</b> Question 12</a></li>
-<li class="chapter" data-level="12.2.7" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-13-4"><i class="fa fa-check"></i><b>12.2.7</b> Question 13</a></li>
+<li class="chapter" data-level="12.2.7" data-path="unsupervised-learning.html"><a href="unsupervised-learning.html#question-13-3"><i class="fa fa-check"></i><b>12.2.7</b> Question 13</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="multiple-testing.html"><a href="multiple-testing.html"><i class="fa fa-check"></i><b>13</b> Multiple Testing</a>
@@ -555,7 +555,7 @@ the fourth observation is contained in the bootstrap sample.</p>
 </blockquote>
 <div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="resampling-methods.html#cb285-1" tabindex="-1"></a>store <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, <span class="fu">sum</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
 <span id="cb285-2"><a href="resampling-methods.html#cb285-2" tabindex="-1"></a><span class="fu">mean</span>(store)</span></code></pre></div>
-<pre><code>## [1] 0.6314</code></pre>
+<pre><code>## [1] 0.6282</code></pre>
 <p>The probability of including <span class="math inline">\(4\)</span> when resampling numbers <span class="math inline">\(1...100\)</span> is close to
 <span class="math inline">\(1 - (1 - 1/100)^{100}\)</span>.</p>
 </div>
@@ -726,7 +726,7 @@ predictors.</li>
 ## AIC: 1585
 ## 
 ## Number of Fisher Scoring iterations: 8</code></pre>
-<p>The standard errors obtained by bootstrapping are <span class="math inline">\(\beta_1\)</span> = 5.0e-6 and
+<p>The standard errors estimated by <code>glm()</code> are <span class="math inline">\(\beta_1\)</span> = 5.0e-6 and
 <span class="math inline">\(\beta_2\)</span> = 2.3e-4.</p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
