@@ -208,7 +208,7 @@ $$ Cor(x,y)^2 = \frac{(\sum_ix_iy_i)^2}{\sum_ix_i^2 \sum_iy_i^2} $$
 
 Also note that:
 
-$$\hat{y}_i = \hat\beta_o + \hat\beta_1x_i = x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2}$$
+$$\hat{y}_i = \hat\beta_0 + \hat\beta_1x_i = x_i\frac{\sum_j{x_jy_j}}{\sum_jx_j^2}$$
 
 Therefore, given that $RSS = \sum_i(y_i - \hat{y}_i)^2$ and
 $\textit{TSS} = \sum_i(y_i - \bar{y})^2 = \sum_iy_i^2$

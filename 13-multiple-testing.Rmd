@@ -35,12 +35,12 @@ For independent tests this is $\alpha + \alpha - \alpha^2$
 >    _Hint: First, suppose that the two p-values are perfectly correlated._
 
 If they were perfectly correlated, we would effectively be performing a single
-test (thus FWER would be $alpha$). In the case when they are positively
+test (thus FWER would be $\alpha$). In the case when they are positively
 correlated therefore, we can expect the FWER to be less than in b.
 
-Alternatively, as above, FWEW = Pr(A ∪ B) = Pr(A) + Pr(B) - Pr(A ∩ B).
+Alternatively, as above, FWER = Pr(A ∪ B) = Pr(A) + Pr(B) - Pr(A ∩ B).
 For perfectly positively correlated tests Pr(A ∩ B) = $\alpha$, so the 
-FWEW is $\alpha$ which is smaller than b.
+FWER is $\alpha$ which is smaller than b.
 
 > d. Suppose again that $m = 2$, but that now the p-values for the two tests are
 >    negatively correlated, so that if one is large then the other will tend to
@@ -52,7 +52,7 @@ FWEW is $\alpha$ which is smaller than b.
 >    _never reject both null hypotheses._
 
 Taking the equation above, for two tests,
-FWEW = Pr(A ∪ B) = Pr(A) + Pr(B) - Pr(A ∩ B). In the case considered in the
+FWER = Pr(A ∪ B) = Pr(A) + Pr(B) - Pr(A ∩ B). In the case considered in the
 hint Pr(A ∩ B) = 0, so Pr(A ∪ B) = $2\alpha$, which is larger than b.
 
 ### Question 2
