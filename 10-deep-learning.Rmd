@@ -120,25 +120,28 @@ Pr(Y=k|X=x) = \frac
 {\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x1 + ... + \beta_{lp}x_p}}
 $$
 
-adding constants $c_j$ to each class gives:
+adding constants $c_j$ to the coefficients $\beta_{kj}$ for every class $k$
+gives:
 
 \begin{align*}
 Pr(Y=k|X=x) 
 &= \frac
-  {e^{\beta_{K0} + \beta_{K1}x_1 + c_1 + ... + \beta_{Kp}x_p + c_p}}
-  {\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x1 + c_1 + ... + \beta_{lp}x_p + c_p}} \\
+  {e^{(\beta_{k0} + c_0) + (\beta_{k1} + c_1)x_1 + ... + (\beta_{kp} + c_p)x_p}}
+  {\sum_{l=1}^K e^{(\beta_{l0} + c_0) + (\beta_{l1} + c_1)x_1 + ... + (\beta_{lp} + c_p)x_p}} \\
 &= \frac
-  {e^{c1 + ... + c_p}e^{\beta_{K0} + \beta_{K1}x_1 + ... + \beta_{Kp}x_p}}
-  {\sum_{l=1}^K e^{c1 + ... + c_p}e^{\beta_{l0} + \beta_{l1}x1 + ... + \beta_{lp}x_p}} \\
+  {e^{c_0 + c_1 x_1 + ... + c_p x_p} \, e^{\beta_{k0} + \beta_{k1}x_1 + ... + \beta_{kp}x_p}}
+  {\sum_{l=1}^K e^{c_0 + c_1 x_1 + ... + c_p x_p} \, e^{\beta_{l0} + \beta_{l1}x_1 + ... + \beta_{lp}x_p}} \\
 &= \frac
-  {e^{c1 + ... + c_p}e^{\beta_{K0} + \beta_{K1}x_1 + ... + \beta_{Kp}x_p}}
-  {e^{c1 + ... + c_p}\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x1 + ... + \beta_{lp}x_p}} \\
+  {e^{c_0 + c_1 x_1 + ... + c_p x_p} \, e^{\beta_{k0} + \beta_{k1}x_1 + ... + \beta_{kp}x_p}}
+  {e^{c_0 + c_1 x_1 + ... + c_p x_p} \sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x_1 + ... + \beta_{lp}x_p}} \\
 &= \frac
-  {e^{\beta_{K0} + \beta_{K1}x_1 + ... + \beta_{Kp}x_p}}
-  {\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x1 + ... + \beta_{lp}x_p}} \\
+  {e^{\beta_{k0} + \beta_{k1}x_1 + ... + \beta_{kp}x_p}}
+  {\sum_{l=1}^K e^{\beta_{l0} + \beta_{l1}x_1 + ... + \beta_{lp}x_p}} \\
 \end{align*}
 
-which collapses to 4.13 (with the same argument as above).
+The key step is that $e^{c_0 + c_1 x_1 + ... + c_p x_p}$ depends on $x$ but
+*not* on the class $l$, so it factors out of the sum in the denominator and
+cancels with the same factor in the numerator. We recover 4.13.
 
 > This shows that the softmax function is _over-parametrized_. However,
 > regularization and SGD typically constrain the solutions so that this is not a

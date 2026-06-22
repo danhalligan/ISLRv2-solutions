@@ -35,14 +35,14 @@ $a_1 = \beta_0$, $b_1 = \beta_1$, $c_1 = \beta_2$, $d_1 = \beta_3$
 For $x \gt \xi$, the cubic polynomial would be (we include the $\beta_4$ term).
 \begin{align}
 f(x) = & \beta_0 + \beta_1x + \beta_2x^2 + \beta_3x^3 + \beta_4(x-\xi)^3 \\
-     = & \beta_0 + \beta_1x + \beta_2x^2 +  + \beta_4(x^3 - 3x^2\xi + 3x\xi^2 -\xi^3) \\
+     = & \beta_0 + \beta_1x + \beta_2x^2 + \beta_3x^3 + \beta_4(x^3 - 3x^2\xi + 3x\xi^2 -\xi^3) \\
      = & \beta_0 - \beta_4\xi^3 + (\beta_1 + 3\beta_4\xi^2)x +
          (\beta_2 - 3\beta_4\xi)x^2 + (\beta_3 + \beta_4)x^3
 \end{align}
 
 Therefore,
-$a_1 = \beta_0 - \beta_4\xi^3$, $b_1 = \beta_1 + 3\beta_4\xi^2$,
-$c_1 = \beta_2 - 3\beta_4\xi$, $d_1 = \beta_3 + \beta_4$
+$a_2 = \beta_0 - \beta_4\xi^3$, $b_2 = \beta_1 + 3\beta_4\xi^2$,
+$c_2 = \beta_2 - 3\beta_4\xi$, $d_2 = \beta_3 + \beta_4$
 
 > c. Show that $f_1(\xi) = f_2(\xi)$. That is, $f(x)$ is continuous at $\xi$.
 
@@ -65,7 +65,7 @@ f_2(\xi) = & \beta_0 - \beta_4\xi^3 + (\beta_1 + 3\beta_4\xi^2)\xi +
 To do this we differentiate the above with respect to $x$.
 
 $$
-f_1'(x) = \beta_1 + 2\beta_2x + 3\beta_3x^2
+f_1'(x) = \beta_1 + 2\beta_2x + 3\beta_3x^2 \\
 f_1'(\xi) = \beta_1 + 2\beta_2\xi + 3\beta_3\xi^2
 $$
 
@@ -81,8 +81,8 @@ f_2'(\xi) & = \beta_1 + 3\beta_4\xi^2 + 2(\beta_2 - 3\beta_4\xi)\xi + 3(\beta_3 
 > Therefore, $f(x)$ is indeed a cubic spline.
 
 $$
-f_1'(x) = 2\beta_2x + 6\beta_3x \\
-f_1''(\xi) = 2\beta_2\xi + 6\beta_3\xi
+f_1''(x) = 2\beta_2 + 6\beta_3 x \\
+f_1''(\xi) = 2\beta_2 + 6\beta_3 \xi
 $$
 
 $$

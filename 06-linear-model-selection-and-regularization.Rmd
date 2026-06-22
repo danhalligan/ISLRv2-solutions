@@ -357,8 +357,8 @@ abline(v = y - lambda / 2, lty = 2)
 \begin{align*}
 \mathcal{L} 
   &= \prod_i^n \mathcal{N}(0, \sigma^2) \\
-  &= \prod_i^n \frac{1}{\sqrt{2\pi\sigma}}\exp\left(-\frac{\epsilon_i^2}{2\sigma^2}\right) \\
-  &= \left(\frac{1}{\sqrt{2\pi\sigma}}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right)
+  &= \prod_i^n \frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{\epsilon_i^2}{2\sigma^2}\right) \\
+  &= \left(\frac{1}{\sqrt{2\pi}\sigma}\right)^n \exp\left(-\frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2\right)
 \end{align*}
 
 > b. Assume the following prior for $\beta$: $\beta_1, ..., \beta_p$ are
