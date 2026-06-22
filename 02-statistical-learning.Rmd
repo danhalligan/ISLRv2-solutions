@@ -70,6 +70,30 @@ $n=52$, $p=3$, regression, prediction.
 > b. Explain why each of the five curves has the shape displayed in
 >    part (a).
 
+```{r}
+library(ggplot2)
+library(tidyr)
+
+flex <- seq(0, 1, length.out = 200)
+curves <- data.frame(
+  flex,
+  `(squared) bias` = 4 * (1 - flex)^2 + 0.2,
+  variance = 0.2 + 4 * flex^3,
+  `training error` = 4.5 * (1 - flex) + 0.3,
+  `Bayes error` = 1,
+  check.names = FALSE
+)
+curves$`test error` <-
+  curves$`(squared) bias` + curves$variance + curves$`Bayes error`
+
+ggplot(
+  pivot_longer(curves, -flex, names_to = "curve", values_to = "value"),
+  aes(flex, value, color = curve)
+) +
+  geom_line(linewidth = 1) +
+  labs(x = "Flexibility", y = "Error", color = NULL)
+```
+
 * (squared) bias: Decreases with increasing flexibility (Generally, more
   flexible methods result in less bias).
 * variance: Increases with increasing flexibility (In general, more flexible
@@ -435,7 +459,20 @@ heatmap(cor(Boston, method = "spearman"), cexRow = 1.1, cexCol = 1.1)
 > c. Are any of the predictors associated with per capita crime rate? If so,
 >    explain the relationship.
 
-Yes
+Yes. Inspecting the Spearman correlations with `crim`:
+
+```{r}
+sort(cor(Boston, method = "spearman")["crim", ])
+```
+
+Crime rate rises strongly with `nox` (air pollution), `indus` (proportion of
+non-retail business), `tax`, `rad` (highway accessibility), `age` (proportion
+of old housing) and `lstat` ("lower-status" population) -- i.e. with the
+features that mark dense, industrial, lower-income tracts. It falls with
+`dis` (distance to employment centers), `zn` (large-lot residential zoning),
+and `medv` (median home value) -- the features that mark wealthier, more
+suburban areas. `chas` (bordering the Charles river) shows essentially no
+association.
 
 > d. Do any of the census tracts of Boston appear to have particularly high 
 >    crime rates? Tax rates? Pupil-teacher ratios? Comment on the range of each
