@@ -392,7 +392,7 @@ knitr::include_graphics(c(
 library(keras)
 images <- list.files("images/animals")
 x <- array(dim = c(length(images), 224, 224, 3))
-for (i in seq_len(length(images))) {
+for (i in seq_along(images)) {
   img <- image_load(paste0("images/animals/", images[i]), target_size = c(224, 224))
   x[i, , , ] <- image_to_array(img)
 }
