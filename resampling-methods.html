@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Resampling Methods | An Introduction to Statistical Learning</title>
   <meta name="description" content="5 Resampling Methods | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.41.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.47.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Resampling Methods | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -50,19 +50,20 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/plotly-binding-4.12.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -521,9 +522,9 @@ the bootstrap sample?</li>
 in the bootstrap sample?</li>
 </ol>
 </blockquote>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="resampling-methods.html#cb281-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="resampling-methods.html#cb281-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb281-2"><a href="resampling-methods.html#cb281-2" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> n)<span class="sc">^</span>n</span></code></pre></div>
-<pre><code>## [1] 0.6321224</code></pre>
+<pre><code>## [1] 0.632139</code></pre>
 <p><span class="math inline">\(p = 0.63\)</span></p>
 <blockquote>
 <ol start="7" style="list-style-type: lower-alpha">
@@ -534,7 +535,7 @@ sample. Comment on what you observe.</li>
 </blockquote>
 <div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="resampling-methods.html#cb283-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>, <span class="cf">function</span>(n) <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> n)<span class="sc">^</span>n)</span>
 <span id="cb283-2"><a href="resampling-methods.html#cb283-2" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="at">log =</span> <span class="st">&quot;x&quot;</span>, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>)</span></code></pre></div>
-<p><img src="05-resampling-methods_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="05-resampling-methods_files/figure-html/unnamed-chunk-4-1.png" alt="" width="672" /></p>
 <p>The probability rapidly approaches 0.63 with increasing <span class="math inline">\(n\)</span>.</p>
 <p>Note that <span class="math display">\[e^x = \lim_{x \to \inf} \left(1 + \frac{x}{n}\right)^n,\]</span> so with <span class="math inline">\(x = -1\)</span>, we
 can see that our limit is <span class="math inline">\(1 - e^{-1} = 1 - 1/e\)</span>.</p>
@@ -554,7 +555,7 @@ the fourth observation is contained in the bootstrap sample.</p>
 </blockquote>
 <div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="resampling-methods.html#cb285-1" tabindex="-1"></a>store <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, <span class="fu">sum</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
 <span id="cb285-2"><a href="resampling-methods.html#cb285-2" tabindex="-1"></a><span class="fu">mean</span>(store)</span></code></pre></div>
-<pre><code>## [1] 0.6332</code></pre>
+<pre><code>## [1] 0.641</code></pre>
 <p>The probability of including <span class="math inline">\(4\)</span> when resampling numbers <span class="math inline">\(1...100\)</span> is close to
 <span class="math inline">\(1 - (1 - 1/100)^{100}\)</span>.</p>
 </div>
@@ -863,7 +864,7 @@ a single variable <span class="math inline">\(x\)</span>). The model equation is
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="resampling-methods.html#cb310-1" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span></code></pre></div>
-<p><img src="05-resampling-methods_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="05-resampling-methods_files/figure-html/unnamed-chunk-19-1.png" alt="" width="672" /></p>
 <p><span class="math inline">\(y\)</span> has a (negative) quadratic relationship with <span class="math inline">\(x\)</span>.</p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -998,7 +999,7 @@ interval for the mean of <code>medv</code>. Compare it to the results obtained u
 <code>t.test(Boston$medv)</code>.</li>
 </ol>
 <p><em>Hint: You can approximate a 95% confidence interval using the
-formula <span class="math inline">\([\hat\mu - 2SE(\hat\mu), \hat\mu + 2SE(\hat\mu)].\)</span></em></p>
+formula <span class="math inline">\([\hat\mu - 2SE(\hat\mu),  \hat\mu + 2SE(\hat\mu)].\)</span></em></p>
 </blockquote>
 <div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="resampling-methods.html#cb323-1" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sd</span>(bs<span class="sc">$</span>t)</span>
 <span id="cb323-2"><a href="resampling-methods.html#cb323-2" tabindex="-1"></a><span class="fu">c</span>(mu <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> se, mu <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> se)</span></code></pre></div>
@@ -1092,42 +1093,42 @@ confidence about the value of the 10th percentile.</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": {}
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/danhalligan/ISLRv2-solutions/edit/main/05-resampling-methods.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": {}
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/danhalligan/ISLRv2-solutions/edit/main/05-resampling-methods.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

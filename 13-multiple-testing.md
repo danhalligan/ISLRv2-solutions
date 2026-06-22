@@ -363,7 +363,7 @@ pvals <- apply(X, 2, function(p) t.test(p)$p.value)
 hist(pvals, main = NULL)
 ```
 
-<img src="13-multiple-testing_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="13-multiple-testing_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" />
 
 > b. If we control Type I error for each null hypothesis at level $\alpha =
 > 0.05$, then how many null hypotheses do we reject?

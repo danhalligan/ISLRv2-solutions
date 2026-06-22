@@ -121,12 +121,12 @@ $p = 0.64$
 
 
 ``` r
-n <- 100000
+n <- 10000
 1 - (1 - 1 / n)^n
 ```
 
 ```
-## [1] 0.6321224
+## [1] 0.632139
 ```
 
 $p = 0.63$
@@ -141,7 +141,7 @@ x <- sapply(1:100000, function(n) 1 - (1 - 1 / n)^n)
 plot(x, log = "x", type = "o")
 ```
 
-<img src="05-resampling-methods_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="05-resampling-methods_files/figure-html/unnamed-chunk-4-1.png" alt="" width="672" />
 
 The probability rapidly approaches 0.63 with increasing $n$.
 
@@ -170,7 +170,7 @@ mean(store)
 ```
 
 ```
-## [1] 0.6332
+## [1] 0.641
 ```
 
 The probability of including $4$ when resampling numbers $1...100$ is close to
@@ -516,7 +516,7 @@ a single variable $x$). The model equation is: $$y = -2x^2 + x + \epsilon$$.
 plot(x, y)
 ```
 
-<img src="05-resampling-methods_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="05-resampling-methods_files/figure-html/unnamed-chunk-19-1.png" alt="" width="672" />
 
 $y$ has a (negative) quadratic relationship with $x$.
 

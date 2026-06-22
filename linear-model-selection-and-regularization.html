@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Linear Model Selection and Regularization | An Introduction to Statistical Learning</title>
   <meta name="description" content="6 Linear Model Selection and Regularization | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.41.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.47.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Linear Model Selection and Regularization | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -50,19 +50,20 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/plotly-binding-4.12.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -784,7 +785,7 @@ plot (6.12) as a function of <span class="math inline">\(\beta_1\)</span>. Your 
 <span id="cb333-5"><a href="linear-model-selection-and-regularization.html#cb333-5" tabindex="-1"></a>}</span>
 <span id="cb333-6"><a href="linear-model-selection-and-regularization.html#cb333-6" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>), <span class="fu">fn</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;beta&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;6.12&quot;</span>)</span>
 <span id="cb333-7"><a href="linear-model-selection-and-regularization.html#cb333-7" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> y <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> lambda), <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-1-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Consider (6.13) with <span class="math inline">\(p = 1\)</span>. For some choice of <span class="math inline">\(y_1\)</span> and <span class="math inline">\(\lambda &gt; 0\)</span>,
@@ -812,7 +813,7 @@ plot (6.13) as a function of <span class="math inline">\(\beta_1\)</span>. Your 
 <span id="cb334-5"><a href="linear-model-selection-and-regularization.html#cb334-5" tabindex="-1"></a>}</span>
 <span id="cb334-6"><a href="linear-model-selection-and-regularization.html#cb334-6" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>), <span class="fu">fn</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;beta&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;6.12&quot;</span>)</span>
 <span id="cb334-7"><a href="linear-model-selection-and-regularization.html#cb334-7" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> y <span class="sc">-</span> lambda <span class="sc">/</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-2-1.png" alt="" width="672" /></p>
 </div>
 <div id="question-7-4" class="section level3 hasAnchor" number="6.1.7">
 <h3><span class="header-section-number">6.1.7</span> Question 7<a href="linear-model-selection-and-regularization.html#question-7-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -867,7 +868,8 @@ we minimize the second term.</p>
 &amp;= \argmin_\beta \left(\frac{1}{2\sigma^2} \right ) \left( \sum_i^n \epsilon_i^2 +\frac{2\sigma^2}{b}\sum_j^p|\beta_j|\right) \\
 &amp;= \argmin_\beta \left( \sum_i^n \epsilon_i^2 +\frac{2\sigma^2}{b}\sum_j^p|\beta_j|\right)
 \end{align*}\]</span></p>
-<p>Note, that <span class="math inline">\(RSS = \sum_i^n \epsilon_i^2\)</span> and if we set <span class="math inline">\(\lambda = \frac{2\sigma^2}{b}\)</span>, the mode corresponds to lasso optimization.
+<p>Note, that <span class="math inline">\(RSS = \sum_i^n \epsilon_i^2\)</span> and if we set <span class="math inline">\(\lambda =
+\frac{2\sigma^2}{b}\)</span>, the mode corresponds to lasso optimization.
 <span class="math display">\[
 \argmin_\beta RSS + \lambda\sum_j^p|\beta_j|
 \]</span></p>
@@ -908,7 +910,8 @@ second term. i.e. we minimize:</p>
 \argmin_\beta \left( \frac{1}{2\sigma^2} \sum_i^n \epsilon_i^2 + \frac{1}{2c}\sum_j^p\beta_j^2 \right)\\
 = \argmin_\beta \left( \frac{1}{2\sigma^2} \left( \sum_i^n \epsilon_i^2 + \frac{\sigma^2}{c}\sum_j^p\beta_j^2 \right) \right)
 \]</span></p>
-<p>As above, if <span class="math inline">\(RSS = \sum_i^n \epsilon_i^2\)</span> and if we set <span class="math inline">\(\lambda = \frac{\sigma^2}{c}\)</span>, we can see that the mode corresponds to ridge optimization.</p>
+<p>As above, if <span class="math inline">\(RSS = \sum_i^n \epsilon_i^2\)</span> and if we set <span class="math inline">\(\lambda =
+\frac{\sigma^2}{c}\)</span>, we can see that the mode corresponds to ridge optimization.</p>
 </div>
 </div>
 <div id="applied-4" class="section level2 hasAnchor" number="6.2">
@@ -1156,22 +1159,22 @@ discuss the results obtained.</li>
 <span id="cb344-2"><a href="linear-model-selection-and-regularization.html#cb344-2" tabindex="-1"></a>(best <span class="ot">&lt;-</span> res<span class="sc">$</span>lambda.min)</span></code></pre></div>
 <pre><code>## [1] 0.09804219</code></pre>
 <div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="linear-model-selection-and-regularization.html#cb346-1" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-8-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="linear-model-selection-and-regularization.html#cb347-1" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="fu">poly</span>(dat<span class="sc">$</span>x, <span class="dv">10</span>, <span class="at">raw =</span> <span class="cn">TRUE</span>), dat<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> res<span class="sc">$</span>lambda.min)</span>
 <span id="cb347-2"><a href="linear-model-selection-and-regularization.html#cb347-2" tabindex="-1"></a><span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> best)</span></code></pre></div>
 <pre><code>## 11 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                     s1
-## (Intercept)  1.8457308
-## 1            2.9092918
-## 2           -1.9287428
-## 3            0.5161012
-## 4            .        
-## 5            .        
-## 6            .        
-## 7            .        
-## 8            .        
-## 9            .        
-## 10           .</code></pre>
+##             s=0.09804219
+## (Intercept)    1.8457308
+## 1              2.9092918
+## 2             -1.9287428
+## 3              0.5161012
+## 4              .        
+## 5              .        
+## 6              .        
+## 7              .        
+## 8              .        
+## 9              .        
+## 10             .</code></pre>
 <p>When fitting lasso, the model that minimizes MSE uses three predictors (as per
 the simulation). The coefficients estimated (2.9, -1.9 and 0.5) are similar to
 those used in the simulation.</p>
@@ -1249,11 +1252,11 @@ and the lasso. Discuss the results obtained.</li>
 <span id="cb351-2"><a href="linear-model-selection-and-regularization.html#cb351-2" tabindex="-1"></a>(best <span class="ot">&lt;-</span> res<span class="sc">$</span>lambda.min)</span></code></pre></div>
 <pre><code>## [1] 1.126906</code></pre>
 <div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="linear-model-selection-and-regularization.html#cb353-1" tabindex="-1"></a><span class="fu">plot</span>(res)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="linear-model-selection-and-regularization.html#cb354-1" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(<span class="fu">poly</span>(dat<span class="sc">$</span>x, <span class="dv">10</span>, <span class="at">raw =</span> <span class="cn">TRUE</span>), dat<span class="sc">$</span>y, <span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> best)</span>
 <span id="cb354-2"><a href="linear-model-selection-and-regularization.html#cb354-2" tabindex="-1"></a><span class="fu">predict</span>(out, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>, <span class="at">s =</span> best)</span></code></pre></div>
 <pre><code>## 11 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                       s1
+##               s=1.126906
 ## (Intercept)  1.061389580
 ## 1            .          
 ## 2           -0.883080980
@@ -1322,7 +1325,7 @@ cross-validation.</li>
 </blockquote>
 <div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="linear-model-selection-and-regularization.html#cb363-1" tabindex="-1"></a>fit4 <span class="ot">&lt;-</span> <span class="fu">pcr</span>(Apps <span class="sc">~</span> ., <span class="at">data =</span> College[train, ], <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">validation =</span> <span class="st">&quot;CV&quot;</span>)</span>
 <span id="cb363-2"><a href="linear-model-selection-and-regularization.html#cb363-2" tabindex="-1"></a><span class="fu">validationplot</span>(fit4, <span class="at">val.type =</span> <span class="st">&quot;MSEP&quot;</span>)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-14-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="linear-model-selection-and-regularization.html#cb364-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit4, College[test, ], <span class="at">ncomp =</span> <span class="dv">17</span>)</span>
 <span id="cb364-2"><a href="linear-model-selection-and-regularization.html#cb364-2" tabindex="-1"></a>(mse<span class="sc">$</span>pcr <span class="ot">&lt;-</span> <span class="fu">mean</span>((p <span class="sc">-</span> College<span class="sc">$</span>Apps[test])<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## [1] 1695269</code></pre>
@@ -1335,7 +1338,7 @@ cross-validation.</li>
 </blockquote>
 <div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="linear-model-selection-and-regularization.html#cb366-1" tabindex="-1"></a>fit5 <span class="ot">&lt;-</span> <span class="fu">plsr</span>(Apps <span class="sc">~</span> ., <span class="at">data =</span> College[train, ], <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">validation =</span> <span class="st">&quot;CV&quot;</span>)</span>
 <span id="cb366-2"><a href="linear-model-selection-and-regularization.html#cb366-2" tabindex="-1"></a><span class="fu">validationplot</span>(fit5, <span class="at">val.type =</span> <span class="st">&quot;MSEP&quot;</span>)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-15-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="linear-model-selection-and-regularization.html#cb367-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit5, College[test, ], <span class="at">ncomp =</span> <span class="dv">12</span>)</span>
 <span id="cb367-2"><a href="linear-model-selection-and-regularization.html#cb367-2" tabindex="-1"></a>(mse<span class="sc">$</span>pls <span class="ot">&lt;-</span> <span class="fu">mean</span>((p <span class="sc">-</span> College<span class="sc">$</span>Apps[test])<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## [1] 1696902</code></pre>
@@ -1347,7 +1350,7 @@ errors resulting from these five approaches?</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="linear-model-selection-and-regularization.html#cb369-1" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">unlist</span>(mse), <span class="at">ylab =</span> <span class="st">&quot;Test MSE&quot;</span>, <span class="at">horiz =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-16-1.png" alt="" width="672" /></p>
 <p>Ridge and lasso give the lowest test errors but the lowest is generated by
 the ridge regression model (in this specific case with this specific seed).</p>
 </div>
@@ -1457,7 +1460,7 @@ set MSE associated with the best model of each size.</li>
 ## 19  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot;
 ## 20  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot;</code></pre>
 <div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="linear-model-selection-and-regularization.html#cb374-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">summary</span>(fit)<span class="sc">$</span>rss <span class="sc">/</span> <span class="dv">100</span>, <span class="at">ylab =</span> <span class="st">&quot;MSE&quot;</span>, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-19-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Plot the test set MSE associated with the best model of each size.</li>
@@ -1472,7 +1475,7 @@ set MSE associated with the best model of each size.</li>
 <span id="cb375-7"><a href="linear-model-selection-and-regularization.html#cb375-7" tabindex="-1"></a>}</span>
 <span id="cb375-8"><a href="linear-model-selection-and-regularization.html#cb375-8" tabindex="-1"></a>mse <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="cf">function</span>(i) <span class="fu">mean</span>((test<span class="sc">$</span>y <span class="sc">-</span> <span class="fu">predict</span>(fit, test, i))<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb375-9"><a href="linear-model-selection-and-regularization.html#cb375-9" tabindex="-1"></a><span class="fu">plot</span>(mse, <span class="at">ylab =</span> <span class="st">&quot;MSE&quot;</span>, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-20-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>For which model size does the test set MSE take on its minimum value?
@@ -1570,7 +1573,7 @@ simulated data which has four non-zero coefficients.</p>
 ## 20  ( 1 ) &quot;*&quot; &quot;*&quot; &quot;*&quot;</code></pre>
 <div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="linear-model-selection-and-regularization.html#cb380-1" tabindex="-1"></a>mse <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="cf">function</span>(i) <span class="fu">mean</span>((test<span class="sc">$</span>y <span class="sc">-</span> <span class="fu">predict</span>(fit, test, i))<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb380-2"><a href="linear-model-selection-and-regularization.html#cb380-2" tabindex="-1"></a><span class="fu">plot</span>(mse, <span class="at">ylab =</span> <span class="st">&quot;MSE&quot;</span>, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-22-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="linear-model-selection-and-regularization.html#cb381-1" tabindex="-1"></a><span class="fu">which.min</span>(mse)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <blockquote>
@@ -1604,7 +1607,7 @@ on what you observe. How does this compare to the test MSE plot from (d)?</li>
 <span id="cb385-8"><a href="linear-model-selection-and-regularization.html#cb385-8" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">sum</span>((m<span class="sc">$</span>b <span class="sc">-</span> m<span class="sc">$</span>c)<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb385-9"><a href="linear-model-selection-and-regularization.html#cb385-9" tabindex="-1"></a>})</span>
 <span id="cb385-10"><a href="linear-model-selection-and-regularization.html#cb385-10" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="at">ylab =</span> <span class="st">&quot;Mean squared coefficient error&quot;</span>, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-24-1.png" alt="" width="672" /></p>
 <p>The error of the coefficient estimates is minimized when model size is 5. This
 corresponds to the point when test MSE was minimized.</p>
 </div>
@@ -1622,7 +1625,7 @@ discuss results for the approaches that you consider.</li>
 <span id="cb386-2"><a href="linear-model-selection-and-regularization.html#cb386-2" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(Boston), <span class="fu">nrow</span>(Boston) <span class="sc">*</span> <span class="dv">2</span> <span class="sc">/</span> <span class="dv">3</span>)</span>
 <span id="cb386-3"><a href="linear-model-selection-and-regularization.html#cb386-3" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(Boston)), train)</span>
 <span id="cb386-4"><a href="linear-model-selection-and-regularization.html#cb386-4" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">log</span>(Boston<span class="sc">$</span>crim))</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-25-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Propose a model (or set of models) that seem to perform well on this data
@@ -1648,13 +1651,13 @@ distribution.</p>
 <pre><code>## [1] 0.6494337</code></pre>
 <div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="linear-model-selection-and-regularization.html#cb393-1" tabindex="-1"></a>fit4 <span class="ot">&lt;-</span> <span class="fu">pcr</span>(<span class="fu">log</span>(crim) <span class="sc">~</span> ., <span class="at">data =</span> Boston[train, ], <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">validation =</span> <span class="st">&quot;CV&quot;</span>)</span>
 <span id="cb393-2"><a href="linear-model-selection-and-regularization.html#cb393-2" tabindex="-1"></a><span class="fu">validationplot</span>(fit4, <span class="at">val.type =</span> <span class="st">&quot;MSEP&quot;</span>)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-26-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="linear-model-selection-and-regularization.html#cb394-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit4, Boston[test, ], <span class="at">ncomp =</span> <span class="dv">8</span>)</span>
 <span id="cb394-2"><a href="linear-model-selection-and-regularization.html#cb394-2" tabindex="-1"></a><span class="fu">mean</span>((p <span class="sc">-</span> <span class="fu">log</span>(Boston<span class="sc">$</span>crim[test]))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.6561043</code></pre>
 <div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="linear-model-selection-and-regularization.html#cb396-1" tabindex="-1"></a>fit5 <span class="ot">&lt;-</span> <span class="fu">plsr</span>(<span class="fu">log</span>(crim) <span class="sc">~</span> ., <span class="at">data =</span> Boston[train, ], <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">validation =</span> <span class="st">&quot;CV&quot;</span>)</span>
 <span id="cb396-2"><a href="linear-model-selection-and-regularization.html#cb396-2" tabindex="-1"></a><span class="fu">validationplot</span>(fit5, <span class="at">val.type =</span> <span class="st">&quot;MSEP&quot;</span>)</span></code></pre></div>
-<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
+<p><img src="06-linear-model-selection-and-regularization_files/figure-html/unnamed-chunk-26-2.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="linear-model-selection-and-regularization.html#cb397-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit5, Boston[test, ], <span class="at">ncomp =</span> <span class="dv">6</span>)</span>
 <span id="cb397-2"><a href="linear-model-selection-and-regularization.html#cb397-2" tabindex="-1"></a><span class="fu">mean</span>((p <span class="sc">-</span> <span class="fu">log</span>(Boston<span class="sc">$</span>crim[test]))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.6773353</code></pre>
@@ -1662,7 +1665,7 @@ distribution.</p>
 un-penalized regression. Some coefficients have been dropped:</p>
 <div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="linear-model-selection-and-regularization.html#cb399-1" tabindex="-1"></a><span class="fu">coef</span>(fit3, <span class="at">s =</span> fit3<span class="sc">$</span>lambda.min)</span></code></pre></div>
 <pre><code>## 14 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
-##                       s1
+##             s=0.01483558
 ## (Intercept) -4.713172675
 ## (Intercept)  .          
 ## zn          -0.011043739
@@ -1708,42 +1711,42 @@ why not?</li>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": {}
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/danhalligan/ISLRv2-solutions/edit/main/06-linear-model-selection-and-regularization.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": {}
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/danhalligan/ISLRv2-solutions/edit/main/06-linear-model-selection-and-regularization.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

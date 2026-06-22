@@ -26,7 +26,7 @@ p + geom_point(aes(color = 1 + 3 * X1 - X2 > 0), size = 0.1) +
   scale_color_discrete(name = "1 + 3X1 - X2 > 0")
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-1-1.png" alt="" width="672" />
 
 > b. On the same plot, sketch the hyperplane $-2 + X_1 + 2X_2 = 0$. Indicate the
 >    set of points for which $-2 + X_1 + 2X_2 > 0$, as well as the set of points
@@ -42,7 +42,7 @@ p + geom_abline(intercept = 1, slope = -1 / 2) + # X2 = 1 - X1/2
   scale_color_discrete(name = "(1 + 3X1 - X2 > 0).(-2 + X1 + 2X2 > 0)")
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-2-1.png" alt="" width="672" />
 
 ### Question 2
 
@@ -64,7 +64,7 @@ p <- ggplot(points, aes(x = X1, y = X2, z = (1 + X1)^2 + (2 - X2)^2 - 4)) +
 p
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" />
 
 > b. On your sketch, indicate the set of points for which
 >    $$(1 + X_1)^2 + (2 - X_2)^2 > 4,$$ as well as the set of points for which
@@ -75,7 +75,7 @@ p
 p + geom_point(aes(color = (1 + X1)^2 + (2 - X2)^2 - 4 > 0), size = 0.1)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-4-1.png" alt="" width="672" />
 
 > c. Suppose that a classifier assigns an observation to the blue class if $$(1
 >    + X_1)^2 + (2 - X_2)^2 > 4,$$ and to the red class otherwise. To what class
@@ -136,7 +136,7 @@ p <- ggplot(data, aes(x = X1, y = X2, color = Y)) +
 p
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672" />
 
 > b. Sketch the optimal separating hyperplane, and provide the equation for this
 >    hyperplane (of the form (9.1)).
@@ -144,7 +144,20 @@ p
 
 ``` r
 library(e1071)
+```
 
+```
+## 
+## Attaching package: 'e1071'
+```
+
+```
+## The following object is masked from 'package:ggplot2':
+## 
+##     element
+```
+
+``` r
 fit <- svm(as.factor(Y) ~ ., data = data, kernel = "linear", cost = 10, scale = FALSE)
 
 # Extract beta_0, beta_1, beta_2
@@ -157,7 +170,7 @@ p <- p + geom_abline(intercept = -beta[1] / beta[3], slope = -beta[2] / beta[3],
 p
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" />
 
 > c. Describe the classification rule for the maximal margin classifier. It
 >    should be something along the lines of "Classify to Red if $\beta_0 +
@@ -181,7 +194,7 @@ p <- p + geom_ribbon(
 p
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-8-1.png" alt="" width="672" />
 
 > e. Indicate the support vectors for the maximal margin classifier.
 
@@ -191,7 +204,7 @@ p <- p + geom_point(data = data[fit$index, ], size = 4)
 p
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672" />
 
 The support vectors (from the svm fit object) are shown above. Arguably, 
 there's another support vector, since four points exactly touch the margin.
@@ -204,7 +217,7 @@ there's another support vector, since four points exactly touch the margin.
 p + geom_point(data = data[7, , drop = FALSE], size = 4, color = "purple")
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-10-1.png" alt="" width="672" />
 
 The 7th point is shown in purple above. It is not a support vector, and not 
 close to the margin, so small changes in its X1, X2 values would not affect the
@@ -223,7 +236,7 @@ $\beta_1 = -1/2$, $\beta_2 = 1$.
 p + geom_abline(intercept = 1, slope = 0.5, lty = 2, col = "red")
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" />
 
 > h. Draw an additional observation on the plot so that the two classes are no
 >    longer separable by a hyperplane.
@@ -233,7 +246,7 @@ p + geom_abline(intercept = 1, slope = 0.5, lty = 2, col = "red")
 p + geom_point(data = data.frame(X1 = 1, X2 = 3, Y = "Blue"), shape = 15, size = 4)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-12-1.png" alt="" width="672" />
 
 ## Applied
 
@@ -263,7 +276,7 @@ p <- ggplot(data, aes(x = x, y = y, color = class)) +
 p
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" />
 
 ``` r
 train <- 1:50
@@ -282,19 +295,19 @@ err <- function(model, data) {
 plot(fits[[1]], data)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-13-2.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-13-2.png" alt="" width="672" />
 
 ``` r
 plot(fits[[2]], data)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-13-3.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-13-3.png" alt="" width="672" />
 
 ``` r
 plot(fits[[3]], data)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-13-4.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-13-4.png" alt="" width="672" />
 
 ``` r
 sapply(fits, err, data = data[train, ])
@@ -355,7 +368,7 @@ p <- ggplot(train, aes(x = x1, y = x2, color = y)) +
 p
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-15-1.png" alt="" width="672" />
 
 > c. Fit a logistic regression model to the data, using $X_1$ and $X_2$ as 
 >    predictors.
@@ -385,7 +398,7 @@ plot_model <- function(fit) {
 plot_model(fit1)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-17-1.png" alt="" width="672" />
 
 > e. Now fit a logistic regression model to the data using non-linear functions
 >    of $X_1$ and $X_2$ as predictors (e.g. $X_1^2, X_1 \times X_2, \log(X_2),$
@@ -416,7 +429,7 @@ fit2 <- glm(y ~ poly(x1, 2) + poly(x2, 2), data = train, family = "binomial")
 plot_model(fit2)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-19-1.png" alt="" width="672" />
 
 > g. Fit a support vector classifier to the data with $X_1$ and $X_2$ as
 >    predictors. Obtain a class prediction for each training observation. Plot
@@ -428,7 +441,7 @@ fit3 <- svm(y ~ x1 + x2, data = train, kernel = "linear")
 plot_model(fit3)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-20-1.png" alt="" width="672" />
 
 > h. Fit a SVM using a non-linear kernel to the data. Obtain a class prediction
 >    for each training observation. Plot the observations, colored according to
@@ -440,7 +453,7 @@ fit4 <- svm(y ~ x1 + x2, data = train, kernel = "polynomial", degree = 2)
 plot_model(fit4)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-21-1.png" alt="" width="672" />
 
 > i. Comment on your results.
 
@@ -490,7 +503,7 @@ p <- ggplot(data, aes(x = x, y = y, color = class)) +
 p
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-22-1.png" alt="" width="672" />
 
 > b. Compute the cross-validation error rates for support vector classifiers
 >    with a range of `cost` values. How many training errors are misclassified
@@ -584,7 +597,7 @@ test$y <- (test$class == "red") * 5 + rnorm(200)
 p + geom_point(data = test, pch = 21)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-25-1.png" alt="" width="672" />
 
 ``` r
 (errs <- sapply(costs, function(cost) {
@@ -633,7 +646,7 @@ p <- ggplot(test, aes(x = x, y = y, color = class, shape = prediction == class))
 p
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-25-2.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-25-2.png" alt="" width="672" />
 
 > d. Discuss your results.
 
@@ -929,19 +942,19 @@ table(predict(results$radial$best.model, data), data$high_mpg)
 plot(results$radial$best.model, data, horsepower ~ displacement)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-29-1.png" alt="" width="672" />
 
 ``` r
 plot(results$radial$best.model, data, horsepower ~ weight)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-29-2.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-29-2.png" alt="" width="672" />
 
 ``` r
 plot(results$radial$best.model, data, displacement ~ weight)
 ```
 
-<img src="09-support-vector-mechines_files/figure-html/unnamed-chunk-29-3.png" width="672" />
+<img src="09-support-vector-machines_files/figure-html/unnamed-chunk-29-3.png" alt="" width="672" />
 
 ### Question 8
 

@@ -162,7 +162,7 @@ plot(x, f(x), type = "l")
 grid()
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-1-1.png" alt="" width="672" />
 
 ### Question 4
 
@@ -186,7 +186,7 @@ plot(x, f(x), type = "l")
 grid()
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-2-1.png" alt="" width="672" />
 
 ### Question 5
 
@@ -256,7 +256,7 @@ plot(1:6, res, xlab = "Degree", ylab = "Test MSE", type = "l")
 abline(v = which.min(res), col = "red", lty = 2)
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" />
 
 ``` r
 fit <- glm(wage ~ poly(age, which.min(res)), data = Wage)
@@ -264,7 +264,7 @@ plot(Wage$age, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 points(1:100, predict(fit, data.frame(age = 1:100)), type = "l", col = "red")
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-3-2.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-3-2.png" alt="" width="672" />
 
 ``` r
 summary(glm(wage ~ poly(age, 6), data = Wage))
@@ -352,7 +352,7 @@ which.min(res)
 abline(v = names(which.min(res)), col = "red", lty = 2)
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-4-1.png" alt="" width="672" />
 
 ``` r
 fit <- glm(wage ~ cut(age, 8), data = Wage)
@@ -360,7 +360,7 @@ plot(Wage$age, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 points(18:80, predict(fit, data.frame(age = 18:80)), type = "l", col = "red")
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-4-2.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-4-2.png" alt="" width="672" />
 
 ### Question 7
 
@@ -375,31 +375,31 @@ points(18:80, predict(fit, data.frame(age = 18:80)), type = "l", col = "red")
 plot(Wage$year, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-1.png" alt="" width="672" />
 
 ``` r
 plot(Wage$age, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-2.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-2.png" alt="" width="672" />
 
 ``` r
 plot(Wage$maritl, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-3.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-3.png" alt="" width="672" />
 
 ``` r
 plot(Wage$jobclass, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-4.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-4.png" alt="" width="672" />
 
 ``` r
 plot(Wage$education, Wage$wage, pch = 19, cex = 0.4, col = alpha("steelblue", 0.4))
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-5.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-5-5.png" alt="" width="672" />
 
 We have a mix of categorical and continuous variables and also want to
 incorporate non-linear aspects of the continuous variables. A GAM is a good
@@ -419,7 +419,7 @@ library(gam)
 ```
 
 ```
-## Loaded gam 1.22-5
+## Loaded gam 1.22-7
 ```
 
 ``` r
@@ -451,7 +451,7 @@ par(mfrow = c(2, 3))
 plot(fit3, se = TRUE, col = "blue")
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672" />
 
 ### Question 8
 
@@ -467,7 +467,7 @@ relationships between the variables in the data.
 pairs(Auto, cex = 0.4, pch = 19)
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" />
 
 It does appear that there are some non-linear relationships (e.g.
 horsepower / weight and mpg). We will pick one variable (horsepower) to predict
@@ -481,10 +481,10 @@ library(tidyverse)
 
 ```
 ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ lubridate 1.9.4     ✔ tibble    3.2.1
-## ✔ purrr     1.0.2     ✔ tidyr     1.3.1
+## ✔ dplyr     1.2.1     ✔ readr     2.2.0
+## ✔ forcats   1.0.1     ✔ stringr   1.6.0
+## ✔ lubridate 1.9.5     ✔ tibble    3.3.1
+## ✔ purrr     1.2.2     ✔ tidyr     1.3.2
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ purrr::accumulate() masks foreach::accumulate()
 ## ✖ dplyr::filter()     masks stats::filter()
@@ -584,7 +584,7 @@ ggplot(Auto, aes(horsepower, mpg)) +
   theme_bw()
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-8-1.png" alt="" width="672" />
 
 ### Question 9
 
@@ -632,7 +632,7 @@ x <- seq(min(Boston$dis), max(Boston$dis), length.out = 1000)
 lines(x, predict(fit, data.frame(dis = x)), col = "red", lty = 2)
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672" />
 
 > b. Plot the polynomial fits for a range of different polynomial degrees (say,
 >    from 1 to 10), and report the associated residual sum of squares.
@@ -652,7 +652,7 @@ ggplot(Boston, aes(dis, nox)) +
   theme_bw()
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-10-1.png" alt="" width="672" />
 
 ``` r
 # residual sum of squares
@@ -723,7 +723,7 @@ x <- seq(min(Boston$dis), max(Boston$dis), length.out = 1000)
 lines(x, predict(fit, data.frame(dis = x)), col = "red", lty = 2)
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-12-1.png" alt="" width="672" />
 
 Knots are chosen based on quantiles of the data.
 
@@ -747,7 +747,7 @@ ggplot(Boston, aes(dis, nox)) +
   theme_bw()
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" />
 
 At high numbers of degrees of freedom the splines overfit the data (particularly
 at extreme ends of the distribution of the predictor variable).
@@ -802,7 +802,7 @@ fit <- regsubsets(Outstate ~ ., data = College[train, ], nvmax = 17, method = "f
 plot(summary(fit)$bic, type = "b")
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-15-1.png" alt="" width="672" />
 
 ``` r
 which.min(summary(fit)$bic)
@@ -868,7 +868,7 @@ plot(err, ylim = c(min(err_gam, err), max(err)), type = "b")
 abline(h = err_gam, col = "red", lty = 2)
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-18-1.png" alt="" width="672" />
 
 ``` r
 # r-squared
@@ -1022,7 +1022,7 @@ p <- ggplot(res, aes(x = Iteration, y = value, color = name)) +
 p
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-24-1.png" alt="" width="672" />
 
 > f. Compare your answer in (e) to the results of simply performing multiple
 >    linear regression to predict $Y$ using $X_1$ and $X_2$. Use the `abline()`
@@ -1044,7 +1044,7 @@ coef(fit)
 p + geom_hline(yintercept = coef(fit), lty = 2)
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-25-1.png" alt="" width="672" />
 
 > g. On this data set, how many backfitting iterations were required in order to
 >    obtain a "good" approximation to the multiple regression coefficient
@@ -1131,7 +1131,7 @@ error <- rowMeans(sweep(res, 2, betas)^2)
 plot(error, log = "x", type = "b")
 ```
 
-<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="07-moving-beyond-linearity_files/figure-html/unnamed-chunk-26-1.png" alt="" width="672" />
 
 ``` r
 # backfitting error

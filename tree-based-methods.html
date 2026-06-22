@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Tree-Based Methods | An Introduction to Statistical Learning</title>
   <meta name="description" content="8 Tree-Based Methods | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.41.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.47.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Tree-Based Methods | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -50,19 +50,20 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/plotly-binding-4.12.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -439,7 +440,7 @@ regions <span class="math inline">\(R_1, R_2, ...,\)</span> the cutpoints <span 
 <span id="cb484-4"><a href="tree-based-methods.html#cb484-4" tabindex="-1"></a><span class="fu">ggtree</span>(tree, <span class="at">ladderize =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">scale_x_reverse</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
 <span id="cb484-5"><a href="tree-based-methods.html#cb484-5" tabindex="-1"></a>  <span class="fu">geom_tiplab</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb484-6"><a href="tree-based-methods.html#cb484-6" tabindex="-1"></a>  <span class="fu">geom_text2</span>(<span class="fu">aes</span>(<span class="at">label =</span> label, <span class="at">subset =</span> <span class="sc">!</span>isTip), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-2-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="tree-based-methods.html#cb485-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>,</span>
 <span id="cb485-2"><a href="tree-based-methods.html#cb485-2" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Age (years)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Weight (kg)&quot;</span>,</span>
 <span id="cb485-3"><a href="tree-based-methods.html#cb485-3" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">160</span>), <span class="at">xaxs =</span> <span class="st">&quot;i&quot;</span>, <span class="at">yaxs =</span> <span class="st">&quot;i&quot;</span></span>
@@ -455,7 +456,7 @@ regions <span class="math inline">\(R_1, R_2, ...,\)</span> the cutpoints <span 
 <span id="cb485-13"><a href="tree-based-methods.html#cb485-13" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">55</span>, <span class="dv">85</span>, <span class="dv">130</span>, <span class="dv">100</span>, <span class="dv">60</span>, <span class="dv">120</span>),</span>
 <span id="cb485-14"><a href="tree-based-methods.html#cb485-14" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;R1&quot;</span>, <span class="st">&quot;R2&quot;</span>, <span class="st">&quot;R3&quot;</span>, <span class="st">&quot;R4&quot;</span>, <span class="st">&quot;R5&quot;</span>, <span class="st">&quot;R6&quot;</span>)</span>
 <span id="cb485-15"><a href="tree-based-methods.html#cb485-15" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" /></p>
 </div>
 <div id="question-2-6" class="section level3 hasAnchor" number="8.1.2">
 <h3><span class="header-section-number">8.1.2</span> Question 2<a href="tree-based-methods.html#question-2-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -505,7 +506,7 @@ could make this plot by hand, but it will be much easier to make in <code>R</cod
 <span id="cb486-10"><a href="tree-based-methods.html#cb486-10" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>x) <span class="sc">|&gt;</span></span>
 <span id="cb486-11"><a href="tree-based-methods.html#cb486-11" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span></span>
 <span id="cb486-12"><a href="tree-based-methods.html#cb486-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-4-1.png" alt="" width="672" /></p>
 </div>
 <div id="question-4-6" class="section level3 hasAnchor" number="8.1.4">
 <h3><span class="header-section-number">8.1.4</span> Question 4<a href="tree-based-methods.html#question-4-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -523,7 +524,7 @@ boxes indicate the mean of <span class="math inline">\(Y\)</span> within each re
 <span id="cb487-4"><a href="tree-based-methods.html#cb487-4" tabindex="-1"></a><span class="fu">ggtree</span>(tree, <span class="at">ladderize =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">scale_x_reverse</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
 <span id="cb487-5"><a href="tree-based-methods.html#cb487-5" tabindex="-1"></a>  <span class="fu">geom_tiplab</span>(<span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb487-6"><a href="tree-based-methods.html#cb487-6" tabindex="-1"></a>  <span class="fu">geom_text2</span>(<span class="fu">aes</span>(<span class="at">label =</span> label, <span class="at">subset =</span> <span class="sc">!</span>isTip), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-5-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Create a diagram similar to the left-hand panel of Figure 8.12, using the
@@ -542,7 +543,7 @@ mean for each region.</li>
 <span id="cb488-8"><a href="tree-based-methods.html#cb488-8" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>),</span>
 <span id="cb488-9"><a href="tree-based-methods.html#cb488-9" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;-1.80&quot;</span>, <span class="st">&quot;0.63&quot;</span>, <span class="st">&quot;-1.06&quot;</span>, <span class="st">&quot;0.21&quot;</span>, <span class="st">&quot;2.49&quot;</span>)</span>
 <span id="cb488-10"><a href="tree-based-methods.html#cb488-10" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672" /></p>
 </div>
 <div id="question-5-6" class="section level3 hasAnchor" number="8.1.5">
 <h3><span class="header-section-number">8.1.5</span> Question 5<a href="tree-based-methods.html#question-5-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -628,7 +629,7 @@ range of values for <code>mtry</code> and <code>ntree</code>. You can model your
 <span id="cb500-23"><a href="tree-based-methods.html#cb500-23" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Error&quot;</span>) <span class="sc">+</span></span>
 <span id="cb500-24"><a href="tree-based-methods.html#cb500-24" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
 <span id="cb500-25"><a href="tree-based-methods.html#cb500-25" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;No. variables at</span><span class="sc">\n</span><span class="st">each split&quot;</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-8-1.png" alt="" width="672" /></p>
 </div>
 <div id="question-8-6" class="section level3 hasAnchor" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Question 8<a href="tree-based-methods.html#question-8-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -665,7 +666,7 @@ results. What test error rate do you obtain?</li>
 ## -4.54900 -0.82980  0.03075  0.00000  0.89250  4.83100</code></pre>
 <div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="tree-based-methods.html#cb504-1" tabindex="-1"></a><span class="fu">plot</span>(tr)</span>
 <span id="cb504-2"><a href="tree-based-methods.html#cb504-2" tabindex="-1"></a><span class="fu">text</span>(tr, <span class="at">pretty =</span> <span class="dv">0</span>, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-10-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="tree-based-methods.html#cb505-1" tabindex="-1"></a>carseats_mse <span class="ot">&lt;-</span> <span class="cf">function</span>(model) {</span>
 <span id="cb505-2"><a href="tree-based-methods.html#cb505-2" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> Carseats[<span class="sc">!</span>train, ])</span>
 <span id="cb505-3"><a href="tree-based-methods.html#cb505-3" tabindex="-1"></a>  <span class="fu">mean</span>((p <span class="sc">-</span> Carseats[<span class="sc">!</span>train, <span class="st">&quot;Sales&quot;</span>])<span class="sc">^</span><span class="dv">2</span>)</span>
@@ -682,14 +683,14 @@ complexity. Does pruning the tree improve the test error rate?</li>
 <span id="cb507-2"><a href="tree-based-methods.html#cb507-2" tabindex="-1"></a><span class="fu">plot</span>(res<span class="sc">$</span>size, res<span class="sc">$</span>dev, <span class="at">type =</span> <span class="st">&quot;b&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Tree size&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Deviance&quot;</span>)</span>
 <span id="cb507-3"><a href="tree-based-methods.html#cb507-3" tabindex="-1"></a>min <span class="ot">&lt;-</span> <span class="fu">which.min</span>(res<span class="sc">$</span>dev)</span>
 <span id="cb507-4"><a href="tree-based-methods.html#cb507-4" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> res<span class="sc">$</span>size[min], <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" /></p>
 <p>Pruning improves performance very slightly (though this is not repeatable in
 different rounds of cross-validation). Arguably, a good balance is achieved
 when the tree size is 11.</p>
 <div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="tree-based-methods.html#cb508-1" tabindex="-1"></a>ptr <span class="ot">&lt;-</span> <span class="fu">prune.tree</span>(tr, <span class="at">best =</span> <span class="dv">11</span>)</span>
 <span id="cb508-2"><a href="tree-based-methods.html#cb508-2" tabindex="-1"></a><span class="fu">plot</span>(ptr)</span>
 <span id="cb508-3"><a href="tree-based-methods.html#cb508-3" tabindex="-1"></a><span class="fu">text</span>(ptr, <span class="at">pretty =</span> <span class="dv">0</span>, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-12-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="tree-based-methods.html#cb509-1" tabindex="-1"></a><span class="fu">carseats_mse</span>(ptr)</span></code></pre></div>
 <pre><code>## [1] 4.625875</code></pre>
 <blockquote>
@@ -869,7 +870,7 @@ Pick one of the terminal nodes, and interpret the information displayed.</li>
 </blockquote>
 <div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="tree-based-methods.html#cb534-1" tabindex="-1"></a><span class="fu">plot</span>(tr)</span>
 <span id="cb534-2"><a href="tree-based-methods.html#cb534-2" tabindex="-1"></a><span class="fu">text</span>(tr, <span class="at">pretty =</span> <span class="dv">0</span>, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-19-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Predict the response on the test data, and produce a confusion matrix
@@ -899,7 +900,7 @@ classification error rate on the <span class="math inline">\(y\)</span>-axis.</l
 <div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="tree-based-methods.html#cb538-1" tabindex="-1"></a><span class="fu">plot</span>(res<span class="sc">$</span>size, res<span class="sc">$</span>dev, <span class="at">type =</span> <span class="st">&quot;b&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Tree size&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Deviance&quot;</span>)</span>
 <span id="cb538-2"><a href="tree-based-methods.html#cb538-2" tabindex="-1"></a>min <span class="ot">&lt;-</span> <span class="fu">which.min</span>(res<span class="sc">$</span>dev)</span>
 <span id="cb538-3"><a href="tree-based-methods.html#cb538-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> res<span class="sc">$</span>size[min], <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-22-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="8" style="list-style-type: lower-alpha">
 <li>Which tree size corresponds to the lowest cross-validated classification
@@ -918,7 +919,7 @@ pruned tree, then create a pruned tree with five terminal nodes.</li>
 <div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="tree-based-methods.html#cb541-1" tabindex="-1"></a>ptr <span class="ot">&lt;-</span> <span class="fu">prune.tree</span>(tr, <span class="at">best =</span> res<span class="sc">$</span>size[min])</span>
 <span id="cb541-2"><a href="tree-based-methods.html#cb541-2" tabindex="-1"></a><span class="fu">plot</span>(ptr)</span>
 <span id="cb541-3"><a href="tree-based-methods.html#cb541-3" tabindex="-1"></a><span class="fu">text</span>(ptr, <span class="at">pretty =</span> <span class="dv">0</span>, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-24-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="10" style="list-style-type: lower-alpha">
 <li>Compare the training error rates between the pruned and unpruned trees.
@@ -978,7 +979,7 @@ the <span class="math inline">\(y\)</span>-axis.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="tree-based-methods.html#cb552-1" tabindex="-1"></a><span class="fu">library</span>(gbm)</span></code></pre></div>
-<pre><code>## Loaded gbm 2.2.2</code></pre>
+<pre><code>## Loaded gbm 2.2.3</code></pre>
 <pre><code>## This version of gbm is no longer under development. Consider transitioning to gbm3, https://github.com/gbm-developers/gbm3</code></pre>
 <div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="tree-based-methods.html#cb555-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb555-2"><a href="tree-based-methods.html#cb555-2" tabindex="-1"></a>lambdas <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">0</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
@@ -996,7 +997,7 @@ the <span class="math inline">\(y\)</span>-axis.</li>
 <span id="cb555-14"><a href="tree-based-methods.html#cb555-14" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;b&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Shrinkage values&quot;</span>,</span>
 <span id="cb555-15"><a href="tree-based-methods.html#cb555-15" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Training MSE&quot;</span>, <span class="at">log =</span> <span class="st">&quot;xy&quot;</span></span>
 <span id="cb555-16"><a href="tree-based-methods.html#cb555-16" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-29-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Produce a plot with different shrinkage values on the <span class="math inline">\(x\)</span>-axis and the
@@ -1014,7 +1015,7 @@ corresponding test set MSE on the <span class="math inline">\(y\)</span>-axis.</
 <span id="cb556-9"><a href="tree-based-methods.html#cb556-9" tabindex="-1"></a><span class="fu">min</span>(errs)</span></code></pre></div>
 <pre><code>## [1] 0.249881</code></pre>
 <div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="tree-based-methods.html#cb558-1" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> lambdas[<span class="fu">which.min</span>(errs)], <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-30-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Compare the test MSE of boosting to the test MSE that results from applying
@@ -1036,7 +1037,7 @@ two of the regression approaches seen in Chapters 3 and 6.</li>
 <pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
 ## 
 ##     expand, pack, unpack</code></pre>
-<pre><code>## Loaded glmnet 4.1-8</code></pre>
+<pre><code>## Loaded glmnet 5.0</code></pre>
 <div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="tree-based-methods.html#cb567-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> dat[train, ])</span>
 <span id="cb567-2"><a href="tree-based-methods.html#cb567-2" tabindex="-1"></a>x.test <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> dat[test, ])</span>
 <span id="cb567-3"><a href="tree-based-methods.html#cb567-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> dat[train, <span class="st">&quot;Salary&quot;</span>]</span>
@@ -1050,7 +1051,7 @@ model?</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="tree-based-methods.html#cb569-1" tabindex="-1"></a><span class="fu">summary</span>(fits[[<span class="fu">which.min</span>(errs)]])</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-33-1.png" alt="" width="672" /></p>
 <pre><code>##                 var    rel.inf
 ## CAtBat       CAtBat 16.4755242
 ## CRBI           CRBI  9.0670759
@@ -1108,7 +1109,7 @@ value of 0.01. Which predictors appear to be the most important?</li>
 <pre><code>## Warning in gbm.fit(x = x, y = y, offset = offset, distribution = distribution,
 ## : variable 71: AVRAAUT has no variation.</code></pre>
 <div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="tree-based-methods.html#cb578-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">summary</span>(fit))</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-36-1.png" alt="" width="672" /></p>
 <pre><code>##               var   rel.inf
 ## PPERSAUT PPERSAUT 15.243041
 ## MKOOPKLA MKOOPKLA 10.220498
@@ -1181,7 +1182,7 @@ were trying to predict <code>Outstate</code> using the other variables in <code>
 <pre><code>## The following objects are masked from &#39;package:purrr&#39;:
 ## 
 ##     accumulate, when</code></pre>
-<pre><code>## Loaded gam 1.22-5</code></pre>
+<pre><code>## Loaded gam 1.22-7</code></pre>
 <div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="tree-based-methods.html#cb602-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb602-2"><a href="tree-based-methods.html#cb602-2" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(College), <span class="dv">400</span>)</span>
 <span id="cb602-3"><a href="tree-based-methods.html#cb602-3" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(College), train)</span>
@@ -1254,7 +1255,7 @@ were trying to predict <code>Outstate</code> using the other variables in <code>
 <span id="cb606-16"><a href="tree-based-methods.html#cb606-16" tabindex="-1"></a><span class="fu">ggplot</span>(res, <span class="fu">aes</span>(Model, MSE)) <span class="sc">+</span></span>
 <span id="cb606-17"><a href="tree-based-methods.html#cb606-17" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
 <span id="cb606-18"><a href="tree-based-methods.html#cb606-18" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;steelblue&quot;</span>)</span></code></pre></div>
-<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p><img src="08-tree-based-methods_files/figure-html/unnamed-chunk-40-1.png" alt="" width="672" /></p>
 <p>In this case, it looks like bagging produces the best performing model in terms
 of test mean square error.</p>
 
@@ -1281,42 +1282,42 @@ of test mean square error.</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": {}
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/danhalligan/ISLRv2-solutions/edit/main/08-tree-based-methods.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": {}
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/danhalligan/ISLRv2-solutions/edit/main/08-tree-based-methods.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

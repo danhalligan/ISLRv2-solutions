@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Classification | An Introduction to Statistical Learning</title>
   <meta name="description" content="4 Classification | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.41.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.47.2 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Classification | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -50,19 +50,20 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/plotly-binding-4.12.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -458,7 +459,7 @@ p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi\sigma}} \exp(-\frac{1}{2\sigma^2}(x - \m
 \]</span></p>
 <p>and the discriminant function is</p>
 <p><span class="math display">\[
-\delta_k(x) = x.\frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma_2} + \log(\pi_k)
+\delta_k(x) = x \cdot \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log(\pi_k)
 \]</span></p>
 <p>Since <span class="math inline">\(\sigma^2\)</span> is constant</p>
 <p><span class="math display">\[
@@ -488,7 +489,8 @@ maximize</p>
 <blockquote>
 <p>This problem relates to the QDA model, in which the observations within each
 class are drawn from a normal distribution with a class-specific mean vector
-and a class specific covariance matrix. We consider the simple case where <span class="math inline">\(p = 1\)</span>; i.e. there is only one feature.</p>
+and a class specific covariance matrix. We consider the simple case where <span class="math inline">\(p
+= 1\)</span>; i.e. there is only one feature.</p>
 <p>Suppose that we have <span class="math inline">\(K\)</span> classes, and that if an observation belongs to the
 <span class="math inline">\(k\)</span>th class then <span class="math inline">\(X\)</span> comes from a one-dimensional normal distribution,
 <span class="math inline">\(X \sim N(\mu_k,\sigma^2)\)</span>. Recall that the density function for the
@@ -778,12 +780,54 @@ provide expressions for <span class="math inline">\(a_k\)</span> and <span class
 </div>
 <div id="question-11-1" class="section level3 hasAnchor" number="4.1.11">
 <h3><span class="header-section-number">4.1.11</span> Question 11<a href="classification.html#question-11-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>ToDo</p>
 <blockquote>
 <p>Work out the detailed forms of <span class="math inline">\(a_k\)</span>, <span class="math inline">\(b_{kj}\)</span>, and <span class="math inline">\(b_{kjl}\)</span> in (4.33).
 Your answer should involve <span class="math inline">\(\pi_k\)</span>, <span class="math inline">\(\pi_K\)</span>, <span class="math inline">\(\mu_k\)</span>, <span class="math inline">\(\mu_K\)</span>, <span class="math inline">\(\Sigma_k\)</span>,
 and <span class="math inline">\(\Sigma_K\)</span>.</p>
 </blockquote>
+<p>Equation 4.33 expresses the log-odds between class <span class="math inline">\(k\)</span> and the baseline class
+<span class="math inline">\(K\)</span> under QDA as</p>
+<p><span class="math display">\[
+\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right) =
+  a_k + \sum_{j=1}^p b_{kj} x_j + \sum_{j=1}^p \sum_{l=1}^p b_{kjl} x_j x_l.
+\]</span></p>
+<p>Under QDA, the class-conditional density is</p>
+<p><span class="math display">\[
+f_k(x) = \frac{1}{(2\pi)^{p/2}|\Sigma_k|^{1/2}}
+         \exp\left(-\tfrac{1}{2}(x - \mu_k)^T \Sigma_k^{-1} (x - \mu_k)\right),
+\]</span></p>
+<p>so the log-odds becomes</p>
+<p><span class="math display">\[\begin{align*}
+\log\frac{\pi_k f_k(x)}{\pi_K f_K(x)}
+&amp;= \log\frac{\pi_k}{\pi_K}
+    - \tfrac{1}{2}\log\frac{|\Sigma_k|}{|\Sigma_K|}
+    - \tfrac{1}{2}(x - \mu_k)^T \Sigma_k^{-1} (x - \mu_k) \\
+&amp;\quad + \tfrac{1}{2}(x - \mu_K)^T \Sigma_K^{-1} (x - \mu_K).
+\end{align*}\]</span></p>
+<p>Expanding the quadratic forms
+<span class="math inline">\((x - \mu)^T \Sigma^{-1} (x - \mu) = x^T \Sigma^{-1} x - 2 \mu^T \Sigma^{-1} x +
+\mu^T \Sigma^{-1} \mu\)</span> and collecting the constant, linear and quadratic
+terms in <span class="math inline">\(x\)</span> gives:</p>
+<p>The constant term:
+<span class="math display">\[
+a_k = \log\left(\frac{\pi_k}{\pi_K}\right)
+      - \tfrac{1}{2}\log\left(\frac{|\Sigma_k|}{|\Sigma_K|}\right)
+      - \tfrac{1}{2}\mu_k^T \Sigma_k^{-1} \mu_k
+      + \tfrac{1}{2}\mu_K^T \Sigma_K^{-1} \mu_K.
+\]</span></p>
+<p>The linear coefficient of <span class="math inline">\(x_j\)</span> (the <span class="math inline">\(j\)</span>th entry of
+<span class="math inline">\(\Sigma_k^{-1}\mu_k - \Sigma_K^{-1}\mu_K\)</span>):
+<span class="math display">\[
+b_{kj} = \sum_{l=1}^p \left[(\Sigma_k^{-1})_{jl}\mu_{kl}
+                            - (\Sigma_K^{-1})_{jl}\mu_{Kl}\right].
+\]</span></p>
+<p>The quadratic coefficient of <span class="math inline">\(x_j x_l\)</span> (from
+<span class="math inline">\(-\tfrac{1}{2}x^T(\Sigma_k^{-1} - \Sigma_K^{-1})x\)</span>):
+<span class="math display">\[
+b_{kjl} = -\tfrac{1}{2}\left[(\Sigma_k^{-1})_{jl} - (\Sigma_K^{-1})_{jl}\right].
+\]</span></p>
+<p>When <span class="math inline">\(\Sigma_k = \Sigma_K\)</span> the quadratic term vanishes (<span class="math inline">\(b_{kjl} = 0\)</span>) and we
+recover the LDA log-odds, which is linear in <span class="math inline">\(x\)</span>.</p>
 </div>
 <div id="question-12-1" class="section level3 hasAnchor" number="4.1.12">
 <h3><span class="header-section-number">4.1.12</span> Question 12<a href="classification.html#question-12-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -822,7 +866,8 @@ are the coefficient estimates in your friend’s model? Be as specific as
 possible.</li>
 </ol>
 </blockquote>
-<p>We can say that in our friend’s model <span class="math inline">\(\hat\alpha_{orange0} - \hat\alpha_{apple0} = 2\)</span> and <span class="math inline">\(\hat\alpha_{orange1} - \hat\alpha_{apple1} = -1\)</span>.</p>
+<p>We can say that in our friend’s model <span class="math inline">\(\hat\alpha_{orange0} -
+\hat\alpha_{apple0} = 2\)</span> and <span class="math inline">\(\hat\alpha_{orange1} - \hat\alpha_{apple1} = -1\)</span>.</p>
 <p>We are unable to know the specific value of each parameter however.</p>
 <blockquote>
 <ol start="4" style="list-style-type: lower-alpha">
@@ -890,7 +935,7 @@ there appear to be any patterns?</li>
 ##            
 ## </code></pre>
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="classification.html#cb178-1" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(Weekly[, <span class="sc">-</span><span class="dv">9</span>]), <span class="at">type =</span> <span class="st">&quot;lower&quot;</span>, <span class="at">diag =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">&quot;ellipse&quot;</span>)</span></code></pre></div>
-<p><img src="04-classification_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" /></p>
 <p>Volume is strongly positively correlated with Year. Other correlations are
 week, but Lag1 is negatively correlated with Lag2 but positively correlated
 with Lag3.</p>
@@ -1091,7 +1136,7 @@ experiment with values for <span class="math inline">\(K\)</span> in the KNN cla
 <span id="cb223-9"><a href="classification.html#cb223-9" tabindex="-1"></a>  <span class="fu">mean</span>(fit <span class="sc">==</span> Weekly[<span class="sc">!</span>train, ]<span class="sc">$</span>Direction)</span>
 <span id="cb223-10"><a href="classification.html#cb223-10" tabindex="-1"></a>})</span>
 <span id="cb223-11"><a href="classification.html#cb223-11" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, res, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;k&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Fraction correct&quot;</span>)</span></code></pre></div>
-<p><img src="04-classification_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="classification.html#cb224-1" tabindex="-1"></a>(k <span class="ot">&lt;-</span> <span class="fu">which.max</span>(res))</span></code></pre></div>
 <pre><code>## [1] 26</code></pre>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="classification.html#cb226-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">knn</span>(</span>
@@ -1136,11 +1181,11 @@ may be useful tools to answer this question. Describe your findings.</li>
 <span id="cb231-2"><a href="classification.html#cb231-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>) <span class="fu">hist</span>(x[, i], <span class="at">breaks =</span> <span class="dv">20</span>, <span class="at">main =</span> <span class="fu">colnames</span>(x)[i])</span>
 <span id="cb231-3"><a href="classification.html#cb231-3" tabindex="-1"></a></span>
 <span id="cb231-4"><a href="classification.html#cb231-4" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>))</span></code></pre></div>
-<p><img src="04-classification_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="classification.html#cb232-1" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>) <span class="fu">boxplot</span>(x[, i] <span class="sc">~</span> x<span class="sc">$</span>mpg01, <span class="at">main =</span> <span class="fu">colnames</span>(x)[i])</span>
 <span id="cb232-2"><a href="classification.html#cb232-2" tabindex="-1"></a></span>
 <span id="cb232-3"><a href="classification.html#cb232-3" tabindex="-1"></a><span class="fu">pairs</span>(x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>])</span></code></pre></div>
-<p><img src="04-classification_files/figure-html/unnamed-chunk-13-2.png" width="672" /><img src="04-classification_files/figure-html/unnamed-chunk-13-3.png" width="672" /></p>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-13-2.png" alt="" width="672" /><img src="04-classification_files/figure-html/unnamed-chunk-13-3.png" alt="" width="672" /></p>
 <p>Most variables show an association with <code>mpg01</code> category, and several
 variables are colinear.</p>
 <blockquote>
@@ -1215,7 +1260,7 @@ to perform the best on this data set?</li>
 <span id="cb244-4"><a href="classification.html#cb244-4" tabindex="-1"></a>})</span>
 <span id="cb244-5"><a href="classification.html#cb244-5" tabindex="-1"></a><span class="fu">names</span>(res) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span></span>
 <span id="cb244-6"><a href="classification.html#cb244-6" tabindex="-1"></a><span class="fu">plot</span>(res, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>)</span></code></pre></div>
-<p><img src="04-classification_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-19-1.png" alt="" width="672" /></p>
 <div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="classification.html#cb245-1" tabindex="-1"></a>res[<span class="fu">which.min</span>(res)]</span></code></pre></div>
 <pre><code>##         3 
 ## 0.1068702</code></pre>
@@ -1289,7 +1334,7 @@ title for the figure. Consider displaying either the <span class="math inline">\
 <span id="cb256-3"><a href="classification.html#cb256-3" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;x&quot;</span><span class="sc">^</span><span class="st">&quot;2&quot;</span>)),</span>
 <span id="cb256-4"><a href="classification.html#cb256-4" tabindex="-1"></a>  <span class="at">log =</span> <span class="st">&quot;y&quot;</span></span>
 <span id="cb256-5"><a href="classification.html#cb256-5" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="04-classification_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-24-1.png" alt="" width="672" /></p>
 <blockquote>
 <ol start="6" style="list-style-type: lower-alpha">
 <li><p>Create a function, <code>PlotPower()</code>, that allows you to create a plot of <code>x</code>
@@ -1309,7 +1354,7 @@ instance, if you call</p>
 <span id="cb258-7"><a href="classification.html#cb258-7" tabindex="-1"></a>}</span>
 <span id="cb258-8"><a href="classification.html#cb258-8" tabindex="-1"></a></span>
 <span id="cb258-9"><a href="classification.html#cb258-9" tabindex="-1"></a><span class="fu">PlotPower</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="04-classification_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-25-1.png" alt="" width="672" /></p>
 </div>
 <div id="question-13-2" class="section level3 hasAnchor" number="4.2.4">
 <h3><span class="header-section-number">4.2.4</span> Question 13<a href="classification.html#question-13-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1334,7 +1379,7 @@ sub-sets of the predictors. Describe your findings.</p>
 <span id="cb260-4"><a href="classification.html#cb260-4" tabindex="-1"></a>}))</span>
 <span id="cb260-5"><a href="classification.html#cb260-5" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">names</span>(x)[ord]</span>
 <span id="cb260-6"><a href="classification.html#cb260-6" tabindex="-1"></a>ord</span></code></pre></div>
-<pre><code>##  [1] &quot;nox&quot;     &quot;dis&quot;     &quot;indus&quot;   &quot;tax&quot;     &quot;age&quot;     &quot;rad&quot;     &quot;zn&quot;     
+<pre><code>##  [1] &quot;zn&quot;      &quot;dis&quot;     &quot;nox&quot;     &quot;indus&quot;   &quot;tax&quot;     &quot;age&quot;     &quot;rad&quot;    
 ##  [8] &quot;lstat&quot;   &quot;medv&quot;    &quot;ptratio&quot; &quot;rm&quot;      &quot;chas&quot;</code></pre>
 <p>Variables <code>nox</code> (nitrogen oxides concentration) followed by <code>dis</code> (distance to
 employment center) appear to be most associated with high crime.</p>
@@ -1348,7 +1393,7 @@ data)</p>
 <span id="cb263-4"><a href="classification.html#cb263-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(highcrim, value)) <span class="sc">+</span></span>
 <span id="cb263-5"><a href="classification.html#cb263-5" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb263-6"><a href="classification.html#cb263-6" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>name, <span class="at">scale =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
-<p><img src="04-classification_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-29-1.png" alt="" width="672" /></p>
 <p>Fit lda, logistic regression, naive Bayes and KNN models (with k = 1..50) for a
 set of specific predictors and return the error rate. We fit models using
 increasing numbers of predictors: column 1, then columns 1 and 2 etc.</p>
@@ -1384,7 +1429,7 @@ increasing numbers of predictors: column 1, then columns 1 and 2 etc.</p>
 <span id="cb265-6"><a href="classification.html#cb265-6" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb265-7"><a href="classification.html#cb265-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="sc">+</span></span>
 <span id="cb265-8"><a href="classification.html#cb265-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
-<p><img src="04-classification_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-31-1.png" alt="" width="672" /></p>
 <p>KNN appears to perform better (if we tune <span class="math inline">\(k\)</span>) for all numbers of predictors.</p>
 <div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="classification.html#cb266-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">knn</span>(</span>
 <span id="cb266-2"><a href="classification.html#cb266-2" tabindex="-1"></a>  x[train, <span class="st">&quot;nox&quot;</span>, <span class="at">drop =</span> <span class="cn">FALSE</span>],</span>
@@ -1413,7 +1458,7 @@ crime rate based on a nearby town.</p>
 <span id="cb270-6"><a href="classification.html#cb270-6" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb270-7"><a href="classification.html#cb270-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Number of predictors&quot;</span>) <span class="sc">+</span></span>
 <span id="cb270-8"><a href="classification.html#cb270-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Error rate&quot;</span>)</span></code></pre></div>
-<p><img src="04-classification_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="04-classification_files/figure-html/unnamed-chunk-33-1.png" alt="" width="672" /></p>
 <p>KNN still performs best with a single predictor (<code>nox</code>), but logistic regression
 with 12 predictors also performs well and has an error rate of ~12%.</p>
 <div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="classification.html#cb271-1" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">names</span>(x)[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>]</span>
@@ -1437,13 +1482,13 @@ with 12 predictors also performs well and has an error rate of ~12%.</p>
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(&gt;|z|)    
 ## (Intercept) -44.525356   7.935621  -5.611 2.01e-08 ***
-## nox          55.062428  10.281556   5.355 8.53e-08 ***
+## zn           -0.099558   0.045914  -2.168 0.030134 *  
 ## dis           1.080847   0.304084   3.554 0.000379 ***
+## nox          55.062428  10.281556   5.355 8.53e-08 ***
 ## indus        -0.067493   0.058547  -1.153 0.248997    
 ## tax          -0.005336   0.003138  -1.700 0.089060 .  
 ## age           0.020965   0.014190   1.477 0.139556    
 ## rad           0.678196   0.192193   3.529 0.000418 ***
-## zn           -0.099558   0.045914  -2.168 0.030134 *  
 ## lstat         0.134035   0.058623   2.286 0.022231 *  
 ## medv          0.213114   0.088922   2.397 0.016547 *  
 ## ptratio       0.294396   0.155285   1.896 0.057981 .  
@@ -1483,42 +1528,42 @@ with 12 predictors also performs well and has an error rate of ~12%.</p>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": {}
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/danhalligan/ISLRv2-solutions/edit/main/04-classification.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": {}
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/danhalligan/ISLRv2-solutions/edit/main/04-classification.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

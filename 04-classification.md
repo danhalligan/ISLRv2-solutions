@@ -48,7 +48,7 @@ $$
 and the discriminant function is
 
 $$
-\delta_k(x) = x.\frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma_2} + \log(\pi_k)
+\delta_k(x) = x \cdot \frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log(\pi_k)
 $$
 
 
@@ -379,11 +379,63 @@ $$b_k = (\mu_k - \mu_K) / \sigma^2$$
 
 ### Question 11
 
-ToDo
-
 > Work out the detailed forms of $a_k$, $b_{kj}$, and $b_{kjl}$ in (4.33).
 > Your answer should involve $\pi_k$, $\pi_K$, $\mu_k$, $\mu_K$, $\Sigma_k$, 
 > and $\Sigma_K$.
+
+Equation 4.33 expresses the log-odds between class $k$ and the baseline class
+$K$ under QDA as
+
+$$
+\log\left(\frac{Pr(Y=k|X=x)}{Pr(Y=K|X=x)}\right) =
+  a_k + \sum_{j=1}^p b_{kj} x_j + \sum_{j=1}^p \sum_{l=1}^p b_{kjl} x_j x_l.
+$$
+
+Under QDA, the class-conditional density is
+
+$$
+f_k(x) = \frac{1}{(2\pi)^{p/2}|\Sigma_k|^{1/2}}
+         \exp\left(-\tfrac{1}{2}(x - \mu_k)^T \Sigma_k^{-1} (x - \mu_k)\right),
+$$
+
+so the log-odds becomes
+
+\begin{align*}
+\log\frac{\pi_k f_k(x)}{\pi_K f_K(x)}
+ &= \log\frac{\pi_k}{\pi_K}
+    - \tfrac{1}{2}\log\frac{|\Sigma_k|}{|\Sigma_K|}
+    - \tfrac{1}{2}(x - \mu_k)^T \Sigma_k^{-1} (x - \mu_k) \\
+ &\quad + \tfrac{1}{2}(x - \mu_K)^T \Sigma_K^{-1} (x - \mu_K).
+\end{align*}
+
+Expanding the quadratic forms
+$(x - \mu)^T \Sigma^{-1} (x - \mu) = x^T \Sigma^{-1} x - 2 \mu^T \Sigma^{-1} x +
+\mu^T \Sigma^{-1} \mu$ and collecting the constant, linear and quadratic
+terms in $x$ gives:
+
+The constant term:
+$$
+a_k = \log\left(\frac{\pi_k}{\pi_K}\right)
+      - \tfrac{1}{2}\log\left(\frac{|\Sigma_k|}{|\Sigma_K|}\right)
+      - \tfrac{1}{2}\mu_k^T \Sigma_k^{-1} \mu_k
+      + \tfrac{1}{2}\mu_K^T \Sigma_K^{-1} \mu_K.
+$$
+
+The linear coefficient of $x_j$ (the $j$th entry of
+$\Sigma_k^{-1}\mu_k - \Sigma_K^{-1}\mu_K$):
+$$
+b_{kj} = \sum_{l=1}^p \left[(\Sigma_k^{-1})_{jl}\mu_{kl}
+                            - (\Sigma_K^{-1})_{jl}\mu_{Kl}\right].
+$$
+
+The quadratic coefficient of $x_j x_l$ (from
+$-\tfrac{1}{2}x^T(\Sigma_k^{-1} - \Sigma_K^{-1})x$):
+$$
+b_{kjl} = -\tfrac{1}{2}\left[(\Sigma_k^{-1})_{jl} - (\Sigma_K^{-1})_{jl}\right].
+$$
+
+When $\Sigma_k = \Sigma_K$ the quadratic term vanishes ($b_{kjl} = 0$) and we
+recover the LDA log-odds, which is linear in $x$.
 
 ### Question 12
 
@@ -497,7 +549,7 @@ summary(Weekly)
 corrplot(cor(Weekly[, -9]), type = "lower", diag = FALSE, method = "ellipse")
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" />
 
 Volume is strongly positively correlated with Year. Other correlations are
 week, but Lag1 is negatively correlated with Lag2 but positively correlated
@@ -819,7 +871,7 @@ res <- sapply(1:30, function(k) {
 plot(1:30, res, type = "o", xlab = "k", ylab = "Fraction correct")
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" />
 
 ``` r
 (k <- which.max(res))
@@ -886,7 +938,7 @@ for (i in 1:7) hist(x[, i], breaks = 20, main = colnames(x)[i])
 par(mfrow = c(2, 4))
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" />
 
 ``` r
 for (i in 1:7) boxplot(x[, i] ~ x$mpg01, main = colnames(x)[i])
@@ -894,7 +946,7 @@ for (i in 1:7) boxplot(x[, i] ~ x$mpg01, main = colnames(x)[i])
 pairs(x[, 1:7])
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-13-2.png" width="672" /><img src="04-classification_files/figure-html/unnamed-chunk-13-3.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-13-2.png" alt="" width="672" /><img src="04-classification_files/figure-html/unnamed-chunk-13-3.png" alt="" width="672" />
 
 Most variables show an association with `mpg01` category, and several
 variables are colinear.
@@ -995,7 +1047,7 @@ names(res) <- 1:50
 plot(res, type = "o")
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-19-1.png" alt="" width="672" />
 
 ``` r
 res[which.min(res)]
@@ -1095,7 +1147,7 @@ plot(1:10, Power3(1:10, 2),
 )
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-24-1.png" alt="" width="672" />
 
 > f. Create a function, `PlotPower()`, that allows you to create a plot of `x`
 >    against `x^a` for a fixed `a` and for a range of values of `x`. For
@@ -1119,7 +1171,7 @@ PlotPower <- function(x, a, log = "y") {
 PlotPower(1:10, 3)
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-25-1.png" alt="" width="672" />
 
 ### Question 13
 
@@ -1154,7 +1206,7 @@ ord
 ```
 
 ```
-##  [1] "nox"     "dis"     "indus"   "tax"     "age"     "rad"     "zn"     
+##  [1] "zn"      "dis"     "nox"     "indus"   "tax"     "age"     "rad"    
 ##  [8] "lstat"   "medv"    "ptratio" "rm"      "chas"
 ```
 
@@ -1181,7 +1233,7 @@ x[train, ] |>
   facet_wrap(~name, scale = "free")
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-29-1.png" alt="" width="672" />
 
 Fit lda, logistic regression, naive Bayes and KNN models (with k = 1..50) for a
 set of specific predictors and return the error rate. We fit models using
@@ -1227,7 +1279,7 @@ pivot_longer(res, cols = !n_var) |>
   ylab("Error rate")
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-31-1.png" alt="" width="672" />
 
 KNN appears to perform better (if we tune $k$) for all numbers of predictors.
 
@@ -1277,7 +1329,7 @@ pivot_longer(res, cols = !n_var) |>
   ylab("Error rate")
 ```
 
-<img src="04-classification_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+<img src="04-classification_files/figure-html/unnamed-chunk-33-1.png" alt="" width="672" />
 
 KNN still performs best with a single predictor (`nox`), but logistic regression
 with 12 predictors also performs well and has an error rate of ~12%.
@@ -1320,13 +1372,13 @@ summary(fit)
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(>|z|)    
 ## (Intercept) -44.525356   7.935621  -5.611 2.01e-08 ***
-## nox          55.062428  10.281556   5.355 8.53e-08 ***
+## zn           -0.099558   0.045914  -2.168 0.030134 *  
 ## dis           1.080847   0.304084   3.554 0.000379 ***
+## nox          55.062428  10.281556   5.355 8.53e-08 ***
 ## indus        -0.067493   0.058547  -1.153 0.248997    
 ## tax          -0.005336   0.003138  -1.700 0.089060 .  
 ## age           0.020965   0.014190   1.477 0.139556    
 ## rad           0.678196   0.192193   3.529 0.000418 ***
-## zn           -0.099558   0.045914  -2.168 0.030134 *  
 ## lstat         0.134035   0.058623   2.286 0.022231 *  
 ## medv          0.213114   0.088922   2.397 0.016547 *  
 ## ptratio       0.294396   0.155285   1.896 0.057981 .  

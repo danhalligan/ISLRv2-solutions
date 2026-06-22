@@ -10,7 +10,7 @@
 >
 > a. Draw a picture of the network, similar to Figures 10.1 or 10.4.
 
-<img src="images/nn.png" width="80%" />
+<img src="images/nn.png" alt="" width="80%" />
 
 > b. Write out an expression for $f(X)$, assuming ReLU activation functions. Be
 > as explicit as you can!
@@ -213,7 +213,7 @@ When we take the negative of this, it is equivalent to 10.14 for two classes
 >
 > a. Draw a sketch of the input and first hidden layer similar to Figure 10.8.
 
-<img src="images/nn2.png" width="50%" />
+<img src="images/nn2.png" alt="" width="50%" />
 
 Note that, because there is no boundary padding, each convolution layer will
 consist of a 28x28 array.
@@ -271,7 +271,7 @@ x <- seq(-6, 6, 0.1)
 plot(x, r(x), type = "l")
 ```
 
-<img src="10-deep-learning_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="10-deep-learning_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" />
 
 > b. What is the derivative of this function?
 
@@ -318,7 +318,7 @@ plot(x, r(x), type = "l")
 points(res, r(res), col = "red", pch = 19)
 ```
 
-<img src="10-deep-learning_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="10-deep-learning_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672" />
 
 
 > d. Repeat with $\beta^0 = 1.4$.
@@ -339,7 +339,7 @@ plot(x, r(x), type = "l")
 points(res, r(res), col = "red", pch = 19)
 ```
 
-<img src="10-deep-learning_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="10-deep-learning_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" />
 
 ### Question 7
 
@@ -351,22 +351,32 @@ points(res, r(res), col = "red", pch = 19)
 
 ``` r
 library(keras)
+```
 
-dat <- ISLR2::Boston
-x <- scale(model.matrix(crim ~ . - 1, data = dat))
+```
+## The keras package is deprecated. Please use the keras3 package instead.
+## Alternatively, to continue using legacy keras, call `py_require_legacy_keras()`.
+```
+
+``` r
+set.seed(42)
+
+dat <- ISLR2::Default
+dat$default <- as.numeric(dat$default == "Yes")
+x <- scale(model.matrix(default ~ . - 1, data = dat))
+y <- dat$default
 n <- nrow(dat)
 ntest <- trunc(n / 3)
-testid <- sample(1:n, ntest)
-y <- dat$crim
+testid <- sample(seq_len(n), ntest)
 
 # logistic regression
-lfit <- lm(crim ~ ., data = dat[-testid, ])
-lpred <- predict(lfit, dat[testid, ])
-with(dat[testid, ], mean(abs(lpred - crim)))
+lfit <- glm(default ~ ., data = dat[-testid, ], family = "binomial")
+lpred <- predict(lfit, dat[testid, ], type = "response") > 0.5
+mean(lpred != y[testid])
 ```
 
 ```
-## [1] 2.99129
+## [1] 0.02580258
 ```
 
 ``` r
@@ -374,44 +384,46 @@ with(dat[testid, ], mean(abs(lpred - crim)))
 nn <- keras_model_sequential() |>
   layer_dense(units = 10, activation = "relu", input_shape = ncol(x)) |>
   layer_dropout(rate = 0.4) |>
-  layer_dense(units = 1)
+  layer_dense(units = 1, activation = "sigmoid")
 
 compile(nn,
-  loss = "mse",
+  loss = "binary_crossentropy",
   optimizer = optimizer_rmsprop(),
-  metrics = list("mean_absolute_error")
+  metrics = "accuracy"
 )
 
 history <- fit(nn,
   x[-testid, ], y[-testid],
-  epochs = 100,
-  batch_size = 26,
+  epochs = 30,
+  batch_size = 128,
   validation_data = list(x[testid, ], y[testid]),
   verbose = 0
 )
 plot(history, smooth = FALSE)
 ```
 
-<img src="10-deep-learning_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="10-deep-learning_files/figure-html/unnamed-chunk-12-1.png" alt="" width="672" />
 
 ``` r
-npred <- predict(nn, x[testid, ])
+npred <- predict(nn, x[testid, ]) > 0.5
 ```
 
 ```
-## 6/6 - 0s - 56ms/epoch - 9ms/step
+## 105/105 - 0s - 269ms/epoch - 3ms/step
 ```
 
 ``` r
-mean(abs(y[testid] - npred))
+mean(npred != y[testid])
 ```
 
 ```
-## [1] 2.255777
+## [1] 0.03420342
 ```
 
-In this case, the neural network outperforms logistic regression having a lower
-absolute error rate on the test data.
+In this case, logistic regression and the neural network achieve comparable
+test-set classification error on the `Default` data. The classes are highly
+imbalanced (only ~3% defaults), so both models are close to the naive baseline
+of always predicting "No".
 
 ### Question 8
 
@@ -439,7 +451,7 @@ model <- application_resnet50(weights = "imagenet")
 
 ```
 ## Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/resnet/resnet50_weights_tf_dim_ordering_tf_kernels.h5
-##      8192/102967424 [..............................] - ETA: 0s  4202496/102967424 [>.............................] - ETA: 2s 22429696/102967424 [=====>........................] - ETA: 0s 37650432/102967424 [=========>....................] - ETA: 0s 56786944/102967424 [===============>..............] - ETA: 0s 69337088/102967424 [===================>..........] - ETA: 0s 87654400/102967424 [========================>.....] - ETA: 0s102967424/102967424 [==============================] - 0s 0us/step
+##      8192/102967424 [..............................] - ETA: 0s  5513216/102967424 [>.............................] - ETA: 1s 15613952/102967424 [===>..........................] - ETA: 0s 22290432/102967424 [=====>........................] - ETA: 0s 30203904/102967424 [=======>......................] - ETA: 0s 39944192/102967424 [==========>...................] - ETA: 0s 50446336/102967424 [=============>................] - ETA: 0s 60039168/102967424 [================>.............] - ETA: 0s 68427776/102967424 [==================>...........] - ETA: 0s 79962112/102967424 [======================>.......] - ETA: 0s 89399296/102967424 [=========================>....] - ETA: 0s100712448/102967424 [============================>.] - ETA: 0s102967424/102967424 [==============================] - 1s 0us/step
 ```
 
 ``` r
@@ -449,7 +461,7 @@ pred <- model |>
 ```
 
 ```
-## 1/1 - 1s - 1s/epoch - 1s/step
+## 1/1 - 8s - 8s/epoch - 8s/step
 ## Downloading data from https://storage.googleapis.com/download.tensorflow.org/data/imagenet_class_index.json
 ##  8192/35363 [=====>........................] - ETA: 0s35363/35363 [==============================] - 0s 0us/step
 ```
@@ -556,11 +568,11 @@ library(tidyverse)
 
 ```
 ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
+## ✔ dplyr     1.2.1     ✔ readr     2.2.0
+## ✔ forcats   1.0.1     ✔ stringr   1.6.0
+## ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+## ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+## ✔ purrr     1.2.2     
 ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::compute() masks neuralnet::compute()
 ## ✖ dplyr::filter()  masks stats::filter()
@@ -720,14 +732,14 @@ history <- model |>
 plot(history, smooth = FALSE)
 ```
 
-<img src="10-deep-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="10-deep-learning_files/figure-html/unnamed-chunk-21-1.png" alt="" width="672" />
 
 ``` r
 kpred <- predict(model, xrnn[!istrain, , ])
 ```
 
 ```
-## 56/56 - 0s - 60ms/epoch - 1ms/step
+## 56/56 - 0s - 115ms/epoch - 2ms/step
 ```
 
 ``` r
@@ -735,7 +747,7 @@ kpred <- predict(model, xrnn[!istrain, , ])
 ```
 
 ```
-## [1] 0.4132727
+## [1] 0.411382
 ```
 
 Both models estimate the same number of coefficients/weights (16):
@@ -769,24 +781,24 @@ model$get_weights()
 ```
 ## [[1]]
 ##               [,1]
-##  [1,] -0.030779257
-##  [2,]  0.097637333
-##  [3,]  0.162438959
-##  [4,] -0.007463477
-##  [5,]  0.118149482
-##  [6,] -0.022518802
-##  [7,]  0.034822762
-##  [8,]  0.081352681
-##  [9,]  0.099863082
-## [10,] -0.031887267
-## [11,]  0.027831292
-## [12,] -0.740422726
-## [13,]  0.094181545
-## [14,]  0.508143246
-## [15,]  0.475804120
+##  [1,] -0.027963677
+##  [2,]  0.101257876
+##  [3,]  0.188923538
+##  [4,] -0.005446123
+##  [5,]  0.124114357
+##  [6,] -0.058935381
+##  [7,]  0.040408149
+##  [8,]  0.084656015
+##  [9,]  0.123320371
+## [10,] -0.029886754
+## [11,]  0.034955047
+## [12,] -0.786240637
+## [13,]  0.094427548
+## [14,]  0.509038746
+## [15,]  0.509369791
 ## 
 ## [[2]]
-## [1] -0.006570991
+## [1] -0.004422377
 ```
 
 The flattened RNN has a lower $R^2$ on the test data than our `lm` model
@@ -837,11 +849,11 @@ xfun::cache_rds({
 ```
 
 ```
-## 56/56 - 0s - 66ms/epoch - 1ms/step
+## 56/56 - 0s - 155ms/epoch - 3ms/step
 ```
 
 ```
-## [1] 0.4268829
+## [1] 0.4203238
 ```
 
 This approach improves our $R^2$ over the linear model above.
@@ -910,11 +922,11 @@ xfun::cache_rds({
 ```
 
 ```
-## 56/56 - 0s - 138ms/epoch - 2ms/step
+## 56/56 - 0s - 286ms/epoch - 5ms/step
 ```
 
 ```
-## [1] 0.444228
+## [1] 0.4467215
 ```
 
 ### Question 13
@@ -969,21 +981,21 @@ xfun::cache_rds({
 
 ```
 ## Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/imdb.npz
-##     8192/17464789 [..............................] - ETA: 0s 4317184/17464789 [======>.......................] - ETA: 0s17464789/17464789 [==============================] - 0s 0us/step
-## 782/782 - 15s - 15s/epoch - 20ms/step
-## 782/782 - 15s - 15s/epoch - 20ms/step
-## 782/782 - 15s - 15s/epoch - 19ms/step
-## 782/782 - 15s - 15s/epoch - 19ms/step
+##     8192/17464789 [..............................] - ETA: 0s 4202496/17464789 [======>.......................] - ETA: 0s13082624/17464789 [=====================>........] - ETA: 0s17464789/17464789 [==============================] - 0s 0us/step
+## 782/782 - 16s - 16s/epoch - 20ms/step
+## 782/782 - 16s - 16s/epoch - 20ms/step
+## 782/782 - 16s - 16s/epoch - 21ms/step
+## 782/782 - 16s - 16s/epoch - 21ms/step
 ```
 
 
 
 | Max Features| Accuracy|
 |------------:|--------:|
-|         1000|  0.86920|
-|         3000|  0.87752|
-|         5000|  0.86340|
-|        10000|  0.86588|
+|         1000|  0.85356|
+|         3000|  0.86064|
+|         5000|  0.86776|
+|        10000|  0.87104|
 
 Varying the dictionary size does not make a substantial impact on our estimates
 of accuracy. However, the models do take a substantial amount of time to fit and

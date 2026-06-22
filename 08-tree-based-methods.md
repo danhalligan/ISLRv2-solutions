@@ -31,7 +31,7 @@ ggtree(tree, ladderize = FALSE) + scale_x_reverse() + coord_flip() +
   geom_text2(aes(label = label, subset = !isTip), hjust = -0.1, vjust = -1)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-2-1.png" alt="" width="672" />
 
 
 ``` r
@@ -52,7 +52,7 @@ text(
 )
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" />
 
 ### Question 2
 
@@ -113,7 +113,7 @@ data.frame(
   geom_line(na.rm = TRUE)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-4-1.png" alt="" width="672" />
 
 ### Question 4
 
@@ -133,7 +133,7 @@ ggtree(tree, ladderize = FALSE) + scale_x_reverse() + coord_flip() +
   geom_text2(aes(label = label, subset = !isTip), hjust = -0.1, vjust = -1)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-5-1.png" alt="" width="672" />
 
 > b. Create a diagram similar to the left-hand panel of Figure 8.12, using the
 >    tree illustrated in the right-hand panel of the same figure. You should
@@ -154,7 +154,7 @@ text(
 )
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672" />
 
 ### Question 5
 
@@ -273,7 +273,7 @@ data.frame(res, check.names = FALSE) |>
   scale_color_discrete(name = "No. variables at\neach split")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-8-1.png" alt="" width="672" />
 
 ### Question 8
 
@@ -319,7 +319,7 @@ plot(tr)
 text(tr, pretty = 0, digits = 2, cex = 0.8)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-10-1.png" alt="" width="672" />
 
 ``` r
 carseats_mse <- function(model) {
@@ -344,7 +344,7 @@ min <- which.min(res$dev)
 abline(v = res$size[min], lty = 2, col = "red")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" />
 
 Pruning improves performance very slightly (though this is not repeatable in
 different rounds of cross-validation). Arguably, a good balance is achieved
@@ -357,7 +357,7 @@ plot(ptr)
 text(ptr, pretty = 0, digits = 2, cex = 0.8)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-12-1.png" alt="" width="672" />
 
 ``` r
 carseats_mse(ptr)
@@ -605,7 +605,7 @@ plot(tr)
 text(tr, pretty = 0, digits = 2, cex = 0.8)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-19-1.png" alt="" width="672" />
 
 > e. Predict the response on the test data, and produce a confusion matrix
 >    comparing the test labels to the predicted test labels. What is the test
@@ -642,7 +642,7 @@ min <- which.min(res$dev)
 abline(v = res$size[min], lty = 2, col = "red")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-22-1.png" alt="" width="672" />
 
 > h. Which tree size corresponds to the lowest cross-validated classification
 >    error rate?
@@ -667,7 +667,7 @@ plot(ptr)
 text(ptr, pretty = 0, digits = 2, cex = 0.8)
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-24-1.png" alt="" width="672" />
 
 > j. Compare the training error rates between the pruned and unpruned trees.
 >    Which is higher?
@@ -754,7 +754,7 @@ library(gbm)
 ```
 
 ```
-## Loaded gbm 2.2.2
+## Loaded gbm 2.2.3
 ```
 
 ```
@@ -780,7 +780,7 @@ plot(lambdas, errs,
 )
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-29-1.png" alt="" width="672" />
 
 > d. Produce a plot with different shrinkage values on the $x$-axis and the
 >    corresponding test set MSE on the $y$-axis.
@@ -806,7 +806,7 @@ min(errs)
 abline(v = lambdas[which.min(errs)], lty = 2, col = "red")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-30-1.png" alt="" width="672" />
 
 > e. Compare the test MSE of boosting to the test MSE that results from applying
 >    two of the regression approaches seen in Chapters 3 and 6.
@@ -852,7 +852,7 @@ library(glmnet)
 ```
 
 ```
-## Loaded glmnet 4.1-8
+## Loaded glmnet 5.0
 ```
 
 ``` r
@@ -875,7 +875,7 @@ mean((predict(fit2, s = 0.1, newx = x.test) - dat[test, "Salary"])^2)
 summary(fits[[which.min(errs)]])
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-33-1.png" alt="" width="672" />
 
 ```
 ##                 var    rel.inf
@@ -955,7 +955,7 @@ fit <- gbm(as.numeric(Purchase == "Yes") ~ ., data = Caravan[train, ], n.trees =
 head(summary(fit))
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-36-1.png" alt="" width="672" />
 
 ```
 ##               var   rel.inf
@@ -1099,7 +1099,7 @@ library(gam)
 ```
 
 ```
-## Loaded gam 1.22-5
+## Loaded gam 1.22-7
 ```
 
 ``` r
@@ -1189,7 +1189,7 @@ ggplot(res, aes(Model, MSE)) +
   geom_bar(stat = "identity", fill = "steelblue")
 ```
 
-<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+<img src="08-tree-based-methods_files/figure-html/unnamed-chunk-40-1.png" alt="" width="672" />
 
 In this case, it looks like bagging produces the best performing model in terms
 of test mean square error.

@@ -89,7 +89,7 @@ c1 <- hclust(as.dist(m), method = "complete")
 plot(c1)
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-1-1.png" alt="" width="672" />
 
 > b. Repeat (a), this time using single linkage clustering.
 
@@ -99,7 +99,7 @@ c2 <- hclust(as.dist(m), method = "single")
 plot(c2)
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-2-1.png" alt="" width="672" />
 
 > c. Suppose that we cut the dendrogram obtained in (a) such that two clusters
 >    result. Which observations are in each cluster?
@@ -146,7 +146,7 @@ table(1:4, cutree(c2, 2))
 plot(c1, labels = c(2, 1, 3, 4))
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-5-1.png" alt="" width="672" />
 
 ### Question 3
 
@@ -176,7 +176,7 @@ ggplot(d, aes(x = x1, y = x2)) +
   geom_point()
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672" />
 
 > b. Randomly assign a cluster label to each observation. You can use the
 >    `sample()` command in `R` to do this. Report the cluster labels for each
@@ -228,7 +228,7 @@ ggplot(d, aes(x = x1, y = x2, color = factor(cluster))) +
   geom_point()
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-11-1.png" alt="" width="672" />
 
 ### Question 4
 
@@ -339,7 +339,7 @@ d2 <- as.dist(1 - cor(t(dat)))
 plot(d1, d2)
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" />
 
 ### Question 8
 
@@ -522,7 +522,7 @@ ggplot(
   geom_point()
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-21-1.png" alt="" width="672" />
 
 > c. Perform $K$-means clustering of the observations with $K = 3$. How well do
 >    the clusters that you obtained in $K$-means clustering compare to the true
@@ -683,21 +683,21 @@ hc.complete <- hclust(as.dist(1 - cor(data)), method = "complete")
 plot(hc.complete)
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-1.png" alt="" width="672" />
 
 ``` r
 hc.complete <- hclust(as.dist(1 - cor(data)), method = "average")
 plot(hc.complete)
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-2.png" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-2.png" alt="" width="672" />
 
 ``` r
 hc.complete <- hclust(as.dist(1 - cor(data)), method = "single")
 plot(hc.complete)
 ```
 
-<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-3.png" width="672" />
+<img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-28-3.png" alt="" width="672" />
 
 Yes the samples clearly separate into the two groups, although the results 
 depend somewhat on the linkage method used. In the case of average clustering,

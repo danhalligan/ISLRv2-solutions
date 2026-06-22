@@ -241,7 +241,7 @@ lines(
 )
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-4-1.png" alt="" width="672" />
 
 ### Question 6
 
@@ -278,7 +278,7 @@ lines(
 )
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-5-1.png" alt="" width="672" />
 
 x <- Surv(c(300, 350, 150, 250), c(1, 0, 1, 0))
 
@@ -454,7 +454,7 @@ plot(survfit(x ~ 1),
 )
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-6-1.png" alt="" width="672" />
 
 > b. Draw a bootstrap sample of size $n = 88$ from the pairs ($y_i$,
 > $\delta_i$), and compute the resulting Kaplan-Meier survival curve. Repeat
@@ -485,7 +485,7 @@ lines(fit$time, fit$surv - se, lty = 2, col = "red")
 lines(fit$time, fit$surv + se, lty = 2, col = "red")
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" />
 
 > c. Fit a Cox proportional hazards model that uses all of the predictors to
 > predict survival. Summarize the main findings.
@@ -545,7 +545,7 @@ plot(survplots, xlab = "Months", ylab = "Survival Probability", col = 2:6)
 legend("bottomleft", c("60", "70", "80", "90", "100"), col = 2:6, lty = 1)
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672" />
 
 ### Question 11
 
@@ -566,7 +566,7 @@ lines(survfit(x[[2]] ~ 1), conf.int = FALSE, col = 3)
 legend("bottomleft", c(">= 2", "<2"), col = 2:3, lty = 1)
 ```
 
-<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="11-survival-analysis-and-censored-data_files/figure-html/unnamed-chunk-10-1.png" alt="" width="672" />
 
 There does not appear to be any difference between the curves.
 
