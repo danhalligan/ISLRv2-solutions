@@ -901,9 +901,9 @@ printCoefmat(do.call(rbind, lapply(fits, function(x) coef(summary(x))[2, ])))
 
 There are significant associations for all predictors with the exception of
 `chas` when fitting separate linear models. For example, consider the following
-plot representing the third model
+plot representing the fifth model
 
-```
+```{r}
 plot(Boston$rm, Boston$crim)
 abline(fits[[5]])
 ```

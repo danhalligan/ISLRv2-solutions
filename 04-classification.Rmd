@@ -517,7 +517,7 @@ corrplot(cor(Weekly[, -9]), type = "lower", diag = FALSE, method = "ellipse")
 ```
 
 Volume is strongly positively correlated with Year. Other correlations are
-week, but Lag1 is negatively correlated with Lag2 but positively correlated
+weak, but Lag1 is negatively correlated with Lag2 but positively correlated
 with Lag3.
 
 > b. Use the full data set to perform a logistic regression with `Direction` as
@@ -867,7 +867,7 @@ PlotPower <- function(x, a, log = "y") {
 PlotPower(1:10, 3)
 ```
 
-### Question 13
+### Question 16
 
 > Using the `Boston` data set, fit classification models in order to predict
 > whether a given census tract has a crime rate above or below the median.
