@@ -266,7 +266,7 @@ $$
 (y_1 - \hat{\beta_1}x_1 - \hat{\beta_2}x_1)^2 + (y_2 - \hat{\beta_1}x_2 - \hat{\beta_2}x_2)^2 \quad \text{subject to} \quad |\hat{\beta_1}| + |\hat{\beta_2}| \le s
 $$
 
-Since $x_1 + x_2 = 0$ and $y_1 + y_2 = 0$, this is equivalent to minimising
+Since $x_1 + x_2 = 0$ and $y_1 + y_2 = 0$, this is equivalent to minimizing
 $2(y_1 - (\hat{\beta_1} + \hat{\beta_2})x_1)^2$
 which has a solution when $\hat{\beta_1} + \hat{\beta_2} = y_1/x_1$.
 Geometrically, this is a $45^\circ$ backwards sloping line in the 

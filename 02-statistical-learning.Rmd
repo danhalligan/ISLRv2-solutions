@@ -103,7 +103,7 @@ $n=52$, $p=3$, regression, prediction.
 > c. Describe three real-life applications in which cluster analysis might be
 >    useful.
 
-* RNAseq tumour gene expression data.
+* RNAseq tumor gene expression data.
 * SNPs in human populations.
 * Frequencies of mutations (with base pair context) in somatic mutation data.
 
@@ -346,7 +346,7 @@ library(knitr)
 x[, numeric] |>
   pivot_longer(everything()) |>
   group_by(name) |>
-  summarise(
+  summarize(
     Mean = mean(value),
     SD = sd(value)
   ) |>
@@ -361,7 +361,7 @@ x[, numeric] |>
 x[-(10:85), numeric] |>
   pivot_longer(everything()) |>
   group_by(name) |>
-  summarise(
+  summarize(
     Range = diff(range(value)),
     Mean = mean(value),
     SD = sd(value)

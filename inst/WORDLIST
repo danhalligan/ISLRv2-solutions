@@ -51,7 +51,6 @@ dx
 exponentiating
 frac
 ge
-generalises
 geq
 grayscale
 highcrim
@@ -60,7 +59,6 @@ i'j
 ij
 im
 infty
-initialised
 interpretable
 ith
 iy
@@ -83,15 +81,12 @@ lt
 mathbb
 mathcal
 mathrm
-maximises
 mbox
-minimising
 misclassified
 misclassifies
 misclassify
 mismeasured
 mk
-modelling
 na
 nd
 npq
@@ -106,7 +101,6 @@ pretrained
 propto
 repositioned
 softmax
-standardised
 stochasticity
 svm
 textit
@@ -115,7 +109,6 @@ tfrac
 th
 tidyverse
 timepoint
-tumour
 un
 unpruned
 wilcox
