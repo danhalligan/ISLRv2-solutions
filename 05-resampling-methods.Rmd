@@ -285,7 +285,7 @@ fit <- glm(default ~ income + balance, data = Default, family = "binomial")
 summary(fit)
 ```
 
-The standard errors obtained by bootstrapping are $\beta_1$ = 5.0e-6 and 
+The standard errors estimated by `glm()` are $\beta_1$ = 5.0e-6 and 
 $\beta_2$ = 2.3e-4.
 
 > b. Write a function, `boot.fn()`, that takes as input the `Default` data set

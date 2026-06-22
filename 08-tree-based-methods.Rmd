@@ -56,7 +56,7 @@ text(
 > $$
 > Explain why this is the case. You can begin with (8.12) in Algorithm 8.2.
 
-Equation 8.1 is:
+Equation 8.12 is:
 
 $$
 f(x) = \sum_{b=1}^B(\lambda \hat{f}^b(x)

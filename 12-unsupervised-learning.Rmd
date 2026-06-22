@@ -35,7 +35,7 @@ Note first that,
 Note that the first term is independent of $i'$ and the last is independent of
 $i$.
 
-Therefore, 10.12 can be written as:
+Therefore, 12.18 can be written as:
 
 \begin{align}
 \frac{1}{|C_k|}\sum_{i,i' \in C_k} \sum_{j=1}^p (x_{ij} - x_{i'j})^2
@@ -56,7 +56,7 @@ over combinations of $i$ and $i'$ for a given $j$.
 >    algorithm (Algorithm 12.2) decreases the objective (12.17) at each
 >    iteration.
 
-Equation 10.12 demonstrates that the euclidean distance between each possible
+Equation 12.18 demonstrates that the euclidean distance between each possible
 pair of samples can be related to the difference from each sample to the mean
 of the cluster. The K-means algorithm works by minimizing the euclidean distance
 to each centroid, thus also minimizes the within-cluster variance.
@@ -345,7 +345,7 @@ hc2 <- hclust(dist(scale(USArrests)), method = "complete")
 >    your answer.
 
 ```{r}
-ct <- cutree(hc, 3)
+ct <- cutree(hc2, 3)
 sapply(1:3, function(i) names(ct)[ct == i])
 ```
 
@@ -534,6 +534,6 @@ FDR adjusted p-value less than some given threshold (e.g. 0.05).
 
 ```{r}
 class <- factor(rep(c("Healthy", "Diseased"), each = 20))
-pvals <- p.adjust(apply(data, 1, function(v) t.test(v ~ class)$p.value))
+pvals <- p.adjust(apply(data, 1, function(v) t.test(v ~ class)$p.value), method = "fdr")
 which(pvals < 0.05)
 ```
