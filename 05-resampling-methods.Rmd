@@ -110,7 +110,7 @@ $p = 0.64$
 >    in the bootstrap sample?
 
 ```{r}
-n <- 100000
+n <- 10000
 1 - (1 - 1 / n)^n
 ```
 
