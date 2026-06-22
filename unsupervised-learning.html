@@ -1006,7 +1006,7 @@ observations from 5% to 30%, in steps of 5%. Apply Algorithm 12.1 with <span cla
 observations that are missing, and the value of <span class="math inline">\(M\)</span>, averaged over 10
 repetitions of the experiment.</p>
 </blockquote>
-<p>We follow Algorithm 12.1: missing entries are initialised to the column mean,
+<p>We follow Algorithm 12.1: missing entries are initialized to the column mean,
 then on each iteration we replace them with the entries from the rank-<span class="math inline">\(M\)</span> SVD
 approximation of the current matrix. Convergence is tracked via the relative
 reduction in mean squared error on the <em>observed</em> entries.</p>
@@ -1097,16 +1097,16 @@ particular cells happened to be hidden.</p>
 <div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="unsupervised-learning.html#cb819-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame.table</span>(mean_err, <span class="at">responseName =</span> <span class="st">&quot;MSE&quot;</span>)</span>
 <span id="cb819-2"><a href="unsupervised-learning.html#cb819-2" tabindex="-1"></a>df<span class="sc">$</span>frac <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(df<span class="sc">$</span>frac))</span>
 <span id="cb819-3"><a href="unsupervised-learning.html#cb819-3" tabindex="-1"></a>df<span class="sc">$</span>M <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">as.character</span>(df<span class="sc">$</span>M))</span>
-<span id="cb819-4"><a href="unsupervised-learning.html#cb819-4" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(frac, MSE, <span class="at">colour =</span> <span class="fu">factor</span>(M), <span class="at">group =</span> M)) <span class="sc">+</span></span>
+<span id="cb819-4"><a href="unsupervised-learning.html#cb819-4" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(frac, MSE, <span class="at">color =</span> <span class="fu">factor</span>(M), <span class="at">group =</span> M)) <span class="sc">+</span></span>
 <span id="cb819-5"><a href="unsupervised-learning.html#cb819-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb819-6"><a href="unsupervised-learning.html#cb819-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb819-7"><a href="unsupervised-learning.html#cb819-7" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb819-8"><a href="unsupervised-learning.html#cb819-8" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fraction of entries missing&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Mean squared error&quot;</span>,</span>
-<span id="cb819-9"><a href="unsupervised-learning.html#cb819-9" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;M&quot;</span></span>
+<span id="cb819-9"><a href="unsupervised-learning.html#cb819-9" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;M&quot;</span></span>
 <span id="cb819-10"><a href="unsupervised-learning.html#cb819-10" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="12-unsupervised-learning_files/figure-html/unnamed-chunk-29-1.png" alt="" width="672" /></p>
 <p>A small number of components (<span class="math inline">\(M \le 3\)</span>) gives by far the best imputations
-on standardised <code>Boston</code>. Beyond that the rank-<span class="math inline">\(M\)</span> approximation starts to
+on standardized <code>Boston</code>. Beyond that the rank-<span class="math inline">\(M\)</span> approximation starts to
 overfit the imputed values themselves, and the error roughly doubles. As
 expected, the error also grows gradually with the fraction of missing
 entries.</p>

@@ -548,7 +548,7 @@ useful.</li>
 </ol>
 </blockquote>
 <ul>
-<li>RNAseq tumour gene expression data.</li>
+<li>RNAseq tumor gene expression data.</li>
 <li>SNPs in human populations.</li>
 <li>Frequencies of mutations (with base pair context) in somatic mutation data.</li>
 </ul>
@@ -890,7 +890,7 @@ the <code>range()</code> function.</li>
 <span id="cb31-3"><a href="statistical-learning.html#cb31-3" tabindex="-1"></a>x[, numeric] <span class="sc">|&gt;</span></span>
 <span id="cb31-4"><a href="statistical-learning.html#cb31-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>()) <span class="sc">|&gt;</span></span>
 <span id="cb31-5"><a href="statistical-learning.html#cb31-5" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">|&gt;</span></span>
-<span id="cb31-6"><a href="statistical-learning.html#cb31-6" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb31-6"><a href="statistical-learning.html#cb31-6" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb31-7"><a href="statistical-learning.html#cb31-7" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(value),</span>
 <span id="cb31-8"><a href="statistical-learning.html#cb31-8" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(value)</span>
 <span id="cb31-9"><a href="statistical-learning.html#cb31-9" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
@@ -941,7 +941,7 @@ remains?</li>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="statistical-learning.html#cb32-1" tabindex="-1"></a>x[<span class="sc">-</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">85</span>), numeric] <span class="sc">|&gt;</span></span>
 <span id="cb32-2"><a href="statistical-learning.html#cb32-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>()) <span class="sc">|&gt;</span></span>
 <span id="cb32-3"><a href="statistical-learning.html#cb32-3" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">|&gt;</span></span>
-<span id="cb32-4"><a href="statistical-learning.html#cb32-4" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb32-4"><a href="statistical-learning.html#cb32-4" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb32-5"><a href="statistical-learning.html#cb32-5" tabindex="-1"></a>    <span class="at">Range =</span> <span class="fu">diff</span>(<span class="fu">range</span>(value)),</span>
 <span id="cb32-6"><a href="statistical-learning.html#cb32-6" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(value),</span>
 <span id="cb32-7"><a href="statistical-learning.html#cb32-7" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(value)</span>

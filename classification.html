@@ -471,8 +471,7 @@ therefore, we can consider maximizing <span class="math inline">\(\log(p_k(x))\)
 <p><span class="math display">\[
 \log(p_k(x)) = \log(\pi_k) - \frac{1}{2\sigma^2}(x - \mu_k)^2 -
                \log\left(\sum_{l=1}^K \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)\right)
-\]</span>
-$$</p>
+\]</span></p>
 <p>Remember that we are maximizing over <span class="math inline">\(k\)</span>, and since the last term does not
 vary with <span class="math inline">\(k\)</span> it can be ignored. So we just need to maximize</p>
 <p><span class="math display">\[\begin{align}
@@ -1188,7 +1187,7 @@ may be useful tools to answer this question. Describe your findings.</li>
 <span id="cb232-3"><a href="classification.html#cb232-3" tabindex="-1"></a><span class="fu">pairs</span>(x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>])</span></code></pre></div>
 <p><img src="04-classification_files/figure-html/unnamed-chunk-13-2.png" alt="" width="672" /><img src="04-classification_files/figure-html/unnamed-chunk-13-3.png" alt="" width="672" /></p>
 <p>Most variables show an association with <code>mpg01</code> category, and several
-variables are colinear.</p>
+variables are collinear.</p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Split the data into a training set and a test set.</li>

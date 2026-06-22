@@ -472,7 +472,7 @@ decision boundary.</p>
 <span id="cb609-3"><a href="support-vector-machines.html#cb609-3" tabindex="-1"></a>  <span class="at">X2 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">5</span>, <span class="at">length.out =</span> <span class="dv">100</span>)</span>
 <span id="cb609-4"><a href="support-vector-machines.html#cb609-4" tabindex="-1"></a>)</span>
 <span id="cb609-5"><a href="support-vector-machines.html#cb609-5" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(points, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2, <span class="at">z =</span> (<span class="dv">1</span> <span class="sc">+</span> X1)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">2</span> <span class="sc">-</span> X2)<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">4</span>)) <span class="sc">+</span></span>
-<span id="cb609-6"><a href="support-vector-machines.html#cb609-6" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">breaks =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb609-6"><a href="support-vector-machines.html#cb609-6" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">breaks =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb609-7"><a href="support-vector-machines.html#cb609-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
 <span id="cb609-8"><a href="support-vector-machines.html#cb609-8" tabindex="-1"></a>p</span></code></pre></div>
 <p><img src="09-support-vector-machines_files/figure-html/unnamed-chunk-3-1.png" alt="" width="672" /></p>
@@ -659,7 +659,7 @@ current calculated margin.</p>
 provide the equation for this hyperplane.</li>
 </ol>
 </blockquote>
-<p>A non-optimal hyperline that still separates the blue and red points would
+<p>A non-optimal hyperplane that still separates the blue and red points would
 be one that touches the (red) point at X1 = 2, X2 = 2 and the (blue) point at
 X1 = 4, X2 = 3. This gives line <span class="math inline">\(y = x/2 + 1\)</span> or, when <span class="math inline">\(\beta_0 = -1\)</span>,
 <span class="math inline">\(\beta_1 = -1/2\)</span>, <span class="math inline">\(\beta_2 = 1\)</span>.</p>

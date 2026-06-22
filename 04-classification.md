@@ -66,7 +66,6 @@ $$
 \log(p_k(x)) = \log(\pi_k) - \frac{1}{2\sigma^2}(x - \mu_k)^2 -
                \log\left(\sum_{l=1}^K \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)\right)
 $$
-$$
 
 Remember that we are maximizing over $k$, and since the last term does not
 vary with $k$ it can be ignored. So we just need to maximize
@@ -950,7 +949,7 @@ pairs(x[, 1:7])
 <img src="04-classification_files/figure-html/unnamed-chunk-13-2.png" alt="" width="672" /><img src="04-classification_files/figure-html/unnamed-chunk-13-3.png" alt="" width="672" />
 
 Most variables show an association with `mpg01` category, and several
-variables are colinear.
+variables are collinear.
 
 > c. Split the data into a training set and a test set.
 

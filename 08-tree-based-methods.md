@@ -516,7 +516,7 @@ bartfit <- gbart(Carseats[train, 2:11], Carseats[train, 1],
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 3s
+## time: 2s
 ## trcnt,tecnt: 1000,1000
 ```
 
@@ -541,8 +541,8 @@ bagging.
 
 ``` r
 set.seed(42)
-train <- sample(1:nrow(OJ), 800)
-test <- setdiff(1:nrow(OJ), train)
+train <- sample(seq_len(nrow(OJ)), 800)
+test <- setdiff(seq_len(nrow(OJ)), train)
 ```
 
 > b. Fit a tree to the training data, with `Purchase` as the response and the
@@ -740,7 +740,7 @@ dat$Salary <- log(dat$Salary)
 
 ``` r
 train <- 1:200
-test <- setdiff(1:nrow(dat), train)
+test <- setdiff(seq_len(nrow(dat)), train)
 ```
 
 > c. Perform boosting on the training set with 1,000 trees for a range of values
@@ -924,7 +924,7 @@ mean((predict(bagged, newdata = dat[test, ]) - dat[test, "Salary"])^2)
 
 ``` r
 train <- 1:1000
-test <- setdiff(1:nrow(Caravan), train)
+test <- setdiff(seq_len(nrow(Caravan)), train)
 ```
 
 > b. Fit a boosting model to the training set with `Purchase` as the response
@@ -1104,8 +1104,8 @@ library(gam)
 
 ``` r
 set.seed(42)
-train <- sample(1:nrow(College), 400)
-test <- setdiff(1:nrow(College), train)
+train <- sample(seq_len(nrow(College)), 400)
+test <- setdiff(seq_len(nrow(College)), train)
 
 # Linear regression
 lr <- gam(Outstate ~ ., data = College[train, ])

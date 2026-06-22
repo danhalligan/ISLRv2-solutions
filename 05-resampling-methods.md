@@ -170,7 +170,7 @@ mean(store)
 ```
 
 ```
-## [1] 0.6335
+## [1] 0.6383
 ```
 
 The probability of including $4$ when resampling numbers $1...100$ is close to
@@ -464,7 +464,7 @@ Yes the observation was correctly classified.
 
 ``` r
 error <- numeric(nrow(Weekly))
-for (i in 1:nrow(Weekly)) {
+for (i in seq_len(nrow(Weekly))) {
   fit <- glm(Direction ~ Lag1 + Lag2, data = Weekly[-i, ], family = "binomial")
   p <- predict(fit, newdata = Weekly[i, , drop = FALSE], type = "response") > 0.5
   error[i] <- ifelse(p, "Down", "Up") == Weekly$Direction[i]

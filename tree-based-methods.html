@@ -800,7 +800,7 @@ regression tree above, although not quite as good as the bagging approach.</p>
 ## done 800 (out of 1100)
 ## done 900 (out of 1100)
 ## done 1000 (out of 1100)
-## time: 3s
+## time: 2s
 ## trcnt,tecnt: 1000,1000</code></pre>
 <div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="tree-based-methods.html#cb527-1" tabindex="-1"></a><span class="fu">carseats_mse</span>(bartfit)</span></code></pre></div>
 <pre><code>## [1] 1.631285</code></pre>
@@ -817,8 +817,8 @@ test set containing the remaining observations.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="tree-based-methods.html#cb529-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb529-2"><a href="tree-based-methods.html#cb529-2" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(OJ), <span class="dv">800</span>)</span>
-<span id="cb529-3"><a href="tree-based-methods.html#cb529-3" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(OJ), train)</span></code></pre></div>
+<span id="cb529-2"><a href="tree-based-methods.html#cb529-2" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(OJ)), <span class="dv">800</span>)</span>
+<span id="cb529-3"><a href="tree-based-methods.html#cb529-3" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(OJ)), train)</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Fit a tree to the training data, with <code>Purchase</code> as the response and the
@@ -969,7 +969,7 @@ set consisting of the remaining observations.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="tree-based-methods.html#cb551-1" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">200</span></span>
-<span id="cb551-2"><a href="tree-based-methods.html#cb551-2" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dat), train)</span></code></pre></div>
+<span id="cb551-2"><a href="tree-based-methods.html#cb551-2" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(dat)), train)</span></code></pre></div>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Perform boosting on the training set with 1,000 trees for a range of values
@@ -1093,7 +1093,7 @@ test set consisting of the remaining observations.</li>
 </ol>
 </blockquote>
 <div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="tree-based-methods.html#cb573-1" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span></span>
-<span id="cb573-2"><a href="tree-based-methods.html#cb573-2" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Caravan), train)</span></code></pre></div>
+<span id="cb573-2"><a href="tree-based-methods.html#cb573-2" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(Caravan)), train)</span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Fit a boosting model to the training set with <code>Purchase</code> as the response
@@ -1184,8 +1184,8 @@ were trying to predict <code>Outstate</code> using the other variables in <code>
 ##     accumulate, when</code></pre>
 <pre><code>## Loaded gam 1.22-7</code></pre>
 <div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="tree-based-methods.html#cb602-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb602-2"><a href="tree-based-methods.html#cb602-2" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(College), <span class="dv">400</span>)</span>
-<span id="cb602-3"><a href="tree-based-methods.html#cb602-3" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(College), train)</span>
+<span id="cb602-2"><a href="tree-based-methods.html#cb602-2" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(College)), <span class="dv">400</span>)</span>
+<span id="cb602-3"><a href="tree-based-methods.html#cb602-3" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(College)), train)</span>
 <span id="cb602-4"><a href="tree-based-methods.html#cb602-4" tabindex="-1"></a></span>
 <span id="cb602-5"><a href="tree-based-methods.html#cb602-5" tabindex="-1"></a><span class="co"># Linear regression</span></span>
 <span id="cb602-6"><a href="tree-based-methods.html#cb602-6" tabindex="-1"></a>lr <span class="ot">&lt;-</span> <span class="fu">gam</span>(Outstate <span class="sc">~</span> ., <span class="at">data =</span> College[train, ])</span>

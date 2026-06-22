@@ -639,7 +639,7 @@ so will have a smaller training RSS.</p>
 test RSS?</li>
 </ol>
 </blockquote>
-<p>We cannot tell which function will produce a smaller test RSS, but there is
+<p>We cannot tell which function will produce a smaller test RSS, but there is a
 chance that <span class="math inline">\(\hat{g}_1\)</span> will if <span class="math inline">\(\hat{g}_2\)</span> overfits the data.</p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
@@ -1074,7 +1074,7 @@ model that uses just a subset of the predictors.</li>
 <span id="cb451-11"><a href="moving-beyond-linearity.html#cb451-11" tabindex="-1"></a></span>
 <span id="cb451-12"><a href="moving-beyond-linearity.html#cb451-12" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb451-13"><a href="moving-beyond-linearity.html#cb451-13" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">TRUE</span>, <span class="fu">nrow</span>(College))</span>
-<span id="cb451-14"><a href="moving-beyond-linearity.html#cb451-14" tabindex="-1"></a>train[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(College), <span class="fu">nrow</span>(College) <span class="sc">*</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>)] <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb451-14"><a href="moving-beyond-linearity.html#cb451-14" tabindex="-1"></a>train[<span class="fu">sample</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(College)), <span class="fu">nrow</span>(College) <span class="sc">*</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>)] <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
 <span id="cb451-15"><a href="moving-beyond-linearity.html#cb451-15" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(Outstate <span class="sc">~</span> ., <span class="at">data =</span> College[train, ], <span class="at">nvmax =</span> <span class="dv">17</span>, <span class="at">method =</span> <span class="st">&quot;forward&quot;</span>)</span>
 <span id="cb451-16"><a href="moving-beyond-linearity.html#cb451-16" tabindex="-1"></a></span>
 <span id="cb451-17"><a href="moving-beyond-linearity.html#cb451-17" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">summary</span>(fit)<span class="sc">$</span>bic, <span class="at">type =</span> <span class="st">&quot;b&quot;</span>)</span></code></pre></div>
@@ -1328,7 +1328,7 @@ Create a plot to justify your answer.</p>
 <span id="cb478-2"><a href="moving-beyond-linearity.html#cb478-2" tabindex="-1"></a>backfit <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">iter =</span> <span class="dv">20</span>) {</span>
 <span id="cb478-3"><a href="moving-beyond-linearity.html#cb478-3" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">ncol =</span> <span class="fu">ncol</span>(x), <span class="at">nrow =</span> iter <span class="sc">+</span> <span class="dv">1</span>)</span>
 <span id="cb478-4"><a href="moving-beyond-linearity.html#cb478-4" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>iter) {</span>
-<span id="cb478-5"><a href="moving-beyond-linearity.html#cb478-5" tabindex="-1"></a>    <span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(x)) {</span>
+<span id="cb478-5"><a href="moving-beyond-linearity.html#cb478-5" tabindex="-1"></a>    <span class="cf">for</span> (k <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">ncol</span>(x))) {</span>
 <span id="cb478-6"><a href="moving-beyond-linearity.html#cb478-6" tabindex="-1"></a>      residual <span class="ot">&lt;-</span> y <span class="sc">-</span> (x[, <span class="sc">-</span>k] <span class="sc">%*%</span> beta[i, <span class="sc">-</span>k])</span>
 <span id="cb478-7"><a href="moving-beyond-linearity.html#cb478-7" tabindex="-1"></a>      beta[i <span class="sc">+</span> <span class="dv">1</span>, k] <span class="ot">&lt;-</span> <span class="fu">lm</span>(residual <span class="sc">~</span> x[, k])<span class="sc">$</span>coef[<span class="dv">2</span>]</span>
 <span id="cb478-8"><a href="moving-beyond-linearity.html#cb478-8" tabindex="-1"></a>    }</span>
