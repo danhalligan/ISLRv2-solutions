@@ -12,7 +12,7 @@
 For intercept, that $\beta_0 = 0$
 For the others, that $\beta_n = 0$ (for $n = 1, 2, 3$)
 
-We can conclude that that without any spending, there are still some sales (the
+We can conclude that without any spending, there are still some sales (the
 intercept is not 0). Furthermore, we can conclude that money spent on TV and
 radio are significantly associated with increased sales, but the same cannot be
 said of newspaper spending.
@@ -110,7 +110,7 @@ model(gpa = 4, iq = 110, level = 1)
 
 This is false. It is important to remember that GPA and IQ vary over different
 scales. It is better to explicitly test the significance of the interaction 
-effect, and/or visualize or quantify the effect on sales under realistic ranges
+effect, and/or visualize or quantify the effect on salary under realistic ranges
 of GPA/IQ values.
 
 ### Question 4
@@ -783,7 +783,7 @@ The model is of the form:
 
 $$Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \epsilon$$
 
-The coefficients are $\beta_0 = 2$, $\beta_1 = 2$, $\beta_3 = 0.3$.
+The coefficients are $\beta_0 = 2$, $\beta_1 = 2$, $\beta_2 = 0.3$.
 
 > b. What is the correlation between `x1` and `x2`? Create a scatterplot
 >    displaying the relationship between the variables.
