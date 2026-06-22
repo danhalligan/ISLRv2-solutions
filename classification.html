@@ -454,8 +454,8 @@ an observation to the class for which the discriminant function is maximized.</p
 </blockquote>
 <p>4.12 is</p>
 <p><span class="math display">\[
-p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi\sigma}} \exp(-\frac{1}{2\sigma^2}(x - \mu_k)^2)}
-              {\sum_{l=1}^k \pi_l\frac{1}{\sqrt{2\pi\sigma}} \exp(-\frac{1}{2\sigma^2}(x - \mu_l)^2)}
+p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi}\sigma} \exp(-\frac{1}{2\sigma^2}(x - \mu_k)^2)}
+              {\sum_{l=1}^K \pi_l\frac{1}{\sqrt{2\pi}\sigma} \exp(-\frac{1}{2\sigma^2}(x - \mu_l)^2)}
 \]</span></p>
 <p>and the discriminant function is</p>
 <p><span class="math display">\[
@@ -464,14 +464,15 @@ p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi\sigma}} \exp(-\frac{1}{2\sigma^2}(x - \m
 <p>Since <span class="math inline">\(\sigma^2\)</span> is constant</p>
 <p><span class="math display">\[
 p_k(x) = \frac{\pi_k \exp\left(-\frac{1}{2\sigma^2}(x - \mu_k)^2\right)}
-              {\sum_{l=1}^k \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)}
+              {\sum_{l=1}^K \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)}
 \]</span></p>
-<p>Maximizing <span class="math inline">\(p_k(x)\)</span> also maximizes any monotonic function of <span class="math inline">\(p_k(X)\)</span>, and
-therefore, we can consider maximizing <span class="math inline">\(\log(p_K(X))\)</span></p>
+<p>Maximizing <span class="math inline">\(p_k(x)\)</span> also maximizes any monotonic function of <span class="math inline">\(p_k(x)\)</span>, and
+therefore, we can consider maximizing <span class="math inline">\(\log(p_k(x))\)</span></p>
 <p><span class="math display">\[
 \log(p_k(x)) = \log(\pi_k) - \frac{1}{2\sigma^2}(x - \mu_k)^2 -
-               \log\left(\sum_{l=1}^k \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)\right)
-\]</span></p>
+               \log\left(\sum_{l=1}^K \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)\right)
+\]</span>
+$$</p>
 <p>Remember that we are maximizing over <span class="math inline">\(k\)</span>, and since the last term does not
 vary with <span class="math inline">\(k\)</span> it can be ignored. So we just need to maximize</p>
 <p><span class="math display">\[\begin{align}
@@ -503,16 +504,16 @@ quadratic.</p>
 </blockquote>
 <p>As above,</p>
 <p><span class="math display">\[
-p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi\sigma_k}} \exp(-\frac{1}{2\sigma_k^2}(x - \mu_k)^2)}
-              {\sum_{l=1}^k \pi_l\frac{1}{\sqrt{2\pi\sigma_l}} \exp(-\frac{1}{2\sigma_l^2}(x - \mu_l)^2)}
+p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi}\sigma_k} \exp(-\frac{1}{2\sigma_k^2}(x - \mu_k)^2)}
+              {\sum_{l=1}^K \pi_l\frac{1}{\sqrt{2\pi}\sigma_l} \exp(-\frac{1}{2\sigma_l^2}(x - \mu_l)^2)}
 \]</span></p>
 <p>Now lets derive the Bayes classifier, without assuming
 <span class="math inline">\(\sigma_1^2 = ... = \sigma_K^2\)</span></p>
-<p>Maximizing <span class="math inline">\(p_k(x)\)</span> also maximizes any monotonic function of <span class="math inline">\(p_k(X)\)</span>, and
-therefore, we can consider maximizing <span class="math inline">\(\log(p_K(X))\)</span></p>
+<p>Maximizing <span class="math inline">\(p_k(x)\)</span> also maximizes any monotonic function of <span class="math inline">\(p_k(x)\)</span>, and
+therefore, we can consider maximizing <span class="math inline">\(\log(p_k(x))\)</span></p>
 <p><span class="math display">\[
-\log(p_k(x)) = \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi\sigma_k}}\right) - \frac{1}{2\sigma_k^2}(x - \mu_k)^2 -
-              \log\left(\sum_{l=1}^k \frac{1}{\sqrt{2\pi\sigma_l}} \pi_l \exp\left(-\frac{1}{2\sigma_l^2}(x - \mu_l)^2\right)\right)
+\log(p_k(x)) = \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi}\sigma_k}\right) - \frac{1}{2\sigma_k^2}(x - \mu_k)^2 -
+              \log\left(\sum_{l=1}^K \frac{1}{\sqrt{2\pi}\sigma_l} \pi_l \exp\left(-\frac{1}{2\sigma_l^2}(x - \mu_l)^2\right)\right)
 \]</span></p>
 <p>Remember that we are maximizing over <span class="math inline">\(k\)</span>, and since the last term does not
 vary with <span class="math inline">\(k\)</span> it can be ignored. So we just need to maximize</p>
@@ -1060,10 +1061,10 @@ data (that is, the data from 2009 and 2010).</li>
 <span id="cb199-6"><a href="classification.html#cb199-6" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(fit, Weekly[<span class="sc">!</span>train, ]<span class="sc">$</span>Direction))</span></code></pre></div>
 <pre><code>##       
 ## fit    Down Up
-##   Down   21 30
-##   Up     22 31</code></pre>
+##   Down   21 29
+##   Up     22 32</code></pre>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="classification.html#cb201-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
-<pre><code>## [1] 0.5</code></pre>
+<pre><code>## [1] 0.5096154</code></pre>
 <blockquote>
 <ol start="8" style="list-style-type: lower-alpha">
 <li>Repeat (d) using naive Bayes.</li>

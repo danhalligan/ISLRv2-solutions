@@ -456,13 +456,13 @@ that <span class="math inline">\(f(x)\)</span> is a piecewise polynomial.</li>
 <p>For <span class="math inline">\(x \gt \xi\)</span>, the cubic polynomial would be (we include the <span class="math inline">\(\beta_4\)</span> term).
 <span class="math display">\[\begin{align}
 f(x) = &amp; \beta_0 + \beta_1x + \beta_2x^2 + \beta_3x^3 + \beta_4(x-\xi)^3 \\
-     = &amp; \beta_0 + \beta_1x + \beta_2x^2 +  + \beta_4(x^3 - 3x^2\xi + 3x\xi^2 -\xi^3) \\
+     = &amp; \beta_0 + \beta_1x + \beta_2x^2 + \beta_3x^3 + \beta_4(x^3 - 3x^2\xi + 3x\xi^2 -\xi^3) \\
      = &amp; \beta_0 - \beta_4\xi^3 + (\beta_1 + 3\beta_4\xi^2)x +
          (\beta_2 - 3\beta_4\xi)x^2 + (\beta_3 + \beta_4)x^3
 \end{align}\]</span></p>
 <p>Therefore,
-<span class="math inline">\(a_1 = \beta_0 - \beta_4\xi^3\)</span>, <span class="math inline">\(b_1 = \beta_1 + 3\beta_4\xi^2\)</span>,
-<span class="math inline">\(c_1 = \beta_2 - 3\beta_4\xi\)</span>, <span class="math inline">\(d_1 = \beta_3 + \beta_4\)</span></p>
+<span class="math inline">\(a_2 = \beta_0 - \beta_4\xi^3\)</span>, <span class="math inline">\(b_2 = \beta_1 + 3\beta_4\xi^2\)</span>,
+<span class="math inline">\(c_2 = \beta_2 - 3\beta_4\xi\)</span>, <span class="math inline">\(d_2 = \beta_3 + \beta_4\)</span></p>
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Show that <span class="math inline">\(f_1(\xi) = f_2(\xi)\)</span>. That is, <span class="math inline">\(f(x)\)</span> is continuous at <span class="math inline">\(\xi\)</span>.</li>
@@ -486,7 +486,7 @@ f_2(\xi) = &amp; \beta_0 - \beta_4\xi^3 + (\beta_1 + 3\beta_4\xi^2)\xi +
 </blockquote>
 <p>To do this we differentiate the above with respect to <span class="math inline">\(x\)</span>.</p>
 <p><span class="math display">\[
-f_1&#39;(x) = \beta_1 + 2\beta_2x + 3\beta_3x^2
+f_1&#39;(x) = \beta_1 + 2\beta_2x + 3\beta_3x^2 \\
 f_1&#39;(\xi) = \beta_1 + 2\beta_2\xi + 3\beta_3\xi^2
 \]</span></p>
 <p><span class="math display">\[\begin{align}
@@ -502,8 +502,8 @@ f_2&#39;(\xi) &amp; = \beta_1 + 3\beta_4\xi^2 + 2(\beta_2 - 3\beta_4\xi)\xi + 3(
 <p>Therefore, <span class="math inline">\(f(x)\)</span> is indeed a cubic spline.</p>
 </blockquote>
 <p><span class="math display">\[
-f_1&#39;(x) = 2\beta_2x + 6\beta_3x \\
-f_1&#39;&#39;(\xi) = 2\beta_2\xi + 6\beta_3\xi
+f_1&#39;&#39;(x) = 2\beta_2 + 6\beta_3 x \\
+f_1&#39;&#39;(\xi) = 2\beta_2 + 6\beta_3 \xi
 \]</span></p>
 <p><span class="math display">\[
 f_2&#39;&#39;(x) = 2\beta_2 - 6\beta_4\xi + 6(\beta_3 + \beta_4)x \\

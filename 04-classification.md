@@ -41,8 +41,8 @@ Letting $x = e^{\beta_0 + \beta_1X}$
 4.12 is
 
 $$
-p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi\sigma}} \exp(-\frac{1}{2\sigma^2}(x - \mu_k)^2)}
-              {\sum_{l=1}^k \pi_l\frac{1}{\sqrt{2\pi\sigma}} \exp(-\frac{1}{2\sigma^2}(x - \mu_l)^2)}
+p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi}\sigma} \exp(-\frac{1}{2\sigma^2}(x - \mu_k)^2)}
+              {\sum_{l=1}^K \pi_l\frac{1}{\sqrt{2\pi}\sigma} \exp(-\frac{1}{2\sigma^2}(x - \mu_l)^2)}
 $$
 
 and the discriminant function is
@@ -56,15 +56,16 @@ Since $\sigma^2$ is constant
 
 $$
 p_k(x) = \frac{\pi_k \exp\left(-\frac{1}{2\sigma^2}(x - \mu_k)^2\right)}
-              {\sum_{l=1}^k \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)}
+              {\sum_{l=1}^K \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)}
 $$
 
-Maximizing $p_k(x)$ also maximizes any monotonic function of $p_k(X)$, and
-therefore, we can consider maximizing $\log(p_K(X))$
+Maximizing $p_k(x)$ also maximizes any monotonic function of $p_k(x)$, and
+therefore, we can consider maximizing $\log(p_k(x))$
 
 $$
 \log(p_k(x)) = \log(\pi_k) - \frac{1}{2\sigma^2}(x - \mu_k)^2 -
-               \log\left(\sum_{l=1}^k \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)\right)
+               \log\left(\sum_{l=1}^K \pi_l \exp\left(-\frac{1}{2\sigma^2}(x - \mu_l)^2\right)\right)
+$$
 $$
 
 Remember that we are maximizing over $k$, and since the last term does not
@@ -103,19 +104,19 @@ $$
 As above,
 
 $$
-p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi\sigma_k}} \exp(-\frac{1}{2\sigma_k^2}(x - \mu_k)^2)}
-              {\sum_{l=1}^k \pi_l\frac{1}{\sqrt{2\pi\sigma_l}} \exp(-\frac{1}{2\sigma_l^2}(x - \mu_l)^2)}
+p_k(x) = \frac{\pi_k\frac{1}{\sqrt{2\pi}\sigma_k} \exp(-\frac{1}{2\sigma_k^2}(x - \mu_k)^2)}
+              {\sum_{l=1}^K \pi_l\frac{1}{\sqrt{2\pi}\sigma_l} \exp(-\frac{1}{2\sigma_l^2}(x - \mu_l)^2)}
 $$
 
 Now lets derive the Bayes classifier, without assuming 
 $\sigma_1^2 = ... = \sigma_K^2$
 
-Maximizing $p_k(x)$ also maximizes any monotonic function of $p_k(X)$, and
-therefore, we can consider maximizing $\log(p_K(X))$
+Maximizing $p_k(x)$ also maximizes any monotonic function of $p_k(x)$, and
+therefore, we can consider maximizing $\log(p_k(x))$
 
 $$
-\log(p_k(x)) = \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi\sigma_k}}\right) - \frac{1}{2\sigma_k^2}(x - \mu_k)^2 -
-              \log\left(\sum_{l=1}^k \frac{1}{\sqrt{2\pi\sigma_l}} \pi_l \exp\left(-\frac{1}{2\sigma_l^2}(x - \mu_l)^2\right)\right)
+\log(p_k(x)) = \log(\pi_k) + \log\left(\frac{1}{\sqrt{2\pi}\sigma_k}\right) - \frac{1}{2\sigma_k^2}(x - \mu_k)^2 -
+              \log\left(\sum_{l=1}^K \frac{1}{\sqrt{2\pi}\sigma_l} \pi_l \exp\left(-\frac{1}{2\sigma_l^2}(x - \mu_l)^2\right)\right)
 $$
 
 Remember that we are maximizing over $k$, and since the last term does not
@@ -730,8 +731,8 @@ fit <- knn(
 ```
 ##       
 ## fit    Down Up
-##   Down   21 30
-##   Up     22 31
+##   Down   21 29
+##   Up     22 32
 ```
 
 ``` r
@@ -739,7 +740,7 @@ sum(diag(t)) / sum(t)
 ```
 
 ```
-## [1] 0.5
+## [1] 0.5096154
 ```
 
 > h. Repeat (d) using naive Bayes.
