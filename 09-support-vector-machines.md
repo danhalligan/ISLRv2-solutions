@@ -144,20 +144,7 @@ p
 
 ``` r
 library(e1071)
-```
 
-```
-## 
-## Attaching package: 'e1071'
-```
-
-```
-## The following object is masked from 'package:ggplot2':
-## 
-##     element
-```
-
-``` r
 fit <- svm(as.factor(Y) ~ ., data = data, kernel = "linear", cost = 10, scale = FALSE)
 
 # Extract beta_0, beta_1, beta_2

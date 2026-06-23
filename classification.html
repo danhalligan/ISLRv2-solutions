@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Classification | An Introduction to Statistical Learning</title>
   <meta name="description" content="4 Classification | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.47.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Classification | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -1060,10 +1060,10 @@ data (that is, the data from 2009 and 2010).</li>
 <span id="cb202-6"><a href="classification.html#cb202-6" tabindex="-1"></a>(t <span class="ot">&lt;-</span> <span class="fu">table</span>(fit, Weekly[<span class="sc">!</span>train, ]<span class="sc">$</span>Direction))</span></code></pre></div>
 <pre><code>##       
 ## fit    Down Up
-##   Down   21 29
-##   Up     22 32</code></pre>
+##   Down   21 30
+##   Up     22 31</code></pre>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="classification.html#cb204-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(t)) <span class="sc">/</span> <span class="fu">sum</span>(t)</span></code></pre></div>
-<pre><code>## [1] 0.5096154</code></pre>
+<pre><code>## [1] 0.5</code></pre>
 <blockquote>
 <ol start="8" style="list-style-type: lower-alpha">
 <li>Repeat (d) using naive Bayes.</li>
@@ -1379,7 +1379,7 @@ sub-sets of the predictors. Describe your findings.</p>
 <span id="cb263-4"><a href="classification.html#cb263-4" tabindex="-1"></a>}))</span>
 <span id="cb263-5"><a href="classification.html#cb263-5" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">names</span>(x)[ord]</span>
 <span id="cb263-6"><a href="classification.html#cb263-6" tabindex="-1"></a>ord</span></code></pre></div>
-<pre><code>##  [1] &quot;zn&quot;      &quot;dis&quot;     &quot;nox&quot;     &quot;indus&quot;   &quot;tax&quot;     &quot;age&quot;     &quot;rad&quot;    
+<pre><code>##  [1] &quot;nox&quot;     &quot;dis&quot;     &quot;indus&quot;   &quot;tax&quot;     &quot;age&quot;     &quot;rad&quot;     &quot;zn&quot;     
 ##  [8] &quot;lstat&quot;   &quot;medv&quot;    &quot;ptratio&quot; &quot;rm&quot;      &quot;chas&quot;</code></pre>
 <p>Variables <code>nox</code> (nitrogen oxides concentration) followed by <code>dis</code> (distance to
 employment center) appear to be most associated with high crime.</p>
@@ -1482,13 +1482,13 @@ with 12 predictors also performs well and has an error rate of ~12%.</p>
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(&gt;|z|)    
 ## (Intercept) -44.525356   7.935621  -5.611 2.01e-08 ***
-## zn           -0.099558   0.045914  -2.168 0.030134 *  
-## dis           1.080847   0.304084   3.554 0.000379 ***
 ## nox          55.062428  10.281556   5.355 8.53e-08 ***
+## dis           1.080847   0.304084   3.554 0.000379 ***
 ## indus        -0.067493   0.058547  -1.153 0.248997    
 ## tax          -0.005336   0.003138  -1.700 0.089060 .  
 ## age           0.020965   0.014190   1.477 0.139556    
 ## rad           0.678196   0.192193   3.529 0.000418 ***
+## zn           -0.099558   0.045914  -2.168 0.030134 *  
 ## lstat         0.134035   0.058623   2.286 0.022231 *  
 ## medv          0.213114   0.088922   2.397 0.016547 *  
 ## ptratio       0.294396   0.155285   1.896 0.057981 .  

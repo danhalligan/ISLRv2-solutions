@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 Tree-Based Methods | An Introduction to Statistical Learning</title>
   <meta name="description" content="8 Tree-Based Methods | An Introduction to Statistical Learning" />
-  <meta name="generator" content="bookdown 0.47.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 Tree-Based Methods | An Introduction to Statistical Learning" />
   <meta property="og:type" content="book" />
@@ -1037,7 +1037,7 @@ two of the regression approaches seen in Chapters 3 and 6.</li>
 <pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
 ## 
 ##     expand, pack, unpack</code></pre>
-<pre><code>## Loaded glmnet 5.0</code></pre>
+<pre><code>## Loaded glmnet 4.1-10</code></pre>
 <div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="tree-based-methods.html#cb570-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> dat[train, ])</span>
 <span id="cb570-2"><a href="tree-based-methods.html#cb570-2" tabindex="-1"></a>x.test <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(Salary <span class="sc">~</span> ., <span class="at">data =</span> dat[test, ])</span>
 <span id="cb570-3"><a href="tree-based-methods.html#cb570-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> dat[train, <span class="st">&quot;Salary&quot;</span>]</span>

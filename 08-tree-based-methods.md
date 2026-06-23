@@ -852,7 +852,7 @@ library(glmnet)
 ```
 
 ```
-## Loaded glmnet 5.0
+## Loaded glmnet 4.1-10
 ```
 
 ``` r
