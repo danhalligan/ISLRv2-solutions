@@ -44,11 +44,15 @@ You can view these solutions hosted from GitHub at the following location:
 
 ## Building the solutions
 
-The R dependencies are provided in the `DESCRIPTION` file and you can install them by running:
+The R dependencies are pinned in `renv.lock`. To install the exact versions used by CI, run:
 
 ```r
-devtools::install()
+install.packages("renv")
+renv::restore()
 ```
+
+(`DESCRIPTION` lists the same direct dependencies for reference; `renv.lock`
+also records transitive deps and the resolved versions.)
 
 Other than that you need the Python packages [tensorflow and keras] installed in the Python environment you are using to run the examples:
 

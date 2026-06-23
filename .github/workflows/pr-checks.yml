@@ -4,6 +4,10 @@ on:
     branches: [main]
 permissions:
   contents: read
+env:
+  # These jobs install only the single tool they need; skip renv autoload
+  # from the project .Rprofile so the renv library is not bootstrapped.
+  RENV_CONFIG_AUTOLOADER_ENABLED: 'FALSE'
 jobs:
   spelling:
     runs-on: ubuntu-latest
