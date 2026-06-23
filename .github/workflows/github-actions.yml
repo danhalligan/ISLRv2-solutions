@@ -8,9 +8,31 @@ permissions:
 jobs:
   build-and-deploy:
     concurrency: ci-${{ github.ref }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    env:
+      # Tell renv to fetch pre-built Linux binaries from Posit Public Package
+      # Manager instead of the source repos recorded in the lockfile. PPM
+      # serves the exact pinned versions and avoids compiling from source
+      # (which would require us to also install -dev system libraries).
+      RENV_CONFIG_REPOS_OVERRIDE: https://packagemanager.posit.co/cran/__linux__/jammy/latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libfontconfig1-dev \
+            libfreetype6-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libpng-dev \
+            libtiff5-dev \
+            libjpeg-dev \
+            libcairo2-dev
 
       - uses: r-lib/actions/setup-pandoc@v2
 
